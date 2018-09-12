@@ -1,0 +1,4 @@
+Switch     Alarm_Master          "Master Alarm"       <presence>       (Alarms)
+Number     Alarm_MasterTimeMins  "Master Alarm"       <clock>          (Alarms)
+String     Alarm_MasterTime      "Master Alarm [%s]"  <clock>
+Switch     Alarm_MasterEvent     "Master Alarm Event" <alarm>          (AlarmEvents)      { autoupdate="false" }

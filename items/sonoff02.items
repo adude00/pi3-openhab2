@@ -1,0 +1,28 @@
+Group sonoff
+Group sonoff02
+
+//////////////// SONOFF 2 /////////////////
+
+// IRRIGAZIONE
+Switch Terrazza "Irrigazione:" <rain> (sonoff02,sonoff,LR,gLight)
+    { mqtt=">[broker:cmnd/sonoff02/POWER:command:*:default],
+            <[broker:stat/sonoff02/POWER:state:default]" }
+
+// TEMPERATURA E UMIDITA
+Number Terrazza_Temp    "Terrazza [%.1f °C]"    <temperature> 	(sonoff02,sonoff,Fuori_Temperature_Chart)
+	{ mqtt="<[broker:tele/sonoff02/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+Number Terrazza_Humid   "Terrazza [%.1f %%]"    <humidity> 	    (sonoff02,sonoff,Fuori_Umidita_Chart)
+	{ mqtt="<[broker:tele/sonoff02/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+// STATUS
+Number Terrazza_RSSI "Terrazza - Signal [%d %%]" <qualityofservice> (sonoff02,sonoff,gRSSI)
+    { mqtt="<[broker:tele/sonoff02/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String Terrazza_Reachable "Terrazza - Status: [%s]" <switch> (sonoff02,sonoff,gReachable)
+    { mqtt="<[broker:tele/sonoff02/LWT:state:MAP(reachable.map)]" }
+String Terrazza_Uptime "Terrazza - uptime: [%s]" <clock> (sonoff02,sonoff)
+    { mqtt="<[broker:tele/sonoff02/STATE:state:JSONPATH($.Uptime)]" }
+
+
+// Selettore grafico
+Number Terrazza_Cart_Period 	"Periodo" (System)
+

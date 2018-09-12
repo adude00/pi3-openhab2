@@ -1,0 +1,12 @@
+Group SveglieAll
+
+Switch svegliaall0630 "Sveglia 6:30" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0630:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0630] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0630 ]" }
+Switch svegliaall0645 "Sveglia 6:45" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0645:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0645] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0645 ]" }
+Switch svegliaall0700 "Sveglia 7:00" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0700:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0700] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0700 ]" }
+Switch svegliaall0715 "Sveglia 7:15" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0715:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0715] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0715 ]" }
+Switch svegliaall0730 "Sveglia 7:30" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0730:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0730] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0730 ]" }
+Switch svegliaall0745 "Sveglia 7:45" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0745:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0745] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0745 ]" }
+Switch svegliaall0800 "Sveglia 8:00" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0800:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0800] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0800 ]" }
+Switch svegliaall0815 "Sveglia 8:15" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0815:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0815] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0815 ]" }
+Switch svegliaall0830 "Sveglia 8:30" <clock> (SveglieAll) { exec="<[/opt/openhab/scripts/sveglia.sh all STATUS 0830:30000:] >[ON:/opt/openhab/scripts/sveglia.sh all ON 0830] >[OFF:/opt/openhab/scripts/sveglia.sh all OFF 0830 ]" }
+

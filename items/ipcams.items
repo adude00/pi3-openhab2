@@ -1,0 +1,11 @@
+Switch	IPCams		"Telecamere"	<camera> 	(ipcams) [ "Switchable" ]	{ gpio="pin:21" }
+
+// Camera 1
+String Camera1_View		 	"Camera 1: Visuale"	<camera> 		(ipcams)
+Switch Camera1_Record "Camera 1: Record" <camera> (ipcams) { exec="<[/opt/openhab/scripts/camera-motion-status.sh 1:30000:] >[ON:/opt/openhab/scripts/camera-motion-on.sh 1 ] >[OFF:/opt/openhab/scripts/camera-motion-off.sh 1]" }
+
+// Camera 2
+String Camera2_View		 	"Camera 2: Visuale"	<camera> 		(ipcams)
+Switch Camera2_Record "Camera 2: Record" <camera> (ipcams) { exec="<[/opt/openhab/scripts/camera-motion-status.sh 2:30000:] >[ON:/opt/openhab/scripts/camera-motion-on.sh 2] >[OFF:/opt/openhab/scripts/camera-motion-off.sh 2]" }
+
+

@@ -1,0 +1,4 @@
+Group   gPresence
+Switch  PresenceGiorgio   "A casa: Giorgio [%s]"    (gPresence)
+Switch  PresenceNan       "A casa: Nan [%s]"        (gPresence)
+Switch  PresenceHumans    "A casa: Qualcuno [%s]"   (gPresence)

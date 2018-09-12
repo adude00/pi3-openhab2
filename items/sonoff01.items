@@ -1,0 +1,22 @@
+Group sonoff
+Group sonoff01
+
+// LUCE da definire
+Switch sf01_Light "Sonoff 01 Basic: Switch" <light> (sonoff01,sonoff,LR,gLight)
+    { mqtt=">[broker:cmnd/sonoff01/POWER:command:*:default],
+            <[broker:stat/sonoff01/POWER:state:default]" }
+
+// TEMPERATURA E UMIDITA
+//Number sf01_Temp    "Sonoff 01 Basic: Temperature [%.1f °C]"    <temperature>   (sonoff01,sonoff,Casa_Temperature_Chart)
+//  { mqtt="<[broker:tele/sonoff01/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+
+//Number sf01_Humid   "Sonoff 01 Basic: Humidity [%.1f %%]"    <humidity>      (sonoff01,sonoff,Casa_Umidita_Chart)
+//    { mqtt="<[broker:tele/sonoff01/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+// STATUS
+Number sf01_Light_RSSI "Sonoff 01 Basic: RSSI [%d %%]" <qualityofservice> (sonoff01,sonoff,gRSSI)
+    { mqtt="<[broker:tele/sonoff01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String sf01_Light_Reachable "Sonoff 01 Basic: Status [%s]" <switch> (sonoff01,sonoff,gReachable)
+    { mqtt="<[broker:tele/sonoff01/LWT:state:MAP(reachable.map)]" }
+String sf01_Uptime "Sonoff 01 Basic: Uptime [%s]" <clock> (sonoff01,sonoff)
+    { mqtt="<[broker:tele/sonoff01/STATE:state:JSONPATH($.Uptime)]" }
