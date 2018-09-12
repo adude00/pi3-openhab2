@@ -1,0 +1,21 @@
+/**
+ * rollershutter rule to support http-binding
+ */
+rule "Tapparella2"
+  when
+    Item Tapparella2 received command
+  then
+          if (receivedCommand==STOP) sendHttpGetRequest("http://sonoff1/cm?cmnd=Power%20Off")
+          if (receivedCommand==UP) sendHttpGetRequest("http://sonoff1/cm?cmnd=Power1%20On")
+          if (receivedCommand==DOWN) sendHttpGetRequest("http://sonoff1/cm?cmnd=Power2%20On")
+end
+
+rule "Tapparella4"
+  when
+    Item Tapparella4 received command
+  then
+          if (receivedCommand==STOP) publish("broker", "cmnd/tapp09/POWER", "OFF") 
+          if (receivedCommand==UP) publish("broker", "cmnd/tapp09/POWER1", "ON")
+          if (receivedCommand==DOWN) publish("broker", "cmnd/tapp09/POWER2", "ON")
+end
+

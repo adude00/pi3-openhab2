@@ -1,0 +1,6 @@
+rule "IP Camera 2 position"
+when
+    Item Camera2_View received update
+then
+    executeCommandLine("/opt/openhab/scripts/camera-posizione.sh 2" + Camera2_View.state)
+end

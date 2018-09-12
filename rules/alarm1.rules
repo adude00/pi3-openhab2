@@ -1,0 +1,42 @@
+  import org.joda.time.*
+
+  var Timer masterAlarmTime = null
+
+  rule "Master bedroom alarm time"
+  when
+    Time cron "0 5 0 * * ?" or
+    Item Alarm_MasterTimeMins received update
+  then
+    var int minutes = (Alarm_MasterTimeMins.state as DecimalType).intValue()
+
+    if (masterAlarmTime !== null)
+      masterAlarmTime.cancel()
+
+    // work out when the alarm is to fire - start from midnight
+    var DateTime alarmTime = parse(now.getYear() + "-" + now.getMonthOfYear() + "-" + now.getDayOfMonth() + "T00:00")
+
+    // add the number of minutes selected
+    alarmTime = alarmTime.plusMinutes(minutes)
+
+    // if we have already past the alarm time then set it for the following day
+    if (alarmTime.beforeNow)
+      alarmTime = alarmTime.plusDays(1)
+
+    // create a timer to execute the alarm at the specified time
+    masterAlarmTime = createTimer(alarmTime) [| 
+      if (Alarm_Master.state == ON && Holiday.state == OFF && now.getDayOfWeek() < 6) 
+        Alarm_MasterEvent.sendCommand(ON)
+    ]
+
+    // update the alarm display time    
+    Alarm_MasterTime.sendCommand(String::format("%02d:%02d", alarmTime.getHourOfDay(), alarmTime.getMinuteOfHour()))
+  end
+
+  rule "Master bedroom alarm"
+  when
+    Item Alarm_MasterEvent received command ON
+  then
+    // IPCams.sendCommand(ON)
+    sf03_Light.sendCommand(ON)
+    // gTappProd.sendCommand(UP)
+  end
