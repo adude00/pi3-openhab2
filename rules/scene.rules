@@ -49,12 +49,13 @@ rule "Chiudi tutto"
 when
     Item Scene_Chiudi changed to ON
 then
-   logInfo("Scene","Scena CHIUDI: iniziata")
+    logInfo("Scene","Scena CHIUDI: iniziata")
       Scene_Lavoro.sendCommand(OFF)
       Scene_aCasa.sendCommand(OFF)
       Scene_Usciamo.sendCommand(OFF)
       gTappProd.sendCommand(DOWN)
-    Thread::sleep(30)
-      Scene_Chiudi.sendCommand(OFF)
-   logInfo("Scene","Scena CHIUDI: finita")
+    createTimer(now.plusSeconds(30), [|
+      gScene.sendCommand(OFF)
+      logInfo("Scene","Scena CHIUDI: finita")
+    ])
 end
