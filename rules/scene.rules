@@ -50,10 +50,7 @@ when
     Item Scene_Chiudi changed to ON
 then
     logInfo("Scene","Scena CHIUDI: iniziata")
-      Scene_Lavoro.sendCommand(OFF)
-      Scene_aCasa.sendCommand(OFF)
-      Scene_Usciamo.sendCommand(OFF)
-      gTappProd.sendCommand(DOWN)
+    gTappProd.sendCommand(DOWN)
     createTimer(now.plusSeconds(30), [|
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena CHIUDI: finita")

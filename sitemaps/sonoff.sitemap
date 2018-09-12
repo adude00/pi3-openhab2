@@ -1,0 +1,56 @@
+sitemap sonoff label="Sonoff"
+{
+	  Frame label="Sonoff" {
+      Text item=LivingRoom_Light label="Luce Soggiorno" {
+      Frame label="Interruttore" {
+        Switch item=LivingRoom_Light label="Luce Soggiorno" icon="light"
+      }
+      Frame label="Status" {
+        Text item=LivingRoom_Light_RSSI       label="Living Room Light - Signal: [%d %%]" icon="qualityofservice"
+        Text item=LivingRoom_Light_Reachable  label="Living Room Light - Status: [%s]"    icon="switch"
+        Text item=LivingRoom_Uptime           label="Living Room Light - Uptime: [%s]"    icon="clock"
+      }
+    }
+
+		Text item=Terrazza_Temp label="Sensori Terrazza [%.1f °C]" {
+      Frame label="Irrigazione" {
+        Switch item=Terrazza label="Irrigazione" icon="rain"
+        }
+			Frame label="Terrazza: Grafici" {
+        Text item=Terrazza_Temp   label="Terrazza - Temperatura: [%.1f °C]"   icon=temperature
+        Text item=Terrazza_Humid  label="Terrazza - Umidità: [%.1f %%]"       icon=humidity
+
+				// SELETTORE PERIODO
+				Switch item=Terrazza_Cart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        // TEMPERATURA
+        Chart  item=Terrazza_Temp period=h   refresh=30000  visibility=[Terrazza_Cart_Period==0, Terrazza_Cart_Period=="Uninitialized"]
+        Chart  item=Terrazza_Temp period=4h  refresh=30000  visibility=[Terrazza_Cart_Period==1]
+        Chart  item=Terrazza_Temp period=8h  refresh=30000  visibility=[Terrazza_Cart_Period==2]
+        Chart  item=Terrazza_Temp period=12h refresh=60000  visibility=[Terrazza_Cart_Period==3]
+        Chart  item=Terrazza_Temp period=D   refresh=60000  visibility=[Terrazza_Cart_Period==4]
+        Chart  item=Terrazza_Temp period=2D  refresh=60000  visibility=[Terrazza_Cart_Period==5]
+        Chart  item=Terrazza_Temp period=W   refresh=120000 visibility=[Terrazza_Cart_Period==6]
+        Chart  item=Terrazza_Temp period=2W  refresh=120000 visibility=[Terrazza_Cart_Period==7]
+        Chart  item=Terrazza_Temp period=M   refresh=120000 visibility=[Terrazza_Cart_Period==8]
+        Chart  item=Terrazza_Temp period=Y   refresh=120000 visibility=[Terrazza_Cart_Period==9]
+
+        // UMIDITA
+        Chart  item=Terrazza_Humid period=h   refresh=30000  visibility=[Terrazza_Cart_Period==0, Terrazza_Cart_Period=="Uninitialized"]
+        Chart  item=Terrazza_Humid period=4h  refresh=30000  visibility=[Terrazza_Cart_Period==1]
+        Chart  item=Terrazza_Humid period=8h  refresh=30000  visibility=[Terrazza_Cart_Period==2]
+        Chart  item=Terrazza_Humid period=12h refresh=60000  visibility=[Terrazza_Cart_Period==3]
+        Chart  item=Terrazza_Humid period=D   refresh=60000  visibility=[Terrazza_Cart_Period==4]
+        Chart  item=Terrazza_Humid period=2D  refresh=60000  visibility=[Terrazza_Cart_Period==5]
+        Chart  item=Terrazza_Humid period=W   refresh=120000 visibility=[Terrazza_Cart_Period==6]
+        Chart  item=Terrazza_Humid period=2W  refresh=120000 visibility=[Terrazza_Cart_Period==7]
+        Chart  item=Terrazza_Humid period=M   refresh=120000 visibility=[Terrazza_Cart_Period==8]
+        Chart  item=Terrazza_Humid period=Y   refresh=120000 visibility=[Terrazza_Cart_Period==9]
+			  }
+      Frame {
+        Text item=Terrazza_RSSI       label="Terrazza - Signal: [%d %%]"  icon="qualityofservice"
+        Text item=Terrazza_Reachable  label="Terrazza - Status: [%s]"     icon="switch"
+        Text item=Terrazza_Uptime     label="Terrazza - Uptime: [%s]"     icon="clock"
+        }
+		  }
+	}
+}
