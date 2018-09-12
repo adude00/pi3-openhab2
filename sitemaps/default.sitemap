@@ -1,0 +1,259 @@
+sitemap default label="Casa"
+{
+	Frame label="Things" {
+		Group item=gLuci label="Luci" icon="light"
+    Text label="Tapparelle" icon=rollershutter {
+      Switch item=gTappProd icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      Default item=Tapp01
+      Default item=Tapp02
+      Default item=Tapp03
+      Default item=Tapp04
+      Default item=Tapp05
+      Default item=Tapp06
+      Default item=Tapp07
+      Default item=Tapp08
+    }
+		Group item=Devices label="Devices" icon="mediacontrol"
+    Text label="IP Cameras" icon="camera" {
+      Switch item=IPCams
+			// Camera 1
+			Selection item=Camera1_View mappings=[0='1: Soggiorno', 1='2: Divano', 2='3: Scrivania', 3='4: Finestra', 4='5: Ingresso', 5='6: AC', 6='7: Cane', 7='8: Soffitto']
+			Switch item=Camera1_Record 
+			// Camera 2
+			Selection item=Camera2_View mappings=[0='1: Ingresso', 1='2: Pavimento Ingresso', 2='3: Cucina', 3='4: Pavimento Tinello', 4='5: Tavolo', 5='6: Divano', 6='7: AC', 7='8: Soffitto']
+      Switch item=Camera2_Record
+    }
+
+    Text item=Air_Conditioner_Temperature label="A/C: [MAP(ac.map):%s]" {
+      Frame   {
+        Selection item=Air_Conditioner_Temperature mappings=[10.0='OFF', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 22.0='22', 23.0='23', 24.0='24', 25.0='25', 26.0='26', 27.0='27', 28.0='28', 29.0='29', 30.0='30', 31.0='30 Turbo']
+        Switch item=Air_Conditioner_Mode mappings=[COLD='COLD', HOT='HOT', OFF='OFF']
+				Switch item=Air_Conditioner_Screen
+				Selection item=Air_Conditioner_Airdir mappings=[1='1 Airdir', 2='2 Airdir', 3='3 Airdir', 4='4 Airdir', 5='5 Airdir', 6='6 Airdir', 7='7 Airdir', 8='8 Airdir', 9='1+8 Airdir', 10='2+8 Airdir', 11='3+8 Airdir', 12='4+8 Airdir', 13='5+8 Airdir', 14='6+8 Airdir', 15='7+8 Airdir'] icon=flow
+				Switch item=Air_Conditioner_Swing icon=wind
+				Switch item=Air_Conditioner_Termostat
+      }
+    }
+    //Group item=SveglieAll 	label="Programmazione A/C" icon="clock"
+    Text label="Programmazioni" icon="clock" {
+      Group item=SveglieAll   label="Programmazione A/C" icon="clock"
+      Text label="Sveglia" icon="clock" {
+        //Setpoint item=WakeUpHour minValue=0 maxValue=23 step=1
+        Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
+        Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
+        Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
+                            10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
+                            20="20", 21="21", 22="22", 23="23"]
+        Selection item=WakeUpMinute label="Minuti" mappings=[
+                              0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
+                            30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
+
+        //Setpoint item=WakeUpMinute minValue=0 maxValue=59 step=1
+        Switch item=WakeUpAlarmSwitch
+        //Text item=WakeUpAlarmTriggered
+        Switch item=WakeUpAlarmRepeat
+      }
+
+      Text item=Alarm_MasterTime icon="alarm-on" visibility=[Alarm_Master==ON] {
+        Frame label="Master Alarm" {
+          Switch item=Alarm_Master
+          Text item=Alarm_MasterTime
+          Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
+        }
+      }
+      Text item=Alarm_MasterTime icon="clock" visibility=[Alarm_Master==OFF] {
+        Frame label="Master Alarm" {
+          Switch item=Alarm_Master
+          Text item=Alarm_MasterTime
+          Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
+        }
+      }
+
+    // Fine elenco
+    Group item=gAutomations   label="Automazioni"
+
+    }
+
+  } // Chiuso frame Things
+
+  Frame label="Sensori" {
+    Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=poweroutlet {
+      Frame {
+        Text item=Casa_Consumi_Istantaneo label="Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
+      }
+      Frame {
+        Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
+        Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
+        Chart  item=Casa_Consumi_Chart period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2]
+        Chart  item=Casa_Consumi_Chart period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3]
+        Chart  item=Casa_Consumi_Chart period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4]
+        Chart  item=Casa_Consumi_Chart period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5]
+        Chart  item=Casa_Consumi_Chart period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6]
+        Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
+        Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
+        Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
+      }
+    }
+//  }
+
+//  Frame label="Temps" {
+	  Text item=Casa_Temperature_AVG label="Temperature Casa [%.1f °C]" {
+	    Frame {
+	      Text item=sf04_Temp
+        Text item=sf03_Temp
+	      Text item=Casa_Temperature_Sogg_Down
+        Text item=Casa_Temperature_Sogg_Up
+        Text item=Casa_Temperature_AVG
+        Text item=sf05_Temp
+        Text item=sf06_Temp
+		  }
+  		Frame {
+  			Text item=Casa_Umidita_Sogg
+        Text item=sf03_Humid
+        Text item=sf04_Humid
+        Text item=sf05_Humid
+        Text item=sf06_Humid
+  		}
+      Frame label="Grafici" {
+      Text label="Grafici" {
+  	  Frame label="Periodo" {
+        Selection item=ChartPeriod mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+      }
+      Frame label="Soggiorno" {
+        // TEMPERATURA Soggiorno
+        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      
+        // UMIDITA Soggiorno
+        Chart  item=gChartLvrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+
+      Frame label="Camera Matrimoniale" {
+        // TEMPERATURA Matrimoniale
+        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Matrimoniale
+        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+
+      Frame label="Tutto insieme" {
+        // TEMPERATURA TUTTO
+        Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Temperature_Chart period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Temperature_Chart period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Temperature_Chart period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=Casa_Temperature_Chart period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=Casa_Temperature_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Temperature_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Temperature_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Temperature_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+  			// UMIDITA TUTTO
+        Chart  item=Casa_Umidita_Chart period=h   refresh=30000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Umidita_Chart period=4h  refresh=30000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Umidita_Chart period=8h  refresh=30000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Umidita_Chart period=12h refresh=60000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Umidita_Chart period=D   refresh=60000  visibility=[ChartPeriod==4]
+        Chart  item=Casa_Umidita_Chart period=2D  refresh=60000  visibility=[ChartPeriod==5]
+        Chart  item=Casa_Umidita_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+      } // Chiuso frame grafici
+      } // Chiuso text grafici
+
+    }
+
+  Text item=Fuori_Temperature label="Temperature fuori [%.1f °C]" {
+    Frame label="Temperature" {
+      Text item=Fuori_Temperature label="Bologna"
+      Text item=Terrazza_Temp     label="Balcony"
+    }
+    Frame label="Humidity" { 
+      Text item=Fuori_Umidita     label="Bologna"   icon="humidity"
+      Text item=Terrazza_Humid    label="Balcony"   icon="humidity"
+    }
+    Frame label="Graphs" {
+      Selection item=Fuori_Temperature_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+      // TEMPERATURA
+      Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Temperature_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Temperature_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Temperature_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Temperature_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Temperature_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Temperature_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Temperature_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Temperature_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      // UMIDITA
+      Chart  item=Fuori_Umidita_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Umidita_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Umidita_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Umidita_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Umidita_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Umidita_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Umidita_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      }
+    }
+  } // CLOSE FRAME TEMPS
+
+  Frame label="Debug" {
+	  Group item=sonoff         label="Debug Sonoff All"
+    Text label="Tapparelle"   icon=rollershutter {
+      Group item=gTappDebug   label="Debug Tapparelle All"
+      Group item=gTappRSSI    label="Debug Tapparelle RSSI"
+      Group item=gTappReach   label="Debug Tapparelle Reachable"
+      Group item=gTappUptime  label="Debug Tapparelle Uptime"
+      Switch item=gTappTest icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      Group item=gTappTest    label="TEST Tapparelle"
+    }
+    Group item=gScene       label="SCENE Test"
+    Group item=gPresence    label="Presence"
+  }
+
+
+}// CLOSE SITEMAP

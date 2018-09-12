@@ -1,0 +1,11 @@
+// PERSIST DI DEFAULT SU TUTTI GLI ITEMS
+// Preso da https://community.openhab.org/t/design-pattern-group-based-persistence/15098
+//
+Strategies {
+        default = everyUpdate
+}
+
+Items {
+        // DEFAULT EVERY ITEM: persist all items on every change (but do not restore on startup!!)
+      * : strategy = everyChange, restoreOnStartup
+}
