@@ -1,0 +1,33 @@
+var Number IphoneGiorgioCounter = 0
+val Number MaxCounter = 18
+
+rule "Execute script IphoneGiorgioPresence"
+when
+    Time cron "0/15/30/45 * * * * ?"
+then
+    var String IphoneGiorgioExec = executeCommandLine("sudo@@/etc/openhab2/shell/iPhoneD.sh", 5000)
+    IphoneGiorgio.postUpdate(IphoneGiorgioExec)
+end
+
+rule "Determine presence IphoneGiorgio"
+when 
+  Item IphoneGiorgio received update
+then {
+  if(IphoneGiorgio.state == "OFF") {
+    IphoneGiorgioCounter = IphoneGiorgioCounter + 1
+    if(IphoneGiorgioCounter > MaxCounter) {
+      PresenceGiorgio.sendCommand(OFF)
+      IphoneGiorgioCounter = 0 
+      logInfo("RULE","IphoneGiorgio  counter reached threshold and sent command OFF. Counter set to 0")
+    }
+    else {
+      logInfo("RULE","Counter IphoneGiorgio threshold not yet reached. Counter set to " + IphoneGiorgioCounter)
+    }
+  }
+  else {
+    PresenceGiorgio.sendCommand(ON) 
+    IphoneGiorgioCounter = 0
+    logInfo("RULE","PresenceGiorgio received command ON. Counter reset to 0")
+  }
+  }
+end

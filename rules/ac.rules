@@ -9,9 +9,9 @@ rule "Air Conditioner"
         var String command;
         //sendCommand(Notifications, "Prendiendo Aire Condicionado")
 
-        if ((Air_Conditioner_Mode.state+"") == "COLD")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
-        if ((Air_Conditioner_Mode.state+"") == "HOT")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
-        if ((Air_Conditioner_Mode.state+"") == "OFF")   command = "/opt/clima/imposta-temp.sh SPENTO";
+        if ((Air_Conditioner_Mode.state+"") == "cool")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "heat")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "off")   command = "/opt/clima/imposta-temp.sh SPENTO";
 
     logInfo("Air Conditioner",command)
         executeCommandLine(command);
@@ -25,8 +25,8 @@ rule "Air Conditioner Temp"
     then
         logInfo("Air Conditioner",receivedCommand + "" +Air_Conditioner_Mode )
         var String command;
-        if ((Air_Conditioner_Mode.state+"") == "COLD")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
-        if ((Air_Conditioner_Mode.state+"") == "HOT")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "cool")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "heat")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
     logInfo("Air Conditioner",command)
         executeCommandLine(command);
 end
@@ -39,8 +39,8 @@ rule "Air Conditioner Airdir"
         logInfo("Air Conditioner",receivedCommand + "" +Air_Conditioner_Mode )
         var String command;
         // Non importa se HOT o COLD l'airdir è sempre uguale!
-        if ((Air_Conditioner_Mode.state+"") == "COLD")  command = "/opt/clima/imposta-temp-C.sh AIRDIR " + Air_Conditioner_Airdir.state;
-        if ((Air_Conditioner_Mode.state+"") == "HOT")   command = "/opt/clima/imposta-temp-H.sh AIRDIR " + Air_Conditioner_Airdir.state;        
+        if ((Air_Conditioner_Mode.state+"") == "cool")  command = "/opt/clima/imposta-temp-C.sh AIRDIR " + Air_Conditioner_Airdir.state;
+        if ((Air_Conditioner_Mode.state+"") == "heat")   command = "/opt/clima/imposta-temp-H.sh AIRDIR " + Air_Conditioner_Airdir.state;        
     logInfo("Air Conditioner",command)
         executeCommandLine(command);
 end
@@ -67,25 +67,3 @@ rule "Air Conditioner Swing"
         executeCommandLine(command);
 end
 
-
-rule "Air Conditioner Timer"
-    when
-        Item Air_Conditioner_Timer received command 
-    then
-        logInfo("Air Conditioner Timer",receivedCommand + "")
-        var String command;
-       
-        if(receivedCommand == ON){
-            //sendCommand(Notifications, "Prendiendo Timer del aire")
-            if ((Air_Conditioner_Mode.state+"") == "COLD")    command = "irsend SEND_ONCE air TIMER_ON_COLD_" + Air_Conditioner_Temperature.state;
-            if ((Air_Conditioner_Mode.state+"") == "HOT")    command = "irsend SEND_ONCE air TIMER_ON_HOT_" + Air_Conditioner_Temperature.state;
-        }
-        else{
-            //sendCommand(Notifications, "Apagando Timer del aire")
-            if ((Air_Conditioner_Mode.state+"") == "COLD")    command = "irsend SEND_ONCE air TIMER_OFF_COLD_" + Air_Conditioner_Temperature.state;
-            if ((Air_Conditioner_Mode.state+"") == "HOT")    command = "irsend SEND_ONCE air TIMER_OFF_HOT_" + Air_Conditioner_Temperature.state;
-        }
-        logInfo("Air Conditioner Timer",command)
-         executeCommandLine(command);
-       
-end

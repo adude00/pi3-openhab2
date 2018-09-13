@@ -30,7 +30,7 @@ sitemap default label="Casa"
     Text item=Air_Conditioner_Temperature label="A/C: [MAP(ac.map):%s]" {
       Frame   {
         Selection item=Air_Conditioner_Temperature mappings=[10.0='OFF', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 22.0='22', 23.0='23', 24.0='24', 25.0='25', 26.0='26', 27.0='27', 28.0='28', 29.0='29', 30.0='30', 31.0='30 Turbo']
-        Switch item=Air_Conditioner_Mode mappings=[COLD='COLD', HOT='HOT', OFF='OFF']
+        Switch item=Air_Conditioner_Mode mappings=[cool='COLD', heat='HOT', off='OFF']
 				Switch item=Air_Conditioner_Screen
 				Selection item=Air_Conditioner_Airdir mappings=[1='1 Airdir', 2='2 Airdir', 3='3 Airdir', 4='4 Airdir', 5='5 Airdir', 6='6 Airdir', 7='7 Airdir', 8='8 Airdir', 9='1+8 Airdir', 10='2+8 Airdir', 11='3+8 Airdir', 12='4+8 Airdir', 13='5+8 Airdir', 14='6+8 Airdir', 15='7+8 Airdir'] icon=flow
 				Switch item=Air_Conditioner_Swing icon=wind
