@@ -56,3 +56,21 @@ then
       logInfo("Scene","Scena CHIUDI: finita")
     ])
 end
+
+rule "Vado a Letto"
+when
+    Item Scene_aLetto changed to ON
+then
+    logInfo("Scene","Scena A Letto: iniziata")
+    gTappProd.sendCommand(DOWN)
+    NAS2.sendCommand(OFF)
+    Net_TV.sendCommand(OFF)
+    Stereo.sendCommand(OFF)
+    Air_Conditioner_Temperature.sendCommand(10.0)
+    sf04_Light.sendCommand(OFF)
+    sf03_Light.sendCommand(OFF)
+    createTimer(now.plusSeconds(30), [|
+      gScene.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: finita")
+    ])
+end
