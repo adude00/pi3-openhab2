@@ -8,6 +8,7 @@ rule "Qualcuno in Casa"
       if (AutoRientro.state == ON) {
         logInfo("Automazione", "AUTO: AutoRientro = ON, attivo la scena sono a casa")
         Scene_aCasa.sendCommand(ON)
+        PresenceHumans.sendCommand(OFF)
       }
 
     }
