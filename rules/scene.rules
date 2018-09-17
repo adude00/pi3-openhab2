@@ -37,6 +37,7 @@ then
       Scene_aCasa.sendCommand(OFF)
       Scene_Chiudi.sendCommand(OFF)
       gTappProd.sendCommand(DOWN)
+      gLuci.sendCommand(OFF)
     createTimer(now.plusSeconds(30), [|
       IPCams.sendCommand(ON)
       logInfo("Scene","Scena USCIAMO: Telecamere accese")
