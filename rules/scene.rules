@@ -23,6 +23,7 @@ then
       gTappProd.sendCommand(UP)
       IPCams.sendCommand(OFF)
     Thread::sleep(30)
+      AutoRientro.sendCommand(OFF)
       Scene_aCasa.sendCommand(OFF)
    logInfo("Scene","Scena A CASA: finita")
 end
