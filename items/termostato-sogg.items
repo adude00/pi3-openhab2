@@ -1,0 +1,5 @@
+Group gTermoSogg
+
+Switch tsSogg   "Termostato Soggiorno"                        (gTermoSogg)
+Number spSogg   "Setpoint Soggiorno [%.1f °C]"  <temperature> (gTermoSogg) 
+Number hsSogg   "Isteresi Soggiorno [%.1f °C]"  <temperature> (gTermoSogg)

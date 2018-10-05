@@ -253,6 +253,11 @@ sitemap default label="Casa"
     }
     Group item=gScene       label="SCENE Test"
     Group item=gPresence    label="Presence"
+    Text label="Termostato test"  {
+      Switch    item=tsSogg
+      Setpoint  item=spSogg minValue=18  maxValue=22 step=0.2
+      Setpoint  item=hsSogg minValue=0   maxValue=3  step=0.1
+    }
   }
 
 
