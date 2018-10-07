@@ -1,0 +1,5 @@
+Group gTermoBagno
+
+Switch tsBagno   "Termostato Bagno"                        (gTermoBagno)
+Number spBagno   "Setpoint Bagno [%.1f °C]"  <temperature> (gTermoBagno) 
+Number hsBagno   "Isteresi Bagno [%.1f °C]"  <temperature> (gTermoBagno)

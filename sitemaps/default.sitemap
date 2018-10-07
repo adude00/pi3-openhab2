@@ -253,7 +253,14 @@ sitemap default label="Casa"
     }
     Group item=gScene       label="SCENE Test"
     Group item=gPresence    label="Presence"
-    Text label="Termostato test"  {
+    Text label="Termostato Bagno"  {
+      Switch    item=tsBagno
+      Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
+      Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
+      Switch    item=sf07_Light
+      Text      item=sf07_Temp  label="Bagno Temp"
+    }
+    Text label="Termostato Soggiorno"  {
       Switch    item=tsSogg
       Setpoint  item=spSogg minValue=18  maxValue=22 step=0.2
       Setpoint  item=hsSogg minValue=0   maxValue=3  step=0.1
