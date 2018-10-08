@@ -11,7 +11,8 @@ rule "Termostato Bagno"
  
   logInfo("tsBagno","DEBUG Stufetta: Valuto la regola")
   if (tsBagno.state == ON) {
-    logInfo("tsBagno","DEBUG Stufetta: entro in tsBagno.state == ON")
+    logInfo("tsBagno","DEBUG Stufetta: tsBagno.state == ON")
+    logInfo("tsBagno","DEBUG Stufetta: cur_temp: " + (cur_temp).floatValue + ", setpoint: " + ((setpoint).floatValue + ", hysteresis: " + (hysteresis).floatValue) + " fine")
     if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
       logInfo("tsBagno","DEBUG Stufetta: entro in (cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)")
       if (sf07_Light.state == OFF) {
@@ -21,6 +22,7 @@ rule "Termostato Bagno"
       }
     }
     else {
+      logInfo("tsBagno","DEBUG Stufetta: temperatura - isteresi raggiunta")
       sendCommand(sf07_Light, OFF)
       logInfo("tsBagno","Stufetta: spenta")
     }
