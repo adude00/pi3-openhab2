@@ -8,23 +8,27 @@ rule "Termostato Bagno"
   var Number cur_temp = sf07_Temp.state 
   var Number setpoint = spBagno.state 
   var Number hysteresis = hsBagno.state 
- 
+  var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+
   logInfo("tsBagno","DEBUG Stufetta: Valuto la regola")
   if (tsBagno.state == ON) {
     logInfo("tsBagno","DEBUG Stufetta: tsBagno.state == ON")
-    logInfo("tsBagno","DEBUG Stufetta: cur_temp: " + (cur_temp).floatValue + ", setpoint: " + ((setpoint).floatValue + ", hysteresis: " + (hysteresis).floatValue) + " fine")
-    if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
-      logInfo("tsBagno","DEBUG Stufetta: entro in (cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)")
-      if (sf07_Light.state == OFF) {
-        logInfo("tsBagno","DEBUG Stufetta: entro in sf07_Light == OFF")
-        sendCommand(sf07_Light, ON)
-        logInfo("tsBagno","Stufetta: accesa")
+    logInfo("tsBagno","DEBUG Stufetta: cur_temp: " + (cur_temp).floatValue + ", setpoint: " + ((setpoint).floatValue + ", hysteresis: " + (hysteresis).floatValue) + "C")
+    if (sf07_Light.state == ON) {
+      logInfo("tsBagno","DEBUG Stufetta: trovata ON, verifico di non superare i " + (setpoint).floatValue + "C")
+      if ((cur_temp).floatValue > ((setpoint).floatValue)) {
+        logInfo("tsBagno","DEBUG Stufetta: Ho superato, ci sono " + (cur_temp).floatValue + "C")
+        sendCommand(sf07_Light, OFF)
+        logInfo("tsBagno","DEBUG Stufetta: SPENGO la stufetta")
       }
     }
     else {
-      logInfo("tsBagno","DEBUG Stufetta: temperatura - isteresi raggiunta")
-      sendCommand(sf07_Light, OFF)
-      logInfo("tsBagno","Stufetta: spenta")
+      logInfo("tsBagno","DEBUG Stufetta: trovata OFF, verifico che non ci siano meno di  " + (hsetpoint).floatValue + "C")
+      if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
+        logInfo("tsBagno","DEBUG Stufetta: ci sono " + (cur_temp).floatValue + "C")
+        sendCommand(sf07_Light, ON)
+        logInfo("tsBagno","DEBUG Stufetta: ACCENDO la stufetta")
+      }
     }
   }
 end
