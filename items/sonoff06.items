@@ -1,8 +1,4 @@
-Group sonoff
 Group sonoff06
-Group gLuci
-Group gChartBdrmT
-Group gChartBdrmH
 
 Switch sf06_Light "Verde" <light> (sonoff06,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff06/POWER:command:*:default],

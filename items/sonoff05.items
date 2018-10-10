@@ -1,8 +1,4 @@
-Group sonoff
 Group sonoff05
-Group gLuci
-Group gChartBdrmT
-Group gChartBdrmH
 
 // LUCE da definire
 Switch sf05_Light "Bianca" <light> (sonoff05,sonoff,LR,gLight,gLuci) [ "Lighting" ]

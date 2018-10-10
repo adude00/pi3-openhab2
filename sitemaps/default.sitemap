@@ -175,6 +175,32 @@ sitemap default label="Casa"
         Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
 
+      Frame label="Bagno" {
+        // TEMPERATURA Bagno
+        Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBathT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBathT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBathT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBathT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBathT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBathT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBathT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBathT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Bagno
+        Chart  item=gChartBathH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBathH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBathH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBathH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBathH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBathH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBathH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+
       Frame label="Tutto insieme" {
         // TEMPERATURA TUTTO
         Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
@@ -258,7 +284,8 @@ sitemap default label="Casa"
       Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
       Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
       Switch    item=sf07_Light
-      Text      item=sf07_Temp  label="Bagno Temp"
+      Text      item=sf07_Temp  label="Temperatura"
+      Text      item=sf07_Humid label="Umidità"
     }
     Text label="Termostato Soggiorno"  {
       Switch    item=tsSogg
