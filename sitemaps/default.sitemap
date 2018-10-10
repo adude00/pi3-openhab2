@@ -110,6 +110,7 @@ sitemap default label="Casa"
         Text item=Casa_Temperature_AVG
         Text item=sf05_Temp
         Text item=sf06_Temp
+        Text item=sf07_Temp
 		  }
   		Frame {
   			Text item=Casa_Umidita_Sogg
@@ -117,6 +118,7 @@ sitemap default label="Casa"
         Text item=sf04_Humid
         Text item=sf05_Humid
         Text item=sf06_Humid
+        Text item=sf07_Humid
   		}
       Frame label="Grafici" {
       Text label="Grafici" {
