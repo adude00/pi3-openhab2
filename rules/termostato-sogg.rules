@@ -9,16 +9,17 @@ rule "Termostato Soggiorno"
   var Number cur_temp = Casa_Temperature_AVG.state
   var Number sp = spSoggiorno.state
   var Number setpoint = sp.floatValue
-  var Number hysteresis = hsSoggiorno.state
-  var Number tDiff = (setpoint - cur_temp).floatValue
-  //var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+  var Number hs = hsSoggiorno.state
+  var Number hysteresis = hs.floatValue
+  var Number tDiffD = (setpoint - cur_temp).floatValue
+  var Number tDiffU = (setpoint - cur_temp - hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
 
   if (tsSoggiorno.state == ON) {
-    logInfo("tsSoggiorno","DEBUG tsSogg: cur: " + cur_temp + ", sPt: " + setpoint + ", hst: " + (hysteresis).floatValue + "C, diff: " + tDiff + "C, A/C: " + sa + "C")
+    logInfo("tsSoggiorno","DEBUG tsSogg: cur: " + cur_temp + ", sPt: " + setpoint + ", hst: " + hysteresis + "C, tDiffD: " + tDiffD + "C, tDiffU: " + tDiffU + "C, A/C: " + sa + "C")
     if (sa == 31.0) {
       logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5 -> " + sa)
-
+      if (tDiffD < 2 ) Air_Conditioner_Temperature.sendCommand(23.0)
     }
     if (sa >= 23.0 && sa < 31.0) {
       logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4 -> " + sa)
@@ -31,9 +32,12 @@ rule "Termostato Soggiorno"
     }
     if (sa == 18.0) {
       logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1 -> " + sa)
+      if (tDiffU  > -2.0 ) Air_Conditioner_Temperature.sendCommand(19.0)
+      if (tDiffD <= -2.0 ) Air_Conditioner_Temperature.sendCommand(10.0)
     }
     if (sa == 10.0) {
       logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0 -> " + sa)
+      if ( tDiffU <= -2.0 ) Air_Conditioner_Temperature.sendCommand(18.0)
     }
   }
 end
