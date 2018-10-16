@@ -58,6 +58,7 @@ then
 }
 end
 
+
 rule "WakeUpAlarmTriggeredOn"
 when
     Item WakeUpAlarmTriggered changed to ON
@@ -68,11 +69,12 @@ then
       WakeUpAlarmSwitch.sendCommand(ON)
 end
 
+
 rule "WakeUpAlarmSwitchOff"
 when
     Item WakeUpAlarmSwitch changed to OFF
 then
-   logInfo(LOG, "Switch off wakeup")
+   logInfo(LOG, "SVEGLIA: Spengo la sveglia")
    if (mDimmerTimer !== null) {
        mDimmerTimer.cancel
        mDimmerTimer = null
@@ -85,14 +87,11 @@ then
 end
 
 
-// Test alarm repeat noon
 rule "Repeat Alarm"
 when
-  // A mezzogiorno di tutti i pre-lavorativi riarmo la sveglia
-  Time cron "0 0 12 ? * MON,TUE,WED,THU,SUN *"
+  // A mezzanotte e 01 di tutti i lavorativi riarmo la sveglia per la mattina
+  Time cron "0 1 0 ? * MON,TUE,WED,THU,FRI *"
   // Generated with http://www.cronmaker.com
-
-  //Time cron "0 27 23 ? * MON,TUE,WED,THU,SUN *"
 then
   logInfo(LOG, "SVEGLIA: Controllo se riattivare la sveglia")
 
