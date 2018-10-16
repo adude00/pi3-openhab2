@@ -1,0 +1,39 @@
+rule "Termostato Soggiorno"
+  when
+    Item spSoggiorno changed or
+    Item Casa_Temperature_AVG changed or
+    Item hsSoggiorno changed or
+    Item tsSoggiorno changed to ON
+  then
+  
+  var Number cur_temp = Casa_Temperature_AVG.state
+  var Number sp = spSoggiorno.state
+  var Number setpoint = sp.floatValue
+  var Number hysteresis = hsSoggiorno.state
+  var Number tDiff = (setpoint - cur_temp).floatValue
+  //var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+  var Number sa = Air_Conditioner_Temperature.state as DecimalType
+
+  if (tsSoggiorno.state == ON) {
+    logInfo("tsSoggiorno","DEBUG tsSogg: cur: " + cur_temp + ", sPt: " + setpoint + ", hst: " + (hysteresis).floatValue + "C, diff: " + tDiff + "C, A/C: " + sa + "C")
+    if (sa == 31.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5 -> " + sa)
+
+    }
+    if (sa >= 23.0 && sa < 31.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4 -> " + sa)
+    }
+    if (sa >= 20.0 && sa < 23.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3 -> " + sa)
+    }
+    if (sa == 19.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa2 -> " + sa)
+    }
+    if (sa == 18.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1 -> " + sa)
+    }
+    if (sa == 10.0) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0 -> " + sa)
+    }
+  }
+end
