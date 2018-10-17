@@ -11,41 +11,51 @@ rule "Termostato Soggiorno"
   var Number setpoint = sp.floatValue
   var Number hs = hsSoggiorno.state
   var Number hysteresis = hs.floatValue
-  var Number tDiff = (setpoint - cur_temp).floatValue
+  //var Number tDiff = (setpoint - cur_temp).floatValue
   var Number tDiffD = (setpoint - cur_temp).floatValue
   var Number tDiffU = (setpoint - cur_temp + hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
-  var Number cdzTemp
+  var Number cdzTemp = 0
 
   if (tsSoggiorno.state == ON) {
-    logInfo("tsSoggiorno","DEBUG tsSogg: cur: " + cur_temp + ", sPt: " + setpoint + ", hst: " + hysteresis + "C, tDiffD: " + tDiffD + "C, tDiffU: " + tDiffU + "C, A/C: " + sa + "C")
+    logInfo("tsSoggiorno","DEBUG tsSogg: " + cur_temp + "C, sPt: " + setpoint + ", hst: " + hysteresis + "C, tDiffD: " + tDiffD + "C, tDiffU: " + tDiffU + "C, A/C: " + sa + "C")
+
+    // CHECK IF TEMPERATURE IS OK
     if (sa == 35.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5 -> " + sa)
-      if (tDiffU < 1.5 ) Air_Conditioner_Temperature.sendCommand(23.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5: " + sa)
+      if (tDiffU < 1.5 )    cdzTemp = 23.0
     }
     if (sa >= 23.0 && sa < 35.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4 -> " + sa)
-      if (tDiffD  > 1.5 ) Air_Conditioner_Temperature.sendCommand(35.0)
-      if (tDiffU <= 0.5 ) Air_Conditioner_Temperature.sendCommand(20.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4: " + sa)
+      if (tDiffD  > 1.5 )   cdzTemp = 35.0
+      if (tDiffU <= 0.5 )   cdzTemp = 20.0
     }
     if (sa >= 20.0 && sa < 23.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3 -> " + sa)
-      if (tDiffD  > 0.5 ) Air_Conditioner_Temperature.sendCommand(23.0)
-      if (tDiffU <= -0.5 ) Air_Conditioner_Temperature.sendCommand(19.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3: " + sa)
+      if (tDiffD  > 0.5 )   cdzTemp = 23.0
+      if (tDiffU <= -0.5 )  cdzTemp = 19.0
     }
     if (sa == 19.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa2 -> " + sa)
-      if (tDiffD >  -0.5 ) Air_Conditioner_Temperature.sendCommand(20.0)
-      if (tDiffU <= -1.5 ) Air_Conditioner_Temperature.sendCommand(18.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa2: " + sa)
+      if (tDiffD >  -0.5 )  cdzTemp = 20.0
+      if (tDiffU <= -1.5 )  cdzTemp = 18.0
     }
     if (sa == 18.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1 -> " + sa)
-      if (tDiffD >  -1.5 ) Air_Conditioner_Temperature.sendCommand(19.0)
-      if (tDiffU <= -2.0 ) Air_Conditioner_Temperature.sendCommand(10.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1: " + sa)
+      if (tDiffD >  -1.5 )  cdzTemp = 19.0
+      if (tDiffU <= -2.0 )  cdzTemp = 10.0
     }
     if (sa == 10.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0 -> " + sa)
-      if ( tDiffD > -2.0 ) Air_Conditioner_Temperature.sendCommand(18.0)
+      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0: " + sa)
+      if ( tDiffD > -2.0 ) cdzTemp = 18.0
     }
+
+    // ACTION if cdzTemp changed
+    if (cdzTemp != 0 ) {
+      logInfo("tsSoggiorno","DEBUG tsSogg: imposto: " + cdzTemp )
+    } else {
+      logInfo("tsSoggiorno","DEBUG tsSogg: ok")
+   }
+
   }
 end
