@@ -47,7 +47,11 @@ rule "Termostato Soggiorno"
     }
     if (sa == 10.0) {
       logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0: " + sa)
-      if ( tDiffU < 1.0 )   cdzTemp = 18.0
+      if ( tDiffD <= -1.5 )                   cdzTemp = 31.0
+      if ( tDiffD > -1.5 && tDiffD <= -0.5 )  cdzTemp = 23.0
+      if ( tDiffD > -0.5 && tDiffD <= 0.0 )   cdzTemp = 20.0
+      if ( tDiffD >  0.0 && tDiffD <  0.5 )   cdzTemp = 19.0
+      if ( tDiffD >  0.5 && tDiffU <  1.0 )   cdzTemp = 18.0
     }
 
     // ACTION if cdzTemp changed
