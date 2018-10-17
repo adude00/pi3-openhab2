@@ -15,6 +15,7 @@ rule "Termostato Soggiorno"
   var Number tDiffD = (setpoint - cur_temp).floatValue
   var Number tDiffU = (setpoint - cur_temp + hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
+  var Number cdzTemp
 
   if (tsSoggiorno.state == ON) {
     logInfo("tsSoggiorno","DEBUG tsSogg: cur: " + cur_temp + ", sPt: " + setpoint + ", hst: " + hysteresis + "C, tDiffD: " + tDiffD + "C, tDiffU: " + tDiffU + "C, A/C: " + sa + "C")
