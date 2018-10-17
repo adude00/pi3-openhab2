@@ -12,8 +12,8 @@ rule "Termostato Soggiorno"
   var Number hs = hsSoggiorno.state
   var Number hysteresis = hs.floatValue
   //var Number tDiff = (setpoint - cur_temp).floatValue
-  var Number tDiffD = (setpoint - cur_temp).floatValue
-  var Number tDiffU = (setpoint - cur_temp + hysteresis).floatValue
+  var Number tDiffD = (cur_temp - setpoint).floatValue
+  var Number tDiffU = (cur_temp - setpoint - hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
   var Number cdzTemp = 0
 
