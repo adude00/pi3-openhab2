@@ -1,4 +1,4 @@
-rule "Termostato Soggiorno"
+rule "Termostato Acceso"
   when
     Item spSoggiorno changed or
     Item Casa_Temperature_AVG changed or
@@ -63,4 +63,11 @@ rule "Termostato Soggiorno"
    }
 
   }
+end
+
+rule "Termostato Spento"
+  when
+    Item tsSoggiorno changed to OFF
+  then
+    Air_Conditioner_Temperature.sendCommand(10.0)
 end

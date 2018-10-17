@@ -1,5 +1,5 @@
 Group gTermoSogg
 
-Switch tsSoggiorno   "Termostato Soggiorno"                        (gTermoSogg)
+Switch tsSoggiorno   "Termostato"                 (gTermoSogg) [ "Switchable" ]
 Number spSoggiorno   "Setpoint Soggiorno [%.1f °C]"  <temperature> (gTermoSogg) 
 Number hsSoggiorno   "Isteresi Soggiorno [%.1f °C]"  <temperature> (gTermoSogg)
