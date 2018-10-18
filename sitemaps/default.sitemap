@@ -131,9 +131,9 @@ sitemap default label="Casa"
         Text item=sf07_Humid                  label="Umidità"
 		  }
       Frame label="Grafici" {
-        Text label="Grafici" {
+        Text label="Grafici" icon=line {
   	    Frame label="Periodo" {
-          Selection item=ChartPeriod mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+          Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
         }
         Frame label="Soggiorno" {
         // TEMPERATURA Soggiorno
@@ -244,13 +244,13 @@ sitemap default label="Casa"
 
   Text item=Fuori_Temperature label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
-      Text item=Fuori_Temperature label="Bologna"   icon="suncloud"
+      Text item=Fuori_Temperature label="Bologna"   icon="vacation"
       Text item=Fuori_Umidita     label="Bologna"   icon="humidity"
       Text item=Terrazza_Temp     label="Balcony"   icon="terrace"
       Text item=Terrazza_Humid    label="Balcony"   icon="humidity"
     }
     Frame label="Graphs" {
-      Selection item=Fuori_Temperature_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+      Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
       // TEMPERATURA
       Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
       Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
