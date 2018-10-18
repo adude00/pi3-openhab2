@@ -41,6 +41,7 @@ sitemap default label="Casa"
         Text      item=Casa_Temperature_AVG
         Setpoint  item=spSoggiorno minValue=17  maxValue=25 step=0.2
         Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
+        Selection item=tsSoggSensor   mappings=[1='Media', 2='Divano']
       }
     }
     //Group item=SveglieAll 	label="Programmazione A/C" icon="clock"
