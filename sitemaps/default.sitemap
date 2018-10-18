@@ -88,7 +88,7 @@ sitemap default label="Casa"
   } // Chiuso frame Things
 
   Frame label="Sensori" {
-    Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=poweroutlet {
+    Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
       Frame {
         Text item=Casa_Consumi_Istantaneo label="Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
       }
@@ -109,31 +109,33 @@ sitemap default label="Casa"
 //  }
 
 //  Frame label="Temps" {
-	  Text item=Casa_Temperature_AVG label="Temperature Casa [%.1f °C]" {
-	    Frame {
-	      Text item=sf04_Temp
-        Text item=sf03_Temp
-	      Text item=Casa_Temperature_Sogg_Down
-        Text item=Casa_Temperature_Sogg_Up
-        Text item=Casa_Temperature_AVG
-        Text item=sf05_Temp
-        Text item=sf06_Temp
-        Text item=sf07_Temp
-		  }
-  		Frame {
-  			Text item=Casa_Umidita_Sogg
-        Text item=sf03_Humid
-        Text item=sf04_Humid
-        Text item=sf05_Humid
-        Text item=sf06_Humid
-        Text item=sf07_Humid
-  		}
-      Frame label="Grafici" {
-      Text label="Grafici" {
-  	  Frame label="Periodo" {
-        Selection item=ChartPeriod mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+	  Text item=Casa_Temperature_AVG label="Casa [%.1f °C]" icon="house" {
+	    Frame label="Soggiorno" {
+	      Text item=sf04_Temp                   label="Divano"  icon=sofa
+        Text item=sf04_Humid                  label="Divano"
+        Text item=sf03_Temp                   label="TV"      icon=video
+        Text item=sf03_Humid                  label="TV"
+        Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
+  			Text item=Casa_Umidita_Sogg           label="Alta"    
+        Text item=Casa_Temperature_AVG        label="Media calcolata"
+	      Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
       }
-      Frame label="Soggiorno" {
+      Frame label="Camera Da Letto" {
+        Text item=sf05_Temp                   label="Specchio"  icon=bedroom
+        Text item=sf05_Humid                  label="Specchio"
+        Text item=sf06_Temp                   label="Soffitto"  icon=attic
+        Text item=sf06_Humid                  label="Soffitto"
+      }
+      Frame label="Bagno" {
+        Text item=sf07_Temp                   label="Temperatura" icon=bath
+        Text item=sf07_Humid                  label="Umidità"
+		  }
+      Frame label="Grafici" {
+        Text label="Grafici" {
+  	    Frame label="Periodo" {
+          Selection item=ChartPeriod mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        }
+        Frame label="Soggiorno" {
         // TEMPERATURA Soggiorno
         Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -157,9 +159,9 @@ sitemap default label="Casa"
         Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
+        }
 
-      Frame label="Camera Matrimoniale" {
+        Frame label="Camera Matrimoniale" {
         // TEMPERATURA Matrimoniale
         Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -183,9 +185,9 @@ sitemap default label="Casa"
         Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
+        }
 
-      Frame label="Bagno" {
+        Frame label="Bagno" {
         // TEMPERATURA Bagno
         Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -209,9 +211,9 @@ sitemap default label="Casa"
         Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
+        }
 
-      Frame label="Tutto insieme" {
+        Frame label="Tutto insieme" {
         // TEMPERATURA TUTTO
         Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -234,19 +236,17 @@ sitemap default label="Casa"
         Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
-      } // Chiuso frame grafici
+        }
+        } // Chiuso frame grafici
       } // Chiuso text grafici
 
     }
 
-  Text item=Fuori_Temperature label="Temperature fuori [%.1f °C]" {
+  Text item=Fuori_Temperature label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
-      Text item=Fuori_Temperature label="Bologna"
-      Text item=Terrazza_Temp     label="Balcony"
-    }
-    Frame label="Humidity" { 
+      Text item=Fuori_Temperature label="Bologna"   icon="suncloud"
       Text item=Fuori_Umidita     label="Bologna"   icon="humidity"
+      Text item=Terrazza_Temp     label="Balcony"   icon="terrace"
       Text item=Terrazza_Humid    label="Balcony"   icon="humidity"
     }
     Frame label="Graphs" {
