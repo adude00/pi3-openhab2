@@ -1,14 +1,10 @@
 rule "Qualcuno in Casa"
   when
-    Item PresenceHumans received command
-  then
     // SOMEBODY ENTERS THE HOUSE
-    if (receivedCommand==ON) {
-
-      if (AutoRientro.state == ON) {
-        logInfo("Automazione", "AUTO: AutoRientro = ON, attivo la scena sono a casa")
-        Scene_aCasa.sendCommand(ON)
-      }
-
+    Item PresenceHumans changed to ON
+  then
+    if (AutoRientro.state == ON) {
+      logInfo("Automazione", "AUTO: AutoRientro = ON, attivo la scena sono a casa")
+      Scene_aCasa.sendCommand(ON)
     }
 end
