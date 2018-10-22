@@ -117,7 +117,7 @@ sitemap default label="Casa"
         Text item=sf03_Humid                  label="TV"
         Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
   			Text item=Casa_Umidita_Sogg           label="Alta"    
-        Text item=Casa_Temperature_AVG        label="Media calcolata"
+        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
 	      Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
       }
       Frame label="Camera Da Letto" {
