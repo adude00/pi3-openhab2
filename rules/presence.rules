@@ -5,6 +5,7 @@ rule "Qualcuno in Casa"
   then
     if (AutoRientro.state == ON) {
       logInfo("Automazione", "AUTO: AutoRientro = ON, attivo la scena sono a casa")
+      pushNotification("Scena A CASA", "Qualcuno è entrato: apro le tapparelle e spengo le telecamere")
       Scene_aCasa.sendCommand(ON)
     }
 end
