@@ -21,9 +21,6 @@ then
   pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
   logInfo("Scene","Scena A CASA: iniziata")
 
-  Scene_Lavoro.sendCommand(OFF)
-  Scene_Usciamo.sendCommand(OFF)
-  Scene_Chiudi.sendCommand(OFF)
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
 
@@ -40,17 +37,15 @@ when
 then
   pushNotification("Scena: USCIAMO", "La scena USCIAMO è stata attivata")
    logInfo("Scene","Scena USCIAMO: iniziata")
-      Scene_Lavoro.sendCommand(OFF)
-      Scene_aCasa.sendCommand(OFF)
-      Scene_Chiudi.sendCommand(OFF)
-      gTappProd.sendCommand(DOWN)
-      gLuci.sendCommand(OFF)
-    createTimer(now.plusSeconds(30), [|
-      IPCams.sendCommand(ON)
-      logInfo("Scene","Scena USCIAMO: Telecamere accese")
-      AutoRientro.sendCommand(ON)
-      gScene.sendCommand(OFF)
-      logInfo("Scene","Scena USCIAMO: finita")
+
+  gTappProd.sendCommand(DOWN)
+  gLuci.sendCommand(OFF)
+
+  createTimer(now.plusSeconds(30), [|
+    IPCams.sendCommand(ON)
+    AutoRientro.sendCommand(ON)
+    gScene.sendCommand(OFF)
+    logInfo("Scene","Scena USCIAMO: Telecamere accese e scena finita")
     ])
 end
 
