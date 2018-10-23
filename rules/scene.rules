@@ -2,36 +2,43 @@ rule "Lavoro"
 when
     Item Scene_Lavoro changed to ON
 then
-   logInfo("Scene","Scena LAVORO: iniziata")
-      Scene_aCasa.sendCommand(OFF)
-      Scene_Usciamo.sendCommand(OFF)
-      Scene_Chiudi.sendCommand(OFF)
-      gTappDog.sendCommand(DOWN)
-    Thread::sleep(30)
-      Scene_Lavoro.sendCommand(OFF)
-   logInfo("Scene","Scena LAVORO: finita")
+  pushNotification("Scena: LAVORO", "La scena LAVORO è stata attivata")
+
+  logInfo("Scene","Scena LAVORO: iniziata")
+  Scene_aCasa.sendCommand(OFF)
+  Scene_Usciamo.sendCommand(OFF)
+  Scene_Chiudi.sendCommand(OFF)
+  gTappDog.sendCommand(DOWN)
+  Thread::sleep(30)
+    Scene_Lavoro.sendCommand(OFF)
+  logInfo("Scene","Scena LAVORO: finita")
 end
 
 rule "A Casa"
 when
     Item Scene_aCasa changed to ON
 then
-   logInfo("Scene","Scena A CASA: iniziata")
-      Scene_Lavoro.sendCommand(OFF)
-      Scene_Usciamo.sendCommand(OFF)
-      Scene_Chiudi.sendCommand(OFF)
-      gTappProd.sendCommand(UP)
-      IPCams.sendCommand(OFF)
-    Thread::sleep(30)
-      AutoRientro.sendCommand(OFF)
-      Scene_aCasa.sendCommand(OFF)
-   logInfo("Scene","Scena A CASA: finita")
+  pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
+  logInfo("Scene","Scena A CASA: iniziata")
+
+  Scene_Lavoro.sendCommand(OFF)
+  Scene_Usciamo.sendCommand(OFF)
+  Scene_Chiudi.sendCommand(OFF)
+  gTappProd.sendCommand(UP)
+  IPCams.sendCommand(OFF)
+
+  createTimer(now.plusSeconds(30), [|
+    AutoRientro.sendCommand(OFF) 
+    gScene.sendCommand(OFF)
+    logInfo("Scene","Scena A CASA: finita")
+    ])
 end
 
 rule "Usciamo"
 when
     Item Scene_Usciamo changed to ON
 then
+  pushNotification("Scena: USCIAMO", "La scena USCIAMO è stata attivata")
    logInfo("Scene","Scena USCIAMO: iniziata")
       Scene_Lavoro.sendCommand(OFF)
       Scene_aCasa.sendCommand(OFF)

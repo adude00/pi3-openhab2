@@ -1,11 +1,18 @@
 rule "Qualcuno in Casa"
   when
-    // SOMEBODY ENTERS THE HOUSE
     Item PresenceHumans changed to ON
   then
+    pushNotification("Presence: SI", "Qualcuno è entrato")
     if (AutoRientro.state == ON) {
       logInfo("Automazione", "AUTO: AutoRientro = ON, attivo la scena sono a casa")
-      pushNotification("Scena A CASA", "Qualcuno è entrato: apro le tapparelle e spengo le telecamere")
       Scene_aCasa.sendCommand(ON)
     }
+end
+
+
+rule "Nessuno in Casa"
+  when
+    Item PresenceHumans changed to OFF
+  then
+    pushNotification("Presence: NO", "Sono usciti tutti")
 end
