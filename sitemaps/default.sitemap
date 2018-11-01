@@ -37,7 +37,7 @@ sitemap default label="Casa"
 				Switch item=Air_Conditioner_Termostat
       }
       Frame label="A/C Auto"  {
-        Switch    item=tsSoggiorno
+        Switch    item=tsSoggiorno            label="Termostato"
         Text      item=Casa_Temperature_AVG   label="Temperatura Media"     icon=house
         Text      item=sf04_Temp              label="Temperatura al Divano" icon=sofa
         Setpoint  item=spSoggiorno minValue=17  maxValue=25 step=0.2
@@ -289,13 +289,21 @@ sitemap default label="Casa"
     }
     Group item=gScene       label="SCENE Test"
     Group item=gPresence    label="Presence"
-    Text label="Termostato Bagno"  {
-      Switch    item=tsBagno
-      Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
-      Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
-      Switch    item=sf07_Light
-      Text      item=sf07_Temp  label="Temperatura"
-      Text      item=sf07_Humid label="Umidità"
+    Text label="Termostati" {
+      Text label="Termostato Bagno"  {
+        Switch    item=tsBagno
+        Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
+        Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
+        Switch    item=sf07_Light
+        Text      item=sf07_Temp  label="Temperatura"
+        Text      item=sf07_Humid label="Umidità"
+      }
+      Text label="Termostato Bedroom"  {
+        Setpoint  item=BdrmThermoTarget   minValue=18  maxValue=25  step=0.1
+        Switch    item=BdrmThermoMode     mappings=[cool='COLD', heat='HOT', off='OFF']
+        Text      item=sf05_Temp  label="Temperatura"
+        Text      item=sf05_Humid label="Umidità"
+      }
     }
   }
 

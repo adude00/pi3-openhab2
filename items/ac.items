@@ -1,7 +1,7 @@
 Group gInitializeTen
 
 //Group gDownstairsThermostat "Downstairs Thermostat" (gFF) [ "Thermostat" ]
-Group gSoggThermostat "Termostato Soggiorno" (gFF) [ "Thermostat" ]
+Group gSoggThermostat "Living Room" (gFF) [ "Thermostat" ]
 
 Switch Air_Conditioner 			        "A/C"  			        <air_conditioner> 	  (Appliance,gInitializeTen) 
 String Air_Conditioner_Mode 		    "Mode"  		        <settings> 		        (Appliance,gSoggThermostat)   [ "homekit:HeatingCoolingMode" ]

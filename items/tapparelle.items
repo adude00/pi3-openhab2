@@ -25,7 +25,7 @@ Switch Scene_Privacy  "Scena: Privacy"  (gScene)  [ "Switchable" ]
 Switch Scene_Chiudi   "Scena: Chiudi"   (gScene)  [ "Switchable" ]
 Switch Scene_aLetto   "Scena: A Letto"  (gScene)  [ "Switchable" ]
 
-Rollershutter Tapp01 "1: Sogg Piccola [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) 
+Rollershutter Tapp01 "1: Sogg Piccola [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm)
     { mqtt=">[broker:cmnd/tapp01/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER3:command:DOWN:MAP(tapparella.map)]" }

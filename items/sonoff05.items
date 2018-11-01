@@ -1,14 +1,18 @@
 Group sonoff05
 
-// LUCE da definire
+// Finto Termostato Camera per Alexa
+Group gBdrmThermostat   "Bedroom" (gFF)                      [ "Thermostat" ]
+String BdrmThermoMode   "Mode"      <settings>  (Appliance,gBdrmThermostat)     [ "homekit:HeatingCoolingMode" ]
+Number BdrmThermoTarget "Target"    <heating>   (Appliance,gBdrmThermostat)     [ "TargetTemperature" ] 
+
 Switch sf05_Light "Bianca" <light> (sonoff05,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff05/POWER:command:*:default],
             <[broker:stat/sonoff05/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf05_Temp    "Cam Spec [%.1f °C]"    <temperature>   (sonoff05,sonoff,Casa_Temperature_Chart,gChartBdrmT)
+Number sf05_Temp    "Cam Spec [%.1f °C]"    <temperature>   (sonoff05,sonoff,Casa_Temperature_Chart,gChartBdrmT,gBdrmThermostat)
   [ "CurrentTemperature" ]  { mqtt="<[broker:tele/sonoff05/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf05_Humid   "Cam Spec [%.1f %%]"    <humidity>      (sonoff05,sonoff,Casa_Umidita_Chart,gChartBdrmH)
+Number sf05_Humid   "Cam Spec [%.1f %%]"    <humidity>      (sonoff05,sonoff,Casa_Umidita_Chart,gChartBdrmH,gBdrmThermostat)
   [ "CurrentHumidity" ]     { mqtt="<[broker:tele/sonoff05/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
@@ -18,3 +22,4 @@ String sf05_Light_Reachable "Bianca: Status [%s]" <switch> (sonoff05,sonoff,gRea
     { mqtt="<[broker:tele/sonoff05/LWT:state:MAP(reachable.map)]" }
 String sf05_Uptime "Bianca: Uptime [%s]" <clock> (sonoff05,sonoff)
     { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Uptime)]" }
+
