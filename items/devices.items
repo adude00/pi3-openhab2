@@ -1,9 +1,7 @@
-Group	Devices
+Group Devices
 
-//itemtype itemname ["labeltext"] [<iconname>] [(group1, group2, ...)] [{bindingconfig}]
+Switch NAS2     "Server"    <player> (Devices) [ "Switchable" ] { nh="172.27.72.51:32400", exec=">[ON:/opt/openhab/scripts/opti/turnon.sh ] >[OFF:ssh root@nas2.bluetears.org /sbin/shutdown -p now ]" }
 
-Switch NAS2  	  "Server"    <player> (Devices) [ "Switchable" ]	{ nh="172.27.72.51:32400", exec=">[ON:/opt/openhab/scripts/opti/turnon.sh ] >[OFF:ssh root@nas2.bluetears.org /sbin/shutdown -p now ]" }
+Switch Net_TV   "Computer"  <screen> (Devices) [ "Switchable" ] { nh="pc.bluetears.org:8000", wol="172.27.72.255#30:5a:3a:0c:01:06", exec="OFF:curl http://pc.bluetears.org:8000/?action=System.Sleep > /dev/null "}
 
-Switch Net_TV   "Computer"	<screen> (Devices) [ "Switchable" ] { nh="pc.bluetears.org:8000", wol="172.27.72.255#30:5a:3a:0c:01:06", exec="OFF:curl http://pc.bluetears.org:8000/?action=System.Sleep > /dev/null "}
-
-Switch Stereo	  "Stereo"    <soundvolume> (Devices) [ "Switchable" ]	{ gpio="pin:20" }
+Switch Stereo   "Stereo"    <soundvolume> (Devices) [ "Switchable" ]  { gpio="pin:20" }
