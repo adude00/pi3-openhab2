@@ -21,9 +21,6 @@ rule "Termostato Acceso"
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
   var Number cdzTemp = 0
 
-  // Check if we want to use sofa sensor and not house average
-  if (tsSoggSensor.state == 2 ) cur_temp = sf04_Temp.state
-
   if (tsSoggiorno.state == ON) {
     logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
 
