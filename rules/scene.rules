@@ -79,6 +79,7 @@ when
 then
     logInfo("Scene","Scena A Letto: iniziata")
     gTappProd.sendCommand(DOWN)
+    tsSoggiorno.sendCommand(OFF)
     logInfo("Scene","Scena A Letto: tapparelle abbassate")
     NAS2.sendCommand(OFF)
     Net_TV.sendCommand(OFF)
