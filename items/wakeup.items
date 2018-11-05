@@ -5,3 +5,6 @@ Switch WakeUpAlarmSwitch    "Wake up alarm [%s]" (gRestore,WakeUpAlarm)
 Switch WakeUpAlarmTriggered "Wake up alarm triggered [%s]"  <alarm> (gRestore,WakeUpAlarm)
 
 Switch WakeUpAlarmRepeat    "Wake up alarm repeat [%s]"    <alarm>     (gRestore,WakeUpAlarm)
+
+Switch WakeUpAC             "Wake up AC [%s]"             <radiator>     (gRestore,WakeUpAlarm)
+Switch WakeUpACTrigger      "Wake up AC Triggered [%s]"   <radiator>  (gRestore,WakeUpAlarm)

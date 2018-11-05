@@ -5,7 +5,7 @@ var boolean mAlaramTriggered = false
 var int mCurrentDimLevel = 0
 val String LOG = "WakeUp"
 var Timer mWakeUpTimer = null
-var Timer mDimmerTimer = null
+var Timer mWakeUpACTimer = null
 var int mDimStep
 var int mTimeStep
 val int DEFAULT_DIM_STEP = 2
@@ -55,6 +55,23 @@ then
                                          WakeUpAlarmTriggered.sendCommand(ON)
                                          mWakeUpTimer = null
                                          ])    
+
+      if (WakeUpAC.state == ON) {
+        var int totalMinutesAC = totalMinutes - 60 
+        logInfo(LOG, "AC Alarm will be set for: " + totalMinutesAC + " minutes")
+        logInfo(LOG, "AC Alarm: "  + hours - 1 + " h " + minutes + " min")
+        WakeUpACTrigger.sendCommand(OFF)
+        if (mWakeUpACTimer !== null) {
+          mWakeUpACTimer.cancel
+          mWakeUpACTimer = null
+        }
+        mWakeUpACTimer = createTimer(now.plusMinutes(totalMinutesAC), [|
+          logInfo(LOG, "AC Alarm triggered! ")
+          WakeUpACTrigger.sendCommand(ON)
+          mWakeUpTimer = null
+        ])    
+      }
+
 }
 end
 
@@ -75,9 +92,9 @@ when
     Item WakeUpAlarmSwitch changed to OFF
 then
    logInfo(LOG, "SVEGLIA: Spengo la sveglia")
-   if (mDimmerTimer !== null) {
-       mDimmerTimer.cancel
-       mDimmerTimer = null
+   if (mWakeUpACTimer !== null) {
+       mWakeUpACTimer.cancel
+       mWakeUpACTimer = null
    }
    if (mWakeUpTimer !== null) {
        mWakeUpTimer.cancel

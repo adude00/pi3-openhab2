@@ -49,7 +49,6 @@ sitemap default label="Casa"
     Text label="Programmazioni" icon="clock" {
       Group item=SveglieAll   label="Programmazione A/C" icon="clock"
       Text label="Sveglia" icon="clock" {
-        //Setpoint item=WakeUpHour minValue=0 maxValue=23 step=1
         Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
         Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
         Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
@@ -59,26 +58,25 @@ sitemap default label="Casa"
                               0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
                             30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
 
-        //Setpoint item=WakeUpMinute minValue=0 maxValue=59 step=1
         Switch item=WakeUpAlarmSwitch
-        //Text item=WakeUpAlarmTriggered
         Switch item=WakeUpAlarmRepeat
+        Switch item=WakeUpAC
       }
 
-      Text item=Alarm_MasterTime icon="alarm-on" visibility=[Alarm_Master==ON] {
-        Frame label="Master Alarm" {
-          Switch item=Alarm_Master
-          Text item=Alarm_MasterTime
-          Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
-        }
-      }
-      Text item=Alarm_MasterTime icon="clock" visibility=[Alarm_Master==OFF] {
-        Frame label="Master Alarm" {
-          Switch item=Alarm_Master
-          Text item=Alarm_MasterTime
-          Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
-        }
-      }
+      //Text item=Alarm_MasterTime icon="alarm-on" visibility=[Alarm_Master==ON] {
+      //  Frame label="Master Alarm" {
+      //    Switch item=Alarm_Master
+      //    Text item=Alarm_MasterTime
+      //    Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
+      //  }
+      //}
+      //Text item=Alarm_MasterTime icon="clock" visibility=[Alarm_Master==OFF] {
+      //  Frame label="Master Alarm" {
+      //    Switch item=Alarm_Master
+      //    Text item=Alarm_MasterTime
+      //    Setpoint item=Alarm_MasterTimeMins minValue=360 maxValue=800 step=5
+      //  }
+      //}
 
     // Fine elenco
     Group item=gAutomations   label="Automazioni"
