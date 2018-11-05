@@ -43,8 +43,8 @@ then
       }
       
       var int totalMinutes = (hours*60) + minutes 
-      logInfo(LOG, "Alarm will be set for: " + totalMinutes + " minutes")
       logInfo(LOG, "Alarm: "  + hours + " h " + minutes + " min")
+      logInfo(LOG, "Alarm TP will be set for: " + totalMinutes + " minutes")
       WakeUpAlarmTriggered.sendCommand(OFF)
       if (mWakeUpTimer !== null) {
           mWakeUpTimer.cancel
@@ -58,8 +58,8 @@ then
 
       if (WakeUpAC.state == ON) {
         var int totalMinutesAC = totalMinutes - 60 
-        logInfo(LOG, "AC Alarm will be set for: " + totalMinutesAC + " minutes")
-        logInfo(LOG, "AC Alarm: "  + hours - 1 + " h " + minutes + " min")
+        logInfo(LOG, "Alarm AC will be set for: " + totalMinutesAC + " minutes")
+
         WakeUpACTrigger.sendCommand(OFF)
         if (mWakeUpACTimer !== null) {
           mWakeUpACTimer.cancel
