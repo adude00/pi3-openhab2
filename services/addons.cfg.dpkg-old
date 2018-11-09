@@ -12,7 +12,7 @@
 #   - expert   : Setup for expert users, especially for people migrating from openHAB 1.x
 #   - demo     : A demo setup which includes UIs, a few bindings, config files etc.
 #
-# See https://www.openhab.org/docs/configuration/packages.html for a detailed explanation of these packages.
+# See http://docs.openhab.org/configuration/packages.html for a detailed explanation of these packages.
 #
 #package = minimal
 
@@ -28,23 +28,24 @@
 #
 #legacy = true
 
-# A comma-separated list of bindings to install (e.g. "binding = sonos,knx,zwave")
-#binding = 
+# A comma-separated list of bindings to install (e.g. "sonos,knx,zwave")
+#binding = zwave,astro1,http,mqtt,nest,networkhealth,ntp,sonos
 
-# A comma-separated list of UIs to install (e.g. "ui = basic,paper")
-#ui = 
+# A comma-separated list of UIs to install (e.g. "basic,paper")
+#ui = paper,classic,habmin,habpanel,basic
+ 
 
-# A comma-separated list of persistence services to install (e.g. "persistence = rrd4j,jpa")
-#persistence = 
+# A comma-separated list of persistence services to install (e.g. "rrd4j,jpa")
+#persistence = influxdb,rrd4j,mapdb
 
-# A comma-separated list of actions to install (e.g. "action = mail,pushover")
-#action = 
+# A comma-separated list of actions to install (e.g. "mail,pushover")
+#action = nma,mail
 
-# A comma-separated list of transformation services to install (e.g. "transformation = map,jsonpath")
-#transformation = 
+# A comma-separated list of transformation services to install (e.g. "map,jsonpath")
+#transformation = xslt,map,regex,javascript,jsonpath
 
-# A comma-separated list of voice services to install (e.g. "voice = marytts,freetts")
+# A comma-separated list of voice services to install (e.g. "marytts,freetts")
 #voice = 
 
-# A comma-separated list of miscellaneous services to install (e.g. "misc = myopenhab")
-#misc = 
+# A comma-separated list of miscellaneous services to install (e.g. "myopenhab")
+#misc = myopenhab

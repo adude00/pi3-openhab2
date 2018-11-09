@@ -61,6 +61,7 @@ sitemap default label="Casa"
         Switch item=WakeUpAlarmSwitch
         Switch item=WakeUpAlarmRepeat
         Switch item=WakeUpAC
+        //Switch item=WakeUpACTrigger label="DEBUG Trigger"
       }
 
       //Text item=Alarm_MasterTime icon="alarm-on" visibility=[Alarm_Master==ON] {
