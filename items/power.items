@@ -4,6 +4,3 @@ Number Casa_Consumi_Chart_Period 	"Periodo" (System)
 
 //FUNGE CON PUNTO ZERO Number Casa_Consumi_Istantaneo 		"Consumo Istantaneo [%.1f W]" <poweroutlet> (Casa_Consumi_Chart) { exec="<[/bin/sh@@-c@@cat /mnt/temp/run/watt | awk '{ print $1 }':60000:REGEX(temp=(.*?)'C)]" }
 Number Casa_Consumi_Istantaneo "Istantaneo (Wh) [%.0f W]" <poweroutlet> (Casa_Consumi_Chart) { exec="<[/bin/sh@@-c@@cat /mnt/temp/run/watt | awk '{ print $1 }':60000:]" }
-
-
-Number Energy_Instant_House "Current energy use [%d W]" (Power) { http="<[http://www.energyhive.com/mobile_proxy/getCurrentValuesSummary?token=D2ZDntk8uszYL957qPHc5mzvgsWFTrhM:60000:JS(efergy.js)]"}

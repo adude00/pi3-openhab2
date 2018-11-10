@@ -78,12 +78,15 @@ end
 
 rule "WakeUpAlarmTriggeredOn"
 when
-    Item WakeUpAlarmTriggered changed to ON
+  Item WakeUpAlarmTriggered changed to ON
 then
-   logInfo(LOG, "Alarm triggered. Starting alarm procedure")
-      gTappWake.sendCommand(UP)
-      WakeUpAlarmSwitch.sendCommand(OFF)
-      WakeUpAlarmSwitch.sendCommand(ON)
+  logInfo(LOG, "SVEGLIA: Alarm triggered. Starting alarm procedure")
+  gTappWake.sendCommand(UP)
+  createTimer(now.plusSeconds(30), [|
+    WakeUpAlarmSwitch.sendCommand(OFF)
+    WakeUpAlarmTriggered.sendCommand(OFF)
+    logInfo(LOG, "SVEGLIA: Alarm procedure finished. Resetting triggers.")
+    ])
 end
 
 
