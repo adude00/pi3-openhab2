@@ -1,7 +1,7 @@
 Group sonoff05
 
 // Finto Termostato Camera per Alexa
-Group gBdrmThermostat   "Bedroom" (gFF)                      [ "Thermostat" ]
+Group gBdrmThermostat   "Camera da letto" (gFF)                      [ "Thermostat" ]
 String BdrmThermoMode   "Mode"      <settings>  (Appliance,gBdrmThermostat)     [ "homekit:HeatingCoolingMode" ]
 Number BdrmThermoTarget "Target"    <heating>   (Appliance,gBdrmThermostat)     [ "TargetTemperature" ] 
 

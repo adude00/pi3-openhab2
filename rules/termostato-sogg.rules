@@ -20,37 +20,38 @@ rule "Termostato Acceso"
   var Number tDiffU = (cur_temp - setpoint + hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
   var Number cdzTemp = 0
+  var Number debug = 0
 
   if (tsSoggiorno.state == ON) {
-    logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
+    if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
 
     // CHECK IF TEMPERATURE IS OK
     if (sa >= 30.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5: " + sa)
       if (tDiffD > -1.5 )    cdzTemp = 23.0
     }
     if (sa >= 23.0 && sa < 30.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4: " + sa)
       if (tDiffU <  -1.5 )   cdzTemp = 31.0
       if (tDiffD >= -0.5 )   cdzTemp = 20.0
     }
     if (sa >= 20.0 && sa < 23.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3: " + sa)
       if (tDiffU < -0.5 )   cdzTemp = 23.0
       if (tDiffD >= 0.0 )   cdzTemp = 19.0
     }
     if (sa == 19.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa2: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa2: " + sa)
       if (tDiffU <  0.0 )   cdzTemp = 20.0
       if (tDiffD >= 0.5 )   cdzTemp = 18.0
     }
     if (sa == 18.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa1: " + sa)
       if (tDiffU <  0.5 )   cdzTemp = 19.0
       if (tDiffD >= 1.0 )   cdzTemp = 10.0
     }
     if (sa == 10.0) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0: " + sa)
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0: " + sa)
       if ( tDiffD <= -1.5 )                   cdzTemp = 31.0
       if ( tDiffD > -1.5 && tDiffD <= -0.5 )  cdzTemp = 23.0
       if ( tDiffD > -0.5 && tDiffD <= 0.0 )   cdzTemp = 20.0
@@ -60,10 +61,10 @@ rule "Termostato Acceso"
 
     // ACTION if cdzTemp changed
     if (cdzTemp != 0 ) {
-      logInfo("tsSoggiorno","DEBUG tsSogg: imposto: " + cdzTemp )
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: imposto: " + cdzTemp )
       Air_Conditioner_Temperature.sendCommand(cdzTemp)
     } else {
-      logInfo("tsSoggiorno","DEBUG tsSogg: ok")
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: ok")
    }
 
   }
