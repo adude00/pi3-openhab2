@@ -278,7 +278,11 @@ sitemap default label="Casa"
   } // CLOSE FRAME TEMPS
 
   Frame label="Debug" {
-	  Group item=sonoff         label="Debug Sonoff All"
+    Text label="Sonoff"   {
+      Group item=sonoff         label="Debug Sonoff All"
+      Group item=gReachable     label="Debug Reachable"
+      Group item=gRSSI          label="Debug RSSI"
+    }
     Text label="Tapparelle"   icon=rollershutter {
       Group item=gTappDebug   label="Debug Tapparelle All"
       Group item=gTappRSSI    label="Debug Tapparelle RSSI"
