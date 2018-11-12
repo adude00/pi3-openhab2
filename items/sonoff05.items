@@ -5,7 +5,7 @@ Group gBdrmThermostat   "Camera da letto" (gFF)                      [ "Thermost
 String BdrmThermoMode   "Mode"      <settings>  (Appliance,gBdrmThermostat)     [ "homekit:HeatingCoolingMode" ]
 Number BdrmThermoTarget "Target"    <heating>   (Appliance,gBdrmThermostat)     [ "TargetTemperature" ] 
 
-Switch sf05_Light "Bianca" <light> (sonoff05,sonoff,LR,gLight,gLuci) [ "Lighting" ]
+Switch sf05_Light "Specchio" <light> (sonoff05,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff05/POWER:command:*:default],
             <[broker:stat/sonoff05/POWER:state:default]" }
 
