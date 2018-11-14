@@ -5,9 +5,9 @@ Switch sf06_Light "Armadio" <light> (sonoff06,sonoff,LR,gLight,gLuci) [ "Lightin
             <[broker:stat/sonoff06/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf06_Temp    "Cam Soff [%.1f °C]"    <temperature>   (sonoff06,sonoff,Casa_Temperature_Chart,gChartBdrmT)
+Number sf06_Temp    "Cam Soff [%.1f °C]"    <temperature>   (gTemp,sonoff06,sonoff,Casa_Temperature_Chart,gChartBdrmT)
   { mqtt="<[broker:tele/sonoff06/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf06_Humid   "Cam Soff [%.1f %%]"    <humidity>      (sonoff06,sonoff,Casa_Umidita_Chart,gChartBdrmH)
+Number sf06_Humid   "Cam Soff [%.1f %%]"    <humidity>      (gHumd,sonoff06,sonoff,Casa_Umidita_Chart,gChartBdrmH)
     { mqtt="<[broker:tele/sonoff06/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
