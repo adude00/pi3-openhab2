@@ -1,2 +1,2 @@
 Number Energy_Instant_House "Efergy [%d W]" (Power) { http="<[http://www.energyhive.com/mobile_proxy/getCurrentValuesSummary?token=D2ZDntk8uszYL957qPHc5mzvgsWFTrhM:60000:JS(efergy.js)]"}
-Number Energy_Induction "Induzione [%d W]" (Casa_Consumi_Chart) { exec="<[/etc/openhab2/shell/efergy.sh:30000:]" }
+Number Energy_Induction "Induzione [%d W]" (Casa_Consumi_Chart,gPower) { exec="<[/etc/openhab2/shell/efergy.sh:30000:]" }
