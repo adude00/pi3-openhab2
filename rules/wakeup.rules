@@ -110,7 +110,7 @@ end
 rule "Repeat Alarm"
 when
   // A mezzanotte e 01 di tutti i lavorativi riarmo la sveglia per la mattina
-  Time cron "0 1 0 ? * MON,TUE,WED,THU,FRI *"
+  Time cron "0 7 3 ? * MON,TUE,WED,THU,FRI *"
   // Generated with http://www.cronmaker.com
 then
   logInfo(LOG, "SVEGLIA: Controllo se riattivare la sveglia")
