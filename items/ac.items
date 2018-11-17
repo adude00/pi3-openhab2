@@ -6,7 +6,7 @@ Group gSoggThermostat "Soggiorno" (gFF) [ "Thermostat" ]
 Switch Air_Conditioner 			        "A/C"  			        <air_conditioner> 	  (Appliance,gInitializeTen) 
 String Air_Conditioner_Mode 		    "Mode"  		        <settings> 		        (Appliance,gSoggThermostat)   [ "homekit:HeatingCoolingMode" ]
 
-Number Air_Conditioner_Temperature 	"Condizionatore"	  <heating> 		        (Appliance,gSoggThermostat)   [ "TargetTemperature" ] 
+Number Air_Conditioner_Temperature 	"Condizionatore"	  <heating> 		        (Appliance,gSoggThermostat,gTemp)   [ "TargetTemperature" ] 
 
 String Air_Conditioner_Airdir		"Air Direction"		<climate>		(Appliance)
 Switch Air_Conditioner_Timer 		"Timer"  		<clock> 		(Appliance) 
