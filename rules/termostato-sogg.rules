@@ -26,16 +26,21 @@ rule "Termostato Acceso"
     if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
 
     // CHECK IF TEMPERATURE IS OK
-    if (sa >= 30.0) {
+    if (sa == 31.0) {
       if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa5: " + sa)
-      if (tDiffD > -1.5 )    cdzTemp = 23.0
+      if (tDiffD > -2.0 )    cdzTemp = 30.0
     }
-    if (sa >= 23.0 && sa < 30.0) {
+    if (sa == 30.0) {
       if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa4: " + sa)
-      if (tDiffU <  -1.5 )   cdzTemp = 31.0
+      if (tDiffU <  -2.0 )   cdzTemp = 31.0
+      if (tDiffD >= -1.0 )   cdzTemp = 23.0
+    }
+    if (sa == 23.0) {
+      if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3: " + sa)
+      if (tDiffU <  -1.0 )   cdzTemp = 30.0
       if (tDiffD >= -0.5 )   cdzTemp = 20.0
     }
-    if (sa >= 20.0 && sa < 23.0) {
+    if (sa == 20.0) {
       if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa3: " + sa)
       if (tDiffU < -0.5 )   cdzTemp = 23.0
       if (tDiffD >= 0.0 )   cdzTemp = 19.0
@@ -52,13 +57,13 @@ rule "Termostato Acceso"
     }
     if (sa == 10.0) {
       if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: stato sa0: " + sa)
-      if ( tDiffD <= -1.5 )                   cdzTemp = 31.0
-      if ( tDiffD > -1.5 && tDiffD <= -0.5 )  cdzTemp = 23.0
-      if ( tDiffD > -0.5 && tDiffD <= 0.0 )   cdzTemp = 20.0
-      if ( tDiffD >  0.0 && tDiffD <  0.5 )   cdzTemp = 19.0
-      if ( tDiffD >  0.5 && tDiffU <  1.0 )   cdzTemp = 18.0
+      if ( tDiffD <= -2.0 )                    cdzTemp = 31.0
+      if ( tDiffD >  -2.0 && tDiffD <= -1.0 )  cdzTemp = 30.0
+      if ( tDiffD >  -1.0 && tDiffD <= -0.5 )  cdzTemp = 23.0
+      if ( tDiffD >  -0.5 && tDiffD <=  0.0 )  cdzTemp = 20.0
+      if ( tDiffD >   0.0 && tDiffD <   0.5 )  cdzTemp = 19.0
+      if ( tDiffD >   0.5 && tDiffU <   1.0 )  cdzTemp = 18.0
     }
-
     // ACTION if cdzTemp changed
     if (cdzTemp != 0 ) {
       if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg: imposto: " + cdzTemp )
