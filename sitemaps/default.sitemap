@@ -40,7 +40,7 @@ sitemap default label="Casa"
         Switch    item=tsSoggiorno            label="Termostato"
         Text      item=Casa_Temperature_AVG   label="Temperatura Media"     icon=house
         Text      item=sf04_Temp              label="Temperatura al Divano" icon=sofa
-        Setpoint  item=spSoggiorno minValue=17  maxValue=25 step=0.2
+        Setpoint  item=spSoggiorno minValue=17  maxValue=25 step=0.1
         Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
         Selection item=tsSoggSensor   mappings=[1='Media', 2='Divano']
       }
@@ -111,26 +111,6 @@ sitemap default label="Casa"
 
 //  Frame label="Temps" {
 	  Text item=Casa_Temperature_AVG label="Casa [%.1f °C]" icon="house" {
-	    Frame label="Soggiorno" {
-	      Text item=sf04_Temp                   label="Divano"  icon=sofa
-        Text item=sf04_Humid                  label="Divano"
-        Text item=sf03_Temp                   label="TV"      icon=video
-        Text item=sf03_Humid                  label="TV"
-        Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
-  			Text item=Casa_Umidita_Sogg           label="Alta"    
-        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
-	      Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
-      }
-      Frame label="Camera Da Letto" {
-        Text item=sf05_Temp                   label="Specchio"  icon=bedroom
-        Text item=sf05_Humid                  label="Specchio"
-        Text item=sf06_Temp                   label="Soffitto"  icon=attic
-        Text item=sf06_Humid                  label="Soffitto"
-      }
-      Frame label="Bagno" {
-        Text item=sf07_Temp                   label="Temperatura" icon=bath
-        Text item=sf07_Humid                  label="Umidità"
-		  }
       Frame label="Grafici" {
         Text label="Grafici" icon=line {
   	    Frame label="Periodo" {
@@ -240,6 +220,26 @@ sitemap default label="Casa"
         }
         } // Chiuso frame grafici
       } // Chiuso text grafici
+	    Frame label="Soggiorno" {
+	      Text item=sf04_Temp                   label="Divano"  icon=sofa
+        Text item=sf04_Humid                  label="Divano"
+        Text item=sf03_Temp                   label="TV"      icon=video
+        Text item=sf03_Humid                  label="TV"
+        Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
+  			Text item=Casa_Umidita_Sogg           label="Alta"    
+        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
+	      Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
+      }
+      Frame label="Camera Da Letto" {
+        Text item=sf05_Temp                   label="Specchio"  icon=bedroom
+        Text item=sf05_Humid                  label="Specchio"
+        Text item=sf06_Temp                   label="Soffitto"  icon=attic
+        Text item=sf06_Humid                  label="Soffitto"
+      }
+      Frame label="Bagno" {
+        Text item=sf07_Temp                   label="Temperatura" icon=bath
+        Text item=sf07_Humid                  label="Umidità"
+		  }
 
     }
 

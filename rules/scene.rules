@@ -42,9 +42,11 @@ then
 
   createTimer(now.plusSeconds(30), [|
     IPCams.sendCommand(ON)
-    AutoRientro.sendCommand(ON)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena USCIAMO: Telecamere accese e scena finita")
+    ])
+  createTimer(now.plusSeconds(30), [|
+    AutoRientro.sendCommand(ON)
     ])
 end
 
