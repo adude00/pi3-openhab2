@@ -45,7 +45,7 @@ then
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena USCIAMO: Telecamere accese e scena finita")
     ])
-  createTimer(now.plusSeconds(30), [|
+  createTimer(now.plusSeconds(300), [|
     AutoRientro.sendCommand(ON)
     ])
 end
