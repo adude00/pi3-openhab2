@@ -9,10 +9,22 @@ rule "Qualcuno in Casa"
     }
 end
 
-
 rule "Nessuno in Casa"
   when
     Item PresenceHumans changed to OFF
   then
     pushNotification("Presence: NO", "Sono usciti tutti")
 end
+
+rule "Troppo tardi per tornare"
+  when
+    Time cron "0 0 23 1/1 * ? *"
+  then
+    if (AutoRientro.state == ON) {
+      logInfo("Automazione", "AUTO: AutoRientro = ON alle 23: lo disabilito.")
+      AutoRientro.sendCommand(OFF)
+    }
+end
+
+
+
