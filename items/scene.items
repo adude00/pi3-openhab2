@@ -1,0 +1,8 @@
+// Function Items
+Group gScene
+Switch Scene_Lavoro   "Scena: Lavoro"   (gScene)  [ "Switchable" ]
+Switch Scene_aCasa    "Scena: A Casa"   (gScene)  [ "Switchable" ]
+Switch Scene_Usciamo  "Scena: Usciamo"  (gScene)  [ "Switchable" ]
+Switch Scene_Privacy  "Scena: Privacy"  (gScene)  [ "Switchable" ]
+Switch Scene_Chiudi   "Scena: Chiudi"   (gScene)  [ "Switchable" ]
+Switch Scene_aLetto   "Scena: A Letto"  (gScene)  [ "Switchable" ]
