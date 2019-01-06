@@ -49,19 +49,22 @@ sitemap default label="Casa"
     Text label="Programmazioni" icon="clock" {
       Group item=SveglieAll   label="Programmazione A/C" icon="clock"
       Text label="Sveglia" icon="clock" {
-        Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
-        Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
-        Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
-                            10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
-                            20="20", 21="21", 22="22", 23="23"]
-        Selection item=WakeUpMinute label="Minuti" mappings=[
-                              0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
-                            30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
-
-        Switch item=WakeUpAlarmSwitch
-        Switch item=WakeUpAlarmRepeat
-        Switch item=WakeUpAC
-        //Switch item=WakeUpACTrigger label="DEBUG Trigger"
+        Frame label="Impostazione" {
+          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
+          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
+          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
+                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
+                              20="20", 21="21", 22="22", 23="23"]
+          Selection item=WakeUpMinute label="Minuti" mappings=[
+                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
+                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
+          Switch item=WakeUpAlarmRepeat label="Sveglia"
+          Switch item=WakeUpAC          label="Auto AC"
+        }
+        Frame label="Debug" {
+          Text label="La sveglia si allarma alle 3.07am"
+          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
+        }  
       }
 
       //Text item=Alarm_MasterTime icon="alarm-on" visibility=[Alarm_Master==ON] {
