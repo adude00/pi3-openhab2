@@ -5,7 +5,7 @@ Number Casa_Temperature_Chart_Period "Periodo" (System)
 Number ChartPeriod "Periodo" (System)
 
 
-Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gSoggThermostat) [ "CurrentTemperature" ] { exec="<[cat /mnt/temp/run/temp-soggiorno-avg:60000:]" }
+Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat) [ "CurrentTemperature" ] { exec="<[cat /mnt/temp/run/temp-soggiorno-avg:60000:]" }
 Number Casa_Temperature_Sogg_Down 	"Sogg Basso [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT) 
         { exec="<[cat /mnt/temp/temp-soggnew:60000:]" }
 Number Casa_Temperature_Sogg_Up 	"Sogg Alto [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT) 

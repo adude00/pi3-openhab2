@@ -236,8 +236,6 @@ sitemap default label="Casa"
       Frame label="Camera Da Letto" {
         Text item=sf05_Temp                   label="Specchio"  icon=bedroom
         Text item=sf05_Humid                  label="Specchio"
-        Text item=sf06_Temp                   label="Soffitto"  icon=attic
-        Text item=sf06_Humid                  label="Soffitto"
       }
       Frame label="Bagno" {
         Text item=sf07_Temp                   label="Temperatura" icon=bath
