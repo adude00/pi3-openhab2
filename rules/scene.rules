@@ -96,4 +96,8 @@ then
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: finita")
     ])
+    createTimer(now.plusSeconds(3600), [|
+      gLuci.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: spente le luci")
+    ])
 end
