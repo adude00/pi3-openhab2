@@ -9,3 +9,4 @@ Items {
         // DEFAULT EVERY ITEM: persist all items on every change (but do not restore on startup!!)
       * : strategy = everyChange, restoreOnStartup
 }
+
