@@ -16,11 +16,11 @@ Group gTappUptime
 Group gTappWake
 
 
-Rollershutter Tapp01 "1: Sogg Piccola [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm)
+Rollershutter Tapp01 "1: Sogg Piccola [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) [ "WindowCovering" ]
     { mqtt=">[broker:cmnd/tapp01/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp02 "2: Sogg Grande [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) 
+Rollershutter Tapp02 "2: Sogg Grande [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) [ "WindowCovering" ]
     { mqtt=">[broker:cmnd/tapp02/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER3:command:DOWN:MAP(tapparella.map)]" }
