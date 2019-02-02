@@ -9,9 +9,9 @@ Switch Terrazza "Irrigazione:" <rain> (sonoff02,sonoff,LR,gLight)
             <[broker:stat/sonoff02/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number Terrazza_Temp    "Terrazza [%.1f °C]"    <temperature> 	(gTemp,sonoff02,sonoff,Fuori_Temperature_Chart)
+Number Terrazza_Temp    "Terrazza [%.1f °C]"    <temperature> 	(gTemp,sonoff02,sonoff,Fuori_Temperature_Chart,gGraph)
 	{ mqtt="<[broker:tele/sonoff02/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number Terrazza_Humid   "Terrazza [%.1f %%]"    <humidity> 	    (gHumd,sonoff02,sonoff,Fuori_Umidita_Chart)
+Number Terrazza_Humid   "Terrazza [%.1f %%]"    <humidity> 	    (gHumd,sonoff02,sonoff,Fuori_Umidita_Chart,gGraph)
 	{ mqtt="<[broker:tele/sonoff02/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

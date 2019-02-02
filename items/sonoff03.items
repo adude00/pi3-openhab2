@@ -1,17 +1,14 @@
 Group sonoff
 Group sonoff03
-Group gLuci
-Group gChartLvrmT
-Group gChartLvrmH
 
 Switch sf03_Light "Lampada di sale" <light> (sonoff03,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff03/POWER:command:*:default],
             <[broker:stat/sonoff03/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf03_Temp    "Sogg TV [%.1f °C]"    <temperature>   (gTemp,sonoff03,sonoff)
+Number sf03_Temp    "Sogg TV [%.1f °C]"    <temperature>   (gTemp,sonoff03,sonoff,gGraph)
   { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf03_Humid   "Sogg TV [%.1f %%]"    <humidity>      (gHumd,sonoff03,sonoff)
+Number sf03_Humid   "Sogg TV [%.1f %%]"    <humidity>      (gHumd,sonoff03,sonoff,gGraph)
     { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

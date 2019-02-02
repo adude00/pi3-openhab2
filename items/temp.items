@@ -5,24 +5,24 @@ Number Casa_Temperature_Chart_Period "Periodo" (System)
 Number ChartPeriod "Periodo" (System)
 
 
-Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat) [ "CurrentTemperature" ] { exec="<[cat /mnt/temp/run/temp-soggiorno-avg:60000:]" }
-Number Casa_Temperature_Sogg_Down 	"Sogg Basso [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT) 
+Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat,gGraph) [ "CurrentTemperature" ] { exec="<[cat /mnt/temp/run/temp-soggiorno-avg:60000:]" }
+Number Casa_Temperature_Sogg_Down 	"Sogg Basso [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph) 
         { exec="<[cat /mnt/temp/temp-soggnew:60000:]" }
-Number Casa_Temperature_Sogg_Up 	"Sogg Alto [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT) 
+Number Casa_Temperature_Sogg_Up 	"Sogg Alto [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph) 
         { exec="<[cat /mnt/temp/dht22-temp:60000:]" }
 
 // UMIDITA: /mnt/temp/dht22-umid
 Group  Casa_Umidita_Chart
 Number Casa_Umidita_Chart_Period "Periodo" (System)
-Number Casa_Umidita_Sogg         "Sogg Alta [%.1f %%]"   <humidity>  (gHumd,Casa_Umidita_Chart,gChartLvrmH) [ "CurrentHumidity" ] { exec="<[cat /mnt/temp/dht22-umid:60000:]" }
+Number Casa_Umidita_Sogg         "Sogg Alta [%.1f %%]"   <humidity>  (gHumd,Casa_Umidita_Chart,gChartLvrmH,gGraph) [ "CurrentHumidity" ] { exec="<[cat /mnt/temp/dht22-umid:60000:]" }
 
 
 // FUORI: TEMP /mnt/temp/fuori-temperatura
 Group  Fuori_Temperature_Chart (System, Charts)
 Number Fuori_Temperature_Chart_Period "Periodo" (System)
-Number Fuori_Temperature    	"Bologna [%.1f °C]" 	<temperature> 	(gTemp,Fuori_Temperature_Chart)	{ exec="<[cat /mnt/temp/fuori-temperatura:60000:]" }
+Number Fuori_Temperature    	"Bologna [%.1f °C]" 	<temperature> 	(gTemp,Fuori_Temperature_Chart,gGraph)	{ exec="<[cat /mnt/temp/fuori-temperatura:60000:]" }
 
 // FUORI: UMIDITA /mnt/temp/fuori-umidita
 Group  Fuori_Umidita_Chart
 Number Fuori_Umidita_Chart_Period "Periodo" (System)
-Number Fuori_Umidita  "Bologna [%.1f %%]"   <humidity>  	(gHumd,Fuori_Umidita_Chart)	  { exec="<[cat /mnt/temp/fuori-umidita:60000:]" }
+Number Fuori_Umidita  "Bologna [%.1f %%]"   <humidity>  	(gHumd,Fuori_Umidita_Chart,gGraph)	  { exec="<[cat /mnt/temp/fuori-umidita:60000:]" }

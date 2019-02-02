@@ -4,9 +4,16 @@ Strategies {
 	everyMinute : "0 * * * * ?"
 }
 
-Items {
-	* : strategy = everyMinute
+
+/* Formato group*, item, * all items*/
+//Items {
+//	Casa_Consumi_Chart* : strategy = everyMinute
 	//* : strategy = everyUpdate, everyMinute
+//}
+
+/* Formato group*, item, * all items*/
+Items {
+    gPower*, gTemp*, gHumd*, gEnergia*, gUmidita*, gGraph* : strategy =  everyMinute
 }
 
 // https://github.com/openhab/openhab/wiki/Raspberry-Pi-System-Temperature

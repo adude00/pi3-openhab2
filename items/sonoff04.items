@@ -1,17 +1,14 @@
 Group sonoff
 Group sonoff04
-Group gLuci
-Group gChartLvrmT
-Group gChartLvrmH
 
 Switch sf04_Light "Divano" <light> (sonoff04,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff04/POWER:command:*:default],
             <[broker:stat/sonoff04/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf04_Temp   "Sogg Divano [%.1f °C]"  <temperature> (gTemp,sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT)
+Number sf04_Temp   "Sogg Divano [%.1f °C]"  <temperature> (gTemp,sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)
   { mqtt="<[broker:tele/sonoff04/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf04_Humid  "Sogg Divano [%.1f %%]"  <humidity>    (gHumd,sonoff04,sonoff,Casa_Umidita_Chart,gChartLvrmH)
+Number sf04_Humid  "Sogg Divano [%.1f %%]"  <humidity>    (gHumd,sonoff04,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
     { mqtt="<[broker:tele/sonoff04/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
