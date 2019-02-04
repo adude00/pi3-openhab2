@@ -3,17 +3,14 @@ Group gChartBdrmT
 Group gChartBdrmH
 Group gChartBathT
 Group gChartBathH
-
 Group gChartLvrmT
 Group gChartLvrmH
+
+Group sonoff
+Group gRSSI
+Group gReachable
 
 Group gTemp
 Group gHumd
 
-// Gruppo RRD4J
 Group gGraph
-
-// Gruppi dei sonoff
-Group sonoff
-Group gRSSI
-Group gReachable

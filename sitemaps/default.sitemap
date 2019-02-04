@@ -266,6 +266,7 @@ sitemap default label="Casa"
       Group item=sonoff         label="Debug Sonoff All"
       Group item=gReachable     label="Debug Reachable"
       Group item=gRSSI          label="Debug RSSI"
+      Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
     }
     Text label="Tapparelle"   icon=rollershutter {
       Group item=gTappDebug   label="Debug Tapparelle All"

@@ -1,2 +1,3 @@
-Group gRSSI
-Group gReachable
+String  Sonoff_Action "Sonoff Action" <sonoff_basic>
+
+
