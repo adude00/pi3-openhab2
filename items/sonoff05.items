@@ -23,3 +23,15 @@ String sf05_Light_Reachable "Bianca: Status [%s]" <switch> (sonoff05,sonoff,gRea
 String sf05_Uptime "Bianca: Uptime [%s]" <clock> (sonoff05,sonoff)
     { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Uptime)]" }
 
+// Versions
+DateTime  sf05_Date     "Sonoff 05: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff05,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Time)]" }
+
+String    sf05_Core     "Sonoff 05: Core [%s]"                <text>       (sonoff05,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff05/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf05_SDK      "Sonoff 05: SDK [%s]"                 <text>       (sonoff05,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff05/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf05_Version  "Sonoff 05: Version [%s]"             <text>       (sonoff05,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff05/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

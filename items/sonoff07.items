@@ -17,3 +17,15 @@ String sf07_Light_Reachable "Bagno: Status [%s]" <switch> (sonoff07,sonoff,gReac
     { mqtt="<[broker:tele/sonoff07/LWT:state:MAP(reachable.map)]" }
 String sf07_Uptime "Bagno: Uptime [%s]" <clock> (sonoff07,sonoff)
     { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Uptime)]" }
+// Versions
+DateTime  sf07_Date     "Sonoff 07: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff07,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Time)]" }
+
+String    sf07_Core     "Sonoff 07: Core [%s]"                <text>       (sonoff07,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff07/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf07_SDK      "Sonoff 07: SDK [%s]"                 <text>       (sonoff07,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff07/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf07_Version  "Sonoff 07: Version [%s]"             <text>       (sonoff07,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff07/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

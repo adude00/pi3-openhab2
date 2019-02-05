@@ -19,3 +19,15 @@ String sf04_Light_Reachable "Divano: Status [%s]" <switch> (sonoff04,sonoff,gRea
 String sf04_Uptime "Divano: Uptime [%s]" <clock> (sonoff04,sonoff)
     { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Uptime)]" }
 
+// Versions
+DateTime  sf04_Date     "Sonoff 04: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff04,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Time)]" }
+
+String    sf04_Core     "Sonoff 04: Core [%s]"                <text>       (sonoff04,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff04/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf04_SDK      "Sonoff 04: SDK [%s]"                 <text>       (sonoff04,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff04/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf04_Version  "Sonoff 04: Version [%s]"             <text>       (sonoff04,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff04/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

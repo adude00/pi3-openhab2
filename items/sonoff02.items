@@ -29,3 +29,15 @@ String    Terrazza_Version  "Terrazza Version [%s]"             <sonoff_pow>    
 // Selettore grafico
 Number Terrazza_Cart_Period 	"Periodo" (System)
 
+// Versions
+DateTime  sf02_Date     "Sonoff 02: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff02,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff02/STATE:state:JSONPATH($.Time)]" }
+
+String    sf02_Core     "Sonoff 02: Core [%s]"                <text>       (sonoff02,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff02/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf02_SDK      "Sonoff 02: SDK [%s]"                 <text>       (sonoff02,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff02/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf02_Version  "Sonoff 02: Version [%s]"             <text>       (sonoff02,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff02/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
