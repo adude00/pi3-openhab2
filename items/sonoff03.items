@@ -5,11 +5,11 @@ Switch sf03_Light "Lampada di sale" <light> (sonoff03,sonoff,LR,gLight,gLuci) [ 
     { mqtt=">[broker:cmnd/sonoff03/POWER:command:*:default],
             <[broker:stat/sonoff03/POWER:state:default]" }
 
-// TEMPERATURA E UMIDITA
-Number sf03_Temp    "Sogg TV [%.1f °C]"    <temperature>   (gTemp,sonoff03,sonoff,gGraph)
-  { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf03_Humid   "Sogg TV [%.1f %%]"    <humidity>      (gHumd,sonoff03,sonoff,gGraph)
-    { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+// TEMPERATURA E UMIDITA DA AGGIORNARE NON FUNZIONA
+//Number sf03_Temp    "Sogg TV [%.1f °C]"    <temperature>   (gTemp,sonoff03,sonoff,gGraph)
+//  { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+//Number sf03_Humid   "Sogg TV [%.1f %%]"    <humidity>      (gHumd,sonoff03,sonoff,gGraph)
+//    { mqtt="<[broker:tele/sonoff03/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
 Number sf03_Light_RSSI "Mobile TV: RSSI [%d %%]" <qualityofservice> (sonoff03,sonoff,gRSSI)
@@ -18,3 +18,4 @@ String sf03_Light_Reachable "Mobile TV: Status [%s]" <switch> (sonoff03,sonoff,g
     { mqtt="<[broker:tele/sonoff03/LWT:state:MAP(reachable.map)]" }
 String sf03_Uptime "Mobile TV: Uptime [%s]" <clock> (sonoff03,sonoff)
     { mqtt="<[broker:tele/sonoff03/STATE:state:JSONPATH($.Uptime)]" }
+

@@ -18,3 +18,4 @@ String sf04_Light_Reachable "Divano: Status [%s]" <switch> (sonoff04,sonoff,gRea
     { mqtt="<[broker:tele/sonoff04/LWT:state:MAP(reachable.map)]" }
 String sf04_Uptime "Divano: Uptime [%s]" <clock> (sonoff04,sonoff)
     { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Uptime)]" }
+

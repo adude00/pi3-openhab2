@@ -14,3 +14,7 @@ Group gTemp
 Group gHumd
 
 Group gGraph
+
+// Debug items groups
+Group gVersion
+Group gTime

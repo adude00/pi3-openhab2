@@ -1,3 +1,8 @@
+// ALL GENERAL SHARED SONOFF STUFF GOES HERE
+
+// Dummy action key for maintenance (status/upgrade/restart)
 String  Sonoff_Action "Sonoff Action" <sonoff_basic>
 
+// Current release status
+String    Sonoff_Current_FW_Available "Current Release available from Theo[%s]" <arendst> (sonoff,gTime) { http="<[tasmotaRelease:10000:JSONPATH($[0].name)]"}
 

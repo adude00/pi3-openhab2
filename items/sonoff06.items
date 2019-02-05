@@ -19,3 +19,8 @@ String sf06_Light_Reachable "Verde: Status [%s]" <switch> (sonoff06,sonoff,gReac
     { mqtt="<[broker:tele/sonoff06/LWT:state:MAP(reachable.map)]" }
 String sf06_Uptime "Verde: Uptime [%s]" <clock> (sonoff06,sonoff)
     { mqtt="<[broker:tele/sonoff06/STATE:state:JSONPATH($.Uptime)]" }
+
+DateTime  Terrazza_Date     "Terrazza Refresh [ %1$tH:%1$tM]"   <clock>            (sonoff06,sonoff,gTime)
+    { mqtt="<[broker:tele/sonoff06/STATE:state:JSONPATH($.Time)]" }
+String    Terrazza_Version  "Terrazza Version [%s]"             <sonoff_pow>       (sonoff06,sonoff,gVersion)
+    { mqtt="<[broker:stat/sonoff06/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
