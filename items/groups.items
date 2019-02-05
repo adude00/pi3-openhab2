@@ -16,5 +16,12 @@ Group gHumd
 Group gGraph
 
 // Debug items groups
+
+// ALL VERSIONS ITEMS
 Group gVersion
+
+// Specific version items
+Group gSDK
+Group gCore 
+Group gFirmware
 Group gTime

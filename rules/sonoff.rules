@@ -18,7 +18,8 @@ then
       case "restart" :
         publish("broker", "cmnd/" + device_id + "/restart", "1") 
       case "queryFW" :
-        publish("broker", "cmnd/" + device_id + "/status", "2")
+        //publish("broker", "cmnd/" + device_id + "/status", "2")
+        publish("broker", "cmnd/sonoffs/status", "2")
       case "upgrade" : {
         publish("broker", "cmnd/" + device_id + "/otaurl", "http://thehackbox.org/tasmota/release/020300/sonoff-minimal.bin")
         publish("broker", "cmnd/" + device_id + "/upgrade", "1")
