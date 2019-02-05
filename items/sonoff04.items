@@ -23,6 +23,9 @@ String sf04_Uptime "Divano: Uptime [%s]" <clock> (sonoff04,sonoff)
 DateTime  sf04_Date     "Sonoff 04: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff04,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Time)]" }
 
+String    sf04_Vcc      "Sonoff 04: Vcc [ %s]"                <text>       (sonoff04,sonoff,gVersion,gVcc)
+    { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Vcc)]" }
+
 String    sf04_Core     "Sonoff 04: Core [%s]"                <text>       (sonoff04,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff04/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 

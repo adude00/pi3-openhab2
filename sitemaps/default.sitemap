@@ -270,6 +270,7 @@ sitemap default label="Casa"
         Group item=gVersion       label="All Version Info"
         Group item=gFirmware      label="Firmware"
         Group item=gSDK           label="SDK"
+        Group item=gVcc           label="Vcc"
         Group item=gCore          label="Core"
         Text  item=Sonoff_Current_FW_Available
         Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]

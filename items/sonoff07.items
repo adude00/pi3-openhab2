@@ -21,6 +21,9 @@ String sf07_Uptime "Bagno: Uptime [%s]" <clock> (sonoff07,sonoff)
 DateTime  sf07_Date     "Sonoff 07: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff07,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Time)]" }
 
+String    sf07_Vcc      "Sonoff 07: Vcc [ %s]"                <text>       (sonoff07,sonoff,gVersion,gVcc)
+    { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Vcc)]" }
+
 String    sf07_Core     "Sonoff 07: Core [%s]"                <text>       (sonoff07,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff07/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 

@@ -27,6 +27,9 @@ String sf05_Uptime "Bianca: Uptime [%s]" <clock> (sonoff05,sonoff)
 DateTime  sf05_Date     "Sonoff 05: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff05,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Time)]" }
 
+String    sf05_Vcc      "Sonoff 05: Vcc [ %s]"                <text>       (sonoff05,sonoff,gVersion,gVcc)
+    { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Vcc)]" }
+
 String    sf05_Core     "Sonoff 05: Core [%s]"                <text>       (sonoff05,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff05/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 

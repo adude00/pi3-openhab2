@@ -24,4 +24,5 @@ Group gVersion
 Group gSDK
 Group gCore 
 Group gFirmware
+Group gVcc
 Group gTime

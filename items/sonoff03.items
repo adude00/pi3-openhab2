@@ -23,6 +23,9 @@ String sf03_Uptime "Mobile TV: Uptime [%s]" <clock> (sonoff03,sonoff)
 DateTime  sf03_Date     "Sonoff 03: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff03,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff03/STATE:state:JSONPATH($.Time)]" }
 
+String    sf03_Vcc      "Sonoff 03: Vcc [ %s]"                <text>       (sonoff03,sonoff,gVersion,gVcc)
+    { mqtt="<[broker:tele/sonoff03/STATE:state:JSONPATH($.Vcc)]" }
+
 String    sf03_Core     "Sonoff 03: Core [%s]"                <text>       (sonoff03,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff03/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 
