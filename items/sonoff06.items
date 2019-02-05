@@ -21,14 +21,14 @@ String sf06_Uptime "Verde: Uptime [%s]" <clock> (sonoff06,sonoff)
     { mqtt="<[broker:tele/sonoff06/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions
-DateTime  Terrazza_Date     "Terrazza Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff06,sonoff,gVersion,gTime)
+DateTime  sf06_Date     "Sonoff 06: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff06,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff06/STATE:state:JSONPATH($.Time)]" }
 
-String    Terrazza_Core     "Terrazza Core [%s]"                <text>       (sonoff06,sonoff,gVersion,gCore)
+String    sf06_Core     "Sonoff 06: Core [%s]"                <text>       (sonoff06,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff06/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 
-String    Terrazza_SDK      "Terrazza SDK [%s]"                 <text>       (sonoff06,sonoff,gVersion,gSDK)
+String    sf06_SDK      "Sonoff 06: SDK [%s]"                 <text>       (sonoff06,sonoff,gVersion,gSDK)
     { mqtt="<[broker:stat/sonoff06/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
 
-String    Terrazza_Version  "Terrazza Version [%s]"             <text>       (sonoff06,sonoff,gVersion,gFirmware)
+String    sf06_Version  "Sonoff 06: Version [%s]"             <text>       (sonoff06,sonoff,gVersion,gFirmware)
     { mqtt="<[broker:stat/sonoff06/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
