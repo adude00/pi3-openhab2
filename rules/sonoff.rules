@@ -8,7 +8,7 @@ val sonoff_device_ids = newArrayList(
 // Work with the grouptopic, addressing ALL modules at once
 //val sonoff_device_ids = newArrayList("sonoffs")
 
-rule "Sonoff Maintenance"
+rule "Sonoff ALL Maintenance"
 when
   Item Sonoff_Action received command
 then 
@@ -35,3 +35,34 @@ then
   }
   Sonoff_Action.postUpdate(NULL)
 end
+
+
+rule "Sonoff Single Maintenance"
+when
+  Item Sonoff_Select_Action received command
+then 
+  logInfo("sonoff.rules", "Sonoff Maintenance on " + Sonoff_Select.state + " device: " + receivedCommand)
+  switch (receivedCommand) {
+    case "restart" :
+      publish("broker", "cmnd/" + Sonoff_Select.state + "/restart", "1") 
+    case "queryFW" :
+      //publish("broker", "cmnd/" + Sonoff_Select.state + "/status", "2")
+      publish("broker", "cmnd/" + Sonoff_Select.state + "/status", "2")
+    case "upgrade" : {
+      publish("broker", "cmnd/" + Sonoff_Select.state + "/otaurl", "http://thehackbox.org/tasmota/release/020300/sonoff-minimal.bin")
+      publish("broker", "cmnd/" + Sonoff_Select.state + "/upgrade", "1")
+      logInfo("sonoff.rules", "Sonoff Maintenance on " + Sonoff_Select.state + ": upgrading to sonoff-minimal.bin")
+      createTimer(now.plusSeconds(120), [|
+        publish("broker", "cmnd/" + Sonoff_Select.state + "/otaurl", "http://thehackbox.org/tasmota/release/020300/sonoff.bin")
+        publish("broker", "cmnd/" + Sonoff_Select.state + "/upgrade", "1")
+        logInfo("sonoff.rules", "Sonoff Maintenance " + Sonoff_Select.state + ": upgrading to sonoff.bin" )
+      ])
+
+    }
+  }
+  Sonoff_Select_Action.postUpdate(NULL)
+end
+
+
+
+

@@ -1,7 +1,10 @@
 // ALL GENERAL SHARED SONOFF STUFF GOES HERE
 
-// Dummy action key for maintenance (status/upgrade/restart)
-String  Sonoff_Action "Sonoff Action" <sonoff_basic>
+// Dummy action keys for maintenance (status/upgrade/restart)
+String  Sonoff_Action "Sonoff Action"               <text>
+String  Sonoff_Select "Sonoff to upgrade"           <text>
+String  Sonoff_Select_Action "Sonoff Single Action" <text>
+String  Sonoff_Select_Info "Info [%s]"              <text>
 
 // Current release status
 String    Sonoff_Current_FW_Available "Current Release available from Theo[%s]" <text> (sonoff,gFirmware,gVersion) { http="<[tasmotaRelease:10000:JSONPATH($[0].name)]"}

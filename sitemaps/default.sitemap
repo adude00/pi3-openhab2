@@ -267,6 +267,16 @@ sitemap default label="Casa"
       Group item=gReachable     label="Debug Reachable"
       Group item=gRSSI          label="Debug RSSI"
       Text label="Versions" {
+        Frame label="Single upgrade" {
+          Text label="Upgrade single sonoffs" {
+            Selection item=Sonoff_Select mappings=[sonoff01="Sonoff 01", sonoff02="Sonoff 02", sonoff03="Sonoff 03", sonoff04="Sonoff 04", sonoff05="Sonoff 05", sonoff06="Sonoff 06", sonoff07="Sonoff 07" ]
+            Switch item=Sonoff_Select_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
+            Text  item=Sonoff_Current_FW_Available
+            Text  item=Sonoff_Select_Info
+          }
+        }
+        Frame label="All sonoffs" {
+
         Group item=gVersion       label="All Version Info"
         Group item=gFirmware      label="Firmware"
         Group item=gSDK           label="SDK"
@@ -274,7 +284,7 @@ sitemap default label="Casa"
         Group item=gCore          label="Core"
         Text  item=Sonoff_Current_FW_Available
         Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
-
+        }
       }
     }
     Text label="Tapparelle"   icon=rollershutter {
