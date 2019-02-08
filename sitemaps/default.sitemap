@@ -208,8 +208,8 @@ sitemap default label="Casa"
 	    Frame label="Soggiorno" {
 	      Text item=sf04_Temp                   label="Divano"  icon=sofa
         Text item=sf04_Humid                  label="Divano"
-        Text item=sf03_Temp                   label="TV"      icon=video
-        Text item=sf03_Humid                  label="TV"
+        //Text item=sf03_Temp                   label="TV"      icon=video
+        //Text item=sf03_Humid                  label="TV"
         Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
   			Text item=Casa_Umidita_Sogg           label="Alta"    
         Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom

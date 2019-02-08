@@ -44,7 +44,7 @@ Rollershutter Tapp07 "7: Bagno [(%d)]" <rollershutter> (Log, gTappProd,gTappWake
     { mqtt=">[broker:cmnd/tapp07/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp08 "8: Cameretta [(%d)]" <rollershutter> (Log, gTappProd,gTappWake,gTappDog) 
+Rollershutter Tapp08 "8: Cameretta [(%d)]" <rollershutter> (Log, gTappProd,gTappDog) 
     { mqtt=">[broker:cmnd/tapp08/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER3:command:DOWN:MAP(tapparella.map)]" }
