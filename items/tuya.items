@@ -1,0 +1,11 @@
+// Tuya group
+Group gTuya
+
+// Power Groups
+Group gWatt
+Group gVa
+Group gVar
+Group gVolt
+Group gAmps
+Group gEnergyToday
+Group gEnergyYesterday
