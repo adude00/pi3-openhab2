@@ -262,6 +262,12 @@ sitemap default label="Casa"
   } // CLOSE FRAME TEMPS
 
   Frame label="Debug" {
+    Text label="Tuya"   {
+      Group item=gTuya          label="Debug Tuya All"
+      Group item=tuya01         label="Debug Tuya 01"
+      Group item=tuya02         label="Debug Tuya 02"
+    }
+    
     Text label="Sonoff"   {
       Group item=sonoff         label="Debug Sonoff All"
       Group item=gReachable     label="Debug Reachable"

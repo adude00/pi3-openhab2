@@ -2,44 +2,44 @@ Group tuya01
 
 // SWITCH
 
-Switch tuya01_Light "Stufetta" <fan_box> (tuya01,gTuya,sonoff,LR,gLight) [ "Switchable" ]
+Switch tuya01_Switch "TV" <tv> (tuya01,gTuya,sonoff,Devices) [ "Switchable" ]
     { mqtt=">[broker:cmnd/tuya01/POWER:command:*:default],
             <[broker:stat/tuya01/POWER:state:default]" }
 
 
 // POWER
 
-Number tuya01_Power     "Line True Power [%.1f W]"          <voltage>       (tuya01,gTuya,gWatt) 
+Number tuya01_Power     "Tuya 01: Line True Power [%.1f W]"          <voltage>       (tuya01,gTuya,gWatt) 
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
 
-Number tuya01_AppPower  "Line Apparent Power [%.3f VA]"     <current>       (tuya01,gTuya,gVa)
+Number tuya01_AppPower  "Tuya 01: Line Apparent Power [%.3f VA]"     <current>       (tuya01,gTuya,gVa)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.ApparentPower)]" }
 
-Number tuya01_ReaPower  "Line Reactive Power [%.3f VAR]"    <current>       (tuya01,gTuya,gVar)
+Number tuya01_ReaPower  "Tuya 01: Line Reactive Power [%.3f VAR]"    <current>       (tuya01,gTuya,gVar)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.ReactivePower)]" }
 
-Number tuya01_Voltage   "Line voltage [%.1f V]"             <voltage>       (tuya01,gTuya,gVolt)
+Number tuya01_Voltage   "Tuya 01: Line voltage [%.1f V]"             <voltage>       (tuya01,gTuya,gVolt)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.Voltage)]" }
 
-Number tuya01_Current   "Line current [%.3f A]"             <current>       (tuya01,gTuya,gAmps)
+Number tuya01_Current   "Tuya 01: Line current [%.3f A]"             <current>       (tuya01,gTuya,gAmps)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.Current)]" }
 
-Number tuya01_Today     "Total energy today [%.3f kWh]"     <total_energy>  (tuya01,gTuya,gEnergyToday)
+Number tuya01_Today     "Tuya 01: Total energy today [%.5f kWh]"     <total_energy>  (tuya01,gTuya,gEnergyToday)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.Today)]" }
 
-Number tuya01_Yesterday "Total energy yesterday [%.3f kWh]" <total_energy>  (tuya01,gTuya,gEnergyYesterday)
+Number tuya01_Yesterday "Tuya 01: Total energy yesterday [%.5f kWh]" <total_energy>  (tuya01,gTuya,gEnergyYesterday)
     { mqtt="<[broker:tele/tuya01/SENSOR:state:JSONPATH($.ENERGY.Yesterday)]" }
 
 
 // STATUS
 
-Number tuya01_Light_RSSI "Bagno: RSSI [%d %%]" <qualityofservice> (tuya01,gTuya,sonoff,gRSSI)
+Number tuya01_Light_RSSI "Tuya 01: RSSI [%d %%]" <qualityofservice> (tuya01,gTuya,sonoff,gRSSI)
     { mqtt="<[broker:tele/tuya01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 
-String tuya01_Light_Reachable "Bagno: Status [%s]" <switch> (tuya01,gTuya,sonoff,gReachable)
+String tuya01_Light_Reachable "Tuya 01: Status [%s]" <switch> (tuya01,gTuya,sonoff,gReachable)
     { mqtt="<[broker:tele/tuya01/LWT:state:MAP(reachable.map)]" }
 
-String tuya01_Uptime "Bagno: Uptime [%s]" <clock> (tuya01,gTuya,sonoff)
+String tuya01_Uptime "Tuya 01: Uptime [%s]" <clock> (tuya01,gTuya,sonoff)
     { mqtt="<[broker:tele/tuya01/STATE:state:JSONPATH($.Uptime)]" }
 
 
