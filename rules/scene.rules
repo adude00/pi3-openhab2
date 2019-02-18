@@ -88,12 +88,16 @@ then
 
     createTimer(now.plusSeconds(3),  [ |
       tsSoggiorno.sendCommand(OFF)
-      sf04_Light.sendCommand(OFF)
-      sf03_Light.sendCommand(OFF)
-      logInfo("Scene","Scena A Letto: termostato e luci soggiorno spente")
+      logInfo("Scene","Scena A Letto: termostato spento")
     ])
 
     createTimer(now.plusSeconds(5),  [ |
+      sf04_Light.sendCommand(OFF)
+      sf03_Light.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: luci soggiorno spente")
+    ])
+
+    createTimer(now.plusSeconds(7),  [ |
       gCinema.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: gruppo gCinema spento")
     ])
@@ -105,8 +109,8 @@ then
       logInfo("Scene","Scena A Letto: finita")
     ])
 
-    createTimer(now.plusSeconds(3600), [|
-      gLuci.sendCommand(OFF)
-      logInfo("Scene","Scena A Letto: spente le luci")
-    ])
+    //createTimer(now.plusSeconds(3600), [|
+    //  gLuci.sendCommand(OFF)
+    //  logInfo("Scene","Scena A Letto: spente le luci")
+    //])
 end

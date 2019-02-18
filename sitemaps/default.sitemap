@@ -34,7 +34,6 @@ sitemap default label="Casa"
 				Switch item=Air_Conditioner_Screen
 				Selection item=Air_Conditioner_Airdir mappings=[1='1 Airdir', 2='2 Airdir', 3='3 Airdir', 4='4 Airdir', 5='5 Airdir', 6='6 Airdir', 7='7 Airdir', 8='8 Airdir', 9='1+8 Airdir', 10='2+8 Airdir', 11='3+8 Airdir', 12='4+8 Airdir', 13='5+8 Airdir', 14='6+8 Airdir', 15='7+8 Airdir'] icon=flow
 				Switch item=Air_Conditioner_Swing icon=wind
-				Switch item=Air_Conditioner_Termostat
       }
       Frame label="A/C Auto"  {
         Switch    item=tsSoggiorno            label="Termostato"
