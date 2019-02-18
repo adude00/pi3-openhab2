@@ -80,22 +80,31 @@ when
     Item Scene_aLetto changed to ON
 then
     logInfo("Scene","Scena A Letto: iniziata")
-    gTappProd.sendCommand(DOWN)
-    tsSoggiorno.sendCommand(OFF)
-    logInfo("Scene","Scena A Letto: tapparelle abbassate")
-    NAS2.sendCommand(OFF)
-    Net_TV.sendCommand(OFF)
-    Stereo.sendCommand(OFF)
-    logInfo("Scene","Scena A Letto: Server, Stereo e PC spenti")
-    sf04_Light.sendCommand(OFF)
-    sf03_Light.sendCommand(OFF)
-    logInfo("Scene","Scena A Letto: Luci soggiorno spente")
+    
+    createTimer(now.plusSeconds(1),  [ |
+      gTappProd.sendCommand(DOWN)
+      logInfo("Scene","Scena A Letto: tapparelle abbassate")
+    ])
+
+    createTimer(now.plusSeconds(3),  [ |
+      tsSoggiorno.sendCommand(OFF)
+      sf04_Light.sendCommand(OFF)
+      sf03_Light.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: termostato e luci soggiorno spente")
+    ])
+
+    createTimer(now.plusSeconds(5),  [ |
+      gCinema.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: gruppo gCinema spento")
+    ])
+
     createTimer(now.plusSeconds(30), [|
       Air_Conditioner_Temperature.sendCommand(10.0)
       logInfo("Scene","Scena A Letto: aria condizionata impostata a spenta: 10.0")
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: finita")
     ])
+
     createTimer(now.plusSeconds(3600), [|
       gLuci.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: spente le luci")
