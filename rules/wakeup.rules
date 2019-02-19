@@ -141,12 +141,14 @@ then
     var Timer tDelay = null
 
     if ( tDiffD <= -3.0 )                   mTimer   = 0
-    if ( tDiffD > -3.0 && tDiffD <= -2.5 )  mTimer   = 20
-    if ( tDiffD > -2.5 && tDiffD <= -2.0 )  mTimer   = 30 
-    if ( tDiffD > -2.0 && tDiffD <= -1.5 )  mTimer   = 40
-    if ( tDiffD > -1.5 && tDiffD <= -1.0 )  mTimer   = 50
+    if ( tDiffD > -3.0 && tDiffD <= -2.5 )  mTimer   = 15 
+    if ( tDiffD > -2.5 && tDiffD <= -2.0 )  mTimer   = 25 
+    if ( tDiffD > -2.0 && tDiffD <= -1.5 )  mTimer   = 35
+    if ( tDiffD > -1.5 && tDiffD <= -1.0 )  mTimer   = 45
 
     logInfo("LOG","Ci sono: " + cur_temp + "C, tDiff: " + tDiffD + "C - Accendo A/C tra " + mTimer + " minuti") 
+
+    pushNotification("SVEGLIA AC", "Ci sono: " + cur_temp + "C, tDiff: " + tDiffD + "C - Accendo A/C tra " + mTimer + " minuti")
 
     tDelay = createTimer(now.plusMinutes(mTimer), [|
           logInfo(LOG, "Timer scaduto, accendo A/C")
