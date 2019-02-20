@@ -152,10 +152,16 @@ then
 
     pushNotification("SVEGLIA AC", "Ci sono: " + cur_temp + "C, tDiff: " + tDiffD + "C - Accendo A/C tra " + mTimer + " minuti")
 
+    if (tDelay !== null) {
+        tDelay.cancel
+        tDelay = null
+    }
+
     tDelay = createTimer(now.plusMinutes(mTimer), [|
           logInfo(LOG, "Timer scaduto, accendo A/C")
           tsSoggiorno.sendCommand(ON)
           tDelay = null
+          pushNotification("SVEGLIA AC", "Timer scaduto, accendo il termostato")
           ])
 
   }
