@@ -6,6 +6,8 @@ var int mCurrentDimLevel = 0
 val String LOG = "WakeUp"
 var Timer mWakeUpTimer = null
 var Timer mWakeUpACTimer = null
+var Timer tDelay = null
+var Timer mWakeUpSceneTimer = null
 var int mDimStep
 var int mTimeStep
 val int DEFAULT_DIM_STEP = 2
@@ -68,7 +70,7 @@ then
         mWakeUpACTimer = createTimer(now.plusMinutes(totalMinutesAC), [|
           logInfo(LOG, "AC Alarm triggered! ")
           WakeUpACTrigger.sendCommand(ON)
-          mWakeUpTimer = null
+          mWakeUpACTimer = null
         ])    
       }
 
@@ -82,9 +84,10 @@ when
 then
   logInfo(LOG, "SVEGLIA: Alarm triggered. Starting alarm procedure")
   gTappWake.sendCommand(UP)
-  createTimer(now.plusSeconds(30), [|
+  mWakeUpSceneTimer = createTimer(now.plusSeconds(30), [|
     WakeUpAlarmSwitch.sendCommand(OFF)
     WakeUpAlarmTriggered.sendCommand(OFF)
+    mWakeUpSceneTimer = null
     logInfo(LOG, "SVEGLIA: Alarm procedure finished. Resetting triggers.")
     ])
 end
@@ -138,7 +141,6 @@ then
     var Number setpoint = sp.floatValue
     var Number tDiffD = (cur_temp - setpoint).floatValue
     var Number mTimer = 60
-    var Timer tDelay = null
 
     if ( tDiffD <= -3.0 )                   mTimer   = 0
     if ( tDiffD > -3.0 && tDiffD <= -2.5 )  mTimer   = 15 
