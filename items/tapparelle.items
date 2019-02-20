@@ -1,50 +1,48 @@
 //Location Groups
-Group:Rollershutter:OR(UP, DOWN)  gTappProd  "All"
-Group:Rollershutter:OR(UP, DOWN)  gTappDog   "Dog"
-Group:Rollershutter:OR(UP, DOWN)  gTappBdrm  "Bedroom"
-Group:Rollershutter:OR(UP, DOWN)  gTappKtcn  "Kitchen"
-Group:Rollershutter:OR(UP, DOWN)  gTappLvrm  "Living Room"
+Group:Rollershutter:OR(UP, DOWN)  gTappProd   "All"
+Group:Rollershutter:OR(UP, DOWN)  gTappDog    "Dog"
+Group:Rollershutter:OR(UP, DOWN)  gTappBdrm   "Bedroom"
+Group:Rollershutter:OR(UP, DOWN)  gTappKtcn   "Kitchen"
+Group:Rollershutter:OR(UP, DOWN)  gTappLvrm   "Living Room"
+Group:Rollershutter:OR(UP, DOWN)  gTappWake   "Morning Routine"
+
 
 // Debug Groups
-Group:Rollershutter:OR(UP, DOWN) gTappTest "Tutte UNDER CONSTRUCTION"
 Group gTappDebug
 Group gTappRSSI
 Group gTappReach
 Group gTappUptime
 
-// Function Groups
-Group gTappWake
 
-
-Rollershutter Tapp01 "1: Sogg Piccola [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) [ "WindowCovering" ]
+Rollershutter Tapp01 "1: Sogg Piccola [(%d)]"     <rollershutter>     (gTappProd,gTappWake,gTappLvrm)
     { mqtt=">[broker:cmnd/tapp01/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp02 "2: Sogg Grande [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappLvrm) [ "WindowCovering" ]
+Rollershutter Tapp02 "2: Sogg Grande [(%d)]"      <rollershutter>     (gTappProd,gTappWake,gTappLvrm)
     { mqtt=">[broker:cmnd/tapp02/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp03 "3: Cucina Destra [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappKtcn,gTappDog) 
+Rollershutter Tapp03 "3: Cucina Destra [(%d)]"    <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappKtcn) 
     { mqtt=">[broker:cmnd/tapp03/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp03/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp03/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]" <rollershutter> (Log,gTappProd,gTappWake,gTappKtcn,gTappDog) 
+Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]"  <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappKtcn) 
     { mqtt=">[broker:cmnd/tapp04/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]" <rollershutter> (Log, gTappProd,gTappWake,gTappBdrm,gTappDog) 
+Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
     { mqtt=">[broker:cmnd/tapp05/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp06 "6: Matr Grande [(%d)]" <rollershutter> (Log, gTappProd,gTappWake,gTappBdrm,gTappDog) 
+Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
     { mqtt=">[broker:cmnd/tapp06/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp07 "7: Bagno [(%d)]" <rollershutter> (Log, gTappProd,gTappWake,gTappDog) 
+Rollershutter Tapp07 "7: Bagno [(%d)]"            <rollershutter>     (gTappProd,gTappWake,gTappDog) 
     { mqtt=">[broker:cmnd/tapp07/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp08 "8: Cameretta [(%d)]" <rollershutter> (Log, gTappProd,gTappWake,gTappDog) 
+Rollershutter Tapp08 "8: Cameretta [(%d)]"        <rollershutter>     (gTappProd,gTappWake,gTappDog) 
     { mqtt=">[broker:cmnd/tapp08/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER3:command:DOWN:MAP(tapparella.map)]" }
@@ -106,9 +104,3 @@ String Tapp08_Reachable "Tapp08 - Status: [%s]" <switch> (gTappDebug,gTappReach)
 String Tapp08_Uptime "Tapp08 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
     { mqtt="<[broker:tele/tapp08/STATE:state:JSONPATH($.Uptime)]" }
 
-
-
-//Rollershutter Tapparella5 "Tapparella5: mqtt OK [(%d)]" <rollershutter> (Log, gTapp) 
-//    { mqtt=">[broker:cmnd/sonoff01/POWER1:command:UP:MAP(tapparella.map)],
-//            >[broker:cmnd/sonoff01/POWER:command:STOP:MAP(tapparella.map)],
-//            >[broker:cmnd/sonoff01/POWER2:command:DOWN:MAP(tapparella.map)]" }
