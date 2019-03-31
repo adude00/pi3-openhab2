@@ -20,9 +20,19 @@ Number Casa_Umidita_Sogg         "Sogg Alta [%.1f %%]"   <humidity>  (gHumd,Casa
 // FUORI: TEMP /mnt/temp/fuori-temperatura
 Group  Fuori_Temperature_Chart (System, Charts)
 Number Fuori_Temperature_Chart_Period "Periodo" (System)
-Number Fuori_Temperature    	"Bologna [%.1f °C]" 	<temperature> 	(gTemp,Fuori_Temperature_Chart,gGraph)	{ exec="<[cat /mnt/temp/fuori-temperatura:60000:]" }
+//Number Fuori_Temperature "Bologna [%.1f °C]"  <temperature>   (gTemp,Fuori_Temperature_Chart,gGraph) {weather="locationId=home, type=temperature, property=current"}
+//Number Fuori_Temperature    	"Bologna [%.1f °C]" 	<temperature> 	(gTemp,Fuori_Temperature_Chart,gGraph)	{ exec="<[cat /mnt/temp/fuori-temperatura:60000:]" }
+Number:Temperature Fuori_Temperature "Bologna [%.1f %unit%]" <temperature> (gTemp,Fuori_Temperature_Chart,gGraph) { channel="openweathermap:weather-and-forecast:api:local:current#temperature" }
+
 
 // FUORI: UMIDITA /mnt/temp/fuori-umidita
 Group  Fuori_Umidita_Chart
 Number Fuori_Umidita_Chart_Period "Periodo" (System)
-Number Fuori_Umidita  "Bologna [%.1f %%]"   <humidity>  	(gHumd,Fuori_Umidita_Chart,gGraph)	  { exec="<[cat /mnt/temp/fuori-umidita:60000:]" }
+//Number Fuori_Umidita  "Bologna [%d %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph) {weather="locationId=home, type=atmosphere, property=humidity"}
+//Number Fuori_Umidita  "Bologna [%.1f %%]"   <humidity>  	(gHumd,Fuori_Umidita_Chart,gGraph)	  { exec="<[cat /mnt/temp/fuori-umidita:60000:]" }
+Number:Dimensionless Fuori_Umidita "Bologna [%.1f %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph) { channel="openweathermap:weather-and-forecast:api:local:current#humidity" }
+
+
+
+DateTime localLastMeasurement "Timestamp of last measurement [%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:%1$tS]" <time> { channel="openweathermap:weather-and-forecast:api:local:current#time-stamp" }
+
