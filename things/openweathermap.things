@@ -1,4 +1,4 @@
-Bridge openweathermap:weather-api:api "OpenWeatherMap Account" [apikey="43094e1bfd92a76912338563c2b7a839", refreshInterval=30, language="en"] {
+Bridge openweathermap:weather-api:api "OpenWeatherMap Account" [apikey="43094e1bfd92a76912338563c2b7a839", refreshInterval=10, language="en"] {
     Thing weather-and-forecast local "Local Weather And Forecast" [location="44.481053,11.371293", forecastHours=0, forecastDays=7]
     Thing uvindex local "Local UV Index" [location="44.481053,11.371293", forecastDays=7]
 }
