@@ -44,9 +44,6 @@ sitemap default label="Casa"
         Selection item=tsSoggSensor   mappings=[1='Media', 2='Divano']
       }
     }
-    //Group item=SveglieAll 	label="Programmazione A/C" icon="clock"
-    //Text label="Programmazioni" icon="clock" {
-      //Group item=SveglieAll   label="Programmazione A/C" icon="clock"
       Text label="Sveglia" icon="clock" {
         Frame label="Sveglia" {
           Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
