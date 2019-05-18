@@ -66,8 +66,6 @@ sitemap default label="Casa"
         }  
       }
 
-    //}
-
   } // Chiuso frame Things
 
   Frame label="Sensori" {
