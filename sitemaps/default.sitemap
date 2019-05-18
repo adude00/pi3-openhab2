@@ -93,9 +93,7 @@ sitemap default label="Casa"
         Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
       }
     }
-//  }
 
-//  Frame label="Temps" {
 	  Text item=Casa_Temperature_AVG label="Casa [%.1f °C]" icon="house" {
       Frame label="Grafici" {
         Text label="Grafici" icon=line {
