@@ -47,7 +47,6 @@ sitemap default label="Casa"
 
 
     Text item=sf07_Temp label="Bagno Stufa" icon=bath {
-    //Text label="Bagno Stufa" icon=bath {
 
       Frame label="Termostato" {
         Switch    item=tsBagno
