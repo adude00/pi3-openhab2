@@ -27,7 +27,7 @@ sitemap default label="Casa"
       Switch item=Camera2_Record
     }
 
-    Text item=Air_Conditioner_Temperature label="A/C: [MAP(ac.map):%s]" {
+    Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {
         Selection item=Air_Conditioner_Temperature mappings=[10.0='OFF', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 22.0='22', 23.0='23', 24.0='24', 25.0='25', 26.0='26', 27.0='27', 28.0='28', 29.0='29', 30.0='30', 31.0='30 Turbo']
         Switch item=Air_Conditioner_Mode mappings=[cool='COLD', heat='HOT', off='OFF']
@@ -43,7 +43,52 @@ sitemap default label="Casa"
         Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
         Selection item=tsSoggSensor   mappings=[1='Media', 2='Divano']
       }
-    }
+    } // Chiuso Text Soggiorno Clima
+
+
+    Text item=sf07_Temp label="Bagno Stufa" icon=bath {
+    //Text label="Bagno Stufa" icon=bath {
+
+      Frame label="Termostato" {
+        Switch    item=tsBagno
+        Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
+        Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
+        Switch    item=sf07_Light
+        Text      item=sf07_Temp  label="Temperatura"
+        Text      item=sf07_Humid label="Umidità"
+      } // Chiuso Frame Termostato
+
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Bagno
+        Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBathT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBathT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBathT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBathT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBathT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBathT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBathT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBathT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Bagno
+        Chart  item=gChartBathH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBathH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBathH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBathH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBathH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBathH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBathH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+      } // Chiuso frame grafici
+
+    } // Chiuso Text Bagno Stufa
+
       Text label="Sveglia" icon="clock" {
         Frame label="Sveglia" {
           Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
