@@ -33,4 +33,8 @@ rule "Termostato Bagno"
       }
     }
   }
+  else {
+    sendCommand(sf07_Light, OFF)
+    logInfo("tsBagno","tsBagno: SPENGO termostato e stufetta")
+  }
 end
