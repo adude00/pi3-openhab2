@@ -5,7 +5,7 @@ Switch sf07_Light "Stufetta" <fan_box> (sonoff07,sonoff,LR,gLight) [ "Switchable
             <[broker:stat/sonoff07/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf07_Temp   "Bagno Temp [%.1f °C]"  <temperature>  (gTemp,sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph)
+Number sf07_Temp   "Bagno Temp [%.1f °C]"  <temperature>  (gTemp,sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph,gTermoBagno)
   [ "CurrentTemperature" ] { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
 Number sf07_Humid  "Bagno Humid [%.1f %%]" <humidity>     (gHumd,sonoff07,sonoff,Casa_Umidita_Chart,gChartBathH,gGraph)
     { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
