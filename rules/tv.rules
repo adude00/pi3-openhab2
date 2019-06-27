@@ -1,0 +1,13 @@
+rule "TV Accesa"
+  when
+    Item tuya03_Power changed
+  then
+
+  if ( tuya03_Power.state > 10 ) {
+    tuya01_Switch.sendCommand(ON)
+  } else {
+    tuya01_Switch.sendCommand(OFF)
+  }
+
+end
+
