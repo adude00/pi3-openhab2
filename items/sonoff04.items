@@ -3,7 +3,7 @@ Group sonoff04
 
 Switch sf04_Light "Divano" <light> (sonoff04,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff04/POWER:command:*:default],
-            <[broker:stat/sonoff04/POWER:state:default]" }
+            <[broker:stat/sonoff04/POWER:state:default]" } 
 
 // TEMPERATURA E UMIDITA
 Number sf04_Temp   "Sogg Divano [%.1f °C]"  <temperature> (gTemp,sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)
