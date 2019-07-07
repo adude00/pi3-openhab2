@@ -2,7 +2,7 @@ Group tuya03
 
 // SWITCH
 
-Switch tuya03_Switch "Amplificatore" <tv> (tuya03,gTuya,sonoff,Devices) [ "Switchable" ]
+Switch tuya03_Switch "Amplificatore" <tv> (tuya03,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya03/POWER:command:*:default],
             <[broker:stat/tuya03/POWER:state:default]" }
 
