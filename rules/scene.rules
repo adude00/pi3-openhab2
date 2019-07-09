@@ -114,3 +114,18 @@ then
     //  logInfo("Scene","Scena A Letto: spente le luci")
     //])
 end
+
+
+rule "Sole"
+when
+    Item Scene_Sole changed to ON
+then
+    logInfo("Scene","Scena SOLE: iniziata")
+    Tapp01.sendCommand(DOWN)
+    createTimer(now.plusSeconds(20), [|
+      Tapp01.sendCommand(STOP)
+      gScene.sendCommand(OFF)
+      logInfo("Scene","Scena SOLE: finita")
+    ])
+end
+
