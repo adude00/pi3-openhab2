@@ -122,7 +122,7 @@ when
 then
     logInfo("Scene","Scena SOLE: iniziata")
     Tapp01.sendCommand(DOWN)
-    createTimer(now.plusSeconds(20), [|
+    createTimer(now.plusSeconds(22), [|
       Tapp01.sendCommand(STOP)
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena SOLE: finita")

@@ -1,0 +1,8 @@
+Switch marantz_power    "Receiver" <switch>         {channel="denonmarantz:avr:0005cdd01d40:general#power"}
+Dimmer marantz_volume   "Volume"   <soundvolume>    {channel="denonmarantz:avr:0005cdd01d40:mainZone#volume"}
+Number marantz_volumeDB "Volume [%.1f dB]"          {channel="denonmarantz:avr:0005cdd01d40:mainZone#volume"}
+Switch marantz_mute     "Mute"     <mute>           {channel="denonmarantz:avr:0005cdd01d40:mainZone#mute"}
+Switch marantz_z2power  "Zone 2"                    {channel="denonmarantz:avr:0005cdd01d40:zone2#power"}
+String marantz_input    "Input [%s]"                {channel="denonmarantz:avr:0005cdd01d40:mainZone#input" }
+String marantz_surround "Surround: [%s]"            {channel="denonmarantz:avr:0005cdd01d40:general#surroundProgram"}
+String marantz_command                              {channel="denonmarantz:avr:0005cdd01d40:general#command"}
