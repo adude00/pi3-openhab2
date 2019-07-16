@@ -4,4 +4,3 @@ Switch NAS2     "Server"    <player> (Devices,gCinema) [ "Switchable" ] { nh="17
 
 Switch Net_TV   "Computer"  <screen> (Devices,gCinema) [ "Switchable" ] { nh="pc.bluetears.org:8000", wol="172.27.72.255#30:5a:3a:0c:01:06", exec="OFF:curl http://pc.bluetears.org:8000/?action=System.Sleep > /dev/null "}
 
-//Switch Stereo   "Stereo"    <soundvolume> (Devices,gCinema) [ "Switchable" ]  { gpio="pin:16" }

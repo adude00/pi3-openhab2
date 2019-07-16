@@ -16,7 +16,25 @@ sitemap default label="Casa"
       Default item=Tapp07
       Default item=Tapp08
     }
-		Group item=Devices label="Devices" icon="cinema"
+    Text label="Devices" icon=cinema {
+      Switch item=NAS2
+      Switch item=Net_TV
+      Group item=marantz_power label="Stereo" icon="receiver" {
+        Default   item=marantz_power     label="Stereo"
+        Selection item=marantz_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_power==ON]
+        Default   item=marantz_mute      visibility=[marantz_power==ON]
+        Setpoint  item=marantz_volume    label="Volume [%.1f]" minValue=0 maxValue=40 step=0.5  visibility=[marantz_power==ON]
+        Slider    item=marantz_volume    label="Volume [%.1f]" visibility=[marantz_power==ON]
+        Default   item=marantz_volumeDB  visibility=[marantz_power==ON]
+        Default   item=marantz_surround  visibility=[marantz_power==ON]
+        Default   item=marantz_artist    visibility=[marantz_power==ON]
+        Default   item=marantz_album     visibility=[marantz_power==ON]
+        Default   item=marantz_track     visibility=[marantz_power==ON]
+      } // CHIUSO GROUP "Stereo"
+      Switch item=tuya02_Switch
+      Switch item=tuya01_Switch
+    } // CHIUSO TEXT "Devices"
+
     Text label="IP Cameras" icon="camera" {
       Switch item=IPCams
 			// Camera 1
@@ -106,17 +124,6 @@ sitemap default label="Casa"
           Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
         }  
       }  // Chiuso Text Sveglia
-
-      Group item=marantz_input label="Receiver" icon="receiver" {
-        Default   item=marantz_power
-        Default   item=marantz_mute      visibility=[marantz_power==ON]
-        Setpoint  item=marantz_volume    label="Volume [%.1f]" minValue=0 maxValue=40 step=0.5  visibility=[marantz_power==ON]
-        Slider    item=marantz_volume    label="Volume [%.1f]" visibility=[marantz_power==ON]  
-        Default   item=marantz_volumeDB  visibility=[marantz_power==ON]
-        Default   item=marantz_surround  visibility=[marantz_power==ON]
-        Selection item=marantz_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_power==ON]
-      } // Chiuso Group Receiver
-
 
   } // Chiuso frame Things
 
