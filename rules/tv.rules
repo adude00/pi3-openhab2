@@ -1,12 +1,12 @@
 rule "TV Accesa"
   when
-    Item tuya03_Power changed
+    Item tuya01_Power changed
   then
 
-  if ( tuya03_Power.state > 8 ) {
-    tuya01_Switch.sendCommand(ON)
-  } else {
-    tuya01_Switch.sendCommand(OFF)
+  if ( tuya01_Power.state > 15 ) {
+    marantz_power.sendCommand(ON)
+//  } else {
+//    tuya01_Switch.sendCommand(OFF)
   }
 
 end

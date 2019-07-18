@@ -1,4 +1,4 @@
-Switch marantz_power    "Receiver" <switch>         {channel="denonmarantz:avr:0005cdd01d40:general#power"}
+Switch marantz_power    "Receiver" <switch>         {channel="denonmarantz:avr:0005cdd01d40:mainZone#power"}
 Dimmer marantz_volume   "Volume"   <soundvolume>    {channel="denonmarantz:avr:0005cdd01d40:mainZone#volume"}
 Number marantz_volumeDB "Volume [%.1f dB]"          {channel="denonmarantz:avr:0005cdd01d40:mainZone#volume"}
 Switch marantz_mute     "Mute"     <mute>           {channel="denonmarantz:avr:0005cdd01d40:mainZone#mute"}
