@@ -2,7 +2,7 @@ Group tuya01
 
 // SWITCH
 
-Switch tuya01_Switch "TV" <tv> (tuya01,gTuya,sonoff,Devices,gCinema) [ "Switchable" ]
+Switch tuya01_Switch "TV" <tv> (tuya01,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya01/POWER:command:*:default],
             <[broker:stat/tuya01/POWER:state:default]" }
 
