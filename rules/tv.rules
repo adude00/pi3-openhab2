@@ -5,8 +5,11 @@ rule "TV Accesa"
 
   if ( tuya01_Power.state > 25 ) {
     marantz_power.sendCommand(ON)
-//  } else {
-//    tuya01_Switch.sendCommand(OFF)
+    createTimer(now.plusSeconds(10), [|
+      marantz_command.sendCommand("SITV")
+      logInfo("Denon","TV ON: Switching ampli on TV source")
+    ])
+   
   }
 
 end
