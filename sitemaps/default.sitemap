@@ -283,7 +283,7 @@ sitemap default label="Casa"
 
     }
 
-  Text item=Terrazza_Temp label="Fuori [%.1f °C]" icon=garden {
+  Text item=Fuori_Temperature label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
       Text item=Fuori_Temperature label="Bologna"   icon="vacation"
       Text item=Fuori_Umidita     label="Bologna"   icon="humidity"
