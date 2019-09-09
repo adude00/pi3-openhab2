@@ -1,0 +1,69 @@
+Group sonoff09
+
+// SWITCH
+
+Switch sonoff09_Switch "Ingresso" (sonoff09,gTuya,sonoff)
+    { mqtt=">[broker:cmnd/sonoff09/POWER:command:*:default],
+            <[broker:stat/sonoff09/POWER:state:default]" }
+
+
+// POWER
+
+Number sonoff09_Power     "Sonoff 09: Line True Power [%.1f W]"          <voltage>       (sonoff09,gTuya,gWatt) 
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
+
+Number sonoff09_AppPower  "Sonoff 09: Line Apparent Power [%.3f VA]"     <current>       (sonoff09,gTuya,gVa)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.ApparentPower)]" }
+
+Number sonoff09_ReaPower  "Sonoff 09: Line Reactive Power [%.3f VAR]"    <current>       (sonoff09,gTuya,gVar)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.ReactivePower)]" }
+
+Number sonoff09_Voltage   "Sonoff 09: Line voltage [%.1f V]"             <voltage>       (sonoff09,gTuya,gVolt)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Voltage)]" }
+
+Number sonoff09_Current   "Sonoff 09: Line current [%.3f A]"             <current>       (sonoff09,gTuya,gAmps)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Current)]" }
+
+Number sonoff09_Today     "Sonoff 09: Total energy today [%.5f kWh]"     <total_energy>  (sonoff09,gTuya,gEnergyToday)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Today)]" }
+
+Number sonoff09_Yesterday "Sonoff 09: Total energy yesterday [%.5f kWh]" <total_energy>  (sonoff09,gTuya,gEnergyYesterday)
+    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Yesterday)]" }
+
+
+// TEMP
+Number sf01_Temp    "Ingresso: Temperature [%.1f °C]"    <temperature>   (sonoff01,sonoff,Casa_Temperature_Chart)
+    { mqtt="<[broker:tele/sonoff01/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+
+Number sf01_Humid   "Ingresso: Humidity [%.1f %%]"    <humidity>      (sonoff01,sonoff,Casa_Umidita_Chart)
+    { mqtt="<[broker:tele/sonoff01/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+
+// STATUS
+
+Number sonoff09_Light_RSSI "Sonoff 09: RSSI [%d %%]" <qualityofservice> (sonoff09,gTuya,sonoff,gRSSI)
+    { mqtt="<[broker:tele/sonoff09/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+
+String sonoff09_Light_Reachable "Sonoff 09: Status [%s]" <switch> (sonoff09,gTuya,sonoff,gReachable)
+    { mqtt="<[broker:tele/sonoff09/LWT:state:MAP(reachable.map)]" }
+
+String sonoff09_Uptime "Sonoff 09: Uptime [%s]" <clock> (sonoff09,gTuya,sonoff)
+    { mqtt="<[broker:tele/sonoff09/STATE:state:JSONPATH($.Uptime)]" }
+
+
+// VERSIONS
+
+DateTime  sonoff09_Date     "Sonoff 09: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff09,gTuya,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff09/STATE:state:JSONPATH($.Time)]" }
+
+//String    sonoff09_Vcc      "Sonoff 09: Vcc [ %s]"                <text>       (sonoff09,gTuya,sonoff,gVersion,gVcc)
+//    { mqtt="<[broker:tele/sonoff09/STATE:state:JSONPATH($.Vcc)]" }
+
+String    sonoff09_Core     "Sonoff 09: Core [%s]"                <text>       (sonoff09,gTuya,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff09/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sonoff09_SDK      "Sonoff 09: SDK [%s]"                 <text>       (sonoff09,gTuya,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff09/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sonoff09_Version  "Sonoff 09: Version [%s]"             <text>       (sonoff09,gTuya,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff09/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
