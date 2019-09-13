@@ -1,8 +1,8 @@
-rule "Energy sonoff09"
+rule "Fix Energy sonoff09"
   when
 
     //Member of sonoff09pzem received update
-    Item sonoff09_Power received update
+    Item sonoff09_Today received update
 
   then
 
