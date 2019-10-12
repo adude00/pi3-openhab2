@@ -1,0 +1,40 @@
+rule "Termostato Cameretta"
+  when
+    Item spCameretta changed or
+    Item sf08_Temp changed or
+    Item tsCameretta received command
+  then
+  
+  var Number cur_temp = sf08_Temp.state 
+  var Number setpoint = spCameretta.state 
+  var Number hysteresis = hsCameretta.state 
+  var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+
+  //logInfo("tsCameretta","DEBUG Ventola: Valuto la regola")
+  if (tsCameretta.state == ON) {
+    //logInfo("tsCameretta","DEBUG Ventola: tsCameretta.state == ON")
+    //logInfo("tsCameretta","DEBUG Ventola: cur_temp: " + (cur_temp).floatValue + ", setpoint: " + ((setpoint).floatValue + ", hysteresis: " + (hysteresis).floatValue) + "C")
+    if (tuya04_Switch.state == ON) {
+      //logInfo("tsCameretta","DEBUG Ventola: trovata ON, verifico di non superare i " + (setpoint).floatValue + "C")
+      if ((cur_temp).floatValue > ((setpoint).floatValue)) {
+        //logInfo("tsCameretta","DEBUG Ventola: Ho superato, ci sono " + (cur_temp).floatValue + "C")
+        sendCommand(tuya04_Switch, OFF)
+        //logInfo("tsCameretta","Ventola: Ci sono " + (cur_temp).floatValue + ", piu di " + ((setpoint).floatValue + ": Spengo")
+        logInfo("tsCameretta","tsCameretta: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+      }
+    }
+    else {
+      //logInfo("tsCameretta","DEBUG Ventola: trovata OFF, verifico che non ci siano meno di  " + (hsetpoint).floatValue + "C")
+      if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
+        //logInfo("tsCameretta","DEBUG Ventola: ci sono " + (cur_temp).floatValue + "C")
+        sendCommand(tuya04_Switch, ON)
+        //logInfo("tsCameretta","Ventola: Ci sono " + (cur_temp).floatValue + ", meno di " + ((hsetpoint).floatValue + ": Accendo")
+        logInfo("tsCameretta","tsCameretta: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+      }
+    }
+  }
+  else {
+    sendCommand(tuya04_Switch, OFF)
+    //logInfo("tsCameretta","tsCameretta: SPENGO termostato e stufetta")
+  }
+end

@@ -65,7 +65,6 @@ sitemap default label="Casa"
 
 
     Text item=sf07_Temp label="Bagno Stufa" icon=bath {
-
       Frame label="Termostato" {
         Switch    item=tsBagno
         Setpoint  item=spBagno minValue=18  maxValue=30 step=0.5
@@ -105,6 +104,47 @@ sitemap default label="Casa"
       } // Chiuso frame grafici
 
     } // Chiuso Text Bagno Stufa
+
+    Text item=sf08_Temp label="Cameretta" icon=bedroom {
+      Frame label="Termostato" {
+        Switch    item=tsCameretta
+        Setpoint  item=spCameretta minValue=18  maxValue=30 step=0.5
+        Setpoint  item=hsCameretta minValue=0   maxValue=3  step=0.1
+        Switch    item=tuya04_Switch icon=fan
+        Text      item=sf08_Temp  label="Temperatura"
+        Text      item=sf08_Humid label="Umidità"
+      } // Chiuso Frame Termostato
+
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Cameretta
+        Chart  item=gChartCamerettaT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartCamerettaT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartCamerettaT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartCamerettaT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartCamerettaT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartCamerettaT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartCamerettaT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartCamerettaT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartCamerettaT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartCamerettaT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // UMIDITA Cameretta
+        Chart  item=gChartCamerettaH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartCamerettaH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartCamerettaH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartCamerettaH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartCamerettaH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartCamerettaH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartCamerettaH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartCamerettaH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartCamerettaH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartCamerettaH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+      } // Chiuso frame grafici
+
+    } // Chiuso Text Cameretta
+
 
       Text label="Sveglia" icon="clock" {
         Frame label="Sveglia" {
