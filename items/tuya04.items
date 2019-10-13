@@ -2,7 +2,7 @@ Group tuya04
 
 // SWITCH
 
-Switch tuya04_Switch "Ventola" <tv> (tuya04,gTuya,sonoff)
+Switch tuya04_Switch "Ventolina Cinese" <fan> (tuya04,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya04/POWER:command:*:default],
             <[broker:stat/tuya04/POWER:state:default]" }
 

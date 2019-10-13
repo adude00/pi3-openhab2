@@ -1,7 +1,12 @@
 // Termostato HOMEKIT
 Group gTermoCameretta "Cameretta" [ "Thermostat" ] 
 
-Number spCameretta    "Setpoint Cameretta [%.1f °C]"  <temperature> (gTermoCameretta)   [ "TargetTemperature" ]
+Number spCameretta    "Setpoint Cameretta [%.1f °C]"  <temperature> (gTermoCameretta)   [ "homekit:TargetTemperature" ]
+
+// ITEM FINTO PER HOMEKIT
+String mdCameretta "Mode" <settings>  (gTermoCameretta) [ "homekit:HeatingCoolingMode" ]
+
+
 
 // Termostato WEB, non parte di homekit
 Switch tsCameretta   "Ventola"                                            [ "Switchable" ]

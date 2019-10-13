@@ -3,15 +3,16 @@ Group sonoff08
 Group gChartCamerettaT
 Group gChartCamerettaH
 
-Switch sf08_Light "Sonoff08" <light> (sonoff08,sonoff,LR,gLight,gLuci) [ "Lighting" ]
+Switch sf08_Light "Scaldino Cinese" <light> (sonoff08,sonoff,LR,gLight,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff08/POWER:command:*:default],
             <[broker:stat/sonoff08/POWER:state:default]" } 
 
 // TEMPERATURA E UMIDITA
-Number sf08_Temp   "Cameretta [%.1f °C]"  <temperature> (gTemp,sonoff08,sonoff,Casa_Temperature_Chart,gChartCamerettaT,gGraph)
-  { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf08_Humid  "Cameretta [%.1f %%]"  <humidity>    (gHumd,sonoff08,sonoff,Casa_Umidita_Chart,gChartCamerettaH,gGraph)
-    { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+Number sf08_Temp   "Cameretta T [%.1f °C]"  <temperature> (gTemp,sonoff08,sonoff,Casa_Temperature_Chart,gChartCamerettaT,gGraph,gTermoCameretta) 
+    [ "CurrentTemperature" ] { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+
+Number sf08_Humid  "Cameretta H [%.1f %%]"  <humidity>    (gHumd,sonoff08,sonoff,Casa_Umidita_Chart,gChartCamerettaH,gGraph)
+    [ "CurrentHumidity" ]    { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
 Number sf08_Light_RSSI "Cameretta: RSSI [%d %%]" <qualityofservice> (sonoff08,sonoff,gRSSI)
