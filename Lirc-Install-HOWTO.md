@@ -7,7 +7,7 @@ In 2019 lirc_rpi, the Linux kernel module provided with Raspbian before, was rep
 
 ## Setting up LIRC
 
-Perform the steps below to build LIRC from source, to patch it and to enable the infrared receiver and transmitter on ANAVI Infrared pHAT:
+Perform the steps below to build LIRC from source, to patch it and to enable the infrared receiver and transmitter.
 
 * Install dependencies
 
@@ -48,6 +48,7 @@ sudo apt install ./liblirc0_0.10.1-5.2_armhf.deb ./liblircclient0_0.10.1-5.2_arm
 ```
 sudo cp /etc/lirc/lirc_options.conf.dist /etc/lirc/lirc_options.conf
 sudo cp /etc/lirc/lircd.conf.dist /etc/lirc/lircd.conf
+cp $BACKUP_LOCATION/ac.conf /etc/lirc/lircd.conf.d
 ```
 
 * Edit */etc/lirc/lirc_options.conf* and make sure that driver and device are set as:
