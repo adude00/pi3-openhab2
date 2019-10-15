@@ -30,12 +30,14 @@ You should now be able to start openhab2. FIRST BOOT WILL BE *SLOW* (5 mintues)!
 ## If things still do not work
 You can manually check that the following folders are restored:
 
+```
 * /etc/openhab2                                  # Conf dir. It's on github. That's easy.
 * /var/lib/openhab2/.ssh/                        # So it will be able to turn on and off the NAS
 * /var/lib/openhab2/config/org/openhab/          # During the next boot it will install what's needed and remove what's not
 * /var/lib/openhab2/persistence/                 # Graphs will work now
 * /var/lib/openhab2/jsondb/homekit.json          # Homekit configuration, then you won't have to add it back to iOS devices
 * /var/lib/openhab2/influxdb.cfg                 # InfluxDB conf. It's linked from /etc/openhab2 because it contains passwords
+```
 
 ### Old guide
 The old guide is in RECOVERY.md file. All its information should be here but you can check it out.
