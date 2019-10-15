@@ -1,6 +1,6 @@
 Group sonoff07
 
-Switch sf07_Light "Stufetta" <fan_box> (sonoff07,sonoff,LR,gLight) [ "Switchable" ]
+Switch sf07_Light "Stufetta" <fan_box> (sonoff07,sonoff,LR)
     { mqtt=">[broker:cmnd/sonoff07/POWER:command:*:default],
             <[broker:stat/sonoff07/POWER:state:default]" }
 
