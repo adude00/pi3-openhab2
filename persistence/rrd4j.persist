@@ -4,6 +4,13 @@ Strategies {
 	everyMinute : "0 * * * * ?"
 }
 
+
+/* Formato group*, item, * all items*/
+//Items {
+//	Casa_Consumi_Chart* : strategy = everyMinute
+	//* : strategy = everyUpdate, everyMinute
+//}
+
 /* Formato group*, item, * all items*/
 Items {
     gPower*, gTemp*, gHumd*, gEnergia*, gUmidita*, gGraph* : strategy =  everyMinute
