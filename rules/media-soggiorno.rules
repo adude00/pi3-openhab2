@@ -1,0 +1,8 @@
+rule mediaSogg
+when
+  Item Casa_Temperature_Sogg_Up changed or
+  Item Casa_Temperature_Sogg_Down changed
+then
+  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType) / 2
+  Casa_Temperature_AVG.postUpdate(avgTemp)
+end

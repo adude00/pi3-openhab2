@@ -313,6 +313,7 @@ sitemap default label="Casa"
   			Text item=Casa_Umidita_Sogg           label="Alta"    
         Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
 	      Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
+	//Text item=Casa_Soggiorno_AVG  label="Sogg AVG"   icon=fan
       }
       Frame label="Camera Da Letto" {
         Text item=sf05_Temp                   label="Specchio"  icon=bedroom
