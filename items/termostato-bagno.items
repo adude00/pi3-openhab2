@@ -1,7 +1,7 @@
 // Termostato HOMEKIT
 Group gTermoBagno "Bagno" [ "Thermostat" ] 
 
-Number spBagno    "Setpoint Bagno"  		<temperature> 	(gTermoBagno)   [ "TargetTemperature" ]
+Number spBagno    "Setpoint Bagno [%.1f °C]"  		<temperature> 	(gTermoBagno)   [ "TargetTemperature" ]
 String mdBagno    "Bagno Heating/Cooling Mode" 			(gTermoBagno) 	[ "homekit:HeatingCoolingMode" ]
 
 // Termostato WEB, non parte di homekit
