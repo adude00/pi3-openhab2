@@ -44,7 +44,8 @@ sitemap default label="Casa"
 			Selection item=Camera2_View mappings=[0='1: Ingresso', 1='2: Pavimento Ingresso', 2='3: Cucina', 3='4: Pavimento Tinello', 4='5: Tavolo', 5='6: Divano', 6='7: AC', 7='8: Soffitto']
       Switch item=Camera2_Record
     }
-
+  } // Chiuso Frame Things
+  Frame label="Thermostats" {
     Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {
         Selection item=Air_Conditioner_Temperature mappings=[10.0='OFF', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 22.0='22', 23.0='23', 24.0='24', 25.0='25', 26.0='26', 27.0='27', 28.0='28', 29.0='29', 30.0='30', 31.0='30 Turbo']
@@ -64,7 +65,7 @@ sitemap default label="Casa"
     } // Chiuso Text Soggiorno Clima
 
 
-    Text item=sf07_Temp label="Bagno Stufa" icon=bath {
+    Text item=sf07_Temp label="Bagno" icon=bath {
       Frame label="Termostato" {
         Switch    item=tsBagno
         Setpoint  item=spBagno minValue=18  maxValue=30 step=0.5
@@ -148,7 +149,11 @@ sitemap default label="Casa"
     } // Chiuso Text Cameretta
 
 
-      Text label="Sveglia" icon="clock" {
+
+  } // Chiuso frame Thermostats
+
+  Frame label="Home Automation" {
+      Text label="Sveglia" icon="time" {
         Frame label="Sveglia" {
           Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
           Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
@@ -166,8 +171,7 @@ sitemap default label="Casa"
           Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
         }  
       }  // Chiuso Text Sveglia
-
-  } // Chiuso frame Things
+  } // Chiuso Frame Home Automation
 
   Frame label="Sensori" {
     Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
