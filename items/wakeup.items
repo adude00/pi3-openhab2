@@ -2,9 +2,10 @@ Group WakeUpAlarm
 Number WakeUpHour           "Wake up hour [%d]" <clock> (gRestore,WakeUpAlarm)
 Number WakeUpMinute         "Wake up minute [%d]" <clock> (gRestore,WakeUpAlarm)
 Switch WakeUpAlarmSwitch    "Wake up alarm [%s]" (gRestore,WakeUpAlarm)
-Switch WakeUpAlarmTriggered "Wake up alarm triggered [%s]"  <alarm> (gRestore,WakeUpAlarm)
+Switch WakeUpAlarmTriggered "Wake up alarm triggered [%s]"  <alarm>   (gRestore,WakeUpAlarm)
 
-Switch WakeUpAlarmRepeat    "Wake up alarm repeat [%s]"    <alarm>     (gRestore,WakeUpAlarm)
+Switch WakeUpAlarmRepeat    "Wake up alarm repeat [%s]"    <alarm>    (gRestore,WakeUpAlarm)
 
-Switch WakeUpAC             "Wake up AC [%s]"             <radiator>     (gRestore,WakeUpAlarm)
+Switch WakeUpAC             "Wake up AC [%s]"             <radiator>  (gRestore,WakeUpAlarm)
+Switch WakeUpTapp           "Wake up Tapp [%s]"           <blinds>    (gRestore,WakeUpAlarm)
 Switch WakeUpACTrigger      "Wake up AC Triggered [%s]"   <radiator>  (gRestore,WakeUpAlarm)

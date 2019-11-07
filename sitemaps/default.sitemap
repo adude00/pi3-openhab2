@@ -165,6 +165,7 @@ sitemap default label="Casa"
                               30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
           Switch item=WakeUpAlarmRepeat label="Sveglia"
           Switch item=WakeUpAC          label="Auto AC"
+          Switch item=WakeUpTapp        label="Auto Tapparelle"
         }
         Frame label="Debug" {
           Text label="La sveglia si allarma alle 3.07am"
