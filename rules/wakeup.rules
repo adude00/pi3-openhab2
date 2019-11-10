@@ -84,7 +84,7 @@ when
 then
   logInfo(LOG, "SVEGLIA: Alarm triggered. Starting alarm procedure")
   if (WakeUpTapp.state == ON) {
-    //gTappWake.sendCommand(UP)
+    gTappWake.sendCommand(UP)
     logInfo(LOG, "SVEGLIA: WakeUpTapp=ON: Tapparelle Aperte")
   }
   mWakeUpSceneTimer = createTimer(now.plusSeconds(30), [|
