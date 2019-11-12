@@ -1,0 +1,62 @@
+Group pow04
+
+// SWITCH
+
+Switch pow04_Switch "TBD Pow04" <tv> (pow04,gTuya,sonoff)
+    { mqtt=">[broker:cmnd/pow04/POWER:command:*:default],
+            <[broker:stat/pow04/POWER:state:default]" }
+
+
+// POWER
+
+Number pow04_Power     "Pow 04: Line True Power [%.1f W]"          <voltage>       (pow04,gTuya,gWatt) 
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
+
+Number pow04_AppPower  "Pow 04: Line Apparent Power [%.3f VA]"     <current>       (pow04,gTuya,gVa)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.ApparentPower)]" }
+
+Number pow04_ReaPower  "Pow 04: Line Reactive Power [%.3f VAR]"    <current>       (pow04,gTuya,gVar)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.ReactivePower)]" }
+
+Number pow04_Voltage   "Pow 04: Line voltage [%.1f V]"             <voltage>       (pow04,gTuya,gVolt)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.Voltage)]" }
+
+Number pow04_Current   "Pow 04: Line current [%.3f A]"             <current>       (pow04,gTuya,gAmps)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.Current)]" }
+
+Number pow04_Today     "Pow 04: Total energy today [%.5f kWh]"     <total_energy>  (pow04,gTuya,gEnergyToday)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.Today)]" }
+
+Number pow04_Yesterday "Pow 04: Total energy yesterday [%.5f kWh]" <total_energy>  (pow04,gTuya,gEnergyYesterday)
+    { mqtt="<[broker:tele/pow04/SENSOR:state:JSONPATH($.ENERGY.Yesterday)]" }
+
+
+// STATUS
+
+Number pow04_Light_RSSI "Pow 04: RSSI [%d %%]" <qualityofservice> (pow04,gTuya,sonoff,gRSSI)
+    { mqtt="<[broker:tele/pow04/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+
+String pow04_Light_Reachable "Pow 04: Status [%s]" <switch> (pow04,gTuya,sonoff,gReachable)
+    { mqtt="<[broker:tele/pow04/LWT:state:MAP(reachable.map)]" }
+
+String pow04_Uptime "Pow 04: Uptime [%s]" <clock> (pow04,gTuya,sonoff)
+    { mqtt="<[broker:tele/pow04/STATE:state:JSONPATH($.Uptime)]" }
+
+
+// VERSIONS
+
+DateTime  pow04_Date     "Pow 04: Refresh [ %1$tH:%1$tM]"   <clock>      (pow04,gTuya,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/pow04/STATE:state:JSONPATH($.Time)]" }
+
+// DEPRECATED https://github.com/arendst/Tasmota/issues/6081
+//String    pow04_Vcc      "Pow 04: Vcc [ %s]"                <text>       (pow04,gTuya,sonoff,gVersion,gVcc)
+//    { mqtt="<[broker:tele/pow04/STATE:state:JSONPATH($.Vcc)]" }
+
+String    pow04_Core     "Pow 04: Core [%s]"                <text>       (pow04,gTuya,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/pow04/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    pow04_SDK      "Pow 04: SDK [%s]"                 <text>       (pow04,gTuya,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/pow04/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    pow04_Version  "Pow 04: Version [%s]"             <text>       (pow04,gTuya,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/pow04/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
