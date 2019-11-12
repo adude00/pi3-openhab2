@@ -177,12 +177,12 @@ sitemap default label="Casa"
   Frame label="Sensori" {
     Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
       Frame {
-        Text item=Casa_Consumi_Istantaneo   label="Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
-        Text item=Energy_Instant_House      label="Efergy Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
-        Text item=Energy_Induction          label="Induzione Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutl
-        Text item=tuya02_Power              label="Lavasciuga: Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya01_Power              label="TV: Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya03_Power              label="Amplificatore: Consumo Istantaneo (Wh): [%.0f W]" icon=poweroutlet
+        Text item=sonoff09_Power_Fix	label="Casa PZEM (Wh): [%.0f W]" icon=poweroutlet
+        Text item=Energy_Induction	label="Induzione (Wh): [%.0f W]" icon=poweroutlet
+        Text item=tuya04_Power		label="Ventola (Wh): [%.0f W]" icon=poweroutlet
+        Text item=tuya02_Power		label="Lavasciuga (Wh): [%.0f W]" icon=poweroutlet
+        Text item=tuya01_Power		label="TV (Wh): [%.0f W]" icon=poweroutlet
+        Text item=tuya03_Power		label="Amplificatore (Wh): [%.0f W]" icon=poweroutlet
       }
       Frame {
         Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
