@@ -10,31 +10,33 @@ rule "Termostato Bagno"
   var Number hysteresis = hsBagno.state 
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
 
-  //logInfo("tsBagno","DEBUG Stufetta: Valuto la regola")
   if (tsBagno.state == ON) {
-    //logInfo("tsBagno","DEBUG Stufetta: tsBagno.state == ON")
-    //logInfo("tsBagno","DEBUG Stufetta: cur_temp: " + (cur_temp).floatValue + ", setpoint: " + ((setpoint).floatValue + ", hysteresis: " + (hysteresis).floatValue) + "C")
     if (sf07_Light.state == ON) {
-      //logInfo("tsBagno","DEBUG Stufetta: trovata ON, verifico di non superare i " + (setpoint).floatValue + "C")
       if ((cur_temp).floatValue > ((setpoint).floatValue)) {
-        //logInfo("tsBagno","DEBUG Stufetta: Ho superato, ci sono " + (cur_temp).floatValue + "C")
         sendCommand(sf07_Light, OFF)
-        //logInfo("tsBagno","Stufetta: Ci sono " + (cur_temp).floatValue + ", piu di " + ((setpoint).floatValue + ": Spengo")
         logInfo("tsBagno","tsBagno: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
       }
     }
     else {
-      //logInfo("tsBagno","DEBUG Stufetta: trovata OFF, verifico che non ci siano meno di  " + (hsetpoint).floatValue + "C")
       if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
-        //logInfo("tsBagno","DEBUG Stufetta: ci sono " + (cur_temp).floatValue + "C")
         sendCommand(sf07_Light, ON)
-        //logInfo("tsBagno","Stufetta: Ci sono " + (cur_temp).floatValue + ", meno di " + ((hsetpoint).floatValue + ": Accendo")
         logInfo("tsBagno","tsBagno: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
       }
     }
   }
   else {
     sendCommand(sf07_Light, OFF)
-    //logInfo("tsBagno","tsBagno: SPENGO termostato e stufetta")
   }
+end
+
+rule "Termostato Bagno Auto OFF"
+  when
+    Item tsBagno changed from OFF to ON
+  then
+    if (tsBagnoAutoOFF.state == ON) {
+      createTimer(now.plusSeconds(1800), [|
+        tsBagno.sendCommand(OFF)
+        logInfo("tsBagno","tsBagno: Auto OFF 30 min")
+      ])
+    }
 end

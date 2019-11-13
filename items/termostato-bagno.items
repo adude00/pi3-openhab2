@@ -8,3 +8,5 @@ String mdBagno    "Bagno Heating/Cooling Mode" 			(gTermoBagno) 	[ "homekit:Heat
 //Switch tsBagno   "Scaldabagno"
 Switch tsBagno 	"Scaldabagno" (gFinto)  [ "Switchable" ]
 Number hsBagno   "Isteresi Bagno [%.1f °C]"  <temperature>
+
+Switch tsBagnoAutoOFF	"Scaldabagno Auto OFF"

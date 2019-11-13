@@ -67,13 +67,14 @@ sitemap default label="Casa"
 
     Text item=sf07_Temp label="Bagno" icon=bath {
       Frame label="Termostato" {
-        Switch    item=tsBagno
-        Setpoint  item=spBagno minValue=18  maxValue=30 step=0.5 icon=smiley
-        Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1 icon=settings
-        Switch    item=sf07_Light icon=radiator
-        Text      item=sf07_Temp  label="Temperatura"
-        Text      item=sf07_Humid label="Umidità"
-	Switch    item=mdBagno    label="Modalità"	mappings=[heat='HOT', off='OFF']
+        Switch		item=tsBagno
+        Setpoint	item=spBagno 		icon=smiley	minValue=18  	maxValue=30	step=0.5
+        Setpoint	item=hsBagno		icon=settings	minValue=0  	maxValue=3	step=0.1
+        Switch		item=sf07_Light 	icon=radiator
+        Text		item=sf07_Temp		label="Temperatura"
+        Text		item=sf07_Humid		label="Umidità"
+	Switch		item=mdBagno		label="Modalità"		mappings=[heat='HOT', off='OFF']
+        Switch		item=tsBagnoAutoOFF	label="Auto OFF"	icon=settings
       } // Chiuso Frame Termostato
 
       Frame label="Grafici " {
@@ -418,14 +419,6 @@ sitemap default label="Casa"
     Group item=gPresence      label="Presence"
     Group item=gAutomations   label="Automazioni"
     Text label="Termostati" {
-      Text label="Termostato Bagno"  {
-        Switch    item=tsBagno
-        Setpoint  item=spBagno minValue=18  maxValue=25 step=0.2
-        Setpoint  item=hsBagno minValue=0   maxValue=3  step=0.1
-        Switch    item=sf07_Light
-        Text      item=sf07_Temp  label="Temperatura"
-        Text      item=sf07_Humid label="Umidità"
-      }
       Text label="Termostato Bedroom"  {
         Setpoint  item=BdrmThermoTarget   minValue=18  maxValue=25  step=0.1
         Switch    item=BdrmThermoMode     mappings=[cool='COLD', heat='HOT', off='OFF']
