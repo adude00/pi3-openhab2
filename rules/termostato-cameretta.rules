@@ -28,3 +28,15 @@ rule "Termostato Cameretta"
     sendCommand(tuya04_Switch, OFF)
   }
 end
+
+rule "Termostato Cameretta Auto OFF"
+  when
+    Item tsCameretta changed from OFF to ON
+  then
+    if (tsCamerettaAutoOFF.state == ON) {
+      createTimer(now.plusSeconds(1800), [|
+        tsCameretta.sendCommand(OFF)
+        logInfo("tsCameretta","tsCameretta: Auto OFF 30 min")
+      ])
+    }
+end

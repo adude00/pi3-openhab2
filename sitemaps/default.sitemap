@@ -117,6 +117,7 @@ sitemap default label="Casa"
         Text      item=sf08_Temp   label="Temperatura"
         Text      item=sf08_Humid  label="Umidità"
         Switch    item=mdCameretta label="Modalità"      mappings=[heat='HOT', off='OFF']
+        Switch    item=tsCamerettaAutoOFF  label="Auto OFF" icon=settings
       } // Chiuso Frame Termostato
 
       Frame label="Grafici " {
