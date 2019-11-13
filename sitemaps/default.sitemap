@@ -181,14 +181,14 @@ sitemap default label="Casa"
   Frame label="Sensori" {
     Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
       Frame {
-        Text item=sonoff09_Power_Fix	label="Casa PZEM (Wh): [%.0f W]" icon=poweroutlet
-        Text item=Energy_Induction	label="Induzione (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya04_Power		label="Ventola (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya02_Power		label="Lavasciuga (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya01_Power		label="TV (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya03_Power		label="Amplificatore (Wh): [%.0f W]" icon=poweroutlet
-        Text item=tuya05_Power		label="Boiler (Wh): [%.0f W]" icon=poweroutlet
-        Text item=pow02_Power		label="Networking (Wh): [%.0f W]" icon=poweroutlet
+        Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
+        Text item=Energy_Induction	label="Induzione: [%.0f W]" icon=kitchen
+        Text item=tuya04_Power		label="Ventola: [%.0f W]" icon=fan
+        Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
+        Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
+        Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
+        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
+        Text item=pow02_Power		label="Networking: [%.0f W]" icon=network
       }
       Frame {
         Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
