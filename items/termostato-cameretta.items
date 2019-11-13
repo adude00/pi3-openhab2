@@ -9,3 +9,4 @@ Switch tsCameretta   "Ventola"  (gFinto)  [ "Switchable" ]
 
 Number hsCameretta   "Isteresi Cameretta [%.1f °C]"  <temperature>
 
+Switch tsCamerettaAutoOFF	"Termostato Cameretta Auto OFF"
