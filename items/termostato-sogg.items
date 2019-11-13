@@ -4,3 +4,5 @@ Switch tsSoggiorno  "Riscaldamento"                               (gTermoSogg) [
 Number spSoggiorno  "Setpoint Soggiorno [%.1f °C]"  <smiley>      (gTermoSogg) 
 Number hsSoggiorno  "Isteresi Soggiorno [%.1f °C]"  <flowpipe>    (gTermoSogg)
 Number tsSoggSensor "Riferimento"                   <zoom>        (gTermoSogg)
+Switch tsSoggiornoOverride
+Switch tsSoggiornoBagnetto  "Bagnetto"              <settings>    (gTermoSogg) [ "Switchable" ]			

@@ -79,5 +79,32 @@ rule "Termostato Spento"
   when
     Item tsSoggiorno changed to OFF
   then
-    Air_Conditioner_Temperature.sendCommand(10.0)
+    if (tsSoggiornoOverride.state == OFF) {
+      Air_Conditioner_Temperature.sendCommand(10.0)
+    }
+end
+
+rule "Bagnetto"
+  when
+    Item tsSoggiornoBagnetto changed from OFF to ON
+  then
+    logInfo("tsSoggiorno","tsSoggiorno: Bagnetto ON")
+
+    // Turn OVERRIDE ON
+    tsSoggiornoOverride.sendCommand(ON)
+
+    // Turn Thermostat OFF
+    tsSoggiorno.sendCommand(OFF)
+
+    // Forcing AIR to 23.0
+    Air_Conditioner_Temperature.sendCommand(23.0)
+
+    // After 30 minutes reset everything 
+    createTimer(now.plusSeconds(1800), [|
+        tsSoggiorno.sendCommand(ON)
+	tsSoggiornoOverride.sendCommand(OFF)
+        tsSoggiornoBagnetto.sendCommand(OFF)
+        logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF dopo 30 min")
+      ])
+    
 end
