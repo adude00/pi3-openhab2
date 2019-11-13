@@ -1,0 +1,58 @@
+Group tuya05
+
+// SWITCH
+
+Switch tuya05_Switch "BOILER" <tv> (tuya05,gTuya,sonoff)
+    { mqtt=">[broker:cmnd/tuya05/POWER:command:*:default],
+            <[broker:stat/tuya05/POWER:state:default]" }
+
+
+// POWER
+
+Number tuya05_Power     "Tuya 05: Line True Power [%.1f W]"          <voltage>       (tuya05,gTuya,gWatt) 
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
+
+Number tuya05_AppPower  "Tuya 05: Line Apparent Power [%.3f VA]"     <current>       (tuya05,gTuya,gVa)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.ApparentPower)]" }
+
+Number tuya05_ReaPower  "Tuya 05: Line Reactive Power [%.3f VAR]"    <current>       (tuya05,gTuya,gVar)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.ReactivePower)]" }
+
+Number tuya05_Voltage   "Tuya 05: Line voltage [%.1f V]"             <voltage>       (tuya05,gTuya,gVolt)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Voltage)]" }
+
+Number tuya05_Current   "Tuya 05: Line current [%.3f A]"             <current>       (tuya05,gTuya,gAmps)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Current)]" }
+
+Number tuya05_Today     "Tuya 05: Total energy today [%.5f kWh]"     <total_energy>  (tuya05,gTuya,gEnergyToday)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Today)]" }
+
+Number tuya05_Yesterday "Tuya 05: Total energy yesterday [%.5f kWh]" <total_energy>  (tuya05,gTuya,gEnergyYesterday)
+    { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Yesterday)]" }
+
+
+// STATUS
+
+Number tuya05_Light_RSSI "Tuya 05: RSSI [%d %%]" <qualityofservice> (tuya05,gTuya,sonoff,gRSSI)
+    { mqtt="<[broker:tele/tuya05/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+
+String tuya05_Light_Reachable "Tuya 05: Status [%s]" <switch> (tuya05,gTuya,sonoff,gReachable)
+    { mqtt="<[broker:tele/tuya05/LWT:state:MAP(reachable.map)]" }
+
+String tuya05_Uptime "Tuya 05: Uptime [%s]" <clock> (tuya05,gTuya,sonoff)
+    { mqtt="<[broker:tele/tuya05/STATE:state:JSONPATH($.Uptime)]" }
+
+
+// VERSIONS
+
+DateTime  tuya05_Date     "Tuya 05: Refresh [ %1$tH:%1$tM]"   <clock>      (tuya05,gTuya,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/tuya05/STATE:state:JSONPATH($.Time)]" }
+
+String    tuya05_Core     "Tuya 05: Core [%s]"                <text>       (tuya05,gTuya,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/tuya05/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    tuya05_SDK      "Tuya 05: SDK [%s]"                 <text>       (tuya05,gTuya,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/tuya05/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    tuya05_Version  "Tuya 05: Version [%s]"             <text>       (tuya05,gTuya,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/tuya05/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

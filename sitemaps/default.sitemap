@@ -187,6 +187,7 @@ sitemap default label="Casa"
         Text item=tuya02_Power		label="Lavasciuga (Wh): [%.0f W]" icon=poweroutlet
         Text item=tuya01_Power		label="TV (Wh): [%.0f W]" icon=poweroutlet
         Text item=tuya03_Power		label="Amplificatore (Wh): [%.0f W]" icon=poweroutlet
+        Text item=tuya05_Power		label="Boiler (Wh): [%.0f W]" icon=poweroutlet
         Text item=pow02_Power		label="Networking (Wh): [%.0f W]" icon=poweroutlet
       }
       Frame {
@@ -378,6 +379,10 @@ sitemap default label="Casa"
       Group item=tuya02         label="Debug Tuya 02"
       Group item=tuya03         label="Debug Tuya 03"
       Group item=tuya04         label="Debug Tuya 04"
+      Group item=tuya05         label="Debug Tuya 05"
+      Group item=tuya06         label="Debug Tuya 06"
+      Group item=tuya07         label="Debug Tuya 07"
+      Group item=tuya08         label="Debug Tuya 08"
       Group item=pow01 		label="Debug POW 01"
       Group item=pow02 		label="Debug POW 02"
       Group item=pow03 		label="Debug POW 03"
