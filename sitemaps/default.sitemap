@@ -182,6 +182,8 @@ sitemap default label="Casa"
     Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
       Frame {
         Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
+        Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
+        Text item=pow01_Power           label="Clima Camera: [%.0f W]" icon=bedroom
         Text item=Energy_Induction	label="Induzione: [%.0f W]" icon=kitchen
         Text item=tuya04_Power		label="Ventola: [%.0f W]" icon=fan
         Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
