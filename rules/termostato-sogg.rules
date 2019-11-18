@@ -84,7 +84,7 @@ rule "Termostato Spento"
     }
 end
 
-rule "Bagnetto"
+rule "Bagnetto ON"
   when
     Item tsSoggiornoBagnetto changed from OFF to ON
   then
@@ -99,12 +99,21 @@ rule "Bagnetto"
     // Forcing AIR to 23.0
     Air_Conditioner_Temperature.sendCommand(23.0)
 
-    // After 30 minutes reset everything 
+    // After 30 minutes turn off bagnetto
     createTimer(now.plusSeconds(1800), [|
-        tsSoggiorno.sendCommand(ON)
-	tsSoggiornoOverride.sendCommand(OFF)
         tsSoggiornoBagnetto.sendCommand(OFF)
         logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF dopo 30 min")
       ])
-    
 end
+
+
+rule "Bagnetto OFF"
+  when
+    Item tsSoggiornoBagnetto changed from ON to OFF
+  then
+    logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF: Inizio")
+    tsSoggiorno.sendCommand(ON)
+    tsSoggiornoOverride.sendCommand(OFF)
+    logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF: Fine")
+end
+
