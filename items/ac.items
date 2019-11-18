@@ -12,4 +12,3 @@ Switch Air_Conditioner_Timer 		"Timer"  		<clock> 		(Appliance)
 Switch Air_Conditioner_Screen 		"Stealth"  		<moon>	 		(Appliance)
 Switch Air_Conditioner_Swing 		"Swing"  		<wind>	 		(Appliance)
 
-//Switch Air_Conditioner_Termostat	"OLD Termostato" 		<temperature> 		(Appliance) { exec="<[/opt/openhab/scripts/termostato.sh:30000:] >[ON:touch /mnt/temp/termostato] >[OFF:rm /mnt/temp/termostato]" }
