@@ -2,7 +2,7 @@ Group pow02
 
 // SWITCH
 
-Switch pow02_Switch "Disabled POW02" <tv> (pow02,gTuya,sonoff)
+Switch pow02_Switch "Pow 02: Networking (Disabled)" <network> (pow02,gTuya,sonoff)
     { mqtt=">[broker:cmnd/pow02/POWER:command:*:default],
             <[broker:stat/pow02/POWER:state:default]" }
 

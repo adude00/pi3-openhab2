@@ -2,7 +2,7 @@ Group pow03
 
 // SWITCH
 
-Switch pow03_Switch "TBD Pow03" <tv> (pow03,gTuya,sonoff)
+Switch pow03_Switch "Pow03: Clima Soggiorno" <flow> (pow03,gTuya,sonoff)
     { mqtt=">[broker:cmnd/pow03/POWER:command:*:default],
             <[broker:stat/pow03/POWER:state:default]" }
 

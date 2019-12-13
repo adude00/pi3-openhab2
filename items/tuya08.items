@@ -2,7 +2,7 @@ Group tuya08
 
 // SWITCH
 
-Switch tuya08_Switch "TUYA08" <tv> (tuya08,gTuya,sonoff)
+Switch tuya08_Switch "Tuya 08: Lavastoviglie (Disabled)" <poweroutlet_eu> (tuya08,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya08/POWER:command:*:default],
             <[broker:stat/tuya08/POWER:state:default]" }
 

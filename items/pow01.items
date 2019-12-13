@@ -2,7 +2,7 @@ Group pow01
 
 // SWITCH
 
-Switch pow01_Switch "TBD Pow01" <tv> (pow01,gTuya,sonoff)
+Switch pow01_Switch "Pow 01: Clima Camera" <flow> (pow01,gTuya,sonoff)
     { mqtt=">[broker:cmnd/pow01/POWER:command:*:default],
             <[broker:stat/pow01/POWER:state:default]" }
 
