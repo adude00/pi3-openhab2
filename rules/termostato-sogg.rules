@@ -20,7 +20,7 @@ rule "Termostato Acceso"
   var Number tDiffU = (cur_temp - setpoint + hysteresis).floatValue
   var Number sa = Air_Conditioner_Temperature.state as DecimalType
   var Number cdzTemp = 0
-  var Number debug = 0
+  //var Number debug = 0
 
   if (tsSoggiorno.state == ON) {
     if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
@@ -117,3 +117,12 @@ rule "Bagnetto OFF"
     logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF: Fine")
 end
 
+
+rule "Medie 15m"
+  when
+    Item Casa_Temperature_AVG changed or
+    Item sf04_Temp changed
+  then
+    avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(15)))
+    avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(15)))
+  end
