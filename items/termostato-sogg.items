@@ -7,5 +7,5 @@ Number tsSoggSensor "Riferimento"                   <zoom>        (gTermoSogg)
 Switch tsSoggiornoOverride
 Switch tsSoggiornoBagnetto  "Bagnetto"              <settings>    (gTermoSogg) [ "Switchable" ]		
 
-Number avgSoggiornoAvg		"Media: 15m [%.1f °C]"  (gTermoSogg,gTemp)
-Number avgSoggiornoDivano	"Divano: 15m [%.1f °C]"	(gTermoSogg,gTemp)
+Number avgSoggiornoAvg		"Media: 30m [%.1f °C]"  (gTermoSogg,gTemp)
+Number avgSoggiornoDivano	"Divano: 30m [%.1f °C]"	(gTermoSogg,gTemp)

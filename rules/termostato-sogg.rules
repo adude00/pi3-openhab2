@@ -124,6 +124,6 @@ rule "Medie 15m"
     Item Casa_Temperature_AVG changed or
     Item sf04_Temp changed
   then
-    avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(15)))
-    avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(15)))
+    avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(30)))
+    avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(30)))
   end
