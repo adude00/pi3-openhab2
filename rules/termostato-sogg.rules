@@ -134,7 +134,7 @@ rule "Medie 15m"
     //avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(30)))
     avgSoggiornoAvg.postUpdate(avgRound)
 
-    logInfo("AVG","AVG Rounded: " + avgRound )
+    //logInfo("AVG","AVG Rounded: " + avgRound )
 
     avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(30)))
 end
