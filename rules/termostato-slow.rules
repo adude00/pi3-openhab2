@@ -1,0 +1,65 @@
+import java.text.DecimalFormat
+
+
+rule "Termostato lento"
+  when
+    Time cron "0 0/1 * * * ?"
+  then
+
+    var Number acPower = acPSoggiorno.state as DecimalType
+ 
+    var Number cur_temp_float = avgSoggiornoAvg.state
+    val DecimalFormat df = new DecimalFormat("#.#")
+    val Number cur_temp = Double::valueOf(df.format(cur_temp_float.doubleValue))
+  
+
+    var Number tolSogg = tolSoggiorno.state
+    //var Number ts = tolSogg.floatValue
+
+    var Number setpoint = spSoggiorno.state
+    //var Number sp = setpoint.floatValue
+
+    logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+
+    if ( ( cur_temp + tolSogg )  < setpoint ) {
+      // TOO COLD: INCREASE by ONE
+      acPower = acPower + 1
+      acPSoggiorno.sendCommand(acPower)
+      logInfo("tsSoggiornoSlow","tsSoggiornoSlow: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
+    }
+    
+    if ( ( cur_temp - tolSogg ) > setpoint ) {
+      if ( acPower > 0 ) {
+        // TOO HOT: DECREASE by ONE
+        acPower = acPower - 1
+        acPSoggiorno.sendCommand(acPower)
+        logInfo("tsSoggiornoSlow","tsSoggiornoSlow: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+      }
+    }
+
+end
+
+rule "Termostato Lento Traduzione"
+  when 
+    Item acPSoggiorno received command
+  then
+
+    var Number cdzTemp
+
+    switch(receivedCommand.toString) {
+      case "0": { cdzTemp = 10.0 }
+      case "1": { cdzTemp = 17.0 }
+      case "2": { cdzTemp = 18.0 }
+      case "3": { cdzTemp = 19.0 }
+      case "4": { cdzTemp = 20.0 }
+      case "5": { cdzTemp = 21.0 }
+      case "6": { cdzTemp = 23.0 }
+      case "7": { cdzTemp = 30.0 }
+      case "8": { cdzTemp = 35.0 }
+      }
+
+    logInfo("tsSoggiornoSlowTrad","tsSoggiornoSlowTrad: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
+
+end
+
+
