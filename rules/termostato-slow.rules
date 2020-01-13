@@ -19,7 +19,7 @@ rule "Termostato lento"
     var Number setpoint = spSoggiorno.state
     //var Number sp = setpoint.floatValue
 
-    logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+    //logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
 
     if ( ( cur_temp + tolSogg )  < setpoint ) {
       // TOO COLD: INCREASE by ONE
