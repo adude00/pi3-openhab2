@@ -67,6 +67,7 @@ sitemap default label="Casa"
 	Switch    item=tsSoggiornoOverride	label="Override"	icon=settings
       }
       Frame label="A/C Auto DEBUG"  {
+         Selection  item=acPSoggiorno           mappings=[0='0: OFF', 1='1: 17C', 2='2: 18C', 3='3: 19C', 4='4: 20C', 5='5: 21C', 6='6: 23C', 7='7: 30C', 8='8: 30 Turbo']
          Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
       }
 
