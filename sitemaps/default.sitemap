@@ -56,6 +56,7 @@ sitemap default label="Casa"
       }
       Frame label="A/C Auto"  {
         Switch    item=tsSoggiorno            label="Termostato"
+        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Istantaneo', 2='Lento']
         Text      item=avgSoggiornoAvg        label="Media 30min"    icon=house
         Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
         Text      item=sf04_Temp              label="Divano"         icon=sofa
@@ -65,9 +66,8 @@ sitemap default label="Casa"
         Switch    item=tsSoggiornoBagnetto      icon=bath
 	Switch    item=tsSoggiornoOverride	label="Override"	icon=settings
       }
-      Frame label="A/C Auto Test"  {
+      Frame label="A/C Auto DEBUG"  {
          Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
-         Setpoint  item=tolSoggiorno            maxValue=1  step=0.1
       }
 
     } // Chiuso Text Soggiorno Clima

@@ -23,7 +23,7 @@ rule "Termostato Acceso"
   var Number cdzTemp = 0
   //var Number debug = 0
 
-  if (tsSoggiorno.state == ON) {
+  if (tsSoggiorno.state == ON  && tsSoggiornoType.state == 1) {
     if ( debug = 1 ) logInfo("tsSoggiorno","DEBUG tsSogg:" + cur_temp + "C, U:" + tDiffU + ", D:" + tDiffD +" - (" + setpoint + " +" + hysteresis + "C) A/C: " + sa + "C, divano: " + sf04_Temp.state + ", state: " + tsSoggSensor.state)
 
     // CHECK IF TEMPERATURE IS OK

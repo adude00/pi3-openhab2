@@ -1,41 +1,42 @@
-import java.text.DecimalFormat
-
+//import java.text.DecimalFormat
 
 rule "Termostato lento"
   when
     Time cron "0 0/1 * * * ?"
+    //Item avgSoggiornoAvg changed
   then
+    //var Number cur_temp_float = avgSoggiornoAvg.state
+    //val DecimalFormat df = new DecimalFormat("#.#")
+    //val Number cur_temp = Double::valueOf(df.format(cur_temp_float.doubleValue))
 
     var Number acPower = acPSoggiorno.state as DecimalType
- 
-    var Number cur_temp_float = avgSoggiornoAvg.state
-    val DecimalFormat df = new DecimalFormat("#.#")
-    val Number cur_temp = Double::valueOf(df.format(cur_temp_float.doubleValue))
-  
-
-    var Number tolSogg = tolSoggiorno.state
-    //var Number ts = tolSogg.floatValue
-
+    var Number cur_temp = avgSoggiornoAvg.state
+    //var Number tolSogg = tolSoggiorno.state
+    var Number tolSogg = hsSoggiorno.state
     var Number setpoint = spSoggiorno.state
-    //var Number sp = setpoint.floatValue
+   
+    if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) { 
 
-    //logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+      logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
 
-    if ( ( cur_temp + tolSogg )  < setpoint ) {
-      // TOO COLD: INCREASE by ONE
-      acPower = acPower + 1
-      acPSoggiorno.sendCommand(acPower)
-      logInfo("tsSoggiornoSlow","tsSoggiornoSlow: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
-    }
-    
-    if ( ( cur_temp - tolSogg ) > setpoint ) {
-      if ( acPower > 0 ) {
-        // TOO HOT: DECREASE by ONE
-        acPower = acPower - 1
+      if ( ( cur_temp + tolSogg )  < setpoint ) {
+        // TOO COLD: INCREASE by ONE
+        acPower = acPower + 1
         acPSoggiorno.sendCommand(acPower)
-        logInfo("tsSoggiornoSlow","tsSoggiornoSlow: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+        logInfo("tsSoggiornoSlow","tsSoggiornoSlow: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
       }
-    }
+    
+      if ( ( cur_temp - tolSogg ) > setpoint ) {
+        if ( acPower > 0 ) {
+          // TOO HOT: DECREASE by ONE
+          acPower = acPower - 1
+          acPSoggiorno.sendCommand(acPower)
+          logInfo("tsSoggiornoSlow","tsSoggiornoSlow: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+        }
+      }
+
+    // END IF termostato ON and type=2
+  }
 
 end
 
@@ -43,7 +44,6 @@ rule "Termostato Lento Traduzione"
   when 
     Item acPSoggiorno received command
   then
-
     var Number cdzTemp
 
     switch(receivedCommand.toString) {
@@ -59,6 +59,7 @@ rule "Termostato Lento Traduzione"
       }
 
     logInfo("tsSoggiornoSlowTrad","tsSoggiornoSlowTrad: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
+    //Air_Conditioner_Temperature.sendCommand(cdzTemp)
 
 end
 
