@@ -1,3 +1,6 @@
+import java.text.DecimalFormat
+
+// https://community.openhab.org/t/how-do-i-get-the-average-out-of-2-items-in-rules-file/41387/2
 rule mediaSogg
 when
   Item Casa_Temperature_Sogg_Up changed or
@@ -8,4 +11,20 @@ then
 end
 
 
-// https://community.openhab.org/t/how-do-i-get-the-average-out-of-2-items-in-rules-file/41387/2
+rule "Media 30m"
+  when
+    Item Casa_Temperature_AVG changed or
+    Item sf04_Temp changed
+  then
+
+    var Number avgOrig = Casa_Temperature_AVG.averageSince(now.minusMinutes(30))
+    val DecimalFormat df = new DecimalFormat("#.#")
+    val Number avgRound = Double::valueOf(df.format(avgOrig.doubleValue))
+
+    //avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(30)))
+    avgSoggiornoAvg.postUpdate(avgRound)
+
+    //logInfo("AVG","AVG Rounded: " + avgRound )
+
+    avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(30)))
+end

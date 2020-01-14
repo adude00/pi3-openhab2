@@ -1,5 +1,3 @@
-import java.text.DecimalFormat
-
 rule "Termostato Acceso"
   when
     Item spSoggiorno changed or
@@ -120,21 +118,3 @@ rule "Bagnetto OFF"
     logInfo("tsSoggiorno","tsSoggiorno: Bagnetto OFF: Fine")
 end
 
-
-rule "Medie 15m"
-  when
-    Item Casa_Temperature_AVG changed or
-    Item sf04_Temp changed
-  then
-
-    var Number avgOrig = Casa_Temperature_AVG.averageSince(now.minusMinutes(30))
-    val DecimalFormat df = new DecimalFormat("#.#")
-    val Number avgRound = Double::valueOf(df.format(avgOrig.doubleValue))
-
-    //avgSoggiornoAvg.postUpdate(Casa_Temperature_AVG.averageSince(now.minusMinutes(30)))
-    avgSoggiornoAvg.postUpdate(avgRound)
-
-    //logInfo("AVG","AVG Rounded: " + avgRound )
-
-    avgSoggiornoDivano.postUpdate(sf04_Temp.averageSince(now.minusMinutes(30)))
-end

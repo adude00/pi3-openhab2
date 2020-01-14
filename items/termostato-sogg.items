@@ -12,3 +12,5 @@ Number avgSoggiornoDivano	"Divano: 30m [%.1f °C]"	(gTermoSogg,gTemp)
 
 Number acPSoggiorno "AC Power [%.0f]"                  <settings>     (gTermoSogg)
 Number tolSoggiorno "Tolleranza [%.1f °C]"		<settings>     (gTermoSogg)
+
+Switch tsSoggiornoNew	"Nuovo algoritmo"	<settings>	(gTermoSogg)
