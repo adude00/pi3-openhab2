@@ -49,7 +49,7 @@ rule "Termostato Lento Traduzione"
         case "5": { cdzTemp = 21.0 }
         case "6": { cdzTemp = 23.0 }
         case "7": { cdzTemp = 30.0 }
-        case "8": { cdzTemp = 35.0 }
+        case "8": { cdzTemp = 31.0 }
         }
 
       logInfo("tsSoggiornoSlowTrad","tsSoggiornoSlowTrad: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
