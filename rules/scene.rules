@@ -87,7 +87,9 @@ then
     ])
 
     createTimer(now.plusSeconds(3),  [ |
-      tsSoggiorno.sendCommand(OFF)
+      if (tsSoggiorno.state == ON) {
+        tsSoggiorno.sendCommand(OFF)
+      }
       logInfo("Scene","Scena A Letto: termostato spento")
     ])
 
@@ -103,8 +105,6 @@ then
     ])
 
     createTimer(now.plusSeconds(30), [|
-      Air_Conditioner_Temperature.sendCommand(10.0)
-      logInfo("Scene","Scena A Letto: aria condizionata impostata a spenta: 10.0")
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: finita")
     ])
