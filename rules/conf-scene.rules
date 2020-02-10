@@ -1,0 +1,29 @@
+rule "CDZ Soggiorno Notturno"
+when
+  Item Scene_aLetto changed to ON
+then
+  if (ac_sog_night_s.state == ON) {
+    Air_Conditioner_Temperature.sendCommand(ac_sog_night_t.state as Number)
+  }
+end
+
+
+rule "CDZ Soggiorno quando entro"
+when
+  Item Scene_aCasa changed to ON
+then
+  if (ac_sog_day_s.state == ON) {
+    Air_Conditioner_Temperature.sendCommand(ac_sog_day_t.state as Number)
+  }
+end
+
+
+rule "CDZ Soggiorno quando esco"
+when
+  Item Scene_Lavoro changed to ON or
+  Item Scene_Usciamo changed to ON
+then
+  if (ac_sog_out_s.state == ON) {
+    Air_Conditioner_Temperature.sendCommand(ac_sog_out_t.state as Number)
+  }
+end
