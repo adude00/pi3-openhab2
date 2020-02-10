@@ -390,7 +390,7 @@ sitemap default label="Casa"
 
   Frame label="Configurazione" {
     Text label="Scene" icon="settings" {
-      Text label="Condizionatore Soggiorno" icon="settings" {
+      Text label="Clima Soggiorno" icon="settings" {
         Frame label="Override notturno" {
           Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
           Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
@@ -398,11 +398,11 @@ sitemap default label="Casa"
         
         Frame label="Override fuori casa" {
           Switch    item=ac_sog_out_s 	 label="Cambio Temp Diurno" 	icon="settings"
-          Selection item=ac_sog_out_t    label="Temp quando fuori"      mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
+          Selection item=ac_sog_out_t    label="Temperatura quando fuori"      mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
         }
 
         Frame label="Temperatura in casa" {
-          Selection item=ac_sog_day_t      label="Temp quando in casa"    mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']   // visibility=[ac_sog_night_s==ON, ac_sog_out_s==ON]
+          Selection item=ac_sog_day_t      label="Temperatura quando in casa"    mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']   // visibility=[ac_sog_night_s==ON, ac_sog_out_s==ON]
           }
       } // Chiuso text scene condizionatore soggiorno
     } // CHIUSO TEXT Configurazione schermata principale
