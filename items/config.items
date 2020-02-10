@@ -3,4 +3,6 @@ Number ac_sog_night_t 	"Soggiorno Notte Temp"	  <heating>
 
 Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
 Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
+
+Switch ac_sog_day_s 	"Soggiorno Casa Switch"	  <heating>
 Number ac_sog_day_t 	"Soggiorno Casa Temp"	  <heating>
