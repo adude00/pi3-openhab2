@@ -393,17 +393,17 @@ sitemap default label="Casa"
       Text label="Clima Soggiorno" icon="settings" {
         Frame label="Override notturno" {
           Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
-          Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
+          Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
         }
         
         Frame label="Override fuori casa" {
-          Switch    item=ac_sog_out_s 	 label="Cambio Temp quando esco" 	icon="settings"
-          Selection item=ac_sog_out_t    label="Temperatura quando esco"      mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
+          Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
+          Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
         }
 
         Frame label="Temperatura in casa" {
-          Switch    item=ac_sog_day_s      label="Cambio Temp quando entro" 	icon="settings"
-          Selection item=ac_sog_day_t      label="Temperatura quando entro"    mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 23.0='23', 30.0='30', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
+          Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
+          Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
           }
       } // Chiuso text scene condizionatore soggiorno
     } // CHIUSO TEXT Configurazione schermata principale
