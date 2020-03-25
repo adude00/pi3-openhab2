@@ -2,7 +2,7 @@ Group pow04
 
 // SWITCH
 
-Switch pow04_Switch "TBD Pow04" <tv> (pow04,gTuya,sonoff)
+Switch pow04_Switch "Videogioco" <wallswitch> (pow04,gTuya,sonoff) [ "Switchable" ]
     { mqtt=">[broker:cmnd/pow04/POWER:command:*:default],
             <[broker:stat/pow04/POWER:state:default]" }
 
