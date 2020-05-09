@@ -1,3 +1,0 @@
-Number:Dimensionless  Fuori_Umidita           "Bologna [%.1f %%]"       <humidity>      (gHumd,Casa_Umidita_Chart,gChartLvrmH,gGraph)     { exec="<[cat /tmp/openweathermap/main-humidity:60000:]" }
-
-Number:Temperature    Fuori_Temperature       "Bologna [%.1f %unit%]"   <temperature>   (gTemp,Fuori_Temperature_Chart,gGraph)            { exec="<[cat /tmp/openweathermap/main-temp:60000:]" }
