@@ -192,7 +192,7 @@ sitemap default label="Casa"
         Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
         Text item=pow01_Power           label="Clima Camera: [%.0f W]" icon=bedroom
-        Text item=Energy_Induction	label="Induzione: [%.0f W]" icon=kitchen
+        Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
         Text item=tuya04_Power		label="Ventola: [%.0f W]" icon=fan
         Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
         Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu

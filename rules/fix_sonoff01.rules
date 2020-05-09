@@ -1,0 +1,25 @@
+rule "Fix Energy sonoff01"
+  when
+
+    //Member of sonoff01pzem received update
+    Item sonoff01_Today received update
+
+  then
+
+    if (sonoff01_Voltage.state == 0 ) {
+
+      logInfo("Fix sonoff01", "sonoff01_Frequency == 0, not doing anything")
+      return;
+
+    } else {
+
+      sonoff01_Power_Fix.postUpdate(sonoff01_Power.state)
+      sonoff01_AppPower_Fix.postUpdate(sonoff01_AppPower.state)
+      sonoff01_ReaPower_Fix.postUpdate(sonoff01_ReaPower.state)
+      sonoff01_Voltage_Fix.postUpdate(sonoff01_Voltage.state)
+      sonoff01_Current_Fix.postUpdate(sonoff01_Current.state)
+      sonoff01_Frequency_Fix.postUpdate(sonoff01_Frequency.state)
+
+    }
+
+end
