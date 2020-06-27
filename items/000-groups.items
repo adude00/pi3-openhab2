@@ -1,3 +1,7 @@
+Group sonoff
+Group gRSSI
+Group gReachable
+
 Group gLuci
 Group gChartBdrmT
 Group gChartBdrmH
@@ -8,9 +12,6 @@ Group gChartLvrmH
 
 Group gCinema
 
-Group sonoff
-Group gRSSI
-Group gReachable
 
 Group gTemp
 Group gHumd
