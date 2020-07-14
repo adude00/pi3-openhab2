@@ -31,9 +31,13 @@ sitemap default label="Casa"
         Default   item=marantz_album     visibility=[marantz_power==ON]
         Default   item=marantz_track     visibility=[marantz_power==ON]
       } // CHIUSO GROUP "Stereo"
-      Switch item=tuya02_Switch
-      Switch item=tuya01_Switch
       Switch item=pow04_Switch
+      Text label="Varie Casa" icon=house {
+        Switch item=tuya02_Switch
+        Switch item=tuya01_Switch
+        Switch item=tuya05_Switch
+        Switch item=tuya03_Switch
+      } // Chiuso Text "Varie Casa"
     } // CHIUSO TEXT "Devices"
 
     Text label="IP Cameras" icon="camera" {
