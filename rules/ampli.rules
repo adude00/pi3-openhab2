@@ -1,0 +1,18 @@
+rule "Ampli Acceso"
+  when
+    Item tuya03_Power changed
+  then
+
+  if ( tuya03_Power.state > 8 ) {
+    if (pow05_Switch.state != ON) {
+      sendCommand(pow05_Switch, ON)
+    }
+  }
+
+  if ( tuya03_Power.state < 8 ) {
+    if (pow05_Switch.state != OFF) {
+      sendCommand(pow05_Switch, OFF)
+    }
+  }
+
+end
