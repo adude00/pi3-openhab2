@@ -88,7 +88,7 @@ sitemap default label="Casa"
         Text		item=sf07_Temp		label="Temperatura"
         Text		item=sf07_Humid		label="Umidità"
 	Switch		item=mdBagno		label="Modalità"		mappings=[heat='HOT', off='OFF']
-        Switch		item=tsBagnoAutoOFF	label="Auto OFF"	icon=settings
+        Switch		item=tsBagnoAutoOFF	label="Auto OFF: 15 min"	icon=settings
       } // Chiuso Frame Termostato
 
       Frame label="Grafici " {
@@ -131,7 +131,7 @@ sitemap default label="Casa"
         Text      item=sf08_Temp   label="Temperatura"
         Text      item=sf08_Humid  label="Umidità"
         Switch    item=mdCameretta label="Modalità"      mappings=[heat='HOT', off='OFF']
-        Switch    item=tsCamerettaAutoOFF  label="Auto OFF" icon=settings
+        Switch    item=tsCamerettaAutoOFF  label="Auto OFF: 30 min" icon=settings
       } // Chiuso Frame Termostato
 
       Frame label="Grafici " {
