@@ -30,6 +30,24 @@ then
     ])
 end
 
+rule "Mattina"
+when
+    Item Scene_Mattina changed to ON
+then
+  pushNotification("Scena: MATTINA", "La scena MATTINA è stata attivata")
+  logInfo("Scene","Scena MATTINA: iniziata")
+
+  gTappProd.sendCommand(UP)
+  IPCams.sendCommand(OFF)
+  tsBagno.sendCommand(ON)
+
+  createTimer(now.plusSeconds(30), [|
+    AutoRientro.sendCommand(OFF) 
+    gScene.sendCommand(OFF)
+    logInfo("Scene","Scena MATTINA: finita")
+    ])
+end
+
 rule "Usciamo"
 when
     Item Scene_Usciamo changed to ON
