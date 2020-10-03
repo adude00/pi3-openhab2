@@ -34,9 +34,9 @@ rule "Termostato Bagno Auto OFF"
     Item tsBagno changed from OFF to ON
   then
     if (tsBagnoAutoOFF.state == ON) {
-      createTimer(now.plusSeconds(1800), [|
+      createTimer(now.plusSeconds(900), [|
         tsBagno.sendCommand(OFF)
-        logInfo("tsBagno","tsBagno: Auto OFF 30 min")
+        logInfo("tsBagno","tsBagno: Auto OFF 15 min")
       ])
     }
 end
