@@ -40,6 +40,7 @@ then
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
   tsBagno.sendCommand(ON)
+  tsCameretta.sendCommand(OFF)
   sf04_Light.sendCommand(ON)
 
   createTimer(now.plusSeconds(30), [|

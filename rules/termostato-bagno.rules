@@ -2,7 +2,7 @@ rule "Termostato Bagno"
   when
     Item spBagno changed or
     Item sf07_Temp changed or
-    Item tsBagno received command
+    Item tsBagno changed
   then
   
   var Number cur_temp = sf07_Temp.state 

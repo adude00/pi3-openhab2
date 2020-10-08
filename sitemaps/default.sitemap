@@ -125,7 +125,7 @@ sitemap default label="Casa"
     Text item=sf08_Temp label="Cameretta" icon=bedroom {
       Frame label="Termostato" {
         Switch    item=tsCameretta
-        Setpoint  item=spCameretta minValue=18  maxValue=23 step=0.1 icon=smiley
+        Setpoint  item=spCameretta minValue=18  maxValue=26 step=0.5 icon=smiley
         Setpoint  item=hsCameretta minValue=0   maxValue=3  step=0.1 icon=settings
         Switch    item=tuya04_Switch icon=fan
         Text      item=sf08_Temp   label="Temperatura"

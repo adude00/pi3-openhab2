@@ -2,7 +2,7 @@ rule "Termostato Cameretta"
   when
     Item spCameretta changed or
     Item sf08_Temp changed or
-    Item tsCameretta received command
+    Item tsCameretta changed
   then
   
   var Number cur_temp = sf08_Temp.state 
