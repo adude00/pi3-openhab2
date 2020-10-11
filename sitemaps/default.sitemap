@@ -191,7 +191,7 @@ sitemap default label="Casa"
   } // Chiuso Frame Home Automation
 
   Frame label="Sensori" {
-    Text item=Casa_Consumi_Istantaneo label="Consumo [%.0f W]" icon=energy {
+    Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
       Frame {
         Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa

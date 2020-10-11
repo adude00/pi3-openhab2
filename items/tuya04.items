@@ -2,7 +2,7 @@ Group tuya04
 
 // SWITCH
 
-Switch tuya04_Switch "Termosifone" <radiator> (tuya04,gTuya,sonoff)
+Switch tuya04_Switch "Spina Termo (tuya04)" <radiator> (tuya04,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya04/POWER:command:*:default],
             <[broker:stat/tuya04/POWER:state:default]" }
 

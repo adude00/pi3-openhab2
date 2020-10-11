@@ -5,7 +5,7 @@ Number spCameretta    "Setpoint Cameretta [%.1f °C]"  		<temperature> 	(gTermoC
 String mdCameretta    "Cameretta Heating/Cooling Mode"			(gTermoCameretta)	[ "homekit:HeatingCoolingMode" ]
 
 // Termostato WEB, non parte di homekit
-Switch tsCameretta   "Ventola"  (gFinto)  [ "Switchable" ]
+Switch tsCameretta   "Termosifone"  (gFinto)  [ "Switchable" ]
 
 Number hsCameretta   "Isteresi Cameretta [%.1f °C]"  <temperature>
 
