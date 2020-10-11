@@ -2,7 +2,7 @@ Group tuya06
 
 // SWITCH
 
-Switch tuya06_Switch "TUYA06" <tv> (tuya06,gTuya,sonoff)
+Switch tuya06_Switch "Spina Termo (tuya06)" <tv> (tuya06,gTuya,sonoff)
     { mqtt=">[broker:cmnd/tuya06/POWER:command:*:default],
             <[broker:stat/tuya06/POWER:state:default]" }
 

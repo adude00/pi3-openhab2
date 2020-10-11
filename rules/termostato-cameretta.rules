@@ -11,21 +11,21 @@ rule "Termostato Cameretta"
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
 
   if (tsCameretta.state == ON) {
-    if (tuya04_Switch.state == ON) {
+    if (tuya06_Switch.state == ON) {
       if ((cur_temp).floatValue > ((setpoint).floatValue)) {
-        sendCommand(tuya04_Switch, OFF)
+        sendCommand(tuya06_Switch, OFF)
         logInfo("tsCameretta","tsCameretta: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
       }
     }
     else {
       if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
-        sendCommand(tuya04_Switch, ON)
+        sendCommand(tuya06_Switch, ON)
         logInfo("tsCameretta","tsCameretta: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
       }
     }
   }
   else {
-    sendCommand(tuya04_Switch, OFF)
+    sendCommand(tuya06_Switch, OFF)
   }
 end
 
