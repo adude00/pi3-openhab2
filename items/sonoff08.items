@@ -2,7 +2,7 @@ Group sonoff08
 Group gChartCamerettaT
 Group gChartCamerettaH
 
-Switch sf08_Light "Scaldino Cinese" <light> (sonoff08,sonoff,LR)
+Switch sf08_Light "Scaldino Cinese" <light> (sonoff08,sonoff)
     { mqtt=">[broker:cmnd/sonoff08/POWER:command:*:default],
             <[broker:stat/sonoff08/POWER:state:default]" } 
 

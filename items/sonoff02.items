@@ -3,7 +3,7 @@ Group sonoff02
 //////////////// SONOFF 2 /////////////////
 
 // IRRIGAZIONE
-Switch Terrazza "Irrigazione:" <rain> (sonoff02,sonoff,LR,gLight)
+Switch Terrazza "Irrigazione:" <rain> (sonoff02,sonoff)
     { mqtt=">[broker:cmnd/sonoff02/POWER:command:*:default],
             <[broker:stat/sonoff02/POWER:state:default]" }
 

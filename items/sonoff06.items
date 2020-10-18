@@ -1,6 +1,6 @@
 Group sonoff06
 
-Switch sf06_Light "Armadio" <light> (sonoff06,sonoff,LR,gLight,gLuci) [ "Lighting" ]
+Switch sf06_Light "Armadio" <light> (sonoff06,sonoff,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff06/POWER:command:*:default],
             <[broker:stat/sonoff06/POWER:state:default]" }
 

@@ -1,6 +1,6 @@
 Group sonoff03
 
-Switch sf03_Light "Lampada di sale" <light> (sonoff03,sonoff,LR,gLight,gLuci) [ "Lighting" ]
+Switch sf03_Light "Lampada di sale" <light> (sonoff03,sonoff,gLuci) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff03/POWER:command:*:default],
             <[broker:stat/sonoff03/POWER:state:default]" }
 

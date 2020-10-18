@@ -3,6 +3,9 @@ Group gRSSI
 Group gReachable
 
 Group gLuci
+Group gRGB
+Group gLightsDim
+
 Group gChartBdrmT
 Group gChartBdrmH
 Group gChartBathT
