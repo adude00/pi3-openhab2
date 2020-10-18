@@ -1,4 +1,3 @@
-Group sonoff
 Group sonoff04
 
 Switch sf04_Light "Divano" <light> (sonoff04,sonoff,LR,gLight,gLuci) [ "Lighting" ]
