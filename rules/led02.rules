@@ -1,0 +1,12 @@
+import java.awt.Color
+
+    rule "Set RGB value LED02"
+       when
+          Item led02_Color changed
+       then
+          var HSBType hsb = led02_Color.state as HSBType
+          var Color color = Color::getHSBColor(hsb.hue.floatValue / 360, hsb.saturation.floatValue / 100, hsb.brightness.floatValue / 100)
+          var String rgb = String::format("%1$02x%2$02x%3$02x", color.red, color.green, color.blue)
+          publish("broker", "cmnd/led02/color", rgb)
+          led02_RGB.postUpdate(rgb)
+       end

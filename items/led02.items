@@ -1,0 +1,37 @@
+Group led02
+
+Color  led02_Color "Soffitto Color"       (gRGB)
+Switch led02_Power "Soffitto" (gRGB,gLuci)  [ "Lighting" ] {mqtt=">[broker:cmnd/led02/POWER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.POWER)" }
+String led02_RGB   "Soffitto Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led02/HSBCOLOR:state:JSONPATH($.Color)]"}
+Dimmer led02_Dim   "Soffitto Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led02/DIMMER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.Dimmer)"}
+
+
+// setoption4 1: DIMMER > DIMMER
+// setoption4 0: DIMMER > RESULT
+// Per il POWER, il RESULT non ha DIMMER e COLOR. Causa loggate di errore
+
+// setoption4 0
+//Dimmer led02_Dim   "Soffitto Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led02/DIMMER:command:*:default], <[broker:stat/led02/RESULT:state:JSONPATH($.Dimmer)"}
+//String led02_RGB   "Soffitto Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led02/RESULT:state:JSONPATH($.Color)]"}
+
+
+// STATUS
+Number led02_RSSI "Soffitto: RSSI [%d %%]" <qualityofservice> (led02,sonoff,gRSSI)
+    { mqtt="<[broker:tele/led02/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String led02_Reachable "Soffitto: Status [%s]" <switch> (led02,sonoff,gReachable)
+    { mqtt="<[broker:tele/led02/LWT:state:MAP(reachable.map)]" }
+String led02_Uptime "Soffitto: Uptime [%s]" <clock> (led02,sonoff)
+    { mqtt="<[broker:tele/led02/STATE:state:JSONPATH($.Uptime)]" }
+
+// Versions
+DateTime  led02_Date     "LED 02: Refresh [ %1$tH:%1$tM]"   <clock>      (led02,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/led02/STATE:state:JSONPATH($.Time)]" }
+
+String    led02_Core     "LED 02: Core [%s]"                <text>       (led02,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/led02/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    led02_SDK      "LED 02: SDK [%s]"                 <text>       (led02,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/led02/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    led02_Version  "LED 02: Version [%s]"             <text>       (led02,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/led02/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
