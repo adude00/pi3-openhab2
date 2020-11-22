@@ -1,0 +1,35 @@
+Group sonoff11
+
+Switch sf11_Light "Scrivania" <light> (sonoff11,sonoff,gLuci) [ "Lighting" ]
+    { mqtt=">[broker:cmnd/sonoff11/POWER:command:*:default],
+            <[broker:stat/sonoff11/POWER:state:default]" } 
+
+// TEMPERATURA E UMIDITA
+Number sf11_Temp   "Camera Scrivania [%.1f °C]"  <temperature> (gTemp,sonoff11,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)
+  { mqtt="<[broker:tele/sonoff11/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+Number sf11_Humid  "Camera Scrivania [%.1f %%]"  <humidity>    (gHumd,sonoff11,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
+    { mqtt="<[broker:tele/sonoff11/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+// STATUS
+Number sf11_Light_RSSI "Scrivania: RSSI [%d %%]" <qualityofservice> (sonoff11,sonoff,gRSSI)
+    { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String sf11_Light_Reachable "Scrivania: Status [%s]" <switch> (sonoff11,sonoff,gReachable)
+    { mqtt="<[broker:tele/sonoff11/LWT:state:MAP(reachable.map)]" }
+String sf11_Uptime "Scrivania: Uptime [%s]" <clock> (sonoff11,sonoff)
+    { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Uptime)]" }
+
+// Versions
+DateTime  sf11_Date     "Sonoff 11: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff11,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Time)]" }
+
+String    sf11_Vcc      "Sonoff 11: Vcc [ %s]"                <text>       (sonoff11,sonoff,gVersion,gVcc)
+    { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Vcc)]" }
+
+String    sf11_Core     "Sonoff 11: Core [%s]"                <text>       (sonoff11,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff11/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf11_SDK      "Sonoff 11: SDK [%s]"                 <text>       (sonoff11,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff11/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf11_Version  "Sonoff 11: Version [%s]"             <text>       (sonoff11,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff11/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

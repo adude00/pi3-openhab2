@@ -1,17 +1,20 @@
 sitemap default label="Casa"
 {
 	Frame label="Things" {
-		Group item=gLuci label="Luci" icon="light"
-		Text label="Luci di casa"  {
-			Switch item=sf03_Light
-			Switch item=sf04_Light
-			Switch item=sf05_Light
-			Switch item=sf06_Light
-
-			Switch 		item=led02_Power
-			Slider 		item=led02_Dim
-			Colorpicker  	item=led02_Color
-			Text 		item=led02_RGB
+		Text label="Luci" icon="light" {
+			Frame label="Luci" { 
+				Switch item=sf03_Light
+				Switch item=sf04_Light
+				Switch item=sf05_Light
+				Switch item=sf06_Light
+				Switch item=sf11_Light
+			}
+			Frame label="LED" {
+				Switch 		item=led02_Power
+				Slider 		item=led02_Dim
+				Colorpicker  	item=led02_Color
+				Text 		item=led02_RGB
+			}
 		}
 
 

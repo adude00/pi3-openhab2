@@ -116,6 +116,7 @@ then
     createTimer(now.plusSeconds(5),  [ |
       sf04_Light.sendCommand(OFF)
       sf03_Light.sendCommand(OFF)
+      led02_Power.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: luci soggiorno spente")
     ])
 
