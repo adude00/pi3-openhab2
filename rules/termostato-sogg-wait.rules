@@ -1,0 +1,56 @@
+
+rule "Termostato Soggiorno Wait"
+  when
+    Item spSoggiorno changed or
+    Item hsSoggiorno changed or
+    Item avgSoggiornoAvg changed
+  then
+    var Number acPower = acPSoggiorno.state as DecimalType
+    var Number cur_temp = avgSoggiornoAvg.state
+    var Number tolSogg = hsSoggiorno.state
+    var Number setpoint = spSoggiorno.state
+    var Number minutes = tsSoggiornoWaitMins.state
+   
+    if (tsSoggiorno.state == ON && tsSoggiornoType.state == 3 && tsSoggiornoWait.state == OFF) { 
+      logInfo("tsSoggiornoWait","tsSoggiornoWait: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+
+      if ( ( cur_temp + tolSogg )  < setpoint ) {
+        // TOO COLD: INCREASE by ONE
+        acPower = acPower + 1
+        acPSoggiorno.sendCommand(acPower)
+        logInfo("tsSoggiornoWait","tsSoggiornoWait: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
+
+	// Creating 20 Wait Timer
+        tsSoggiornoWait.sendCommand(ON)
+        logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
+        createTimer(now.plusMinutes(minutes), [|
+          tsSoggiornoWait.sendCommand(OFF)
+          logInfo("tsSoggiornoWait","tsSoggiornoWait: mins expired, tsSoggiornoWait OFF")
+        ])
+
+      }
+    
+      if ( ( cur_temp - tolSogg ) > setpoint ) {
+        if ( acPower > 0 ) {
+          // TOO HOT: DECREASE by ONE
+          acPower = acPower - 1
+          acPSoggiorno.sendCommand(acPower)
+          logInfo("tsSoggiornoWait","tsSoggiornoWait: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+
+	  // Creating 20 Wait Timer
+          tsSoggiornoWait.sendCommand(ON)
+          logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
+          createTimer(now.plusMinutes(minutes), [|
+            tsSoggiornoWait.sendCommand(OFF)
+            logInfo("tsSoggiornoWait","tsSoggiornoWait: timer expired, tsSoggiornoWait OFF")
+          ])
+
+        }
+      }
+
+    // END IF termostato ON and type=3
+  }
+
+end
+
+
