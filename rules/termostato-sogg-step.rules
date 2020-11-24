@@ -4,8 +4,8 @@ rule "Termostato Soggiorno Step to Air"
   then
     var Number cdzTemp
 
-    if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) {
-    //if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1) {
+    //if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) {
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1) {
       switch(receivedCommand.toString) {
         case "0": { cdzTemp = 10.0 }
         case "1": { cdzTemp = 17.0 }
