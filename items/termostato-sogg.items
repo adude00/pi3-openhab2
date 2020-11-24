@@ -14,3 +14,7 @@ Number acPSoggiorno "AC Power [%.0f]"                  <settings>     (gTermoSog
 //Number tolSoggiorno "Tolleranza [%.1f °C]"		<settings>     (gTermoSogg)
 
 Number tsSoggiornoType	"Nuovo algoritmo"	<settings>	(gTermoSogg)
+
+
+Switch tsSoggiornoWait 		"Ts is Waiting..."		<settings> (gTermoSogg)
+Number tsSoggiornoWaitMins	"Minutes to Wait"		<settings> (gTermoSogg)

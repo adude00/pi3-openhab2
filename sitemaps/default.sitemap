@@ -77,7 +77,7 @@ sitemap default label="Casa"
       }
       Frame label="A/C Auto"  {
         Switch    item=tsSoggiorno            label="Termostato"
-        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Istantaneo', 2='Lento']
+        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
         Text      item=avgSoggiornoAvg        label="Media 30min"    icon=house
         Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
         Text      item=sf04_Temp              label="Divano"         icon=sofa
@@ -90,6 +90,10 @@ sitemap default label="Casa"
       Frame label="A/C Auto DEBUG"  {
          Selection  item=acPSoggiorno           mappings=[0='0: OFF', 1='1: 17C', 2='2: 18C', 3='3: 19C', 4='4: 20C', 5='5: 21C', 6='6: 23C', 7='7: 30C', 8='8: 30 Turbo']
          Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
+	 Switch    item=tsSoggiornoWait
+         Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" icon=settings minValue=0  maxValue=60 step=5
+         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
+
       }
 
     } // Chiuso Text Soggiorno Clima
