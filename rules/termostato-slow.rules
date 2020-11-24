@@ -33,29 +33,3 @@ rule "Termostato lento"
 
 end
 
-rule "Termostato Lento Traduzione"
-  when 
-    Item acPSoggiorno received command
-  then
-    var Number cdzTemp
-
-    if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) {
-      switch(receivedCommand.toString) {
-        case "0": { cdzTemp = 10.0 }
-        case "1": { cdzTemp = 17.0 }
-        case "2": { cdzTemp = 18.0 }
-        case "3": { cdzTemp = 19.0 }
-        case "4": { cdzTemp = 20.0 }
-        case "5": { cdzTemp = 21.0 }
-        case "6": { cdzTemp = 23.0 }
-        case "7": { cdzTemp = 30.0 }
-        case "8": { cdzTemp = 31.0 }
-        }
-
-      logInfo("tsSoggiornoSlowTrad","tsSoggiornoSlowTrad: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
-      Air_Conditioner_Temperature.sendCommand(cdzTemp)
-    }
-
-end
-
-

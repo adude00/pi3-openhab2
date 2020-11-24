@@ -31,30 +31,6 @@ rule "Air Conditioner Temp"
       logInfo("Air Conditioner",command)
       executeCommandLine(command);
 
-      // Sync to Termostato Slow 
-      var Number cdzTemp
-      switch(receivedCommand.toString) {
-        case "10.0": { cdzTemp = 0 }
-        case "17.0": { cdzTemp = 1 }
-        case "18.0": { cdzTemp = 2 }
-        case "19.0": { cdzTemp = 3 }
-        case "20.0": { cdzTemp = 4 }
-        case "21.0": { cdzTemp = 5 }
-        case "23.0": { cdzTemp = 6 }
-        case "30.0": { cdzTemp = 7 }
-        case "31.0": { cdzTemp = 8 }
-        case "10": { cdzTemp = 0 }
-        case "17": { cdzTemp = 1 }
-        case "18": { cdzTemp = 2 }
-        case "19": { cdzTemp = 3 }
-        case "20": { cdzTemp = 4 }
-        case "21": { cdzTemp = 5 }
-        case "23": { cdzTemp = 6 }
-        case "30": { cdzTemp = 7 }
-        case "31": { cdzTemp = 8 }
-        }
-      acPSoggiorno.postUpdate(cdzTemp)
-
 end
 
 

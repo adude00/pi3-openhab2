@@ -1,0 +1,55 @@
+rule "Termostato Soggiorno Step to Air"
+  when
+    Item acPSoggiorno received command
+  then
+    var Number cdzTemp
+
+    if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) {
+    //if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1) {
+      switch(receivedCommand.toString) {
+        case "0": { cdzTemp = 10.0 }
+        case "1": { cdzTemp = 17.0 }
+        case "2": { cdzTemp = 18.0 }
+        case "3": { cdzTemp = 19.0 }
+        case "4": { cdzTemp = 20.0 }
+        case "5": { cdzTemp = 21.0 }
+        case "6": { cdzTemp = 23.0 }
+        case "7": { cdzTemp = 30.0 }
+        case "8": { cdzTemp = 31.0 }
+        }
+
+      logInfo("tsSoggiornoSlowTrad","tsSoggiornoSlowTrad: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
+      Air_Conditioner_Temperature.sendCommand(cdzTemp)
+    }
+
+end
+
+rule "Termostato Soggiorno Air to Step"
+    when
+        Item Air_Conditioner_Temperature received command
+    then
+
+      // Sync to Termostato Slow
+      var Number cdzTemp
+      switch(receivedCommand.toString) {
+        case "10.0": { cdzTemp = 0 }
+        case "17.0": { cdzTemp = 1 }
+        case "18.0": { cdzTemp = 2 }
+        case "19.0": { cdzTemp = 3 }
+        case "20.0": { cdzTemp = 4 }
+        case "21.0": { cdzTemp = 5 }
+        case "23.0": { cdzTemp = 6 }
+        case "30.0": { cdzTemp = 7 }
+        case "31.0": { cdzTemp = 8 }
+        case "10": { cdzTemp = 0 }
+        case "17": { cdzTemp = 1 }
+        case "18": { cdzTemp = 2 }
+        case "19": { cdzTemp = 3 }
+        case "20": { cdzTemp = 4 }
+        case "21": { cdzTemp = 5 }
+        case "23": { cdzTemp = 6 }
+        case "30": { cdzTemp = 7 }
+        case "31": { cdzTemp = 8 }
+        }
+      acPSoggiorno.postUpdate(cdzTemp)
+end
