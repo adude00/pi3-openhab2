@@ -9,7 +9,10 @@ rule "Termostato Soggiorno Wait"
     var Number cur_temp = avgSoggiornoAvg.state
     var Number tolSogg = hsSoggiorno.state
     var Number setpoint = spSoggiorno.state
-    var Number minutes = tsSoggiornoWaitMins.state
+
+    // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
+    // https://community.openhab.org/t/solved-int-from-switch-item-number-as-now-plusminutes/60035/17
+    val int timerTime = (tsSoggiornoWaitMins.state as Number).intValue
    
     if (tsSoggiorno.state == ON && tsSoggiornoType.state == 3 && tsSoggiornoWait.state == OFF) { 
       logInfo("tsSoggiornoWait","tsSoggiornoWait: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
@@ -23,7 +26,7 @@ rule "Termostato Soggiorno Wait"
 	// Creating 20 Wait Timer
         tsSoggiornoWait.sendCommand(ON)
         logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
-        createTimer(now.plusMinutes(minutes), [|
+        createTimer(now.plusMinutes(timerTime), [|
           tsSoggiornoWait.sendCommand(OFF)
           logInfo("tsSoggiornoWait","tsSoggiornoWait: mins expired, tsSoggiornoWait OFF")
         ])
@@ -40,7 +43,7 @@ rule "Termostato Soggiorno Wait"
 	  // Creating 20 Wait Timer
           tsSoggiornoWait.sendCommand(ON)
           logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
-          createTimer(now.plusMinutes(minutes), [|
+          createTimer(now.plusMinutes(timerTime), [|
             tsSoggiornoWait.sendCommand(OFF)
             logInfo("tsSoggiornoWait","tsSoggiornoWait: timer expired, tsSoggiornoWait OFF")
           ])
