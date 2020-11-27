@@ -46,6 +46,7 @@ then
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
+    Air_Conditioner_Temperature.sendCommand(23.0)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena MATTINA: finita")
     ])
