@@ -6,9 +6,16 @@ rule "Termostato Soggiorno Wait"
     Item avgSoggiornoAvg changed
   then
     var Number acPower = acPSoggiorno.state as DecimalType
-    var Number cur_temp = avgSoggiornoAvg.state
     var Number tolSogg = hsSoggiorno.state
     var Number setpoint = spSoggiorno.state
+
+
+    // Temp to check against
+    var Number cur_temp = Casa_Temperature_AVG.state
+    // Check if we want to use sofa sensor and not house average and override in case
+    if (tsSoggSensor.state == 2 ) cur_temp = sf04_Temp.state
+    if (tsSoggSensor.state == 3 ) cur_temp = avgSoggiornoAvg.state
+
 
     // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
     // https://community.openhab.org/t/solved-int-from-switch-item-number-as-now-plusminutes/60035/17
