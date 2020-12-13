@@ -1,9 +1,11 @@
 
 rule "Termostato Soggiorno Wait"
   when
+    Item Casa_Temperature_AVG changed or
+    Item sf04_Temp changed or
+    Item avgSoggiornoAvg changed or
     Item spSoggiorno changed or
-    Item hsSoggiorno changed or
-    Item avgSoggiornoAvg changed
+    Item hsSoggiorno changed
   then
     var Number acPower = acPSoggiorno.state as DecimalType
     var Number tolSogg = hsSoggiorno.state

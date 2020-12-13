@@ -1,8 +1,7 @@
 
-rule "Termostato lento"
+rule "Termostato Soggiorno Crontab"
   when
     Time cron "0 0/30 * * * ?"
-    //Item avgSoggiornoAvg changed
   then
     var Number acPower = acPSoggiorno.state as DecimalType
     var Number tolSogg = hsSoggiorno.state
@@ -16,13 +15,13 @@ rule "Termostato lento"
 
    
     if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) { 
-      logInfo("tsSoggiornoSlow","tsSoggiornoSlow: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+      logInfo("tsSoggiornoCron","tsSoggiornoCron: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
 
       if ( ( cur_temp + tolSogg )  < setpoint ) {
         // TOO COLD: INCREASE by ONE
         acPower = acPower + 1
         acPSoggiorno.sendCommand(acPower)
-        logInfo("tsSoggiornoSlow","tsSoggiornoSlow: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
+        logInfo("tsSoggiornoCron","tsSoggiornoCron: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
       }
     
       if ( ( cur_temp - tolSogg ) > setpoint ) {
@@ -30,7 +29,7 @@ rule "Termostato lento"
           // TOO HOT: DECREASE by ONE
           acPower = acPower - 1
           acPSoggiorno.sendCommand(acPower)
-          logInfo("tsSoggiornoSlow","tsSoggiornoSlow: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+          logInfo("tsSoggiornoCron","tsSoggiornoCron: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
         }
       }
 
