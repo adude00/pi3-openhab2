@@ -9,3 +9,5 @@ Switch WakeUpAlarmRepeat    "Wake up alarm repeat [%s]"    <alarm>    (gRestore,
 Switch WakeUpAC             "Wake up AC [%s]"             <radiator>  (gRestore,WakeUpAlarm)
 Switch WakeUpTapp           "Wake up Tapp [%s]"           <blinds>    (gRestore,WakeUpAlarm)
 Switch WakeUpACTrigger      "Wake up AC Triggered [%s]"   <radiator>  (gRestore,WakeUpAlarm)
+
+Switch WakeUpTsSlow         "Wake Up Thermostat Slow [%s]" <radiator>  (gRestore,WakeUpAlarm)

@@ -83,10 +83,26 @@ when
   Item WakeUpAlarmTriggered changed to ON
 then
   logInfo(LOG, "SVEGLIA: Alarm triggered. Starting alarm procedure")
+
+  // TAPPARELLE
   if (WakeUpTapp.state == ON) {
     gTappWake.sendCommand(UP)
     logInfo(LOG, "SVEGLIA: WakeUpTapp=ON: Tapparelle Aperte")
   }
+
+  // Termostato Slow
+  if (WakeUpTsSlow.state == ON) {
+
+    Air_Conditioner_Temperature.sendCommand(19.0)
+    logInfo(LOG, "SVEGLIA: CDZ Impostato a 19")
+
+    createTimer(now.plusSeconds(3),  [ |
+        tsSoggiorno.sendCommand(ON)
+      logInfo(LOG, "SVEGLIA: Termostato Lento Acceso")
+    ])
+
+  }
+
   mWakeUpSceneTimer = createTimer(now.plusSeconds(30), [|
     WakeUpAlarmSwitch.sendCommand(OFF)
     WakeUpAlarmTriggered.sendCommand(OFF)

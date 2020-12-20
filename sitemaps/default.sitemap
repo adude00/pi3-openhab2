@@ -48,6 +48,7 @@ sitemap default label="Casa"
         Default   item=marantz_track     visibility=[marantz_power==ON]
       } // CHIUSO GROUP "Stereo"
       Switch item=pow04_Switch
+      Switch item=DynamicVolume
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
         Switch item=tuya01_Switch
@@ -203,6 +204,7 @@ sitemap default label="Casa"
           Switch item=WakeUpAlarmRepeat label="Sveglia"
           Switch item=WakeUpAC          label="Auto AC"
           Switch item=WakeUpTapp        label="Auto Tapparelle"
+          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
         }
         Frame label="Debug" {
           Text label="La sveglia si allarma alle 3.07am"
