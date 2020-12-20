@@ -33,8 +33,21 @@ sitemap default label="Casa"
       Default item=Tapp08
     }
     Text label="Devices" icon=cinema {
+      Frame label="Cose" {
       Switch item=NAS2
       Switch item=Net_TV
+      Switch item=pow04_Switch
+      Text label="Varie Casa" icon=house {
+        Switch item=tuya02_Switch
+        Switch item=tuya01_Switch
+        Switch item=tuya05_Switch
+        Switch item=tuya03_Switch
+      } // Chiuso Text "Varie Casa"
+      } // Chiuso FRAME "Cose"
+      Frame label="Audio" {
+        Switch item=DynamicVolume
+        Switch item=Restorer
+        Switch item=DynamicEq
       Group item=marantz_power label="Stereo" icon="receiver" {
         Default   item=marantz_power     label="Stereo"
         Selection item=marantz_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_power==ON]
@@ -47,15 +60,8 @@ sitemap default label="Casa"
         Default   item=marantz_album     visibility=[marantz_power==ON]
         Default   item=marantz_track     visibility=[marantz_power==ON]
       } // CHIUSO GROUP "Stereo"
-      Switch item=pow04_Switch
-      Switch item=DynamicVolume
-      Switch item=Restorer
-      Text label="Varie Casa" icon=house {
-        Switch item=tuya02_Switch
-        Switch item=tuya01_Switch
-        Switch item=tuya05_Switch
-        Switch item=tuya03_Switch
-      } // Chiuso Text "Varie Casa"
+
+        }
     } // CHIUSO TEXT "Devices"
 
     Text label="IP Cameras" icon="camera" {
