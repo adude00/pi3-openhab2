@@ -49,6 +49,7 @@ sitemap default label="Casa"
       } // CHIUSO GROUP "Stereo"
       Switch item=pow04_Switch
       Switch item=DynamicVolume
+      Switch item=Restorer
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
         Switch item=tuya01_Switch
