@@ -22,6 +22,7 @@ then
 
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
+  tsCameretta.sendCommand(OFF)
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
