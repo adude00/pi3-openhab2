@@ -44,7 +44,7 @@ rule "Termostato Soggiorno Wait"
           ])
 
         } else {
-            if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: MAX Temp Reached. Doing Nothing.")
+            if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: MAX Temp (" + acPowerMax + ") Reached. Doing Nothing.")
 	}
 
       }
