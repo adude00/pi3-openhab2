@@ -18,3 +18,6 @@ Number tsSoggiornoType	"Nuovo algoritmo"	<settings>	(gTermoSogg)
 
 Switch tsSoggiornoWait 		"Ts is Waiting..."		<settings> (gTermoSogg)
 Number tsSoggiornoWaitMins	"Minutes to Wait"		<settings> (gTermoSogg)
+Number tsSoggiornoWaitMaxTemp	"Ts Max temp"			<settings> (gTermoSogg)
+Switch tsSoggiornoWaitDebug     "Ts Debug"              	<settings> (gTermoSogg)
+

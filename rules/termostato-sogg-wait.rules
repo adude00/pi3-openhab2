@@ -8,6 +8,7 @@ rule "Termostato Soggiorno Wait"
     Item hsSoggiorno changed
   then
     var Number acPower = acPSoggiorno.state as DecimalType
+    var Number acPowerMax = tsSoggiornoWaitMaxTemp.state as DecimalType
     var Number tolSogg = hsSoggiorno.state
     var Number setpoint = spSoggiorno.state
 
@@ -24,21 +25,27 @@ rule "Termostato Soggiorno Wait"
     val int timerTime = (tsSoggiornoWaitMins.state as Number).intValue
    
     if (tsSoggiorno.state == ON && tsSoggiornoType.state == 3 && tsSoggiornoWait.state == OFF) { 
-      logInfo("tsSoggiornoWait","tsSoggiornoWait: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
+      if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tolSogg: (" + tolSogg + "), acPower: " + acPower)
 
       if ( ( cur_temp + tolSogg )  < setpoint ) {
-        // TOO COLD: INCREASE by ONE
-        acPower = acPower + 1
-        acPSoggiorno.sendCommand(acPower)
-        logInfo("tsSoggiornoWait","tsSoggiornoWait: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
+        if ( acPower < acPowerMax ) {
 
-	// Creating 20 Wait Timer
-        tsSoggiornoWait.sendCommand(ON)
-        logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
-        createTimer(now.plusMinutes(timerTime), [|
-          tsSoggiornoWait.sendCommand(OFF)
-          logInfo("tsSoggiornoWait","tsSoggiornoWait: mins expired, tsSoggiornoWait OFF")
-        ])
+          // TOO COLD: INCREASE by ONE
+          acPower = acPower + 1
+          acPSoggiorno.sendCommand(acPower)
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Increasing acPower to " + acPower)
+
+          // Creating 20 Wait Timer
+          tsSoggiornoWait.sendCommand(ON)
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: timer started, tsSoggiornoWait ON")
+          createTimer(now.plusMinutes(timerTime), [|
+            tsSoggiornoWait.sendCommand(OFF)
+            if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: mins expired, tsSoggiornoWait OFF")
+          ])
+
+        } else {
+            if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: MAX Temp Reached. Doing Nothing.")
+	}
 
       }
     
@@ -47,14 +54,14 @@ rule "Termostato Soggiorno Wait"
           // TOO HOT: DECREASE by ONE
           acPower = acPower - 1
           acPSoggiorno.sendCommand(acPower)
-          logInfo("tsSoggiornoWait","tsSoggiornoWait: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Decreasing acPower to " + acPower)
 
 	  // Creating 20 Wait Timer
           tsSoggiornoWait.sendCommand(ON)
-          logInfo("tsSoggiornoWait","tsSoggiornoWait: timer started, tsSoggiornoWait ON")
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: timer started, tsSoggiornoWait ON")
           createTimer(now.plusMinutes(timerTime), [|
             tsSoggiornoWait.sendCommand(OFF)
-            logInfo("tsSoggiornoWait","tsSoggiornoWait: timer expired, tsSoggiornoWait OFF")
+            if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: timer expired, tsSoggiornoWait OFF")
           ])
 
         }
