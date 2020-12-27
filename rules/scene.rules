@@ -44,6 +44,10 @@ then
   tsCameretta.sendCommand(OFF)
   sf04_Light.sendCommand(ON)
   Air_Conditioner_Temperature.sendCommand(23.0)
+  createTimer(now.plusSeconds(10), [|
+	tsSoggiorno.sendCommand(ON)
+    ])
+
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
