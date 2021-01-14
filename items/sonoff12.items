@@ -1,0 +1,35 @@
+Group sonoff12
+
+//Switch sf12_Light "Lettino" <light> (sonoff12,sonoff,gLuci) [ "Lighting" ]
+//    { mqtt=">[broker:cmnd/sonoff12/POWER:command:*:default],
+//            <[broker:stat/sonoff12/POWER:state:default]" } 
+
+// TEMPERATURA E UMIDITA
+Number sf12_Temp   "Lettino [%.1f °C]"  <temperature> (gTemp,sonoff12,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)
+  { mqtt="<[broker:tele/sonoff12/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+Number sf12_Humid  "Lettino [%.1f %%]"  <humidity>    (gHumd,sonoff12,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
+    { mqtt="<[broker:tele/sonoff12/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+// STATUS
+Number sf12_Light_RSSI "Lettino: RSSI [%d %%]" <qualityofservice> (sonoff12,sonoff,gRSSI)
+    { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String sf12_Light_Reachable "Lettino: Status [%s]" <switch> (sonoff12,sonoff,gReachable)
+    { mqtt="<[broker:tele/sonoff12/LWT:state:MAP(reachable.map)]" }
+String sf12_Uptime "Lettino: Uptime [%s]" <clock> (sonoff12,sonoff)
+    { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Uptime)]" }
+
+// Versions
+DateTime  sf12_Date     "Sonoff 12: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff12,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Time)]" }
+
+//String    sf12_Vcc      "Sonoff 12: Vcc [ %s]"                <text>       (sonoff12,sonoff,gVersion,gVcc)
+//    { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Vcc)]" }
+
+String    sf12_Core     "Sonoff 12: Core [%s]"                <text>       (sonoff12,sonoff,gVersion,gCore)
+    { mqtt="<[broker:stat/sonoff12/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+
+String    sf12_SDK      "Sonoff 12: SDK [%s]"                 <text>       (sonoff12,sonoff,gVersion,gSDK)
+    { mqtt="<[broker:stat/sonoff12/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
+
+String    sf12_Version  "Sonoff 12: Version [%s]"             <text>       (sonoff12,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/sonoff12/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
