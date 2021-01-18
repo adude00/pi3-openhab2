@@ -1,0 +1,8 @@
+Switch DaikinCameretta_Power "A/C" { channel="opendaikin:ac_unit:172_27_72_148:power" }
+Number:Temperature DaikinCameretta_SetPoint "SetPoint" { channel="opendaikin:ac_unit:172_27_72_148:settemp" }
+String DaikinCameretta_Mode "Mode" { channel="opendaikin:ac_unit:172_27_72_148:mode" }
+String DaikinCameretta_HomekitMode { channel="opendaikin:ac_unit:172_27_72_148:homekitmode" }
+String DaikinCameretta_Fan "Fan Speed" { channel="opendaikin:ac_unit:172_27_72_148:fanspeed" }
+String DaikinCameretta_Fan_Movement "Air Direction" { channel="opendaikin:ac_unit:172_27_72_148:fandir" }
+Number:Temperature DaikinCameretta_IndoorTemperature "Temp al Clima [%.1f °C]" { channel="opendaikin:ac_unit:172_27_72_148:indoortemp" }
+Number:Temperature DaikinCameretta_OutdoorTemperature "Temp Esterna [%.1f °C]" (gTemp) { channel="opendaikin:ac_unit:172_27_72_148:outdoortemp" }
