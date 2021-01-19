@@ -175,17 +175,17 @@ sitemap default label="Casa"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=sf08_Temp label="Cameretta" icon=bedroom {
+    Text item=sf12_Temp label="Cameretta" icon=baby_2 {
       Frame label="Condizionatore" {
         Switch item=DaikinCameretta_Power
-        Setpoint item=DaikinCameretta_SetPoint visibility=[DaikinCameretta_Power==ON]
-        Selection item=DaikinCameretta_Mode mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] visibility=[DaikinCameretta_Power==ON]
-        Selection item=DaikinCameretta_Fan mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinCameretta_Power==ON]
-        Selection item=DaikinCameretta_Fan_Movement mappings=["STOPPED"="Stopped", "VERTICAL"="Vertical", "HORIZONTAL"="Horizontal", "VERTICAL_AND_HORIZONTAL"="Vertical and Horizontal"] visibility=[DaikinCameretta_Power==ON]
-        Text item=DaikinCameretta_IndoorTemperature
-        Text item=DaikinCameretta_OutdoorTemperature
+        Setpoint item=DaikinCameretta_SetPoint icon=heating step=0.5 visibility=[DaikinCameretta_Power==ON]
+        Selection item=DaikinCameretta_Mode icon=settings mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] visibility=[DaikinCameretta_Power==ON]
+        Selection item=DaikinCameretta_Fan icon=fan mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinCameretta_Power==ON]
+        Selection item=DaikinCameretta_Fan_Movement icon=flow mappings=["STOPPED"="Stopped", "VERTICAL"="Vertical", "HORIZONTAL"="Horizontal", "VERTICAL_AND_HORIZONTAL"="Vertical and Horizontal"] visibility=[DaikinCameretta_Power==ON]
+        Text item=DaikinCameretta_IndoorTemperature icon=temperature
+        Text item=DaikinCameretta_OutdoorTemperature icon=temperature
+        Text item=pow01_Power label="Potenza Motore: [%.0f W]" icon=pump
       }
-
       Frame label="Termostato" {
         Switch    item=tsCameretta
         Setpoint  item=spCameretta minValue=18  maxValue=26 step=0.1 icon=smiley
@@ -230,7 +230,57 @@ sitemap default label="Casa"
 
     } // Chiuso Text Cameretta
 
+    Text item=sf11_Temp label="Matrimoniale" icon=bedroom {
+      Frame label="Condizionatore" {
+        Switch item=DaikinMatrimoniale_Power
+        Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
+        Selection item=DaikinMatrimoniale_Fan icon=fan mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinMatrimoniale_Power==ON]
+        Selection item=DaikinMatrimoniale_Fan_Movement icon=flow mappings=["STOPPED"="Stopped", "VERTICAL"="Vertical", "HORIZONTAL"="Horizontal", "VERTICAL_AND_HORIZONTAL"="Vertical and Horizontal"] visibility=[DaikinMatrimoniale_Power==ON]
+        //Selection item=DaikinMatrimoniale_Mode icon=settings mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] visibility=[DaikinMatrimoniale_Power==ON]
+        Switch item=DaikinMatrimoniale_Mode icon=settings mappings=["COLD"="Cold", "HEAT"="Heat"] visibility=[DaikinMatrimoniale_Power==ON]
+        Text item=DaikinMatrimoniale_IndoorTemperature icon=temperature
+        Text item=DaikinMatrimoniale_OutdoorTemperature icon=temperature
+        Text item=pow01_Power label="Potenza Motore: [%.0f W]" icon=pump
+      }
 
+      Frame label="Dati" {
+        Text      item=sf05_Temp   label="Specchio: Temperatura"
+        Text      item=sf05_Humid  label="Specchio: Umidità"
+        Text      item=sf11_Temp   label="Scrivania: Temperatura"
+        Text      item=sf11_Humid  label="Scrivania: Umidità"
+
+      }
+
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Matrimoniale
+        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // UMIDITA Matrimoniale
+        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+      } // Chiuso frame grafici
+
+
+    }
 
   } // Chiuso frame Thermostats
 
@@ -262,7 +312,7 @@ sitemap default label="Casa"
       Frame {
         Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
-        Text item=pow01_Power           label="Clima Camera: [%.0f W]" icon=bedroom
+        Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
         Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
         Text item=tuya06_Power		label="Termo: [%.0f W]" icon=radiator
         Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
