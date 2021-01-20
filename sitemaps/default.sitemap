@@ -187,19 +187,12 @@ sitemap default label="Casa"
         Text item=DaikinCameretta_IndoorTemperature icon=temperature
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
-      Frame label="Termostato" {
-        Switch    item=tsCameretta
-        Setpoint  item=spCameretta minValue=18  maxValue=26 step=0.1 icon=smiley
-        Setpoint  item=hsCameretta minValue=0   maxValue=3  step=0.1 icon=settings
-        Switch    item=tuya06_Switch            icon=radiator
-        Text 	  item=tuya06_Power             label="Termo: [%.0f W]" icon=radiator
+      Frame label="Comfort" {
         Text      item=sf12_Temp   label="LETTINO: Temperatura"
         Text      item=sf12_Humid  label="LETTINO: Umidità"
         Text      item=sf08_Temp   label="TAVOLO: Temperatura"
         Text      item=sf08_Humid  label="TAVOLO: Umidità"
-        Switch    item=mdCameretta label="Modalità"      mappings=[heat='HOT', off='OFF']
-        Switch    item=tsCamerettaAutoOFF  label="Auto OFF: 30 min" icon=settings
-      } // Chiuso Frame Termostato
+      }
 
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
@@ -228,6 +221,15 @@ sitemap default label="Casa"
         Chart  item=gChartCamerettaH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
       } // Chiuso frame grafici
+      Frame label="Termostato" {
+        Switch    item=tsCameretta
+        Setpoint  item=spCameretta minValue=18  maxValue=26 step=0.1 icon=smiley
+        Setpoint  item=hsCameretta minValue=0   maxValue=3  step=0.1 icon=settings
+        Switch    item=tuya06_Switch            icon=radiator
+        Text 	  item=tuya06_Power             label="Termo: [%.0f W]" icon=radiator
+        Switch    item=mdCameretta label="Modalità"      mappings=[heat='HOT', off='OFF']
+        Switch    item=tsCamerettaAutoOFF  label="Auto OFF: 30 min" icon=settings
+      } // Chiuso Frame Termostato
 
     } // Chiuso Text Cameretta
 
