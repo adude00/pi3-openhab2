@@ -1,0 +1,22 @@
+rule daikinFanMatrimoniale
+when
+  Item DaikinMatrimoniale_Fan received command
+then
+  
+    var Number fanSpeed
+
+    if (DaikinMatrimoniale_Fan.state !== null) {
+      switch(receivedCommand.toString) {
+        case "SILENCE": { fanSpeed = 0 }
+        case "LEVEL_1": { fanSpeed = 1 }
+        case "LEVEL_2": { fanSpeed = 2 }
+        case "LEVEL_3": { fanSpeed = 3 }
+        case "LEVEL_4": { fanSpeed = 4 }
+        case "LEVEL_5": { fanSpeed = 5 }
+        case "AUTO": { fanSpeed = 9 }
+        }
+    }
+    DaikinMatrimoniale_Fan_Number.postUpdate(fanSpeed)
+
+end
+
