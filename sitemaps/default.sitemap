@@ -238,7 +238,8 @@ sitemap default label="Casa"
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
         Selection item=DaikinMatrimoniale_Fan icon=fan mappings=["AUTO"="Auto", "SILENCE"="Silence", "LEVEL_1"="Level 1", "LEVEL_2"="Level 2", "LEVEL_3"="Level 3", "LEVEL_4"="Level 4", "LEVEL_5"="Level 5"] visibility=[DaikinMatrimoniale_Power==ON]
-        Selection item=DaikinMatrimoniale_Fan_Movement icon=flow mappings=["STOPPED"="Stopped", "VERTICAL"="Vertical", "HORIZONTAL"="Horizontal", "VERTICAL_AND_HORIZONTAL"="Vertical and Horizontal"] visibility=[DaikinMatrimoniale_Power==ON]
+        // Selection item=DaikinMatrimoniale_Fan_Movement icon=flow mappings=["STOPPED"="Stopped", "VERTICAL"="Vertical", "HORIZONTAL"="Horizontal", "VERTICAL_AND_HORIZONTAL"="Vertical and Horizontal"] visibility=[DaikinMatrimoniale_Power==ON]
+        Switch item=DaikinMatrimoniale_Fan_Movement icon=flow mappings=["STOPPED"="STOP", "VERTICAL"=" ^ ", "HORIZONTAL"=" > ", "VERTICAL_AND_HORIZONTAL"=" ^>"] visibility=[DaikinMatrimoniale_Power==ON]
         //Selection item=DaikinMatrimoniale_Mode icon=settings mappings=["AUTO"="Auto", "DEHUMIDIFIER"="Dehumidifier", "COLD"="Cold", "HEAT"="Heat", "FAN"="Fan"] visibility=[DaikinMatrimoniale_Power==ON]
         Switch item=DaikinMatrimoniale_Mode icon=settings mappings=["COLD"="Cold", "HEAT"="Heat"] visibility=[DaikinMatrimoniale_Power==ON]
         Text item=pow01_Power label="Potenza Motore: [%.0f W]" icon=pump
