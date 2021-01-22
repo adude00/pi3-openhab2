@@ -1,5 +1,3 @@
-Group gChartLvrmT
-Group gChartLvrmH
 Group  Casa_Temperature_Chart (System, Charts)
 Number Casa_Temperature_Chart_Period "Periodo" (System)
 Number ChartPeriod "Periodo" (System)
