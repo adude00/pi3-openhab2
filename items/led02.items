@@ -1,9 +1,9 @@
 Group led02
 
 Color  led02_Color "Soffitto Color"       (gRGB)
-Switch led02_Power "Soffitto" (gRGB,gLuci)  [ "Lighting" ] {mqtt=">[broker:cmnd/led02/POWER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.POWER)" }
+Switch led02_Power "Soffitto Acceso" (gRGB,gLuci) {mqtt=">[broker:cmnd/led02/POWER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.POWER)" }
 String led02_RGB   "Soffitto Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led02/HSBCOLOR:state:JSONPATH($.Color)]"}
-Dimmer led02_Dim   "Soffitto Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led02/DIMMER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.Dimmer)"}
+Dimmer led02_Dim   "Soffitto" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led02/DIMMER:command:*:default], <[broker:stat/led02/DIMMER:state:JSONPATH($.Dimmer)"} 
 
 
 // setoption4 1: DIMMER > DIMMER

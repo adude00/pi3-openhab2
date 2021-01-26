@@ -10,8 +10,8 @@ sitemap default label="Casa"
 				Switch item=sf11_Light
 			}
 			Frame label="LED Soggiorno" {
-				Switch 		item=led02_Power
-				Slider 		item=led02_Dim
+				Switch 		item=led02_Power	label="Soffitto"
+				Slider 		item=led02_Dim		label="Soffitto Power [%.0f %%]"
 				Colorpicker  	item=led02_Color
 				Text 		item=led02_RGB
 			}
