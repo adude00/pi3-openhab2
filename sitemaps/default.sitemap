@@ -8,20 +8,20 @@ sitemap default label="Casa"
 				Switch item=sf05_Light
 				Switch item=sf06_Light
 				Switch item=sf11_Light
+				Slider item=led01_DimW
 			}
 			Frame label="LED Soggiorno" {
-				Switch 		item=led02_Power	label="Soffitto"
-				Slider 		item=led02_Dim		label="Soffitto Power [%.0f %%]"
+				Switch 		item=led02_Power	
+				Slider 		item=led02_Dim		
 				Colorpicker  	item=led02_Color
 				Text 		item=led02_RGB
 			}
-			Frame label="LED Letto" {
-				Switch 		item=led01_Power
+			Frame label="Barra LED Colorati" {
+				//Switch 		item=led01_Power
 				Slider 		item=led01_Dim
 				Colorpicker  	item=led01_Color
 				Text 		item=led01_RGB
-				Switch 		item=led01_PowerW
-				Slider 		item=led01_DimW
+				//Switch 		item=led01_PowerW
 			}
 		}
 
