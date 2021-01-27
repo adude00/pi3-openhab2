@@ -7,3 +7,8 @@ Number DaikinCameretta_Fan_Number "Fan Speed" (gGraph)
 String DaikinCameretta_Fan_Movement "Air Direction" { channel="opendaikin:ac_unit:172_27_72_148:fandir" }
 Number:Temperature DaikinCameretta_IndoorTemperature "Temp Split [%.1f °C]" { channel="opendaikin:ac_unit:172_27_72_148:indoortemp" }
 Number:Temperature DaikinCameretta_OutdoorTemperature "Temp Esterna [%.1f °C]" (gTemp) { channel="opendaikin:ac_unit:172_27_72_148:outdoortemp" }
+
+
+Number DaikinCameretta_MaxTemp "Temp Max [%.1f °C]"
+Number DaikinCameretta_MinTemp "Temp Min [%.1f °C]"
+Switch DaikinCameretta_AntiSpike "Anti Spike"
