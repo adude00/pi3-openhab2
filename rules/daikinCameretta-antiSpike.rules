@@ -11,14 +11,18 @@ rule "Daikin Cameretta Anti Spike"
 
     if (DaikinCameretta_AntiSpike.state == ON) {
 
-      if ((cur_temp).floatValue > ((setpoint_max).floatValue)) {
-        sendCommand(DaikinCameretta_Fan, SILENCE)
-        logInfo("DaikinCamerettaAntiSpike","AntiSpikeCameretta: Temp: " + (cur_temp).floatValue + "C > " + (setpoint_max).floatValue + "C")
+      if (DaikinCameretta_Fan.state != "SILENCE" ) {
+        if ((cur_temp).floatValue > ((setpoint_max).floatValue)) {
+          logInfo("DaikinCamerettaAntiSpike","AntiSpikeCameretta - set SILENCE: " + (cur_temp).floatValue + "C > " + (setpoint_max).floatValue + "C")
+  	  DaikinCameretta_Fan.sendCommand("SILENCE")
+        }
       }
 
-      if ((cur_temp).floatValue < ((setpoint_min).floatValue)) {
-        sendCommand(DaikinCameretta_Fan, LEVEL_1)
-        logInfo("DaikinCamerettaAntiSpike","AntiSpikeCameretta: Temp: " + (cur_temp).floatValue + "C <" + (setpoint_min).floatValue + "C")
+      if (DaikinCameretta_Fan.state != "LEVEL_1" ) {
+        if ((cur_temp).floatValue < ((setpoint_min).floatValue)) {
+          logInfo("DaikinCamerettaAntiSpike","AntiSpikeCameretta - set LEVEL_1: " + (cur_temp).floatValue + "C <" + (setpoint_min).floatValue + "C")
+	  DaikinCameretta_Fan.sendCommand("LEVEL_1")
+        }
       }
 
     }
