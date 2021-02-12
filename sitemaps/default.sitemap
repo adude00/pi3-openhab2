@@ -195,8 +195,8 @@ sitemap default label="Casa"
         Text      item=sf12_Temp   label="LETTINO: Temperatura" { 
 	  Text      item=sf12_Temp   label="LETTINO: Temperatura"
 	  Switch   item=DaikinCameretta_AntiSpike
-          Setpoint item=DaikinCameretta_MaxTemp icon=temperature step=0.1 minValue=19 maxValue=23
-          Setpoint item=DaikinCameretta_MinTemp icon=temperature step=0.1 minValue=19 maxValue=23
+          Setpoint item=DaikinCameretta_MaxTemp icon=temperature step=0.1 minValue=19 maxValue=24
+          Setpoint item=DaikinCameretta_MinTemp icon=temperature step=0.1 minValue=19 maxValue=24
         }
         Text      item=sf12_Humid  label="LETTINO: Umidità"
         Text      item=sf08_Temp   label="TAVOLO: Temperatura"
