@@ -9,7 +9,8 @@ Switch pow01_Switch "Pow 01: Clima Camera" <flow> (pow01,gTuya,sonoff)
 
 // POWER
 
-Number pow01_Power     "Pow 01: Line True Power [%.1f W]"          <voltage>       (pow01,gTuya,gWatt) 
+//Number pow01_Power     "Pow 01: Line True Power [%.1f W]"          <voltage>       (pow01,gTuya,gWatt) 
+Number pow01_Power     "Pump Power [%.1f W]"          <voltage>       (pow01,gTuya,gWatt) 
     { mqtt="<[broker:tele/pow01/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
 
 Number pow01_AppPower  "Pow 01: Line Apparent Power [%.3f VA]"     <current>       (pow01,gTuya,gVa)

@@ -217,17 +217,17 @@ sitemap default label="Casa"
         Chart  item=gChartCamerettaT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartCamerettaT period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartCamerettaT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        // TEMPERATURA Cameretta
-        Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=pow01_Power period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=pow01_Power period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=pow01_Power period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=pow01_Power period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=pow01_Power period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=pow01_Power period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=pow01_Power period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // Potenza Pompa
+        Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=pow01_Power period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=pow01_Power period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=pow01_Power period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=pow01_Power period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=pow01_Power period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=pow01_Power period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=pow01_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA Cameretta
         Chart  item=gChartCamerettaH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartCamerettaH period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -289,6 +289,18 @@ sitemap default label="Casa"
         Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // Potenza Pompa
+        Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=pow01_Power period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=pow01_Power period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=pow01_Power period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=pow01_Power period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=pow01_Power period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=pow01_Power period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=pow01_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
         // UMIDITA Matrimoniale
         Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
