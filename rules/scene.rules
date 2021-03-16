@@ -22,7 +22,10 @@ then
 
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
+
   tsCameretta.sendCommand(OFF)
+  DaikinCameretta_SetPoint.sendCommand(20.0)
+  DaikinCameretta_Fan.sendCommand("SILENCE")
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
@@ -46,6 +49,8 @@ then
   Air_Conditioner_Temperature.sendCommand(23.0)
   createTimer(now.plusSeconds(10), [|
 	tsSoggiorno.sendCommand(ON)
+        DaikinCameretta_SetPoint.sendCommand(20.0)
+        DaikinCameretta_Fan.sendCommand("SILENCE")
     ])
 
 
