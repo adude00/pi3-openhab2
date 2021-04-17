@@ -1,3 +1,11 @@
+// Scena Mattina
+Dimmer led03_w_Morning  "Soffitto Bianco"      <lightbulb>
+Dimmer led03_c_Morning  "Soffitto Colorato"    <lightbulb>
+
+
+
+
+// Clima Soggiorno
 Switch ac_sog_night_s 	"Soggiorno Notte Switch"  <heating>
 Number ac_sog_night_t 	"Soggiorno Notte Temp"	  <heating>
 

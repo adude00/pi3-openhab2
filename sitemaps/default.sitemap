@@ -2,20 +2,21 @@ sitemap default label="Casa"
 {
 	Frame label="Things" {
 		Text label="Luci" icon="light" {
-			Frame label="Luci" { 
-				Switch item=sf03_Light
+			Frame label="Soggiorno Luci" {
 				Switch item=sf04_Light
+				Switch item=sf03_Light
+				Slider item=led03_DimW
+				Slider 		item=led03_Dim
+				Colorpicker  	item=led03_Color
+				Text 		item=led03_RGB
+			}
+			Frame label="Matrimoniale" { 
 				Switch item=sf05_Light
 				Switch item=sf06_Light
 				Switch item=sf11_Light
 				Slider item=led01_DimW
 			}
-			Frame label="LED Soggiorno" {
-				Switch 		item=led02_Power	
-				Slider 		item=led02_Dim		
-				Colorpicker  	item=led02_Color
-				Text 		item=led02_RGB
-			}
+
 			Frame label="Barra LED Colorati" {
 				//Switch 		item=led01_Power
 				Slider 		item=led01_Dim
@@ -549,6 +550,13 @@ sitemap default label="Casa"
 
   Frame label="Configurazione" {
     Text label="Scene" icon="settings" {
+      Text label="Scena Mattina" icon="settings" {
+        Frame label="Led Soggiorno" {
+          Slider    item=led03_w_Morning
+          Slider    item=led03_c_Morning
+        }
+      }
+
       Text label="Clima Soggiorno" icon="settings" {
         Frame label="Override notturno" {
           Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
