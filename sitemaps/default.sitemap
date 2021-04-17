@@ -548,12 +548,13 @@ sitemap default label="Casa"
   } // CLOSE FRAME TEMPS
 
 
-  Frame label="Configurazione" {
+  Frame label="Configurazioni" {
     Text label="Scene" icon="settings" {
       Text label="Scena Mattina" icon="settings" {
-        Frame label="Led Soggiorno" {
+        Frame label="Configurazione Luci Soggiorno" {
           Slider    item=led03_w_Morning
           Slider    item=led03_c_Morning
+          Switch    item=sf04_Light_Morning
         }
       }
 

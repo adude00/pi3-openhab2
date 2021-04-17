@@ -1,11 +1,11 @@
 Group led03
 
 Color  led03_Color "Discoteca Color"       (gRGB)
-Switch led03_Power "Discoteca Accesa" (gRGB,gLuci)  {mqtt=">[broker:cmnd/led03/DIMMER1:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER1)" }
+Switch led03_Power "Discoteca Accesa" (gRGB,gLuci,gLuciSogg)  {mqtt=">[broker:cmnd/led03/DIMMER1:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER1)" }
 String led03_RGB   "Discoteca Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led03/HSBCOLOR1:state:JSONPATH($.Color1)]"}
 Dimmer led03_Dim   "Discoteca [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led03/DIMMER1:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.Dimmer1)"}
 
-Switch led03_PowerW "Soffitto Acceso" (gRGB,gLuci) {mqtt=">[broker:cmnd/led03/DIMMER2:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER2)]"}
+Switch led03_PowerW "Soffitto Acceso" (gRGB,gLuci,gLuciSogg) {mqtt=">[broker:cmnd/led03/DIMMER2:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER2)]"}
 Dimmer led03_DimW   "Soffitto [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led03/DIMMER2:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.Dimmer2)"}
 
 

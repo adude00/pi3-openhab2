@@ -1,6 +1,7 @@
 // Scena Mattina
-Dimmer led03_w_Morning  "Soffitto Bianco"      <lightbulb>
-Dimmer led03_c_Morning  "Soffitto Colorato"    <lightbulb>
+Dimmer led03_w_Morning  	"Soffitto Bianco"      <lightbulb>
+Dimmer led03_c_Morning  	"Soffitto Colorato"    <lightbulb>
+Switch sf04_Light_Morning	"Divano"               <lightbulb>
 
 
 

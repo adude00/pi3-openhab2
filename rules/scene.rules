@@ -34,7 +34,7 @@ then
     ])
 end
 
-rule "Mattina"
+rule "Mattina: SIAMO SVEGLI"
 when
     Item Scene_Mattina changed to ON
 then
@@ -44,8 +44,13 @@ then
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
   tsBagno.sendCommand(ON)
-  tsCameretta.sendCommand(OFF)
-  sf04_Light.sendCommand(ON)
+  //tsCameretta.sendCommand(OFF)
+
+  // Accendo le luci in soggiorno in base alla configurazione
+  sf04_Light.sendCommand(sf04_Light_Morning.state)
+  led03_DimW.sendCommand(led03_w_Morning.state)
+  led03_Dim.sendCommand(led03_c_Morning.state)
+
   Air_Conditioner_Temperature.sendCommand(23.0)
   createTimer(now.plusSeconds(10), [|
 	tsSoggiorno.sendCommand(ON)
@@ -56,7 +61,7 @@ then
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
-    Air_Conditioner_Temperature.sendCommand(23.0)
+    //Air_Conditioner_Temperature.sendCommand(23.0)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena MATTINA: finita")
     ])
@@ -107,7 +112,7 @@ then
     ])
 end
 
-rule "Vado a Letto"
+rule "Vado a Letto: BUONANOTTE"
 when
     Item Scene_aLetto changed to ON
 then
@@ -125,10 +130,8 @@ then
       logInfo("Scene","Scena A Letto: termostato spento")
     ])
 
-    createTimer(now.plusSeconds(5),  [ |
-      sf04_Light.sendCommand(OFF)
-      sf03_Light.sendCommand(OFF)
-      led02_Power.sendCommand(OFF)
+    createTimer(now.plusSeconds(3),  [ |
+      gLuciSogg.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: luci soggiorno spente")
     ])
 
@@ -141,11 +144,6 @@ then
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: finita")
     ])
-
-    //createTimer(now.plusSeconds(3600), [|
-    //  gLuci.sendCommand(OFF)
-    //  logInfo("Scene","Scena A Letto: spente le luci")
-    //])
 end
 
 

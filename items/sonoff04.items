@@ -1,6 +1,6 @@
 Group sonoff04
 
-Switch sf04_Light "Divano" <light> (sonoff04,sonoff,gLuci) [ "Lighting" ]
+Switch sf04_Light "Divano" <light> (sonoff04,sonoff,gLuci,gLuciSogg) [ "Lighting" ]
     { mqtt=">[broker:cmnd/sonoff04/POWER:command:*:default],
             <[broker:stat/sonoff04/POWER:state:default]" } 
 
