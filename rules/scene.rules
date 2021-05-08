@@ -20,8 +20,18 @@ then
   pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
   logInfo("Scene","Scena A CASA: iniziata")
 
+
+  var Number led03_w = led03_w_Morning.state
+  var Number led03_c = led03_c_Morning.state
+
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
+
+  // Accendo le luci in soggiorno in base alla configurazione
+  sf04_Light.sendCommand(ON)
+  led03_DimW.sendCommand(led03_w)
+  led03_Dim.sendCommand(led03_c)
+
 
   tsCameretta.sendCommand(OFF)
   DaikinCameretta_SetPoint.sendCommand(20.0)
