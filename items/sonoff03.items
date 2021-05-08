@@ -15,7 +15,7 @@ Number sf03_Light_RSSI "Mobile TV: RSSI [%d %%]" <qualityofservice> (sonoff03,so
     { mqtt="<[broker:tele/sonoff03/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf03_Light_Reachable "Mobile TV: Status [%s]" <switch> (sonoff03,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff03/LWT:state:MAP(reachable.map)]" }
-String sf03_Uptime "Mobile TV: Uptime [%s]" <clock> (sonoff03,sonoff)
+String sf03_Uptime "Mobile TV: Uptime [%s]" <clock> (sonoff03,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff03/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

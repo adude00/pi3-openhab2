@@ -39,7 +39,7 @@ Number pow03_Light_RSSI "Pow 03: RSSI [%d %%]" <qualityofservice> (pow03,gTuya,s
 String pow03_Light_Reachable "Pow 03: Status [%s]" <switch> (pow03,gTuya,sonoff,gReachable)
     { mqtt="<[broker:tele/pow03/LWT:state:MAP(reachable.map)]" }
 
-String pow03_Uptime "Pow 03: Uptime [%s]" <clock> (pow03,gTuya,sonoff)
+String pow03_Uptime "Pow 03: Uptime [%s]" <clock> (pow03,gTuya,sonoff,gUptime)
     { mqtt="<[broker:tele/pow03/STATE:state:JSONPATH($.Uptime)]" }
 
 

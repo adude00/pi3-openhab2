@@ -15,7 +15,7 @@ Number sf05_Light_RSSI "Bianca: RSSI [%d %%]" <qualityofservice> (sonoff05,sonof
     { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf05_Light_Reachable "Bianca: Status [%s]" <switch> (sonoff05,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff05/LWT:state:MAP(reachable.map)]" }
-String sf05_Uptime "Bianca: Uptime [%s]" <clock> (sonoff05,sonoff)
+String sf05_Uptime "Bianca: Uptime [%s]" <clock> (sonoff05,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff05/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

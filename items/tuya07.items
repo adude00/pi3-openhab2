@@ -39,7 +39,7 @@ Number tuya07_Light_RSSI "Tuya 07: RSSI [%d %%]" <qualityofservice> (tuya07,gTuy
 String tuya07_Light_Reachable "Tuya 07: Status [%s]" <switch> (tuya07,gTuya,sonoff,gReachable)
     { mqtt="<[broker:tele/tuya07/LWT:state:MAP(reachable.map)]" }
 
-String tuya07_Uptime "Tuya 07: Uptime [%s]" <clock> (tuya07,gTuya,sonoff)
+String tuya07_Uptime "Tuya 07: Uptime [%s]" <clock> (tuya07,gTuya,sonoff,gUptime)
     { mqtt="<[broker:tele/tuya07/STATE:state:JSONPATH($.Uptime)]" }
 
 

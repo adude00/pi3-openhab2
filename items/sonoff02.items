@@ -18,7 +18,7 @@ Number Terrazza_RSSI "Terrazza - Signal [%d %%]" <qualityofservice> (sonoff02,so
     { mqtt="<[broker:tele/sonoff02/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Terrazza_Reachable "Terrazza - Status: [%s]" <switch> (sonoff02,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff02/LWT:state:MAP(reachable.map)]" }
-String Terrazza_Uptime "Terrazza - uptime: [%s]" <clock> (sonoff02,sonoff)
+String Terrazza_Uptime "Terrazza - uptime: [%s]" <clock> (sonoff02,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff02/STATE:state:JSONPATH($.Uptime)]" }
 
 // Selettore grafico

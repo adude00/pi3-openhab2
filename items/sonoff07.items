@@ -15,7 +15,7 @@ Number sf07_Light_RSSI "Bagno: RSSI [%d %%]" <qualityofservice> (sonoff07,sonoff
     { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf07_Light_Reachable "Bagno: Status [%s]" <switch> (sonoff07,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff07/LWT:state:MAP(reachable.map)]" }
-String sf07_Uptime "Bagno: Uptime [%s]" <clock> (sonoff07,sonoff)
+String sf07_Uptime "Bagno: Uptime [%s]" <clock> (sonoff07,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff07/STATE:state:JSONPATH($.Uptime)]" }
 // Versions
 DateTime  sf07_Date     "Sonoff 07: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff07,sonoff,gVersion,gTime)

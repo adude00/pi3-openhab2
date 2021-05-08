@@ -15,7 +15,7 @@ Number sf11_Light_RSSI "Scrivania: RSSI [%d %%]" <qualityofservice> (sonoff11,so
     { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf11_Light_Reachable "Scrivania: Status [%s]" <switch> (sonoff11,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff11/LWT:state:MAP(reachable.map)]" }
-String sf11_Uptime "Scrivania: Uptime [%s]" <clock> (sonoff11,sonoff)
+String sf11_Uptime "Scrivania: Uptime [%s]" <clock> (sonoff11,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff11/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

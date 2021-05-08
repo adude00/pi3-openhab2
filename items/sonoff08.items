@@ -18,7 +18,7 @@ Number sf08_Light_RSSI "Cameretta: RSSI [%d %%]" <qualityofservice> (sonoff08,so
     { mqtt="<[broker:tele/sonoff08/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf08_Light_Reachable "Cameretta: Status [%s]" <switch> (sonoff08,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff08/LWT:state:MAP(reachable.map)]" }
-String sf08_Uptime "Cameretta: Uptime [%s]" <clock> (sonoff08,sonoff)
+String sf08_Uptime "Cameretta: Uptime [%s]" <clock> (sonoff08,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff08/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

@@ -15,7 +15,7 @@ Number sf04_Light_RSSI "Divano: RSSI [%d %%]" <qualityofservice> (sonoff04,sonof
     { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf04_Light_Reachable "Divano: Status [%s]" <switch> (sonoff04,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff04/LWT:state:MAP(reachable.map)]" }
-String sf04_Uptime "Divano: Uptime [%s]" <clock> (sonoff04,sonoff)
+String sf04_Uptime "Divano: Uptime [%s]" <clock> (sonoff04,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff04/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

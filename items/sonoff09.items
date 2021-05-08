@@ -57,7 +57,7 @@ Number sonoff09_Light_RSSI "Sonoff 09: RSSI [%d %%]" <qualityofservice> (sonoff0
 String sonoff09_Light_Reachable "Sonoff 09: Status [%s]" <switch> (sonoff09,gTuya,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff09/LWT:state:MAP(reachable.map)]" }
 
-String sonoff09_Uptime "Sonoff 09: Uptime [%s]" <clock> (sonoff09,gTuya,sonoff)
+String sonoff09_Uptime "Sonoff 09: Uptime [%s]" <clock> (sonoff09,gTuya,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff09/STATE:state:JSONPATH($.Uptime)]" }
 
 

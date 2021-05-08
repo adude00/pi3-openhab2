@@ -15,7 +15,7 @@ Number sf12_Light_RSSI "Lettino: RSSI [%d %%]" <qualityofservice> (sonoff12,sono
     { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String sf12_Light_Reachable "Lettino: Status [%s]" <switch> (sonoff12,sonoff,gReachable)
     { mqtt="<[broker:tele/sonoff12/LWT:state:MAP(reachable.map)]" }
-String sf12_Uptime "Lettino: Uptime [%s]" <clock> (sonoff12,sonoff)
+String sf12_Uptime "Lettino: Uptime [%s]" <clock> (sonoff12,sonoff,gUptime)
     { mqtt="<[broker:tele/sonoff12/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

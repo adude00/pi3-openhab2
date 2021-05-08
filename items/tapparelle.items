@@ -52,55 +52,55 @@ Number Tapp01_RSSI "Tapp01 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTap
     { mqtt="<[broker:tele/tapp01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp01_Reachable "Tapp01 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp01/LWT:state:MAP(reachable.map)]" }
-String Tapp01_Uptime "Tapp01 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp01_Uptime "Tapp01 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp01/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp02_RSSI "Tapp02 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp02/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp02_Reachable "Tapp02 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp02/LWT:state:MAP(reachable.map)]" }
-String Tapp02_Uptime "Tapp02 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp02_Uptime "Tapp02 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp02/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp03_RSSI "Tapp03 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp03/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp03_Reachable "Tapp03 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp03/LWT:state:MAP(reachable.map)]" }
-String Tapp03_Uptime "Tapp03 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp03_Uptime "Tapp03 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp03/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp04_RSSI "Tapp04 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp04/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp04_Reachable "Tapp04 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp04/LWT:state:MAP(reachable.map)]" }
-String Tapp04_Uptime "Tapp04 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp04_Uptime "Tapp04 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp04/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp05_RSSI "Tapp05 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp05/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp05_Reachable "Tapp05 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp05/LWT:state:MAP(reachable.map)]" }
-String Tapp05_Uptime "Tapp05 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp05_Uptime "Tapp05 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp05/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp06_RSSI "Tapp06 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp06/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp06_Reachable "Tapp06 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp06/LWT:state:MAP(reachable.map)]" }
-String Tapp06_Uptime "Tapp06 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp06_Uptime "Tapp06 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp06/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp07_RSSI "Tapp07 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp07/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp07_Reachable "Tapp07 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp07/LWT:state:MAP(reachable.map)]" }
-String Tapp07_Uptime "Tapp07 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp07_Uptime "Tapp07 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp07/STATE:state:JSONPATH($.Uptime)]" }
 
 Number Tapp08_RSSI "Tapp08 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
     { mqtt="<[broker:tele/tapp08/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String Tapp08_Reachable "Tapp08 - Status: [%s]" <switch> (gTappDebug,gTappReach)
     { mqtt="<[broker:tele/tapp08/LWT:state:MAP(reachable.map)]" }
-String Tapp08_Uptime "Tapp08 - uptime: [%s]" <clock> (gTappDebug,gTappUptime)
+String Tapp08_Uptime "Tapp08 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
     { mqtt="<[broker:tele/tapp08/STATE:state:JSONPATH($.Uptime)]" }
 

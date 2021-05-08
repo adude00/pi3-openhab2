@@ -23,7 +23,7 @@ Number led01_RSSI "Letto: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
 String led01_Reachable "Letto: Status [%s]" <switch> (led01,sonoff,gReachable)
     { mqtt="<[broker:tele/led01/LWT:state:MAP(reachable.map)]" }
-String led01_Uptime "Letto: Uptime [%s]" <clock> (led01,sonoff)
+String led01_Uptime "Letto: Uptime [%s]" <clock> (led01,sonoff,gUptime)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions
