@@ -1,6 +1,7 @@
 Group sonoff
 Group gRSSI
 Group gReachable
+Group gUptime
 
 Group gLuci
 Group gLuciSogg
