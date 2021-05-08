@@ -549,90 +549,94 @@ sitemap default label="Casa"
 
 
   Frame label="Configurazioni" {
-    Text label="Scene" icon="settings" {
-      Text label="Scena Mattina" icon="settings" {
-        Frame label="Configurazione Luci Soggiorno" {
-          Slider    item=led03_w_Morning
-          Slider    item=led03_c_Morning
-          Switch    item=sf04_Light_Morning
-        }
+    Text label="Home Automation" icon="settings" {
+      Frame label="Scene" {
+	Text label="Scena Mattina" icon="settings" {
+	  Frame label="Configurazione Luci Soggiorno" {
+	    Slider    item=led03_w_Morning
+	    Slider    item=led03_c_Morning
+	    Switch    item=sf04_Light_Morning
+	  }
+	}
+
+	Text label="Clima Soggiorno" icon="settings" {
+	  Frame label="Override notturno" {
+	    Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
+	    Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
+	  }
+	  
+	  Frame label="Override fuori casa" {
+	    Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
+	    Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
+	  }
+
+	  Frame label="Temperatura in casa" {
+	    Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
+	    Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
+	    }
+	} // Chiuso text scene condizionatore soggiorno
       }
-
-      Text label="Clima Soggiorno" icon="settings" {
-        Frame label="Override notturno" {
-          Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
-          Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
-        }
-        
-        Frame label="Override fuori casa" {
-          Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
-          Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
-        }
-
-        Frame label="Temperatura in casa" {
-          Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
-          Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
-          }
-      } // Chiuso text scene condizionatore soggiorno
+      Frame label="Automatismi" { 
+        Group item=gAutomations   label="Automazioni"
+        Group item=gPresence      label="Presence"
+      }
     } // CHIUSO TEXT Configurazione schermata principale
   } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 
   Frame label="Debug" {
-    Text label="Tuya"   {
-      Group item=gTuya          label="Debug Tuya All"
-      Group item=tuya01         label="Debug Tuya 01"
-      Group item=tuya02         label="Debug Tuya 02"
-      Group item=tuya03         label="Debug Tuya 03"
-      Group item=tuya04         label="Debug Tuya 04"
-      Group item=tuya05         label="Debug Tuya 05"
-      Group item=tuya06         label="Debug Tuya 06"
-      Group item=tuya07         label="Debug Tuya 07"
-      Group item=tuya08         label="Debug Tuya 08"
-      Group item=pow01 		label="Debug POW 01"
-      Group item=pow02 		label="Debug POW 02"
-      Group item=pow03 		label="Debug POW 03"
-      Group item=pow04 		label="Debug POW 04"
-      Group item=pow05 		label="Debug POW 05"
-    }
-    
-    Text label="Sonoff"   {
-      Group item=sonoff         label="Debug Sonoff All"
-      Group item=gReachable     label="Debug Reachable"
-      Group item=gRSSI          label="Debug RSSI"
-      Text label="Versions" {
-        Frame label="Single upgrade" {
-          Text label="Upgrade single sonoffs" {
-            Selection item=Sonoff_Select mappings=[sonoff01="Sonoff 01", sonoff02="Sonoff 02", sonoff03="Sonoff 03", sonoff04="Sonoff 04", sonoff05="Sonoff 05", sonoff06="Sonoff 06", sonoff07="Sonoff 07" ]
-            Switch item=Sonoff_Select_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
-            Text  item=Sonoff_Current_FW_Available
-            Text  item=Sonoff_Select_Info
-          }
-        }
-        Frame label="All sonoffs" {
+    Text label="Tasmota Devices" {
+      Text label="Tuya"   {
+	Group item=gTuya		label="Debug Tuya All"
+	Group item=tuya01		label="Debug Tuya 01"
+	Group item=tuya02		label="Debug Tuya 02"
+	Group item=tuya03		label="Debug Tuya 03"
+	Group item=tuya04		label="Debug Tuya 04"
+	Group item=tuya05		label="Debug Tuya 05"
+	Group item=tuya06		label="Debug Tuya 06"
+	Group item=tuya07		label="Debug Tuya 07"
+	Group item=tuya08		label="Debug Tuya 08"
+	Group item=pow01		label="Debug POW 01"
+	Group item=pow02 		label="Debug POW 02"
+	Group item=pow03 		label="Debug POW 03"
+	Group item=pow04 		label="Debug POW 04"
+	Group item=pow05 		label="Debug POW 05"
+      }
+      
+      Text label="Sonoff"   {
+	Group item=sonoff         label="Debug Sonoff All"
+	Group item=gReachable     label="Debug Reachable"
+	Group item=gRSSI          label="Debug RSSI"
+	Text label="Versions" {
+	  Frame label="Single upgrade" {
+	    Text label="Upgrade single sonoffs" {
+	      Selection item=Sonoff_Select mappings=[sonoff01="Sonoff 01", sonoff02="Sonoff 02", sonoff03="Sonoff 03", sonoff04="Sonoff 04", sonoff05="Sonoff 05", sonoff06="Sonoff 06", sonoff07="Sonoff 07" ]
+	      Switch item=Sonoff_Select_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
+	      Text  item=Sonoff_Current_FW_Available
+	      Text  item=Sonoff_Select_Info
+	    }
+	  }
+	  Frame label="All sonoffs" {
 
-        Group item=gVersion       label="All Version Info"
-        Group item=gFirmware      label="Firmware"
-        Group item=gSDK           label="SDK"
-        Group item=gVcc           label="Vcc"
-        Group item=gCore          label="Core"
-        Text  item=Sonoff_Current_FW_Available
-        Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
-        }
+	  Group item=gVersion       label="All Version Info"
+	  Group item=gFirmware      label="Firmware"
+	  Group item=gSDK           label="SDK"
+	  Group item=gVcc           label="Vcc"
+	  Group item=gCore          label="Core"
+	  Text  item=Sonoff_Current_FW_Available
+	  Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
+	  }
+	}
+      }
+      Text label="Tapparelle"   icon=rollershutter {
+	Group item=gTappDebug   label="Debug Tapparelle All"
+	Group item=gTappRSSI    label="Debug Tapparelle RSSI"
+	Group item=gTappReach   label="Debug Tapparelle Reachable"
+	Group item=gTappUptime  label="Debug Tapparelle Uptime"
       }
     }
-    Text label="Tapparelle"   icon=rollershutter {
-      Group item=gTappDebug   label="Debug Tapparelle All"
-      Group item=gTappRSSI    label="Debug Tapparelle RSSI"
-      Group item=gTappReach   label="Debug Tapparelle Reachable"
-      Group item=gTappUptime  label="Debug Tapparelle Uptime"
-      Switch item=gTappTest icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      Group item=gTappTest    label="TEST Tapparelle"
-    }
     Group item=gScene         label="SCENE"
-    Group item=gPresence      label="Presence"
-    Group item=gAutomations   label="Automazioni"
     Text label="Termostati" {
       Text label="Termostato Bedroom"  {
         Setpoint  item=BdrmThermoTarget   minValue=18  maxValue=25  step=0.1
