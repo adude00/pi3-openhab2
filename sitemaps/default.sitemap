@@ -558,8 +558,12 @@ sitemap default label="Casa"
 	    Switch    item=sf04_Light_Morning
 	  }
 	  Frame label="Configurazione Clima Cameretta" {
+	    Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura alla sveglia: [%.0f]" minValue=16 maxValue=30 step=1
 	    Switch    item=conf_autooff_ac_kid
-	    Slider  item=conf_autooff_ac_kid_mins
+            Setpoint  item=conf_autooff_ac_kid_mins      label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
+	  }
+	  Frame label="Configurazione Clima Soggiorno" {
+	    Switch    item=conf_autoon_ac_hot_sogg
 	  }
 	}
 

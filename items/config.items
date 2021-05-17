@@ -5,10 +5,13 @@ Dimmer led03_c_Morning  	"Soffitto Colorato"    <lightbulb>
 Switch sf04_Light_Morning	"Divano"               <lightbulb>
 
 // Aircon
+Number conf_mattina_ac_kid_temp "Temperatura Mattina"           <temperatura>
 Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta"	<flow>
 Number conf_autooff_ac_kid_mins "Dopo quanti minuti"    	<settings>
 
 // Clima Soggiorno
+Switch conf_autoon_ac_hot_sogg "Auto Riscaldamento Soggiorno"   <settings>
+
 Switch ac_sog_night_s 	"Soggiorno Notte Switch"  <heating>
 Number ac_sog_night_t 	"Soggiorno Notte Temp"	  <heating>
 
