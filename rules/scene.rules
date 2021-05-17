@@ -75,8 +75,9 @@ then
 
   Air_Conditioner_Temperature.sendCommand(23.0)
   createTimer(now.plusSeconds(10), [|
+        val int tempNum01 = (conf_mattina_ac_kid_temp.state as Number).intValue
 	tsSoggiorno.sendCommand(ON)
-        DaikinCameretta_SetPoint.sendCommand(20.0)
+        DaikinCameretta_SetPoint.sendCommand(tempNum01)
         DaikinCameretta_Fan.sendCommand("SILENCE")
     ])
 
