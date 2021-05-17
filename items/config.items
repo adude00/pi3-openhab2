@@ -1,10 +1,12 @@
 // Scena Mattina
+// Luci
 Dimmer led03_w_Morning  	"Soffitto Bianco"      <lightbulb>
 Dimmer led03_c_Morning  	"Soffitto Colorato"    <lightbulb>
 Switch sf04_Light_Morning	"Divano"               <lightbulb>
 
-
-
+// Aircon
+Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta"	<flow>
+Number conf_autooff_ac_kid_mins "Dopo quanti minuti"    	<settings>
 
 // Clima Soggiorno
 Switch ac_sog_night_s 	"Soggiorno Notte Switch"  <heating>
