@@ -54,10 +54,19 @@ then
   var Number led03_w = led03_w_Morning.state
   var Number led03_c = led03_c_Morning.state
 
+  if (conf_autooff_ac_kid.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF cameretta: Timer Partito")
+    val int timer01mins = (conf_autooff_ac_kid_mins.state as Number).intValue
+    createTimer(now.plusMinutes(timer01mins), [|
+      DaikinCameretta_Power.sendCommand(OFF)
+      logInfo("Scene","MATTINA: AutoOFF cameretta: Spento")
+    ])
+
+  }
+
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
   tsBagno.sendCommand(ON)
-  //tsCameretta.sendCommand(OFF)
 
   // Accendo le luci in soggiorno in base alla configurazione
   sf04_Light.sendCommand(ON)
