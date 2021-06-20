@@ -15,6 +15,10 @@ rule "A/C"
     // Normal command, state not off, power is 1
     command = "/etc/openhab2/shell/mqtt-parser.sh 1 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
 
+    // Temp is a fake 10, so power set to 0
+    if ((Air_Conditioner_Temperature.state+"") == "10")   command = "/etc/openhab2/shell/mqtt-parser.sh 0 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
+    if ((Air_Conditioner_Temperature.state+"") == "10.0")   command = "/etc/openhab2/shell/mqtt-parser.sh 0 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
+
     // State is off, so power set to 0
     if ((Air_Conditioner_Mode.state+"") == "off")   command = "/etc/openhab2/shell/mqtt-parser.sh 0 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
 
