@@ -51,6 +51,9 @@ sitemap default label="Casa"
         Switch item=tuya01_Switch
         Switch item=tuya05_Switch
         Switch item=tuya03_Switch
+        Switch item=pow03_Switch
+        Switch item=pow01_Switch
+        Switch item=Terrazza
       } // Chiuso Text "Varie Casa"
       } // Chiuso FRAME "Cose"
       Frame label="Audio" {
