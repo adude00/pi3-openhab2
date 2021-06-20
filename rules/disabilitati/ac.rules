@@ -1,25 +1,36 @@
 //*******************************************************************
 //AIR CONDITIONER
 //*******************************************************************
+rule "Air Conditioner"
+    when
+        Item Air_Conditioner_Mode received command 
+    then
+        logInfo("Air Conditioner Mode",receivedCommand + "" +Air_Conditioner_Mode )
+        var String command;
+        //sendCommand(Notifications, "Prendiendo Aire Condicionado")
 
-rule "A/C"
-  when
-    Item Air_Conditioner_Mode received command or
-    Item Air_Conditioner_Temperature received command or
-    Item Air_Conditioner_Fan received command
-  then
-    logInfo("A/C","A/C -> MODE: " + Air_Conditioner_Mode.state + "; TEMP: " + Air_Conditioner_Temperature.state + "; FAN: " + Air_Conditioner_Fan.state )
-
-    var String command;
-    
-    // Normal command, state not off, power is 1
-    command = "/etc/openhab2/shell/mqtt-parser.sh 1 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
-
-    // State is off, so power set to 0
-    if ((Air_Conditioner_Mode.state+"") == "off")   command = "/etc/openhab2/shell/mqtt-parser.sh 0 "+ Air_Conditioner_Mode.state + " " + Air_Conditioner_Temperature.state + " " + Air_Conditioner_Fan.state;
+        if ((Air_Conditioner_Mode.state+"") == "cool")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "heat")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "off")   command = "/opt/clima/imposta-temp.sh SPENTO";
 
     logInfo("Air Conditioner",command)
-    executeCommandLine(command);
+      executeCommandLine(command);
+
+end
+
+
+rule "Air Conditioner Temp"
+    when
+        Item Air_Conditioner_Temperature received command
+    then
+        logInfo("Air Conditioner",receivedCommand + "" +Air_Conditioner_Mode )
+        var String command;
+        if ((Air_Conditioner_Mode.state+"") == "cool")  command = "/opt/clima/imposta-temp-C.sh " + Air_Conditioner_Temperature.state;
+        if ((Air_Conditioner_Mode.state+"") == "heat")   command = "/opt/clima/imposta-temp-H.sh " + Air_Conditioner_Temperature.state;
+
+      logInfo("Air Conditioner",command)
+      executeCommandLine(command);
+
 end
 
 
