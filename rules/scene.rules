@@ -64,6 +64,11 @@ then
 
   }
 
+  if (conf_autooff_ac_bdr.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF Bedroom: Spengo il Clima")
+    DaikinMatrimoniale_Power.sendCommand(OFF)
+  }
+
   // AC Soggiorno
   if (conf_autoon_ac_hot_sogg.state == ON) {
     Air_Conditioner_Temperature.sendCommand(23.0)

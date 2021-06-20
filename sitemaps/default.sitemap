@@ -578,6 +578,9 @@ sitemap default label="Casa"
 	    Switch    item=conf_autooff_ac_kid
             Setpoint  item=conf_autooff_ac_kid_mins      label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
 	  }
+	  Frame label="Configurazione Clima Matrimoniale" {
+	    Switch    item=conf_autooff_ac_bdr
+	  }
 	  Frame label="Configurazione Clima Soggiorno" {
 	    Switch    item=conf_autoon_ac_hot_sogg
 	  }
