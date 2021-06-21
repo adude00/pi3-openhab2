@@ -33,9 +33,9 @@ then
   led03_Dim.sendCommand(led03_c)
 
 
-  tsCameretta.sendCommand(OFF)
-  DaikinCameretta_SetPoint.sendCommand(20.0)
-  DaikinCameretta_Fan.sendCommand("SILENCE")
+  //tsCameretta.sendCommand(OFF)
+  //DaikinCameretta_SetPoint.sendCommand(20.0)
+  //DaikinCameretta_Fan.sendCommand("SILENCE")
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 

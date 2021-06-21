@@ -12,3 +12,6 @@ Switch Air_Conditioner_Timer 		"Timer"  		<clock> 		(Appliance)
 Switch Air_Conditioner_Screen 		"Stealth"  		<moon>	 		(Appliance)
 Switch Air_Conditioner_Swing 		"Swing"  		<wind>	 		(Appliance)
 
+String Air_Conditioner_Fan 		"Fan"  			<wind>	 		(Appliance)
+
+
