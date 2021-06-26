@@ -54,6 +54,8 @@ then
   var Number led03_w = led03_w_Morning.state
   var Number led03_c = led03_c_Morning.state
 
+  
+  // CAMERETTA - AUTO OFF
   if (conf_autooff_ac_kid.state == ON) {
     logInfo("Scene","MATTINA: AutoOFF cameretta: Timer Partito")
     val int timer01mins = (conf_autooff_ac_kid_mins.state as Number).intValue
@@ -61,13 +63,26 @@ then
       DaikinCameretta_Power.sendCommand(OFF)
       logInfo("Scene","MATTINA: AutoOFF cameretta: Spento")
     ])
-
   }
 
+
+  // CAMERETTA - CHANGE TEMP
+  if (conf_autooff_ac_kid_chng.state == ON) {
+    createTimer(now.plusSeconds(10), [|
+      val int tempNum01 = (conf_mattina_ac_kid_temp.state as Number).intValue
+      DaikinCameretta_SetPoint.sendCommand(tempNum01)
+      DaikinCameretta_Fan.sendCommand("SILENCE")
+      logInfo("Scene","MATTINA: Cambio temp cameretta fatto.")
+    ])
+  }
+
+
+  // MATRIMONIALE - AUTO OFF
   if (conf_autooff_ac_bdr.state == ON) {
     logInfo("Scene","MATTINA: AutoOFF Bedroom: Spengo il Clima")
     DaikinMatrimoniale_Power.sendCommand(OFF)
   }
+
 
   // AC Soggiorno
   if (conf_autoon_ac_hot_sogg.state == ON) {
@@ -90,12 +105,6 @@ then
   led03_Dim.sendCommand(led03_c)
 
   //Air_Conditioner_Temperature.sendCommand(23.0)
-  createTimer(now.plusSeconds(10), [|
-        val int tempNum01 = (conf_mattina_ac_kid_temp.state as Number).intValue
-	//tsSoggiorno.sendCommand(ON)
-        DaikinCameretta_SetPoint.sendCommand(tempNum01)
-        DaikinCameretta_Fan.sendCommand("SILENCE")
-    ])
 
 
   createTimer(now.plusSeconds(30), [|
