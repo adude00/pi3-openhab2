@@ -25,9 +25,6 @@ String sf08_Uptime "Cameretta: Uptime [%s]" <clock> (sonoff08,sonoff,gUptime)
 DateTime  sf08_Date     "Sonoff 08: Refresh [ %1$tH:%1$tM]"   <clock>      (sonoff08,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/sonoff08/STATE:state:JSONPATH($.Time)]" }
 
-String    sf08_Vcc      "Sonoff 08: Vcc [ %s]"                <text>       (sonoff08,sonoff,gVersion,gVcc)
-    { mqtt="<[broker:tele/sonoff08/STATE:state:JSONPATH($.Vcc)]" }
-
 String    sf08_Core     "Sonoff 08: Core [%s]"                <text>       (sonoff08,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/sonoff08/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
 
