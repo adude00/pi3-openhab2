@@ -354,14 +354,20 @@ sitemap default label="Casa"
                                 0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
                               30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
           Switch item=WakeUpAlarmRepeat label="Sveglia"
-          Switch item=WakeUpAC          label="Auto AC"
           Switch item=WakeUpTapp        label="Auto Tapparelle"
-          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
+          Switch item=WakeUpTs          label="Auto Termostato"
+          Switch item=WakeUpACNow       label="A/C Standard"
+	  Selection item=WakeUpACTemp  label="Temperatura A/C"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
+
         }
         Frame label="Debug" {
           Text label="La sveglia si allarma alle 3.07am"
           Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
-        }  
+        }
+	Frame label="Old" {
+          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
+          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
+	}
       }  // Chiuso Text Sveglia
   } // Chiuso Frame Home Automation
 
