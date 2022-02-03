@@ -1,3 +1,10 @@
+rule "Termostato Acceso"
+  when
+    Item tsSoggiorno changed to ON
+  then
+    tsSoggiornoWait.sendCommand(OFF)
+end
+
 
 rule "Termostato Soggiorno Wait"
   when

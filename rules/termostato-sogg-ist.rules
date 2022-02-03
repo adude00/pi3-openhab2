@@ -5,8 +5,7 @@ rule "Termostato Acceso"
     Item sf04_Temp changed or
     Item avgSoggiornoAvg changed or
     Item hsSoggiorno changed or
-    Item tsSoggSensor changed or
-    Item tsSoggiorno changed to ON
+    Item tsSoggSensor changed
   then
   
   var Number cur_temp = Casa_Temperature_AVG.state
