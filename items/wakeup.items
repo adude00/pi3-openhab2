@@ -10,8 +10,10 @@ Switch WakeUpAC             "Wake up AC PreHeat [%s]"    <radiator>  (gRestore,W
 Switch WakeUpACNow          "Wake up AC Now[%s]"         <radiator>  (gRestore,WakeUpAlarm)
 Number WakeUpACTemp         "Wake up AC Temp [%s]"       <temperature_hot> (gRestore,WakeUpAlarm)
 
-Switch WakeUpTapp           "Wake up Tapp [%s]"           <blinds>    (gRestore,WakeUpAlarm)
-Switch WakeUpACTrigger      "Wake up AC Triggered [%s]"   <radiator>  (gRestore,WakeUpAlarm)
+Switch WakeUpTapp           "Wake up Tapp [%s]"           	<blinds>	(gRestore,WakeUpAlarm)
+Switch WakeUpACTrigger      "Wake up AC Triggered [%s]"   	<radiator>	(gRestore,WakeUpAlarm)
 
-Switch WakeUpTs             "Wake Up Thermostat [%s]" <radiator>  (gRestore,WakeUpAlarm)
-Switch WakeUpTsSlow         "Wake Up Thermostat Slow [%s]" <radiator>  (gRestore,WakeUpAlarm)
+Switch WakeUpLights         "Wake Up Lights [%s]" 		<light>		(gRestore,WakeUpAlarm)
+
+Switch WakeUpTs             "Wake Up Thermostat [%s]" 		<radiator>	(gRestore,WakeUpAlarm)
+Switch WakeUpTsSlow         "Wake Up Thermostat Slow [%s]" 	<radiator> 	(gRestore,WakeUpAlarm)

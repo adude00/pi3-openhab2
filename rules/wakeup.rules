@@ -90,6 +90,19 @@ then
     logInfo(LOG, "SVEGLIA: WakeUpTapp=ON: Tapparelle Aperte")
   }
 
+  // LIGHTS
+  if (WakeUpLights.state == ON) {
+
+    var Number led03_w = led03_w_Morning.state
+    var Number led03_c = led03_c_Morning.state
+
+    sf04_Light.sendCommand(ON)
+    led03_DimW.sendCommand(led03_w)
+    led03_Dim.sendCommand(led03_c)
+
+    logInfo(LOG, "SVEGLIA: WakeUpLights=ON: Luci Accese")
+  }
+
   // A/C Standard
   if (WakeUpACNow.state == ON) {
     Air_Conditioner_Temperature.sendCommand(WakeUpACTemp.state as Number)

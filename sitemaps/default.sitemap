@@ -358,6 +358,7 @@ sitemap default label="Casa"
           Switch item=WakeUpTs          label="Auto Termostato"
           Switch item=WakeUpACNow       label="A/C Standard"
 	  Selection item=WakeUpACTemp  label="Temperatura A/C"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
+          Switch item=WakeUpLights
 
         }
         Frame label="Debug" {
