@@ -1,6 +1,6 @@
 Group gTermoSogg
 
-Switch tsSoggiorno  "Riscaldamento"                               (gTermoSogg) [ "Switchable" ]
+Switch tsSoggiorno  "Riscaldamento"                               (gTermoSogg,gRestore) [ "Switchable" ]
 Number spSoggiorno  "Setpoint Soggiorno [%.1f °C]"  <smiley>      (gTermoSogg) 
 Number hsSoggiorno  "Isteresi Soggiorno [%.1f °C]"  <flowpipe>    (gTermoSogg)
 Number tsSoggSensor "Riferimento"                   <zoom>        (gTermoSogg)
@@ -16,7 +16,7 @@ Number acPSoggiorno "AC Power [%.0f]"                  <settings>     (gTermoSog
 Number tsSoggiornoType	"Nuovo algoritmo"	<settings>	(gTermoSogg)
 
 
-Switch tsSoggiornoWait 		"Ts is Waiting..."		<lock> (gTermoSogg)
+Switch tsSoggiornoWait 		"Ts is Waiting..."		<lock> (gTermoSogg,gRestore)
 Number tsSoggiornoWaitMins	"Minutes to Wait"		<time> (gTermoSogg)
 Number tsSoggiornoWaitMaxTemp	"Temperatura Massima"		<temperature_hot> (gTermoSogg)
 Switch tsSoggiornoWaitDebug     "LOG Verbosi"              	<text> (gTermoSogg)
