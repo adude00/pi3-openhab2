@@ -1,5 +1,6 @@
-rule "Termostato Acceso"
+rule "Spegni il wait"
   when
+    System started or
     Item tsSoggiorno changed to ON
   then
     tsSoggiornoWait.sendCommand(OFF)
