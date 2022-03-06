@@ -30,11 +30,11 @@ Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]"  <rollershutter>     (gTappProd
     { mqtt=">[broker:cmnd/tapp04/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappProd,gTappDog,gTappBdrm) 
+Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
     { mqtt=">[broker:cmnd/tapp05/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappProd,gTappDog,gTappBdrm) 
+Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
     { mqtt=">[broker:cmnd/tapp06/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER3:command:DOWN:MAP(tapparella.map)]" }
