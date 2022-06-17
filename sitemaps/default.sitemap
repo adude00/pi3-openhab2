@@ -100,6 +100,94 @@ sitemap default label="Casa"
       Switch item=Camera2_Record
     }
   } // Chiuso Frame Things
+
+
+  Frame label="Configurazioni" {
+
+
+
+    Text label="Home Automation" icon="settings" {
+      Frame label="Scene" {
+	Text label="Scena Mattina" icon="settings" {
+	  Frame label="Configurazione Luci Soggiorno" {
+	    Switch    item=sf04_Light_Morning
+	    Switch    item=sogg_soff_Morning
+	    Slider    item=led03_w_Morning visibility=[sogg_soff_Morning==ON]
+	    Slider    item=led03_c_Morning visibility=[sogg_soff_Morning==ON]
+	  }
+	  Frame label="Configurazione Clima Cameretta" {
+            Switch    item=conf_autooff_ac_kid_chng     
+            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
+	    Switch    item=conf_autooff_ac_kid
+            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=1 visibility=[conf_autooff_ac_kid==ON]
+	  }
+	  Frame label="Configurazione Clima Matrimoniale" {
+	    Switch    item=conf_autooff_ac_bdr
+	  }
+	  Frame label="Clima Soggiorno" {
+            Switch item=WakeUpACNow      label="Accendi"       icon=flow
+	    Selection item=WakeUpACTemp  label="Temperatura"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
+          Switch item=WakeUpTs          label="Termostato"    visibility=[WakeUpACNow==ON]
+	  }
+	}
+
+	Text label="Clima Soggiorno" icon="settings" {
+	  Frame label="Override notturno" {
+	    Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
+	    Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
+	  }
+	  
+	  Frame label="Override fuori casa" {
+	    Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
+	    Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
+	  }
+
+	  Frame label="Temperatura in casa" {
+	    Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
+	    Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
+	    }
+	} // Chiuso text scene condizionatore soggiorno
+      }
+      Frame label="Automatismi" { 
+      Text label="Sveglia" icon="time" {
+        Frame label="Sveglia" {
+          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
+          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
+          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
+                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
+                              20="20", 21="21", 22="22", 23="23"]
+          Selection item=WakeUpMinute label="Minuti" mappings=[
+                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
+                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
+          Switch item=WakeUpAlarmRepeat label="Sveglia"
+          Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
+
+          Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
+          Switch item=WakeUpACNow       label="A/C Standard"    visibility=[WakeUpScene==OFF]
+          Selection item=WakeUpACTemp  label="Temperatura A/C"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpScene==OFF] 
+        }
+
+        Frame label="Debug" {
+          Text label="La sveglia si allarma alle 3.07am"
+          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
+        }
+	Frame label="Old" {
+          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
+          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
+	}
+      }  // Chiuso Text Sveglia
+
+Group item=gAutomations   label="Automazioni"
+        Group item=gPresence      label="Presence"
+      }
+    } // CHIUSO TEXT Configurazione schermata principale
+
+  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
+
+
+
   Frame label="Thermostats" {
     Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {
@@ -342,36 +430,6 @@ sitemap default label="Casa"
 
   } // Chiuso frame Thermostats
 
-  Frame label="Home Automation" {
-      Text label="Sveglia" icon="time" {
-        Frame label="Sveglia" {
-          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
-          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
-          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
-                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
-                              20="20", 21="21", 22="22", 23="23"]
-          Selection item=WakeUpMinute label="Minuti" mappings=[
-                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
-                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
-          Switch item=WakeUpAlarmRepeat label="Sveglia"
-          Switch item=WakeUpTapp        label="Auto Tapparelle"
-          Switch item=WakeUpTs          label="Auto Termostato"
-          Switch item=WakeUpACNow       label="A/C Standard"
-	  Selection item=WakeUpACTemp  label="Temperatura A/C"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
-          Switch item=WakeUpLights
-
-        }
-        Frame label="Debug" {
-          Text label="La sveglia si allarma alle 3.07am"
-          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
-        }
-	Frame label="Old" {
-          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
-          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
-	}
-      }  // Chiuso Text Sveglia
-  } // Chiuso Frame Home Automation
-
   Frame label="Sensori" {
     Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
       Frame {
@@ -576,52 +634,6 @@ sitemap default label="Casa"
   } // CLOSE FRAME TEMPS
 
 
-  Frame label="Configurazioni" {
-    Text label="Home Automation" icon="settings" {
-      Frame label="Scene" {
-	Text label="Scena Mattina" icon="settings" {
-	  Frame label="Configurazione Luci Soggiorno" {
-	    Slider    item=led03_w_Morning
-	    Slider    item=led03_c_Morning
-	    Switch    item=sf04_Light_Morning
-	  }
-	  Frame label="Configurazione Clima Cameretta" {
-            Switch    item=conf_autooff_ac_kid_chng     
-            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
-	    Switch    item=conf_autooff_ac_kid
-            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=5 visibility=[conf_autooff_ac_kid==ON]
-	  }
-	  Frame label="Configurazione Clima Matrimoniale" {
-	    Switch    item=conf_autooff_ac_bdr
-	  }
-	  Frame label="Configurazione Clima Soggiorno" {
-	    Switch    item=conf_autoon_ac_hot_sogg
-	  }
-	}
-
-	Text label="Clima Soggiorno" icon="settings" {
-	  Frame label="Override notturno" {
-	    Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
-	    Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
-	  }
-	  
-	  Frame label="Override fuori casa" {
-	    Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
-	    Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
-	  }
-
-	  Frame label="Temperatura in casa" {
-	    Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
-	    Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
-	    }
-	} // Chiuso text scene condizionatore soggiorno
-      }
-      Frame label="Automatismi" { 
-        Group item=gAutomations   label="Automazioni"
-        Group item=gPresence      label="Presence"
-      }
-    } // CHIUSO TEXT Configurazione schermata principale
-  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 

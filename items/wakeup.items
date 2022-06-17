@@ -6,6 +6,8 @@ Switch WakeUpAlarmTriggered "Wake up alarm triggered [%s]"  <alarm>   (gRestore,
 
 Switch WakeUpAlarmRepeat    "Wake up alarm repeat [%s]"    <alarm>    (gRestore,WakeUpAlarm)
 
+Switch WakeUpScene          "Wake up scene" <sun> (gRestore,WakeUpAlarm)
+
 Switch WakeUpAC             "Wake up AC PreHeat [%s]"    <radiator>  (gRestore,WakeUpAlarm)
 Switch WakeUpACNow          "Wake up AC Now[%s]"         <radiator>  (gRestore,WakeUpAlarm)
 Number WakeUpACTemp         "Wake up AC Temp [%s]"       <temperature_hot> (gRestore,WakeUpAlarm)

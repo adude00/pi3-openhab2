@@ -48,8 +48,8 @@ String tuya02_Uptime "Tuya 02: Uptime [%s]" <clock> (tuya02,gTuya,sonoff,gUptime
 DateTime  tuya02_Date     "Tuya 02: Refresh [ %1$tH:%1$tM]"   <clock>      (tuya02,gTuya,sonoff,gVersion,gTime)
     { mqtt="<[broker:tele/tuya02/STATE:state:JSONPATH($.Time)]" }
 
-String    tuya02_Vcc      "Tuya 02: Vcc [ %s]"                <text>       (tuya02,gTuya,sonoff,gVersion,gVcc)
-    { mqtt="<[broker:tele/tuya02/STATE:state:JSONPATH($.Vcc)]" }
+//String    tuya02_Vcc      "Tuya 02: Vcc [ %s]"                <text>       (tuya02,gTuya,sonoff,gVersion,gVcc)
+//    { mqtt="<[broker:tele/tuya02/STATE:state:JSONPATH($.Vcc)]" }
 
 String    tuya02_Core     "Tuya 02: Core [%s]"                <text>       (tuya02,gTuya,sonoff,gVersion,gCore)
     { mqtt="<[broker:stat/tuya02/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
