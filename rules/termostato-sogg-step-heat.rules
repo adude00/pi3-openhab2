@@ -1,11 +1,10 @@
-rule "Termostato Soggiorno Step to Air"
+rule "Termostato Soggiorno Step to Air HEAT"
   when
     Item acPSoggiorno received command
   then
     var Number cdzTemp
 
-    //if (tsSoggiorno.state == ON && tsSoggiornoType.state == 2) {
-    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1) {
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat") {
       switch(receivedCommand.toString) {
         case "0": { cdzTemp = 10.0 }
         case "1": { cdzTemp = 17.0 }
@@ -24,11 +23,12 @@ rule "Termostato Soggiorno Step to Air"
 
 end
 
-rule "Termostato Soggiorno Air to Step"
+rule "Termostato Soggiorno Air to Step HEAT"
     when
         Item Air_Conditioner_Temperature received command
     then
 
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat") {
       // Sync to Termostato Slow
       var Number cdzTemp
       switch(receivedCommand.toString) {
@@ -52,4 +52,5 @@ rule "Termostato Soggiorno Air to Step"
         case "31": { cdzTemp = 8 }
         }
       acPSoggiorno.postUpdate(cdzTemp)
+    }
 end

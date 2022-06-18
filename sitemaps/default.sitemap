@@ -204,10 +204,10 @@ Group item=gAutomations   label="Automazioni"
         Text      item=avgSoggiornoAvg        label="Media 30min"    icon=flow
         Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
         Text      item=sf04_Temp              label="Divano"         icon=sofa
-        Setpoint  item=spSoggiorno minValue=17  maxValue=25 step=0.1
+        Setpoint  item=spSoggiorno minValue=17  maxValue=27 step=0.1
         Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
         Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
-        Selection item=tsSoggiornoWaitMaxTemp   mappings=[0='0: OFF', 1='1: 17C', 2='2: 18C', 3='3: 19C', 4='4: 20C', 5='5: 21C', 6='6: 23C', 7='7: 30C', 8='8: 30 Turbo']
+        Selection item=tsSoggiornoWaitMaxTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
 
       }
 
@@ -231,7 +231,7 @@ Group item=gAutomations   label="Automazioni"
       Frame label="A/C Auto DEBUG"  {
         Switch    item=tsSoggiornoBagnetto      icon=bath
 	Switch    item=tsSoggiornoOverride	label="Override"	icon=settings
-        Selection  item=acPSoggiorno           mappings=[0='0: OFF', 1='1: 17C', 2='2: 18C', 3='3: 19C', 4='4: 20C', 5='5: 21C', 6='6: 23C', 7='7: 30C', 8='8: 30 Turbo']
+        Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
         Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
 	Switch    item=tsSoggiornoWait
         Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5

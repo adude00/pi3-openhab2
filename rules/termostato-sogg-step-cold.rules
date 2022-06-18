@@ -1,0 +1,66 @@
+rule "Termostato Soggiorno Step to Air COOL"
+  when
+    Item acPSoggiorno received command
+  then
+    var Number cdzTemp
+
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "cool") {
+    //if ((Air_Conditioner_Mode.state+"") == "cool") {
+      switch(receivedCommand.toString) {
+        case "0": { cdzTemp = 20.0 }
+        case "1": { cdzTemp = 23.0 }
+        case "2": { cdzTemp = 24.0 }
+        case "3": { cdzTemp = 25.0 }
+        case "4": { cdzTemp = 26.0 }
+        case "5": { cdzTemp = 27.0 }
+        case "6": { cdzTemp = 28.0 }
+        case "7": { cdzTemp = 30.0 }
+        case "8": { cdzTemp = 10.0 }
+        case "0.0": { cdzTemp = 20.0 }
+        case "1.0": { cdzTemp = 23.0 }
+        case "2.0": { cdzTemp = 24.0 }
+        case "3.0": { cdzTemp = 25.0 }
+        case "4.0": { cdzTemp = 26.0 }
+        case "5.0": { cdzTemp = 27.0 }
+        case "6.0": { cdzTemp = 28.0 }
+        case "7.0": { cdzTemp = 30.0 }
+        case "8.0": { cdzTemp = 10.0 }
+        }
+
+      logInfo("tsSoggiornoSlowCool","tsSoggiornoSlowCool: INFO: acPSoggiorno: " + receivedCommand + ", cdzTemp: " + cdzTemp)
+      Air_Conditioner_Temperature.sendCommand(cdzTemp)
+    }
+
+end
+
+rule "Termostato Soggiorno Air to Step COOL"
+    when
+        Item Air_Conditioner_Temperature received command
+    then
+
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "cool") {
+      // Sync to Termostato Slow
+      var Number cdzTemp
+      switch(receivedCommand.toString) {
+        case "20.0": { cdzTemp = 0 }
+        case "23.0": { cdzTemp = 1 }
+        case "24.0": { cdzTemp = 2 }
+        case "25.0": { cdzTemp = 3 }
+        case "26.0": { cdzTemp = 4 }
+        case "27.0": { cdzTemp = 5 }
+        case "28.0": { cdzTemp = 6 }
+        case "30.0": { cdzTemp = 7 }
+        case "10.0": { cdzTemp = 8 }
+        case "20": { cdzTemp = 0 }
+        case "23": { cdzTemp = 1 }
+        case "24": { cdzTemp = 2 }
+        case "25": { cdzTemp = 3 }
+        case "26": { cdzTemp = 4 }
+        case "27": { cdzTemp = 5 }
+        case "28": { cdzTemp = 6 }
+        case "30": { cdzTemp = 7 }
+        case "10": { cdzTemp = 8 }
+        }
+      acPSoggiorno.postUpdate(cdzTemp)
+    }
+end
