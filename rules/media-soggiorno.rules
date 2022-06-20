@@ -4,17 +4,18 @@ import java.text.DecimalFormat
 rule mediaSogg
 when
   Item Casa_Temperature_Sogg_Up changed or
-  Item Casa_Temperature_Sogg_Down changed
+  Item Casa_Temperature_Sogg_Down changed or
+  Item sf09_Temp changed or
+  Item sf04_Temp changed
 then
-  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType) / 2
+  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf09_Temp.state as DecimalType + sf04_Temp.state as DecimalType) / 4
   Casa_Temperature_AVG.postUpdate(avgTemp)
 end
 
 
 rule "Media 30m"
   when
-    Item Casa_Temperature_AVG changed or
-    Item sf04_Temp changed
+    Item Casa_Temperature_AVG changed
   then
 
     var Number avgOrig = Casa_Temperature_AVG.averageSince(now.minusMinutes(30))
