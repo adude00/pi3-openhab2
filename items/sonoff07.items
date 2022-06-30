@@ -5,10 +5,10 @@ Switch sf07_Light "Stufetta" <fan_box> (sonoff07,sonoff)
             <[broker:stat/sonoff07/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA - ROTTO
-//Number sf07_Temp   "Bagno Temp [%.1f °C]"  <temperature>  (gTemp,sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph,gTermoBagno)
-//  [ "CurrentTemperature" ] { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-//Number sf07_Humid  "Bagno Humid [%.1f %%]" <humidity>     (gHumd,sonoff07,sonoff,Casa_Umidita_Chart,gChartBathH,gGraph)
-//    { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+Number sf07_Temp   "Bagno Temp [%.1f °C]"  <temperature>  (gTemp,sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph,gTermoBagno)
+  [ "CurrentTemperature" ] { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+Number sf07_Humid  "Bagno Humid [%.1f %%]" <humidity>     (gHumd,sonoff07,sonoff,Casa_Umidita_Chart,gChartBathH,gGraph)
+    { mqtt="<[broker:tele/sonoff07/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS
 Number sf07_Light_RSSI "Bagno: RSSI [%d %%]" <qualityofservice> (sonoff07,sonoff,gRSSI)

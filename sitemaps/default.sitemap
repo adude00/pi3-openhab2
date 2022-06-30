@@ -200,6 +200,7 @@ Group item=gAutomations   label="Automazioni"
       }
       Frame label="A/C Auto"  {
         Switch    item=tsSoggiorno            label="Termostato"
+	Switch    item=tsSoggiornoAutoON      label="Auto ON on SetPoint" icon=settings
         Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
         Text      item=avgSoggiornoAvg        label="Media 30min"    icon=flow
         Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
