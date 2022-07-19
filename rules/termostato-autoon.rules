@@ -1,28 +1,14 @@
 rule "Termostato Soggiorno AutoON"
   when
-    Item Casa_Temperature_AVG changed or
-    Item sf04_Temp changed or
-    Item avgSoggiornoAvg changed or
-    Item spSoggiorno changed or
-    Item hsSoggiorno changed or
-    Item tsSoggiornoAutoON changed
+    Item Air_Conditioner_Temperature changed
   then
-    var Number setpoint = spSoggiorno.state
-
-
-    // Temp to check against
-    var Number cur_temp = Casa_Temperature_AVG.state
-    // Check if we want to use sofa sensor and not house average and override in case
-    if (tsSoggSensor.state == 2 ) cur_temp = sf04_Temp.state
-    if (tsSoggSensor.state == 3 ) cur_temp = avgSoggiornoAvg.state
-
     // Actual rule
     if (tsSoggiorno.state == OFF && tsSoggiornoAutoON.state == ON) {
-      if ( ((Air_Conditioner_Mode.state+"") == "cool" ) && cur_temp < setpoint ) {
-	  tsSoggiorno.sendCommand(ON) 
-      }
-      if ( ((Air_Conditioner_Mode.state+"") == "heat" ) && cur_temp > setpoint ) {
-	  tsSoggiorno.sendCommand(ON) 
-      }
+
+      createTimer(now.plusSeconds(5), [|
+        tsSoggiorno.sendCommand(ON) 
+	logInfo("AutoON","AutoON: Accendo Termostato")
+      ])
+
     }
   end
