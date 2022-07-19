@@ -1,0 +1,25 @@
+Group esp01
+
+//Switch esp01_Light "Stufetta" <fan_box> (esp01,sonoff)
+//    { mqtt=">[broker:cmnd/esp01/POWER:command:*:default],
+//            <[broker:stat/esp01/POWER:state:default]" }
+
+// TEMPERATURA E UMIDITA
+Number esp01_Temp   "ESP01 Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff)
+  [ "CurrentTemperature" ] { mqtt="<[broker:tele/esp01/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+Number esp01_Humid  "ESP01 Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff)
+    { mqtt="<[broker:tele/esp01/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+
+// STATUS
+Number esp01_Light_RSSI "ESP01: RSSI [%d %%]" <qualityofservice> (esp01,sonoff,gRSSI)
+    { mqtt="<[broker:tele/esp01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+String esp01_Light_Reachable "ESP01: Status [%s]" <switch> (esp01,sonoff,gReachable)
+    { mqtt="<[broker:tele/esp01/LWT:state:MAP(reachable.map)]" }
+String esp01_Uptime "ESP01: Uptime [%s]" <clock> (esp01,sonoff,gUptime)
+    { mqtt="<[broker:tele/esp01/STATE:state:JSONPATH($.Uptime)]" }
+// Versions
+DateTime  esp01_Date     "ESP01: Refresh [ %1$tH:%1$tM]"   <clock>      (esp01,sonoff,gVersion,gTime)
+    { mqtt="<[broker:tele/esp01/STATE:state:JSONPATH($.Time)]" }
+
+String    esp01_Version  "ESP01: Version [%s]"             <text>       (esp01,sonoff,gVersion,gFirmware)
+    { mqtt="<[broker:stat/esp01/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
