@@ -17,6 +17,7 @@ rule "Termostato Soggiorno Wait"
   then
     var Number acPower = acPSoggiorno.state as DecimalType
     var Number acPowerMax = tsSoggiornoWaitMaxTemp.state as DecimalType
+    var Number acPowerMin = tsSoggiornoWaitMinTemp.state as DecimalType
     var Number tolSogg = hsSoggiorno.state
     var Number setpoint = spSoggiorno.state
 
@@ -58,7 +59,7 @@ rule "Termostato Soggiorno Wait"
       }
     
       if ( ( cur_temp - tolSogg ) > setpoint ) {
-        if ( acPower > 0 ) {
+        if ( acPower > acPowerMin ) {
 	  // Creating 20 Wait Timer
           tsSoggiornoWait.sendCommand(ON)
           if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoWait: timer started, tsSoggiornoWait ON")

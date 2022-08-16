@@ -19,6 +19,7 @@ Number tsSoggiornoType	"Nuovo algoritmo"	<settings>	(gTermoSogg)
 Switch tsSoggiornoWait 		"Ts is Waiting..."		<lock> (gTermoSogg)
 Number tsSoggiornoWaitMins	"Minutes to Wait"		<time> (gTermoSogg)
 Number tsSoggiornoWaitMaxTemp	"Temperatura Massima"		<temperature_hot> (gTermoSogg)
+Number tsSoggiornoWaitMinTemp	"Temperatura Minima"		<temperature_hot> (gTermoSogg)
 Switch tsSoggiornoWaitDebug     "LOG Verbosi"              	<text> (gTermoSogg)
 Switch tsSoggiornoAutoON        "Auto ON on threshold"        	<text> (gTermoSogg)
 

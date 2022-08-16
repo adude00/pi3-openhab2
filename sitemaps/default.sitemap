@@ -209,6 +209,7 @@ Group item=gAutomations   label="Automazioni"
         Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
         Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
         Selection item=tsSoggiornoWaitMaxTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
+        Selection item=tsSoggiornoWaitMinTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
 
       }
 
