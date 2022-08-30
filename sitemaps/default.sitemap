@@ -287,7 +287,7 @@ Group item=gAutomations   label="Automazioni"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=sf12_Temp label="Cameretta" icon=baby_2 {
+    Text item=esp01_Temp label="Cameretta" icon=baby_2 {
       Frame label="Condizionatore" {
         Switch item=DaikinCameretta_Power
         Setpoint item=DaikinCameretta_SetPoint icon=heating step=0.5 visibility=[DaikinCameretta_Power==ON]
@@ -304,15 +304,15 @@ Group item=gAutomations   label="Automazioni"
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=sf12_Temp   label="LETTINO: Temperatura" { 
-	  Text      item=sf12_Temp   label="LETTINO: Temperatura"
+        Text      item=esp01_Temp   label="LETTINO: Temperatura" { 
+	  Text      item=esp01_Temp   label="LETTINO: Temperatura"
 	  Switch   item=DaikinCameretta_AntiSpike
           Setpoint item=DaikinCameretta_MaxTemp icon=temperature step=0.1 minValue=19 maxValue=24
           Setpoint item=DaikinCameretta_MinTemp icon=temperature step=0.1 minValue=19 maxValue=24
         }
-        Text      item=sf12_Humid  label="LETTINO: Umidità"
-        Text      item=sf08_Temp   label="TAVOLO: Temperatura"
-        Text      item=sf08_Humid  label="TAVOLO: Umidità"
+        Text      item=esp01_Humid  label="LETTINO: Umidità"
+        Text      item=esp02_Temp   label="TAVOLO: Temperatura"
+        Text      item=esp02_Humid  label="TAVOLO: Umidità"
       }
 
       Frame label="Grafici " {
@@ -587,8 +587,10 @@ Group item=gAutomations   label="Automazioni"
 	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
       }
       Frame label="Cameretta" {
-        Text item=sf08_Temp                   label="Cameretta"  icon=bedroom_blue
-        Text item=sf08_Humid                  label="Cameretta"
+        Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
+        Text item=esp02_Humid                  label="Cameretta Girls"
+        Text item=esp01_Temp                   label="Cameretta Ethan"  icon=bedroom_blue
+        Text item=esp01_Humid                  label="Cameretta Ethan"
       }
       Frame label="Bagno" {
         Text item=sf07_Temp                   label="Temperatura" icon=bath

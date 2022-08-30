@@ -1,11 +1,11 @@
 rule "Daikin Cameretta Anti Spike"
 
   when
-    Item sf12_Temp changed
+    Item esp01_Temp changed
 
   then
   
-    var Number cur_temp = sf12_Temp.state 
+    var Number cur_temp = esp01_Temp.state 
     var Number setpoint_max = DaikinCameretta_MaxTemp.state 
     var Number setpoint_min = DaikinCameretta_MinTemp.state 
 

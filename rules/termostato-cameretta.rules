@@ -1,11 +1,11 @@
 rule "Termostato Cameretta"
   when
     Item spCameretta changed or
-    Item sf08_Temp changed or
+    Item esp02_Temp changed or
     Item tsCameretta changed
   then
   
-  var Number cur_temp = sf08_Temp.state 
+  var Number cur_temp = esp02_Temp.state 
   var Number setpoint = spCameretta.state 
   var Number hysteresis = hsCameretta.state 
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
