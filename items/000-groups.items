@@ -7,6 +7,7 @@ Group gLuci
 Group gLuciSogg
 Group gRGB
 Group gLightsDim
+Group gBuonanotte
 
 Group gChartBdrmT
 Group gChartBdrmH
@@ -19,7 +20,7 @@ Group gChartCamerettaH
 Group gChartCamerettaT
 
 Group gCinema
-
+Group gScrivania
 
 Group gTemp
 Group gHumd

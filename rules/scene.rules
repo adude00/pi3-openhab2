@@ -188,6 +188,10 @@ then
       gLuciSogg.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: luci soggiorno spente")
     ])
+    createTimer(now.plusSeconds(5),  [ |
+      gBuonanotte.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: gruppo gBuonanotte spento")
+    ])
 
     createTimer(now.plusSeconds(7),  [ |
       gCinema.sendCommand(OFF)

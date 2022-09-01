@@ -46,6 +46,7 @@ sitemap default label="Casa"
       Switch item=NAS2
       Switch item=Net_TV
       Switch item=pow04_Switch
+      Switch item=sf08_Light
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
         Switch item=tuya01_Switch
@@ -382,8 +383,10 @@ Group item=gAutomations   label="Automazioni"
       Frame label="Dati" {
         Text      item=sf05_Temp   label="Specchio: Temperatura"
         Text      item=sf05_Humid  label="Specchio: Umidità"
-        Text      item=sf11_Temp   label="Scrivania: Temperatura"
-        Text      item=sf11_Humid  label="Scrivania: Umidità"
+        Text      item=sf08_Temp   label="Scrivania: Temperatura"
+        Text      item=sf08_Humid  label="Scrivania: Umidità"
+        Text      item=sf11_Temp   label="Soffitto: Temperatura"
+        Text      item=sf11_Humid  label="Soffitto: Umidità"
 
       }
 
