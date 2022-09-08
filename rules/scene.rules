@@ -218,3 +218,15 @@ then
     ])
 end
 
+rule "Nanna"
+when
+    Item Scene_Nanna changed to ON
+then
+    logInfo("Scene","Scena NANNA: iniziata")
+    Tapp08.sendCommand(DOWN)
+    createTimer(now.plusSeconds(30), [|
+      gScene.sendCommand(OFF)
+      logInfo("Scene","Scena NANNA: finita")
+    ])
+end
+
