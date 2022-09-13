@@ -305,15 +305,15 @@ Group item=gAutomations   label="Automazioni"
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=esp01_Temp   label="LETTINO: Temperatura" { 
-	  Text      item=esp01_Temp   label="LETTINO: Temperatura"
+        Text      item=esp01_Temp   label="ETHAN: Temperatura" { 
+	  Text      item=esp01_Temp   label="ETHAN: Temperatura"
 	  Switch   item=DaikinCameretta_AntiSpike
           Setpoint item=DaikinCameretta_MaxTemp icon=temperature step=0.1 minValue=19 maxValue=24
           Setpoint item=DaikinCameretta_MinTemp icon=temperature step=0.1 minValue=19 maxValue=24
         }
-        Text      item=esp01_Humid  label="LETTINO: Umidità"
-        Text      item=esp02_Temp   label="TAVOLO: Temperatura"
-        Text      item=esp02_Humid  label="TAVOLO: Umidità"
+        Text      item=esp01_Humid  label="ETHAN: Umidità"
+        Text      item=esp02_Temp   label="GIRLS: Temperatura"
+        Text      item=esp02_Humid  label="GIRLS: Umidità"
       }
 
       Frame label="Grafici " {
@@ -387,7 +387,6 @@ Group item=gAutomations   label="Automazioni"
         Text      item=sf08_Humid  label="Scrivania: Umidità"
         Text      item=sf11_Temp   label="Soffitto: Temperatura"
         Text      item=sf11_Humid  label="Soffitto: Umidità"
-
       }
 
       Frame label="Grafici " {
