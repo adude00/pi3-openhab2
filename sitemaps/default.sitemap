@@ -257,9 +257,10 @@ Group item=gAutomations   label="Automazioni"
         Switch		item=tsBagnoAutoOFF	label="Auto OFF: 15 min"	icon=settings
       } // Chiuso Frame Termostato
 
-      Frame label="Grafici " {
+      Frame label="Periodo " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-
+      }
+      Frame label="Temperatura " {
         // TEMPERATURA Bagno
         Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
@@ -271,8 +272,9 @@ Group item=gAutomations   label="Automazioni"
         Chart  item=gChartBathT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartBathT period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBathT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-
-        // UMIDITA Bagno
+      }
+      Frame label="Umidità " {
+	// UMIDITA Bagno
         Chart  item=gChartBathH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
         Chart  item=gChartBathH period=4h  refresh=300000  visibility=[ChartPeriod==1]
         Chart  item=gChartBathH period=8h  refresh=300000  visibility=[ChartPeriod==2]
@@ -283,8 +285,20 @@ Group item=gAutomations   label="Automazioni"
         Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
         Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-
-      } // Chiuso frame grafici
+      }
+      Frame label="Consumo Boiler" {
+        // CONSUMO BOILER
+        Chart  item=gChartBathP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBathP period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBathP period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBathP period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBathP period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBathP period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBathP period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBathP period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBathP period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBathP period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
 
     } // Chiuso Text Bagno Stufa
 

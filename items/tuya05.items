@@ -9,7 +9,7 @@ Switch tuya05_Switch "BOILER" <tv> (tuya05,gTuya,sonoff)
 
 // POWER
 
-Number tuya05_Power     "Tuya 05: Line True Power [%.1f W]"          <voltage>       (tuya05,gTuya,gWatt) 
+Number tuya05_Power     "Tuya 05: Line True Power [%.1f W]"          <voltage>       (tuya05,gTuya,gWatt,gChartBathP) 
     { mqtt="<[broker:tele/tuya05/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
 
 Number tuya05_AppPower  "Tuya 05: Line Apparent Power [%.3f VA]"     <current>       (tuya05,gTuya,gVa)
