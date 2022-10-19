@@ -5,4 +5,7 @@ rule "Boiler turned off"
     if (previousState >= 100 && tuya05_Power.state <= 60 ) {
       pushNotification("BOILER: Off", "Il Boiler è carico.")
     }
+    if (previousState <= 1000 && tuya05_Power.state > 1000 ) {
+      pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
+    }
 end
