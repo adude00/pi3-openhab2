@@ -1,6 +1,6 @@
 Group gInitializeTen
 
-Group gSoggThermostat "Soggiorno" (gFF) [ "Thermostat" ]
+Group gSoggThermostat "Clima Soggiorno" (gFF) [ "Thermostat" ]
 
 Switch Air_Conditioner 			        "A/C"  			        <air_conditioner> 	  (Appliance,gInitializeTen) 
 String Air_Conditioner_Mode 		    "Mode"  		        <settings> 		        (Appliance,gSoggThermostat)   [ "homekit:HeatingCoolingMode" ]

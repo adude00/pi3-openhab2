@@ -10,6 +10,9 @@ Switch conf_autooff_ac_kid_chng	"Modifica Temperatura"		<settings>
 Number conf_mattina_ac_kid_temp "Temperatura da impostare"      <temperatura>
 Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta"	<flow>
 Number conf_autooff_ac_kid_mins "Dopo quanti minuti"    	<settings>
+Switch conf_nanna_ac_kid_acon	"Nanna: accendi AC Cameretta"	<settings>
+Switch conf_nanna_ac_kid_chng	"Nanna: modifica temp"		<settings>
+Number conf_nanna_ac_kid_temp   "Nanna: temp da impostare"      <temperatura>
 
 Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale"	<flow>
 
