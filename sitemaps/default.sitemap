@@ -186,7 +186,7 @@ sitemap default label="Casa"
 	    }
 	} // TEXT CLIMA SOGGIORNO
 
-Group item=gAutomations   label="Automazioni"
+        Group item=gAutomations   label="Automazioni"
         Group item=gPresence      label="Presence"
       }
     } // CHIUSO TEXT Configurazione schermata principale

@@ -15,6 +15,7 @@ Switch conf_nanna_ac_kid_chng	"Nanna: modifica temp"		<settings>
 Number conf_nanna_ac_kid_temp   "Nanna: temp da impostare"      <temperatura>
 
 Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale"	<flow>
+Switch conf_autooff_desk_ac_bdr	"Spegni AC Matrimoniale con Scrivania"	<flow> (gAutomations)
 
 // Clima Soggiorno
 Switch conf_autoon_ac_hot_sogg "Auto Riscaldamento Soggiorno"   <settings>

@@ -1,0 +1,11 @@
+rule "Auto OFF AC Matrimoniale con scrivania"
+when
+  Item sf08_Light changed from ON to OFF or
+  Item sf11_Light changed from ON to OFF
+then
+  // MATRIMONIALE - AUTO OFF
+  if (conf_autooff_desk_ac_bdr.state == ON) {
+    logInfo("Scene","Scrivania OFF: Spengo il Clima")
+    DaikinMatrimoniale_Power.sendCommand(OFF)
+  }
+end
