@@ -126,9 +126,9 @@ sitemap default label="Casa"
 	    Switch    item=conf_autooff_ac_bdr
 	  }
 	  Frame label="Clima Soggiorno" {
-            Switch item=WakeUpACNow      label="Accendi"       icon=flow
+            Switch item=WakeUpACNow      label="Imposta Temperatura"       icon=flow
 	    Selection item=WakeUpACTemp  label="Temperatura"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
-          Switch item=WakeUpTs          label="Termostato"    visibility=[WakeUpACNow==ON]
+          Switch item=WakeUpTs          label="Accendi Termostato"
 	  }
 	}  // SCENA Mattina
 
@@ -239,7 +239,7 @@ sitemap default label="Casa"
 
       Frame label="A/C Auto DEBUG"  {
         Switch    item=tsSoggiornoBagnetto      icon=bath
-	Switch    item=tsSoggiornoOverride	label="Override"	icon=settings
+	Switch    item=tsSoggiornoOverride	icon=settings
         Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
         Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
 	Switch    item=tsSoggiornoWait

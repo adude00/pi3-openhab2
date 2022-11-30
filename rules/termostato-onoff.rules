@@ -1,0 +1,65 @@
+rule "Termostato Acceso"
+  when
+    Item tsSoggiorno changed from OFF to ON
+  then
+
+    var Number acPower = acPSoggiorno.state as DecimalType
+    var Number acPowerMax = tsSoggiornoWaitMaxTemp.state as DecimalType
+
+    if (tsSoggiornoOverride.state == OFF && tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat" && acPower == 0 ) {  // IF We're heating and the aircon is currently OFF
+     
+
+      if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Turning AC to MAX")
+
+
+      if (tsSoggiornoAutoON.state == ON) {   // IF AutoON is Enabled
+        if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Temporary disabling AutoON")
+        tsSoggiornoAutoON.sendCommand(OFF)   // Disabling AutoON
+
+        createTimer(now.plusSeconds(10), [|   // Waiting 10 seconds
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Re-Enabling AutoON")
+          tsSoggiornoAutoON.sendCommand(ON)        // Re-Enabling AutoON
+        ])
+      }
+
+      acPSoggiorno.sendCommand(acPowerMax)
+
+      } // END IF    
+     
+end
+
+rule "Termostato Spento"
+  when
+    Item tsSoggiorno changed from ON to OFF
+  then
+    if (tsSoggiornoOverride.state == OFF) {
+
+      if (tsSoggiornoAutoON.state == ON) {   // IF AutoON is Enabled
+        if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Temporary disabling AutoON")
+        tsSoggiornoAutoON.sendCommand(OFF)   // Disabling AutoON
+
+        createTimer(now.plusSeconds(10), [|   // Waiting 10 seconds
+          if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Re-Enabling AutoON")
+          tsSoggiornoAutoON.sendCommand(ON)        // Re-Enabling AutoON
+        ])
+      }
+
+    Air_Conditioner_Temperature.sendCommand(10.0)
+    }
+end
+
+rule "Termostato Soggiorno AutoON"
+  when
+    Item Air_Conditioner_Temperature changed
+  then
+    // Actual rule
+    if (tsSoggiorno.state == OFF && tsSoggiornoAutoON.state == ON) {
+
+      createTimer(now.plusSeconds(5), [|
+        tsSoggiorno.sendCommand(ON)
+        logInfo("AutoON","AutoON: Accendo Termostato")
+      ])
+
+    }
+  end
+

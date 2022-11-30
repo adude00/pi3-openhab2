@@ -89,17 +89,19 @@ then
 
   if (tsSoggiorno.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
 
-    if (WakeUpACNow.state == ON) {  // Se decido di accendere il clima
-      Air_Conditioner_Temperature.sendCommand(WakeUpACTemp.state as Number) // Imposto la temp selezionata
-      logInfo("Scene","SVEGLIA: WakeUpACNow=ON: A/C ON")
-  
       // Termostato
-      if (WakeUpTs.state == ON) {  // Se decido di accendere ANCHE il termostato
+      if (WakeUpTs.state == ON) {  // Se decido di accendere il termostato
         createTimer(now.plusSeconds(3),  [ |
           tsSoggiorno.sendCommand(ON)
           logInfo("Scene","SVEGLIA: WakeUpTs=ON: Termostato Acceso")
         ])
       }  
+
+
+    if (WakeUpACNow.state == ON) {  // Se decido di accendere il clima
+      Air_Conditioner_Temperature.sendCommand(WakeUpACTemp.state as Number) // Imposto la temp selezionata
+      logInfo("Scene","SVEGLIA: WakeUpACNow=ON: A/C ON")
+  
     }
 
   } // FINE A/C Soggiorno

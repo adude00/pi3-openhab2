@@ -77,15 +77,6 @@ rule "Termostato Acceso"
   }
 end
 
-rule "Termostato Spento"
-  when
-    Item tsSoggiorno changed to OFF
-  then
-    if (tsSoggiornoOverride.state == OFF) {
-      Air_Conditioner_Temperature.sendCommand(10.0)
-    }
-end
-
 rule "Bagnetto ON"
   when
     Item tsSoggiornoBagnetto changed from OFF to ON
