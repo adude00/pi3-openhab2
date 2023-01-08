@@ -1,0 +1,16 @@
+rule "Maintenance"
+  when
+
+    //Item sw_restart received update or
+    Item sw_restart received command
+
+  then
+
+    var String command;
+
+    logInfo("Restart","Restart requested, proceeding...")
+
+    command = "sudo /etc/openhab2/shell/restart.sh";
+    executeCommandLine(command);
+
+end

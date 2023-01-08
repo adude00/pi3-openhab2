@@ -6,11 +6,11 @@ rule "Termostato Acceso"
     var Number acPower = acPSoggiorno.state as DecimalType
     var Number acPowerMax = tsSoggiornoWaitMaxTemp.state as DecimalType
 
-    if (tsSoggiornoOverride.state == OFF && tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat" && acPower == 0 ) {  // IF We're heating and the aircon is currently OFF
-     
+//    if (tsSoggiornoOverride.state == OFF && tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat" && acPower == 0 ) {  // IF We're heating and the aircon is currently OFF
+
+    if (tsSoggiornoType.state !== null && tsSoggiornoType.state !== 1 && (Air_Conditioner_Mode.state+"") == "heat" && ( acPower == 0 || acPower == 1 ) ) {  // IF We're heating and the aircon is currently OFF or 17C aka Min
 
       if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Turning AC to MAX")
-
 
       if (tsSoggiornoAutoON.state == ON) {   // IF AutoON is Enabled
         if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoON","DEBUG - Temporary disabling AutoON")

@@ -18,14 +18,29 @@ Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale"	<flow>
 Switch conf_autooff_desk_ac_bdr	"Spegni AC Matrimoniale con Scrivania"	<flow> (gAutomations)
 
 // Clima Soggiorno
-Switch conf_autoon_ac_hot_sogg  "Auto ON Riscaldamento Soggiorno"   <settings>
-Switch conf_autooff_ac_hot_sogg "Auto OFFRiscaldamento Soggiorno"   <settings>
+// Switch conf_autoon_ac_hot_sogg  "Auto ON Riscaldamento Soggiorno"   <settings>
+// Switch conf_autooff_ac_hot_sogg "Auto OFFRiscaldamento Soggiorno"   <settings>
 
-Switch ac_sog_night_s 	"Soggiorno Notte Switch"  <heating>
-Number ac_sog_night_t 	"Soggiorno Notte Temp"	  <heating>
+Switch ac_sog_night_t_off 	"Night Auto-Off Thermostat"    <heating>
+Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
+Number ac_sog_night_temp 	"Night Temp to set"	       <heating>
 
-Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
-Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
+Switch ac_sog_usciamo_t_off 	"Usciamo Auto-Off Thermostat"  <heating>
+Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp"     <heating>
+Number ac_sog_usciamo_temp 	"Usciamo Temp to set"	       <heating>
 
-Switch ac_sog_day_s 	"Soggiorno Casa Switch"	  <heating>
-Number ac_sog_day_t 	"Soggiorno Casa Temp"	  <heating>
+Switch ac_sog_lavoro_t_off 	"Lavoro Auto-Off Thermostat"   <heating>
+Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp"      <heating>
+Number ac_sog_lavoro_temp 	"Lavoro Temp to set"           <heating>
+
+Switch ac_sog_acasa_t_on  	"A Casa Auto-ON Thermostat"    <heating>
+Switch ac_sog_acasa_change 	"A Casa Auto Change Temp"      <heating>
+Number ac_sog_acasa_temp 	"A Casa Temp to set"           <heating>
+
+Number sw_restart "Maintenance" <settings>
+
+//Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
+//Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
+//
+//Switch ac_sog_day_s 	"Soggiorno Casa Switch"	  <heating>
+//Number ac_sog_day_t 	"Soggiorno Casa Temp"	  <heating>

@@ -170,20 +170,28 @@ sitemap default label="Casa"
 	}
       }  // Chiuso Text Sveglia
 	Text label="Clima Soggiorno" icon="settings" {
-	  Frame label="Override notturno" {
-	    Switch    item=ac_sog_night_s  label="Cambio Temp Notturno"   icon="settings"
-	    Selection item=ac_sog_night_t  label="Temperatura Notturna"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_s==ON]
+	  Frame label="Override Notte" {
+	    Switch    item=ac_sog_night_t_off icon="settings"
+	    Switch    item=ac_sog_night_change  icon="settings"
+	    Selection item=ac_sog_night_temp    mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_night_change==ON]
 	  }
-	  
-	  Frame label="Override fuori casa" {
-	    Switch    item=ac_sog_out_s 	label="Cambio Temp quando esco"  icon="settings"
-	    Selection item=ac_sog_out_t   label="Temperatura quando esco"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_out_s==ON]
+	  Frame label="Override Lavoro" {
+	    Switch    item=ac_sog_lavoro_t_off icon="settings"
+	    Switch    item=ac_sog_lavoro_change  icon="settings"
+	    Selection item=ac_sog_lavoro_temp    mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_lavoro_change==ON]
+	  }
+	  Frame label="Override Usciamo" {
+	    Switch    item=ac_sog_usciamo_t_off icon="settings"
+	    Switch    item=ac_sog_usciamo_change  icon="settings"
+	    Selection item=ac_sog_usciamo_temp    mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_usciamo_change==ON]
 	  }
 
-	  Frame label="Temperatura in casa" {
-	    Switch    item=ac_sog_day_s  label="Cambio Temp quando entro"  icon="settings"
-	    Selection item=ac_sog_day_t  label="Temperatura quando entro"  mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_day_s==ON]
+          Frame label="Override A Casa" {
+	    Switch    item=ac_sog_acasa_t_on        icon="settings"
+	    Switch    item=ac_sog_acasa_change      icon="settings"
+	    Selection item=ac_sog_acasa_temp        mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[ac_sog_acasa_change==ON]
 	    }
+	  
 	} // TEXT CLIMA SOGGIORNO
 
         Group item=gAutomations   label="Automazioni"
@@ -724,6 +732,9 @@ sitemap default label="Casa"
       }
     } // CHIUSO Text Tasmota Devices
     Group item=gScene         label="SCENE"
+    Text label="OpenHAB" {
+      Switch item=sw_restart mappings=[0="Restart"]
+    }
   } // CHIUSO FRAME DEBUG
 
 

@@ -8,7 +8,9 @@ when
   Item sf09_Temp changed or
   Item sf04_Temp changed
 then
-  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf09_Temp.state as DecimalType + sf04_Temp.state as DecimalType) / 4
+  //var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf09_Temp.state as DecimalType + sf04_Temp.state as DecimalType) / 4
+  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf04_Temp.state as DecimalType) / 3
+  //var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType) / 2
   Casa_Temperature_AVG.postUpdate(avgTemp)
 end
 

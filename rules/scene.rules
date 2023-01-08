@@ -12,6 +12,26 @@ then
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena LAVORO: finita")
     ])
+
+
+  // TERMOSTATO
+  if (ac_sog_lavoro_t_off.state == ON) {
+    createTimer(now.plusSeconds(3),  [ |
+      if (tsSoggiorno.state == ON) {
+        tsSoggiorno.sendCommand(OFF)
+      logInfo("Scene","Scena Lavoro: termostato spento")
+      }
+    ])
+  }
+
+  // IMPOSTA TEMP
+  if (ac_sog_lavoro_change.state == ON) {
+    createTimer(now.plusSeconds(7),  [ |
+      Air_Conditioner_Temperature.sendCommand(ac_sog_lavoro_temp.state as Number)
+      logInfo("Scene","Scena Lavoro: temperatura richiesta impostata")
+    ])
+  }
+
 end
 
 rule "A Casa"
@@ -33,16 +53,32 @@ then
   led03_DimW.sendCommand(led03_w)
   led03_Dim.sendCommand(led03_c)
 
-
-  //tsCameretta.sendCommand(OFF)
-  //DaikinCameretta_SetPoint.sendCommand(20.0)
-  //DaikinCameretta_Fan.sendCommand("SILENCE")
-
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena A CASA: finita")
     ])
+
+  // TERMOSTATO
+  if (ac_sog_acasa_t_on.state == ON) {
+    createTimer(now.plusSeconds(3),  [ |
+      if (tsSoggiorno.state == OFF) {
+        tsSoggiorno.sendCommand(ON)
+      logInfo("Scene","Scena A Casa: termostato acceso")
+      }
+    ])
+  }
+
+  // IMPOSTA TEMP
+  if (ac_sog_acasa_change.state == ON) {
+    createTimer(now.plusSeconds(7),  [ |
+      Air_Conditioner_Temperature.sendCommand(ac_sog_acasa_temp.state as Number)
+      logInfo("Scene","Scena A Casa: temperatura richiesta impostata")
+    ])
+  }
+
+
+
 end
 
 rule "Mattina: SIAMO SVEGLI"
@@ -142,14 +178,34 @@ then
   createTimer(now.plusSeconds(300), [|
     AutoRientro.sendCommand(ON)
     ])
+
+    // TERMOSTATO
+    if (ac_sog_usciamo_t_off.state == ON) {
+      createTimer(now.plusSeconds(3),  [ |
+        if (tsSoggiorno.state == ON) {
+          tsSoggiorno.sendCommand(OFF)
+        logInfo("Scene","Scena Usciamo: termostato spento")
+        }
+      ])
+    }
+
+    // IMPOSTA TEMP
+    if (ac_sog_usciamo_change.state == ON) {
+      createTimer(now.plusSeconds(7),  [ |
+        Air_Conditioner_Temperature.sendCommand(ac_sog_usciamo_temp.state as Number)
+        logInfo("Scene","Scena Usciamo: temperatura richiesta impostata")
+      ])
+    }
+
 end
 
 
-rule "Privacy "
+rule "Privacy"
 when
     Item Scene_Privacy changed to ON
 then
     logInfo("Scene","Scena PRIVACY: iniziata")
+    Tapp01.sendCommand(DOWN)
     Tapp02.sendCommand(DOWN)
     createTimer(now.plusSeconds(30), [|
       gScene.sendCommand(OFF)
@@ -180,12 +236,24 @@ then
       logInfo("Scene","Scena A Letto: tapparelle abbassate")
     ])
 
-    createTimer(now.plusSeconds(3),  [ |
-      if (tsSoggiorno.state == ON) {
-        tsSoggiorno.sendCommand(OFF)
-      }
-      logInfo("Scene","Scena A Letto: termostato spento")
-    ])
+    // TERMOSTATO
+    if (ac_sog_night_t_off.state == ON) {
+      createTimer(now.plusSeconds(3),  [ |
+        if (tsSoggiorno.state == ON) {
+          tsSoggiorno.sendCommand(OFF)
+        logInfo("Scene","Scena A Letto: termostato spento")
+        }
+      ])
+    }
+
+    // IMPOSTA TEMP
+    if (ac_sog_night_change.state == ON) {
+      createTimer(now.plusSeconds(7),  [ |
+        Air_Conditioner_Temperature.sendCommand(ac_sog_night_temp.state as Number)
+	logInfo("Scene","Scena A Letto: temperatura richiesta impostata")
+      ])
+    }
+
 
     createTimer(now.plusSeconds(3),  [ |
       gLuciSogg.sendCommand(OFF)
