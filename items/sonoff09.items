@@ -42,11 +42,11 @@ Number sonoff09_Yesterday     "Sonoff 09: Total energy yesterday [%.5f kWh]" <to
 
 
 // TEMP
-Number sf09_Temp    "Ingresso: Temperature [%.1f °C]"    <temperature>   (sonoff09,sonoff,gTemp)
-    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-
-Number sf09_Humid   "Ingresso: Humidity [%.1f %%]"    <humidity>      (sonoff09,sonoff,gHumd)
-    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
+//Number sf09_Temp    "Ingresso: Temperature [%.1f °C]"    <temperature>   (sonoff09,sonoff,gTemp)
+//    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
+//
+//Number sf09_Humid   "Ingresso: Humidity [%.1f %%]"    <humidity>      (sonoff09,sonoff,gHumd)
+//    { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 
 // STATUS
