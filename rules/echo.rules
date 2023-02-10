@@ -1,0 +1,13 @@
+rule "Notify that plex is ON"
+when
+    Item Plex changed to ON
+then
+    Echo_Soggiorno_TTS.sendCommand('Il server è acceso. Ora puoi guardare PLEX!')
+end
+
+rule "Notify that Specchio is ON"
+when
+    Item sf05_Light changed to ON
+then
+    Echo_Camera_TTS.sendCommand('Lo specchio è acceso. Ora puoi guardarti!')
+end

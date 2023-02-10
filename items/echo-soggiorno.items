@@ -1,0 +1,25 @@
+// Account
+String Echo_Soggiorno_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}
+
+Group Alexa_Soggiorno <player>
+
+// Player control
+Player Echo_Soggiorno_Player                 "Player"                                (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:player"}
+Dimmer Echo_Soggiorno_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:volume"}
+Switch Echo_Soggiorno_Shuffle                "Shuffle"                               (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:shuffle"}
+
+// Player Information
+String Echo_Soggiorno_Title                  "Title"                                 (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:title"}
+String Echo_Soggiorno_ProviderDisplayName    "Provider"                              (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:providerDisplayName"}
+
+// Commands
+String Echo_Soggiorno_Announcement           "Announcement"                          (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:announcement"}
+String Echo_Soggiorno_TTS                    "Text to Speech"                        (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:textToSpeech"}
+Dimmer Echo_Soggiorno_TTS_Volume             "Text to Speech Volume"                 (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:textToSpeechVolume"}
+String Echo_Soggiorno_Remind                 "Remind"                                (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:remind"}
+String Echo_Soggiorno_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:playAlarmSound"}
+Dimmer Echo_Soggiorno_NotificationVolume     "Notification volume"                   (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:notificationVolume"}
+Switch Echo_Soggiorno_AscendingAlarm         "Ascending alarm"                       (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:ascendingAlarm"}
+
+// Feedbacks
+String Echo_Soggiorno_LastVoiceCommand       "Last voice command"                    (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:lastVoiceCommand"}

@@ -43,6 +43,7 @@ sitemap default label="Casa"
     }
     Text label="Devices" icon=cinema {
       Frame label="Cose" {
+      Switch item=Plex
       Switch item=NAS2
       Switch item=Net_TV
       Switch item=pow04_Switch
@@ -88,7 +89,41 @@ sitemap default label="Casa"
         Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
       } // CHIUSO GROUP "Bedroom"
 
+        } // CHIUSO FRAME Audio
+
+
+	Frame label="Alexa" {
+
+        Text label="Echo Soggiorno" {
+            Default   item=Echo_Soggiorno_Player
+            Slider    item=Echo_Soggiorno_Volume
+            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Soggiorno_TTS_Volume
+            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Soggiorno_Shuffle
+            Text      item=Echo_Soggiorno_Title
+
+            Text    item=Echo_Soggiorno_LastVoiceCommand
+            Slider  item=Echo_Soggiorno_NotificationVolume
         }
+
+        Text label="Echo Camera" {
+            Default   item=Echo_Camera_Player
+            Slider    item=Echo_Camera_Volume
+            Setpoint  item=Echo_Camera_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Camera_TTS_Volume
+            Setpoint  item=Echo_Camera_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Camera_Shuffle
+            Text      item=Echo_Camera_Title
+
+            Text    item=Echo_Camera_LastVoiceCommand
+            Slider  item=Echo_Camera_NotificationVolume
+        }
+
+	} // CHIUSO FRAME Alexa
+
+
+
     } // CHIUSO TEXT "Devices"
 
     Text label="IP Cameras" icon="camera" {

@@ -1,0 +1,8 @@
+Bridge amazonechocontrol:account:8dcf59ae "Amazon Account" @ "Accounts" [discoverSmartHome=2, pollingIntervalSmartHomeAlexa=30, pollingIntervalSmartSkills=120]
+{
+    Thing echo		echo_soggiorno	"Alexa" @ "Soggiorno"	[serialNumber="G2A0WK0493940NA9"]
+    Thing echo		echo_camera	"Alexa" @ "Camera"	[serialNumber="G0911W06927102VE"]
+    Thing echo		echo_cameretta	"Alexa" @ "Cameretta" 	[serialNumber="G090XG1214320N34"]
+    Thing wha		echo_wha        "First Floor Music Group" @ "Music Groups" [serialNumber="fdf60e7460644b3d9350ba8bde22b1fe"]
+}
+
