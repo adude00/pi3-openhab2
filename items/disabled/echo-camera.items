@@ -10,16 +10,9 @@ Switch Echo_Camera_Shuffle                "Shuffle"                             
 
 // Player Information
 String Echo_Camera_Title                  "Title"                                 (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:title"}
-String Echo_Camera_ProviderDisplayName    "Provider"                              (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:providerDisplayName"}
 
 // Commands
-String Echo_Camera_Announcement           "Announcement"                          (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:announcement"}
 String Echo_Camera_TTS                    "Text to Speech"                        (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:textToSpeech"}
 Dimmer Echo_Camera_TTS_Volume             "Text to Speech Volume"                 (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:textToSpeechVolume"}
-String Echo_Camera_Remind                 "Remind"                                (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:remind"}
-String Echo_Camera_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:playAlarmSound"}
 Dimmer Echo_Camera_NotificationVolume     "Notification volume"                   (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:notificationVolume"}
-Switch Echo_Camera_AscendingAlarm         "Ascending alarm"                       (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:ascendingAlarm"}
 
-// Feedbacks
-String Echo_Camera_LastVoiceCommand       "Last voice command"                    (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:echo_camera:lastVoiceCommand"}

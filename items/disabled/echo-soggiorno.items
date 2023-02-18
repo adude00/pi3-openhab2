@@ -10,16 +10,9 @@ Switch Echo_Soggiorno_Shuffle                "Shuffle"                          
 
 // Player Information
 String Echo_Soggiorno_Title                  "Title"                                 (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:title"}
-String Echo_Soggiorno_ProviderDisplayName    "Provider"                              (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:providerDisplayName"}
 
 // Commands
-String Echo_Soggiorno_Announcement           "Announcement"                          (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:announcement"}
 String Echo_Soggiorno_TTS                    "Text to Speech"                        (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:textToSpeech"}
 Dimmer Echo_Soggiorno_TTS_Volume             "Text to Speech Volume"                 (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:textToSpeechVolume"}
-String Echo_Soggiorno_Remind                 "Remind"                                (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:remind"}
-String Echo_Soggiorno_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:playAlarmSound"}
 Dimmer Echo_Soggiorno_NotificationVolume     "Notification volume"                   (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:notificationVolume"}
-Switch Echo_Soggiorno_AscendingAlarm         "Ascending alarm"                       (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:ascendingAlarm"}
 
-// Feedbacks
-String Echo_Soggiorno_LastVoiceCommand       "Last voice command"                    (Alexa_Soggiorno) {channel="amazonechocontrol:echo:8dcf59ae:echo_soggiorno:lastVoiceCommand"}

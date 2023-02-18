@@ -10,7 +10,7 @@ Switch sonoff09_Switch "Ingresso" (sonoff09,gTuya,sonoff)
 
 // POWER
 
-Number sonoff09_Power_Fix     "Sonoff 09: Line True Power [%.1f W]"          <voltage>       (sonoff09,gTuya,gWatt) 
+Number sonoff09_Power_Fix     "Total house Power [%.1f W]"          <voltage>       (sonoff09,gTuya,gWatt,Casa_Consumi_Chart) 
 Number sonoff09_Power         "Sonoff 09: Line True Power [%.1f W]"          <voltage>       (sonoff09,gTuya,gWatt,sonoff09pzem) 
     { mqtt="<[broker:tele/sonoff09/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
 

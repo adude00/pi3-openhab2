@@ -28,6 +28,11 @@ Group gHumd
 
 Group gGraph
 
+// Consumi
+Group  Casa_Consumi_Chart (System, Charts)
+Group  gPower
+Number Casa_Consumi_Chart_Period        "Periodo" (System)
+
 // Debug items groups
 
 // ALL VERSIONS ITEMS
