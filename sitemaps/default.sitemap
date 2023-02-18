@@ -257,7 +257,7 @@ sitemap default label="Casa"
 	Switch    item=tsSoggiornoWait
         Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
 	Switch    item=tsSoggiornoWaitDebug
-
+        Switch item=pow03_Switch
       }
 
     } // Chiuso Text Soggiorno Clima
