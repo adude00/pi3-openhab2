@@ -1,10 +1,14 @@
+Group gThermostat_Matrimoniale "Clima Matrimoniale" [ "Thermostat" ]
+
+
 Switch DaikinMatrimoniale_Power "A/C" { channel="opendaikin:ac_unit:172_27_72_144:power" }
-Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" { channel="opendaikin:ac_unit:172_27_72_144:settemp" }
+Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" (gThermostat_Matrimoniale) [ "homekit:TargetTemperature" ] { channel="opendaikin:ac_unit:172_27_72_144:settemp" }
 String DaikinMatrimoniale_Mode "Mode [ %s]" { channel="opendaikin:ac_unit:172_27_72_144:mode" }
-String DaikinMatrimoniale_HomekitMode { channel="opendaikin:ac_unit:172_27_72_144:homekitmode" }
+//String DaikinMatrimoniale_HomekitMode "Mode [ %s]" (gThermostat_Matrimoniale) [ "homekit:HeatingCoolingMode" ] { channel="opendaikin:ac_unit:172_27_72_144:homekitmode" }
 String DaikinMatrimoniale_Fan "Fan Speed" { channel="opendaikin:ac_unit:172_27_72_144:fanspeed" }
 Number DaikinMatrimoniale_Fan_Number "Fan Speed" (gGraph)
 String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="opendaikin:ac_unit:172_27_72_144:fandir" }
 Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split" { channel="opendaikin:ac_unit:172_27_72_144:indoortemp" }
 Number:Temperature DaikinMatrimoniale_OutdoorTemperature "Temp Esterna" { channel="opendaikin:ac_unit:172_27_72_144:outdoortemp" }
 
+String DaikinMatrimoniale_HomekitMode "Mode [ %s]" (gThermostat_Matrimoniale) [ "homekit:HeatingCoolingMode" ]
