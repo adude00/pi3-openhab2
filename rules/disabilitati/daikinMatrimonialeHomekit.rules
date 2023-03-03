@@ -1,0 +1,28 @@
+// DAIKIN -->> HOMEKIT: 
+// Così alexa dice 
+// - "il condizionatore è impostato a..."
+// - "il riscaldamento è impostato a..."
+rule DaikinMatrimoniale_Mode
+when
+    Item DaikinMatrimoniale_Mode received update
+then
+    if (DaikinMatrimoniale_Mode.state == "heating" ) {
+      postUpdate(DaikinMatrimoniale_HomekitMode, "heat")
+    }
+    if (DaikinMatrimoniale_Mode.state == "cooling" ) {
+      postUpdate(DaikinMatrimoniale_HomekitMode, "cool")
+    }
+end
+
+// HOMEKIT ACCENDE CON TEMPERATURA
+rule DaikinMatrimoniale_SetPoint
+when
+    //Item DaikinMatrimoniale_SetPoint received update // NO: RICEVE COSTANTEMENTE UPDATES DAL BINDINGS
+    Item DaikinMatrimoniale_SetPoint received command
+then
+    //pushNotification("Daikin Matrimoniale", "Setpoint " + DaikinMatrimoniale_SetPoint.state)
+    if (DaikinMatrimoniale_Power.state == OFF) {
+        pushNotification("Daikin Matrimoniale", "Accendo: setpoint " + DaikinMatrimoniale_SetPoint.state)
+        DaikinMatrimoniale_Power.sendCommand(ON)
+    }
+end
