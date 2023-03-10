@@ -5,7 +5,7 @@ Dimmer led03_c_Morning  	"Soffitto Colorato"    <lightbulb>
 Switch sf04_Light_Morning	"Accendi Divano"       <lightbulb>
 Switch sogg_soff_Morning	"Accendi Soffitto"     <lightbulb>
 
-// Aircon
+// CONF Scene_Mattina - Siamo Svegli
 Switch conf_autooff_ac_kid_chng	"Modifica Temperatura"		<settings>
 Number conf_mattina_ac_kid_temp "Temperatura da impostare"      <temperatura>
 Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta"	<flow>
@@ -17,25 +17,27 @@ Number conf_nanna_ac_kid_temp   "Nanna: temp da impostare"      <temperatura>
 Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale"	<flow>
 Switch conf_autooff_desk_ac_bdr	"Spegni AC Matrimoniale con Scrivania"	<flow> (gAutomations)
 
-// Clima Soggiorno
-// Switch conf_autoon_ac_hot_sogg  "Auto ON Riscaldamento Soggiorno"   <settings>
-// Switch conf_autooff_ac_hot_sogg "Auto OFFRiscaldamento Soggiorno"   <settings>
+Switch ac_sog_sveglia_t_on 	"Sveglia Auto-On"              <heating>
+Switch ac_sog_sveglia_change 	"Sveglia Auto Change Temp"     <heating>
+Number ac_sog_sveglia_temp 	"Sveglia Temp [%.1f °C]"       <heating>
 
-Switch ac_sog_night_t_off 	"Night Auto-Off Thermostat"    <heating>
-Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
-Number ac_sog_night_temp 	"Night Temp to set"	       <heating>
 
-Switch ac_sog_usciamo_t_off 	"Usciamo Auto-Off Thermostat"  <heating>
-Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp"     <heating>
-Number ac_sog_usciamo_temp 	"Usciamo Temp to set"	       <heating>
-
-Switch ac_sog_lavoro_t_off 	"Lavoro Auto-Off Thermostat"   <heating>
-Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp"      <heating>
-Number ac_sog_lavoro_temp 	"Lavoro Temp to set"           <heating>
-
-Switch ac_sog_acasa_t_on  	"A Casa Auto-ON Thermostat"    <heating>
+// CONF SOGGIORNO - Scene varie
+Switch ac_sog_acasa_t_on  	"A Casa Auto-On"               <heating>
 Switch ac_sog_acasa_change 	"A Casa Auto Change Temp"      <heating>
-Number ac_sog_acasa_temp 	"A Casa Temp to set"           <heating>
+Number ac_sog_acasa_temp 	"A Casa Temp [%.1f °C]"        <heating>
+
+Switch ac_sog_lavoro_t_off 	"Lavoro Auto-Off"              <heating>
+Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp"      <heating>
+Number ac_sog_lavoro_temp 	"Lavoro Temp [%.1f °C]"        <heating>
+
+Switch ac_sog_usciamo_t_off 	"Usciamo Auto-Off"             <heating>
+Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp"     <heating>
+Number ac_sog_usciamo_temp 	"Usciamo Temp [%.1f °C]"       <heating>
+
+Switch ac_sog_night_t_off 	"Night Auto-Off"               <heating>
+Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
+Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 
 Number sw_restart "Maintenance" <settings>
 

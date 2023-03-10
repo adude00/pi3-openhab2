@@ -1,0 +1,6 @@
+Bridge mqtt:broker:brokerv2 "Mosquitto MQTT Broker v2" [
+	host="mqtt.bluetears.org",
+	secure=false,
+	port=1883,
+	clientID="OpenHABv2"
+]

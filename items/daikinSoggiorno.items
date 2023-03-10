@@ -1,0 +1,52 @@
+Switch acSoggiornoPower "Power" { channel="mqtt:topic:acSoggiorno:power" }
+Switch acSoggiornoStreamer "Streamer" { channel="mqtt:topic:acSoggiorno:streamer" }
+Switch acSoggiornoPowerful "Powerful" { channel="mqtt:topic:acSoggiorno:powerful" }
+Switch acSoggiornoOutdoorSilent "Outdoor Silent" { channel="mqtt:topic:acSoggiorno:outdoorSilent" }
+Switch acSoggiornoEco "Eco" { channel="mqtt:topic:acSoggiorno:eco" }
+
+Number:Temperature acSoggiornoRoomTemp "Split Temp [%.1f]" { channel="mqtt:topic:acSoggiorno:roomTemp" }
+Number:Temperature acSoggiornoOutsideTemp "Outside Temp [%.1f]" (gTemp) { channel="mqtt:topic:acSoggiorno:outsideTemp" }
+
+String acSoggiornoName "Nome in App" { channel="mqtt:topic:acSoggiorno:name" }
+String acSoggiornoMode "Mode" { channel="mqtt:topic:acSoggiorno:mode" }
+
+Number acSoggiornoHeatSetpoint  "H Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:acSoggiorno:HeatSetpoint" }
+Number acSoggiornoCoolSetpoint  "C Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:acSoggiorno:CoolSetpoint" }
+Number acSoggiornoAutoSetpoint  "A Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:acSoggiorno:AutoSetpoint" }
+
+// Heat Fan
+String acSoggiornoHeatFanMode   "H Fan Mode"  { channel="mqtt:topic:acSoggiorno:HeatFanMode" }
+Number acSoggiornoHeatFanSpeed  "H Fan Speed" { channel="mqtt:topic:acSoggiorno:HeatFanSpeed" }
+String acSoggiornoHeatFanSwingH "H Swing ↔"   { channel="mqtt:topic:acSoggiorno:HeatFanSwingH" }
+String acSoggiornoHeatFanSwingV "H Swing ↕"   { channel="mqtt:topic:acSoggiorno:HeatFanSwingV" }
+
+// Cool Fan
+String acSoggiornoCoolFanMode   "C Fan Mode"  { channel="mqtt:topic:acSoggiorno:CoolFanMode" }
+Number acSoggiornoCoolFanSpeed  "C Fan Speed" { channel="mqtt:topic:acSoggiorno:CoolFanSpeed" }
+String acSoggiornoCoolFanSwingH "C Swing ↔"   { channel="mqtt:topic:acSoggiorno:CoolFanSwingH" }
+String acSoggiornoCoolFanSwingV "C Swing ↕"   { channel="mqtt:topic:acSoggiorno:CoolFanSwingV" }
+
+// Auto Fan
+String acSoggiornoAutoFanMode   "A Fan Mode"  { channel="mqtt:topic:acSoggiorno:AutoFanMode" }
+Number acSoggiornoAutoFanSpeed  "A Fan Speed" { channel="mqtt:topic:acSoggiorno:AutoFanSpeed" }
+String acSoggiornoAutoFanSwingH "A Swing ↔"   { channel="mqtt:topic:acSoggiorno:AutoFanSwingH" }
+String acSoggiornoAutoFanSwingV "A Swing ↕"   { channel="mqtt:topic:acSoggiorno:AutoFanSwingV" }
+
+// FanOnly Fan
+String acSoggiornoFanOnlyFanMode   "F Fan Mode"  { channel="mqtt:topic:acSoggiorno:FanOnlyFanMode" }
+Number acSoggiornoFanOnlyFanSpeed  "F Fan Speed" { channel="mqtt:topic:acSoggiorno:FanOnlyFanSpeed" }
+String acSoggiornoFanOnlyFanSwingH "F Swing ↔"   { channel="mqtt:topic:acSoggiorno:FanOnlyFanSwingH" }
+String acSoggiornoFanOnlyFanSwingV "F Swing ↕"   { channel="mqtt:topic:acSoggiorno:FanOnlyFanSwingV" }
+
+// Dry Fan - Only Auto Mode
+String acSoggiornoDryFanMode   "D Fan Mode"  { channel="mqtt:topic:acSoggiorno:DryFanMode" }
+String acSoggiornoDryFanSwingH "D Swing ↔"   { channel="mqtt:topic:acSoggiorno:DryFanSwingH" }
+String acSoggiornoDryFanSwingV "D Swing ↕"   { channel="mqtt:topic:acSoggiorno:DryFanSwingV" }
+
+// OK mqttv1 OK
+//Switch acSoggiornoPower
+//    { mqtt=">[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/onOffMode/set:command:*:MAP(daikin-set.map)],
+//            <[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/onOffMode/value:state:MAP(daikin-value.map)]" }
+
+//Number:Temperature acSoggiornoOutsideTemp "Outside Temp [%.1f]"
+//    { mqtt="<[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/sensoryData//outdoorTemperature/value:state:default]" }

@@ -17,8 +17,8 @@ then
   // TERMOSTATO
   if (ac_sog_lavoro_t_off.state == ON) {
     createTimer(now.plusSeconds(3),  [ |
-      if (tsSoggiorno.state == ON) {
-        tsSoggiorno.sendCommand(OFF)
+      if (acSoggiornoPower.state == ON) {
+        acSoggiornoPower.sendCommand(OFF)
       logInfo("Scene","Scena Lavoro: termostato spento")
       }
     ])
@@ -27,7 +27,7 @@ then
   // IMPOSTA TEMP
   if (ac_sog_lavoro_change.state == ON) {
     createTimer(now.plusSeconds(7),  [ |
-      Air_Conditioner_Temperature.sendCommand(ac_sog_lavoro_temp.state as Number)
+      acSoggiornoHeatSetpoint.sendCommand(ac_sog_lavoro_temp.state as Number)
       logInfo("Scene","Scena Lavoro: temperatura richiesta impostata")
     ])
   }
@@ -62,8 +62,8 @@ then
   // TERMOSTATO
   if (ac_sog_acasa_t_on.state == ON) {
     createTimer(now.plusSeconds(3),  [ |
-      if (tsSoggiorno.state == OFF) {
-        tsSoggiorno.sendCommand(ON)
+      if (acSoggiornoPower.state == OFF) {
+        acSoggiornoPower.sendCommand(ON)
       logInfo("Scene","Scena A Casa: termostato acceso")
       }
     ])
@@ -72,7 +72,7 @@ then
   // IMPOSTA TEMP
   if (ac_sog_acasa_change.state == ON) {
     createTimer(now.plusSeconds(7),  [ |
-      Air_Conditioner_Temperature.sendCommand(ac_sog_acasa_temp.state as Number)
+      acSoggiornoHeatSetpoint.sendCommand(ac_sog_acasa_temp.state as Number)
       logInfo("Scene","Scena A Casa: temperatura richiesta impostata")
     ])
   }
@@ -92,6 +92,20 @@ then
   var Number led03_c = led03_c_Morning.state
 
   
+  // SOGGIORNO - AUTO ON
+  if (ac_sog_sveglia_t_on.state == ON) {
+    logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Clima")
+    acSoggiornoPower.sendCommand(ON)
+  }
+  // SOGGIORNO - CHANGE TEMP
+  if (ac_sog_sveglia_change.state == ON) {
+    createTimer(now.plusSeconds(7), [|
+      val int tempNum01 = (ac_sog_sveglia_temp.state as Number).intValue
+      acSoggiornoHeatSetpoint.sendCommand(tempNum01)
+      logInfo("Scene","MATTINA: Cambio temp soggiorno fatto.")
+    ])
+  }
+
   // CAMERETTA - AUTO OFF
   if (conf_autooff_ac_kid.state == ON) {
     logInfo("Scene","MATTINA: AutoOFF cameretta: Timer Partito")
@@ -123,19 +137,19 @@ then
 
   // A/C Soggiorno
 
-  if (tsSoggiorno.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
+  if (acSoggiornoPower.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
 
       // Termostato
       if (WakeUpTs.state == ON) {  // Se decido di accendere il termostato
         createTimer(now.plusSeconds(3),  [ |
-          tsSoggiorno.sendCommand(ON)
+          acSoggiornoPower.sendCommand(ON)
           logInfo("Scene","SVEGLIA: WakeUpTs=ON: Termostato Acceso")
         ])
       }  
 
 
     if (WakeUpACNow.state == ON) {  // Se decido di accendere il clima
-      Air_Conditioner_Temperature.sendCommand(WakeUpACTemp.state as Number) // Imposto la temp selezionata
+      acSoggiornoHeatSetpoint.sendCommand(WakeUpACTemp.state as Number) // Imposto la temp selezionata
       logInfo("Scene","SVEGLIA: WakeUpACNow=ON: A/C ON")
   
     }
@@ -154,7 +168,7 @@ then
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
-    //Air_Conditioner_Temperature.sendCommand(23.0)
+    //acSoggiornoHeatSetpoint.sendCommand(23.0)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena MATTINA: finita")
     ])
@@ -182,8 +196,8 @@ then
     // TERMOSTATO
     if (ac_sog_usciamo_t_off.state == ON) {
       createTimer(now.plusSeconds(3),  [ |
-        if (tsSoggiorno.state == ON) {
-          tsSoggiorno.sendCommand(OFF)
+        if (acSoggiornoPower.state == ON) {
+          acSoggiornoPower.sendCommand(OFF)
         logInfo("Scene","Scena Usciamo: termostato spento")
         }
       ])
@@ -192,7 +206,7 @@ then
     // IMPOSTA TEMP
     if (ac_sog_usciamo_change.state == ON) {
       createTimer(now.plusSeconds(7),  [ |
-        Air_Conditioner_Temperature.sendCommand(ac_sog_usciamo_temp.state as Number)
+        acSoggiornoHeatSetpoint.sendCommand(ac_sog_usciamo_temp.state as Number)
         logInfo("Scene","Scena Usciamo: temperatura richiesta impostata")
       ])
     }
@@ -239,8 +253,8 @@ then
     // TERMOSTATO
     if (ac_sog_night_t_off.state == ON) {
       createTimer(now.plusSeconds(3),  [ |
-        if (tsSoggiorno.state == ON) {
-          tsSoggiorno.sendCommand(OFF)
+        if (acSoggiornoPower.state == ON) {
+          acSoggiornoPower.sendCommand(OFF)
         logInfo("Scene","Scena A Letto: termostato spento")
         }
       ])
@@ -249,7 +263,7 @@ then
     // IMPOSTA TEMP
     if (ac_sog_night_change.state == ON) {
       createTimer(now.plusSeconds(7),  [ |
-        Air_Conditioner_Temperature.sendCommand(ac_sog_night_temp.state as Number)
+        acSoggiornoHeatSetpoint.sendCommand(ac_sog_night_temp.state as Number)
 	logInfo("Scene","Scena A Letto: temperatura richiesta impostata")
       ])
     }
@@ -282,8 +296,12 @@ when
 then
     logInfo("Scene","Scena SOLE: iniziata")
     Tapp01.sendCommand(DOWN)
-    createTimer(now.plusSeconds(22), [|
+    createTimer(now.plusSeconds(20), [|
       Tapp01.sendCommand(STOP)
+    ])
+    Tapp02.sendCommand(DOWN)
+    createTimer(now.plusSeconds(22), [|
+      Tapp02.sendCommand(STOP)
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena SOLE: finita")
     ])
