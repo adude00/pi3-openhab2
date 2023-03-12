@@ -15,11 +15,20 @@ then
 
 
   // TERMOSTATO
-  if (ac_sog_lavoro_t_off.state == ON) {
+  if (ts_sog_lavoro_off.state == ON) {
     createTimer(now.plusSeconds(3),  [ |
+      if (tsSoggiorno.state == ON) {
+        tsSoggiorno.sendCommand(OFF)
+      logInfo("Scene","Scena Lavoro: termostato spento")
+      }
+    ])
+  }
+  // AIRCON
+  if (ac_sog_lavoro_off.state == ON) {
+    createTimer(now.plusSeconds(5),  [ |
       if (acSoggiornoPower.state == ON) {
         acSoggiornoPower.sendCommand(OFF)
-      logInfo("Scene","Scena Lavoro: termostato spento")
+      logInfo("Scene","Scena Lavoro: aircon spento")
       }
     ])
   }
@@ -59,11 +68,20 @@ then
     logInfo("Scene","Scena A CASA: finita")
     ])
 
-  // TERMOSTATO
-  if (ac_sog_acasa_t_on.state == ON) {
+  // AIRCON
+  if (ac_sog_acasa_on.state == ON) {
     createTimer(now.plusSeconds(3),  [ |
       if (acSoggiornoPower.state == OFF) {
         acSoggiornoPower.sendCommand(ON)
+      logInfo("Scene","Scena A Casa: aircon acceso")
+      }
+    ])
+  }
+  // TERMOSTATO
+  if (ts_sog_acasa_on.state == ON) {
+    createTimer(now.plusSeconds(5),  [ |
+      if (tsSoggiorno.state == OFF) {
+        tsSoggiorno.sendCommand(ON)
       logInfo("Scene","Scena A Casa: termostato acceso")
       }
     ])
@@ -92,10 +110,19 @@ then
   var Number led03_c = led03_c_Morning.state
 
   
-  // SOGGIORNO - AUTO ON
-  if (ac_sog_sveglia_t_on.state == ON) {
-    logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Clima")
-    acSoggiornoPower.sendCommand(ON)
+  // SOGGIORNO - CLIMA ON
+  if (ac_sog_sveglia_on.state == ON) {
+    createTimer(now.plusSeconds(3), [|
+      acSoggiornoPower.sendCommand(ON)
+      logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Clima")
+    ])
+  }
+  // SOGGIORNO - TERMOSTATO ON
+  if (ts_sog_sveglia_on.state == ON) {
+    createTimer(now.plusSeconds(5), [|
+      tsSoggiorno.sendCommand(ON)
+      logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Termostato")
+    ])
   }
   // SOGGIORNO - CHANGE TEMP
   if (ac_sog_sveglia_change.state == ON) {
@@ -135,24 +162,17 @@ then
   }
 
 
-  // A/C Soggiorno
+  // TS Soggiorno
 
-  if (acSoggiornoPower.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
+  if (tsSoggiorno.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
 
       // Termostato
       if (WakeUpTs.state == ON) {  // Se decido di accendere il termostato
-        createTimer(now.plusSeconds(3),  [ |
-          acSoggiornoPower.sendCommand(ON)
+        createTimer(now.plusSeconds(5),  [ |
+          tsSoggiorno.sendCommand(ON)
           logInfo("Scene","SVEGLIA: WakeUpTs=ON: Termostato Acceso")
         ])
       }  
-
-
-    if (WakeUpACNow.state == ON) {  // Se decido di accendere il clima
-      acSoggiornoHeatSetpoint.sendCommand(WakeUpACTemp.state as Number) // Imposto la temp selezionata
-      logInfo("Scene","SVEGLIA: WakeUpACNow=ON: A/C ON")
-  
-    }
 
   } // FINE A/C Soggiorno
 
@@ -194,11 +214,20 @@ then
     ])
 
     // TERMOSTATO
-    if (ac_sog_usciamo_t_off.state == ON) {
+    if (ts_sog_usciamo_off.state == ON) {
       createTimer(now.plusSeconds(3),  [ |
+        if (tsSoggiorno.state == ON) {
+          tsSoggiorno.sendCommand(OFF)
+        logInfo("Scene","Scena Usciamo: termostato spento")
+        }
+      ])
+    }
+    // AIRCON
+    if (ac_sog_usciamo_off.state == ON) {
+      createTimer(now.plusSeconds(5),  [ |
         if (acSoggiornoPower.state == ON) {
           acSoggiornoPower.sendCommand(OFF)
-        logInfo("Scene","Scena Usciamo: termostato spento")
+        logInfo("Scene","Scena Usciamo: aircon spento")
         }
       ])
     }
@@ -251,11 +280,20 @@ then
     ])
 
     // TERMOSTATO
-    if (ac_sog_night_t_off.state == ON) {
+    if (ts_sog_night_off.state == ON) {
       createTimer(now.plusSeconds(3),  [ |
+        if (tsSoggiorno.state == ON) {
+          tsSoggiorno.sendCommand(OFF)
+        logInfo("Scene","Scena A Letto: termostato spento")
+        }
+      ])
+    }
+    // AIRCON
+    if (ac_sog_night_off.state == ON) {
+      createTimer(now.plusSeconds(5),  [ |
         if (acSoggiornoPower.state == ON) {
           acSoggiornoPower.sendCommand(OFF)
-        logInfo("Scene","Scena A Letto: termostato spento")
+        logInfo("Scene","Scena A Letto: aircon spento")
         }
       ])
     }
