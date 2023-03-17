@@ -130,9 +130,7 @@ sitemap default label="Casa"
 	    Switch    item=conf_autooff_ac_bdr
 	  }
 	  Frame label="Clima Soggiorno" {
-            Switch item=WakeUpACNow      label="Imposta Temperatura"       icon=flow
-	    Selection item=WakeUpACTemp  label="Temperatura"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpACNow==ON]
-          Switch item=WakeUpTs          label="Accendi Termostato"
+            Switch item=WakeUpTs          label="Accendi Termostato"
 	  }
 	}  // SCENA Mattina
 
@@ -160,8 +158,6 @@ sitemap default label="Casa"
           Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
           Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
           Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
-          Switch item=WakeUpACNow       label="A/C Standard"    visibility=[WakeUpScene==OFF]
-          Selection item=WakeUpACTemp  label="Temperatura A/C"   mappings=[10.0='OFF', 17.0='17 C', 18.0='18 C', 19.0='19 C', 20.0='20 C', 21.0='21 C', 23.0='23 C', 30.0='30 C', 31.0='30 Turbo']  visibility=[WakeUpScene==OFF] 
           Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
         }
 
@@ -169,33 +165,35 @@ sitemap default label="Casa"
           Text label="La sveglia si allarma alle 3.07am"
           Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
         }
-	Frame label="Old" {
-          Switch item=WakeUpTsSlow      label="Auto Termostato Slow"
-	}
       }  // Chiuso Text Sveglia
 	Text label="Clima Soggiorno" icon="settings" {
           Frame label="Override Sveglia" {
-	    Switch      item=ac_sog_sveglia_t_on    icon="settings"
+	    Switch      item=ts_sog_sveglia_on    icon="settings"
+	    Switch      item=ac_sog_sveglia_on    icon="settings"
 	    Switch      item=ac_sog_sveglia_change  icon="settings"
 	    Setpoint    item=ac_sog_sveglia_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_sveglia_change==ON]
 	  }
           Frame label="Override A Casa" {
-	    Switch      item=ac_sog_acasa_t_on      icon="settings"
+	    Switch      item=ts_sog_acasa_on      icon="settings"
+	    Switch      item=ac_sog_acasa_on      icon="settings"
 	    Switch      item=ac_sog_acasa_change    icon="settings"
 	    Setpoint    item=ac_sog_acasa_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_acasa_change==ON]
 	  }
 	  Frame label="Override Lavoro" {
-	    Switch      item=ac_sog_lavoro_t_off    icon="settings"
+	    Switch      item=ts_sog_lavoro_off    icon="settings"
+	    Switch      item=ac_sog_lavoro_off    icon="settings"
 	    Switch      item=ac_sog_lavoro_change   icon="settings"
 	    Setpoint    item=ac_sog_lavoro_temp     minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_lavoro_change==ON]
 	  }
 	  Frame label="Override Usciamo" {
-	    Switch      item=ac_sog_usciamo_t_off   icon="settings"
+	    Switch      item=ts_sog_usciamo_off   icon="settings"
+	    Switch      item=ac_sog_usciamo_off   icon="settings"
 	    Switch      item=ac_sog_usciamo_change  icon="settings"
 	    Setpoint    item=ac_sog_usciamo_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_usciamo_change==ON]
 	  }
 	  Frame label="Override Notte" {
-	    Switch      item=ac_sog_night_t_off     icon="settings"
+	    Switch      item=ts_sog_night_off     icon="settings"
+	    Switch      item=ac_sog_night_off     icon="settings"
 	    Switch      item=ac_sog_night_change    icon="settings"
 	    Setpoint    item=ac_sog_night_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_night_change==ON]
 	  }
@@ -294,13 +292,14 @@ sitemap default label="Casa"
       }
 
       Frame label="A/C Auto DEBUG"  {
-        Switch    item=tsSoggiornoBagnetto      icon=bath
+        //Switch    item=tsSoggiornoBagnetto      icon=bath
 	Switch    item=tsSoggiornoOverride	icon=settings
-        Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
+        //Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
+        //Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
 	Switch    item=tsSoggiornoWait
         Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
 	Switch    item=tsSoggiornoWaitDebug
+	Switch    item=tsSoggiornoRunning
         Switch item=pow03_Switch
       }
 

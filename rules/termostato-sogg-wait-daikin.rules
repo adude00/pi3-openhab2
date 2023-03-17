@@ -1,4 +1,4 @@
-rule "Spegni il wait"
+rule "Reset termostato items at boot"
   when
     System started or
     Item tsSoggiorno changed to ON
@@ -88,7 +88,7 @@ then
               if ( acTemp < acTempMax ) {
                 // INCREASE TEMP IF WE CAN
                 acTemp = acTemp + acTempStep
-                acSoggiornoHeatSetpoint.sendCommand(acTemp)
+                acSoggiornoCooltSetpoint.sendCommand(acTemp)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
               } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
@@ -105,7 +105,7 @@ then
             if ( acTemp < acTempMax ) {
             // WE CAN INCREASE TEMP
               acTemp = acTemp + acTempStep
-              acSoggiornoCoolSetpoint.sendCommand(acTemp)
+              acSoggiornoHeatSetpoint.sendCommand(acTemp)
               if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
               if (acSoggiornoPower.state == OFF ) {
                 // TURN ON IF OFF

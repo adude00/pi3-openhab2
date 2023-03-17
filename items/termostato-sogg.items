@@ -17,6 +17,7 @@ Number tsSoggiornoType	"Nuovo algoritmo"	<settings>	(gTermoSogg)
 
 
 Switch tsSoggiornoWait 		"Ts is Waiting..."		<lock> (gTermoSogg)
+Switch tsSoggiornoRunning	"Ts is Running..."		<lock> (gTermoSogg)
 Number tsSoggiornoWaitMins	"Minutes to Wait"		<time> (gTermoSogg)
 Number tsSoggiornoWaitMaxTemp	"Temperatura Massima [%.1f °C]"		<temperature_hot> (gTermoSogg)
 Number tsSoggiornoWaitMinTemp	"Temperatura Minima [%.1f °C]"		<temperature_hot> (gTermoSogg)

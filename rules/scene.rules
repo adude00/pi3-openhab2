@@ -68,9 +68,16 @@ then
     logInfo("Scene","Scena A CASA: finita")
     ])
 
+  // IMPOSTA TEMP
+  if (ac_sog_acasa_change.state == ON) {
+    createTimer(now.plusSeconds(3),  [ |
+      acSoggiornoHeatSetpoint.sendCommand(ac_sog_acasa_temp.state as Number)
+      logInfo("Scene","Scena A Casa: temperatura richiesta impostata")
+    ])
+  }
   // AIRCON
   if (ac_sog_acasa_on.state == ON) {
-    createTimer(now.plusSeconds(3),  [ |
+    createTimer(now.plusSeconds(5),  [ |
       if (acSoggiornoPower.state == OFF) {
         acSoggiornoPower.sendCommand(ON)
       logInfo("Scene","Scena A Casa: aircon acceso")
@@ -79,23 +86,13 @@ then
   }
   // TERMOSTATO
   if (ts_sog_acasa_on.state == ON) {
-    createTimer(now.plusSeconds(5),  [ |
+    createTimer(now.plusSeconds(7),  [ |
       if (tsSoggiorno.state == OFF) {
         tsSoggiorno.sendCommand(ON)
       logInfo("Scene","Scena A Casa: termostato acceso")
       }
     ])
   }
-
-  // IMPOSTA TEMP
-  if (ac_sog_acasa_change.state == ON) {
-    createTimer(now.plusSeconds(7),  [ |
-      acSoggiornoHeatSetpoint.sendCommand(ac_sog_acasa_temp.state as Number)
-      logInfo("Scene","Scena A Casa: temperatura richiesta impostata")
-    ])
-  }
-
-
 
 end
 
@@ -110,26 +107,25 @@ then
   var Number led03_c = led03_c_Morning.state
 
   
+  // SOGGIORNO - CHANGE TEMP
+  if (ac_sog_sveglia_change.state == ON) {
+    createTimer(now.plusSeconds(3), [|
+      acSoggiornoHeatSetpoint.sendCommand(ac_sog_sveglia_temp.state as Number)
+      logInfo("Scene","MATTINA: Cambio temp soggiorno fatto. Temperatura impostata: " + ac_sog_sveglia_temp.state + "C")
+    ])
+  }
   // SOGGIORNO - CLIMA ON
   if (ac_sog_sveglia_on.state == ON) {
-    createTimer(now.plusSeconds(3), [|
+    createTimer(now.plusSeconds(5), [|
       acSoggiornoPower.sendCommand(ON)
       logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Clima")
     ])
   }
   // SOGGIORNO - TERMOSTATO ON
   if (ts_sog_sveglia_on.state == ON) {
-    createTimer(now.plusSeconds(5), [|
+    createTimer(now.plusSeconds(37), [|
       tsSoggiorno.sendCommand(ON)
       logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Termostato")
-    ])
-  }
-  // SOGGIORNO - CHANGE TEMP
-  if (ac_sog_sveglia_change.state == ON) {
-    createTimer(now.plusSeconds(7), [|
-      val int tempNum01 = (ac_sog_sveglia_temp.state as Number).intValue
-      acSoggiornoHeatSetpoint.sendCommand(tempNum01)
-      logInfo("Scene","MATTINA: Cambio temp soggiorno fatto.")
     ])
   }
 
@@ -161,20 +157,6 @@ then
     DaikinMatrimoniale_Power.sendCommand(OFF)
   }
 
-
-  // TS Soggiorno
-
-  if (tsSoggiorno.state == OFF) {   // AGISCI SOLO SE IL TS E' SPENTO
-
-      // Termostato
-      if (WakeUpTs.state == ON) {  // Se decido di accendere il termostato
-        createTimer(now.plusSeconds(5),  [ |
-          tsSoggiorno.sendCommand(ON)
-          logInfo("Scene","SVEGLIA: WakeUpTs=ON: Termostato Acceso")
-        ])
-      }  
-
-  } // FINE A/C Soggiorno
 
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
