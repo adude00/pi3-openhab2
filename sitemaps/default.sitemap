@@ -213,7 +213,7 @@ sitemap default label="Casa"
     Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
       Frame label="A/C Manual" {
         Switch    item=acSoggiornoPower
-	Selection item=acSoggiornoMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"]
+	Selection item=acSoggiornoMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
 	Setpoint  item=acSoggiornoHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==heating] 
 	Setpoint  item=acSoggiornoCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==cooling, acSoggiornoMode==dry] 
 	Setpoint  item=acSoggiornoAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==auto] 
@@ -226,15 +226,15 @@ sitemap default label="Casa"
 
       Frame label="A/C Fan Control" visibility=[acSoggiornoPower==ON] {
         // Heat
-	Selection item=acSoggiornoHeatFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==heating]
+	Selection item=acSoggiornoHeatFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[acSoggiornoMode==heating]
+	Switch    item=acSoggiornoHeatFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[acSoggiornoMode==heating]
+	Switch    item=acSoggiornoHeatFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==heating]
+	Switch    item=acSoggiornoHeatFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==heating]
         // Cool
-        Selection item=acSoggiornoCoolFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==cooling]
+        Selection item=acSoggiornoCoolFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[acSoggiornoMode==cooling]
+        Switch    item=acSoggiornoCoolFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[acSoggiornoMode==cooling]
+        Switch    item=acSoggiornoCoolFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==cooling]
+        Switch    item=acSoggiornoCoolFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==cooling]
         // Auto
         Selection item=acSoggiornoAutoFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[acSoggiornoMode==auto]
         Switch    item=acSoggiornoAutoFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[acSoggiornoMode==auto]

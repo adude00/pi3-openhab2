@@ -5,6 +5,7 @@ rule "Reset termostato items at boot"
   then
     tsSoggiornoWait.sendCommand(OFF)
     tsSoggiornoRunning.sendCommand(OFF)
+    logInfo("tsSoggiornoWait","System started. Turning off tsSoggiornoWait and tsSoggiornoRunning")
 end
 
 
