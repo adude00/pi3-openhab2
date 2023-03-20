@@ -1,8 +1,8 @@
 // Termostato HOMEKIT
-Group gTermoCameretta "Cameretta" [ "Thermostat" ] 
+Group gTermoCameretta "Cameretta"
 
-Number spCameretta    "Setpoint Cameretta [%.1f °C]"  		<temperature> 	(gTermoCameretta)	[ "TargetTemperature" ]
-String mdCameretta    "Cameretta Heating/Cooling Mode"			(gTermoCameretta)	[ "homekit:HeatingCoolingMode" ]
+Number spCameretta    "Setpoint Cameretta [%.1f °C]"  		<temperature> 	(gTermoCameretta)
+String mdCameretta    "Cameretta Heating/Cooling Mode"			(gTermoCameretta)
 
 // Termostato WEB, non parte di homekit
 Switch tsCameretta   "Termosifone"  (gFinto)  [ "Switchable" ]

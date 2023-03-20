@@ -1,11 +1,11 @@
 Group gInitializeTen
 
-Group gSoggThermostat "Clima Comfee" (gFF) [ "Thermostat" ]
+Group gSoggThermostat "Clima Comfee" (gFF)
 
 Switch Air_Conditioner 			        "A/C"  			        <air_conditioner> 	  (Appliance,gInitializeTen) 
-String Air_Conditioner_Mode 		    "Mode"  		        <settings> 		        (Appliance,gSoggThermostat)   [ "homekit:HeatingCoolingMode" ]
+String Air_Conditioner_Mode 		    "Mode"  		        <settings> 		        (Appliance,gSoggThermostat)
 
-Number Air_Conditioner_Temperature 	"Condizionatore"	  <heating> 		        (Appliance,gSoggThermostat,gTemp)   [ "TargetTemperature" ] 
+Number Air_Conditioner_Temperature 	"Condizionatore"	  <heating> 		        (Appliance,gSoggThermostat,gTemp)
 
 String Air_Conditioner_Airdir		"Air Direction"		<climate>		(Appliance)
 Switch Air_Conditioner_Timer 		"Timer"  		<clock> 		(Appliance) 
