@@ -1,9 +1,9 @@
-Switch DaikinMatrimoniale_Power "A/C" { channel="opendaikin:ac_unit:172_27_72_144:power" }
-Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" { channel="opendaikin:ac_unit:172_27_72_144:settemp" }
-String DaikinMatrimoniale_Mode "Mode [ %s]" { channel="opendaikin:ac_unit:172_27_72_144:mode" }
-String DaikinMatrimoniale_Fan "Fan Speed" { channel="opendaikin:ac_unit:172_27_72_144:fanspeed" }
+Switch DaikinMatrimoniale_Power "A/C" { channel="daikin:ac_unit:DaikinAP05103:power" }
+Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" { channel="daikin:ac_unit:DaikinAP05103:settemp" }
+String DaikinMatrimoniale_Mode "Mode [ %s]" { channel="daikin:ac_unit:DaikinAP05103:mode" }
+String DaikinMatrimoniale_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP05103:fanspeed" }
 Number DaikinMatrimoniale_Fan_Number "Fan Speed" (gGraph)
-String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="opendaikin:ac_unit:172_27_72_144:fandir" }
-Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split" { channel="opendaikin:ac_unit:172_27_72_144:indoortemp" }
-Number:Temperature DaikinMatrimoniale_OutdoorTemperature "Temp Esterna" { channel="opendaikin:ac_unit:172_27_72_144:outdoortemp" }
+String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP05103:fandir" }
+Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split" { channel="daikin:ac_unit:DaikinAP05103:indoortemp" }
+Number:Temperature DaikinMatrimoniale_OutdoorTemperature "Temp Esterna" { channel="daikin:ac_unit:DaikinAP05103:outdoortemp" }
 

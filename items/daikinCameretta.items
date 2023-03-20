@@ -1,14 +1,9 @@
-Switch DaikinCameretta_Power "A/C" { channel="opendaikin:ac_unit:172_27_72_148:power" }
-Number:Temperature DaikinCameretta_SetPoint "SetPoint" (gTemp) { channel="opendaikin:ac_unit:172_27_72_148:settemp" }
-String DaikinCameretta_Mode "Mode" { channel="opendaikin:ac_unit:172_27_72_148:mode" }
-String DaikinCameretta_HomekitMode { channel="opendaikin:ac_unit:172_27_72_148:homekitmode" }
-String DaikinCameretta_Fan "Fan Speed" { channel="opendaikin:ac_unit:172_27_72_148:fanspeed" }
+Switch DaikinCameretta_Power "A/C" { channel="daikin:ac_unit:DaikinAP37843:power" }
+Number:Temperature DaikinCameretta_SetPoint "SetPoint" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:settemp" }
+String DaikinCameretta_Mode "Mode" { channel="daikin:ac_unit:DaikinAP37843:mode" }
+String DaikinCameretta_HomekitMode { channel="daikin:ac_unit:DaikinAP37843:homekitmode" }
+String DaikinCameretta_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP37843:fanspeed" }
 Number DaikinCameretta_Fan_Number "Fan Speed" (gGraph)
-String DaikinCameretta_Fan_Movement "Air Direction" { channel="opendaikin:ac_unit:172_27_72_148:fandir" }
-Number:Temperature DaikinCameretta_IndoorTemperature "Temp Split [%.1f °C]" { channel="opendaikin:ac_unit:172_27_72_148:indoortemp" }
-Number:Temperature DaikinCameretta_OutdoorTemperature "Temp Esterna [%.1f °C]" (gTemp) { channel="opendaikin:ac_unit:172_27_72_148:outdoortemp" }
-
-
-Number DaikinCameretta_MaxTemp "Temp Max [%.1f °C]"
-Number DaikinCameretta_MinTemp "Temp Min [%.1f °C]"
-Switch DaikinCameretta_AntiSpike "Anti Spike"
+String DaikinCameretta_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP37843:fandir" }
+Number:Temperature DaikinCameretta_IndoorTemperature "Temp Split [%.1f °C]" { channel="daikin:ac_unit:DaikinAP37843:indoortemp" }
+Number:Temperature DaikinCameretta_OutdoorTemperature "Temp Esterna [%.1f °C]" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }

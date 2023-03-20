@@ -382,12 +382,7 @@ sitemap default label="Casa"
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=esp01_Temp   label="ETHAN: Temperatura" { 
-	  Text      item=esp01_Temp   label="ETHAN: Temperatura"
-	  Switch   item=DaikinCameretta_AntiSpike
-          Setpoint item=DaikinCameretta_MaxTemp icon=temperature step=0.1 minValue=19 maxValue=24
-          Setpoint item=DaikinCameretta_MinTemp icon=temperature step=0.1 minValue=19 maxValue=24
-        }
+        Text      item=esp01_Temp   label="ETHAN: Temperatura" 
         Text      item=esp01_Humid  label="ETHAN: Umidità"
         Text      item=esp02_Temp   label="GIRLS: Temperatura"
         Text      item=esp02_Humid  label="GIRLS: Umidità"
@@ -516,7 +511,6 @@ sitemap default label="Casa"
         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
         Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
         Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
-        Text item=tuya06_Power		label="Termo: [%.0f W]" icon=radiator
         Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
         Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu
         Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
