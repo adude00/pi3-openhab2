@@ -769,6 +769,26 @@ sitemap default label="Casa"
 	  Group item=gTappUptime  label="Debug Tapparelle Uptime"
 	}
       }
+      Frame label="Tasmota Things" {
+		Group item=t_sonoff    label="ALL Tasmota Things"
+		Text label="Per Tasmota" {
+			Group item=t_sonoff02
+			Group item=t_sonoff05
+		}
+		Text label="Per Type" {
+			Group item=gSwitch 
+			Group item=gTemp   
+			Group item=gHumd   
+			Group item=gWatt 
+			Group item=gVersion
+			Group item=gReachable
+			Group item=gRSSI
+			Group item=gLoad
+			Group item=gResult
+			Group item=gUptime
+			Group item=gReason
+		}
+      }
     } // CHIUSO Text Tasmota Devices
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {

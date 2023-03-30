@@ -1,0 +1,33 @@
+Group t_sonoff02      "sonoff02: Terrazza"
+
+// ITEM SPECIFIC
+Number Terrazza_Cart_Period     "Periodo" (System)
+
+Switch                Terrazza        "Irrigazione:"        <rain>                                                 {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
+Number:Temperature    Terrazza_Temp   "Terrazza [%.1f °C]"  <temperature>  (gTemp,Fuori_Temperature_Chart,gGraph)  {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
+Number:Dimensionless  Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHumd,Fuori_Umidita_Chart,gGraph)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
+
+
+// DEFAULT FOR ALL
+// device specific properties
+Switch               sonoff02_switch        "sonoff02 Switch"                <poweroutlet> (t_sonoff,t_sonoff02,gSwitch)    {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
+Number:Temperature   sonoff02_Temp          "sonoff02 Temperature [%.1f °C]" <temperature> (t_sonoff,t_sonoff02,gTemp)      {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
+Number:Dimensionless sonoff02_Humi          "sonoff02 Humidity [%.1f %%]"       <humidity> (t_sonoff,t_sonoff02,gHumd)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
+
+//Number:Power       sonoff02_Power         "Power [%.1f W]"                      <energy> (t_sonoff,t_sonoff02,gPower)     {channel="mqtt:topic:tasmota:sonoff02:Power"}
+
+// Tasmota Status
+String               sonoff02_Refresh       "sonoff02 Time [%s]"                   <clock> (t_sonoff,t_sonoff02,gTime)      {channel="mqtt:topic:tasmota:sonoff02:Time"}
+String               sonoff02_Version       "sonoff02 Version [%s]"                        (t_sonoff,t_sonoff02,gVersion)   {channel="mqtt:topic:tasmota:sonoff02:Version"}
+String               sonoff02_Reachable     "sonoff02 Reachable [%s]"             <switch> (t_sonoff,t_sonoff02,gReachable) {channel="mqtt:topic:tasmota:sonoff02:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sonoff02_RSSI          "sonoff02 Signal [%d %%]" <network>            (t_sonoff,t_sonoff02,gRSSI)      {channel="mqtt:topic:tasmota:sonoff02:RSSI"}
+Number:Dimensionless sonoff02_LoadAvg       "sonoff02 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff02,gLoad)      {channel="mqtt:topic:tasmota:sonoff02:LoadAvg"}
+String               sonoff02_Result        "sonoff02 Result [%s]"    <status>             (t_sonoff,t_sonoff02,gResult)    {channel="mqtt:topic:tasmota:sonoff02:Result"}
+String               sonoff02_Uptime        "sonoff02 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff02,gUptime)    {channel="mqtt:topic:tasmota:sonoff02:Uptime"}
+String               sonoff02_RestartReason "sonoff02 Reason [%s]"    <error>              (t_sonoff,t_sonoff02,gReason)    {channel="mqtt:topic:tasmota:sonoff02:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sonoff02_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff02) {channel="mqtt:topic:tasmota:sonoff02:WifiDowntime"}
+

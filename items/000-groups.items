@@ -1,4 +1,5 @@
 Group sonoff
+Group t_sonoff
 Group gRSSI
 Group gReachable
 Group gUptime
@@ -37,6 +38,10 @@ Number Casa_Consumi_Chart_Period        "Periodo" (System)
 
 // ALL VERSIONS ITEMS
 Group gVersion
+Group gLoad
+Group gReason
+Group gResult
+Group gSwitch
 
 // Specific version items
 Group gSDK

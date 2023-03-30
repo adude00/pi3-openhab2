@@ -318,13 +318,10 @@ then
     Tapp01.sendCommand(DOWN)
     createTimer(now.plusSeconds(20), [|
       Tapp01.sendCommand(STOP)
-    ])
-    Tapp02.sendCommand(DOWN)
-    createTimer(now.plusSeconds(22), [|
-      Tapp02.sendCommand(STOP)
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena SOLE: finita")
     ])
+    Tapp02.sendCommand(DOWN)
 end
 
 

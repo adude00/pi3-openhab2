@@ -1,0 +1,31 @@
+Group t_sonoff05      "sonoff05: Specchio"
+
+// ITEM SPECIFIC
+Switch                sf05_Light   "Specchio"                 <light>        (gLuci)  [ "Lighting" ]                             {channel="mqtt:topic:tasmota:sonoff05:PowerSwitch"}
+Number:Temperature    sf05_Temp   "Temp. Specchio [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartBdrmT,gGraph)   {channel="mqtt:topic:tasmota:sonoff05:Temperature"}
+Number:Dimensionless  sf05_Humid  "Umid. Specchio [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart,gChartBdrmH,gGraph)       {channel="mqtt:topic:tasmota:sonoff05:Humidity"}
+
+
+// DEFAULT FOR ALL
+// device specific properties
+Switch               sonoff05_switch        "sonoff05 Switch"                <poweroutlet> (t_sonoff,t_sonoff05,gSwitch)    {channel="mqtt:topic:tasmota:sonoff05:PowerSwitch"}
+Number:Temperature   sonoff05_Temp          "sonoff05 Temperature [%.1f °C]" <temperature> (t_sonoff,t_sonoff05,gTemp)      {channel="mqtt:topic:tasmota:sonoff05:Temperature"}
+Number:Dimensionless sonoff05_Humi          "sonoff05 Humidity [%.1f %%]"       <humidity> (t_sonoff,t_sonoff05,gHumd)      {channel="mqtt:topic:tasmota:sonoff05:Humidity"}
+
+//Number:Power       sonoff05_Power         "Power [%.1f W]"                      <energy> (t_sonoff,t_sonoff05,gPower)     {channel="mqtt:topic:tasmota:sonoff05:Power"}
+
+// Tasmota Status
+String               sonoff05_Refresh       "sonoff05 Time [%s]"                   <clock> (t_sonoff,t_sonoff05,gTime)      {channel="mqtt:topic:tasmota:sonoff05:Time"}
+String               sonoff05_Version       "sonoff05 Version [%s]"                        (t_sonoff,t_sonoff05,gVersion)   {channel="mqtt:topic:tasmota:sonoff05:Version"}
+String               sonoff05_Reachable     "sonoff05 Reachable [%s]"             <switch> (t_sonoff,t_sonoff05,gReachable) {channel="mqtt:topic:tasmota:sonoff05:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sonoff05_RSSI          "sonoff05 Signal [%d %%]" <network>            (t_sonoff,t_sonoff05,gRSSI)      {channel="mqtt:topic:tasmota:sonoff05:RSSI"}
+Number:Dimensionless sonoff05_LoadAvg       "sonoff05 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff05,gLoad)      {channel="mqtt:topic:tasmota:sonoff05:LoadAvg"}
+String               sonoff05_Result        "sonoff05 Result [%s]"    <status>             (t_sonoff,t_sonoff05,gResult)    {channel="mqtt:topic:tasmota:sonoff05:Result"}
+String               sonoff05_Uptime        "sonoff05 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff05,gUptime)    {channel="mqtt:topic:tasmota:sonoff05:Uptime"}
+String               sonoff05_RestartReason "sonoff05 Reason [%s]"    <error>              (t_sonoff,t_sonoff05,gReason)    {channel="mqtt:topic:tasmota:sonoff05:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sonoff05_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff05) {channel="mqtt:topic:tasmota:sonoff05:WifiDowntime"}
+

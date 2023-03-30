@@ -1,0 +1,34 @@
+Thing mqtt:topic:tasmota:sonoff05 "Specchio_Thing" (mqtt:broker:brokerv2)  [ availabilityTopic="tele/sonoff05/LWT", payloadAvailable="Online", payloadNotAvailable="Offline" ] {
+    Channels:
+        // Sonoff Basic / Sonoff S20 Smart Socket (Read and switch on-state)
+        Type switch   : PowerSwitch   [stateTopic="stat/sonoff05/POWER",   commandTopic="cmnd/sonoff05/POWER", on="ON", off="OFF"]
+
+        // Sonoff Pow (read current wattage; for read and switch on-state see above)
+        //Type number : Power         [stateTopic="tele/sonoff05/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Power"]
+
+        // devices including AM2301 temperature sensor
+        Type number   : Temperature   [stateTopic="tele/sonoff05/SENSOR",  transformationPattern="JSONPATH:$.AM2301.Temperature"]
+        Type number   : Humidity      [stateTopic="tele/sonoff05/SENSOR",  transformationPattern="JSONPATH:$.AM2301.Humidity"]
+
+        // Tasmota Status
+        Type string   : Reachable     [stateTopic="tele/sonoff05/LWT"]
+        Type number   : RSSI          [stateTopic="tele/sonoff05/STATE",  transformationPattern="JSONPATH:$.Wifi.RSSI"]
+        Type number   : LoadAvg       [stateTopic="tele/sonoff05/STATE",  transformationPattern="JSONPATH:$.LoadAvg"]
+        Type string   : Uptime        [stateTopic="tele/sonoff05/STATE",  transformationPattern="JSONPATH:$.Uptime"]
+        Type string   : Time          [stateTopic="tele/sonoff05/STATE",  transformationPattern="JSONPATH:$.Time"]
+
+        // Diagnostics: Define specific for what you really need on a regular basis, use standalone MQTT client for troubleshooting
+        Type string   : RestartReason [stateTopic="tele/sonoff05/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
+        Type string   : Version       [stateTopic="tele/sonoff05/INFO1",  transformationPattern="JSONPATH:$.Version"]
+        Type string   : Result        [stateTopic="stat/sonoff05/RESULT"]
+
+        // NEW Type string : Version       [stateTopic="tele/sonoff05/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]
+        // NEW Type string : RestartReason [stateTopic="tele/sonoff05/INFO3", transformationPattern="JSONPATH:$.Info3.RestartReason"]
+	// NEW Type number : Uptime        [stateTopic="tele/sonoff05/STATE", transformationPattern="JSONPATH:$.UptimeSec"]
+        // NEW Type string : WifiDowntime  [stateTopic="tele/sonoff05/STATE", transformationPattern="JSONPATH:$.Wifi.Downtime"]
+
+	// NO - non mi piace - Type switch : Reachable     [stateTopic="tele/sonoff05/LWT",     transformationPattern="MAP:tasmota-reachable.map"]
+
+	// old one, have to query it
+        //Type string : Version2      [stateTopic="stat/sonoff05/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version"]
+}
