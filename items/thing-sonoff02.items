@@ -10,7 +10,7 @@ Number:Dimensionless  Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHum
 
 // DEFAULT FOR ALL
 // device specific properties
-Switch               sonoff02_switch        "sonoff02 Switch"                <poweroutlet> (t_sonoff,t_sonoff02,gSwitch)    {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
+Switch               sonoff02_switch        "sonoff02 Switch - Irrigazione"                <poweroutlet> (t_sonoff,t_sonoff02,gSwitch)    {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
 Number:Temperature   sonoff02_Temp          "sonoff02 Temperature [%.1f °C]" <temperature> (t_sonoff,t_sonoff02,gTemp)      {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
 Number:Dimensionless sonoff02_Humi          "sonoff02 Humidity [%.1f %%]"       <humidity> (t_sonoff,t_sonoff02,gHumd)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
 

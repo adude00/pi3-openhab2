@@ -295,6 +295,7 @@ then
     ])
     createTimer(now.plusSeconds(5),  [ |
       gBuonanotte.sendCommand(OFF)
+      led01_DimW.sendCommand(10)
       logInfo("Scene","Scena A Letto: gruppo gBuonanotte spento")
     ])
 
@@ -305,7 +306,11 @@ then
 
     createTimer(now.plusSeconds(30), [|
       gScene.sendCommand(OFF)
-      logInfo("Scene","Scena A Letto: finita")
+      logInfo("Scene","Scena A Letto: finita prima parte")
+    ])
+    createTimer(now.plusSeconds(300), [|
+      led01_DimW.sendCommand(OFF)
+      logInfo("Scene","Scena A Letto: finita per davvero e spenta barra matrimoniale")
     ])
 end
 
