@@ -4,14 +4,14 @@ rule "Ampli Acceso"
   then
 
   if ( tuya03_Power.state > 8 ) {
-    if (pow05_Switch.state != ON) {
-      sendCommand(pow05_Switch, ON)
+    if (sf06_Switch.state != ON) {
+      sendCommand(sf06_Switch, ON)
     }
   }
 
   if ( tuya03_Power.state < 8 ) {
-    if (pow05_Switch.state != OFF) {
-      sendCommand(pow05_Switch, OFF)
+    if (sf06_Switch.state != OFF) {
+      sendCommand(sf06_Switch, OFF)
     }
   }
 
