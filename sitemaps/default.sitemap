@@ -790,6 +790,24 @@ sitemap default label="Casa"
 		}
       }
     } // CHIUSO Text Tasmota Devices
+    Text label="Shellies" {
+      Text label="Shelly 01 - P1 Matrimoniale" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly01_R1
+        Text   item=shelly01_Power icon=none
+        Text   item=shelly01_voltage icon=none
+        Text   item=shelly01_energy icon=none
+        Text   item=shelly01_temperature icon=none
+        Text   item=shelly01_restartreq icon=none
+        Text   item=shelly01_uptime icon=none
+        Text   item=shelly01_state icon=none
+        Text   item=shelly01_event0 icon=none
+        Text   item=shelly01_source icon=none
+        Text   item=shelly01_ip icon=none
+        Text   item=shelly01_rssi icon=none
+	}
+      } 
+    }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {
       Switch item=sw_restart mappings=[0="Restart"]

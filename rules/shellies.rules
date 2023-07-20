@@ -1,0 +1,15 @@
+rule "Shellies Update"
+when
+    //Time cron "0 0/1 * * * ?" // Every minute
+    Time cron "0 0 0/1 * * ?" // Every hour
+then
+
+    g_shellies.members.forEach[ i |
+        var shelly = i.name
+        logInfo("Shelly", "Requesting hourly status update for " + shelly)
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "shellies/" + shelly + "/rpc", "{\"id\":1, \"src\":\"shellies/" + shelly + "/shellystatus\", \"method\":\"Shelly.GetStatus\"}" )
+    ]
+
+end
