@@ -13,19 +13,25 @@ rule "shellytapp01 UP"
 when 
 	Item shellytapp01_roller received command UP
 then
-	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytapp01/command/cover:0 -m open")
+	publish("broker", "shellies/shellytapp01/command/cover:0", "open")
 end
 
 rule "shellytapp01 DOWN"
 when 
 	Item shellytapp01_roller received command DOWN
 then
-	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytapp01/command/cover:0 -m close")
+	publish("broker", "shellies/shellytapp01/command/cover:0", "close")
 end
 
 rule "shellytapp01 STOP"
 when 
 	Item shellytapp01_roller received command STOP
 then
-	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytapp01/command/cover:0 -m stop")
+	publish("broker", "shellies/shellytapp01/command/cover:0", "stop")
 end
