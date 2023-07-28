@@ -807,6 +807,22 @@ sitemap default label="Casa"
         Text   item=shelly01_rssi icon=none
 	}
       } 
+      Text label="Shelly 02 - P1 Frigo" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly02_R1
+        Text   item=shelly02_Power icon=none
+        Text   item=shelly02_voltage icon=none
+        Text   item=shelly02_energy icon=none
+        Text   item=shelly02_temperature icon=none
+        Text   item=shelly02_restartreq icon=none
+        Text   item=shelly02_uptime icon=none
+        Text   item=shelly02_state icon=none
+        Text   item=shelly02_event0 icon=none
+        Text   item=shelly02_source icon=none
+        Text   item=shelly02_ip icon=none
+        Text   item=shelly02_rssi icon=none
+	}
+      } 
     }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {

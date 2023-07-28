@@ -1,3 +1,4 @@
+// https://community.openhab.org/t/oh3-example-shellyplus1pm-things-items-rules/141143
 rule "Shellies Update"
 when
     //Time cron "0 0/1 * * * ?" // Every minute
