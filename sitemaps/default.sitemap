@@ -823,6 +823,22 @@ sitemap default label="Casa"
         Text   item=shelly02_rssi icon=none
 	}
       } 
+      Text label="ShellyTapp 01 - P1 Cameretta" {
+	Frame label="Shelly Plus 2PM" {
+        Switch item=shellytapp01_roller
+        Text   item=shellytapp01_Power icon=none
+        Text   item=shellytapp01_voltage icon=none
+        Text   item=shellytapp01_energy icon=none
+        Text   item=shellytapp01_temperature icon=none
+        Text   item=shellytapp01_restartreq icon=none
+        Text   item=shellytapp01_uptime icon=none
+        Text   item=shellytapp01_state icon=none
+        Text   item=shellytapp01_event0 icon=none
+        Text   item=shellytapp01_source icon=none
+        Text   item=shellytapp01_ip icon=none
+        Text   item=shellytapp01_rssi icon=none
+	}
+      } 
     }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {

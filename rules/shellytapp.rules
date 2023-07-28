@@ -1,0 +1,31 @@
+// NON FUNZIONA: aggiorna lo state ALLA FINE del comando.
+// Da tenere solo come esempio, usare quelli sotto!!!
+//
+//rule "shellytapp01 changed"
+//when
+//	Item shellytapp01_roller received command 
+//then
+//	//var percent = (shellytapp01_roller.state as number).intvalue
+//	executeCommandLine("curl http://172.27.72.109/" + shellytapp01_roller.state)
+//end
+
+rule "shellytapp01 UP"
+when 
+	Item shellytapp01_roller received command UP
+then
+	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
+end
+
+rule "shellytapp01 DOWN"
+when 
+	Item shellytapp01_roller received command DOWN
+then
+	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
+end
+
+rule "shellytapp01 STOP"
+when 
+	Item shellytapp01_roller received command STOP
+then
+	executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
+end
