@@ -151,12 +151,17 @@ then
   }
 
 
-  // MATRIMONIALE - AUTO OFF
+  // MATRIMONIALE - AC AUTO OFF
   if (conf_autooff_ac_bdr.state == ON) {
     logInfo("Scene","MATTINA: AutoOFF Bedroom: Spengo il Clima")
     DaikinMatrimoniale_Power.sendCommand(OFF)
   }
 
+  // MATRIMONIALE - White Noise AUTO OFF
+  if (WhiteNoiseBDRMautoOFF.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF White Noise: Spengo il rumore bianco")
+    WhiteNoiseBDRM.sendCommand(OFF)
+  }
 
   gTappProd.sendCommand(UP)
   IPCams.sendCommand(OFF)
@@ -287,6 +292,12 @@ then
 	logInfo("Scene","Scena A Letto: temperatura richiesta impostata")
       ])
     }
+
+  // MATRIMONIALE - White Noise AUTO ON
+  if (WhiteNoiseBDRMautoON.state == ON) {
+    logInfo("Scene","Scena A Letto: AutoON White Noise: Accendo il rumore bianco")
+    WhiteNoiseBDRM.sendCommand(ON)
+  }
 
 
     createTimer(now.plusSeconds(3),  [ |

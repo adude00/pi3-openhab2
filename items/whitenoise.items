@@ -1,0 +1,3 @@
+Switch WhiteNoiseBDRM		"White Noise Bedroom"		<soundvolume>
+Switch WhiteNoiseBDRMautoON	"White Noise Bedroom Auto On"	<soundvolume>
+Switch WhiteNoiseBDRMautoOFF	"White Noise Bedroom Auto Off"	<soundvolume>

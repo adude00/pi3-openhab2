@@ -88,6 +88,8 @@ sitemap default label="Casa"
         Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
         Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
       } // CHIUSO GROUP "Bedroom"
+      Switch  item=WhiteNoiseBDRM
+
 
         } // CHIUSO FRAME Audio
 
@@ -132,6 +134,9 @@ sitemap default label="Casa"
 	  Frame label="Clima Soggiorno" {
             Switch item=WakeUpTs          label="Accendi Termostato"
 	  }
+	  Frame label="White Noise" {
+	    Switch item=WhiteNoiseBDRMautoOFF
+	  }
 	}  // SCENA Mattina
 
         Text label="Scena Nanna" icon="settings" {
@@ -142,6 +147,7 @@ sitemap default label="Casa"
 
       }
       Frame label="Automatismi" { 
+	Switch item=WhiteNoiseBDRMautoON
       Text label="Sveglia" icon="time" {
         Frame label="Sveglia" {
           Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
