@@ -829,6 +829,27 @@ sitemap default label="Casa"
         Text   item=shelly02_rssi icon=none
 	}
       } 
+      Text label="Shelly2PM 01 - Giochi: Luce e Clima" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly2pm01_R0
+        Text   item=shelly2pm01_Power0
+        Text   item=shelly2pm01_voltage0
+        Text   item=shelly2pm01_energy0
+        Text   item=shelly2pm01_temperature0
+        Switch item=shelly2pm01_R1
+        Text   item=shelly2pm01_Power1
+        Text   item=shelly2pm01_voltage1
+        Text   item=shelly2pm01_energy1
+        Text   item=shelly2pm01_temperature1
+        Text   item=shelly2pm01_restartreq icon=none
+        Text   item=shelly2pm01_uptime icon=none
+        Text   item=shelly2pm01_state icon=none
+        Text   item=shelly2pm01_event0 icon=none
+        Text   item=shelly2pm01_source icon=none
+        Text   item=shelly2pm01_ip icon=none
+        Text   item=shelly2pm01_rssi icon=none
+	}
+      } 
       Text label="ShellyTapp 01 - P1 Cameretta" {
 	Frame label="Shelly Plus 2PM" {
         Switch item=shellytapp01_roller

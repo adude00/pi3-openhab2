@@ -1,0 +1,41 @@
+Group        g_shellies
+
+Switch shelly2pm01_R0                 "2pm01 Output (0) Giochi: Luce Fuori"
+    { channel="mqtt:topic:shellies:shelly2pm01:PowerSwitch0" }
+Number shelly2pm01_Power0             "2pm01 Power (0) [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shelly2pm01:Power0" }
+Number shelly2pm01_voltage0           "2pm01 Voltage (0) [%s V]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Voltage0" }
+Number shelly2pm01_energy0            "2pm01 Energy (0) [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Energy0" }
+Number shelly2pm01_temperature0       "2pm01 Temp (0) [%s C]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Temperature0" }
+
+Switch shelly2pm01_R1                 "2pm01 Output (1) Giochi: Clima"
+    { channel="mqtt:topic:shellies:shelly2pm01:PowerSwitch1" }
+Number shelly2pm01_Power1             "2pm01 Power (1) [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shelly2pm01:Power1" }
+Number shelly2pm01_voltage1           "2pm01 Voltage (1) [%s V]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Voltage1" }
+Number shelly2pm01_energy1            "2pm01 Energy (1) [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Energy1" }
+Number shelly2pm01_temperature1       "2pm01 Temp (1) [%s C]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Temperature1" }
+
+String shelly2pm01_restartreq         "shelly2pm01 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly2pm01:RestartReq" }
+String shelly2pm01_state              "shelly2pm01 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly2pm01_event0             "shelly2pm01 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly2pm01:Event0" }
+String shelly2pm01_ip                 "shelly2pm01 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly2pm01:IP" }
+String shelly2pm01_rssi               "shelly2pm01 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly2pm01:RSSI" }
+String shelly2pm01_source             "shelly2pm01 Source"
+    { channel="mqtt:topic:shellies:shelly2pm01:Source" }
+Number shelly2pm01_uptime             "shelly2pm01 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly2pm01:Uptime" }
+
+String shelly2pm01                    "shelly2pm01" (g_shellies) // dummy for rule status loop
+

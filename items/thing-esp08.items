@@ -1,0 +1,33 @@
+Group t_esp08         "esp08: P1 Power Total"
+
+// ITEM SPECIFIC
+//Switch                sf06_Switch "Amplino"                 <light>        (gLuci)  [ "Lighting" ]                             {channel="mqtt:topic:tasmota:esp08:PowerSwitch"}
+//Number:Temperature    sf06_Temp   "Temp. Amplino [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartBdrmT,gGraph)   {channel="mqtt:topic:tasmota:esp08:Temperature"}
+//Number:Dimensionless  sf06_Humid  "Umid. Amplino [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart,gChartBdrmH,gGraph)       {channel="mqtt:topic:tasmota:esp08:Humidity"}
+
+
+
+// device specific properties
+//Switch               esp08_switch        "esp08 Switch"                <poweroutlet> (t_sonoff,t_esp08,gSwitch)    {channel="mqtt:topic:tasmota:esp08:PowerSwitch"}
+//Number:Temperature   esp08_Temp          "esp08 Temperature [%.1f °C]" <temperature> (t_sonoff,t_esp08,gTemp)      {channel="mqtt:topic:tasmota:esp08:Temperature"}
+//Number:Dimensionless esp08_Humi          "esp08 Humidity [%.1f %%]"       <humidity> (t_sonoff,t_esp08,gHumd)      {channel="mqtt:topic:tasmota:esp08:Humidity"}
+
+Number:Power         esp08_Power         "esp08 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp08,gWatt)     {channel="mqtt:topic:tasmota:esp08:Power"}
+
+// FOR ALL
+
+// Tasmota Status
+String               esp08_Refresh       "esp08 Time [%s]"                   <clock> (t_sonoff,t_esp08,gTime)      {channel="mqtt:topic:tasmota:esp08:Time"}
+String               esp08_Version       "esp08 Version [%s]"                        (t_sonoff,t_esp08,gVersion)   {channel="mqtt:topic:tasmota:esp08:Version"}
+String               esp08_Reachable     "esp08 Reachable [%s]"             <switch> (t_sonoff,t_esp08,gReachable) {channel="mqtt:topic:tasmota:esp08:Reachable"}
+
+// Diagnostics
+Number:Dimensionless esp08_RSSI          "esp08 Signal [%d %%]" <network>            (t_sonoff,t_esp08,gRSSI)      {channel="mqtt:topic:tasmota:esp08:RSSI"}
+Number:Dimensionless esp08_LoadAvg       "esp08 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_esp08,gLoad)      {channel="mqtt:topic:tasmota:esp08:LoadAvg"}
+String               esp08_Result        "esp08 Result [%s]"    <status>             (t_sonoff,t_esp08,gResult)    {channel="mqtt:topic:tasmota:esp08:Result"}
+String               esp08_Uptime        "esp08 Uptime [%s]"    <clock>              (t_sonoff,t_esp08,gUptime)    {channel="mqtt:topic:tasmota:esp08:Uptime"}
+String               esp08_RestartReason "esp08 Reason [%s]"    <error>              (t_sonoff,t_esp08,gReason)    {channel="mqtt:topic:tasmota:esp08:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String esp08_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_esp08) {channel="mqtt:topic:tasmota:esp08:WifiDowntime"}
+
