@@ -512,7 +512,7 @@ sitemap default label="Casa"
 
   Frame label="Sensori" {
     Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
-      Frame {
+      Frame label="Piano 2" {
         Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
         Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
         Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
@@ -523,9 +523,14 @@ sitemap default label="Casa"
         Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
-        Text item=pow04_Power		label="Computer: [%.0f W]" icon=wallswitch
       }
-      Frame {
+      Frame label="Piano 1" {
+        Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
+        Text item=shelly02_Power	label="P1 Frigo [%.0f W]" icon=pantry
+        Text item=shelly01_Power	label="P1 Clima Matrimoniale [%.0f W]" icon=climate
+        Text item=shelly2pm01_Power1	label="P1 Clima Giochi [%.0f W]" icon=climate
+      }
+      Frame label="Grafici" {
         Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
         Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
         Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
