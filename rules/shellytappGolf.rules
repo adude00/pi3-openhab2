@@ -1,0 +1,37 @@
+// NON FUNZIONA: aggiorna lo state ALLA FINE del comando.
+// Da tenere solo come esempio, usare quelli sotto!!!
+//
+//rule "shellytappGolf changed"
+//when
+//	Item shellytappGolf_roller received command 
+//then
+//	//var percent = (shellytappGolf_roller.state as number).intvalue
+//	executeCommandLine("curl http://172.27.72.109/" + shellytappGolf_roller.state)
+//end
+
+rule "shellytappGolf UP"
+when 
+	Item shellytappGolf_roller received command UP
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappGolf/command/cover:0 -m open")
+	publish("broker", "shellies/shellytappGolf/command/cover:0", "open")
+end
+
+rule "shellytappGolf DOWN"
+when 
+	Item shellytappGolf_roller received command DOWN
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappGolf/command/cover:0 -m close")
+	publish("broker", "shellies/shellytappGolf/command/cover:0", "close")
+end
+
+rule "shellytappGolf STOP"
+when 
+	Item shellytappGolf_roller received command STOP
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappGolf/command/cover:0 -m stop")
+	publish("broker", "shellies/shellytappGolf/command/cover:0", "stop")
+end

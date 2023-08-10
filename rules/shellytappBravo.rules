@@ -1,0 +1,37 @@
+// NON FUNZIONA: aggiorna lo state ALLA FINE del comando.
+// Da tenere solo come esempio, usare quelli sotto!!!
+//
+//rule "shellytappBravo changed"
+//when
+//	Item shellytappBravo_roller received command 
+//then
+//	//var percent = (shellytappBravo_roller.state as number).intvalue
+//	executeCommandLine("curl http://172.27.72.109/" + shellytappBravo_roller.state)
+//end
+
+rule "shellytappBravo UP"
+when 
+	Item shellytappBravo_roller received command UP
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappBravo/command/cover:0 -m open")
+	publish("broker", "shellies/shellytappBravo/command/cover:0", "open")
+end
+
+rule "shellytappBravo DOWN"
+when 
+	Item shellytappBravo_roller received command DOWN
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappBravo/command/cover:0 -m close")
+	publish("broker", "shellies/shellytappBravo/command/cover:0", "close")
+end
+
+rule "shellytappBravo STOP"
+when 
+	Item shellytappBravo_roller received command STOP
+then
+	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
+	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappBravo/command/cover:0 -m stop")
+	publish("broker", "shellies/shellytappBravo/command/cover:0", "stop")
+end

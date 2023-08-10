@@ -1,0 +1,29 @@
+Group        g_shellies
+
+Rollershutter shellytappHotel_roller      "shellytappHotel Roller" (gTappP1)
+//    { channel="exec:command:shellytappHotel:run" }
+Number shellytappHotel_Power              "shellytappHotel Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shellytappHotel:Power" }
+Number shellytappHotel_voltage            "shellytappHotel Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shellytappHotel:Voltage" }
+Number shellytappHotel_energy             "shellytappHotel Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shellytappHotel:Energy" }
+Number shellytappHotel_temperature        "shellytappHotel Temp [%s C]"
+    { channel="mqtt:topic:shellies:shellytappHotel:Temperature" }
+String shellytappHotel_restartreq         "shellytappHotel Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shellytappHotel:RestartReq" }
+String shellytappHotel_state              "shellytappHotel Status [%s]"
+    { channel="mqtt:topic:shellies:shellytappHotel:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shellytappHotel_event0             "shellytappHotel Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shellytappHotel:Event0" }
+String shellytappHotel_ip                 "shellytappHotel IP [%s]"
+    { channel="mqtt:topic:shellies:shellytappHotel:IP" }
+String shellytappHotel_rssi               "shellytappHotel RSSI [%s]"
+    { channel="mqtt:topic:shellies:shellytappHotel:RSSI" }
+String shellytappHotel_source             "shellytappHotel Source"
+    { channel="mqtt:topic:shellies:shellytappHotel:Source" }
+Number shellytappHotel_uptime             "shellytappHotel Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shellytappHotel:Uptime" }
+
+String shellytappHotel                    "shellytappHotel" (g_shellies) // dummy for rule status loop
+

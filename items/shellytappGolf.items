@@ -1,0 +1,29 @@
+Group        g_shellies
+
+Rollershutter shellytappGolf_roller      "shellytappGolf Roller" (gTappP1)
+//    { channel="exec:command:shellytappGolf:run" }
+Number shellytappGolf_Power              "shellytappGolf Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shellytappGolf:Power" }
+Number shellytappGolf_voltage            "shellytappGolf Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shellytappGolf:Voltage" }
+Number shellytappGolf_energy             "shellytappGolf Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shellytappGolf:Energy" }
+Number shellytappGolf_temperature        "shellytappGolf Temp [%s C]"
+    { channel="mqtt:topic:shellies:shellytappGolf:Temperature" }
+String shellytappGolf_restartreq         "shellytappGolf Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shellytappGolf:RestartReq" }
+String shellytappGolf_state              "shellytappGolf Status [%s]"
+    { channel="mqtt:topic:shellies:shellytappGolf:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shellytappGolf_event0             "shellytappGolf Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shellytappGolf:Event0" }
+String shellytappGolf_ip                 "shellytappGolf IP [%s]"
+    { channel="mqtt:topic:shellies:shellytappGolf:IP" }
+String shellytappGolf_rssi               "shellytappGolf RSSI [%s]"
+    { channel="mqtt:topic:shellies:shellytappGolf:RSSI" }
+String shellytappGolf_source             "shellytappGolf Source"
+    { channel="mqtt:topic:shellies:shellytappGolf:Source" }
+Number shellytappGolf_uptime             "shellytappGolf Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shellytappGolf:Uptime" }
+
+String shellytappGolf                    "shellytappGolf" (g_shellies) // dummy for rule status loop
+

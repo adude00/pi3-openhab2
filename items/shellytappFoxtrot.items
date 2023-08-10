@@ -1,0 +1,29 @@
+Group        g_shellies
+
+Rollershutter shellytappFoxtrot_roller      "shellytappFoxtrot Roller" (gTappP1)
+//    { channel="exec:command:shellytappFoxtrot:run" }
+Number shellytappFoxtrot_Power              "shellytappFoxtrot Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Power" }
+Number shellytappFoxtrot_voltage            "shellytappFoxtrot Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Voltage" }
+Number shellytappFoxtrot_energy             "shellytappFoxtrot Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Energy" }
+Number shellytappFoxtrot_temperature        "shellytappFoxtrot Temp [%s C]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Temperature" }
+String shellytappFoxtrot_restartreq         "shellytappFoxtrot Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:RestartReq" }
+String shellytappFoxtrot_state              "shellytappFoxtrot Status [%s]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shellytappFoxtrot_event0             "shellytappFoxtrot Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Event0" }
+String shellytappFoxtrot_ip                 "shellytappFoxtrot IP [%s]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:IP" }
+String shellytappFoxtrot_rssi               "shellytappFoxtrot RSSI [%s]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:RSSI" }
+String shellytappFoxtrot_source             "shellytappFoxtrot Source"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Source" }
+Number shellytappFoxtrot_uptime             "shellytappFoxtrot Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shellytappFoxtrot:Uptime" }
+
+String shellytappFoxtrot                    "shellytappFoxtrot" (g_shellies) // dummy for rule status loop
+

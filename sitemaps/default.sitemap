@@ -28,18 +28,31 @@ sitemap default label="Casa"
 
 
     Text label="Tapparelle" icon=rollershutter {
-      Switch item=gTappProd icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      Default item=Tapp01
-      Default item=Tapp02
-      Default item=Tapp03
-      Default item=Tapp04
-      Default item=Tapp05
-      Default item=Tapp06
-      Default item=Tapp07
-      Default item=Tapp08
+      Frame label="Piano 2" {
+        Switch item=gTappProd icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Default item=Tapp01
+        Default item=Tapp02
+        Default item=Tapp03
+        Default item=Tapp04
+        Default item=Tapp05
+        Default item=Tapp06
+        Default item=Tapp07
+        Default item=Tapp08
+      }
+      Frame label="Piano 1" {
+        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
+        Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
+        Switch item=shellytappCharlie_roller  label="Charlie - Bagno"
+        Switch item=shellytappDelta_roller    label="Delta - Cameretta"
+        Switch item=shellytappEcho_roller     label="Echo - Matrimoniale Grande"
+        Switch item=shellytappFoxtrot_roller  label="Foxtrot - Matrimoniale Piccola"
+        Switch item=shellytappGolf_roller     label="Golf - Cucina destra"
+        Switch item=shellytappHotel_roller    label="Hotel - Cucina sinistra"
+      }
     }
     Text label="Devices" icon=cinema {
       Frame label="Cose" {
@@ -855,7 +868,7 @@ sitemap default label="Casa"
         Text   item=shelly2pm01_rssi icon=none
 	}
       } 
-      Text label="Tapparella Alpha - P1 Giochi Grande" {
+      Text label="Tapparella Alpha - P1 Giochi Piccola" {
 	Frame label="shellytappAlpha" {
           Switch item=shellytappAlpha_roller
           Text   item=shellytappAlpha_Power icon=none
@@ -870,6 +883,36 @@ sitemap default label="Casa"
           Text   item=shellytappAlpha_ip icon=none
           Text   item=shellytappAlpha_rssi icon=none}
       } 
+      Text label="Tapparella Bravo - P1 Giochi Grande" {
+        Frame label="shellytappBravo" {
+          Switch item=shellytappBravo_roller
+          Text   item=shellytappBravo_Power icon=none
+          Text   item=shellytappBravo_voltage icon=none
+          Text   item=shellytappBravo_energy icon=none
+          Text   item=shellytappBravo_temperature icon=none
+          Text   item=shellytappBravo_restartreq icon=none
+          Text   item=shellytappBravo_uptime icon=none
+          Text   item=shellytappBravo_state icon=none
+          Text   item=shellytappBravo_event0 icon=none
+          Text   item=shellytappBravo_source icon=none
+          Text   item=shellytappBravo_ip icon=none
+          Text   item=shellytappBravo_rssi icon=none}
+      }
+      Text label="Tapparella Charlie - P1 Bagno" {
+        Frame label="shellytappCharlie" {
+          Switch item=shellytappCharlie_roller
+          Text   item=shellytappCharlie_Power icon=none
+          Text   item=shellytappCharlie_voltage icon=none
+          Text   item=shellytappCharlie_energy icon=none
+          Text   item=shellytappCharlie_temperature icon=none
+          Text   item=shellytappCharlie_restartreq icon=none
+          Text   item=shellytappCharlie_uptime icon=none
+          Text   item=shellytappCharlie_state icon=none
+          Text   item=shellytappCharlie_event0 icon=none
+          Text   item=shellytappCharlie_source icon=none
+          Text   item=shellytappCharlie_ip icon=none
+          Text   item=shellytappCharlie_rssi icon=none}
+      }
       Text label="Tapparella Delta - P1 Cameretta" {
 	Frame label="shellytappDelta" {
           Switch item=shellytappDelta_roller
@@ -886,6 +929,67 @@ sitemap default label="Casa"
           Text   item=shellytappDelta_rssi icon=none
 	}
       } 
+      Text label="Tapparella Echo - P1 Matrimoniale Piccola" {
+        Frame label="shellytappEcho" {
+          Switch item=shellytappEcho_roller
+          Text   item=shellytappEcho_Power icon=none
+          Text   item=shellytappEcho_voltage icon=none
+          Text   item=shellytappEcho_energy icon=none
+          Text   item=shellytappEcho_temperature icon=none
+          Text   item=shellytappEcho_restartreq icon=none
+          Text   item=shellytappEcho_uptime icon=none
+          Text   item=shellytappEcho_state icon=none
+          Text   item=shellytappEcho_event0 icon=none
+          Text   item=shellytappEcho_source icon=none
+          Text   item=shellytappEcho_ip icon=none
+          Text   item=shellytappEcho_rssi icon=none}
+      }
+      Text label="Tapparella Foxtrot - P1 Matrimoniale Grande" {
+        Frame label="shellytappFoxtrot" {
+          Switch item=shellytappFoxtrot_roller
+          Text   item=shellytappFoxtrot_Power icon=none
+          Text   item=shellytappFoxtrot_voltage icon=none
+          Text   item=shellytappFoxtrot_energy icon=none
+          Text   item=shellytappFoxtrot_temperature icon=none
+          Text   item=shellytappFoxtrot_restartreq icon=none
+          Text   item=shellytappFoxtrot_uptime icon=none
+          Text   item=shellytappFoxtrot_state icon=none
+          Text   item=shellytappFoxtrot_event0 icon=none
+          Text   item=shellytappFoxtrot_source icon=none
+          Text   item=shellytappFoxtrot_ip icon=none
+          Text   item=shellytappFoxtrot_rssi icon=none}
+      }
+      Text label="Tapparella Golf - P1 Cucina Destra" {
+        Frame label="shellytappGolf" {
+          Switch item=shellytappGolf_roller
+          Text   item=shellytappGolf_Power icon=none
+          Text   item=shellytappGolf_voltage icon=none
+          Text   item=shellytappGolf_energy icon=none
+          Text   item=shellytappGolf_temperature icon=none
+          Text   item=shellytappGolf_restartreq icon=none
+          Text   item=shellytappGolf_uptime icon=none
+          Text   item=shellytappGolf_state icon=none
+          Text   item=shellytappGolf_event0 icon=none
+          Text   item=shellytappGolf_source icon=none
+          Text   item=shellytappGolf_ip icon=none
+          Text   item=shellytappGolf_rssi icon=none}
+      }
+      Text label="Tapparella Hotel - P1 Cucina Sinistra" {
+        Frame label="shellytappHotel" {
+          Switch item=shellytappHotel_roller
+          Text   item=shellytappHotel_Power icon=none
+          Text   item=shellytappHotel_voltage icon=none
+          Text   item=shellytappHotel_energy icon=none
+          Text   item=shellytappHotel_temperature icon=none
+          Text   item=shellytappHotel_restartreq icon=none
+          Text   item=shellytappHotel_uptime icon=none
+          Text   item=shellytappHotel_state icon=none
+          Text   item=shellytappHotel_event0 icon=none
+          Text   item=shellytappHotel_source icon=none
+          Text   item=shellytappHotel_ip icon=none
+          Text   item=shellytappHotel_rssi icon=none}
+      }
+
     }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {
