@@ -1,0 +1,29 @@
+Group        g_shellies
+
+Rollershutter shellytappDelta_roller      "shellytappDelta Roller"
+//    { channel="exec:command:shellytappDelta:run" }
+Number shellytappDelta_Power              "shellytappDelta Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shellytappDelta:Power" }
+Number shellytappDelta_voltage            "shellytappDelta Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shellytappDelta:Voltage" }
+Number shellytappDelta_energy             "shellytappDelta Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shellytappDelta:Energy" }
+Number shellytappDelta_temperature        "shellytappDelta Temp [%s C]"
+    { channel="mqtt:topic:shellies:shellytappDelta:Temperature" }
+String shellytappDelta_restartreq         "shellytappDelta Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shellytappDelta:RestartReq" }
+String shellytappDelta_state              "shellytappDelta Status [%s]"
+    { channel="mqtt:topic:shellies:shellytappDelta:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shellytappDelta_event0             "shellytappDelta Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shellytappDelta:Event0" }
+String shellytappDelta_ip                 "shellytappDelta IP [%s]"
+    { channel="mqtt:topic:shellies:shellytappDelta:IP" }
+String shellytappDelta_rssi               "shellytappDelta RSSI [%s]"
+    { channel="mqtt:topic:shellies:shellytappDelta:RSSI" }
+String shellytappDelta_source             "shellytappDelta Source"
+    { channel="mqtt:topic:shellies:shellytappDelta:Source" }
+Number shellytappDelta_uptime             "shellytappDelta Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shellytappDelta:Uptime" }
+
+String shellytappDelta                    "shellytappDelta" (g_shellies) // dummy for rule status loop
+

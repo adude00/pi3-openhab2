@@ -1,0 +1,16 @@
+Thing mqtt:topic:shellies:shellytappAlpha "Tapparella Alpha - P1 Giochi Piccola" (mqtt:broker:brokerv2) {
+    Channels:
+      //Type switch : PowerSwitch     [ stateTopic="shellies/shellytappAlpha/status/cover:0" , transformationPattern="JSONPATH:$.output", on="true" , off="false" , commandTopic="shellies/shellytappAlpha/rpc" , formatBeforePublish="{\"src\":\"openhab\",\"method\":\"Switch.Set\", \"params\":{\"id\":0,\"on\":%s}}" ] 
+      //Type rollershutter : PowerSwitch     [ stateTopic="shellies/shellytappAlpha/status/cover:0" , transformationPattern="JSONPATH:$.state", UP="open", opening="UP" , DOWN="closed", DOWN="closing", STOP="stopped", commandTopic="shellies/shellytappAlpha/rpc" , formatBeforePublish="{\"src\":\"openhab\",\"method\":\"Switch.Set\", \"params\":{\"id\":0,\"on\":%s}}" ] 
+        Type number : Power           [ stateTopic="shellies/shellytappAlpha/status/cover:0" , transformationPattern="JSONPATH:$.apower" ]
+        Type number : Voltage         [ stateTopic="shellies/shellytappAlpha/status/cover:0" , transformationPattern="JSONPATH:$.voltage" ]
+        Type number : Energy          [ stateTopic="shellies/shellytappAlpha/status/cover:0", transformationPattern="JSONPATH:$.aenergy.total∩JS:shellyplus_energy_kwh.js" ] // From Shelly in Wh
+        Type number : Temperature     [ stateTopic="shellies/shellytappAlpha/status/cover:0", transformationPattern="JSONPATH:$.temperature.tC" ]
+        Type string : RestartReq      [ stateTopic="shellies/shellytappAlpha/status/sys",  transformationPattern="REGEX:(.*restart_required.*)∩JSONPATH:$.restart_required"]
+        Type string : Devicestate     [ stateTopic="shellies/shellytappAlpha/online" ]
+        Type string : IP              [ stateTopic="shellies/shellytappAlpha/shellystatus/rpc", transformationPattern="REGEX:(.*sta_ip.*)∩JSONPATH:$.result.wifi.sta_ip"]
+	Type string : Event0          [ stateTopic="shellies/shellytappAlpha/events/rpc", transformationPattern="REGEX:(.*\"event\":.*)∩JSONPATH:$.params.events[*].event" ] 
+        Type string : Source          [ stateTopic="shellies/shellytappAlpha/status/cover:0" , transformationPattern="JSONPATH:$.source" ]
+        Type string : RSSI            [ stateTopic="shellies/shellytappAlpha/shellystatus/rpc", transformationPattern="REGEX:(.*rssi.*)∩JSONPATH:$.result.wifi.rssi"]
+        Type number : Uptime          [ stateTopic="shellies/shellytappAlpha/shellystatus/rpc", transformationPattern="REGEX:(.*uptime.*)∩JSONPATH:$.result.sys.uptime"] // in seconds
+      }

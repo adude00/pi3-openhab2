@@ -1,4 +1,5 @@
 //Location Groups
+Group:Rollershutter:OR(UP, DOWN)  gTappP1     "P1"
 Group:Rollershutter:OR(UP, DOWN)  gTappProd   "All"
 Group:Rollershutter:OR(UP, DOWN)  gTappDog    "Dog"
 Group:Rollershutter:OR(UP, DOWN)  gTappBdrm   "Bedroom"

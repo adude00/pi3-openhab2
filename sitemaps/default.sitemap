@@ -855,20 +855,35 @@ sitemap default label="Casa"
         Text   item=shelly2pm01_rssi icon=none
 	}
       } 
-      Text label="ShellyTapp 01 - P1 Cameretta" {
-	Frame label="Shelly Plus 2PM" {
-        Switch item=shellytapp01_roller
-        Text   item=shellytapp01_Power icon=none
-        Text   item=shellytapp01_voltage icon=none
-        Text   item=shellytapp01_energy icon=none
-        Text   item=shellytapp01_temperature icon=none
-        Text   item=shellytapp01_restartreq icon=none
-        Text   item=shellytapp01_uptime icon=none
-        Text   item=shellytapp01_state icon=none
-        Text   item=shellytapp01_event0 icon=none
-        Text   item=shellytapp01_source icon=none
-        Text   item=shellytapp01_ip icon=none
-        Text   item=shellytapp01_rssi icon=none
+      Text label="Tapparella Alpha - P1 Giochi Grande" {
+	Frame label="shellytappAlpha" {
+          Switch item=shellytappAlpha_roller
+          Text   item=shellytappAlpha_Power icon=none
+          Text   item=shellytappAlpha_voltage icon=none
+          Text   item=shellytappAlpha_energy icon=none
+          Text   item=shellytappAlpha_temperature icon=none
+          Text   item=shellytappAlpha_restartreq icon=none
+          Text   item=shellytappAlpha_uptime icon=none
+          Text   item=shellytappAlpha_state icon=none
+          Text   item=shellytappAlpha_event0 icon=none
+          Text   item=shellytappAlpha_source icon=none
+          Text   item=shellytappAlpha_ip icon=none
+          Text   item=shellytappAlpha_rssi icon=none}
+      } 
+      Text label="Tapparella Delta - P1 Cameretta" {
+	Frame label="shellytappDelta" {
+          Switch item=shellytappDelta_roller
+          Text   item=shellytappDelta_Power icon=none
+          Text   item=shellytappDelta_voltage icon=none
+          Text   item=shellytappDelta_energy icon=none
+          Text   item=shellytappDelta_temperature icon=none
+          Text   item=shellytappDelta_restartreq icon=none
+          Text   item=shellytappDelta_uptime icon=none
+          Text   item=shellytappDelta_state icon=none
+          Text   item=shellytappDelta_event0 icon=none
+          Text   item=shellytappDelta_source icon=none
+          Text   item=shellytappDelta_ip icon=none
+          Text   item=shellytappDelta_rssi icon=none
 	}
       } 
     }
