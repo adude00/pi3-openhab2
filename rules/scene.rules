@@ -6,6 +6,7 @@ then
   logInfo("Scene","Scena LAVORO: iniziata")
 
   gTappDog.sendCommand(DOWN)
+  gTappP1.sendCommand(DOWN)
   gLuci.sendCommand(OFF)
 
   createTimer(now.plusSeconds(30), [|
@@ -55,6 +56,7 @@ then
   var Number led03_c = led03_c_Morning.state
 
   gTappProd.sendCommand(UP)
+  gTappP1.sendCommand(UP)
   IPCams.sendCommand(OFF)
 
   // Accendo le luci in soggiorno in base alla configurazione
@@ -164,6 +166,7 @@ then
   }
 
   gTappProd.sendCommand(UP)
+  gTappP1.sendCommand(UP)
   IPCams.sendCommand(OFF)
   //tsBagno.sendCommand(ON)
 
@@ -189,6 +192,7 @@ then
   logInfo("Scene","Scena USCIAMO: iniziata")
 
   gTappProd.sendCommand(DOWN)
+  gTappP1.sendCommand(DOWN)
   gLuci.sendCommand(OFF)
 
   createTimer(now.plusSeconds(30), [|
@@ -249,6 +253,7 @@ when
 then
     logInfo("Scene","Scena CHIUDI: iniziata")
     gTappProd.sendCommand(DOWN)
+    gTappP1.sendCommand(DOWN)
     createTimer(now.plusSeconds(30), [|
       gScene.sendCommand(OFF)
       logInfo("Scene","Scena CHIUDI: finita")
@@ -263,6 +268,7 @@ then
     
     createTimer(now.plusSeconds(1),  [ |
       gTappProd.sendCommand(DOWN)
+      gTappP1.sendCommand(DOWN)
       logInfo("Scene","Scena A Letto: tapparelle abbassate")
     ])
 
