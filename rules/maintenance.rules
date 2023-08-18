@@ -1,16 +1,31 @@
-rule "Maintenance"
+rule "OpenHAB restart"
   when
 
-    //Item sw_restart received update or
     Item sw_restart received command
 
   then
 
     var String command;
 
-    logInfo("Restart","Restart requested, proceeding...")
+    logInfo("Maintenance","OpenHAB restart requested, proceeding...")
 
     command = "sudo /etc/openhab2/shell/restart.sh";
+    executeCommandLine(command);
+
+end
+
+rule "PI3 restart"
+  when
+
+    Item pi_restart received command
+
+  then
+
+    var String command;
+
+    logInfo("Maintenance","PI3 reboot requested, proceeding...")
+
+    command = "sudo /etc/openhab2/shell/reboot.sh";
     executeCommandLine(command);
 
 end

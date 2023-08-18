@@ -994,6 +994,7 @@ sitemap default label="Casa"
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {
       Switch item=sw_restart mappings=[0="Restart"]
+      Switch item=pi_restart mappings=[0="Reboot"]
     }
     Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {

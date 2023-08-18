@@ -43,7 +43,8 @@ Switch ac_sog_night_off 	"Night Auto-Off"               <heating>
 Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
 Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 
-Number sw_restart "Maintenance" <settings>
+Number sw_restart "Restart OpenHAB" <settings>
+Number pi_restart "Reboot PI3" <settings>
 
 //Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
 //Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
