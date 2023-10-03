@@ -28,8 +28,12 @@ sitemap default label="Casa"
 
 
     Text label="Tapparelle" icon=rollershutter {
+      Frame label="Tutta Casa" {
+        Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP2   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      }
       Frame label="Piano 2" {
-        Switch item=gTappProd icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
         Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
         Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
         Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
@@ -43,7 +47,6 @@ sitemap default label="Casa"
         Default item=Tapp08
       }
       Frame label="Piano 1" {
-        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
         Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
         Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
         Switch item=shellytappCharlie_roller  label="Charlie - Bagno"

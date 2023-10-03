@@ -1,6 +1,6 @@
 Group        g_shellies
 
-Rollershutter shellytappCharlie_roller      "shellytappCharlie Roller" (gTappP1)
+Rollershutter shellytappCharlie_roller      "shellytappCharlie Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappCharlie:run" }
 Number shellytappCharlie_Power              "shellytappCharlie Power [%s W]" (gWatt)
     { channel="mqtt:topic:shellies:shellytappCharlie:Power" }

@@ -1,6 +1,6 @@
 Group        g_shellies
 
-Rollershutter shellytappDelta_roller      "shellytappDelta Roller" (gTappP1)
+Rollershutter shellytappDelta_roller      "shellytappDelta Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappDelta:run" }
 Number shellytappDelta_Power              "shellytappDelta Power [%s W]" (gWatt)
     { channel="mqtt:topic:shellies:shellytappDelta:Power" }

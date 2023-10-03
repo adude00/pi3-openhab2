@@ -1,6 +1,7 @@
 //Location Groups
 Group:Rollershutter:OR(UP, DOWN)  gTappP1     "P1"
-Group:Rollershutter:OR(UP, DOWN)  gTappProd   "All"
+Group:Rollershutter:OR(UP, DOWN)  gTappP2     "P2"
+Group:Rollershutter:OR(UP, DOWN)  gTappAll    "All"
 Group:Rollershutter:OR(UP, DOWN)  gTappDog    "Dog"
 Group:Rollershutter:OR(UP, DOWN)  gTappBdrm   "Bedroom"
 Group:Rollershutter:OR(UP, DOWN)  gTappKtcn   "Kitchen"
@@ -15,35 +16,35 @@ Group gTappReach
 Group gTappUptime
 
 
-Rollershutter Tapp01 "1: Sogg Piccola [(%d)]"     <rollershutter>     (gTappProd,gTappWake,gTappLvrm)     [ "WindowCovering" ]
+Rollershutter Tapp01 "1: Sogg Piccola [(%d)]"     <rollershutter>     (gTappAll,gTappWake,gTappLvrm,gTappP2)
     { mqtt=">[broker:cmnd/tapp01/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp01/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp02 "2: Sogg Grande [(%d)]"      <rollershutter>     (gTappProd,gTappWake,gTappLvrm)
+Rollershutter Tapp02 "2: Sogg Grande [(%d)]"      <rollershutter>     (gTappAll,gTappWake,gTappLvrm,gTappP2)
     { mqtt=">[broker:cmnd/tapp02/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp02/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp03 "3: Cucina Destra [(%d)]"    <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappKtcn) 
+Rollershutter Tapp03 "3: Cucina Destra [(%d)]"    <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappKtcn,gTappP2) 
     { mqtt=">[broker:cmnd/tapp03/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp03/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp03/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]"  <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappKtcn) 
+Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]"  <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappKtcn,gTappP2) 
     { mqtt=">[broker:cmnd/tapp04/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp04/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
+Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappBdrm,gTappP2) 
     { mqtt=">[broker:cmnd/tapp05/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp05/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappProd,gTappWake,gTappDog,gTappBdrm) 
+Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappBdrm,gTappP2)
     { mqtt=">[broker:cmnd/tapp06/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp06/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp07 "7: Bagno [(%d)]"            <rollershutter>     (gTappProd,gTappWake,gTappDog) 
+Rollershutter Tapp07 "7: Bagno [(%d)]"            <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappP2)
     { mqtt=">[broker:cmnd/tapp07/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp07/POWER3:command:DOWN:MAP(tapparella.map)]" }
-Rollershutter Tapp08 "8: Cameretta [(%d)]"        <rollershutter>     (gTappProd,gTappWake,gTappDog) 
+Rollershutter Tapp08 "8: Cameretta [(%d)]"        <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappP2)
     { mqtt=">[broker:cmnd/tapp08/POWER2:command:UP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER:command:STOP:MAP(tapparella.map)],
             >[broker:cmnd/tapp08/POWER3:command:DOWN:MAP(tapparella.map)]" }

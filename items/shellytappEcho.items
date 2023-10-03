@@ -1,6 +1,6 @@
 Group        g_shellies
 
-Rollershutter shellytappEcho_roller      "shellytappEcho Roller" (gTappP1)
+Rollershutter shellytappEcho_roller      "shellytappEcho Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappEcho:run" }
 Number shellytappEcho_Power              "shellytappEcho Power [%s W]" (gWatt)
     { channel="mqtt:topic:shellies:shellytappEcho:Power" }
