@@ -265,7 +265,10 @@ when
     Item Scene_aLetto changed to ON
 then
     logInfo("Scene","Scena A Letto: iniziata")
-    
+
+    // Luce camera a 10% subito
+    led01_DimW.sendCommand(10)
+
     createTimer(now.plusSeconds(1),  [ |
       gTappProd.sendCommand(DOWN)
       gTappP1.sendCommand(DOWN)
@@ -312,7 +315,6 @@ then
     ])
     createTimer(now.plusSeconds(5),  [ |
       gBuonanotte.sendCommand(OFF)
-      led01_DimW.sendCommand(10)
       logInfo("Scene","Scena A Letto: gruppo gBuonanotte spento")
     ])
 
