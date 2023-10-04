@@ -1,6 +1,6 @@
 Group        g_shellies
 
-Rollershutter shellytappHotel_roller      "shellytappHotel Roller" (gTappP1)
+Rollershutter shellytappHotel_roller      "shellytappHotel Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappHotel:run" }
 Number shellytappHotel_Power              "shellytappHotel Power [%s W]" (gWatt)
     { channel="mqtt:topic:shellies:shellytappHotel:Power" }
