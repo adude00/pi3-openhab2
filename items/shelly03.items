@@ -1,0 +1,29 @@
+Group        g_shellies
+
+Switch shelly03_R1                 "shelly03" (gLuci)
+    { channel="mqtt:topic:shellies:shelly03:PowerSwitch" }
+Number shelly03_Power              "shelly03 Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shelly03:Power" }
+Number shelly03_voltage            "shelly03 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shelly03:Voltage" }
+Number shelly03_energy             "shelly03 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly03:Energy" }
+Number shelly03_temperature        "shelly03 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shelly03:Temperature" }
+String shelly03_restartreq         "shelly03 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly03:RestartReq" }
+String shelly03_state              "shelly03 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly03:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly03_event0             "shelly03 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly03:Event0" }
+String shelly03_ip                 "shelly03 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly03:IP" }
+String shelly03_rssi               "shelly03 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly03:RSSI" }
+String shelly03_source             "shelly03 Source"
+    { channel="mqtt:topic:shellies:shelly03:Source" }
+Number shelly03_uptime             "shelly03 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly03:Uptime" }
+
+String shelly03                    "shelly03" (g_shellies) // dummy for rule status loop
+

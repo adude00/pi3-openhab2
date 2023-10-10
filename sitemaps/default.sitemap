@@ -2,9 +2,13 @@ sitemap default label="Casa"
 {
 	Frame label="Things" {
 		Text label="Luci" icon="light" {
+			Frame label="P1 Luci" {
+			        Switch item=shelly03_R1    label="Scala"    icon=lightbulb
+			        Switch item=shelly04_R1    label="Luce Giochi"   icon=lightbulb
+			        Switch item=shelly05_R1    label="Faretti Giochi"   icon=lightbulb
+			}
 			Frame label="Soggiorno Luci" {
 				Switch item=sf04_Light
-				Switch item=sf03_Light
 				Slider item=led03_DimW
 				Slider 		item=led03_Dim
 				Colorpicker  	item=led03_Color
@@ -12,7 +16,6 @@ sitemap default label="Casa"
 			}
 			Frame label="Matrimoniale" { 
 				Switch item=sf05_Light
-				Switch item=sf06_Light
 				Switch item=sf11_Light
 				Slider item=led01_DimW
 			}
@@ -818,7 +821,7 @@ sitemap default label="Casa"
       }
     } // CHIUSO Text Tasmota Devices
     Text label="Shellies" {
-      Text label="Shelly 01 - P1 Matrimoniale" {
+      Text label="Shelly 01 - P1 Clima Matrimoniale" {
 	Frame label="Shelly Plus 1PM" {
         Switch item=shelly01_R1
         Text   item=shelly01_Power icon=none
@@ -848,6 +851,54 @@ sitemap default label="Casa"
         Text   item=shelly02_source icon=none
         Text   item=shelly02_ip icon=none
         Text   item=shelly02_rssi icon=none
+	}
+      } 
+      Text label="Shelly 03 - Luce Scala" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly03_R1
+        Text   item=shelly03_Power icon=none
+        Text   item=shelly03_voltage icon=none
+        Text   item=shelly03_energy icon=none
+        Text   item=shelly03_temperature icon=none
+        Text   item=shelly03_restartreq icon=none
+        Text   item=shelly03_uptime icon=none
+        Text   item=shelly03_state icon=none
+        Text   item=shelly03_event0 icon=none
+        Text   item=shelly03_source icon=none
+        Text   item=shelly03_ip icon=none
+        Text   item=shelly03_rssi icon=none
+	}
+      } 
+      Text label="Shelly 04 - Luce Giochi" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly04_R1
+        Text   item=shelly04_Power icon=none
+        Text   item=shelly04_voltage icon=none
+        Text   item=shelly04_energy icon=none
+        Text   item=shelly04_temperature icon=none
+        Text   item=shelly04_restartreq icon=none
+        Text   item=shelly04_uptime icon=none
+        Text   item=shelly04_state icon=none
+        Text   item=shelly04_event0 icon=none
+        Text   item=shelly04_source icon=none
+        Text   item=shelly04_ip icon=none
+        Text   item=shelly04_rssi icon=none
+	}
+      } 
+      Text label="Shelly 05 - Faretti Giochi" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly05_R1
+        Text   item=shelly05_Power icon=none
+        Text   item=shelly05_voltage icon=none
+        Text   item=shelly05_energy icon=none
+        Text   item=shelly05_temperature icon=none
+        Text   item=shelly05_restartreq icon=none
+        Text   item=shelly05_uptime icon=none
+        Text   item=shelly05_state icon=none
+        Text   item=shelly05_event0 icon=none
+        Text   item=shelly05_source icon=none
+        Text   item=shelly05_ip icon=none
+        Text   item=shelly05_rssi icon=none
 	}
       } 
       Text label="Shelly2PM 01 - Giochi: Luce e Clima" {

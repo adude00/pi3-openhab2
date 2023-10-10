@@ -305,8 +305,9 @@ then
 
 
     createTimer(now.plusSeconds(3),  [ |
-      gLuciSogg.sendCommand(OFF)
-      logInfo("Scene","Scena A Letto: luci soggiorno spente")
+      gLuci.sendCommand(OFF)
+      led01_DimW.sendCommand(10)
+      logInfo("Scene","Scena A Letto: luci spente tranne letto che ha 5 min di timer")
     ])
     createTimer(now.plusSeconds(5),  [ |
       gBuonanotte.sendCommand(OFF)
