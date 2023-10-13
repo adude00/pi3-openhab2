@@ -303,12 +303,6 @@ then
     WhiteNoiseBDRM.sendCommand(ON)
   }
 
-
-    createTimer(now.plusSeconds(3),  [ |
-      gLuci.sendCommand(OFF)
-      led01_DimW.sendCommand(10)
-      logInfo("Scene","Scena A Letto: luci spente tranne letto che ha 5 min di timer")
-    ])
     createTimer(now.plusSeconds(5),  [ |
       gBuonanotte.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: gruppo gBuonanotte spento")
@@ -324,8 +318,9 @@ then
       logInfo("Scene","Scena A Letto: finita prima parte")
     ])
     createTimer(now.plusSeconds(300), [|
+      gLuci.sendCommand(OFF)
       led01_DimW.sendCommand(OFF)
-      logInfo("Scene","Scena A Letto: finita per davvero e spenta barra matrimoniale")
+      logInfo("Scene","Scena A Letto: finita per davvero, spenta barra matrimoniale e tutte le altre luci")
     ])
 end
 
