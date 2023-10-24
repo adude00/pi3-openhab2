@@ -1,0 +1,8 @@
+rule "Forno Pronto"
+  when
+    Item TOTALPOWER changed
+  then
+    if (previousState - TOTALPOWER.state >= 2200 ) {
+      pushNotification("FORNO: Pronto", "Il forno è pronto")
+    }
+end

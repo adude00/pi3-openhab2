@@ -1,6 +1,6 @@
 Group sonoff08
 
-Switch sf08_Light "Ciabatta Scrivania" <wallswitch> (sonoff08,sonoff,gScrivania,gBuonanotte) [ "Switchable" ]
+Switch sf08_Light "Scrivania" <wallswitch> (sonoff08,sonoff,gScrivania,gBuonanotte) [ "Switchable" ]
     { mqtt=">[broker:cmnd/sonoff08/POWER:command:*:default],
             <[broker:stat/sonoff08/POWER:state:default]" } 
 

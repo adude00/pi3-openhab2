@@ -1,0 +1,7 @@
+rule "Notify that plex is ON"
+when
+    Item Plex changed to ON
+then
+    Echo_Soggiorno_TTS.sendCommand('Il server è acceso. Ora puoi guardare PLEX!')
+    logInfo("ECHO", "Plex Acceso. Mandato TTS ad Echo Soggiorno")
+end

@@ -113,6 +113,35 @@ sitemap default label="Casa"
         } // CHIUSO FRAME Audio
 
 
+	Frame label="Alexa" {
+
+        Text label="Echo Soggiorno" {
+            Default   item=Echo_Soggiorno_Player
+            Slider    item=Echo_Soggiorno_Volume
+            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Soggiorno_TTS_Volume
+            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Soggiorno_Shuffle
+            Text      item=Echo_Soggiorno_Title
+
+            Text    item=Echo_Soggiorno_LastVoiceCommand
+            Slider  item=Echo_Soggiorno_NotificationVolume
+        }
+
+        Text label="Echo Camera" {
+            Default   item=Echo_Camera_Player
+            Slider    item=Echo_Camera_Volume
+            Setpoint  item=Echo_Camera_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Camera_TTS_Volume
+            Setpoint  item=Echo_Camera_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Camera_Shuffle
+            Text      item=Echo_Camera_Title
+
+            Text    item=Echo_Camera_LastVoiceCommand
+            Slider  item=Echo_Camera_NotificationVolume
+        }
+
+	} // CHIUSO FRAME Alexa
 
     } // CHIUSO TEXT "Devices"
 
