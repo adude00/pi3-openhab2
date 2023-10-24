@@ -1,0 +1,25 @@
+// Account
+String Echo_Campanello_SendMessage            "SendMessage"                           {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:sendMessage"}
+
+Group Alexa_Campanello <player>
+
+// Player control
+Player Echo_Campanello_Player                 "Player"                                (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:player"}
+Dimmer Echo_Campanello_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:volume"}
+Switch Echo_Campanello_Shuffle                "Shuffle"                               (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:shuffle"}
+
+// Player Information
+String Echo_Campanello_Title                  "Title"                                 (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:title"}
+String Echo_Campanello_ProviderDisplayName    "Provider"                              (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:providerDisplayName"}
+
+// Commands
+String Echo_Campanello_Announcement           "Announcement"                          (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:announcement"}
+String Echo_Campanello_TTS                    "Text to Speech"                        (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:textToSpeech"}
+Dimmer Echo_Campanello_TTS_Volume             "Text to Speech Volume"                 (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:textToSpeechVolume"}
+String Echo_Campanello_Remind                 "Remind"                                (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:remind"}
+String Echo_Campanello_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:playAlarmSound"}
+Dimmer Echo_Campanello_NotificationVolume     "Notification volume"                   (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:notificationVolume"}
+Switch Echo_Campanello_AscendingAlarm         "Ascending alarm"                       (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:ascendingAlarm"}
+
+// Feedbacks
+String Echo_Campanello_LastVoiceCommand       "Last voice command"                    (Alexa_Campanello) {channel="amazonechocontrol:wha:8dcf59ae:0b81a77b8e544f6e85c5bad43ea9ddc5:lastVoiceCommand"}

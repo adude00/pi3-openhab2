@@ -2,6 +2,7 @@ Bridge amazonechocontrol:account:8dcf59ae "Amazon Account" @ "Accounts" [discove
 {
     Thing echo		echo_soggiorno	"Alexa" @ "Soggiorno"	[serialNumber="G2A0WK0493940NA9"]
     Thing echo		echo_camera	"Alexa" @ "Camera"	[serialNumber="G0911W06927102VE"]
+    Thing echo		echo_campanello	"Alexa" @ "Campanello"	[serialNumber="0b81a77b8e544f6e85c5bad43ea9ddc5"]
     //Thing echo		echo_cameretta	"Alexa" @ "Cameretta" 	[serialNumber="G090XG1214320N34"]
     //Thing wha		echo_wha        "First Floor Music Group" @ "Music Groups" [serialNumber="fdf60e7460644b3d9350ba8bde22b1fe"]
 }

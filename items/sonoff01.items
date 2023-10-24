@@ -3,7 +3,7 @@ Group sonoff01pzem
 
 // SWITCH
 
-Switch sonoff01_Switch "Scatola PZEM" (sonoff01,gTuya,sonoff)
+Switch sonoff01_Switch "Relais Porta" (sonoff01,gTuya,sonoff)
     { mqtt=">[broker:cmnd/sonoff01/POWER:command:*:default],
             <[broker:stat/sonoff01/POWER:state:default]" }
 

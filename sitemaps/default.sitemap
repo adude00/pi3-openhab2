@@ -141,6 +141,33 @@ sitemap default label="Casa"
             Slider  item=Echo_Camera_NotificationVolume
         }
 
+        Text label="Echo Studio" {
+            Default   item=Echo_Studio_Player
+            Slider    item=Echo_Studio_Volume
+            Setpoint  item=Echo_Studio_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Studio_TTS_Volume
+            Setpoint  item=Echo_Studio_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Studio_Shuffle
+            Text      item=Echo_Studio_Title
+
+            Text    item=Echo_Studio_LastVoiceCommand
+            Slider  item=Echo_Studio_NotificationVolume
+        }
+
+        Text label="Echo Giochi" {
+            Default   item=Echo_Giochi_Player
+            Slider    item=Echo_Giochi_Volume
+            Setpoint  item=Echo_Giochi_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Giochi_TTS_Volume
+            Setpoint  item=Echo_Giochi_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Giochi_Shuffle
+            Text      item=Echo_Giochi_Title
+
+            Text    item=Echo_Giochi_LastVoiceCommand
+            Slider  item=Echo_Giochi_NotificationVolume
+        }
+
+
 	} // CHIUSO FRAME Alexa
 
     } // CHIUSO TEXT "Devices"
@@ -256,7 +283,19 @@ sitemap default label="Casa"
 
         Group item=gAutomations   label="Automazioni"
         Group item=gPresence      label="Presence"
-      }
+	Text label="Alexa" icon=settings {
+
+	  Frame label="Campanello" {
+	    Switch        item=alexa_campanello
+	    Switch        item=sonoff01_Switch 
+	  }
+	  Frame label="Forno" {
+	    Switch        item=alexa_forno 
+	  }
+
+	}
+
+      } // CHIUSO FRAME Automatismi
     } // CHIUSO TEXT Configurazione schermata principale
 
   } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE

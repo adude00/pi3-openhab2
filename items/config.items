@@ -46,6 +46,11 @@ Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 Number sw_restart "Restart OpenHAB" <settings>
 Number pi_restart "Reboot PI3" <settings>
 
+// Alexa
+Switch alexa_campanello         "Campanello"                   <settings>        [ "Switchable" ]
+Switch alexa_forno              "Forno"                        <settings>        [ "Switchable" ]
+
+
 //Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
 //Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
 //

@@ -1,0 +1,14 @@
+rule "Campanello"
+  when
+    Item sonoff01_Switch changed from OFF to ON
+  then
+    pushNotification("CAMPANELLO!!", "Qualcuno ha suonato!")
+    logInfo("CAMPANELLO", "Qualcuno ha suonato")
+    if ( alexa_campanello.state == ON ) {
+      Echo_Soggiorno_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
+      Echo_Studio_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
+      Echo_Giochi_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
+      Echo_Camera_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
+      logInfo("CAMPANELLO", "Allertato Alexa")
+    }
+end
