@@ -4,11 +4,15 @@ rule "Campanello"
   then
     pushNotification("CAMPANELLO!!", "Qualcuno ha suonato!")
     logInfo("CAMPANELLO", "Qualcuno ha suonato")
+
+    var String message;
+    message= "Drin drin! Hanno suonato! Drin Drin! Corri al citofono! Drin drin!"
+
     if ( alexa_campanello.state == ON ) {
-      Echo_Soggiorno_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
-      Echo_Studio_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
-      Echo_Giochi_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
-      Echo_Camera_TTS.sendCommand('Drin drin! Hanno suonato! Corri al citofono!')
+      Echo_Soggiorno_TTS.sendCommand(message)
+      Echo_Studio_TTS.sendCommand(message)
+      Echo_Giochi_TTS.sendCommand(message)
+      Echo_Camera_TTS.sendCommand(message)
       logInfo("CAMPANELLO", "Allertato Alexa")
     }
 end
