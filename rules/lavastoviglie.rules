@@ -1,0 +1,7 @@
+rule "Lavastoviglie spina offline"
+  when
+    Item tuya08_Light_Reachable changed from ON to OFF
+  then
+    tuya08_Power.postUpdate(0)
+    logInfo("LAVASTOVIGLIE", "Spina offline, imposto consumo a 0W")
+end

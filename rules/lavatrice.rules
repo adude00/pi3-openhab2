@@ -1,0 +1,58 @@
+rule "Lavatrice spina online"
+  when
+    Item tuya02_Light_Reachable changed from OFF to ON
+  then
+    alexa_lavatrice.sendCommand(ON)
+    logInfo("LAVATRICE", "Spina online, attivo la notifica su alexa")
+end
+rule "Lavatrice spina offline"
+  when
+    Item tuya02_Light_Reachable changed from ON to OFF
+  then
+    alexa_lavatrice.sendCommand(OFF)
+    tuya02_Power.postUpdate(0)
+    logInfo("LAVATRICE", "Spina offline, disattivo la notifica su alexa e imposto consumo a 0W")
+end
+
+
+rule "Lavatrice spina ON"
+  when
+    Item tuya02_Switch changed from OFF to ON
+  then
+    alexa_lavatrice.sendCommand(ON)
+    logInfo("LAVATRICE", "Spina ON, attivo la notifica su alexa")
+end
+rule "Lavatrice spina OFF"
+  when
+    Item tuya02_Switch changed from ON to OFF
+  then
+    alexa_lavatrice.sendCommand(OFF)
+    logInfo("LAVATRICE", "Spina OFF, disattivo la notifica su alexa")
+end
+
+
+rule "Lavatrice ha finito"
+  when
+    Item tuya02_Power changed
+  then
+    if ( alexa_lavatrice.state == ON ) {
+      if ( previousState >= 2 && tuya02_Power.state < 2 ) {
+
+        pushNotification("LAVATRICE: Finita", "La lavasciuga ha finito il lavaggio")
+
+	var String message;
+	message= "La lavatrice ha finito il lavaggio. Ripeto. La lavatrice ha finito il lavaggio. Vai a sistemare i vestiti!"
+	
+	Echo_Soggiorno_TTS.sendCommand(message)
+	Echo_Studio_TTS.sendCommand(message)
+	Echo_Giochi_TTS.sendCommand(message)
+	Echo_Camera_TTS.sendCommand(message)
+
+        alexa_lavatrice.sendCommand(OFF)
+
+        logInfo("LAVATRICE", "Lavaggio finito, mandata notifica su prowl ed Alexa, spento allarme.")
+
+      
+      }
+    }
+end

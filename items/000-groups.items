@@ -27,6 +27,9 @@ Group gScrivania
 Group gTemp
 Group gHumd
 
+Group gTempP1
+Group gHumdP1
+
 Group gGraph
 
 // Consumi

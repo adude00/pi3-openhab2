@@ -1,0 +1,31 @@
+Group t_sonoff20      "sonoff20: Bagno P1"
+
+// ITEM SPECIFIC
+// Switch                sf20_Light   "Bagno P1"                 <light>        (gLuci)  [ "Lighting" ]                             {channel="mqtt:topic:tasmota:sonoff20:PowerSwitch"}
+Number:Temperature    sf20_Temp   "Temp. Bagno P1 [%.1f °C]"  <temperature>  (gTempP1,gGraph)   {channel="mqtt:topic:tasmota:sonoff20:Temperature"}
+Number:Dimensionless  sf20_Humid  "Umid. Bagno P1 [%.1f %%]"  <humidity>     (gHumdP1,gGraph)   {channel="mqtt:topic:tasmota:sonoff20:Humidity"}
+
+
+// DEFAULT FOR ALL
+// device specific properties
+Switch               sonoff20_switch        "sonoff20 Switch"                <poweroutlet> (t_sonoff,t_sonoff20,gSwitch)    {channel="mqtt:topic:tasmota:sonoff20:PowerSwitch"}
+Number:Temperature   sonoff20_Temp          "Temp. Bagno P1 [%.1f °C]"       <temperature> (t_sonoff,t_sonoff20)      {channel="mqtt:topic:tasmota:sonoff20:Temperature"}
+Number:Dimensionless sonoff20_Humid         "Umid. Bagno P1 [%.1f %%]"       <humidity>    (t_sonoff,t_sonoff20)      {channel="mqtt:topic:tasmota:sonoff20:Humidity"}
+
+//Number:Power       sonoff20_Power         "Power [%.1f W]"                      <energy> (t_sonoff,t_sonoff20,gPower)     {channel="mqtt:topic:tasmota:sonoff20:Power"}
+
+// Tasmota Status
+String               sonoff20_Refresh       "sonoff20 Time [%s]"                   <clock> (t_sonoff,t_sonoff20,gTime)      {channel="mqtt:topic:tasmota:sonoff20:Time"}
+String               sonoff20_Version       "sonoff20 Version [%s]"                        (t_sonoff,t_sonoff20,gVersion)   {channel="mqtt:topic:tasmota:sonoff20:Version"}
+String               sonoff20_Reachable     "sonoff20 Reachable [%s]"             <switch> (t_sonoff,t_sonoff20,gReachable) {channel="mqtt:topic:tasmota:sonoff20:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sonoff20_RSSI          "sonoff20 Signal [%d %%]" <network>            (t_sonoff,t_sonoff20,gRSSI)      {channel="mqtt:topic:tasmota:sonoff20:RSSI"}
+Number:Dimensionless sonoff20_LoadAvg       "sonoff20 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff20,gLoad)      {channel="mqtt:topic:tasmota:sonoff20:LoadAvg"}
+String               sonoff20_Result        "sonoff20 Result [%s]"    <status>             (t_sonoff,t_sonoff20,gResult)    {channel="mqtt:topic:tasmota:sonoff20:Result"}
+String               sonoff20_Uptime        "sonoff20 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff20,gUptime)    {channel="mqtt:topic:tasmota:sonoff20:Uptime"}
+String               sonoff20_RestartReason "sonoff20 Reason [%s]"    <error>              (t_sonoff,t_sonoff20,gReason)    {channel="mqtt:topic:tasmota:sonoff20:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sonoff20_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff20) {channel="mqtt:topic:tasmota:sonoff20:WifiDowntime"}
+

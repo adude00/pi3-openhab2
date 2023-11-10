@@ -292,6 +292,9 @@ sitemap default label="Casa"
 	  Frame label="Forno" {
 	    Switch        item=alexa_forno 
 	  }
+	  Frame label="Lavatrice" {
+	    Switch        item=alexa_lavatrice
+	  }
 
 	}
 
