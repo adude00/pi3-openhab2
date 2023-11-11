@@ -1,17 +1,40 @@
 rule "Reset termostato items at boot"
   when
-    System started or
-    Item tsSoggiorno changed to ON
+    System started
   then
     tsSoggiornoWait.sendCommand(OFF)
     tsSoggiornoRunning.sendCommand(OFF)
-    logInfo("tsSoggiornoWait","System started. Turning off tsSoggiornoWait and tsSoggiornoRunning")
+    logInfo("tsSoggiornoWait","System started: Turning off tsSoggiornoWait and tsSoggiornoRunning")
+end
+
+rule "Termostato ON - Setting startup Temp"
+  when
+    Item tsSoggiorno changed from OFF to ON
+  then
+    tsSoggiornoWait.sendCommand(OFF)
+    tsSoggiornoRunning.sendCommand(OFF)
+    logInfo("tsSoggiornoWait","Termostato ON - Turning off tsSoggiornoWait and tsSoggiornoRunning")
+
+    if ( tsSoggiornoStartupTempON.state == ON ) {
+      logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature")
+      acSoggiornoHeatSetpoint.sendCommand(tsSoggiornoStartupTemp.state as Number)
+    }
+end
+
+rule "Termostato OFF - Turning OFF if needed"
+  when
+    Item tsSoggiorno changed from ON to OFF
+  then
+  if ( tsSoggiornoOverride.state == OFF ) {
+    logInfo("tsSoggiornoWait","Termostato OFF. tsSoggiornoOverride=OFF. Turning OFF Aircon")
+    acSoggiornoPower.sendCommand(OFF)
+  }
 end
 
 
 rule "Termostato Soggiorno Wait"
 when
-    Item tsSoggiorno changed to ON or
+    Item tsSoggiorno changed from OFF to ON or
     Item Casa_Temperature_AVG changed or
     Item sf04_Temp changed or
     Item avgSoggiornoAvg changed or
