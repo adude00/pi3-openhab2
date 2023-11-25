@@ -57,6 +57,7 @@ then
 
   gTappAll.sendCommand(UP)
   IPCams.sendCommand(OFF)
+  alexa_campanello.sendCommand(ON)
 
   // Accendo le luci in soggiorno in base alla configurazione
   sf04_Light.sendCommand(ON)
@@ -107,6 +108,7 @@ then
   var Number led03_w = led03_w_Morning.state
   var Number led03_c = led03_c_Morning.state
 
+  alexa_campanello.sendCommand(ON)
   
   // SOGGIORNO - CHANGE TEMP
   if (ac_sog_sveglia_change.state == ON) {
@@ -270,6 +272,8 @@ then
       logInfo("Scene","Scena A Letto: tapparelle abbassate")
     ])
 
+  alexa_campanello.sendCommand(OFF)
+
     // TERMOSTATO
     if (ts_sog_night_off.state == ON) {
       createTimer(now.plusSeconds(3),  [ |
@@ -346,6 +350,8 @@ when
 then
     logInfo("Scene","Scena NANNA: iniziata")
     Tapp08.sendCommand(DOWN)
+
+    alexa_campanello.sendCommand(OFF)
 
     if (conf_nanna_ac_kid_acon.state == ON) {
       logInfo("Scene","Nanna: Accendo clima cameretta")

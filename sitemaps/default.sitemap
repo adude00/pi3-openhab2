@@ -307,18 +307,10 @@ sitemap default label="Casa"
 
   Frame label="Thermostats" {
     Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
-      Frame label="A/C Manual" {
-        Switch    item=acSoggiornoPower
-	Selection item=acSoggiornoMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
-	Setpoint  item=acSoggiornoHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==heating] 
-	Setpoint  item=acSoggiornoCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==cooling, acSoggiornoMode==dry] 
-	Setpoint  item=acSoggiornoAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==auto] 
-        Text      item=pow03_Power label="Potenza Motore: [%.0f W]" icon=pump
-        Text      item=acSoggiornoOutsideTemp icon=temperature
-        Text      item=avgSoggiornoAvg        label="Media 30min"    icon=flow
-        Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
-        Text      item=sf04_Temp              label="Divano"         icon=sofa
-	}
+      Frame label="A/C Auto"  {
+        Switch    item=tsSoggiorno            label="Termostato"
+        Setpoint  item=spSoggiorno minValue=17  maxValue=29 step=0.1
+      }
 
       Frame label="A/C Fan Control" visibility=[acSoggiornoPower==ON] {
         // Heat
@@ -347,6 +339,24 @@ sitemap default label="Casa"
         Switch    item=acSoggiornoDryFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==dry]
       }
 
+      Frame label="A/C Manual" {
+        Switch    item=acSoggiornoPower
+	Selection item=acSoggiornoMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
+	Setpoint  item=acSoggiornoHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==heating] 
+	Setpoint  item=acSoggiornoCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==cooling, acSoggiornoMode==dry] 
+	Setpoint  item=acSoggiornoAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==auto] 
+        Text      item=pow03_Power label="Potenza Motore: [%.0f W]" icon=pump
+      }
+
+      Frame label="Soggiorno Status" {
+        Text      item=acSoggiornoOutsideTemp       label="Terrazzo Davanti [%.1f °C]" icon=garden
+        Text      item=avgSoggiornoAvg              label="Media 30min"                icon=flow
+        Text      item=Casa_Temperature_AVG         label="Istantanea"                 icon=house
+        Text      item=Casa_Temperature_Sogg_Up     label="Alta"                       icon=flowpipe
+        Text      item=sf04_Temp                    label="Divano"                     icon=sofa
+	Text      item=Casa_Temperature_Sogg_Down   label="Bassa"                      icon=returnpipe
+      }
+
       Frame label="A/C Extra" {
         Text item=acSoggiornoName
         Switch item=acSoggiornoStreamer
@@ -356,19 +366,6 @@ sitemap default label="Casa"
         Text item=acSoggiornoRoomTemp icon=temperature
       }
 
-      Frame label="A/C Auto"  {
-        Switch    item=tsSoggiorno            label="Termostato"
-	Switch    item=tsSoggiornoAutoON      label="Auto ON on SetPoint" icon=settings
-        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
-        Setpoint  item=spSoggiorno minValue=17  maxValue=29 step=0.1
-        Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
-        Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
-        //Selection item=tsSoggiornoWaitMaxTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        //Selection item=tsSoggiornoWaitMinTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        Setpoint item=tsSoggiornoWaitMaxTemp    minValue=10 maxValue=31 step=0.5
-        Setpoint item=tsSoggiornoWaitMinTemp    minValue=10 maxValue=31 step=0.5
-        Setpoint item=tsSoggiornoWaitStep       minValue=0.5 maxValue=3 step=0.5
-      }
 
       Frame label="Grafici " {
 	Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
@@ -387,16 +384,25 @@ sitemap default label="Casa"
         Chart  item=pow03_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
       }
 
+      Frame label="A/C Auto Conf" {
+        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
+        Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
+        Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1              icon=settings
+        Setpoint item=tsSoggiornoWaitMaxTemp    minValue=10 maxValue=31 step=0.5  icon=flowpipe
+        Setpoint item=tsSoggiornoWaitMinTemp    minValue=10 maxValue=31 step=0.5  icon=returnpipe
+        Setpoint item=tsSoggiornoWaitStep       minValue=0.5 maxValue=3 step=0.5  icon=line
+        Switch    item=tsSoggiornoStartupTempON 
+        Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
+	Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
+	Switch    item=tsSoggiornoOverride	  icon=settings
+      }
+
       Frame label="A/C Auto DEBUG"  {
-        //Switch    item=tsSoggiornoBagnetto      icon=bath
-	Switch    item=tsSoggiornoOverride	icon=settings
-        //Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        //Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
 	Switch    item=tsSoggiornoWait
-        Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
+        Setpoint  item=tsSoggiornoWaitMins	  label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
 	Switch    item=tsSoggiornoWaitDebug
 	Switch    item=tsSoggiornoRunning
-        Switch item=pow03_Switch
+        Switch    item=pow03_Switch
       }
 
     } // Chiuso Text Soggiorno Clima
@@ -548,28 +554,24 @@ sitemap default label="Casa"
       }
 
       Frame label="Dati" {
-        Text      item=sf05_Temp   label="Specchio: Temperatura"
-        Text      item=sf05_Humid  label="Specchio: Umidità"
-        Text      item=sf08_Temp   label="Scrivania: Temperatura"
-        Text      item=sf08_Humid  label="Scrivania: Umidità"
-        Text      item=sf11_Temp   label="Soffitto: Temperatura"
-        Text      item=sf11_Humid  label="Soffitto: Umidità"
+        Text      item=sf05_Temp   label="Luce Bianca: Temperatura"
+        Text      item=sf05_Humid  label="Luce Bianca: Umidità"
       }
 
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
         // TEMPERATURA Matrimoniale
-        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // Potenza Pompa
         Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
         Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
@@ -583,16 +585,16 @@ sitemap default label="Casa"
         Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
         // UMIDITA Matrimoniale
-        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // Chiuso frame grafici
 
@@ -971,7 +973,39 @@ sitemap default label="Casa"
         Text   item=shelly05_ip icon=none
         Text   item=shelly05_rssi icon=none
 	}
-      } 
+      }
+      Text label="Shelly 06 - Clima Studio" {
+        Frame label="Shelly Plus 1PM" {
+        Switch item=shelly06_R1
+        Text   item=shelly06_Power icon=none
+        Text   item=shelly06_voltage icon=none
+        Text   item=shelly06_energy icon=none
+        Text   item=shelly06_temperature icon=none
+        Text   item=shelly06_restartreq icon=none
+        Text   item=shelly06_uptime icon=none
+        Text   item=shelly06_state icon=none
+        Text   item=shelly06_event0 icon=none
+        Text   item=shelly06_source icon=none
+        Text   item=shelly06_ip icon=none
+        Text   item=shelly06_rssi icon=none
+        }
+      }
+      Text label="Shelly 07 - Clima HiSense" {
+        Frame label="Shelly Plus 1PM" {
+        Switch item=shelly07_R1
+        Text   item=shelly07_Power icon=none
+        Text   item=shelly07_voltage icon=none
+        Text   item=shelly07_energy icon=none
+        Text   item=shelly07_temperature icon=none
+        Text   item=shelly07_restartreq icon=none
+        Text   item=shelly07_uptime icon=none
+        Text   item=shelly07_state icon=none
+        Text   item=shelly07_event0 icon=none
+        Text   item=shelly07_source icon=none
+        Text   item=shelly07_ip icon=none
+        Text   item=shelly07_rssi icon=none
+        }
+      }
       Text label="Shelly2PM 01 - Giochi: Luce e Clima" {
 	Frame label="Shelly Plus 1PM" {
         Switch item=shelly2pm01_R0

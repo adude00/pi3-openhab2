@@ -5,10 +5,10 @@ Switch sf08_Light "Scrivania" <wallswitch> (sonoff08,sonoff,gScrivania,gBuonanot
             <[broker:stat/sonoff08/POWER:state:default]" } 
 
 // TEMPERATURA E UMIDITA
-Number sf08_Temp   "Temp. Scrivania [%.1f °C]"  <temperature>  (gTemp,sonoff08,sonoff,gChartBdrmT,gGraph)
+Number sf08_Temp   "Temp. Scrivania [%.1f °C]"  <temperature>  (gTemp,sonoff08,sonoff)
     { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Temperature)]" } 
 
-Number sf08_Humid  "Umid. Scrivania [%.1f %%]"  <humidity>    (gHumd,sonoff08,sonoff,gChartBdrmH,gGraph)
+Number sf08_Humid  "Umid. Scrivania [%.1f %%]"  <humidity>    (gHumd,sonoff08,sonoff)
     { mqtt="<[broker:tele/sonoff08/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

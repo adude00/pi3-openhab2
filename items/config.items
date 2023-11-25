@@ -19,27 +19,27 @@ Switch conf_autooff_desk_ac_bdr	"Spegni AC Matrimoniale con Scrivania"	<flow> (g
 
 // CONF SOGGIORNO - Scene varie
 Switch ts_sog_sveglia_on 	"Sveglia TS Auto-On"           <heating>
-Switch ac_sog_sveglia_on 	"Sveglia Auto-On"              <heating>
+Switch ac_sog_sveglia_on 	"Sveglia Clima Auto-On"        <heating>
 Switch ac_sog_sveglia_change 	"Sveglia Auto Change Temp"     <heating>
 Number ac_sog_sveglia_temp 	"Sveglia Temp [%.1f °C]"       <heating>
 
 Switch ts_sog_acasa_on 		"A Casa TS Auto-On"            <heating>
-Switch ac_sog_acasa_on  	"A Casa Auto-On"               <heating>
+Switch ac_sog_acasa_on  	"A Casa Clima Auto-On"         <heating>
 Switch ac_sog_acasa_change 	"A Casa Auto Change Temp"      <heating>
 Number ac_sog_acasa_temp 	"A Casa Temp [%.1f °C]"        <heating>
 
 Switch ts_sog_lavoro_off 	"Lavoro TS Auto-Off"           <heating>
-Switch ac_sog_lavoro_off 	"Lavoro Auto-Off"              <heating>
+Switch ac_sog_lavoro_off 	"Lavoro Clima Auto-Off"        <heating>
 Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp"      <heating>
 Number ac_sog_lavoro_temp 	"Lavoro Temp [%.1f °C]"        <heating>
 
 Switch ts_sog_usciamo_off 	"Usciamo TS Auto-Off"          <heating>
-Switch ac_sog_usciamo_off 	"Usciamo Auto-Off"             <heating>
+Switch ac_sog_usciamo_off 	"Usciamo Clima Auto-Off"       <heating>
 Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp"     <heating>
 Number ac_sog_usciamo_temp 	"Usciamo Temp [%.1f °C]"       <heating>
 
 Switch ts_sog_night_off 	"Night TS Auto-Off"            <heating>
-Switch ac_sog_night_off 	"Night Auto-Off"               <heating>
+Switch ac_sog_night_off 	"Night Clima Auto-Off"         <heating>
 Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
 Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 

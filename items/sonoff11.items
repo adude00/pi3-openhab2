@@ -1,13 +1,13 @@
 Group sonoff11
 
-Switch sf11_Light "Luce Scrivania" <light> (sonoff11,sonoff,gLuci,gScrivania) [ "Lighting" ]
+Switch sf11_Light "Luce Scrivania" <light> (sonoff11,sonoff,gLuci,gScrivania)
     { mqtt=">[broker:cmnd/sonoff11/POWER:command:*:default],
             <[broker:stat/sonoff11/POWER:state:default]" } 
 
 // TEMPERATURA E UMIDITA
-Number sf11_Temp   "Temp. Soffitto [%.1f °C]"  <temperature> (gTemp,sonoff11,sonoff,Casa_Temperature_Chart,gChartBdrmT,gGraph)
+Number sf11_Temp   "Temp. Soffitto [%.1f °C]"  <temperature> (gTemp,sonoff11,sonoff)
   { mqtt="<[broker:tele/sonoff11/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf11_Humid  "Umid. Soffitto [%.1f %%]"  <humidity>    (gHumd,sonoff11,sonoff,Casa_Umidita_Chart,gChartBdrmH,gGraph)
+Number sf11_Humid  "Umid. Soffitto [%.1f %%]"  <humidity>    (gHumd,sonoff11,sonoff)
     { mqtt="<[broker:tele/sonoff11/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

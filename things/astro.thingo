@@ -1,0 +1,11 @@
+astro:sun:home [ geolocation="44.4808858,11.3713893,50", interval=60 ] {
+    Channels:
+        Type rangeEvent : rise#event [
+            offset=-30
+	    latest=06:30
+        ]
+        Type rangeEvent : set#event [
+            offset=30,
+            latest="20:30"
+        ]
+}

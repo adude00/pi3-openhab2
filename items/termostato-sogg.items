@@ -4,7 +4,7 @@ Switch tsSoggiorno  "Termostato Soggiorno"                        (gTermoSogg,gR
 Number spSoggiorno  "Setpoint Soggiorno [%.1f °C]"  <smiley>      (gTermoSogg) 
 Number hsSoggiorno  "Isteresi Soggiorno [%.1f °C]"  <flowpipe>    (gTermoSogg)
 Number tsSoggSensor "Riferimento"                   <zoom>        (gTermoSogg)
-Switch tsSoggiornoOverride  "Override ON/OFF Thermostat"
+Switch tsSoggiornoOverride  "Override OFF Thermostat"
 Switch tsSoggiornoBagnetto  "Bagnetto"              <settings>    (gTermoSogg) [ "Switchable" ]		
 
 Number avgSoggiornoAvg		"Media: 30m [%.1f °C]"  (gTermoSogg,gTemp)
@@ -25,3 +25,6 @@ Number tsSoggiornoWaitStep	"Step [%.1f °C]"		<temperature_hot> (gTermoSogg)
 Switch tsSoggiornoWaitDebug     "LOG Verbosi"              	<text> (gTermoSogg)
 Switch tsSoggiornoAutoON        "Auto ON on threshold"        	<text> (gTermoSogg)
 
+
+Number tsSoggiornoStartupTemp    "Temp Accensione [%.1f °C]"     <heating>
+Switch tsSoggiornoStartupTempON  "Imposta Startup Temp"
