@@ -467,7 +467,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=esp01_Temp label="Cameretta" icon=baby_2 {
+    Text item=esp02_Temp label="Cameretta" icon=girl_3 {
       Frame label="Condizionatore" {
         Switch item=DaikinCameretta_Power
         Setpoint item=DaikinCameretta_SetPoint icon=heating step=0.5 visibility=[DaikinCameretta_Power==ON]
@@ -484,8 +484,6 @@ sitemap default label="Casa"
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=esp01_Temp   label="ETHAN: Temperatura" 
-        Text      item=esp01_Humid  label="ETHAN: Umidità"
         Text      item=esp02_Temp   label="GIRLS: Temperatura"
         Text      item=esp02_Humid  label="GIRLS: Umidità"
       }
@@ -540,7 +538,60 @@ sitemap default label="Casa"
 
     } // Chiuso Text Cameretta
 
-    Text item=sf11_Temp label="Matrimoniale" icon=bedroom {
+    Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
+      Frame label="Condizionatore" {
+        Switch    item=shelly01_R1    icon=climate  label="Clima Ethan"
+	Text      item=shelly01_Power icon=energy 
+      }
+      Frame label="Comfort" {
+        Text      item=esp01_Temp   label="ETHAN: Temperatura"
+        Text      item=esp01_Humid  label="ETHAN: Umidità"
+      }
+      Frame label="Outside" {
+        Text      item=Fuori_Temperature label="Bologna"   icon="vacation" 
+        Text      item=acSoggiornoOutsideTemp              icon=garden        label="Terrazzo Davanti [%.1f °C]"
+      }
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Ethan
+        Chart  item=gChartEthanT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // Potenza Pompa
+        Chart  item=gChartEthanP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA Ethan
+        Chart  item=gChartEthanH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+      } // CHIUSO Frame Grafici
+    } // CHIUSO Text Camera Ethan
+
+    Text item=sf05_Temp label="Matrimoniale" icon=bedroom {
       Frame label="Condizionatore" {
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
@@ -618,9 +669,10 @@ sitemap default label="Casa"
       }
       Frame label="Piano 1" {
         Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
-        Text item=shelly02_Power	label="P1 Frigo [%.0f W]" icon=pantry
-        Text item=shelly01_Power	label="P1 Clima Matrimoniale [%.0f W]" icon=climate
-        Text item=shelly2pm01_Power1	label="P1 Clima Giochi [%.0f W]" icon=climate
+        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
+        Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
+        Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
+        Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
       }
       Frame label="Grafici" {
         Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
@@ -634,6 +686,16 @@ sitemap default label="Casa"
         Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
         Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
         Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
+        Chart  item=Casa_Consumi_Chart_Total period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9] legend=true
       }
     }
 
@@ -1154,6 +1216,7 @@ sitemap default label="Casa"
     Text label="OpenHAB" {
       Switch item=sw_restart mappings=[0="Restart"]
       Switch item=pi_restart mappings=[0="Reboot"]
+      Switch item=alexa_test_giochi_20
     }
     Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {

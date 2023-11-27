@@ -21,6 +21,10 @@ Group gChartLvrmH
 Group gChartCamerettaH
 Group gChartCamerettaT
 
+Group gChartEthanH
+Group gChartEthanT
+Group gChartEthanP
+
 Group gCinema
 Group gScrivania
 
@@ -36,6 +40,7 @@ Group gGraph
 Group  Casa_Consumi_Chart (System, Charts)
 Group  gPower
 Number Casa_Consumi_Chart_Period        "Periodo" (System)
+Group Casa_Consumi_Chart_Total
 
 // Debug items groups
 

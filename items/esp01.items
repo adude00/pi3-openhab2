@@ -5,9 +5,9 @@ Group esp01
 //            <[broker:stat/esp01/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number esp01_Temp   "Cameretta Ethan Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff,gChartCamerettaT)
+Number esp01_Temp   "Cameretta Ethan Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff,gChartCamerettaT,gChartEthanT)
   [ "CurrentTemperature" ] { mqtt="<[broker:tele/esp01/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number esp01_Humid  "Cameretta Ethan Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff,gChartCamerettaH)
+Number esp01_Humid  "Cameretta Ethan Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff,gChartCamerettaH,gChartEthanH)
     { mqtt="<[broker:tele/esp01/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

@@ -2,7 +2,7 @@ Group        g_shellies
 
 Switch shelly01_R1                 "shelly01"
     { channel="mqtt:topic:shellies:shelly01:PowerSwitch" }
-Number shelly01_Power              "shelly01 Power [%s W]" (gWatt)
+Number shelly01_Power              "PdC Ethan Power [%s W]" (gWatt,Casa_Consumi_Chart,gChartEthanP)
     { channel="mqtt:topic:shellies:shelly01:Power" }
 Number shelly01_voltage            "shelly01 Voltage [%s V]"
     { channel="mqtt:topic:shellies:shelly01:Voltage" }

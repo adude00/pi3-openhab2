@@ -1,5 +1,11 @@
 // Account
-String Echo_Giochi_SendMessage            "SendMessage"                           {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:sendMessage"}
+//String Echo_Giochi_SendMessage            "SendMessage"                           {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:sendMessage"}
+
+String Echo_Giochi_Send                   "SendMessage"          {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:sendMessage"}
+String Echo_Giochi_SendMessage            "SendMessage"          {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}
+String Echo_Giochi_StartCommand           "Start Command"        {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:startCommand"}
+
+//String Echo_Giochi_StartRoutine      "Start Routine"                   {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:startRoutine"}
 
 Group Alexa_Giochi <player>
 

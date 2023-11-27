@@ -51,6 +51,7 @@ Switch alexa_campanello         "Campanello"                   <settings>       
 Switch alexa_forno              "Forno"                        <settings>        [ "Switchable" ]
 Switch alexa_lavatrice          "Lavatrice"                    <settings>        [ "Switchable" ]
 
+Switch alexa_test_giochi_20     "Test 20"                      <settings>
 
 //Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
 //Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
