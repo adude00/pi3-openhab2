@@ -1,0 +1,2 @@
+Switch     climaGiochi_Power        "Clima Giochi" { channel="amazonechocontrol:smartHomeDevice:8dcf59ae:c4b98684-5a1e-4cd2-98ed-fb804d04e550:powerState" }
+Number     climaGiochi_Temp         "Clima Giochi Temp [%.0f °C]" (gTemp) { channel="amazonechocontrol:smartHomeDevice:8dcf59ae:c4b98684-5a1e-4cd2-98ed-fb804d04e550:temperature" }

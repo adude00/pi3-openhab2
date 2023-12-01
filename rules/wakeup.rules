@@ -84,6 +84,8 @@ when
 then
   logInfo(LOG, "SVEGLIA: Alarm triggered. Starting alarm procedure")
 
+  sunIsOut.sendCommand(ON)
+
   // Per non avere cose doppie, lancio scena mattina
   if (WakeUpScene.state == ON) {
     Scene_Mattina.sendCommand(ON)

@@ -1,0 +1,62 @@
+rule "Termostato Giochi"
+  when
+    Item tsGiochiSp changed or
+    Item tsGiochiHp changed or
+    Item sf12_Temp changed or
+    Item tsGiochi changed from OFF to ON
+  then
+  
+  var Number cur_temp = sf12_Temp.state 
+  var Number setpoint = tsGiochiSp.state 
+  var Number hysteresis = tsGiochiHs.state 
+  var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+
+  // THERMOSTAT IS ON
+  if (tsGiochi.state == ON) { 
+
+
+    // AIRCON is ON
+    if (climaGiochi_Power.state == ON) {
+      if (  (cur_temp).floatValue > (setpoint).floatValue  ) {
+        sendCommand(climaGiochi_Power, OFF)
+        logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+      }
+    }
+
+    // AIRCON is OFF
+    else {
+      if (  (cur_temp).floatValue < (hsetpoint).floatValue  ) {
+
+        // IF POWER is OFF, turn on the POWER
+        if (shelly07_R1.state == OFF) {
+	  sendCommand(shelly07_R1, ON)
+          logInfo("tsGiochi","tsGiochi: ACCENDO Motore perchè era spento")
+	  
+	  // AFTER ONE MINUTE turn ON the SPLIT
+	  createTimer(now.plusSeconds(60), [|
+	    sendCommand(climaGiochi_Power, ON)
+	    logInfo("tsGiochi","tsGiochi: ACCENDO Prima Volta - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+	    ])
+
+	} 
+
+	// IF POWER is ON, turn ON the SPLIT
+	else {  
+          sendCommand(climaGiochi_Power, ON)
+          logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+	}
+		
+      }
+    }
+  }
+
+end
+
+
+rule "Spegni Clima Giochi"
+  when
+    Item tsGiochi changed from ON to OFF
+  then
+    sendCommand(climaGiochi_Power, OFF)
+    logInfo("tsGiochi","tsGiochi: Spengo AIRCON come richiesto")
+  end

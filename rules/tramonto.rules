@@ -1,0 +1,8 @@
+rule "Tramonto"
+  when
+    Item sunIsOut changed from ON to OFF
+  then
+    gTappP1.sendCommand(DOWN)
+    logInfo("TRAMONTO", "Il sole è tramontato, chiudo le tapparelle al piano di sotto!")
+end
+

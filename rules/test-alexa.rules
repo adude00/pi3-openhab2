@@ -1,0 +1,14 @@
+rule "Lavatrice spina online"
+  when
+    Item alexa_test_giochi_20 changed from OFF to ON
+  then
+  	var String message;
+	message= "Alexa Clima Giochi 30 gradi"
+	AmazonControl_SendMessage.sendCommand(message)
+	message= "Clima Giochi 30 gradi"
+	AmazonControl_SendMessage.sendCommand(message)
+	AmazonControl_SendMessage.sendCommand('Alexa, che ore sono?')
+        alexa_test_giochi_20.sendCommand(OFF)
+
+        logInfo("GIOCHI", "Mandato Comando")
+end

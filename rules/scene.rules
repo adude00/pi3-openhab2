@@ -55,7 +55,8 @@ then
   var Number led03_w = led03_w_Morning.state
   var Number led03_c = led03_c_Morning.state
 
-  gTappAll.sendCommand(UP)
+  gTappP2.sendCommand(UP)
+  if (sunIsOut.state == ON) gTappP1.sendCommand(UP)
   IPCams.sendCommand(OFF)
   alexa_campanello.sendCommand(ON)
 
@@ -166,7 +167,9 @@ then
     WhiteNoiseBDRM.sendCommand(OFF)
   }
 
-  gTappAll.sendCommand(UP)
+  gTappP2.sendCommand(UP)
+  if (sunIsOut.state == ON) gTappP1.sendCommand(UP)
+
   IPCams.sendCommand(OFF)
   //tsBagno.sendCommand(ON)
 

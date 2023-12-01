@@ -1,9 +1,9 @@
 Group t_sonoff12      "sonoff12: Giochi"
 
 // ITEM SPECIFIC
-// Switch                sf12_Switch "sf12_Switch"                 <light>        [ "Lighting" ]                      {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
-Number:Temperature    sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gGraph)   {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
-Number:Dimensionless  sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart,gGraph)       {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
+// Switch             sf12_Switch "sf12_Switch"                 <light>        [ "Lighting" ]             {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
+Number:Temperature    sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,gGraph,gChartGiochiT)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
+Number:Dimensionless  sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,gGraph,gChartGiochiH)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
 
 
 // DEFAULT FOR ALL

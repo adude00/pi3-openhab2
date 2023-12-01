@@ -295,6 +295,9 @@ sitemap default label="Casa"
 	  Frame label="Lavatrice" {
 	    Switch        item=alexa_lavatrice
 	  }
+	  Frame label="Tramonto" {
+	    Switch        item=sunIsOut
+	  }
 
 	}
 
@@ -538,60 +541,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Cameretta
 
-    Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
-      Frame label="Condizionatore" {
-        Switch    item=shelly01_R1    icon=climate  label="Clima Ethan"
-	Text      item=shelly01_Power icon=energy 
-      }
-      Frame label="Comfort" {
-        Text      item=esp01_Temp   label="ETHAN: Temperatura"
-        Text      item=esp01_Humid  label="ETHAN: Umidità"
-      }
-      Frame label="Outside" {
-        Text      item=Fuori_Temperature label="Bologna"   icon="vacation" 
-        Text      item=acSoggiornoOutsideTemp              icon=garden        label="Terrazzo Davanti [%.1f °C]"
-      }
-      Frame label="Grafici " {
-        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-
-        // TEMPERATURA Ethan
-        Chart  item=gChartEthanT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
-        // Potenza Pompa
-        Chart  item=gChartEthanP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
-        // UMIDITA Ethan
-        Chart  item=gChartEthanH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
-
-      } // CHIUSO Frame Grafici
-    } // CHIUSO Text Camera Ethan
-
-    Text item=sf05_Temp label="Matrimoniale" icon=bedroom {
+    Text item=sf05_Temp label="Matrimoniale" icon=bedroom_orange {
       Frame label="Condizionatore" {
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
@@ -649,7 +599,124 @@ sitemap default label="Casa"
 
       } // Chiuso frame grafici
 
-    }
+    } // Chiuso Text Matrimoniale
+
+
+    Text item=sf12_Temp label="Sala Giochi" icon=groundfloor {
+      Frame label="Comfort" {
+        Text      item=sf12_Temp   label="Giochi: Temperatura"
+        Text      item=sf12_Humid  label="Giochi: Umidità"
+      }
+      Frame label="Riscaldamento" {
+        Switch    item=tsGiochi
+        Setpoint  item=tsGiochiSp  minValue=16  maxValue=20 step=0.5
+        Setpoint  item=tsGiochiHs  minValue=0   maxValue=2  step=0.1
+      }
+      Frame label="Condizionatore" {
+        Switch    item=climaGiochi_Power    icon=climate  label="Clima Giochi"
+        Text      item=shelly07_Power       icon=energy
+	Switch    item=shelly07_R1          icon=energy
+      }
+      Frame label="Outside" {
+        Text      item=Fuori_Temperature label="Bologna"      icon="vacation"
+        Text      item=DaikinMatrimoniale_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
+      }
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Giochi
+        Chart  item=gChartGiochiT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartGiochiT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartGiochiT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartGiochiT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartGiochiT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartGiochiT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartGiochiT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartGiochiT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartGiochiT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartGiochiT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // Potenza Pompa
+        Chart  item=gChartGiochiP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartGiochiP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartGiochiP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartGiochiP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartGiochiP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartGiochiP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartGiochiP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartGiochiP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartGiochiP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartGiochiP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA Giochi
+        Chart  item=gChartGiochiH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartGiochiH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartGiochiH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartGiochiH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartGiochiH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartGiochiH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartGiochiH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartGiochiH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartGiochiH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartGiochiH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+      } // CHIUSO Frame Grafici
+    } // CHIUSO Text Camera Giochi
+
+
+    Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
+      Frame label="Condizionatore" {
+        Switch    item=shelly01_R1    icon=climate  label="Clima Ethan"
+	Text      item=shelly01_Power icon=energy 
+      }
+      Frame label="Comfort" {
+        Text      item=esp01_Temp   label="ETHAN: Temperatura"
+        Text      item=esp01_Humid  label="ETHAN: Umidità"
+      }
+      Frame label="Outside" {
+        Text      item=Fuori_Temperature label="Bologna"   icon="vacation" 
+        Text      item=acSoggiornoOutsideTemp              icon=garden        label="Terrazzo Davanti [%.1f °C]"
+      }
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Ethan
+        Chart  item=gChartEthanT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // Potenza Pompa
+        Chart  item=gChartEthanP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA Ethan
+        Chart  item=gChartEthanH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartEthanH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartEthanH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartEthanH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartEthanH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartEthanH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartEthanH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartEthanH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartEthanH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartEthanH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+      } // CHIUSO Frame Grafici
+    } // CHIUSO Text Camera Ethan
+
+
+
 
   } // Chiuso frame Thermostats
 
@@ -1214,9 +1281,14 @@ sitemap default label="Casa"
     }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {
-      Switch item=sw_restart mappings=[0="Restart"]
-      Switch item=pi_restart mappings=[0="Reboot"]
-      Switch item=alexa_test_giochi_20
+      Switch    item=sw_restart mappings=[0="Restart"]
+      Switch    item=pi_restart mappings=[0="Reboot"]
+      Switch    item=alexa_test_giochi_20
+      Switch    item=climaGiochi_Power
+      //Setpoint  item=climaGiochi_Temp  minValue=16  maxValue=30
+      //Selection item=climaGiochi_setPoint  mappings=[16="16", 17="17", 18="18", 19="19", 20="20", 21="21", 22="22"]
+      //Selection item=climaGiochi_setPoint  mappings=[16.0="16.0", 17.0="17.0", 18.0="18.0", 19.0="19.0", 20.0="20.0", 21.0="21.0", 22.0="22.0"]
+      Text      item=climaGiochi_Temp
     }
     Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
       Frame label="A/C Manual"  {

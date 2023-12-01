@@ -1,0 +1,1 @@
+String AmazonControl_SendMessage            "SendMessage"          {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}

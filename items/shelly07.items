@@ -1,8 +1,8 @@
 Group        g_shellies
 
-Switch shelly07_R1                 "shelly07"
+Switch shelly07_R1                 "PdC Hisense"
     { channel="mqtt:topic:shellies:shelly07:PowerSwitch" }
-Number shelly07_Power              "PdC Hisense Power [%s W]" (gWatt,Casa_Consumi_Chart)
+Number shelly07_Power              "PdC Hisense Power [%s W]" (gWatt,Casa_Consumi_Chart,gChartGiochiP)
     { channel="mqtt:topic:shellies:shelly07:Power" }
 Number shelly07_voltage            "shelly07 Voltage [%s V]"
     { channel="mqtt:topic:shellies:shelly07:Voltage" }
