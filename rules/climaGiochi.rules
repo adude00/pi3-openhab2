@@ -1,0 +1,10 @@
+rule "Clima Giochi Power"
+  when
+    Item climaGiochi_Power_API received command or
+    Item climaGiochi_Temp_API received command or
+    Item climaGiochi_Fan_API received command
+  then
+    var String command
+    command = "/etc/openhab2/scripts/ConnectLife/set-climaGiochi.sh " + climaGiochi_Power_API.state + " " + climaGiochi_Temp_API.state + " " + climaGiochi_Fan_API.state +"";
+    executeCommandLine(command)
+  end

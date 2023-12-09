@@ -2,8 +2,8 @@ Group t_sonoff20      "sonoff20: Bagno P1"
 
 // ITEM SPECIFIC
 // Switch                sf20_Light   "Bagno P1"                 <light>        (gLuci)  [ "Lighting" ]                             {channel="mqtt:topic:tasmota:sonoff20:PowerSwitch"}
-Number:Temperature    sf20_Temp   "Temp. Bagno P1 [%.1f °C]"  <temperature>  (gTempP1,gGraph)   {channel="mqtt:topic:tasmota:sonoff20:Temperature"}
-Number:Dimensionless  sf20_Humid  "Umid. Bagno P1 [%.1f %%]"  <humidity>     (gHumdP1,gGraph)   {channel="mqtt:topic:tasmota:sonoff20:Humidity"}
+Number:Temperature    sf20_Temp   "Temp. Bagno P1 [%.1f °C]"  <temperature>  (gTempP1,gGraph,gChartBagnoP1T)   {channel="mqtt:topic:tasmota:sonoff20:Temperature"}
+Number:Dimensionless  sf20_Humid  "Umid. Bagno P1 [%.1f %%]"  <humidity>     (gHumdP1,gGraph,gChartBagnoP1H)   {channel="mqtt:topic:tasmota:sonoff20:Humidity"}
 
 
 // DEFAULT FOR ALL

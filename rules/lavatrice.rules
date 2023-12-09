@@ -1,6 +1,6 @@
 rule "Lavatrice spina online"
   when
-    Item tuya02_Light_Reachable changed from OFF to ON
+    Item tuya02_Light_Reachable changed to ON
   then
     alexa_lavatrice.sendCommand(ON)
     logInfo("LAVATRICE", "Spina online, attivo la notifica su alexa")

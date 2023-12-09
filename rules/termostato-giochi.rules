@@ -15,15 +15,15 @@ rule "Termostato Giochi"
   if (tsGiochi.state == ON) { 
 
 
-    // AIRCON is ON
+    // AIRCON is ON (Alexa)
     if (climaGiochi_Power.state == ON) {
       if (  (cur_temp).floatValue > (setpoint).floatValue  ) {
-        sendCommand(climaGiochi_Power, OFF)
+        sendCommand(climaGiochi_Power_API, OFF)
         logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
       }
     }
 
-    // AIRCON is OFF
+    // AIRCON is OFF (Alexa)
     else {
       if (  (cur_temp).floatValue < (hsetpoint).floatValue  ) {
 
@@ -34,7 +34,7 @@ rule "Termostato Giochi"
 	  
 	  // AFTER ONE MINUTE turn ON the SPLIT
 	  createTimer(now.plusSeconds(60), [|
-	    sendCommand(climaGiochi_Power, ON)
+	    sendCommand(climaGiochi_Power_API, ON)
 	    logInfo("tsGiochi","tsGiochi: ACCENDO Prima Volta - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
 	    ])
 
@@ -42,7 +42,7 @@ rule "Termostato Giochi"
 
 	// IF POWER is ON, turn ON the SPLIT
 	else {  
-          sendCommand(climaGiochi_Power, ON)
+          sendCommand(climaGiochi_Power_API, ON)
           logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
 	}
 		
@@ -57,6 +57,6 @@ rule "Spegni Clima Giochi"
   when
     Item tsGiochi changed from ON to OFF
   then
-    sendCommand(climaGiochi_Power, OFF)
+    sendCommand(climaGiochi_Power_API, OFF)
     logInfo("tsGiochi","tsGiochi: Spengo AIRCON come richiesto")
   end

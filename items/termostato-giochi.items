@@ -1,3 +1,3 @@
 Number tsGiochiSp    "Setpoint Giochi [%.1f °C]"  		<temperature>		(gTemp)
 Number tsGiochiHs    "Istersi Giochi [%.1f °C]"  		<temperature>
-Switch tsGiochi      "Riscaldamento Giochi"			<settings>		[ "Switchable" ]
+Switch tsGiochi      "Riscaldamento Giochi"			<fire>		[ "Switchable" ]

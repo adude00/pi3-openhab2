@@ -308,7 +308,7 @@ sitemap default label="Casa"
 
 
 
-  Frame label="Thermostats" {
+  Frame label="Temperature P2" {
     Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
       Frame label="A/C Auto"  {
         Switch    item=tsSoggiorno            label="Termostato"
@@ -601,8 +601,10 @@ sitemap default label="Casa"
 
     } // Chiuso Text Matrimoniale
 
+  } // Chiuso Text Temperature P2
+  Frame label="Temperature P1" {
 
-    Text item=sf12_Temp label="Sala Giochi" icon=groundfloor {
+    Text item=sf12_Temp label="Sala Giochi" icon=party {
       Frame label="Comfort" {
         Text      item=sf12_Temp   label="Giochi: Temperatura"
         Text      item=sf12_Humid  label="Giochi: Umidità"
@@ -613,9 +615,12 @@ sitemap default label="Casa"
         Setpoint  item=tsGiochiHs  minValue=0   maxValue=2  step=0.1
       }
       Frame label="Condizionatore" {
-        Switch    item=climaGiochi_Power    icon=climate  label="Clima Giochi"
-        Text      item=shelly07_Power       icon=energy
-	Switch    item=shelly07_R1          icon=energy
+        Switch    item=climaGiochi_Power_API  icon=climate  label="Clima Giochi API"
+	Setpoint  item=climaGiochi_Temp_API   minValue=16  maxValue=30 step=1
+	Selection item=climaGiochi_Fan_API    mappings=[0="Auto", 5="Very Low", 6="Low", 7="Mid", 8="High", 9="Very High"]
+        Text      item=shelly07_Power         icon=energy
+        Switch    item=climaGiochi_Power      icon=climate  label="Clima Giochi Alexa"
+	Switch    item=shelly07_R1            icon=energy
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature label="Bologna"      icon="vacation"
@@ -716,6 +721,96 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera Ethan
 
 
+    Text item=sf08_Temp label="Studio" icon=calendar {
+      Frame label="Condizionatore" {
+        Switch    item=shelly06_R1    icon=climate  label="Clima Studio"
+        Text      item=shelly06_Power icon=energy
+      }
+      Frame label="Comfort" {
+        Text      item=sf08_Temp   label="Studio: Temperatura"
+        Text      item=sf08_Humid  label="Studio: Umidità"
+      }
+      Frame label="Outside" {
+        Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna" 
+        Text      item=DaikinMatrimoniale_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
+      }
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA Studio
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // Potenza Pompa
+        Chart  item=gChartStudioP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartStudioP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartStudioP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartStudioP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartStudioP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartStudioP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartStudioP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartStudioP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartStudioP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartStudioP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA Studio
+        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+      } // CHIUSO Frame Grafici
+    } // CHIUSO Text Studio
+
+    Text item=sf20_Temp label="BagnoP1" icon=toilet {
+      Frame label="Comfort" {
+        Text      item=sf20_Temp   label="BagnoP1: Temperatura"
+        Text      item=sf20_Humid  label="BagnoP1: Umidità"
+      }
+      Frame label="Outside" {
+        Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna"
+        Text      item=DaikinMatrimoniale_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
+      }
+      Frame label="Grafici " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+
+        // TEMPERATURA BagnoP1
+        Chart  item=gChartBagnoP1T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartBagnoP1T period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartBagnoP1T period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartBagnoP1T period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartBagnoP1T period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartBagnoP1T period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartBagnoP1T period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartBagnoP1T period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartBagnoP1T period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartBagnoP1T period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA BagnoP1
+        Chart  item=gChartBagnoP1H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartBagnoP1H period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartBagnoP1H period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartBagnoP1H period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartBagnoP1H period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartBagnoP1H period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartBagnoP1H period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartBagnoP1H period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartBagnoP1H period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartBagnoP1H period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+      } // CHIUSO Frame Grafici
+    } // CHIUSO Text Camera BagnoP1
 
 
   } // Chiuso frame Thermostats
