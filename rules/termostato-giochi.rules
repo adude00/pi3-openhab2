@@ -16,7 +16,9 @@ rule "Termostato Giochi"
 
 
     // AIRCON is ON (Alexa)
-    if (climaGiochi_Power.state == ON) {
+    // if (climaGiochi_Power.state == ON) {
+    // AIRCON is ON (Power Usage)
+    if (shelly07_Power.state > 10) {
       if (  (cur_temp).floatValue > (setpoint).floatValue  ) {
         sendCommand(climaGiochi_Power_API, OFF)
         logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")

@@ -15,4 +15,4 @@ URL=$GIOCHI_STATUS
 curl -s -X 'GET' \
   $URL \
   -H 'accept: application/json' \
-  -H 'Authorization: Bearer '"$BEARER" |jq
+  -H 'Authorization: Bearer '"$BEARER" |jq 

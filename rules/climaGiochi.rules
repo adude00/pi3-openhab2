@@ -4,7 +4,10 @@ rule "Clima Giochi Power"
     Item climaGiochi_Temp_API received command or
     Item climaGiochi_Fan_API received command
   then
-    var String command
-    command = "/etc/openhab2/scripts/ConnectLife/set-climaGiochi.sh " + climaGiochi_Power_API.state + " " + climaGiochi_Temp_API.state + " " + climaGiochi_Fan_API.state +"";
-    executeCommandLine(command)
+    createTimer((now.plusSeconds(1)), [|
+      val int temp = (climaGiochi_Temp_API.state as Number).intValue
+      var String command
+      command = "/etc/openhab2/scripts/ConnectLife/set-climaGiochi.sh " + climaGiochi_Power_API.state + " " + temp + " " + climaGiochi_Fan_API.state +"";
+      executeCommandLine(command)
+    ])
   end
