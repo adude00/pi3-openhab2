@@ -1,0 +1,26 @@
+Group t_esp02         "esp02: Cameretta Girls"
+
+// POWER
+//Number:Power         esp02_Power         "esp02 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp02,gWatt)     {channel="mqtt:topic:tasmota:esp02:Power"}
+
+// Sensor
+Number:Temperature   esp02_Temp          "Cameretta Girls Temp [%.1f °C]"  <temperature>  (gTemp,esp02,sonoff,gChartCamerettaT)   {channel="mqtt:topic:tasmota:esp02:Temperature"}
+Number:Dimensionless esp02_Humid         "Cameretta Girls Humid [%.1f %%]" <humidity>     (gHumd,esp02,sonoff,gChartCamerettaH)   {channel="mqtt:topic:tasmota:esp02:Humidity"}
+
+// FOR ALL
+
+// Tasmota Status
+String               esp02_Refresh       "esp02 Time [%s]"                   <clock> (t_sonoff,t_esp02,gTime)      {channel="mqtt:topic:tasmota:esp02:Time"}
+String               esp02_Version       "esp02 Version [%s]"                        (t_sonoff,t_esp02,gVersion)   {channel="mqtt:topic:tasmota:esp02:Version"}
+String               esp02_Reachable     "esp02 Reachable [%s]"             <switch> (t_sonoff,t_esp02,gReachable) {channel="mqtt:topic:tasmota:esp02:Reachable"}
+
+// Diagnostics
+Number:Dimensionless esp02_RSSI          "esp02 Signal [%d %%]" <network>            (t_sonoff,t_esp02,gRSSI)      {channel="mqtt:topic:tasmota:esp02:RSSI"}
+Number:Dimensionless esp02_LoadAvg       "esp02 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_esp02,gLoad)      {channel="mqtt:topic:tasmota:esp02:LoadAvg"}
+String               esp02_Result        "esp02 Result [%s]"    <status>             (t_sonoff,t_esp02,gResult)    {channel="mqtt:topic:tasmota:esp02:Result"}
+String               esp02_Uptime        "esp02 Uptime [%s]"    <clock>              (t_sonoff,t_esp02,gUptime)    {channel="mqtt:topic:tasmota:esp02:Uptime"}
+String               esp02_RestartReason "esp02 Reason [%s]"    <error>              (t_sonoff,t_esp02,gReason)    {channel="mqtt:topic:tasmota:esp02:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String esp02_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_esp02) {channel="mqtt:topic:tasmota:esp02:WifiDowntime"}
+

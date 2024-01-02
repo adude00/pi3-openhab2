@@ -1,0 +1,26 @@
+Group t_esp01         "esp01: Cameretta Ethan"
+
+// POWER
+//Number:Power         esp01_Power         "esp01 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp01,gWatt)     {channel="mqtt:topic:tasmota:esp01:Power"}
+
+// Sensor
+Number:Temperature   esp01_Temp          "Cameretta Ethan Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff,gChartEthanT)    {channel="mqtt:topic:tasmota:esp01:Temperature"}
+Number:Dimensionless esp01_Humid         "Cameretta Ethan Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff,gChartEthanH)    {channel="mqtt:topic:tasmota:esp01:Humidity"}
+
+// FOR ALL
+
+// Tasmota Status
+String               esp01_Refresh       "esp01 Time [%s]"                   <clock> (t_sonoff,t_esp01,gTime)      {channel="mqtt:topic:tasmota:esp01:Time"}
+String               esp01_Version       "esp01 Version [%s]"                        (t_sonoff,t_esp01,gVersion)   {channel="mqtt:topic:tasmota:esp01:Version"}
+String               esp01_Reachable     "esp01 Reachable [%s]"             <switch> (t_sonoff,t_esp01,gReachable) {channel="mqtt:topic:tasmota:esp01:Reachable"}
+
+// Diagnostics
+Number:Dimensionless esp01_RSSI          "esp01 Signal [%d %%]" <network>            (t_sonoff,t_esp01,gRSSI)      {channel="mqtt:topic:tasmota:esp01:RSSI"}
+Number:Dimensionless esp01_LoadAvg       "esp01 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_esp01,gLoad)      {channel="mqtt:topic:tasmota:esp01:LoadAvg"}
+String               esp01_Result        "esp01 Result [%s]"    <status>             (t_sonoff,t_esp01,gResult)    {channel="mqtt:topic:tasmota:esp01:Result"}
+String               esp01_Uptime        "esp01 Uptime [%s]"    <clock>              (t_sonoff,t_esp01,gUptime)    {channel="mqtt:topic:tasmota:esp01:Uptime"}
+String               esp01_RestartReason "esp01 Reason [%s]"    <error>              (t_sonoff,t_esp01,gReason)    {channel="mqtt:topic:tasmota:esp01:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String esp01_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_esp01) {channel="mqtt:topic:tasmota:esp01:WifiDowntime"}
+

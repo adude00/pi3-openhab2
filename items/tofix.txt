@@ -1,0 +1,25 @@
+V daikinSoggiorno.items
+V esp01.items
+V esp02.items
+led01.items
+led03.items
+pow01.items
+pow02.items
+pow03.items
+pow04.items
+pow05.items
+sonoff01.items
+sonoff04.items
+sonoff07.items
+sonoff08.items
+sonoff09.items
+sonoff11.items
+tapparelle.items
+tuya01.items
+tuya02.items
+tuya03.items
+tuya04.items
+tuya05.items
+tuya06.items
+tuya07.items
+tuya08.items

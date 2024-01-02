@@ -43,10 +43,3 @@ String acSoggiornoDryFanMode   "D Fan Mode"  { channel="mqtt:topic:acSoggiorno:D
 String acSoggiornoDryFanSwingH "D Swing ↔"   { channel="mqtt:topic:acSoggiorno:DryFanSwingH" }
 String acSoggiornoDryFanSwingV "D Swing ↕"   { channel="mqtt:topic:acSoggiorno:DryFanSwingV" }
 
-// OK mqttv1 OK
-//Switch acSoggiornoPower
-//    { mqtt=">[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/onOffMode/set:command:*:MAP(daikin-set.map)],
-//            <[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/onOffMode/value:state:MAP(daikin-value.map)]" }
-
-//Number:Temperature acSoggiornoOutsideTemp "Outside Temp [%.1f]"
-//    { mqtt="<[broker:daikin/98260124-ec73-40c0-ae8c-148f9f558c2f/climateControl/sensoryData//outdoorTemperature/value:state:default]" }
