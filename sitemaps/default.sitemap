@@ -774,7 +774,7 @@ sitemap default label="Casa"
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Studio
 
-    Text item=sf20_Temp label="BagnoP1" icon=toilet {
+    Text item=sf20_Temp label="Bagno P1" icon=toilet {
       Frame label="Comfort" {
         Text      item=sf20_Temp   label="BagnoP1: Temperatura"
         Text      item=sf20_Humid  label="BagnoP1: Umidità"

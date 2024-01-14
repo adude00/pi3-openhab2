@@ -1,4 +1,4 @@
-Thing mqtt:topic:tasmota:esp08 "ESP08_Thing" (mqtt:broker:brokerv2)  [ availabilityTopic="tele/esp08/LWT", payloadAvailable="Online", payloadNotAvailable="Offline" ] {
+Thing mqtt:topic:tasmota:esp08 "esp08_Thing" (mqtt:broker:brokerv2)  [ availabilityTopic="tele/esp08/LWT", payloadAvailable="Online", payloadNotAvailable="Offline" ] {
     Channels:
         // Sonoff Basic / Sonoff S20 Smart Socket (Read and switch on-state)
         // Type switch   : PowerSwitch   [stateTopic="stat/esp08/POWER",   commandTopic="cmnd/esp08/POWER", on="ON", off="OFF"]
