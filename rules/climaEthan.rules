@@ -1,0 +1,14 @@
+rule "climaEthan"
+when 
+	Member of g_climaEthan received command
+then
+	var String command
+	// COOLIX SAMSUNG_AC KELON
+
+        command = "{ \"Vendor\":\"SAMSUNG_AC\", \"Power\":\"" + climaEthan_Power.state + "\", \"Mode\":\""+ climaEthan_Mode.state + "\", \"Temp\":\"" + climaEthan_Temp.state +"\", \"FanSpeed\":\""+ climaEthan_Fan.state +"\", \"Quiet\":\"" + climaEthan_Quiet.state + "\", \"Beep\":\"" + climaEthan_Beep.state +"\", \"SwingV\":\"" + climaEthan_Swing.state + "\", \"Light\":\"" + climaEthan_Light.state +"\", \"Turbo\":\"" + climaEthan_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
+	
+        logInfo("climaEthan",command)        
+ 
+        publish("broker", "cmnd/ir01/irhvac0", command)
+end
+

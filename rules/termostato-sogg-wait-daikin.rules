@@ -19,6 +19,10 @@ rule "Termostato ON - Setting startup Temp"
       logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature")
       acSoggiornoHeatSetpoint.sendCommand(tsSoggiornoStartupTemp.state as Number)
     }
+
+    acSoggiornoPower.sendCommand(ON)
+    logInfo("tsSoggiornoWait","Termostato ON. Turning ON Aircon")
+
 end
 
 rule "Termostato OFF - Turning OFF if needed"

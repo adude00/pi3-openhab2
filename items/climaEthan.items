@@ -1,0 +1,15 @@
+Group g_climaEthan
+
+Switch climaEthan_Power    "Clima Ethan"       (g_climaEthan)    [ "Switchable" ]
+Number climaEthan_Temp     "Temp [%.1f °C]"    (g_climaEthan)
+String climaEthan_Mode     "Mode"              (g_climaEthan)
+String climaEthan_Fan      "Fan Speed"         (g_climaEthan)    
+Switch climaEthan_Swing    "Swing"             (g_climaEthan)
+Switch climaEthan_Quiet    "Quiet"             (g_climaEthan)
+Switch climaEthan_Light    "Light"             (g_climaEthan)
+Switch climaEthan_Turbo    "Turbo"             (g_climaEthan)
+Switch climaEthan_Beep     "Disable Beep"      (g_climaEthan)
+
+
+Switch climaEthan_AutoOn   "Clima Ethan Auto ON"
+Switch climaEthan_AutoOff  "Clima Ethan Auto OFF"

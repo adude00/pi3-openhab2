@@ -225,15 +225,15 @@ sitemap default label="Casa"
 	Switch item=WhiteNoiseBDRMautoON
       Text label="Sveglia" icon="time" {
         Frame label="Sveglia" {
-          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1
-          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1
+          Switch item=WakeUpAlarmRepeat label="Sveglia"
+          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
+          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[WakeUpAlarmRepeat==ON]
           Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
                               10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
-                              20="20", 21="21", 22="22", 23="23"]
+                              20="20", 21="21", 22="22", 23="23"] visibility=[WakeUpAlarmRepeat==ON]
           Selection item=WakeUpMinute label="Minuti" mappings=[
                                 0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
-                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"]
-          Switch item=WakeUpAlarmRepeat label="Sveglia"
+                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"] visibility=[WakeUpAlarmRepeat==ON]
           Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
 
           Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
@@ -247,6 +247,27 @@ sitemap default label="Casa"
           Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
         }
       }  // Chiuso Text Sveglia
+
+        Group item=gAutomations   label="Automazioni"
+        Group item=gPresence      label="Presence"
+	Text label="Alexa" icon=settings {
+
+	  Frame label="Campanello" {
+	    Switch        item=alexa_campanello
+	    Switch        item=sonoff01_Switch 
+	  }
+	  Frame label="Forno" {
+	    Switch        item=alexa_forno 
+	  }
+	  Frame label="Lavatrice" {
+	    Switch        item=alexa_lavatrice
+	  }
+	  Frame label="Tramonto" {
+	    Switch        item=sunIsOut
+	  }
+
+	}
+
 	Text label="Clima Soggiorno" icon="settings" {
           Frame label="Override Sveglia" {
 	    Switch      item=ts_sog_sveglia_on    icon="settings"
@@ -281,24 +302,9 @@ sitemap default label="Casa"
 	  
 	} // TEXT CLIMA SOGGIORNO
 
-        Group item=gAutomations   label="Automazioni"
-        Group item=gPresence      label="Presence"
-	Text label="Alexa" icon=settings {
-
-	  Frame label="Campanello" {
-	    Switch        item=alexa_campanello
-	    Switch        item=sonoff01_Switch 
-	  }
-	  Frame label="Forno" {
-	    Switch        item=alexa_forno 
-	  }
-	  Frame label="Lavatrice" {
-	    Switch        item=alexa_lavatrice
-	  }
-	  Frame label="Tramonto" {
-	    Switch        item=sunIsOut
-	  }
-
+	Text label="Clima Ethan" icon="settings" {
+          Switch      item=climaEthan_AutoOn
+          Switch      item=climaEthan_AutoOff
 	}
 
       } // CHIUSO FRAME Automatismi
@@ -669,8 +675,17 @@ sitemap default label="Casa"
 
     Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
       Frame label="Condizionatore" {
-        Switch    item=shelly01_R1    icon=climate  label="Clima Ethan"
-	Text      item=shelly01_Power icon=energy 
+        Switch    item=climaEthan_Power     icon=climate      label="Clima Ethan"
+	Setpoint  item=climaEthan_Temp      icon=temperature  minValue=16 maxValue=30 step=1
+	Selection item=climaEthan_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
+	Switch    item=climaEthan_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]
+	Switch    item=climaEthan_Swing     icon=flow
+	Switch    item=climaEthan_Quiet     icon=microphone
+	Switch    item=climaEthan_Beep      icon=soundvolume_mute
+	Switch    item=climaEthan_Light     icon=light
+	Switch    item=climaEthan_Turbo     icon=pump
+	Text      item=shelly01_Power       icon=energy 
+        Switch    item=shelly01_R1          icon=climate      label="Compressor Power"
       }
       Frame label="Comfort" {
         Text      item=esp01_Temp   label="ETHAN: Temperatura"
@@ -718,6 +733,7 @@ sitemap default label="Casa"
         Chart  item=gChartEthanH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
+
     } // CHIUSO Text Camera Ethan
 
 
