@@ -1,6 +1,7 @@
 rule "climaEthan"
 when 
-	Member of g_climaEthan received command
+	//Member of g_climaEthan received command or
+	Member of g_climaEthan changed
 then
 	var String command
 	// COOLIX SAMSUNG_AC KELON

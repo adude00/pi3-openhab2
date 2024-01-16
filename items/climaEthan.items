@@ -8,7 +8,7 @@ Switch climaEthan_Swing    "Swing"             (g_climaEthan)
 Switch climaEthan_Quiet    "Quiet"             (g_climaEthan)
 Switch climaEthan_Light    "Light"             (g_climaEthan)
 Switch climaEthan_Turbo    "Turbo"             (g_climaEthan)
-Switch climaEthan_Beep     "Disable Beep"      (g_climaEthan)
+Switch climaEthan_Beep     "Beep"              (g_climaEthan)
 
 
 Switch climaEthan_AutoOn   "Clima Ethan Auto ON"
