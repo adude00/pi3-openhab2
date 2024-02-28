@@ -65,6 +65,12 @@ then
   led03_DimW.sendCommand(led03_w)
   led03_Dim.sendCommand(led03_c)
 
+  // Accendo luci P1 visto che si entra da P1
+  shelly03_R1.sendCommand(ON)
+  shelly04_R1.sendCommand(ON)   
+  shelly05_R1.sendCommand(ON)
+  shelly2pm01_R1.sendCommand(ON)
+
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
     gScene.sendCommand(OFF)
@@ -163,8 +169,13 @@ then
 
   // MATRIMONIALE - White Noise AUTO OFF
   if (WhiteNoiseBDRMautoOFF.state == ON) {
-    logInfo("Scene","MATTINA: AutoOFF White Noise: Spengo il rumore bianco")
+    logInfo("Scene","MATTINA: AutoOFF White Noise Bedroom: Spengo il rumore bianco")
     WhiteNoiseBDRM.sendCommand(OFF)
+  }
+  // GIRLS - White Noise AUTO OFF
+  if (WhiteNoiseGirlsautoOFF.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF White Noise Girls: Spengo il rumore bianco")
+    WhiteNoiseGirls.sendCommand(OFF)
   }
 
   // CAMERA ETHAN - AC AUTO OFF
@@ -201,12 +212,15 @@ then
   logInfo("Scene","Scena USCIAMO: iniziata")
 
   gTappAll.sendCommand(DOWN)
-  gLuci.sendCommand(OFF)
 
+  createTimer(now.plusSeconds(120), [|
+    gLuci.sendCommand(OFF)
+    gScene.sendCommand(OFF)
+    logInfo("Scene","Scena USCIAMO: Luci spente e scena finita")
+    ])
   createTimer(now.plusSeconds(30), [|
     IPCams.sendCommand(ON)
-    gScene.sendCommand(OFF)
-    logInfo("Scene","Scena USCIAMO: Telecamere accese e scena finita")
+    logInfo("Scene","Scena USCIAMO: Telecamere accese")
     ])
   createTimer(now.plusSeconds(300), [|
     AutoRientro.sendCommand(ON)
@@ -365,6 +379,11 @@ then
     if (conf_nanna_ac_kid_acon.state == ON) {
       logInfo("Scene","Nanna: Accendo clima cameretta")
       DaikinCameretta_Power.sendCommand(ON)
+    }
+
+    if (WhiteNoiseGirlsautoON.state == ON) {
+      logInfo("Scene","Nanna: Accendo rumore bianco")
+      WhiteNoiseGirls.sendCommand(ON)
     }
 
     createTimer(now.plusSeconds(30), [|

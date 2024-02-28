@@ -1,10 +1,17 @@
-rule "Lavatrice spina online"
+rule "Lavatrice spina online to ON"
   when
-    Item tuya02_Light_Reachable changed to ON or
+    Item tuya02_Light_Reachable changed to ON
+  then
+    alexa_lavatrice.sendCommand(ON)
+    logInfo("LAVATRICE", "Spina online to ON, attivo la notifica su alexa")
+end
+
+rule "Lavatrice spina online from OFF to ON"
+  when
     Item tuya02_Light_Reachable changed from OFF to ON
   then
     alexa_lavatrice.sendCommand(ON)
-    logInfo("LAVATRICE", "Spina online, attivo la notifica su alexa")
+    logInfo("LAVATRICE", "Spina online OFF to ON, attivo la notifica su alexa")
 end
 
 rule "Lavatrice spina offline"
