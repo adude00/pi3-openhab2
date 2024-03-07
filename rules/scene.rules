@@ -173,10 +173,10 @@ then
     WhiteNoiseBDRM.sendCommand(OFF)
   }
   // GIRLS - White Noise AUTO OFF
-  if (WhiteNoiseGirlsautoOFF.state == ON) {
-    logInfo("Scene","MATTINA: AutoOFF White Noise Girls: Spengo il rumore bianco")
-    WhiteNoiseGirls.sendCommand(OFF)
-  }
+  //if (WhiteNoiseGirlsautoOFF.state == ON) {
+  //  logInfo("Scene","MATTINA: AutoOFF White Noise Girls: Spengo il rumore bianco")
+  //  WhiteNoiseGirls.sendCommand(OFF)
+  //}
 
   // CAMERA ETHAN - AC AUTO OFF
   if (climaEthan_AutoOff.state == ON) {

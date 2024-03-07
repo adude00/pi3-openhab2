@@ -361,7 +361,7 @@ sitemap default label="Casa"
         Text      item=acSoggiornoOutsideTemp       label="Terrazzo Davanti [%.1f °C]" icon=garden
         Text      item=avgSoggiornoAvg              label="Media 30min"                icon=flow
         Text      item=Casa_Temperature_AVG         label="Istantanea"                 icon=house
-        Text      item=Casa_Temperature_Sogg_Up     label="Alta"                       icon=flowpipe
+        Text      item=sf06_Temp                    label="Alta"                       icon=flowpipe
         Text      item=sf04_Temp                    label="Divano"                     icon=sofa
 	Text      item=Casa_Temperature_Sogg_Down   label="Bassa"                      icon=returnpipe
       }
@@ -995,7 +995,7 @@ sitemap default label="Casa"
       Frame label="Soggiorno Tutte" {
 	Text item=sf04_Temp                   label="Divano"  icon=sofa
         Text item=sf04_Humid                  label="Divano"
-        Text item=Casa_Temperature_Sogg_Up    label="Alta"    icon=flowpipe
+        Text item=sf06_Temp                   label="Alta"    icon=flowpipe
   	Text item=Casa_Umidita_Sogg           label="Alta"    
         Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
 	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe

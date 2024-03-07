@@ -3,14 +3,13 @@ import java.text.DecimalFormat
 // https://community.openhab.org/t/how-do-i-get-the-average-out-of-2-items-in-rules-file/41387/2
 rule mediaSogg
 when
-  Item Casa_Temperature_Sogg_Up changed or
   Item Casa_Temperature_Sogg_Down changed or
-  Item sf09_Temp changed or
+  Item sf06_Temp changed or
   Item sf04_Temp changed
 then
   //var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf09_Temp.state as DecimalType + sf04_Temp.state as DecimalType) / 4
-  var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf04_Temp.state as DecimalType) / 3
-  //var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType) / 2
+  //var avgTemp = (Casa_Temperature_Sogg_Up.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf04_Temp.state as DecimalType) / 3
+  var avgTemp = (sf06_Temp.state as DecimalType + Casa_Temperature_Sogg_Down.state as DecimalType + sf04_Temp.state as DecimalType) / 3
   Casa_Temperature_AVG.postUpdate(avgTemp)
 end
 

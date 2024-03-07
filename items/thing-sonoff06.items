@@ -2,8 +2,8 @@ Group t_sonoff06      "sonoff06: Amplino"
 
 // ITEM SPECIFIC
 Switch                sf06_Switch "Amplino"                 <light>        [ "Lighting" ]                             {channel="mqtt:topic:tasmota:sonoff06:PowerSwitch"}
-Number:Temperature    sf06_Temp   "Temp. Amplino [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart)   {channel="mqtt:topic:tasmota:sonoff06:Temperature"}
-Number:Dimensionless  sf06_Humid  "Umid. Amplino [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart)       {channel="mqtt:topic:tasmota:sonoff06:Humidity"}
+Number                sf06_Temp   "Temp. Amplino [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT)   {channel="mqtt:topic:tasmota:sonoff06:Temperature"}
+Number                sf06_Humid  "Umid. Amplino [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart)       {channel="mqtt:topic:tasmota:sonoff06:Humidity"}
 
 
 // DEFAULT FOR ALL
