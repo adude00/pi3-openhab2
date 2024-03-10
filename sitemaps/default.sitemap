@@ -140,6 +140,18 @@ sitemap default label="Casa"
             Text    item=Echo_Camera_LastVoiceCommand
             Slider  item=Echo_Camera_NotificationVolume
         }
+        Text label="Echo Cameretta" {
+            Default   item=Echo_Cameretta_Player
+            Slider    item=Echo_Cameretta_Volume
+            Setpoint  item=Echo_Cameretta_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Cameretta_TTS_Volume
+            Setpoint  item=Echo_Cameretta_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Cameretta_Shuffle
+            Text      item=Echo_Cameretta_Title
+
+            Text    item=Echo_Cameretta_LastVoiceCommand
+            Slider  item=Echo_Cameretta_NotificationVolume
+        }
 
         Text label="Echo Studio" {
             Default   item=Echo_Studio_Player
@@ -844,6 +856,7 @@ sitemap default label="Casa"
         Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
+        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
       }
       Frame label="Piano 1" {
         Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
