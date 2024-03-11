@@ -1,25 +1,25 @@
 // Account
-String Echo_Cameretta_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}
+String Echo_Cameretta_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:98a41df9:sendMessage"}
 
 Group Alexa_Cameretta <player>
 
 // Player control
-Player Echo_Cameretta_Player                 "Player"                                (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:player"}
-Dimmer Echo_Cameretta_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:volume"}
-Switch Echo_Cameretta_Shuffle                "Shuffle"                               (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:shuffle"}
+Player Echo_Cameretta_Player                 "Player"                                (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:player"}
+Dimmer Echo_Cameretta_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:volume"}
+Switch Echo_Cameretta_Shuffle                "Shuffle"                               (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:shuffle"}
 
 // Player Information
-String Echo_Cameretta_Title                  "Title"                                 (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:title"}
-String Echo_Cameretta_ProviderDisplayName    "Provider"                              (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:providerDisplayName"}
+String Echo_Cameretta_Title                  "Title"                                 (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:title"}
+String Echo_Cameretta_ProviderDisplayName    "Provider"                              (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:providerDisplayName"}
 
 // Commands
-String Echo_Cameretta_Announcement           "Announcement"                          (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:announcement"}
-String Echo_Cameretta_TTS                    "Text to Speech"                        (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:textToSpeech"}
-Dimmer Echo_Cameretta_TTS_Volume             "Text to Speech Volume"                 (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:textToSpeechVolume"}
-String Echo_Cameretta_Remind                 "Remind"                                (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:remind"}
-String Echo_Cameretta_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:playAlarmSound"}
-Dimmer Echo_Cameretta_NotificationVolume     "Notification volume"                   (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:notificationVolume"}
-Switch Echo_Cameretta_AscendingAlarm         "Ascending alarm"                       (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:ascendingAlarm"}
+String Echo_Cameretta_Announcement           "Announcement"                          (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:announcement"}
+String Echo_Cameretta_TTS                    "Text to Speech"                        (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:textToSpeech"}
+Dimmer Echo_Cameretta_TTS_Volume             "Text to Speech Volume"                 (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:textToSpeechVolume"}
+String Echo_Cameretta_Remind                 "Remind"                                (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:remind"}
+String Echo_Cameretta_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:playAlarmSound"}
+Dimmer Echo_Cameretta_NotificationVolume     "Notification volume"                   (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:notificationVolume"}
+Switch Echo_Cameretta_AscendingAlarm         "Ascending alarm"                       (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:ascendingAlarm"}
 
 // Feedbacks
-String Echo_Cameretta_LastVoiceCommand       "Last voice command"                    (Alexa_Cameretta) {channel="amazonechocontrol:echo:8dcf59ae:G090XG1214320N34:lastVoiceCommand"}
+String Echo_Cameretta_LastVoiceCommand       "Last voice command"                    (Alexa_Cameretta) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:lastVoiceCommand"}

@@ -10,6 +10,11 @@ then
 	
         logInfo("climaEthan",command)        
  
-        publish("broker", "cmnd/ir01/irhvac0", command)
+        // action-mqtt bindingsv1
+	// publish("broker", "cmnd/ir01/irhvac0", command)
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "cmnd/ir01/irhvac0", command )
+
 end
 

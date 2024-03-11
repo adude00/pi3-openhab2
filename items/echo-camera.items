@@ -1,25 +1,25 @@
 // Account
-String Echo_Camera_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}
+String Echo_Camera_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:98a41df9:sendMessage"}
 
 Group Alexa_Camera <player>
 
 // Player control
-Player Echo_Camera_Player                 "Player"                                (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:player"}
-Dimmer Echo_Camera_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:volume"}
-Switch Echo_Camera_Shuffle                "Shuffle"                               (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:shuffle"}
+Player Echo_Camera_Player                 "Player"                                (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:player"}
+Dimmer Echo_Camera_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:volume"}
+Switch Echo_Camera_Shuffle                "Shuffle"                               (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:shuffle"}
 
 // Player Information
-String Echo_Camera_Title                  "Title"                                 (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:title"}
-String Echo_Camera_ProviderDisplayName    "Provider"                              (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:providerDisplayName"}
+String Echo_Camera_Title                  "Title"                                 (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:title"}
+String Echo_Camera_ProviderDisplayName    "Provider"                              (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:providerDisplayName"}
 
 // Commands
-String Echo_Camera_Announcement           "Announcement"                          (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:announcement"}
-String Echo_Camera_TTS                    "Text to Speech"                        (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:textToSpeech"}
-Dimmer Echo_Camera_TTS_Volume             "Text to Speech Volume"                 (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:textToSpeechVolume"}
-String Echo_Camera_Remind                 "Remind"                                (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:remind"}
-String Echo_Camera_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:playAlarmSound"}
-Dimmer Echo_Camera_NotificationVolume     "Notification volume"                   (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:notificationVolume"}
-Switch Echo_Camera_AscendingAlarm         "Ascending alarm"                       (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:ascendingAlarm"}
+String Echo_Camera_Announcement           "Announcement"                          (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:announcement"}
+String Echo_Camera_TTS                    "Text to Speech"                        (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:textToSpeech"}
+Dimmer Echo_Camera_TTS_Volume             "Text to Speech Volume"                 (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:textToSpeechVolume"}
+String Echo_Camera_Remind                 "Remind"                                (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:remind"}
+String Echo_Camera_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:playAlarmSound"}
+Dimmer Echo_Camera_NotificationVolume     "Notification volume"                   (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:notificationVolume"}
+Switch Echo_Camera_AscendingAlarm         "Ascending alarm"                       (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:ascendingAlarm"}
 
 // Feedbacks
-String Echo_Camera_LastVoiceCommand       "Last voice command"                    (Alexa_Camera) {channel="amazonechocontrol:echo:8dcf59ae:G0911W06927102VE:lastVoiceCommand"}
+String Echo_Camera_LastVoiceCommand       "Last voice command"                    (Alexa_Camera) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:lastVoiceCommand"}

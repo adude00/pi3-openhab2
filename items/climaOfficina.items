@@ -1,2 +1,2 @@
-Switch                 climaOfficina_Power        "Clima Officina" { channel="amazonechocontrol:smartHomeDevice:8dcf59ae:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:powerState" }
-Number:Temperature     climaOfficina_Temp         "Clima Officina Temp" (gTemp) { channel="amazonechocontrol:smartHomeDevice:8dcf59ae:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:temperature" }
+Switch                 climaOfficina_Power        "Clima Officina" { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:powerState" }
+Number:Temperature     climaOfficina_Temp         "Clima Officina Temp" (gTemp) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:temperature" }

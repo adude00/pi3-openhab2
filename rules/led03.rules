@@ -7,6 +7,8 @@ import java.awt.Color
           var HSBType hsb = led03_Color.state as HSBType
           var Color color = Color::getHSBColor(hsb.hue.floatValue / 360, hsb.saturation.floatValue / 100, hsb.brightness.floatValue / 100)
           var String rgb = String::format("%1$02x%2$02x%3$02x", color.red, color.green, color.blue)
-          publish("broker", "cmnd/led03/color1", rgb)
+          //publish("broker", "cmnd/led03/color1", rgb) -- action-mqtt bindingsv1
+          var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+          actionsBroker.publishMQTT( "cmnd/led03/color1", rgb )
           led03_RGB.postUpdate(rgb)
        end

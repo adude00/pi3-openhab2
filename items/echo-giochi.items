@@ -3,22 +3,22 @@
 Group Alexa_Giochi <player>
 
 // Player control
-Player Echo_Giochi_Player                 "Player"                                (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:player"}
-Dimmer Echo_Giochi_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:volume"}
-Switch Echo_Giochi_Shuffle                "Shuffle"                               (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:shuffle"}
+Player Echo_Giochi_Player                 "Player"                                (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:player"}
+Dimmer Echo_Giochi_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:volume"}
+Switch Echo_Giochi_Shuffle                "Shuffle"                               (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:shuffle"}
 
 // Player Information
-String Echo_Giochi_Title                  "Title"                                 (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:title"}
-String Echo_Giochi_ProviderDisplayName    "Provider"                              (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:providerDisplayName"}
+String Echo_Giochi_Title                  "Title"                                 (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:title"}
+String Echo_Giochi_ProviderDisplayName    "Provider"                              (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:providerDisplayName"}
 
 // Commands
-String Echo_Giochi_Announcement           "Announcement"                          (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:announcement"}
-String Echo_Giochi_TTS                    "Text to Speech"                        (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:textToSpeech"}
-Dimmer Echo_Giochi_TTS_Volume             "Text to Speech Volume"                 (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:textToSpeechVolume"}
-String Echo_Giochi_Remind                 "Remind"                                (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:remind"}
-String Echo_Giochi_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:playAlarmSound"}
-Dimmer Echo_Giochi_NotificationVolume     "Notification volume"                   (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:notificationVolume"}
-Switch Echo_Giochi_AscendingAlarm         "Ascending alarm"                       (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:ascendingAlarm"}
+String Echo_Giochi_Announcement           "Announcement"                          (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:announcement"}
+String Echo_Giochi_TTS                    "Text to Speech"                        (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:textToSpeech"}
+Dimmer Echo_Giochi_TTS_Volume             "Text to Speech Volume"                 (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:textToSpeechVolume"}
+String Echo_Giochi_Remind                 "Remind"                                (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:remind"}
+String Echo_Giochi_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:playAlarmSound"}
+Dimmer Echo_Giochi_NotificationVolume     "Notification volume"                   (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:notificationVolume"}
+Switch Echo_Giochi_AscendingAlarm         "Ascending alarm"                       (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:ascendingAlarm"}
 
 // Feedbacks
-String Echo_Giochi_LastVoiceCommand       "Last voice command"                    (Alexa_Giochi) {channel="amazonechocontrol:echo:8dcf59ae:G0922M0624750D8E:lastVoiceCommand"}
+String Echo_Giochi_LastVoiceCommand       "Last voice command"                    (Alexa_Giochi) {channel="amazonechocontrol:echo:98a41df9:G0922M0624750D8E:lastVoiceCommand"}
