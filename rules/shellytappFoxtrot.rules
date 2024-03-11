@@ -1,21 +1,14 @@
-// NON FUNZIONA: aggiorna lo state ALLA FINE del comando.
-// Da tenere solo come esempio, usare quelli sotto!!!
-//
-//rule "shellytappFoxtrot changed"
-//when
-//	Item shellytappFoxtrot_roller received command 
-//then
-//	//var percent = (shellytappFoxtrot_roller.state as number).intvalue
-//	executeCommandLine("curl http://172.27.72.109/" + shellytappFoxtrot_roller.state)
-//end
-
 rule "shellytappFoxtrot UP"
 when 
 	Item shellytappFoxtrot_roller received command UP
 then
 	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Open?id=0")
 	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappFoxtrot/command/cover:0 -m open")
-	publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "open")
+	//publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "open") -- MQTTv1 Bindings
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytappFoxtrot/command/cover:0", "open" )
+
 end
 
 rule "shellytappFoxtrot DOWN"
@@ -24,7 +17,10 @@ when
 then
 	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Close?id=0")
 	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappFoxtrot/command/cover:0 -m close")
-	publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "close")
+	//publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "close") -- MQTTv1 Bindings
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytappFoxtrot/command/cover:0", "close" )
 end
 
 rule "shellytappFoxtrot STOP"
@@ -33,5 +29,8 @@ when
 then
 	//executeCommandLine("curl http://172.27.72.109/rpc/Cover.Stop?id=0")
 	//executeCommandLine("mosquitto_pub -h localhost -p 1883 -t shellies/shellytappFoxtrot/command/cover:0 -m stop")
-	publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "stop")
+	//publish("broker", "shellies/shellytappFoxtrot/command/cover:0", "stop") -- MQTTv1 Bindings
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytappFoxtrot/command/cover:0", "stop" )
 end
