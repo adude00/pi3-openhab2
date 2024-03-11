@@ -1,2 +1,3 @@
 *.swp
 prowl.cfg
+services/influxdb.cfg
