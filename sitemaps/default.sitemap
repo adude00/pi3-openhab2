@@ -403,6 +403,17 @@ sitemap default label="Casa"
         Chart  item=pow03_Power period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
         Chart  item=pow03_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
         Chart  item=pow03_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+
+        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
       }
 
       Frame label="A/C Auto Conf" {
