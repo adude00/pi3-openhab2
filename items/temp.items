@@ -5,8 +5,10 @@ Number ChartPeriod "Periodo" (System)
 //Number Casa_Soggiorno_AVG 		"Sogg AVG [%.1f °C]" 		<temperature>
 //Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat,gGraph) { exec="<[cat /mnt/temp/run/temp-soggiorno-avg:60000:]" }
 Number Casa_Temperature_AVG 		"Sogg Media [%.1f °C]" 		<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat,gGraph)
-Number Casa_Temperature_Sogg_Down 	"Sogg Basso [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph) 
-        { exec="<[cat /mnt/temp/temp-soggnew:60000:]" }
+Number Casa_Temperature_Sogg_Down 	"Sogg Basso [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
+//        { exec="<[cat /mnt/temp/temp-soggnew:60000:]" }
+String Casa_Temperature_Sogg_Down_String       "Sogg Basso [%.1f °C]"  <temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
+       {channel="exec:command:soggdown:output"}
 Number Casa_Temperature_Sogg_Up 	"Sogg Alto [%.1f °C]" 	<temperature> (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph) 
         { exec="<[cat /mnt/temp/dht22-temp:60000:]" }
 

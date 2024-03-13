@@ -1,0 +1,6 @@
+rule Casa_Temperature_Sogg_Down
+when
+  Item Casa_Temperature_Sogg_Down_String changed 
+then
+  Casa_Temperature_Sogg_Down.postUpdate(Float::parseFloat(String::format("%s",Casa_Temperature_Sogg_Down_String.state)))
+end

@@ -1,0 +1,2 @@
+Thing exec:command:soggdown [command="/bin/cat /mnt/temp/temp-soggnew", interval=10, timeout=3, autorun=true]
+
