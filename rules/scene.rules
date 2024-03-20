@@ -381,10 +381,10 @@ then
       DaikinCameretta_Power.sendCommand(ON)
     }
 
-    if (WhiteNoiseGirlsautoON.state == ON) {
-      logInfo("Scene","Nanna: Accendo rumore bianco")
-      WhiteNoiseGirls.sendCommand(ON)
-    }
+    //if (WhiteNoiseGirlsautoON.state == ON) {
+    //  logInfo("Scene","Nanna: Accendo rumore bianco")
+    //  WhiteNoiseGirls.sendCommand(ON)
+    //}
 
     createTimer(now.plusSeconds(30), [|
       gScene.sendCommand(OFF)
