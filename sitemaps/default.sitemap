@@ -108,6 +108,7 @@ sitemap default label="Casa"
         Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
       } // CHIUSO GROUP "Bedroom"
       Switch  item=WhiteNoiseBDRM
+      Switch  item=WhiteNoiseGirls
 
 
         } // CHIUSO FRAME Audio
