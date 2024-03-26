@@ -178,11 +178,11 @@ then
     WhiteNoiseGirls.sendCommand(OFF)
   }
 
-  // CAMERA ETHAN - AC AUTO OFF
-  if (climaEthan_AutoOff.state == ON) {
-    logInfo("Scene","MATTINA: AutoOFF Ethan: Spengo il Clima")
-    climaEthan_Power.sendCommand(OFF)
-  }
+  // CAMERA ETHAN - AC AUTO OFF - TODO DAKIN
+  //if (climaEthan_AutoOff.state == ON) {
+  //  logInfo("Scene","MATTINA: AutoOFF Ethan: Spengo il Clima")
+  //  climaEthan_Power.sendCommand(OFF)
+  //}
 
   gTappP2.sendCommand(UP)
   if (sunIsOut.state == ON) gTappP1.sendCommand(UP)

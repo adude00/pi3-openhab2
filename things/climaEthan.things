@@ -1,0 +1,140 @@
+Thing mqtt:topic:climaEthan "Clima Ethan" (mqtt:broker:brokerv2) {
+	Channels:
+		Type switch : power "Power Switch" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/onOffMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/onOffMode/set",
+			on="on",
+			off="off"          
+		]
+		Type switch : streamer "Streamer Mode Switch" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/streamerMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/streamerMode/set",
+			on="on",
+			off="off"          
+		]
+		Type switch : powerful "Powerful Mode Switch" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/powerfulMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/powerfulMode/set",
+			on="on",
+			off="off"          
+		]
+		Type switch : outdoorSilent "Outdoor Silent Mode Switch" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/outdoorSilentMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/outdoorSilentMode/set",
+			on="on",
+			off="off"          
+		]
+		Type switch : eco "Eco Mode Switch" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/econoMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/econoMode/set",
+			on="on",
+			off="off"          
+		]
+		Type string : mode "Mode" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/operationMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/operationMode/set"
+		]
+		Type number : HeatSetpoint "Setpoint Heat" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/heating/setpoints/roomTemperature/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/heating/setpoints/roomTemperature/set"
+		]
+		Type number : CoolSetpoint "Setpoint Cool" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/cooling/setpoints/roomTemperature/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/cooling/setpoints/roomTemperature/set"
+		]
+		Type number : AutoSetpoint "Setpoint Auto" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/auto/setpoints/roomTemperature/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/temperatureControl//operationModes/auto/setpoints/roomTemperature/set"
+		]
+		Type string : name "name" [
+			stateTopic = "daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/name/value"
+		]
+		Type number : outsideTemp "Outside Temperature" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/sensoryData//outdoorTemperature/value"
+		]
+		Type number : roomTemp "Outside Temperature" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/sensoryData//roomTemperature/value"
+		]
+		// Fan Heat
+		Type string : HeatFanMode "Fan Mode Heat" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanSpeed/currentMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanSpeed/currentMode/set"
+		]
+		Type number : HeatFanSpeed "Fan Speed Heat" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanSpeed/modes/fixed/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanSpeed/modes/fixed/set"
+		]
+		Type string : HeatFanSwingH "Fan Horizontal Swing Heat" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanDirection/horizontal/currentMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanDirection/horizontal/currentMode/set"
+		]
+		Type string : HeatFanSwingV "Fan Vertical Swing Heat" [ 
+			stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanDirection/vertical/currentMode/value", 
+			commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/heating/fanDirection/vertical/currentMode/set"
+		]
+                // Fan Cool
+                Type string : CoolFanMode "Fan Mode Cool" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanSpeed/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanSpeed/currentMode/set"
+                ]
+                Type number : CoolFanSpeed "Fan Speed Cool" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanSpeed/modes/fixed/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanSpeed/modes/fixed/set"
+                ]
+                Type string : CoolFanSwingH "Fan Horizontal Swing Cool" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanDirection/horizontal/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanDirection/horizontal/currentMode/set"
+                ]
+                Type string : CoolFanSwingV "Fan Vertical Swing Cool" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanDirection/vertical/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/cooling/fanDirection/vertical/currentMode/set"
+                ]
+                // Fan Auto
+                Type string : AutoFanMode "Fan Mode Auto" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanSpeed/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanSpeed/currentMode/set"
+                ]
+                Type number : AutoFanSpeed "Fan Speed Auto" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanSpeed/modes/fixed/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanSpeed/modes/fixed/set"
+                ]
+                Type string : AutoFanSwingH "Fan Horizontal Swing Auto" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanDirection/horizontal/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanDirection/horizontal/currentMode/set"
+                ]
+                Type string : AutoFanSwingV "Fan Vertical Swing Auto" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanDirection/vertical/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/auto/fanDirection/vertical/currentMode/set"
+                ]
+                // Fan FanOnly
+                Type string : FanOnlyFanMode "Fan Mode FanOnly" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanSpeed/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanSpeed/currentMode/set"
+                ]
+                Type number : FanOnlyFanSpeed "Fan Speed FanOnly" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanSpeed/modes/fixed/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanSpeed/modes/fixed/set"
+                ]
+                Type string : FanOnlyFanSwingH "Fan Horizontal Swing FanOnly" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanDirection/horizontal/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanDirection/horizontal/currentMode/set"
+                ]
+                Type string : FanOnlyFanSwingV "Fan Vertical Swing FanOnly" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanDirection/vertical/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/fanOnly/fanDirection/vertical/currentMode/set"
+                ]
+                // Fan Dry - Auto Fan Only
+                Type string : DryFanMode "Fan Mode Dry" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanSpeed/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanSpeed/currentMode/set"
+                ]
+                Type string : DryFanSwingH "Fan Horizontal Swing Dry" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanDirection/horizontal/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanDirection/horizontal/currentMode/set"
+                ]
+                Type string : DryFanSwingV "Fan Vertical Swing Dry" [
+                        stateTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanDirection/vertical/currentMode/value",
+                        commandTopic="daikin/27595d49-b65e-41cf-81bd-6ec164d18ff2/climateControl/fanControl//operationModes/dry/fanDirection/vertical/currentMode/set"
+                ]
+
+}

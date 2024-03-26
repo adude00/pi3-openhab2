@@ -1,0 +1,20 @@
+rule "climaStudio"
+when 
+	//Member of g_climaStudio received command or
+	Member of g_climaStudio changed
+then
+	var String command
+	// Samsung: SAMSUNG_AC
+
+        command = "{ \"Vendor\":\"SAMSUNG_AC\", \"Power\":\"" + climaStudio_Power.state + "\", \"Mode\":\""+ climaStudio_Mode.state + "\", \"Temp\":\"" + climaStudio_Temp.state +"\", \"FanSpeed\":\""+ climaStudio_Fan.state +"\", \"Quiet\":\"" + climaStudio_Quiet.state + "\", \"Beep\":\"" + climaStudio_Beep.state +"\", \"SwingV\":\"" + climaStudio_Swing.state + "\", \"Light\":\"" + climaStudio_Light.state +"\", \"Turbo\":\"" + climaStudio_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
+	
+        logInfo("climaStudio",command)        
+ 
+        // action-mqtt bindingsv1
+	// publish("broker", "cmnd/ir01/irhvac0", command)
+
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "cmnd/ir01/irhvac0", command )
+
+end
+

@@ -56,8 +56,7 @@ Switch alexa_test_giochi_20     "Test 20"                      <settings>
 // Tramonto
 Switch sunIsOut			"Giorno"			<settings>		[ "Switchable" ]
 
-//Switch ac_sog_out_s	"Soggiorno Fuori Switch"  <heating>
-//Number ac_sog_out_t	"Soggiorno Fuori Temp"    <heating>
-//
-//Switch ac_sog_day_s 	"Soggiorno Casa Switch"	  <heating>
-//Number ac_sog_day_t 	"Soggiorno Casa Temp"	  <heating>
+// ClimaEthan
+Switch climaEthan_AutoOn   "Clima Ethan Auto ON"
+Switch climaEthan_AutoOff  "Clima Ethan Auto OFF"
+

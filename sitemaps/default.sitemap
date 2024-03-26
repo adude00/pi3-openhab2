@@ -708,26 +708,44 @@ sitemap default label="Casa"
 
 
     Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
-      Frame label="Condizionatore" {
-        Switch    item=climaEthan_Power     icon=climate      label="Clima Ethan"
-	Setpoint  item=climaEthan_Temp      icon=temperature  minValue=16 maxValue=30 step=1
-	Selection item=climaEthan_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
-	Switch    item=climaEthan_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]
-	Switch    item=climaEthan_Swing     icon=flow
-	Switch    item=climaEthan_Quiet     icon=microphone
-	Switch    item=climaEthan_Beep      icon=soundvolume_mute
-	Switch    item=climaEthan_Light     icon=light
-	Switch    item=climaEthan_Turbo     icon=pump
+      Frame label="A/C Manual" {
+        Switch    item=climaEthanPower
+	Selection item=climaEthanMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
+	Setpoint  item=climaEthanHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==heating] 
+	Setpoint  item=climaEthanCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==cooling, climaEthanMode==dry] 
+	Setpoint  item=climaEthanAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==auto] 
 	Text      item=shelly01_Power       icon=energy 
-        Switch    item=shelly01_R1          icon=climate      label="Compressor Power"
       }
+
+      Frame label="A/C Fan Control" visibility=[climaEthanPower==ON] {
+        // Heat
+	Selection item=climaEthanHeatFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[climaEthanMode==heating]
+	Switch    item=climaEthanHeatFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[climaEthanMode==heating]
+	Switch    item=climaEthanHeatFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[climaEthanMode==heating]
+        // Cool
+        Selection item=climaEthanCoolFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[climaEthanMode==cooling]
+        Switch    item=climaEthanCoolFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[climaEthanMode==cooling]
+        Switch    item=climaEthanCoolFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[climaEthanMode==cooling]
+        // Auto
+        Selection item=climaEthanAutoFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[climaEthanMode==auto]
+        Switch    item=climaEthanAutoFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[climaEthanMode==auto]
+        Switch    item=climaEthanAutoFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==auto]
+        // FanOnly
+        Selection item=climaEthanFanOnlyFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[climaEthanMode==fanOnly]
+        Switch    item=climaEthanFanOnlyFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[climaEthanMode==fanOnly]
+        Switch    item=climaEthanFanOnlyFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==fanOnly]
+        // Dry - Auto Fan Forced
+        Text      item=climaEthanDryFanMode   label="Dry Auto Fan Only"                                  visibility=[climaEthanMode==dry]
+        Switch    item=climaEthanDryFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==dry]
+      }
+
       Frame label="Comfort" {
         Text      item=esp01_Temp   label="ETHAN: Temperatura"
         Text      item=esp01_Humid  label="ETHAN: Umidità"
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature label="Bologna"   icon="vacation" 
-        Text      item=acSoggiornoOutsideTemp              icon=garden        label="Terrazzo Davanti [%.1f °C]"
+        Text      item=climaEthanOutsideTemp               icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
       }
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
@@ -768,11 +786,24 @@ sitemap default label="Casa"
 
       } // CHIUSO Frame Grafici
 
+      Frame label="A/C Debug" {
+        Switch    item=shelly01_R1          icon=climate      label="Compressor Power"
+      }
+
     } // CHIUSO Text Camera Ethan
 
 
     Text item=sf08_Temp label="Studio" icon=calendar {
       Frame label="Condizionatore" {
+        Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
+	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
+	Selection item=climaStudio_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
+	Switch    item=climaStudio_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]
+	Switch    item=climaStudio_Swing     icon=flow
+	Switch    item=climaStudio_Quiet     icon=microphone
+	Switch    item=climaStudio_Beep      icon=soundvolume_mute
+	Switch    item=climaStudio_Light     icon=light
+	Switch    item=climaStudio_Turbo     icon=pump
         Switch    item=shelly06_R1    icon=climate  label="Clima Studio"
         Text      item=shelly06_Power icon=energy
       }

@@ -1,15 +1,45 @@
-Group g_climaEthan
+Switch climaEthanPower "Power" { channel="mqtt:topic:climaEthan:power" }
+Switch climaEthanStreamer "Streamer" { channel="mqtt:topic:climaEthan:streamer" }
+Switch climaEthanPowerful "Powerful" { channel="mqtt:topic:climaEthan:powerful" }
+Switch climaEthanOutdoorSilent "Outdoor Silent" { channel="mqtt:topic:climaEthan:outdoorSilent" }
+Switch climaEthanEco "Eco" { channel="mqtt:topic:climaEthan:eco" }
 
-Switch climaEthan_Power    "Clima Ethan"       (g_climaEthan)    [ "Switchable" ]
-Number climaEthan_Temp     "Temp [%.1f °C]"    (g_climaEthan)
-String climaEthan_Mode     "Mode"              (g_climaEthan)
-String climaEthan_Fan      "Fan Speed"         (g_climaEthan)    
-Switch climaEthan_Swing    "Swing"             (g_climaEthan)
-Switch climaEthan_Quiet    "Quiet"             (g_climaEthan)
-Switch climaEthan_Light    "Light"             (g_climaEthan)
-Switch climaEthan_Turbo    "Turbo"             (g_climaEthan)
-Switch climaEthan_Beep     "Beep"              (g_climaEthan)
+Number:Temperature climaEthanRoomTemp "Split Temp [%.1f]" { channel="mqtt:topic:climaEthan:roomTemp" }
+Number:Temperature climaEthanOutsideTemp "Outside Temp [%.1f]" (gTemp) { channel="mqtt:topic:climaEthan:outsideTemp" }
 
+String climaEthanName "Nome in App" { channel="mqtt:topic:climaEthan:name" }
+String climaEthanMode "Mode" { channel="mqtt:topic:climaEthan:mode" }
 
-Switch climaEthan_AutoOn   "Clima Ethan Auto ON"
-Switch climaEthan_AutoOff  "Clima Ethan Auto OFF"
+Number climaEthanHeatSetpoint  "H Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:climaEthan:HeatSetpoint" }
+Number climaEthanCoolSetpoint  "C Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:climaEthan:CoolSetpoint" }
+Number climaEthanAutoSetpoint  "A Setpoint [%.1f °C]" (gGraph) { channel="mqtt:topic:climaEthan:AutoSetpoint" }
+
+// Heat Fan
+String climaEthanHeatFanMode   "H Fan Mode"  { channel="mqtt:topic:climaEthan:HeatFanMode" }
+Number climaEthanHeatFanSpeed  "H Fan Speed" { channel="mqtt:topic:climaEthan:HeatFanSpeed" }
+String climaEthanHeatFanSwingH "H Swing ↔"   { channel="mqtt:topic:climaEthan:HeatFanSwingH" }
+String climaEthanHeatFanSwingV "H Swing ↕"   { channel="mqtt:topic:climaEthan:HeatFanSwingV" }
+
+// Cool Fan
+String climaEthanCoolFanMode   "C Fan Mode"  { channel="mqtt:topic:climaEthan:CoolFanMode" }
+Number climaEthanCoolFanSpeed  "C Fan Speed" { channel="mqtt:topic:climaEthan:CoolFanSpeed" }
+String climaEthanCoolFanSwingH "C Swing ↔"   { channel="mqtt:topic:climaEthan:CoolFanSwingH" }
+String climaEthanCoolFanSwingV "C Swing ↕"   { channel="mqtt:topic:climaEthan:CoolFanSwingV" }
+
+// Auto Fan
+String climaEthanAutoFanMode   "A Fan Mode"  { channel="mqtt:topic:climaEthan:AutoFanMode" }
+Number climaEthanAutoFanSpeed  "A Fan Speed" { channel="mqtt:topic:climaEthan:AutoFanSpeed" }
+String climaEthanAutoFanSwingH "A Swing ↔"   { channel="mqtt:topic:climaEthan:AutoFanSwingH" }
+String climaEthanAutoFanSwingV "A Swing ↕"   { channel="mqtt:topic:climaEthan:AutoFanSwingV" }
+
+// FanOnly Fan
+String climaEthanFanOnlyFanMode   "F Fan Mode"  { channel="mqtt:topic:climaEthan:FanOnlyFanMode" }
+Number climaEthanFanOnlyFanSpeed  "F Fan Speed" { channel="mqtt:topic:climaEthan:FanOnlyFanSpeed" }
+String climaEthanFanOnlyFanSwingH "F Swing ↔"   { channel="mqtt:topic:climaEthan:FanOnlyFanSwingH" }
+String climaEthanFanOnlyFanSwingV "F Swing ↕"   { channel="mqtt:topic:climaEthan:FanOnlyFanSwingV" }
+
+// Dry Fan - Only Auto Mode
+String climaEthanDryFanMode   "D Fan Mode"  { channel="mqtt:topic:climaEthan:DryFanMode" }
+String climaEthanDryFanSwingH "D Swing ↔"   { channel="mqtt:topic:climaEthan:DryFanSwingH" }
+String climaEthanDryFanSwingV "D Swing ↕"   { channel="mqtt:topic:climaEthan:DryFanSwingV" }
+
