@@ -235,7 +235,17 @@ sitemap default label="Casa"
 
       }
       Frame label="Automatismi" { 
-	Switch item=WhiteNoiseBDRMautoON
+	Text label="White Noise" icon="settings" {
+	  Frame label="Bedroom" {
+	    Switch item=WhiteNoiseBDRMautoON
+	    Switch item=WhiteNoiseBDRMautoOFF
+	  }
+	  Frame label="Cameretta" {
+	    Switch item=WhiteNoiseGirlsAutoON
+	    Switch item=WhiteNoiseGirlsAutoOFF
+	  }
+	}
+
       Text label="Sveglia" icon="time" {
         Frame label="Sveglia" {
           Switch item=WakeUpAlarmRepeat label="Sveglia"

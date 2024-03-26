@@ -4,9 +4,11 @@ when
 	Member of g_climaEthan changed
 then
 	var String command
-	// COOLIX SAMSUNG_AC KELON
+	// Samsung: SAMSUNG_AC
 
-        command = "{ \"Vendor\":\"SAMSUNG_AC\", \"Power\":\"" + climaEthan_Power.state + "\", \"Mode\":\""+ climaEthan_Mode.state + "\", \"Temp\":\"" + climaEthan_Temp.state +"\", \"FanSpeed\":\""+ climaEthan_Fan.state +"\", \"Quiet\":\"" + climaEthan_Quiet.state + "\", \"Beep\":\"" + climaEthan_Beep.state +"\", \"SwingV\":\"" + climaEthan_Swing.state + "\", \"Light\":\"" + climaEthan_Light.state +"\", \"Turbo\":\"" + climaEthan_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
+	// Daikin: DAIKIN, DAIKIN2, DAIKIN216, DAIKIN160, DAIKIN176, DAIKIN128, DAIKIN152, DAIKIN64
+
+        command = "{ \"Vendor\":\"DAIKIN\", \"Power\":\"" + climaEthan_Power.state + "\", \"Mode\":\""+ climaEthan_Mode.state + "\", \"Temp\":\"" + climaEthan_Temp.state +"\", \"FanSpeed\":\""+ climaEthan_Fan.state +"\", \"Quiet\":\"" + climaEthan_Quiet.state + "\", \"Beep\":\"" + climaEthan_Beep.state +"\", \"SwingV\":\"" + climaEthan_Swing.state + "\", \"Light\":\"" + climaEthan_Light.state +"\", \"Turbo\":\"" + climaEthan_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
 	
         logInfo("climaEthan",command)        
  
