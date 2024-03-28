@@ -1,25 +1,25 @@
 // Account
-String Echo_Studio_SendMessage            "SendMessage"                           {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:sendMessage"}
+String Echo_Studio_SendMessage            "SendMessage"                           {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:sendMessage"}
 
 Group Alexa_Studio <player>
 
 // Player control
-Player Echo_Studio_Player                 "Player"                                (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:player"}
-Dimmer Echo_Studio_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:volume"}
-Switch Echo_Studio_Shuffle                "Shuffle"                               (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:shuffle"}
+Player Echo_Studio_Player                 "Player"                                (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:player"}
+Dimmer Echo_Studio_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:volume"}
+Switch Echo_Studio_Shuffle                "Shuffle"                               (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:shuffle"}
 
 // Player Information
-String Echo_Studio_Title                  "Title"                                 (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:title"}
-String Echo_Studio_ProviderDisplayName    "Provider"                              (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:providerDisplayName"}
+String Echo_Studio_Title                  "Title"                                 (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:title"}
+String Echo_Studio_ProviderDisplayName    "Provider"                              (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:providerDisplayName"}
 
 // Commands
-String Echo_Studio_Announcement           "Announcement"                          (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:announcement"}
-String Echo_Studio_TTS                    "Text to Speech"                        (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:textToSpeech"}
-Dimmer Echo_Studio_TTS_Volume             "Text to Speech Volume"                 (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:textToSpeechVolume"}
-String Echo_Studio_Remind                 "Remind"                                (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:remind"}
-String Echo_Studio_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:playAlarmSound"}
-Dimmer Echo_Studio_NotificationVolume     "Notification volume"                   (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:notificationVolume"}
-Switch Echo_Studio_AscendingAlarm         "Ascending alarm"                       (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:ascendingAlarm"}
+String Echo_Studio_Announcement           "Announcement"                          (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:announcement"}
+String Echo_Studio_TTS                    "Text to Speech"                        (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:textToSpeech"}
+Dimmer Echo_Studio_TTS_Volume             "Text to Speech Volume"                 (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:textToSpeechVolume"}
+String Echo_Studio_Remind                 "Remind"                                (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:remind"}
+String Echo_Studio_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:playAlarmSound"}
+Dimmer Echo_Studio_NotificationVolume     "Notification volume"                   (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:notificationVolume"}
+Switch Echo_Studio_AscendingAlarm         "Ascending alarm"                       (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:ascendingAlarm"}
 
 // Feedbacks
-String Echo_Studio_LastVoiceCommand       "Last voice command"                    (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G0922K0732650R40:lastVoiceCommand"}
+String Echo_Studio_LastVoiceCommand       "Last voice command"                    (Alexa_Studio) {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:lastVoiceCommand"}
