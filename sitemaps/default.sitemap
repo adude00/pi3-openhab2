@@ -1082,12 +1082,13 @@ sitemap default label="Casa"
       }
     }
 
-  Text item=Fuori_Temperature label="Fuori [%.1f °C]" icon=garden {
+  Text item=acSoggiornoOutsideTemp label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
-      Text item=Fuori_Temperature label="Bologna"   icon="vacation"
-      Text item=Fuori_Umidita     label="Bologna"   icon="humidity"
-      Text item=Terrazza_Temp     label="Balcony"   icon="terrace"
-      Text item=Terrazza_Humid    label="Balcony"   icon="humidity"
+      Text item=acSoggiornoOutsideTemp                   label="Daikin 2P Davanti"        icon="terrace"
+      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"         icon="terrace"
+      Text item=climaEthanOutsideTemp                    label="Daikin 1P Davanti"        icon="terrace"
+      Text item=Terrazza_Temp                            label="Sensore 2P Temp"   icon="terrace"
+      Text item=Terrazza_Humid                           label="Sensore 2P Humid"  icon="humidity"
     }
     Frame label="Graphs" {
       Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
