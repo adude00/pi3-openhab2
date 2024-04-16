@@ -5,7 +5,7 @@ Switch acSoggiornoOutdoorSilent "Outdoor Silent" { channel="mqtt:topic:acSoggior
 Switch acSoggiornoEco "Eco" { channel="mqtt:topic:acSoggiorno:eco" }
 
 Number:Temperature acSoggiornoRoomTemp "Split Temp [%.1f]" { channel="mqtt:topic:acSoggiorno:roomTemp" }
-Number:Temperature acSoggiornoOutsideTemp "Outside Temp [%.1f]" (gTemp) { channel="mqtt:topic:acSoggiorno:outsideTemp" }
+Number:Temperature acSoggiornoOutsideTemp "2P Davanti [%.1f]" (gTemp,Fuori_Temperature_Chart) { channel="mqtt:topic:acSoggiorno:outsideTemp" }
 
 String acSoggiornoName "Nome in App" { channel="mqtt:topic:acSoggiorno:name" }
 String acSoggiornoMode "Mode" { channel="mqtt:topic:acSoggiorno:mode" }

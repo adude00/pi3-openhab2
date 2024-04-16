@@ -5,7 +5,7 @@ Switch climaEthanOutdoorSilent "Outdoor Silent" { channel="mqtt:topic:climaEthan
 Switch climaEthanEco "Eco" { channel="mqtt:topic:climaEthan:eco" }
 
 Number:Temperature climaEthanRoomTemp "Split Temp [%.1f]" { channel="mqtt:topic:climaEthan:roomTemp" }
-Number:Temperature climaEthanOutsideTemp "Outside Temp [%.1f]" (gTemp) { channel="mqtt:topic:climaEthan:outsideTemp" }
+Number:Temperature climaEthanOutsideTemp "1P Davanti [%.1f]" (gTemp,Fuori_Temperature_Chart) { channel="mqtt:topic:climaEthan:outsideTemp" }
 
 String climaEthanName "Nome in App" { channel="mqtt:topic:climaEthan:name" }
 String climaEthanMode "Mode" { channel="mqtt:topic:climaEthan:mode" }

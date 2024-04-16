@@ -6,4 +6,4 @@ String DaikinCameretta_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP37843:f
 Number DaikinCameretta_Fan_Number "Fan Speed" (gGraph)
 String DaikinCameretta_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP37843:fandir" }
 Number:Temperature DaikinCameretta_IndoorTemperature "Temp Split [%.1f °C]" { channel="daikin:ac_unit:DaikinAP37843:indoortemp" }
-Number:Temperature DaikinCameretta_OutdoorTemperature "Temp Esterna [%.1f °C]" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }
+Number:Temperature DaikinCameretta_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp,Fuori_Temperature_Chart) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }

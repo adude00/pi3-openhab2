@@ -5,5 +5,5 @@ String DaikinMatrimoniale_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP0510
 Number DaikinMatrimoniale_Fan_Number "Fan Speed" (gGraph)
 String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP05103:fandir" }
 Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split" { channel="daikin:ac_unit:DaikinAP05103:indoortemp" }
-Number:Temperature DaikinMatrimoniale_OutdoorTemperature "Temp Esterna" { channel="daikin:ac_unit:DaikinAP05103:outdoortemp" }
+Number:Temperature DaikinMatrimoniale_OutdoorTemperature "2P Dietro [%.1f °C]" { channel="daikin:ac_unit:DaikinAP05103:outdoortemp" }
 

@@ -1085,7 +1085,7 @@ sitemap default label="Casa"
   Text item=acSoggiornoOutsideTemp label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
       Text item=acSoggiornoOutsideTemp                   label="Daikin 2P Davanti"        icon="terrace"
-      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"         icon="terrace"
+      Text item=DaikinCameretta_OutdoorTemperature       label="Daikin 2P Dietro"         icon="terrace"
       Text item=climaEthanOutsideTemp                    label="Daikin 1P Davanti"        icon="terrace"
       Text item=Terrazza_Temp                            label="Sensore 2P Temp"   icon="terrace"
       Text item=Terrazza_Humid                           label="Sensore 2P Humid"  icon="humidity"
