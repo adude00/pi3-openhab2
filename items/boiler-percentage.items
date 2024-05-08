@@ -1,0 +1,3 @@
+Number Boiler_Percentage "Acqua Calda [%.1f %%]"  <bath> (gGraph)
+Number Boiler_Max        "Max last 24h [%.1f W]"
+Number Boiler_Delta      "Delta Watt [%.1f W]"
