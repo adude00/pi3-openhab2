@@ -452,17 +452,19 @@ sitemap default label="Casa"
 
 
     Text item=sf07_Temp label="Bagno" icon=bath {
-      Frame label="Termostato" {
-        Switch		item=tsBagno
-        Setpoint	item=spBagno 		icon=smiley	minValue=18  	maxValue=30	step=0.5
-        Setpoint	item=hsBagno		icon=settings	minValue=0  	maxValue=3	step=0.1
-        Switch		item=sf07_Light 	icon=radiator
+
+      Frame label="Boiler" {
+        Text            item=Boiler_Percentage {
+		Text		item=Boiler_Percentage
+		Text		item=Boiler_Max
+		Setpoint	item=Boiler_Delta     minValue=100     maxValue=300     step=10
+		Text item=tuya05_Power          label="Boiler: [%.0f W]"
+	}
+      }
+      Frame label="Comfort" {
         Text		item=sf07_Temp		label="Temperatura"
         Text		item=sf07_Humid		label="Umidità"
-	Switch		item=mdBagno		label="Modalità"		mappings=[heat='HOT', off='OFF']
-        Switch		item=tsBagnoAutoOFF	label="Auto OFF: 15 min"	icon=settings
-      } // Chiuso Frame Termostato
-
+      }
       Frame label="Consumo Boiler" {
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         // CONSUMO BOILER
@@ -507,6 +509,14 @@ sitemap default label="Casa"
         Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
+      Frame label="Termostato" {
+        Switch		item=tsBagno
+        Setpoint	item=spBagno 		icon=smiley	minValue=18  	maxValue=30	step=0.5
+        Setpoint	item=hsBagno		icon=settings	minValue=0  	maxValue=3	step=0.1
+        Switch		item=sf07_Light 	icon=radiator
+	Switch		item=mdBagno		label="Modalità"		mappings=[heat='HOT', off='OFF']
+        Switch		item=tsBagnoAutoOFF	label="Auto OFF: 15 min"	icon=settings
+      } // Chiuso Frame Termostato
 
     } // Chiuso Text Bagno Stufa
 
@@ -1459,6 +1469,7 @@ sitemap default label="Casa"
     }
     Group item=gScene         label="SCENE"
     Text label="OpenHAB" {
+      Switch    item=cl_restart mappings=[0="Restart Cloud"]
       Switch    item=sw_restart mappings=[0="Restart"]
       Switch    item=pi_restart mappings=[0="Reboot"]
       Switch    item=alexa_test_giochi_20

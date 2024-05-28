@@ -1,0 +1,25 @@
+rule "Calculate Boiler Percentage"
+  when
+    Item tuya05_Power changed
+  then
+    // FULL
+    if (previousState >= 400 && tuya05_Power.state <= 60 ) {
+      Boiler_Percentage.postUpdate(100)
+      Boiler_Max.postUpdate(previousState)
+    }
+
+    // CHARGING
+    if ( tuya05_Power.state >= 100 ) {
+
+      // Formula calcolo percentuale
+      Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
+    }
+
+    //if (previousState >= 100 && tuya05_Power.state <= 60 ) {
+    //  pushNotification("BOILER: Off", "Il Boiler è carico.")
+    //}
+    if (previousState <= 1000 && tuya05_Power.state > 1000 ) {
+      pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
+    }
+
+end

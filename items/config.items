@@ -43,6 +43,7 @@ Switch ac_sog_night_off 	"Night Clima Auto-Off"         <heating>
 Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
 Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 
+Number cl_restart "Restart Cloud Connector" <settings>
 Number sw_restart "Restart OpenHAB" <settings>
 Number pi_restart "Reboot PI3" <settings>
 

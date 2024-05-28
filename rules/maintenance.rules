@@ -1,3 +1,19 @@
+rule "Cloud Connector restart"
+  when
+
+    Item cl_restart received command
+
+  then
+
+    var String command;
+
+    logInfo("Maintenance","OpenHAB Cloud Connector restart requested, proceeding...")
+
+    command = "sudo /etc/openhab2/shell/restart-cloud.sh";
+    executeCommandLine(command);
+
+end
+
 rule "OpenHAB restart"
   when
 
