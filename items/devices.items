@@ -1,6 +1,6 @@
 Group Devices
 
-Switch NAS2     "Server"    <player> (Devices,gCinema) [ "Switchable" ] { nh="172.27.72.51:32400", exec=">[ON:/opt/openhab/scripts/opti/turnon.sh] >[OFF:ssh root@optiooooooo.bluetears.org /sbin/shutdown -p now]" }
+Switch NAS2     "Server"    <player> (Devices,gCinema) [ "Switchable" ] { nh="172.27.72.50:32400", exec=">[ON:/opt/openhab/scripts/opti/turnon.sh] >[OFF:ssh root@opti.bluetears.org /sbin/shutdown -h now]" }
 
 Switch Plex     "Plex"      <player> (Devices,gCinema) [ "Switchable" ] { nh="172.27.72.51:32400" }
 

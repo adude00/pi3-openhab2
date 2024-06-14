@@ -1,2 +1,2 @@
-logreader:reader:disconnected[ refreshRate=1000, errorPatterns="Error connecting to the openHAB Cloud instance"]
+logreader:reader:disconnected[ refreshRate=30000, errorPatterns="Error connecting to the openHAB Cloud instance"]
 logreader:reader:connected[ refreshRate=1000, errorPatterns="Connected to the openHAB Cloud service"]
