@@ -719,34 +719,26 @@ sitemap default label="Casa"
 
     Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
       Frame label="A/C Manual" {
-        Switch    item=climaEthanPower
-	Selection item=climaEthanMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
-	Setpoint  item=climaEthanHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==heating] 
-	Setpoint  item=climaEthanCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==cooling, climaEthanMode==dry] 
-	Setpoint  item=climaEthanAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[climaEthanMode==auto] 
-	Text      item=shelly01_Power       icon=energy 
+        Switch    item=faikin01_power
+	Selection item=faikin01_mode 	mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
+	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
+	Setpoint  item=faikin01_temp 	label="Setpoint" minValue=16 maxValue=32 step=0.5
+	Switch    item=faikin01_swingv   
+	Switch    item=faikin01_econo    
+	Switch    item=faikin01_powerful
+	Switch    item=faikin01_AutoQuiet
+	Text      item=shelly01_Power  	label="Power" icon=energy 
       }
 
-      Frame label="A/C Fan Control" visibility=[climaEthanPower==ON] {
-        // Heat
-	Selection item=climaEthanHeatFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[climaEthanMode==heating]
-	Switch    item=climaEthanHeatFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[climaEthanMode==heating]
-	Switch    item=climaEthanHeatFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[climaEthanMode==heating]
-        // Cool
-        Selection item=climaEthanCoolFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[climaEthanMode==cooling]
-        Switch    item=climaEthanCoolFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[climaEthanMode==cooling]
-        Switch    item=climaEthanCoolFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[climaEthanMode==cooling]
-        // Auto
-        Selection item=climaEthanAutoFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[climaEthanMode==auto]
-        Switch    item=climaEthanAutoFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[climaEthanMode==auto]
-        Switch    item=climaEthanAutoFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==auto]
-        // FanOnly
-        Selection item=climaEthanFanOnlyFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[climaEthanMode==fanOnly]
-        Switch    item=climaEthanFanOnlyFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[climaEthanMode==fanOnly]
-        Switch    item=climaEthanFanOnlyFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==fanOnly]
-        // Dry - Auto Fan Forced
-        Text      item=climaEthanDryFanMode   label="Dry Auto Fan Only"                                  visibility=[climaEthanMode==dry]
-        Switch    item=climaEthanDryFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[climaEthanMode==dry]
+      Frame label="Faikin Data" {
+		Text item=faikin01_fanrpm   label="Fan speed"
+		Text item=faikin01_anglev   label="Fan angle" 
+		Text item=faikin01_liquid   label="Coolant Temperature"
+		Text item=faikin01_comp     label="Compressor usage"
+		Text item=faikin01_demand   label="Max Power allowed" 
+		Text item=faikin01_Wh       label="Total Energy used"
+		Text item=faikin01_ts       label="Last update"
+		Text item=faikin01_home     label="Split Temperature"
       }
 
       Frame label="Comfort" {
@@ -754,8 +746,8 @@ sitemap default label="Casa"
         Text      item=esp01_Humid  label="ETHAN: Umidità"
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature label="Bologna"   icon="vacation" 
-        Text      item=climaEthanOutsideTemp               icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
+        Text      item=Fuori_Temperature   icon=vacation      label="Bologna"
+        Text      item=faikin01_outside    icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
       }
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
@@ -1094,9 +1086,8 @@ sitemap default label="Casa"
 
   Text item=acSoggiornoOutsideTemp label="Fuori [%.1f °C]" icon=garden {
     Frame label="Temperature" {
-      Text item=acSoggiornoOutsideTemp                   label="Daikin 2P Davanti"        icon="terrace"
       Text item=DaikinCameretta_OutdoorTemperature       label="Daikin 2P Dietro"         icon="terrace"
-      Text item=climaEthanOutsideTemp                    label="Daikin 1P Davanti"        icon="terrace"
+      Text item=faikin01_outside			 label="Daikin 1P Davanti"        icon="terrace"
       Text item=Terrazza_Temp                            label="Sensore 2P Temp"   icon="terrace"
       Text item=Terrazza_Humid                           label="Sensore 2P Humid"  icon="humidity"
     }

@@ -1,0 +1,65 @@
+rule "faikin01 all"
+when 
+	Member of g_faikin01_cmd_wait received command
+then
+	var String command
+
+	var boolean power
+	var boolean swingv
+	var boolean econo
+	var boolean powerful
+
+        createTimer(now.plusSeconds(1), [|
+
+		// Calculate boolean for ON/OFF items
+		if ( faikin01_power.state  == ON )    { power = true }   else { power = false }
+		if ( faikin01_swingv.state  == ON )   { swingv = true }  else { swingv = false }
+		if ( faikin01_econo.state  == ON )    { econo = true }   else { econo = false }
+		if ( faikin01_powerful.state  == ON ) { powerful = true} else { powerful = false }
+
+	        command = "{ \"power\":" + power + ", \"mode\":\""+ faikin01_mode.state + "\", \"temp\":" + faikin01_temp.state +", \"fan\":\""+ faikin01_fan.state +"\", \"econo\":" + econo + ", \"swingv\":" + swingv + ", \"powerful\":" + powerful +" }"
+	
+	        logInfo("faikin01 ALL",command)        
+ 
+	        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+		actionsBroker.publishMQTT( "command/faikin01/control", command )
+
+	])
+end
+
+
+rule "faikin01 swingv ON"
+when
+        Item faikin01_swingv received command ON
+then
+        var String command
+        command = "{ \"swingv\": true }"
+        logInfo("faikin01 swingv ON",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin01/control", command )
+
+end
+rule "faikin01 swingv OFF"
+when
+        Item faikin01_swingv received command OFF
+then
+        var String command
+        command = "{ \"swingv\": false }"
+        logInfo("faikin01 swingv OFF",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin01/control", command )
+end
+
+
+rule "faikin01 AutoQuiet"
+when
+        Item faikin01_power received command ON
+then
+        if (faikin01_AutoQuiet.state == ON) {
+		createTimer(now.plusSeconds(3), [|
+			faikin01_fan.sendCommand("Q")
+                	logInfo("faikin01 AutoQuiet","Quiet mode abilitato")
+		])	
+	}
+end
+
