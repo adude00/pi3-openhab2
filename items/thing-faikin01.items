@@ -26,3 +26,6 @@ String faikin01_mode     "Mode"       <heating>    (g_faikin01,g_faikin01_cmd_wa
 String faikin01_ts       "TimeStamp"  <time>       (g_faikin01) 			{channel="mqtt:topic:Faikin:faikin01:ts"}
 
 Switch faikin01_AutoQuiet "Auto Quiet" <settings>  (g_faikin01)
+
+// Retrocompatibilità Grafici
+Number:Temperature climaEthanOutsideTemp "1P Davanti [%.1f]" (gTemp,Fuori_Temperature_Chart) { channel="mqtt:topic:Faikin:faikin01:outside" }
