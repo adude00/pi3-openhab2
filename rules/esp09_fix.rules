@@ -1,0 +1,22 @@
+rule "Fix Energy esp09"
+  when
+    Item esp09_Refresh received update
+  then
+
+    if (esp09_Voltage.state == 0 ) {
+
+      logInfo("Fix esp09", "esp09_Voltage == 0, not doing anything")
+      return;
+
+    } else {
+
+      sonoff01_Power_Fix.postUpdate(esp09_Power.state)
+      sonoff01_AppPower_Fix.postUpdate(esp09_AppPower.state)
+      sonoff01_ReaPower_Fix.postUpdate(esp09_ReaPower.state)
+      sonoff01_Voltage_Fix.postUpdate(esp09_Voltage.state)
+      sonoff01_Current_Fix.postUpdate(esp09_Current.state)
+      sonoff01_Frequency_Fix.postUpdate(esp09_Frequency.state)
+
+    }
+
+end

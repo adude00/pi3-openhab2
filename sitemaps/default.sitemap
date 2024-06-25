@@ -219,12 +219,6 @@ sitemap default label="Casa"
 	  Frame label="Configurazione Clima Matrimoniale" {
 	    Switch    item=conf_autooff_ac_bdr
 	  }
-	  Frame label="Clima Soggiorno" {
-            Switch item=WakeUpTs          label="Accendi Termostato"
-	  }
-	  Frame label="White Noise" {
-	    Switch item=WhiteNoiseBDRMautoOFF
-	  }
 	}  // SCENA Mattina
 
         Text label="Scena Nanna" icon="settings" {
@@ -1133,7 +1127,6 @@ sitemap default label="Casa"
       Frame label="Specifici per tipo" {
 	Text label="Tuya"   {
 	  Group item=gTuya		label="Debug Tuya All"
-	  Group item=tuya01		label="Debug Tuya 01"
 	  Group item=tuya02		label="Debug Tuya 02"
 	  Group item=tuya03		label="Debug Tuya 03"
 	  Group item=tuya04		label="Debug Tuya 04"
@@ -1180,11 +1173,20 @@ sitemap default label="Casa"
 	  Group item=gTappUptime  label="Debug Tapparelle Uptime"
 	}
       }
-      Frame label="Tasmota Things" {
-		Group item=t_sonoff    label="ALL Tasmota Things"
-		Text label="Per Tasmota" {
+      Frame label="New Conf: Things" {
+		Group item=t_sonoff    label="ALL Sonoff Things"
+		Text label="Per Thing/Object" {
 			Group item=t_sonoff02
+			Group item=t_sonoff04
 			Group item=t_sonoff05
+			Group item=t_sonoff07
+			Group item=t_sonoff08
+			Group item=t_sonoff11
+			Group item=t_sonoff12
+			Group item=t_sonoff20
+			Group item=t_esp08
+			Group item=t_esp09
+			Group item=t_tuya01
 		}
 		Text label="Per Type" {
 			Group item=gSwitch 

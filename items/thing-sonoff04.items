@@ -1,0 +1,27 @@
+Group t_sonoff04      "sonoff04: Divano"
+
+// ITEM SPECIFIC
+Switch		sf04_Light  "Divano"			<light>		(t_sonoff04,sonoff,gLuci,gLuciSogg) [ "Lighting" ]
+	{channel="mqtt:topic:tasmota:sonoff04:PowerSwitch"}
+
+Number		sf04_Temp   "Sogg Divano [%.1f °C]"	<temperature>	(gTemp,t_sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
+	{channel="mqtt:topic:tasmota:sonoff04:Temperature"}
+
+Number		sf04_Humid  "Sogg Divano [%.1f %%]"	<humidity>	(gHumd,t_sonoff04,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
+	{channel="mqtt:topic:tasmota:sonoff04:Humidity"}
+
+// Tasmota Status
+String               sf04_Refresh       "sonoff04 Time [%s]"      <clock>  (t_sonoff,t_sonoff04,gTime)      {channel="mqtt:topic:tasmota:sonoff04:Time"}
+String               sf04_Version       "sonoff04 Version [%s]"	  <status> (t_sonoff,t_sonoff04,gVersion)   {channel="mqtt:topic:tasmota:sonoff04:Version"}
+String               sf04_Reachable     "sonoff04 Reachable [%s]" <switch> (t_sonoff,t_sonoff04,gReachable) {channel="mqtt:topic:tasmota:sonoff04:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sf04_RSSI          "sonoff04 Signal [%d %%]" <network>            (t_sonoff,t_sonoff04,gRSSI)      {channel="mqtt:topic:tasmota:sonoff04:RSSI"}
+Number:Dimensionless sf04_LoadAvg       "sonoff04 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff04,gLoad)      {channel="mqtt:topic:tasmota:sonoff04:LoadAvg"}
+String               sf04_Result        "sonoff04 Result [%s]"    <status>             (t_sonoff,t_sonoff04,gResult)    {channel="mqtt:topic:tasmota:sonoff04:Result"}
+String               sf04_Uptime        "sonoff04 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff04,gUptime)    {channel="mqtt:topic:tasmota:sonoff04:Uptime"}
+String               sf04_RestartReason "sonoff04 Reason [%s]"    <error>              (t_sonoff,t_sonoff04,gReason)    {channel="mqtt:topic:tasmota:sonoff04:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sf04_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff04) {channel="mqtt:topic:tasmota:sonoff04:WifiDowntime"}
+

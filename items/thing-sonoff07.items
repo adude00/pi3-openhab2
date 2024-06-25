@@ -1,0 +1,27 @@
+Group t_sonoff07      "sonoff07: Bagno P2 e Stufetta"
+
+// ITEM SPECIFIC
+Switch		sf07_Light "Stufetta" 			<fan_box> 	(t_sonoff07,sonoff)
+	{channel="mqtt:topic:tasmota:sonoff07:PowerSwitch"}
+
+Number		sf07_Temp   "Bagno Temp [%.1f °C]"  	<temperature>  	(gTemp,t_sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph)
+	{channel="mqtt:topic:tasmota:sonoff07:Temperature"}
+
+Number 		sf07_Humid  "Bagno Humid [%.1f %%]" 	<humidity>	(gHumd,t_sonoff07,sonoff,Casa_Umidita_Chart,gChartBathH,gGraph)
+	{channel="mqtt:topic:tasmota:sonoff07:Humidity"}
+
+// Tasmota Status
+String               sf07_Refresh       "sonoff07 Time [%s]"      <clock>  (t_sonoff,t_sonoff07,gTime)      {channel="mqtt:topic:tasmota:sonoff07:Time"}
+String               sf07_Version       "sonoff07 Version [%s]"	  <status> (t_sonoff,t_sonoff07,gVersion)   {channel="mqtt:topic:tasmota:sonoff07:Version"}
+String               sf07_Reachable     "sonoff07 Reachable [%s]" <switch> (t_sonoff,t_sonoff07,gReachable) {channel="mqtt:topic:tasmota:sonoff07:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sf07_RSSI          "sonoff07 Signal [%d %%]" <network>            (t_sonoff,t_sonoff07,gRSSI)      {channel="mqtt:topic:tasmota:sonoff07:RSSI"}
+Number:Dimensionless sf07_LoadAvg       "sonoff07 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff07,gLoad)      {channel="mqtt:topic:tasmota:sonoff07:LoadAvg"}
+String               sf07_Result        "sonoff07 Result [%s]"    <status>             (t_sonoff,t_sonoff07,gResult)    {channel="mqtt:topic:tasmota:sonoff07:Result"}
+String               sf07_Uptime        "sonoff07 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff07,gUptime)    {channel="mqtt:topic:tasmota:sonoff07:Uptime"}
+String               sf07_RestartReason "sonoff07 Reason [%s]"    <error>              (t_sonoff,t_sonoff07,gReason)    {channel="mqtt:topic:tasmota:sonoff07:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sf07_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff07) {channel="mqtt:topic:tasmota:sonoff07:WifiDowntime"}
+

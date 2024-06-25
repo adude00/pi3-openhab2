@@ -1,0 +1,27 @@
+Group t_sonoff11      "sonoff11: Luce Scrivania"
+
+// ITEM SPECIFIC
+Switch		sf11_Light "Luce Scrivania" 		<light> 	(t_sonoff11,sonoff,gLuci,gScrivania)
+	{channel="mqtt:topic:tasmota:sonoff11:PowerSwitch"}
+
+Number		sf11_Temp   "Temp. Soffitto [%.1f °C]"  <temperature> 	(gTemp,t_sonoff11,sonoff)
+	{channel="mqtt:topic:tasmota:sonoff11:Temperature"}
+
+Number		sf11_Humid  "Umid. Soffitto [%.1f %%]"  <humidity>    	(gHumd,t_sonoff11,sonoff)
+	{channel="mqtt:topic:tasmota:sonoff11:Humidity"}
+
+// Tasmota Status
+String               sf11_Refresh       "sonoff11 Time [%s]"      <clock>  (t_sonoff,t_sonoff11,gTime)      {channel="mqtt:topic:tasmota:sonoff11:Time"}
+String               sf11_Version       "sonoff11 Version [%s]"	  <status> (t_sonoff,t_sonoff11,gVersion)   {channel="mqtt:topic:tasmota:sonoff11:Version"}
+String               sf11_Reachable     "sonoff11 Reachable [%s]" <switch> (t_sonoff,t_sonoff11,gReachable) {channel="mqtt:topic:tasmota:sonoff11:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sf11_RSSI          "sonoff11 Signal [%d %%]" <network>            (t_sonoff,t_sonoff11,gRSSI)      {channel="mqtt:topic:tasmota:sonoff11:RSSI"}
+Number:Dimensionless sf11_LoadAvg       "sonoff11 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff11,gLoad)      {channel="mqtt:topic:tasmota:sonoff11:LoadAvg"}
+String               sf11_Result        "sonoff11 Result [%s]"    <status>             (t_sonoff,t_sonoff11,gResult)    {channel="mqtt:topic:tasmota:sonoff11:Result"}
+String               sf11_Uptime        "sonoff11 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff11,gUptime)    {channel="mqtt:topic:tasmota:sonoff11:Uptime"}
+String               sf11_RestartReason "sonoff11 Reason [%s]"    <error>              (t_sonoff,t_sonoff11,gReason)    {channel="mqtt:topic:tasmota:sonoff11:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sf11_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff11) {channel="mqtt:topic:tasmota:sonoff11:WifiDowntime"}
+

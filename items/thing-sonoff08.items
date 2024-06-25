@@ -1,0 +1,27 @@
+Group t_sonoff08      "sonoff08: Scrivania"
+
+// ITEM SPECIFIC
+Switch		sf08_Light "Scrivania" 			<wallswitch> 	(t_sonoff08,sonoff,gScrivania,gBuonanotte)	
+	{channel="mqtt:topic:tasmota:sonoff08:PowerSwitch"}
+
+Number		sf08_Temp   "Temp. Scrivania [%.1f °C]"  <temperature>  (gTemp,t_sonoff08,sonoff,gChartStudioT)
+	{channel="mqtt:topic:tasmota:sonoff08:Temperature"}
+
+Number		sf08_Humid  "Umid. Scrivania [%.1f %%]"  <humidity>    (gHumd,t_sonoff08,sonoff,gChartStudioH)
+	{channel="mqtt:topic:tasmota:sonoff08:Humidity"}
+
+// Tasmota Status
+String               sf08_Refresh       "sonoff08 Time [%s]"      <clock>  (t_sonoff,t_sonoff08,gTime)      {channel="mqtt:topic:tasmota:sonoff08:Time"}
+String               sf08_Version       "sonoff08 Version [%s]"	  <status> (t_sonoff,t_sonoff08,gVersion)   {channel="mqtt:topic:tasmota:sonoff08:Version"}
+String               sf08_Reachable     "sonoff08 Reachable [%s]" <switch> (t_sonoff,t_sonoff08,gReachable) {channel="mqtt:topic:tasmota:sonoff08:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sf08_RSSI          "sonoff08 Signal [%d %%]" <network>            (t_sonoff,t_sonoff08,gRSSI)      {channel="mqtt:topic:tasmota:sonoff08:RSSI"}
+Number:Dimensionless sf08_LoadAvg       "sonoff08 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff08,gLoad)      {channel="mqtt:topic:tasmota:sonoff08:LoadAvg"}
+String               sf08_Result        "sonoff08 Result [%s]"    <status>             (t_sonoff,t_sonoff08,gResult)    {channel="mqtt:topic:tasmota:sonoff08:Result"}
+String               sf08_Uptime        "sonoff08 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff08,gUptime)    {channel="mqtt:topic:tasmota:sonoff08:Uptime"}
+String               sf08_RestartReason "sonoff08 Reason [%s]"    <error>              (t_sonoff,t_sonoff08,gReason)    {channel="mqtt:topic:tasmota:sonoff08:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sf08_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff08) {channel="mqtt:topic:tasmota:sonoff08:WifiDowntime"}
+
