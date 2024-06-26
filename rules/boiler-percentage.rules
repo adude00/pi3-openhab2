@@ -17,7 +17,7 @@ rule "Calculate Boiler Percentage"
     }
 
     // CHARGING
-    if ( tuya05_Power.state >= 100 ) {
+    if ( tuya05_Power.state >= 300 ) {
 
       // Formula calcolo percentuale
       Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
