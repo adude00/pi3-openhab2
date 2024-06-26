@@ -3,8 +3,9 @@ when
     Item Plex changed to ON
 then
     // CHECK IF SERVER IS ACTUALLY ON FOR REAL
-    if ( tuya07_Power.state > 80 ) {
+    if ( tuya07_Power.state > 90 ) {
       Echo_Soggiorno_TTS.sendCommand('Il server è acceso. Ora puoi guardare PLEX!')
       logInfo("PLEX", "Plex Acceso. Mandato TTS ad Echo Soggiorno")
+      pushNotification("Plex: ON", "Plex è acceso!")
     }
 end

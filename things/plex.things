@@ -1,0 +1,1 @@
+Thing network:servicedevice:plex "Plex Server" [ hostname="172.27.72.50", port=32400, refreshInterval=10000 ]

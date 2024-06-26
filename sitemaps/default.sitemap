@@ -61,15 +61,18 @@ sitemap default label="Casa"
       }
     }
     Text label="Devices" icon=cinema {
-      Frame label="Cose" {
+      Frame label="Plex" {
       Switch item=Plex
+      Text   item=Plex_Last
+      }
+      Frame label="Cose" {
       Switch item=NAS2
       Switch item=Net_TV
       Switch item=pow04_Switch
       Switch item=sf08_Light
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
-        Switch item=tuya01_Switch
+        Switch item=tuya01_switch
         Switch item=tuya05_Switch
         Switch item=tuya03_Switch
         Switch item=pow03_Switch
