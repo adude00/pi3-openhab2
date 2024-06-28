@@ -7,14 +7,17 @@ rule "Calculate Boiler Percentage"
       //Boiler_Percentage.postUpdate(100)
       //Boiler_Max.postUpdate(previousState)
 
-
       var Number pmax 
       //pmax = tuya05_Power.maximumSince(now.minusMinutes(5))
       pmax = previousState
+
       //logInfo("Boiler MAX","Max: " + tuya05_Power.maximumSince(now.minusMinutes(5)) )
       logInfo("Boiler MAX","Scrivo il max: " + pmax + " - Imposto 100%")
+
       Boiler_Max.postUpdate(pmax)
-      Boiler_Percentage.postUpdate(100)
+      createTimer(now.plusSeconds(2), [|
+      	Boiler_Percentage.postUpdate(100)
+      ])
     }
 
     // CHARGING

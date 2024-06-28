@@ -1,0 +1,87 @@
+rule "faikin02 all"
+when 
+	Member of g_faikin02_cmd_wait received command
+then
+	var String command
+
+	var boolean power
+	var boolean swingv
+	var boolean econo
+	var boolean powerful
+
+        createTimer(now.plusSeconds(1), [|
+
+		// Calculate boolean for ON/OFF items
+		if ( faikin02_power.state  == ON )    { power = true }   else { power = false }
+		if ( faikin02_swingv.state  == ON )   { swingv = true }  else { swingv = false }
+		if ( faikin02_econo.state  == ON )    { econo = true }   else { econo = false }
+		if ( faikin02_powerful.state  == ON ) { powerful = true} else { powerful = false }
+
+	        command = "{ \"power\":" + power + ", \"mode\":\""+ faikin02_mode.state + "\", \"temp\":" + faikin02_temp.state +", \"fan\":\""+ faikin02_fan.state +"\", \"econo\":" + econo + ", \"swingv\":" + swingv + ", \"powerful\":" + powerful +" }"
+	
+	        logInfo("faikin02 ALL",command)        
+ 
+	        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+		actionsBroker.publishMQTT( "command/faikin02/control", command )
+
+	])
+end
+
+
+rule "faikin02 swingv ON"
+when
+        Item faikin02_swingv received command ON
+then
+        var String command
+        command = "{ \"swingv\": true }"
+        logInfo("faikin02 swingv ON",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin02/control", command )
+
+end
+rule "faikin02 swingv OFF"
+when
+        Item faikin02_swingv received command OFF
+then
+        var String command
+        command = "{ \"swingv\": false }"
+        logInfo("faikin02 swingv OFF",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin02/control", command )
+end
+
+rule "faikin02 swingh ON"
+when
+        Item faikin02_swingh received command ON
+then
+        var String command
+        command = "{ \"swingh\": true }"
+        logInfo("faikin02 swingh ON",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin02/control", command )
+
+end
+rule "faikin02 swingh OFF"
+when
+        Item faikin02_swingh received command OFF
+then
+        var String command
+        command = "{ \"swingh\": false }"
+        logInfo("faikin02 swingh OFF",command)
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+        actionsBroker.publishMQTT( "command/faikin02/control", command )
+end
+
+
+rule "faikin02 AutoQuiet"
+when
+        Item faikin02_power received command ON
+then
+        if (faikin02_AutoQuiet.state == ON) {
+		createTimer(now.plusSeconds(3), [|
+			faikin02_fan.sendCommand("Q")
+                	logInfo("faikin02 AutoQuiet","Quiet mode abilitato")
+		])	
+	}
+end
+

@@ -64,6 +64,7 @@ sitemap default label="Casa"
       Frame label="Plex" {
       Switch item=Plex
       Text   item=Plex_Last
+      Switch item=Plex_Restart mappings=[0="Restart"]
       }
       Frame label="Cose" {
       Switch item=NAS2
@@ -341,44 +342,37 @@ sitemap default label="Casa"
         Setpoint  item=spSoggiorno minValue=17  maxValue=29 step=0.1
       }
 
-      Frame label="A/C Fan Control" visibility=[acSoggiornoPower==ON] {
-        // Heat
-	Selection item=acSoggiornoHeatFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==heating]
-	Switch    item=acSoggiornoHeatFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==heating]
-        // Cool
-        Selection item=acSoggiornoCoolFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] icon=flow        visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     icon=fan         visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==cooling]
-        Switch    item=acSoggiornoCoolFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  icon=movecontrol visibility=[acSoggiornoMode==cooling]
-        // Auto
-        Selection item=acSoggiornoAutoFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[acSoggiornoMode==auto]
-        Switch    item=acSoggiornoAutoFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[acSoggiornoMode==auto]
-        Switch    item=acSoggiornoAutoFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==auto]
-        Switch    item=acSoggiornoAutoFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==auto]
-        // FanOnly
-        Selection item=acSoggiornoFanOnlyFanMode   mappings=["quiet"="Quiet", "auto"="Auto", "fixed"="Fixed"] visibility=[acSoggiornoMode==fanOnly]
-        Switch    item=acSoggiornoFanOnlyFanSpeed  mappings=["1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]     visibility=[acSoggiornoMode==fanOnly]
-        Switch    item=acSoggiornoFanOnlyFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==fanOnly]
-        Switch    item=acSoggiornoFanOnlyFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==fanOnly]
-        // Dry - Auto Fan Forced
-        Text      item=acSoggiornoDryFanMode   label="Dry Auto Fan Only"                                  visibility=[acSoggiornoMode==dry]
-        Switch    item=acSoggiornoDryFanSwingH mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==dry]
-        Switch    item=acSoggiornoDryFanSwingV mappings=["stop"="STOP", "swing"="SWING"]                  visibility=[acSoggiornoMode==dry]
-      }
+      Frame label="A/C Control" {
+        Switch    item=faikin02_power
+        Selection item=faikin02_mode    mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
+        Selection item=faikin02_fan     mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
+        Setpoint  item=faikin02_temp    label="Setpoint" minValue=16 maxValue=32 step=0.5
+        Text      item=faikin02_fanrpm   label="Extra Settings" { 
+        	Switch    item=faikin02_swingv   
+        	Switch    item=faikin02_swingh   
+        	Switch    item=faikin02_econo    
+        	Switch    item=faikin02_powerful
+		Switch    item=faikin02_AutoQuiet
+	}
 
-      Frame label="A/C Manual" {
-        Switch    item=acSoggiornoPower
-	Selection item=acSoggiornoMode mappings=["heating"="Heat", "cooling"="Cool", "dry"="Dry", "auto"="Auto", "fanOnly"="Fan"] icon=settings
-	Setpoint  item=acSoggiornoHeatSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==heating] 
-	Setpoint  item=acSoggiornoCoolSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==cooling, acSoggiornoMode==dry] 
-	Setpoint  item=acSoggiornoAutoSetpoint icon=heating minValue=10 maxValue=31 step=0.5 visibility=[acSoggiornoMode==auto] 
-        Text      item=pow03_Power label="Potenza Motore: [%.0f W]" icon=pump
+        Text      item=pow03_Power label="Dettagli Tecnici: [%.0f W]" icon=pump {
+          Frame label="Faikin Data" {
+		Text item=pow03_Power       label="Power: [%.0f W]" icon=energy
+                Text item=faikin02_comp     label="Compressor usage"
+                Text item=faikin02_liquid   label="Coolant Temperature"
+                Text item=faikin02_fanrpm   label="Fan speed"
+                Text item=faikin02_anglev   label="Fan angle" 
+                Text item=faikin02_demand   label="Max Power allowed" 
+                Text item=faikin02_Wh       label="Total Energy used"
+                Text item=faikin02_ts       label="Last update"
+                Text item=faikin02_home     label="Split Temperature"
+                Text item=faikin02_outside  label="Outside Temperature"
+          }
+	}
       }
 
       Frame label="Soggiorno Status" {
-        Text      item=acSoggiornoOutsideTemp       label="Terrazzo Davanti [%.1f °C]" icon=garden
+        Text      item=faikin02_outside             label="Terrazzo Davanti [%.1f °C]" icon=garden
         Text      item=avgSoggiornoAvg              label="Media 30min"                icon=flow
         Text      item=Casa_Temperature_AVG         label="Istantanea"                 icon=house
         Text      item=sf06_Temp                    label="Alta"                       icon=flowpipe

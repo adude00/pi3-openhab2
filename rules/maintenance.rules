@@ -45,3 +45,19 @@ rule "PI3 restart"
     executeCommandLine(command);
 
 end
+
+rule "Plex restart"
+  when
+
+    Item Plex_Restart received command
+
+  then
+
+    var String command;
+
+    logInfo("Maintenance","Plex restart requested, proceeding...")
+
+    command = "sudo /etc/openhab2/shell/plex-restart.sh";
+    executeCommandLine(command);
+
+end
