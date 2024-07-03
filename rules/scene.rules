@@ -27,8 +27,8 @@ then
   // AIRCON
   if (ac_sog_lavoro_off.state == ON) {
     createTimer(now.plusSeconds(5),  [ |
-      if (acSoggiornoPower.state == ON) {
-        acSoggiornoPower.sendCommand(OFF)
+      if (faikin02_power.state == ON) {
+        faikin02_power.sendCommand(OFF)
       logInfo("Scene","Scena Lavoro: aircon spento")
       }
     ])
@@ -37,7 +37,7 @@ then
   // IMPOSTA TEMP
   if (ac_sog_lavoro_change.state == ON) {
     createTimer(now.plusSeconds(7),  [ |
-      acSoggiornoHeatSetpoint.sendCommand(ac_sog_lavoro_temp.state as Number)
+      faikin02_temp.sendCommand(ac_sog_lavoro_temp.state as Number)
       logInfo("Scene","Scena Lavoro: temperatura richiesta impostata")
     ])
   }
@@ -80,15 +80,15 @@ then
   // IMPOSTA TEMP
   if (ac_sog_acasa_change.state == ON) {
     createTimer(now.plusSeconds(3),  [ |
-      acSoggiornoHeatSetpoint.sendCommand(ac_sog_acasa_temp.state as Number)
+      faikin02_temp.sendCommand(ac_sog_acasa_temp.state as Number)
       logInfo("Scene","Scena A Casa: temperatura richiesta impostata")
     ])
   }
   // AIRCON
   if (ac_sog_acasa_on.state == ON) {
     createTimer(now.plusSeconds(5),  [ |
-      if (acSoggiornoPower.state == OFF) {
-        acSoggiornoPower.sendCommand(ON)
+      if (faikin02_power.state == OFF) {
+        faikin02_power.sendCommand(ON)
       logInfo("Scene","Scena A Casa: aircon acceso")
       }
     ])
@@ -120,14 +120,14 @@ then
   // SOGGIORNO - CHANGE TEMP
   if (ac_sog_sveglia_change.state == ON) {
     createTimer(now.plusSeconds(3), [|
-      acSoggiornoHeatSetpoint.sendCommand(ac_sog_sveglia_temp.state as Number)
+      faikin02_temp.sendCommand(ac_sog_sveglia_temp.state as Number)
       logInfo("Scene","MATTINA: Cambio temp soggiorno fatto. Temperatura impostata: " + ac_sog_sveglia_temp.state + "C")
     ])
   }
   // SOGGIORNO - CLIMA ON
   if (ac_sog_sveglia_on.state == ON) {
     createTimer(now.plusSeconds(5), [|
-      acSoggiornoPower.sendCommand(ON)
+      faikin02_power.sendCommand(ON)
       logInfo("Scene","MATTINA: AutoON Soggiorno: Accendo il Clima")
     ])
   }
@@ -198,7 +198,7 @@ then
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
-    //acSoggiornoHeatSetpoint.sendCommand(23.0)
+    //faikin02_temp.sendCommand(23.0)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena MATTINA: finita")
     ])
@@ -238,8 +238,8 @@ then
     // AIRCON
     if (ac_sog_usciamo_off.state == ON) {
       createTimer(now.plusSeconds(5),  [ |
-        if (acSoggiornoPower.state == ON) {
-          acSoggiornoPower.sendCommand(OFF)
+        if (faikin02_power.state == ON) {
+          faikin02_power.sendCommand(OFF)
         logInfo("Scene","Scena Usciamo: aircon spento")
         }
       ])
@@ -248,7 +248,7 @@ then
     // IMPOSTA TEMP
     if (ac_sog_usciamo_change.state == ON) {
       createTimer(now.plusSeconds(7),  [ |
-        acSoggiornoHeatSetpoint.sendCommand(ac_sog_usciamo_temp.state as Number)
+        faikin02_temp.sendCommand(ac_sog_usciamo_temp.state as Number)
         logInfo("Scene","Scena Usciamo: temperatura richiesta impostata")
       ])
     }
@@ -309,8 +309,8 @@ then
     // AIRCON
     if (ac_sog_night_off.state == ON) {
       createTimer(now.plusSeconds(5),  [ |
-        if (acSoggiornoPower.state == ON) {
-          acSoggiornoPower.sendCommand(OFF)
+        if (faikin02_power.state == ON) {
+          faikin02_power.sendCommand(OFF)
         logInfo("Scene","Scena A Letto: aircon spento")
         }
       ])
@@ -319,7 +319,7 @@ then
     // IMPOSTA TEMP
     if (ac_sog_night_change.state == ON) {
       createTimer(now.plusSeconds(7),  [ |
-        acSoggiornoHeatSetpoint.sendCommand(ac_sog_night_temp.state as Number)
+        faikin02_temp.sendCommand(ac_sog_night_temp.state as Number)
 	logInfo("Scene","Scena A Letto: temperatura richiesta impostata")
       ])
     }

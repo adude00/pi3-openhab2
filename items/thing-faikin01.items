@@ -10,15 +10,15 @@ Switch faikin01_powerful "Powerful"   <siren>       (g_faikin01,g_faikin01_cmd_w
 Switch faikin01_swingv   "Swing ↕"    <flow>        (g_faikin01) {channel="mqtt:topic:Faikin:faikin01:swingv"}
 
 // NUMBER
-Number faikin01_home    "faikin01 - home [%.1f °C]"     <temperature>  (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:home"}
-Number faikin01_fanrpm  "faikin01 - fanrpm [%s rpm]"    <fan>          (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:fanrpm"}
-Number faikin01_comp    "faikin01 - comp [%s %%]"       <pump>         (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:comp"}
-Number faikin01_outside "faikin01 - outside [%s °C]"    <temperature>  (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:outside"}
-Number faikin01_liquid  "faikin01 - liquid [%s °C]"     <temperature>  (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:liquid"}
-Number faikin01_anglev  "faikin01 - anglev [%s °]"      <flow>         (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:anglev"}
-Number faikin01_temp    "faikin01 - Setpoint [%.1f °C]" <heating>      (g_faikin01,g_faikin01_cmd_wait)	{channel="mqtt:topic:Faikin:faikin01:temp"}
-Number faikin01_demand  "faikin01 - demand [%s %%]"     <settings>     (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:demand"}
-Number faikin01_Wh      "faikin01 - Wh [%s Wh]"         <energy>       (g_faikin01)    			{channel="mqtt:topic:Faikin:faikin01:Wh"}
+Number faikin01_home    "faikin01 - home [%.1f °C]"     <temperature>  (g_faikin01)    				{channel="mqtt:topic:Faikin:faikin01:home"}
+Number faikin01_fanrpm  "faikin01 - fanrpm [%s rpm]"    <fan>          (g_faikin01,gGraph)    			{channel="mqtt:topic:Faikin:faikin01:fanrpm"}
+Number faikin01_comp    "faikin01 - comp [%s %%]"       <pump>         (g_faikin01,gGraph)    			{channel="mqtt:topic:Faikin:faikin01:comp"}
+Number faikin01_outside "faikin01 - outside [%s °C]"    <temperature>  (g_faikin01,gGraph)    			{channel="mqtt:topic:Faikin:faikin01:outside"}
+Number faikin01_liquid  "faikin01 - liquid [%s °C]"     <temperature>  (g_faikin01,gGraph)    			{channel="mqtt:topic:Faikin:faikin01:liquid"}
+Number faikin01_anglev  "faikin01 - anglev [%s °]"      <flow>         (g_faikin01)    				{channel="mqtt:topic:Faikin:faikin01:anglev"}
+Number faikin01_temp    "faikin01 - Setpoint [%.1f °C]" <heating>      (g_faikin01,g_faikin01_cmd_wait,gGraph)	{channel="mqtt:topic:Faikin:faikin01:temp"}
+Number faikin01_demand  "faikin01 - demand [%s %%]"     <settings>     (g_faikin01)    				{channel="mqtt:topic:Faikin:faikin01:demand"}
+Number faikin01_Wh      "faikin01 - Wh [%s Wh]"         <energy>       (g_faikin01)    				{channel="mqtt:topic:Faikin:faikin01:Wh"}
 
 // STRING
 String faikin01_fan      "Fan"        <fan>        (g_faikin01,g_faikin01_cmd_wait) 	{channel="mqtt:topic:Faikin:faikin01:fan"}

@@ -203,7 +203,7 @@ then
 
     tDelay = createTimer(now.plusMinutes(mTimer), [|
           logInfo(LOG, "Timer scaduto, accendo A/C")
-          acSoggiornoPower.sendCommand(ON)
+          faikin02_power.sendCommand(ON)
           tDelay = null
           pushNotification("SVEGLIA AC", "Timer scaduto, accendo il A/C Soggiorno")
           ])

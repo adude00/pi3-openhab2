@@ -3,7 +3,7 @@ rule "Calculate Boiler Percentage"
     Item tuya05_Power changed
   then
     // FULL
-    if (previousState >= 440 && tuya05_Power.state < 400 ) {
+    if (previousState >= 440 && tuya05_Power.state < 370 ) {
       //Boiler_Percentage.postUpdate(100)
       //Boiler_Max.postUpdate(previousState)
 

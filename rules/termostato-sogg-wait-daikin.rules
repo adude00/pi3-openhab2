@@ -17,10 +17,10 @@ rule "Termostato ON - Setting startup Temp"
 
     if ( tsSoggiornoStartupTempON.state == ON ) {
       logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature")
-      acSoggiornoHeatSetpoint.sendCommand(tsSoggiornoStartupTemp.state as Number)
+      faikin02_temp.sendCommand(tsSoggiornoStartupTemp.state as Number)
     }
 
-    acSoggiornoPower.sendCommand(ON)
+    faikin02_power.sendCommand(ON)
     logInfo("tsSoggiornoWait","Termostato ON. Turning ON Aircon")
 
 end
@@ -31,7 +31,7 @@ rule "Termostato OFF - Turning OFF if needed"
   then
   if ( tsSoggiornoOverride.state == OFF ) {
     logInfo("tsSoggiornoWait","Termostato OFF. tsSoggiornoOverride=OFF. Turning OFF Aircon")
-    acSoggiornoPower.sendCommand(OFF)
+    faikin02_power.sendCommand(OFF)
   }
 end
 
@@ -58,14 +58,13 @@ then
     if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG: RULE Started")
 
     var Number acTemp
-    if ((acSoggiornoMode.state+"") == "heating") acTemp = acSoggiornoHeatSetpoint.state as Number
-    if ((acSoggiornoMode.state+"") == "cooling") acTemp = acSoggiornoCoolSetpoint.state as Number
+    acTemp = faikin02_temp.state as Number
 
-    var Number acTempMax = tsSoggiornoWaitMaxTemp.state as DecimalType
-    var Number acTempMin = tsSoggiornoWaitMinTemp.state as DecimalType
+    var Number acTempMax  = tsSoggiornoWaitMaxTemp.state as DecimalType
+    var Number acTempMin  = tsSoggiornoWaitMinTemp.state as DecimalType
     var Number acTempStep = tsSoggiornoWaitStep.state as Number
-    var Number tolSogg = hsSoggiorno.state
-    var Number setpoint = spSoggiorno.state
+    var Number tolSogg    = hsSoggiorno.state
+    var Number setpoint   = spSoggiorno.state
 
 
     // Temp to check against
@@ -98,13 +97,13 @@ then
 
 	  // TOO COLD COOLING: INCREASE TEMP
 
-	  if ((acSoggiornoMode.state+"") == "cooling") {
+	  if ((faikin02_mode.state+"") == "C") {
 	    if (pow03_Power.state < 40) {
               // COMPRESSOR IS NOT RUNNING
 
-              if (acSoggiornoPower.state == ON ) {
+              if (faikin02_power.state == ON ) {
                 // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER
-                acSoggiornoPower.sendCommand(OFF)
+                faikin02_power.sendCommand(OFF)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Compressor not doing anything already. Turning aircon OFF!")
               } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, aircon already OFF!!")
@@ -116,7 +115,7 @@ then
               if ( acTemp < acTempMax ) {
                 // INCREASE TEMP IF WE CAN
                 acTemp = acTemp + acTempStep
-                acSoggiornoCooltSetpoint.sendCommand(acTemp)
+                faikin02_temp.sendCommand(acTemp)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
               } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
@@ -129,15 +128,15 @@ then
 
           // TOO COLD HEATING: INCREASE TEMP
 
-          if ((acSoggiornoMode.state+"") == "heating") {
+          if ((faikin02_mode.state+"") == "H") {
             if ( acTemp < acTempMax ) {
             // WE CAN INCREASE TEMP
               acTemp = acTemp + acTempStep
-              acSoggiornoHeatSetpoint.sendCommand(acTemp)
+              faikin02_temp.sendCommand(acTemp)
               if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
-              if (acSoggiornoPower.state == OFF ) {
+              if (faikin02_power.state == OFF ) {
                 // TURN ON IF OFF
-                acSoggiornoPower.sendCommand(ON)
+                faikin02_power.sendCommand(ON)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: Aircon was OFF. Turning it ON!")
               }
             } else {
@@ -168,13 +167,13 @@ then
 	  
 	  // TOO HOT HEATING: REDUCE TEMP
 
-	  if ((acSoggiornoMode.state+"") == "heating") {
+	  if ((faikin02_mode.state+"") == "H") {
 	    if (pow03_Power.state < 40) {
 	      // COMPRESSOR IS NOT RUNNING
 
-	      if (acSoggiornoPower.state == ON ) {
+	      if (faikin02_power.state == ON ) {
 	        // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER 
-	        acSoggiornoPower.sendCommand(OFF)
+	        faikin02_power.sendCommand(OFF)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Compressor not doing anything already. Turning aircon OFF!")
 	      } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, aircon already OFF!!")
@@ -186,7 +185,7 @@ then
 	      if ( acTemp > acTempMin ) {
 		// DECREASE POWER IF WE CAN
                 acTemp = acTemp - acTempStep
-	        acSoggiornoHeatSetpoint.sendCommand(acTemp)
+	        faikin02_temp.sendCommand(acTemp)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Decreasing acTemp to " + acTemp)
 	      } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
@@ -199,15 +198,15 @@ then
 
 	  // TOO HOT COOLING: DECREASE TEMP
 
-	  if ((acSoggiornoMode.state+"") == "cooling") {
+	  if ((faikin02_mode.state+"") == "C") {
 	    if ( acTemp > acTempMin ) {
 	    // WE CAN DECREASE TEMP
               acTemp = acTemp - acTempStep
-	      acSoggiornoCoolSetpoint.sendCommand(acTemp)
+	      faikin02_temp.sendCommand(acTemp)
               if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
-	      if (acSoggiornoPower.state == OFF ) {
+	      if (faikin02_power.state == OFF ) {
 	        // TURN ON IF OFF
-	        acSoggiornoPower.sendCommand(ON)
+	        faikin02_power.sendCommand(ON)
 	        if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: Aircon was OFF. Turning it ON!")
 	      }
 	    } else {
