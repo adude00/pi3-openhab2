@@ -1,7 +1,7 @@
-Group t_tuya02          "tuya02: Lavasciuta"
+Group t_tuya02          "tuya02: Lavasciuga"
 
 // SWITCH
-Switch tuya02_Switch "Lavasciuga" <tv> (tuya02,gTuya,sonoff,Devices) [ "Switchable" ]  {channel="mqtt:topic:tasmota:tuya02:PowerSwitch"}
+Switch tuya02_Switch "Lavasciuga" <washingmachine_2> (t_sonoff,t_tuya02,gSwitch,Devices) [ "Switchable" ]  {channel="mqtt:topic:tasmota:tuya02:PowerSwitch"}
 
 // POWER
 Number:Power            tuya02_Power      "tuya02 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya02,gWatt)    {channel="mqtt:topic:tasmota:tuya02:Power"}

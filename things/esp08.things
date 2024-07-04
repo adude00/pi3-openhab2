@@ -4,7 +4,13 @@ Thing mqtt:topic:tasmota:esp08 "esp08_Thing" (mqtt:broker:brokerv2)  [ availabil
         // Type switch   : PowerSwitch   [stateTopic="stat/esp08/POWER",   commandTopic="cmnd/esp08/POWER", on="ON", off="OFF"]
 
         // Sonoff Pow (read current wattage; for read and switch on-state see above)
-        Type number : Power         [stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Power"]
+        Type number : Power		[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Power"]
+        Type number : ApparentPower	[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.ApparentPower"]
+        Type number : ReactivePower	[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.ReactivePower"]
+        Type number : Voltage		[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Voltage"]
+        Type number : Current		[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Current"]
+        Type number : Frequency		[stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Frequency"]
+
 
         // devices including AM2301 temperature sensor
         //Type number   : Temperature   [stateTopic="tele/esp08/SENSOR",  transformationPattern="JSONPATH:$.AM2301.Temperature"]
@@ -18,8 +24,8 @@ Thing mqtt:topic:tasmota:esp08 "esp08_Thing" (mqtt:broker:brokerv2)  [ availabil
         Type string   : Time          [stateTopic="tele/esp08/STATE",  transformationPattern="JSONPATH:$.Time"]
 
         // Diagnostics: Define specific for what you really need on a regular basis, use standalone MQTT client for troubleshooting
-        Type string   : RestartReason [stateTopic="tele/esp08/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
-        Type string   : Version       [stateTopic="tele/esp08/INFO1",  transformationPattern="JSONPATH:$.Version"]
+        //Type string   : RestartReason [stateTopic="tele/esp08/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
+        //Type string   : Version       [stateTopic="tele/esp08/INFO1",  transformationPattern="JSONPATH:$.Version"]
         Type string   : Result        [stateTopic="stat/esp08/RESULT"]
 
         Type string : Version       [stateTopic="tele/esp08/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]

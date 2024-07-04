@@ -1,9 +1,10 @@
 rule "Lavastoviglie spina offline"
   when
-    Item tuya08_Light_Reachable changed from ON to OFF
+    Item tuya08_Reachable changed from Online to Offline
   then
     if ( tuya08_Power.averageSince(now.minusMinutes(5)) < 2 ) {
       tuya08_Power.postUpdate(0)
+      //logInfo("LAVASTOVIGLIE", "Spina offline: imposto consumo a 0W")
       logInfo("LAVASTOVIGLIE", "Spina offline e consumo avg(5m) minore di 2: imposto consumo a 0W")
     }
 end

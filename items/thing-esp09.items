@@ -1,34 +1,34 @@
 Group t_esp09         "esp09 (sf01): Induzione e Campanello"
 
-Switch  esp09_Switch    "esp09: switch" (t_esp09,gTuya,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
-Switch  sonoff01_Switch "Relais Porta"  (t_esp09,gTuya,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
+Switch  esp09_Switch    "esp09: switch" (t_esp09,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
+Switch  sonoff01_Switch "Relais Porta"  (t_esp09,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
 
-Number  esp09_Power         "esp09: Power - Induzione [%.1f W]"        <voltage>       (t_esp09,gTuya,gWattg)
+Number  esp09_Power         "esp09: Power - Induzione [%.1f W]"        <voltage>       (t_esp09,t_sonoff,gWattg)
 	{channel="mqtt:topic:tasmota:esp09:Power"}
 
-Number esp09_AppPower      "esp09: Line Apparent Power [%.3f VA]"     <current>       (t_esp09,gTuya,gVag)
+Number esp09_AppPower      "esp09: Line Apparent Power [%.3f VA]"     <current>       (t_esp09,t_sonoff,gVag)
 	{channel="mqtt:topic:tasmota:esp09:ApparentPower"}
 
-Number esp09_ReaPower      "esp09: Line Reactive Power [%.3f VAR]"    <current>       (t_esp09,gTuya,gVarg)
+Number esp09_ReaPower      "esp09: Line Reactive Power [%.3f VAR]"    <current>       (t_esp09,t_sonoff,gVarg)
 	{channel="mqtt:topic:tasmota:esp09:ReactivePower"}
 
-Number esp09_Voltage       "esp09: Line voltage [%.1f V]"             <voltage>       (t_esp09,gTuya,gVoltg)
+Number esp09_Voltage       "esp09: Line voltage [%.1f V]"             <voltage>       (t_esp09,t_sonoff,gVoltg)
 	{channel="mqtt:topic:tasmota:esp09:Voltage"}
 
-Number esp09_Current       "esp09: Line current [%.3f A]"             <current>       (t_esp09,gTuya,gAmpsg)
+Number esp09_Current       "esp09: Line current [%.3f A]"             <current>       (t_esp09,t_sonoff,gAmpsg)
 	{channel="mqtt:topic:tasmota:esp09:Current"}
 
-Number esp09_Frequency     "esp09: Line Frequency [%.1f Hz]"          <current>       (t_esp09,gTuyag)
+Number esp09_Frequency     "esp09: Line Frequency [%.1f Hz]"          <current>       (t_esp09,t_sonoff)
 	{channel="mqtt:topic:tasmota:esp09:Frequency"}
 
 
 // FAKE
-Number sonoff01_Power_Fix     "esp09 fix: True Power [%.1f W]"          <voltage>       (t_esp09,gTuya,gWatt)
-Number sonoff01_AppPower_Fix  "esp09 fix: Apparent Power [%.3f VA]"     <current>       (t_esp09,gTuya,gVa)
-Number sonoff01_ReaPower_Fix  "esp09 fix: Reactive Power [%.3f VAR]"    <current>       (t_esp09,gTuya,gVar)
-Number sonoff01_Voltage_Fix   "esp09 fix: Voltage [%.1f V]"             <voltage>       (t_esp09,gTuya,gVolt)
-Number sonoff01_Current_Fix   "esp09 fix: Current [%.3f A]"             <current>       (t_esp09,gTuya,gAmps)
-Number sonoff01_Frequency_Fix "esp09 fix: Frequency [%.1f Hz]"          <current>       (t_esp09,gTuya)
+Number sonoff01_Power_Fix     "esp09 fix: True Power [%.1f W]"          <voltage>       (t_esp09,t_sonoff,gWatt)
+Number sonoff01_AppPower_Fix  "esp09 fix: Apparent Power [%.3f VA]"     <current>       (t_esp09,t_sonoff,gVa)
+Number sonoff01_ReaPower_Fix  "esp09 fix: Reactive Power [%.3f VAR]"    <current>       (t_esp09,t_sonoff,gVar)
+Number sonoff01_Voltage_Fix   "esp09 fix: Voltage [%.1f V]"             <voltage>       (t_esp09,t_sonoff,gVolt)
+Number sonoff01_Current_Fix   "esp09 fix: Current [%.3f A]"             <current>       (t_esp09,t_sonoff,gAmps)
+Number sonoff01_Frequency_Fix "esp09 fix: Frequency [%.1f Hz]"          <current>       (t_esp09,t_sonoff)
 
 
 // FOR ALL

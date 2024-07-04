@@ -2,6 +2,22 @@ Group t_esp08         "esp08: P1 Power Total"
 
 Number:Power         esp08_Power         "esp08 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp08,gWatt)     {channel="mqtt:topic:tasmota:esp08:Power"}
 
+Number esp08_AppPower      "esp08: Line Apparent Power [%.3f VA]"     <current>       (t_esp08,t_sonoff,gVag)
+        {channel="mqtt:topic:tasmota:esp08:ApparentPower"}
+
+Number esp08_ReaPower      "esp08: Line Reactive Power [%.3f VAR]"    <current>       (t_esp08,t_sonoff,gVarg)
+        {channel="mqtt:topic:tasmota:esp08:ReactivePower"}
+
+Number esp08_Voltage       "esp08: Line voltage [%.1f V]"             <voltage>       (t_esp08,t_sonoff,gVoltg)
+        {channel="mqtt:topic:tasmota:esp08:Voltage"}
+
+Number esp08_Current       "esp08: Line current [%.3f A]"             <current>       (t_esp08,t_sonoff,gAmpsg)
+        {channel="mqtt:topic:tasmota:esp08:Current"}
+
+Number esp08_Frequency     "esp08: Line Frequency [%.1f Hz]"          <current>       (t_esp08,t_sonoff)
+        {channel="mqtt:topic:tasmota:esp08:Frequency"}
+
+
 // FOR ALL
 
 // Tasmota Status

@@ -1,7 +1,7 @@
 Group t_tuya01          "tuya01: TV"
 
 // SWITCH
-Switch                  tuya01_switch     "tuya01 Switch"                  <poweroutlet> (t_sonoff,t_tuya01,gSwitch)  {channel="mqtt:topic:tasmota:tuya01:PowerSwitch"}
+Switch                  tuya01_switch     "tuya01 Switch"                  <poweroutlet> (t_sonoff,t_tuya01,gSwitch,Devices)  {channel="mqtt:topic:tasmota:tuya01:PowerSwitch"}
 
 // POWER
 Number:Power            tuya01_Power      "tuya01 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya01,gWatt)    {channel="mqtt:topic:tasmota:tuya01:Power"}

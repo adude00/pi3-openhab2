@@ -1,0 +1,51 @@
+Group Casa_Consumi_Chart_Total
+
+Group t_esp10         "esp10 (sf09): Total House Power"
+
+Switch  esp10_Switch        "esp10: switch" (t_esp10,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp10:PowerSwitch"}
+
+Number  esp10_Power         "esp10: Power - Induzione [%.1f W]"        <voltage>       (t_esp10,t_sonoff,gWattg)
+	{channel="mqtt:topic:tasmota:esp10:Power"}
+
+Number esp10_AppPower      "esp10: Line Apparent Power [%.3f VA]"     <current>       (t_esp10,t_sonoff,gVag)
+	{channel="mqtt:topic:tasmota:esp10:ApparentPower"}
+
+Number esp10_ReaPower      "esp10: Line Reactive Power [%.3f VAR]"    <current>       (t_esp10,t_sonoff,gVarg)
+	{channel="mqtt:topic:tasmota:esp10:ReactivePower"}
+
+Number esp10_Voltage       "esp10: Line voltage [%.1f V]"             <voltage>       (t_esp10,t_sonoff,gVoltg)
+	{channel="mqtt:topic:tasmota:esp10:Voltage"}
+
+Number esp10_Current       "esp10: Line current [%.3f A]"             <current>       (t_esp10,t_sonoff,gAmpsg)
+	{channel="mqtt:topic:tasmota:esp10:Current"}
+
+Number esp10_Frequency     "esp10: Line Frequency [%.1f Hz]"          <current>       (t_esp10,t_sonoff)
+	{channel="mqtt:topic:tasmota:esp10:Frequency"}
+
+
+// FAKE
+Number sonoff09_Power_Fix     "Total House Power [%.1f W]"             <voltage>  (t_esp10,t_sonoff,gWatt,Casa_Consumi_Chart_Total)
+Number sonoff09_AppPower_Fix  "esp10: Line Apparent Power [%.3f VA]"   <current>  (t_esp10,t_sonoff,gVa)
+Number sonoff09_ReaPower_Fix  "esp10: Line Reactive Power [%.3f VAR]"  <current>  (t_esp10,t_sonoff,gVar)
+Number sonoff09_Voltage_Fix   "esp10: Line voltage [%.1f V]"           <voltage>  (t_esp10,t_sonoff,gVolt)
+Number sonoff09_Current_Fix   "esp10: Line current [%.3f A]"           <current>  (t_esp10,t_sonoff,gAmps)
+Number sonoff09_Frequency_Fix "esp10: Line Frequency [%.1f Hz]"        <current>  (t_esp10,t_sonoff)
+
+
+// FOR ALL
+
+// Tasmota Status
+String               esp10_Refresh       "esp10 Refresh [%s]"      <clock>  (t_sonoff,t_esp10,gTime)      {channel="mqtt:topic:tasmota:esp10:Time"}
+String               esp10_Version       "esp10 Version [%s]"                    (t_sonoff,t_esp10,gVersion)   {channel="mqtt:topic:tasmota:esp10:Version"}
+String               esp10_Reachable     "esp10 Reachable [%s]"         <switch> (t_sonoff,t_esp10,gReachable) {channel="mqtt:topic:tasmota:esp10:Reachable"}
+
+// Diagnostics
+Number:Dimensionless esp10_RSSI          "esp10 Signal [%d %%]" <network>            (t_sonoff,t_esp10,gRSSI)      {channel="mqtt:topic:tasmota:esp10:RSSI"}
+Number:Dimensionless esp10_LoadAvg       "esp10 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_esp10,gLoad)      {channel="mqtt:topic:tasmota:esp10:LoadAvg"}
+String               esp10_Result        "esp10 Result [%s]"    <status>             (t_sonoff,t_esp10,gResult)    {channel="mqtt:topic:tasmota:esp10:Result"}
+String               esp10_Uptime        "esp10 Uptime [%s]"    <clock>              (t_sonoff,t_esp10,gUptime)    {channel="mqtt:topic:tasmota:esp10:Uptime"}
+String               esp10_RestartReason "esp10 Reason [%s]"    <error>              (t_sonoff,t_esp10,gReason)    {channel="mqtt:topic:tasmota:esp10:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String esp10_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_esp10) {channel="mqtt:topic:tasmota:esp10:WifiDowntime"}
+

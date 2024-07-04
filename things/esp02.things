@@ -18,8 +18,8 @@ Thing mqtt:topic:tasmota:esp02 "esp02_Thing" (mqtt:broker:brokerv2)  [ availabil
         Type string   : Time          [stateTopic="tele/esp02/STATE",  transformationPattern="JSONPATH:$.Time"]
 
         // Diagnostics: Define specific for what you really need on a regular basis, use standalone MQTT client for troubleshooting
-        Type string   : RestartReason [stateTopic="tele/esp02/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
-        Type string   : Version       [stateTopic="tele/esp02/INFO1",  transformationPattern="JSONPATH:$.Version"]
+        //Type string   : RestartReason [stateTopic="tele/esp02/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
+        //Type string   : Version       [stateTopic="tele/esp02/INFO1",  transformationPattern="JSONPATH:$.Version"]
         Type string   : Result        [stateTopic="stat/esp02/RESULT"]
 
         Type string : Version       [stateTopic="tele/esp02/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]

@@ -1115,57 +1115,7 @@ sitemap default label="Casa"
 	Group item=gRSSI          label="Debug RSSI"
 	Group item=gUptime          label="Debug Uptime"
       }
-      Frame label="Specifici per tipo" {
-	Text label="Tuya"   {
-	  Group item=gTuya		label="Debug Tuya All"
-	  Group item=tuya02		label="Debug Tuya 02"
-	  Group item=tuya03		label="Debug Tuya 03"
-	  Group item=tuya04		label="Debug Tuya 04"
-	  Group item=tuya05		label="Debug Tuya 05"
-	  Group item=tuya06		label="Debug Tuya 06"
-	  Group item=tuya07		label="Debug Tuya 07"
-	  Group item=tuya08		label="Debug Tuya 08"
-	  Group item=pow01		label="Debug POW 01"
-	  Group item=pow02 		label="Debug POW 02"
-	  Group item=pow03 		label="Debug POW 03"
-	  Group item=pow04 		label="Debug POW 04"
-	  Group item=pow05 		label="Debug POW 05"
-	}
-	
-	Text label="Sonoff"   {
-	  Group item=sonoff         label="Debug Sonoff All"
-	  Group item=gReachable     label="Debug Reachable"
-	  Group item=gRSSI          label="Debug RSSI"
-	  Text label="Versions" {
-	    Frame label="Single upgrade" {
-	      Text label="Upgrade single sonoffs" {
-		Selection item=Sonoff_Select mappings=[sonoff01="Sonoff 01", sonoff02="Sonoff 02", sonoff03="Sonoff 03", sonoff04="Sonoff 04", sonoff05="Sonoff 05", sonoff06="Sonoff 06", sonoff07="Sonoff 07" ]
-		Switch item=Sonoff_Select_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
-		Text  item=Sonoff_Current_FW_Available
-		Text  item=Sonoff_Select_Info
-	      }
-	    }
-	    Frame label="All sonoffs" {
-
-	    Group item=gVersion       label="All Version Info"
-	    Group item=gFirmware      label="Firmware"
-	    Group item=gSDK           label="SDK"
-	    Group item=gVcc           label="Vcc"
-	    Group item=gCore          label="Core"
-	    Text  item=Sonoff_Current_FW_Available
-	    Switch item=Sonoff_Action mappings=[restart="Restart", queryFW="Query FW", upgrade="Upgrade FW"]
-	    }
-	  }
-	}
-	Text label="Tapparelle"   icon=rollershutter {
-	  Group item=gTappDebug   label="Debug Tapparelle All"
-	  Group item=gTappRSSI    label="Debug Tapparelle RSSI"
-	  Group item=gTappReach   label="Debug Tapparelle Reachable"
-	  Group item=gTappUptime  label="Debug Tapparelle Uptime"
-	}
-      }
-      Frame label="New Conf: Things" {
-		Group item=t_sonoff    label="ALL Sonoff Things"
+      Frame label="New Confs: Things" {
 		Text label="Per Thing/Object" {
 			Group item=t_sonoff02
 			Group item=t_sonoff04
@@ -1177,8 +1127,36 @@ sitemap default label="Casa"
 			Group item=t_sonoff20
 			Group item=t_esp08
 			Group item=t_esp09
+			Group item=t_esp10
 			Group item=t_tuya01
+			Group item=t_tuya02
+			Group item=t_tuya03
+			Group item=t_tuya04
+			Group item=t_tuya05
+			Group item=t_tuya06
+			Group item=t_tuya07
+			Group item=t_tuya08
 		}
+      }
+
+      Frame label="Specifici per tipo" {
+	Text label="Tuya"   {
+	  Group item=pow01		label="Debug POW 01"
+	  Group item=pow02 		label="Debug POW 02"
+	  Group item=pow03 		label="Debug POW 03"
+	  Group item=pow04 		label="Debug POW 04"
+	  Group item=pow05 		label="Debug POW 05"
+	}
+	
+	Text label="Tapparelle"   icon=rollershutter {
+	  Group item=gTappDebug   label="Debug Tapparelle All"
+	  Group item=gTappRSSI    label="Debug Tapparelle RSSI"
+	  Group item=gTappReach   label="Debug Tapparelle Reachable"
+	  Group item=gTappUptime  label="Debug Tapparelle Uptime"
+	}
+      }
+      Frame label="Per Group" {
+		Group item=t_sonoff    label="ALL Sonoff Things"
 		Text label="Per Type" {
 			Group item=gSwitch 
 			Group item=gTemp   

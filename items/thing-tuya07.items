@@ -1,0 +1,33 @@
+Group t_tuya07          "tuya07: Networking"
+
+// SWITCH
+Switch tuya07_Switch  "Networking"  <poweroutlet> (t_sonoff,t_tuya07,gSwitch) {channel="mqtt:topic:tasmota:tuya07:PowerSwitch"}
+
+// POWER
+Number:Power            tuya07_Power      "tuya07 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya07,gWatt)    {channel="mqtt:topic:tasmota:tuya07:Power"}
+Number:Dimensionless    tuya07_AppPower   "tuya07 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya07,gVa)      {channel="mqtt:topic:tasmota:tuya07:ApparentPower"}
+Number:Dimensionless    tuya07_ReaPower   "tuya07 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya07,gVar)     {channel="mqtt:topic:tasmota:tuya07:ReactivePower"}
+Number:Dimensionless    tuya07_Voltage    "tuya07 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya07,gVolt)    {channel="mqtt:topic:tasmota:tuya07:Voltage"}
+Number:Dimensionless    tuya07_Current    "tuya07 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya07,gAmps)    {channel="mqtt:topic:tasmota:tuya07:Current"}
+
+// Sensor
+//Number:Temperature   tuya07_Temp          "tuya07 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya07)       {channel="mqtt:topic:tasmota:tuya07:Temperature"}
+//Number:Dimensionless tuya07_Humid         "tuya07 Humid [%.1f %%]"              <humidity>     (gHumd,t_tuya07)       {channel="mqtt:topic:tasmota:tuya07:Humidity"}
+
+// FOR ALL
+
+// Tasmota Status
+String               tuya07_Refresh       "tuya07 Time [%s]"                   <clock> (t_sonoff,t_tuya07,gTime)      {channel="mqtt:topic:tasmota:tuya07:Time"}
+String               tuya07_Version       "tuya07 Version [%s]"                        (t_sonoff,t_tuya07,gVersion)   {channel="mqtt:topic:tasmota:tuya07:Version"}
+String               tuya07_Reachable     "tuya07 Reachable [%s]"             <switch> (t_sonoff,t_tuya07,gReachable) {channel="mqtt:topic:tasmota:tuya07:Reachable"}
+
+// Diagnostics
+Number:Dimensionless tuya07_RSSI          "tuya07 Signal [%d %%]" <network>            (t_sonoff,t_tuya07,gRSSI)      {channel="mqtt:topic:tasmota:tuya07:RSSI"}
+Number:Dimensionless tuya07_LoadAvg       "tuya07 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_tuya07,gLoad)      {channel="mqtt:topic:tasmota:tuya07:LoadAvg"}
+String               tuya07_Result        "tuya07 Result [%s]"    <status>             (t_sonoff,t_tuya07,gResult)    {channel="mqtt:topic:tasmota:tuya07:Result"}
+String               tuya07_Uptime        "tuya07 Uptime [%s]"    <clock>              (t_sonoff,t_tuya07,gUptime)    {channel="mqtt:topic:tasmota:tuya07:Uptime"}
+String               tuya07_RestartReason "tuya07 Reason [%s]"    <error>              (t_sonoff,t_tuya07,gReason)    {channel="mqtt:topic:tasmota:tuya07:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String tuya07_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_tuya07) {channel="mqtt:topic:tasmota:tuya07:WifiDowntime"}
+

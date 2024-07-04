@@ -1,0 +1,44 @@
+Thing mqtt:topic:tasmota:tuya03 "tuya03_Thing" (mqtt:broker:brokerv2)  [ availabilityTopic="tele/tuya03/LWT", payloadAvailable="Online", payloadNotAvailable="Offline" ] {
+    Channels:
+        // Sonoff Basic / Sonoff S20 Smart Socket (Read and switch on-state)
+        Type switch   : PowerSwitch   [stateTopic="stat/tuya03/POWER",   commandTopic="cmnd/tuya03/POWER", on="ON", off="OFF"]
+
+        // Sonoff Pow (read current wattage; for read and switch on-state see above)
+        Type number : Power         [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Power"]
+        Type number : ApparentPower [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.ApparentPower"]
+        Type number : ReactivePower [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.ReactivePower"]
+        Type number : Voltage       [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Voltage"]
+        Type number : Current       [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Current"]
+        //Type number : EnerToday     [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Today"]
+        //Type number : EnerYesterday [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.ENERGY.Yesterday"]
+
+        // devices including AM2301 temperature sensor
+        //Type number   : Temperature   [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.AM2301.Temperature"]
+        //Type number   : Humidity      [stateTopic="tele/tuya03/SENSOR",  transformationPattern="JSONPATH:$.AM2301.Humidity"]
+
+        // Tasmota Status
+        Type string   : Reachable     [stateTopic="tele/tuya03/LWT"]
+        Type number   : RSSI          [stateTopic="tele/tuya03/STATE",  transformationPattern="JSONPATH:$.Wifi.RSSI"]
+        Type number   : LoadAvg       [stateTopic="tele/tuya03/STATE",  transformationPattern="JSONPATH:$.LoadAvg"]
+        Type string   : Uptime        [stateTopic="tele/tuya03/STATE",  transformationPattern="JSONPATH:$.Uptime"]
+        Type string   : Time          [stateTopic="tele/tuya03/STATE",  transformationPattern="JSONPATH:$.Time"]
+
+        // Diagnostics: Define specific for what you really need on a regular basis, use standalone MQTT client for troubleshooting
+        Type string   : Result        [stateTopic="stat/tuya03/RESULT"]
+	Type number   : Uptime        [stateTopic="tele/tuya03/STATE", transformationPattern="JSONPATH:$.UptimeSec"]
+        
+	// OLD
+	Type string   : RestartReason [stateTopic="tele/tuya03/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
+        Type string   : Version       [stateTopic="tele/tuya03/INFO1",  transformationPattern="JSONPATH:$.Version"]
+	// NEW
+        //Type string : Version       [stateTopic="tele/tuya03/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]
+        //Type string : RestartReason [stateTopic="tele/tuya03/INFO3", transformationPattern="JSONPATH:$.Info3.RestartReason"]
+
+        // Upgrade first
+        //Type string : WifiDowntime  [stateTopic="tele/tuya03/STATE", transformationPattern="JSONPATH:$.Wifi.Downtime"]
+
+	// NO - non mi piace - Type switch : Reachable     [stateTopic="tele/tuya03/LWT",     transformationPattern="MAP:tasmota-reachable.map"]
+
+	// old one, have to query it
+        //Type string : Version2      [stateTopic="stat/tuya03/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version"]
+}

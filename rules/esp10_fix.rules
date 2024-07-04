@@ -1,0 +1,26 @@
+rule "Fix Energy esp10"
+  when
+    Item esp10_Refresh received update
+  then
+
+    createTimer(now.plusSeconds(1), [|
+
+      if (esp10_Voltage.state == 0 ) {
+
+        logInfo("Fix esp10", "esp10_Voltage == 0, not doing anything")
+        return;
+
+      } else {
+
+        sonoff09_Power_Fix.postUpdate(esp10_Power.state)
+        sonoff09_AppPower_Fix.postUpdate(esp10_AppPower.state)
+        sonoff09_ReaPower_Fix.postUpdate(esp10_ReaPower.state)
+        sonoff09_Voltage_Fix.postUpdate(esp10_Voltage.state)
+        sonoff09_Current_Fix.postUpdate(esp10_Current.state)
+        sonoff09_Frequency_Fix.postUpdate(esp10_Frequency.state)
+
+      }
+
+    ])
+
+end

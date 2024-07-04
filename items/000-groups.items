@@ -71,3 +71,15 @@ Group gTime
 
 // Fake group for groupless items
 Group gFinto
+
+// Tuya group
+Group gTuya
+
+// Power Groups
+Group gWatt
+Group gVa
+Group gVar
+Group gVolt
+Group gAmps
+Group gEnergyToday
+Group gEnergyYesterday

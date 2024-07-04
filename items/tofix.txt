@@ -9,14 +9,14 @@ pow03.items
 pow04.items
 pow05.items
 V- sonoff01.items
-sonoff09.items
-sonoff11.items
+V- sonoff09.items
+V- sonoff11.items
 tapparelle.items
 V- tuya01.items
-tuya02.items
-tuya03.items
-tuya04.items
-tuya05.items
-tuya06.items
-tuya07.items
-tuya08.items
+V- tuya02.items
+V- tuya03.items
+V- tuya04.items
+V- tuya05.items
+V- tuya06.items
+V- tuya07.items
+V- tuya08.items

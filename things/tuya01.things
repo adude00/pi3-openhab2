@@ -24,13 +24,15 @@ Thing mqtt:topic:tasmota:tuya01 "tuya01_Thing" (mqtt:broker:brokerv2)  [ availab
         Type string   : Time          [stateTopic="tele/tuya01/STATE",  transformationPattern="JSONPATH:$.Time"]
 
         // Diagnostics: Define specific for what you really need on a regular basis, use standalone MQTT client for troubleshooting
+        Type string   : Result        [stateTopic="stat/tuya01/RESULT"]
+	Type number   : Uptime        [stateTopic="tele/tuya01/STATE", transformationPattern="JSONPATH:$.UptimeSec"]
+
+	// OLD
         Type string   : RestartReason [stateTopic="tele/tuya01/INFO3",  transformationPattern="JSONPATH:$.RestartReason"]
         Type string   : Version       [stateTopic="tele/tuya01/INFO1",  transformationPattern="JSONPATH:$.Version"]
-        Type string   : Result        [stateTopic="stat/tuya01/RESULT"]
-
-        Type string : Version       [stateTopic="tele/tuya01/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]
-        Type string : RestartReason [stateTopic="tele/tuya01/INFO3", transformationPattern="JSONPATH:$.Info3.RestartReason"]
-	Type number : Uptime        [stateTopic="tele/tuya01/STATE", transformationPattern="JSONPATH:$.UptimeSec"]
+	// NEW
+        //Type string : Version       [stateTopic="tele/tuya01/INFO1", transformationPattern="JSONPATH:$.Info1.Version"]
+        //Type string : RestartReason [stateTopic="tele/tuya01/INFO3", transformationPattern="JSONPATH:$.Info3.RestartReason"]
 
         // Upgrade first
         //Type string : WifiDowntime  [stateTopic="tele/tuya01/STATE", transformationPattern="JSONPATH:$.Wifi.Downtime"]
