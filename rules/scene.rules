@@ -57,7 +57,7 @@ then
 
   gTappP2.sendCommand(UP)
   if (sunIsOut.state == ON) gTappP1.sendCommand(UP)
-  IPCams.sendCommand(OFF)
+  sf03_Switch.sendCommand(OFF)
   alexa_campanello.sendCommand(ON)
 
   // Accendo le luci in soggiorno in base alla configurazione
@@ -187,7 +187,7 @@ then
   gTappP2.sendCommand(UP)
   if (sunIsOut.state == ON) gTappP1.sendCommand(UP)
 
-  IPCams.sendCommand(OFF)
+  sf03_Switch.sendCommand(OFF)
   //tsBagno.sendCommand(ON)
 
   // Accendo le luci in soggiorno in base alla configurazione
@@ -219,7 +219,7 @@ then
     logInfo("Scene","Scena USCIAMO: Luci spente e scena finita")
     ])
   createTimer(now.plusSeconds(30), [|
-    IPCams.sendCommand(ON)
+    sf03_Switch.sendCommand(ON)
     logInfo("Scene","Scena USCIAMO: Telecamere accese")
     ])
   createTimer(now.plusSeconds(300), [|

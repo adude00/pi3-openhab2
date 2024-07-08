@@ -6,7 +6,7 @@ rule "Campanello"
     logInfo("CAMPANELLO", "Qualcuno ha suonato")
 
     var String message;
-    message= "Drin drin! Hanno suonato! Drin Drin! Corri al citofono! Drin drin!"
+    message= "Dlin dlon! Hanno suonato! Dlin dlon! Corri al citofono! Dlin dlon!"
 
     if ( alexa_campanello.state == ON ) {
       Echo_Soggiorno_TTS.sendCommand(message)

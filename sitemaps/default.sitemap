@@ -190,7 +190,7 @@ sitemap default label="Casa"
     } // CHIUSO TEXT "Devices"
 
     Text label="IP Cameras" icon="camera" {
-      Switch item=IPCams
+      Switch item=sf03_Switch
 			// Camera 1
 			Selection item=Camera1_View mappings=[0='1: Soggiorno', 1='2: Divano', 2='3: Scrivania', 3='4: Finestra', 4='5: Ingresso', 5='6: AC', 6='7: Cane', 7='8: Soffitto']
 			Switch item=Camera1_Record 
@@ -1118,6 +1118,7 @@ sitemap default label="Casa"
       Frame label="New Confs: Things" {
 		Text label="Per Thing/Object" {
 			Group item=t_sonoff02
+			Group item=t_sonoff03
 			Group item=t_sonoff04
 			Group item=t_sonoff05
 			Group item=t_sonoff07
