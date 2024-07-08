@@ -275,7 +275,7 @@ sitemap default label="Casa"
 
 	  Frame label="Campanello" {
 	    Switch        item=alexa_campanello
-	    Switch        item=sonoff01_Switch 
+	    Switch        item=esp09_Switch 
 	  }
 	  Frame label="Forno" {
 	    Switch        item=alexa_forno 

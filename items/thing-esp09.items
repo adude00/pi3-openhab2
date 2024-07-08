@@ -1,7 +1,6 @@
-Group t_esp09         "esp09 (sf01): Induzione e Campanello"
+Group   t_esp09         "esp09 (sf01): Induzione e Campanello"
 
 Switch  esp09_Switch    "esp09: switch" (t_esp09,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
-Switch  sonoff01_Switch "Relais Porta"  (t_esp09,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp09:PowerSwitch"}
 
 Number  esp09_Power         "esp09: Power - Induzione [%.1f W]"        <voltage>       (t_esp09,t_sonoff,gWattg)
 	{channel="mqtt:topic:tasmota:esp09:Power"}

@@ -1,12 +1,12 @@
 rule "Campanello"
   when
-    Item sonoff01_Switch changed from OFF to ON
+    Item esp09_Switch changed from OFF to ON
   then
     pushNotification("CAMPANELLO!!", "Qualcuno ha suonato!")
     logInfo("CAMPANELLO", "Qualcuno ha suonato")
 
     var String message;
-    message= "Dlin dlon! Hanno suonato! Dlin dlon! Corri al citofono! Dlin dlon!"
+    message= "Drin drin! Hanno suonato! Drin drin! Corri al citofono! Drin drin!"
 
     if ( alexa_campanello.state == ON ) {
       Echo_Soggiorno_TTS.sendCommand(message)
