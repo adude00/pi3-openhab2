@@ -1,4 +1,4 @@
-rule "Reset termostato items at boot"
+rule "Reset Termostato Soggiorno items at boot"
   when
     System started
   then
@@ -7,7 +7,7 @@ rule "Reset termostato items at boot"
     logInfo("tsSoggiornoWait","System started: Turning off tsSoggiornoWait and tsSoggiornoRunning")
 end
 
-rule "Termostato ON - Setting startup Temp"
+rule "Termostato Soggiorno ON - Setting startup Temp"
   when
     Item tsSoggiorno changed from OFF to ON
   then
@@ -15,17 +15,25 @@ rule "Termostato ON - Setting startup Temp"
     tsSoggiornoRunning.sendCommand(OFF)
     logInfo("tsSoggiornoWait","Termostato ON - Turning off tsSoggiornoWait and tsSoggiornoRunning")
 
-    if ( tsSoggiornoStartupTempON.state == ON ) {
-      logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature")
-      faikin02_temp.sendCommand(tsSoggiornoStartupTemp.state as Number)
-    }
 
-    faikin02_power.sendCommand(ON)
-    logInfo("tsSoggiornoWait","Termostato ON. Turning ON Aircon")
+    if (faikin02_power.state == OFF ) {
+      faikin02_power.sendCommand(ON)
+      logInfo("tsSoggiornoWait","Termostato ON. Aircon OFF. Turning ON Aircon")
+
+      createTimer(now.plusSeconds(2), [|
+
+        if ( tsSoggiornoStartupTempON.state == ON ) {
+          logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature: " + tsSoggiornoStartupTemp.state)
+          faikin02_temp.sendCommand(tsSoggiornoStartupTemp.state as Number)
+        }
+
+      ])
+
+    }
 
 end
 
-rule "Termostato OFF - Turning OFF if needed"
+rule "Termostato Soggiorno OFF - Turning OFF if needed"
   when
     Item tsSoggiorno changed from ON to OFF
   then

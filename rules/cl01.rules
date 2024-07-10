@@ -1,0 +1,43 @@
+rule "cl01 all"
+when 
+	Member of g_cl01 received command
+then
+	var String command
+	
+	var int t_power		= 0
+	var int t_beep     	= 0
+	var int t_fan_mute	= 0
+	var int t_super		= 0
+	var int t_eco		= 0
+	var int t_up_down	= 0
+
+        createTimer(now.plusSeconds(1), [|
+
+		var int t_temp 		= (cl01_temp.state as Number).intValue
+		var int t_work_mode 	= (cl01_work_mode.state as Number).intValue
+		var int t_fan_speed 	= (cl01_fan_speed.state as Number).intValue
+
+                if ( cl01_power.state  == ON )    { t_power = 1 }    
+                if ( cl01_beep.state  == ON )     { t_beep = 1 }     
+                if ( cl01_fan_mute.state  == ON ) { t_fan_mute = 1 } 
+                if ( cl01_super.state  == ON )    { t_super = 1 }    
+                if ( cl01_eco.state  == ON )      { t_eco = 1 }      
+                if ( cl01_up_down.state  == ON )  { t_up_down = 1 } 
+
+		command = "{ \"t_temp\":" + t_temp +", \"t_work_mode\":" + t_work_mode +", \"t_fan_speed\":" + t_fan_speed +", \"t_power\":" + t_power + ", \"t_beep\":" + t_beep + ", \"t_fan_mute\":" + t_fan_mute + ", \"t_super\":" + t_super + ", \"t_eco\":" + t_eco + ", \"t_up_down\":" + t_up_down + " }"
+
+		//command = "{ \"t_temp\":" + cl01_temp.state +", \"t_work_mode\":" + cl01_work_mode.state +", \"t_fan_speed\":" + fan_speed_temp.state +", \"t_power\":" + t_power + ", \"t_beep\":" + t_beep + ", \"t_fan_mute\":" + t_fan_mute + ", \"t_super\":" + t_super + ", \"t_eco\":" + t_eco + ", \"t_up_down\":" + t_up_down + " }"
+
+		logInfo("cl01 API Post: ",command)        
+
+		val String cl01_Endpoint = "http://zero1:8000/api/devices/pu000098650051000200030003000000f7f60bc1a3a"
+		val String cl01_Headers = "application/json"
+		var String cl01_Data = command
+		var String API_RETURN = sendHttpPostRequest(cl01_Endpoint,cl01_Headers,cl01_Data,20000)
+
+		logInfo("cl01 API Return: ",API_RETURN)
+        ])
+
+end
+
+

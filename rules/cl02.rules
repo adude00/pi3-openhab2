@@ -1,0 +1,48 @@
+rule "cl02 all"
+when 
+	Member of g_cl02 received command
+then
+	var String command
+	
+	var int t_power		= 0
+	var int t_beep     	= 0
+	var int t_fan_mute	= 0
+	var int t_super		= 0
+	var int t_eco		= 0
+	var int t_up_down	= 0
+
+        createTimer(now.plusSeconds(1), [|
+
+		var int t_temp 		= (cl02_temp.state as Number).intValue
+		var int t_work_mode 	= (cl02_work_mode.state as Number).intValue
+		var int t_fan_speed 	= (cl02_fan_speed.state as Number).intValue
+
+                if ( cl02_power.state  == ON )    { t_power = 1 }    
+                if ( cl02_beep.state  == ON )     { t_beep = 1 }     
+                if ( cl02_fan_mute.state  == ON ) { t_fan_mute = 1 } 
+                if ( cl02_super.state  == ON )    { t_super = 1 }    
+                if ( cl02_eco.state  == ON )      { t_eco = 1 }      
+                if ( cl02_up_down.state  == ON )  { t_up_down = 1 } 
+
+		command = "{ \"t_temp\":" + t_temp +", \"t_work_mode\":" + t_work_mode +", \"t_fan_speed\":" + t_fan_speed +", \"t_power\":" + t_power + ", \"t_beep\":" + t_beep + ", \"t_fan_mute\":" + t_fan_mute + ", \"t_super\":" + t_super + ", \"t_eco\":" + t_eco + ", \"t_up_down\":" + t_up_down + " }"
+
+
+		logInfo("cl02 API Post: ",command)        
+
+		val String cl02_Endpoint = "http://zero1:8000/api/devices/pu000098650051000200030003000000f7f60c2690d"
+		val String cl02_Headers = "application/json"
+		var String cl02_Data = command
+		var String API_RETURN = sendHttpPostRequest(cl02_Endpoint,cl02_Headers,cl02_Data,20000)
+		logInfo("cl02 API Return: ",API_RETURN)
+
+		if ( API_RETURN.contains("Fail") ) {
+		  createTimer(now.plusSeconds(5), [|
+		    var String API_RETRY = sendHttpPostRequest(cl02_Endpoint,cl02_Headers,cl02_Data,20000)
+		    logInfo("cl02 API Retry: ",API_RETRY)
+		  ])
+		}
+        ])
+
+end
+
+
