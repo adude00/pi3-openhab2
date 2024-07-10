@@ -639,22 +639,70 @@ sitemap default label="Casa"
   Frame label="Temperature P1" {
 
     Text item=sf12_Temp label="Sala Giochi" icon=party {
+      Frame label="Termostato" {
+	Switch    item=tsGiochi
+	Text      item=spGiochi {
+
+	  // Thermostat Page
+	  Frame label="Temperature" {
+	    Text item=sf12_Temp 
+	  }
+	  Frame label="Thermostat" {
+            Switch    item=tsGiochi
+	    Setpoint  item=spGiochi minValue=17    maxValue=29 step=0.2
+	  }
+
+          Frame label="A/C Auto Conf" {
+            Setpoint  item=hsGiochi minValue=0     maxValue=3  step=0.1           icon=settings
+            Setpoint  item=tsGiochiWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
+            Setpoint  item=tsGiochiWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
+            Setpoint  item=tsGiochiWaitStep        minValue=1  maxValue=3  step=1  icon=line
+            Switch    item=tsGiochiStartupTempON 
+            Setpoint  item=tsGiochiStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsGiochiStartupTempON==ON]
+            Switch    item=tsGiochiAutoON          label="Auto ON on SetPoint" icon=settings
+            Switch    item=tsGiochiOverride        icon=settings
+          }
+
+          Frame label="A/C Auto DEBUG"  {
+            Switch    item=tsGiochiWait
+            Setpoint  item=tsGiochiWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
+            Switch    item=tsGiochiWaitDebug
+            Switch    item=tsGiochiRunning
+            Switch    item=shelly07_Power
+          }
+
+	} //Chiuso text spGiochi
+      } // Chiuso frame Termostato
+
+
       Frame label="Comfort" {
         Text      item=sf12_Temp   label="Giochi: Temperatura"
         Text      item=sf12_Humid  label="Giochi: Umidità"
       }
-      Frame label="Riscaldamento" {
-        Switch    item=tsGiochi
-        Setpoint  item=tsGiochiSp  minValue=16  maxValue=20 step=0.5
-        Setpoint  item=tsGiochiHs  minValue=0   maxValue=2  step=0.1
-      }
-      Frame label="Condizionatore" {
-        Switch    item=climaGiochi_Power_API  icon=climate  label="Clima Giochi API"
-	Setpoint  item=climaGiochi_Temp_API   minValue=16  maxValue=30 step=1
-	Selection item=climaGiochi_Fan_API    mappings=[0="Auto", 5="Very Low", 6="Low", 7="Mid", 8="High", 9="Very High"]
-        Text      item=shelly07_Power         icon=energy
-        Switch    item=climaGiochi_Power      icon=climate  label="Clima Giochi Alexa"
-	Switch    item=shelly07_R1            icon=energy
+      Frame label="Condizionatore Sala Giochi" {
+        Switch    item=cl02_power     icon=climate      
+	Setpoint  item=cl02_temp      icon=temperature  minValue=16 maxValue=32 step=1
+	Selection item=cl02_fan_speed icon=fan          mappings=["0"="Auto", "5"="Super Low", "6"="Low", "7"="Medium", "8"="High", "9"="Super High"]
+	Switch    item=cl02_fan_mute  icon=microphone
+        Text      item=shelly07_Power icon=settings     label="Extra Settings" {
+	  Frame label="Mode" {
+	    Switch    item=cl02_work_mode icon=settings     mappings=["0"="Fan", "1"="Heat", "2"="Cool", "3"="Dry", "4"="Auto"]
+	  }
+	  Frame label="Settings" {
+	    Switch    item=cl02_up_down   icon=flow
+	    Switch    item=cl02_beep      icon=soundvolume
+	    Switch    item=cl02_eco       icon=garden
+	    Switch    item=cl02_super     icon=pump
+	  }
+	  Frame label="Power" {
+	    Text      item=shelly07_Power icon=energy
+            Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
+	  }
+	  Frame label="Alexa API" {
+	    Switch    item=cl02_a_power	icon=switch
+	    Text      item=cl02_a_temp	icon=temperature
+	  }
+	}
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature label="Bologna"      icon="vacation"
@@ -840,6 +888,41 @@ sitemap default label="Casa"
 
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Studio
+
+    Text item=sf08_Temp label="Officina" icon=office {
+      Frame label="Condizionatore Officina" {
+        Switch    item=cl01_power     icon=climate      
+	Setpoint  item=cl01_temp      icon=temperature  minValue=16 maxValue=32 step=1
+	Selection item=cl01_fan_speed icon=fan          mappings=["0"="Auto", "5"="Super Low", "6"="Low", "7"="Medium", "8"="High", "9"="Super High"]
+	Switch    item=cl01_fan_mute  icon=microphone
+        Text      item=shelly07_Power icon=settings     label="Extra Settings" {
+	  Frame label="Mode" {
+	    Switch    item=cl01_work_mode icon=settings     mappings=["0"="Fan", "1"="Heat", "2"="Cool", "3"="Dry", "4"="Auto"]
+	  }
+	  Frame label="Settings" {
+	    Switch    item=cl01_up_down   icon=flow
+	    Switch    item=cl01_beep      icon=soundvolume
+	    Switch    item=cl01_eco       icon=garden
+	    Switch    item=cl01_super     icon=pump
+	  }
+	  Frame label="Power" {
+	    Text      item=shelly07_Power icon=energy
+            Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
+	  }
+	  Frame label="Alexa API" {
+	    Switch    item=cl01_a_power	icon=switch
+	    Text      item=cl01_a_temp	icon=temperature
+	  }
+	}
+      }
+      Frame label="Comfort" {
+        Text      item=sf08_Temp   label="Officina: Temperatura"
+        Text      item=sf08_Humid  label="Officina: Umidità"
+      }
+      Frame label="Outside" {
+        Text      item=faikin01_outside icon=garden        label="Terrazzo Davanti [%.1f °C]"
+      }
+    }
 
     Text item=sf20_Temp label="Bagno P1" icon=toilet {
       Frame label="Comfort" {

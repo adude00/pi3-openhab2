@@ -1,0 +1,1 @@
+curl -s http://zero1:8000/api/devices/pu000098650051000200030003000000f7f60bc1a3a -H "Content-Type: application/json" -d '{"t_temp":24, "t_beep":0, "t_fan_mute":1, "t_super":0, "t_eco":1, "t_up_down":0}'

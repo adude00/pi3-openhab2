@@ -7,6 +7,19 @@ rule "Reset Termostato Giochi items at boot"
     logInfo("tsGiochiWait","System started: Turning off tsGiochiWait and tsGiochiRunning")
 end
 
+rule "Termostato Giochi AutoON"
+  when
+    Item cl02_power changed from OFF to ON or
+    Item cl02_a_power changed from OFF to ON
+  then
+    if ( tsGiochiAutoON == ON && tsGiochi == OFF ) {
+      createTimer(now.plusSeconds(2), [|
+        tsGiochi.sendCommand(ON)
+        logInfo("tsGiochiWait","Aircon ON. Termostato OFF. tsGiochiAutoON=ON: accendo Termostato.")
+      ])
+    }
+end
+
 rule "Termostato Giochi ON - Setting startup Temp"
   when
     Item tsGiochi changed from OFF to ON

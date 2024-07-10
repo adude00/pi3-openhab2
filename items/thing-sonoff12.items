@@ -2,17 +2,13 @@ Group t_sonoff12      "sonoff12: Giochi"
 
 // ITEM SPECIFIC
 // Switch             sf12_Switch "sf12_Switch"                 <light>        [ "Lighting" ]             {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
-Number:Temperature    sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,gGraph,gChartGiochiT)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
-Number:Dimensionless  sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,gGraph,gChartGiochiH)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
+Number  	sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,gGraph,gChartGiochiT)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
+Number  	sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,gGraph,gChartGiochiH)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
 
 
 // DEFAULT FOR ALL
 // device specific properties
 Switch               sonoff12_switch        "sonoff12 Switch"                <poweroutlet> (t_sonoff,t_sonoff12,gSwitch)    {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
-Number:Temperature   sonoff12_Temp          "sonoff12 Temperature [%.1f °C]" <temperature> (t_sonoff,t_sonoff12,gTemp)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
-Number:Dimensionless sonoff12_Humi          "sonoff12 Humidity [%.1f %%]"       <humidity> (t_sonoff,t_sonoff12,gHumd)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
-
-//Number:Power       sonoff12_Power         "Power [%.1f W]"                      <energy> (t_sonoff,t_sonoff12,gPower)     {channel="mqtt:topic:tasmota:sonoff12:Power"}
 
 // Tasmota Status
 String               sonoff12_Refresh       "sonoff12 Time [%s]"                   <clock> (t_sonoff,t_sonoff12,gTime)      {channel="mqtt:topic:tasmota:sonoff12:Time"}
