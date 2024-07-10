@@ -344,10 +344,13 @@ sitemap default label="Casa"
 
       Frame label="A/C Control" {
         Switch    item=faikin02_power
-        Selection item=faikin02_mode    mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
         Selection item=faikin02_fan     mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
         Setpoint  item=faikin02_temp    label="Setpoint" minValue=16 maxValue=32 step=0.5
         Text      item=faikin02_fanrpm  label="Extra Settings" icon=settings { 
+	  Frame label="Mode" {
+            Selection item=faikin02_mode    mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
+	  }
+	  Frame label="Options" {
         	Switch    item=faikin02_swingv   
         	Switch    item=faikin02_swingh   
         	Switch    item=faikin02_econo    
@@ -355,6 +358,7 @@ sitemap default label="Casa"
         	Switch    item=faikin02_streamer
         	Switch    item=faikin02_quiet
 		Switch    item=faikin02_AutoQuiet
+	  }
 	}
 
         Text      item=pow03_Power label="Dettagli Tecnici: [%.0f W]" icon=pump {
