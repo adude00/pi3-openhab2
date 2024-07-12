@@ -1,53 +1,30 @@
 rule "faikin01 all"
 when 
-	Member of g_faikin01_cmd_wait received command
+	Member of g_faikin01_cmd received command
 then
 	var String command
+	var String translation
 
-	var boolean power
-	var boolean swingv
-	var boolean econo
-	var boolean powerful
-
-        createTimer(now.plusSeconds(1), [|
-
-		// Calculate boolean for ON/OFF items
-		if ( faikin01_power.state  == ON )    { power = true }   else { power = false }
-		if ( faikin01_swingv.state  == ON )   { swingv = true }  else { swingv = false }
-		if ( faikin01_econo.state  == ON )    { econo = true }   else { econo = false }
-		if ( faikin01_powerful.state  == ON ) { powerful = true} else { powerful = false }
-
-	        command = "{ \"power\":" + power + ", \"mode\":\""+ faikin01_mode.state + "\", \"temp\":" + faikin01_temp.state +", \"fan\":\""+ faikin01_fan.state +"\", \"econo\":" + econo + ", \"swingv\":" + swingv + ", \"powerful\":" + powerful +" }"
+	if ( receivedCommand == ON ) translation = "true"
+	if ( receivedCommand == OFF ) translation = "false"
+	//logInfo("faikin01 DEBUG","Item: " + triggeringItem.name + " - Command: " + receivedCommand + " - Translation: " + translation )
 	
-	        logInfo("faikin01 ALL",command)        
+	// ORIGINAL COMMAND
+	if ( triggeringItem.name == "faikin01_temp" )     command = "{ \"temp\":"+ receivedCommand +" }"
+	if ( triggeringItem.name == "faikin01_fan" )      command = "{ \"fan\":\""+ receivedCommand + "\" }"
+	if ( triggeringItem.name == "faikin01_mode" )     command = "{ \"mode\":\""+ receivedCommand + "\" }"
+	// TRANSLATED true/false 
+	if ( triggeringItem.name == "faikin01_power" )    command = "{ \"power\":"+ translation +" }"
+	if ( triggeringItem.name == "faikin01_econo" )    command = "{ \"econo\":"+ translation +" }"
+	if ( triggeringItem.name == "faikin01_swingv" )   command = "{ \"swingv\":"+ translation +" }"
+	if ( triggeringItem.name == "faikin01_powerful" ) command = "{ \"powerful\":"+ translation +" }"
+
+
+	logInfo("faikin01 command",command)        
  
-	        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
-		actionsBroker.publishMQTT( "command/faikin01/control", command )
+	var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "command/faikin01/control", command )
 
-	])
-end
-
-
-rule "faikin01 swingv ON"
-when
-        Item faikin01_swingv received command ON
-then
-        var String command
-        command = "{ \"swingv\": true }"
-        logInfo("faikin01 swingv ON",command)
-        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
-        actionsBroker.publishMQTT( "command/faikin01/control", command )
-
-end
-rule "faikin01 swingv OFF"
-when
-        Item faikin01_swingv received command OFF
-then
-        var String command
-        command = "{ \"swingv\": false }"
-        logInfo("faikin01 swingv OFF",command)
-        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
-        actionsBroker.publishMQTT( "command/faikin01/control", command )
 end
 
 
@@ -56,7 +33,7 @@ when
         Item faikin01_power received command ON
 then
         if (faikin01_AutoQuiet.state == ON) {
-		createTimer(now.plusSeconds(3), [|
+		createTimer(now.plusSeconds(5), [|
 			faikin01_fan.sendCommand("Q")
                 	logInfo("faikin01 AutoQuiet","Quiet mode abilitato")
 		])	

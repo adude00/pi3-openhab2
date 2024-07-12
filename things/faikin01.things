@@ -6,14 +6,14 @@ Thing mqtt:topic:Faikin:faikin01 "faikin01_Thing" (mqtt:broker:brokerv2) {
         Type number   : temp		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.temp"]
 
 	// Faikin - si aggiorna SOLO ogni minuto
-        Type number   : home    	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.home[0]"]
-        Type number   : fanrpm  	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.fanrpm[0]"]
-        Type number   : comp    	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.comp[0]"]
-        Type number   : outside 	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.outside[0]"]
-        Type number   : liquid  	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.liquid[0]"]
-        Type number   : anglev   	[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.anglev[0]"]
-        Type number   : demand		[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.demand[0]"]
-        Type number   : Wh		[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.Wh[0]"]
+        Type number   : home    	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.home"]
+        Type number   : fanrpm  	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.fanrpm"]
+        Type number   : comp    	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.comp"]
+        Type number   : outside 	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.outside"]
+        Type number   : liquid  	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.liquid"]
+        Type number   : anglev   	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.anglev"]
+        Type number   : demand		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.demand"]
+        Type number   : Wh		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.Wh"]
 
         // Strings
         Type string   : fan		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.fan"]

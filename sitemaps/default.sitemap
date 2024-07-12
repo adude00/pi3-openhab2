@@ -776,25 +776,39 @@ sitemap default label="Casa"
     Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
       Frame label="A/C Manual" {
         Switch    item=faikin01_power
-	Selection item=faikin01_mode 	mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
 	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
 	Setpoint  item=faikin01_temp 	label="Setpoint" minValue=16 maxValue=32 step=0.5
-	Switch    item=faikin01_swingv   
-	Switch    item=faikin01_econo    
-	Switch    item=faikin01_powerful
-	Switch    item=faikin01_AutoQuiet
-	Text      item=shelly01_Power  	label="Power" icon=energy 
-      }
 
-      Frame label="Faikin Data" {
-		Text item=faikin01_fanrpm   label="Fan speed"
+        Text item=faikin01_fanrpm   label="Extra Settings" icon=settings {
+	  Frame label="Mode" {
+	    Selection item=faikin01_mode 	mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
+	  }
+	  Frame label="A/C Options" {
+	    Switch    item=faikin01_swingv   
+	    Switch    item=faikin01_econo    
+	    Switch    item=faikin01_powerful
+	  }
+          Frame label="System Options" {
+	    Switch    item=faikin01_AutoQuiet
+	  }
+	}
+
+	Text      item=shelly01_Power  	label="Extra Data" icon=chart { 
+          Frame label="Faikin Data" {
+		Text item=faikin01_fanrpm   label="Fan speed" icon=wind
 		Text item=faikin01_anglev   label="Fan angle" 
 		Text item=faikin01_liquid   label="Coolant Temperature"
 		Text item=faikin01_comp     label="Compressor usage"
 		Text item=faikin01_demand   label="Max Power allowed" 
-		Text item=faikin01_Wh       label="Total Energy used"
 		Text item=faikin01_ts       label="Last update"
 		Text item=faikin01_home     label="Split Temperature"
+          }
+	  Frame label="Energy usage" {
+	    Text item=shelly01_Power  label="Power"                      icon=energy
+	    Text item=faikin01_Wh     label="Total Energy reported used" icon=chart
+	  }
+	}
+
       }
 
       Frame label="Comfort" {
