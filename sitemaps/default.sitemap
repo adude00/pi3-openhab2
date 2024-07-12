@@ -387,10 +387,10 @@ sitemap default label="Casa"
         Selection item=faikin02_fan     mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
         Setpoint  item=faikin02_temp    label="Setpoint" minValue=16 maxValue=32 step=0.5
         Text      item=faikin02_fanrpm  label="Extra Settings" icon=settings { 
-	  Frame label="Mode" {
+	  Frame label="A/C Mode" {
             Selection item=faikin02_mode    mappings=["H"="Heat", "C"="Cool", "D"="Dry", "A"="Auto", "F"="Fan"]
 	  }
-	  Frame label="Options" {
+	  Frame label="A/C Options" {
         	Switch    item=faikin02_swingv   
         	Switch    item=faikin02_swingh   
         	Switch    item=faikin02_econo    
@@ -401,19 +401,24 @@ sitemap default label="Casa"
 	  }
 	}
 
-        Text      item=pow03_Power label="Dettagli Tecnici: [%.0f W]" icon=pump {
-          Frame label="Faikin Data" {
-		Text item=pow03_Power       label="Power: [%.0f W]" icon=energy
-                Text item=faikin02_comp     label="Compressor usage"
-                Text item=faikin02_liquid   label="Coolant Temperature"
-                Text item=faikin02_fanrpm   label="Fan speed"
-                Text item=faikin02_anglev   label="Fan angle" 
-                Text item=faikin02_demand   label="Max Power allowed" 
-                Text item=faikin02_Wh       label="Total Energy used"
-                Text item=faikin02_ts       label="Last update"
-                Text item=faikin02_home     label="Split Temperature"
-                Text item=faikin02_outside  label="Outside Temperature"
+        Text item=pow03_Power label="Extra Data" icon=chart {
+          Frame label="Temperature" {
+            Text item=Casa_Temperature_AVG
           }
+          Frame label="Faikin Data" {
+            Text item=faikin02_fanrpm   label="Fan speed"
+            Text item=faikin02_anglev   label="Fan angle" 
+            Text item=faikin02_liquid   label="Coolant Temperature"
+            Text item=faikin02_comp     label="Compressor usage"
+            Text item=faikin02_demand   label="Max Power allowed" 
+            Text item=faikin02_home     label="Split Temperature"
+            Text item=faikin02_outside  label="Outside Temperature"
+          }
+          Frame label="Energy usage" {
+	    Text item=pow03_Power       label="Power"
+            Text item=faikin02_Wh       label="Total Energy used"
+            Text item=faikin02_ts       label="Last update"
+	  }
 	}
       }
 
@@ -793,18 +798,19 @@ sitemap default label="Casa"
 	  }
 	}
 
-	Text      item=shelly01_Power  	label="Extra Data" icon=chart { 
+	Text item=shelly01_Power 	label="Extra Data" icon=chart { 
           Frame label="Faikin Data" {
 		Text item=faikin01_fanrpm   label="Fan speed" icon=wind
 		Text item=faikin01_anglev   label="Fan angle" 
 		Text item=faikin01_liquid   label="Coolant Temperature"
 		Text item=faikin01_comp     label="Compressor usage"
 		Text item=faikin01_demand   label="Max Power allowed" 
-		Text item=faikin01_ts       label="Last update"
 		Text item=faikin01_home     label="Split Temperature"
+		Text item=faikin01_outside  label="Outside Temperature"
           }
 	  Frame label="Energy usage" {
 	    Text item=shelly01_Power  label="Power"                      icon=energy
+	    Text item=faikin01_ts     label="Last update"
 	    Text item=faikin01_Wh     label="Total Energy reported used" icon=chart
 	  }
 	}

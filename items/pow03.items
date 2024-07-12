@@ -9,7 +9,7 @@ Switch pow03_Switch "Pow03: Clima Soggiorno" <flow> (pow03,gTuya,sonoff)
 
 // POWER
 
-Number pow03_Power     "PdC Lvrm Power [%.1f W]"          <voltage>       (pow03,gTuya,gWatt,Casa_Consumi_Chart) 
+Number pow03_Power     "PdC Lvrm Power [%.1f W]"          <energy>       (pow03,gTuya,gWatt,Casa_Consumi_Chart) 
     { mqtt="<[broker:tele/pow03/SENSOR:state:JSONPATH($.ENERGY.Power)]" }
 
 Number pow03_AppPower  "Pow 03: Line Apparent Power [%.3f VA]"     <current>       (pow03,gTuya,gVa)

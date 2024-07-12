@@ -2,10 +2,8 @@
 Thing mqtt:topic:Faikin:faikin01 "faikin01_Thing" (mqtt:broker:brokerv2) {
     Channels:
 
-        // State - si aggiorna SOLO ad ogni cambio di stato
+        // State - si aggiorna SOLO ad ogni cambio di stato - livestatus=ON
         Type number   : temp		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.temp"]
-
-	// Faikin - si aggiorna SOLO ogni minuto
         Type number   : home    	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.home"]
         Type number   : fanrpm  	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.fanrpm"]
         Type number   : comp    	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.comp"]
@@ -14,18 +12,16 @@ Thing mqtt:topic:Faikin:faikin01 "faikin01_Thing" (mqtt:broker:brokerv2) {
         Type number   : anglev   	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.anglev"]
         Type number   : demand		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.demand"]
         Type number   : Wh		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.Wh"]
-
-        // Strings
         Type string   : fan		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.fan"]
         Type string   : mode		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.mode"]
-        Type string   : ts		[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.ts"]
+
+        // Faikin - si aggiorna SOLO ogni minuto
+	Type string   : ts		[stateTopic="Faikin/faikin01",  transformationPattern="JSONPATH:$.ts"]
 
 	// Switch (like a string)
-        Type switch   : power           [stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.power", on="true", off="false"]
-        Type switch   : swingv		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.swingv", on="true", off="false"]
-        Type switch   : econo		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.econo", on="true", off="false"]
+        Type switch   : power           [stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.power",    on="true", off="false"]
+        Type switch   : swingv		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.swingv",   on="true", off="false"]
+        Type switch   : econo		[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.econo",    on="true", off="false"]
         Type switch   : powerful	[stateTopic="state/faikin01/status",  transformationPattern="JSONPATH:$.powerful", on="true", off="false"]
-
-
 
 } 
