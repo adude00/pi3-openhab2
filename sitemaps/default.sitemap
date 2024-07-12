@@ -190,13 +190,18 @@ sitemap default label="Casa"
     } // CHIUSO TEXT "Devices"
 
     Text label="IP Cameras" icon="camera" {
-      Switch item=sf03_Switch
+      Frame label="2P" {
+        Switch item=sf03_Switch
 			// Camera 1
 			Selection item=Camera1_View mappings=[0='1: Soggiorno', 1='2: Divano', 2='3: Scrivania', 3='4: Finestra', 4='5: Ingresso', 5='6: AC', 6='7: Cane', 7='8: Soffitto']
 			Switch item=Camera1_Record 
 			// Camera 2
 			Selection item=Camera2_View mappings=[0='1: Ingresso', 1='2: Pavimento Ingresso', 2='3: Cucina', 3='4: Pavimento Tinello', 4='5: Tavolo', 5='6: Divano', 6='7: AC', 7='8: Soffitto']
-      Switch item=Camera2_Record
+        Switch item=Camera2_Record
+      }
+      Frame label="1P" {
+	Switch item=sf12_Switch
+      }
     }
   } // Chiuso Frame Things
 
@@ -337,10 +342,45 @@ sitemap default label="Casa"
 
   Frame label="Temperature P2" {
     Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
-      Frame label="A/C Auto"  {
-        Switch    item=tsSoggiorno            label="Termostato"
-        Setpoint  item=spSoggiorno minValue=17  maxValue=29 step=0.1
-      }
+      Frame label="Termostato" {
+        Switch    item=tsSoggiorno
+        Text      item=spSoggiorno {
+
+          // Thermostat Page
+          Frame label="Temperature" {
+            Text item=Casa_Temperature_AVG 
+          }
+          Frame label="Thermostat" {
+            Switch    item=tsSoggiorno
+            Setpoint  item=spSoggiorno minValue=17    maxValue=29 step=0.1
+          }
+
+          Frame label="A/C Auto Conf" {
+            Setpoint  item=hsSoggiorno minValue=0     maxValue=3  step=0.1           icon=settings
+            Setpoint  item=tsSoggiornoWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
+            Setpoint  item=tsSoggiornoWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
+            Setpoint  item=tsSoggiornoWaitStep        minValue=1  maxValue=3  step=1  icon=line
+            Switch    item=tsSoggiornoStartupTempON 
+            Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
+            Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
+            Switch    item=tsSoggiornoOverride        icon=settings
+          }
+
+          Frame label="Extra" {
+            Selection item=tsSoggiornoType          label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
+            Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
+          }
+
+          Frame label="A/C Auto DEBUG"  {
+            Switch    item=tsSoggiornoWait
+            Setpoint  item=tsSoggiornoWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
+            Switch    item=tsSoggiornoWaitDebug
+            Switch    item=tsSoggiornoRunning
+            Switch    item=pow03_Switch
+          }
+
+        } //Chiuso text spSoggiorno
+      } // Chiuso frame Termostato
 
       Frame label="A/C Control" {
         Switch    item=faikin02_power
@@ -415,26 +455,6 @@ sitemap default label="Casa"
         Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
       }
 
-      Frame label="A/C Auto Conf" {
-        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
-        Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
-        Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1              icon=settings
-        Setpoint item=tsSoggiornoWaitMaxTemp    minValue=10 maxValue=31 step=0.5  icon=flowpipe
-        Setpoint item=tsSoggiornoWaitMinTemp    minValue=10 maxValue=31 step=0.5  icon=returnpipe
-        Setpoint item=tsSoggiornoWaitStep       minValue=0.5 maxValue=3 step=0.5  icon=line
-        Switch    item=tsSoggiornoStartupTempON 
-        Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
-	Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
-	Switch    item=tsSoggiornoOverride	  icon=settings
-      }
-
-      Frame label="A/C Auto DEBUG"  {
-	Switch    item=tsSoggiornoWait
-        Setpoint  item=tsSoggiornoWaitMins	  label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
-	Switch    item=tsSoggiornoWaitDebug
-	Switch    item=tsSoggiornoRunning
-        Switch    item=pow03_Switch
-      }
 
     } // Chiuso Text Soggiorno Clima
 
@@ -1522,66 +1542,7 @@ sitemap default label="Casa"
       Switch    item=cl_restart mappings=[0="Restart Cloud"]
       Switch    item=sw_restart mappings=[0="Restart"]
       Switch    item=pi_restart mappings=[0="Reboot"]
-      Switch    item=alexa_test_giochi_20
-      Switch    item=climaGiochi_Power
-      //Setpoint  item=climaGiochi_Temp  minValue=16  maxValue=30
-      //Selection item=climaGiochi_setPoint  mappings=[16="16", 17="17", 18="18", 19="19", 20="20", 21="21", 22="22"]
-      //Selection item=climaGiochi_setPoint  mappings=[16.0="16.0", 17.0="17.0", 18.0="18.0", 19.0="19.0", 20.0="20.0", 21.0="21.0", 22.0="22.0"]
-      Text      item=climaGiochi_Temp
     }
-    Text item=Air_Conditioner_Temperature label="Soggiorno Clima: [MAP(ac.map):%s]" {
-      Frame label="A/C Manual"  {
-        Selection item=Air_Conditioner_Temperature mappings=[10.0='OFF', 17.0='17', 18.0='18', 19.0='19', 20.0='20', 21.0='21', 22.0='22', 23.0='23', 24.0='24', 25.0='25', 26.0='26', 27.0='27', 28.0='28', 29.0='29', 30.0='30', 31.0='30 Turbo']
-        Switch item=Air_Conditioner_Mode mappings=[cool='COLD', heat='HOT', off='OFF']
-        Switch item=Air_Conditioner_Screen
-        Switch item=Air_Conditioner_Fan mappings=[1='Low', 3='Med', 5='High', Auto='Auto']
-	Selection item=Air_Conditioner_Airdir mappings=[1='1 Airdir', 2='2 Airdir', 3='3 Airdir', 4='4 Airdir', 5='5 Airdir', 6='6 Airdir', 7='7 Airdir', 8='8 Airdir', 9='1+8 Airdir', 10='2+8 Airdir', 11='3+8 Airdir', 12='4+8 Airdir', 13='5+8 Airdir', 14='6+8 Airdir', 15='7+8 Airdir'] icon=flow
-	Switch item=Air_Conditioner_Swing icon=wind
-      }
-      Frame label="A/C Auto"  {
-        Switch    item=tsSoggiorno            label="Termostato"
-	Switch    item=tsSoggiornoAutoON      label="Auto ON on SetPoint" icon=settings
-        Selection item=tsSoggiornoType        label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
-        Text      item=avgSoggiornoAvg        label="Media 30min"    icon=flow
-        Text      item=Casa_Temperature_AVG   label="Istantanea"     icon=house
-        Text      item=sf04_Temp              label="Divano"         icon=sofa
-        Setpoint  item=spSoggiorno minValue=17  maxValue=29 step=0.1
-        Setpoint  item=hsSoggiorno minValue=0   maxValue=3  step=0.1
-        Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
-        Selection item=tsSoggiornoWaitMaxTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        Selection item=tsSoggiornoWaitMinTemp   mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-
-      }
-
-      Frame label="Grafici " {
-	Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
-
-        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-        // Potenza Pompa
-        Chart  item=pow03_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=pow03_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=pow03_Power period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=pow03_Power period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=pow03_Power period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=pow03_Power period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=pow03_Power period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=pow03_Power period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=pow03_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=pow03_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
-      }
-
-      Frame label="A/C Auto DEBUG"  {
-        Switch    item=tsSoggiornoBagnetto      icon=bath
-	Switch    item=tsSoggiornoOverride	icon=settings
-        Selection  item=acPSoggiorno           mappings=[0='0: OFF / 20C', 1='1: 17C / 23C', 2='2: 18C / 24C', 3='3: 19C / 25C', 4='4: 20C / 26C', 5='5: 21C / 27C', 6='6: 23C / 28C', 7='7: 30C / 30C', 8='8: 30 Turbo / OFF']
-        Setpoint  item=acPSoggiorno            maxValue=8  minValue=0
-	Switch    item=tsSoggiornoWait
-        Setpoint  item=tsSoggiornoWaitMins	label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=5
-	Switch    item=tsSoggiornoWaitDebug
-        Switch item=pow03_Switch
-      }
-
-    } // Chiuso Text Soggiorno Clima
 
   } // CHIUSO FRAME DEBUG
 

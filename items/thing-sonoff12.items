@@ -1,14 +1,14 @@
 Group t_sonoff12      "sonoff12: Giochi"
 
 // ITEM SPECIFIC
-// Switch             sf12_Switch "sf12_Switch"                 <light>        [ "Lighting" ]             {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
-Number  	sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,gGraph,gChartGiochiT)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
-Number  	sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,gGraph,gChartGiochiH)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
+Switch          sf12_Switch "Telecamere 1P"           <camera>       (t_sonoff,t_sonoff12,gSwitch)      [ "Switchable" ]     {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
+Number  	sf12_Temp   "Temp. Giochi [%.1f °C]"  <temperature>  (gTemp,gGraph,t_sonoff12,gChartGiochiT)      {channel="mqtt:topic:tasmota:sonoff12:Temperature"}
+Number  	sf12_Humid  "Umid. Giochi [%.1f %%]"  <humidity>     (gHumd,gGraph,t_sonoff12,gChartGiochiH)      {channel="mqtt:topic:tasmota:sonoff12:Humidity"}
 
 
 // DEFAULT FOR ALL
 // device specific properties
-Switch               sonoff12_switch        "sonoff12 Switch"                <poweroutlet> (t_sonoff,t_sonoff12,gSwitch)    {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
+//Switch               sonoff12_switch        "Telecamere 1P"                <camera> (t_sonoff,t_sonoff12,gSwitch)    {channel="mqtt:topic:tasmota:sonoff12:PowerSwitch"}
 
 // Tasmota Status
 String               sonoff12_Refresh       "sonoff12 Time [%s]"                   <clock> (t_sonoff,t_sonoff12,gTime)      {channel="mqtt:topic:tasmota:sonoff12:Time"}
