@@ -1,0 +1,20 @@
+Group gTermoOfficina
+
+Switch tsOfficina  "Termostato Officina"                        (gTermoOfficina,gRestore) [ "Switchable" ]
+Number spOfficina  "Setpoint Officina [%.1f °C]"  <smiley>      (gTermoOfficina) 
+Number hsOfficina  "Isteresi Officina [%.1f °C]"  <flowpipe>    (gTermoOfficina)
+Switch tsOfficinaOverride  "Override OFF Thermostat"
+
+
+Switch tsOfficinaWait 		"Ts is Waiting..."		<lock> (gTermoOfficina)
+Switch tsOfficinaRunning	"Ts is Running..."		<lock> (gTermoOfficina)
+Number tsOfficinaWaitMins	"Minutes to Wait"		<time> (gTermoOfficina)
+Number tsOfficinaWaitMaxTemp	"Temperatura Massima [%.1f °C]"		<temperature_hot> (gTermoOfficina)
+Number tsOfficinaWaitMinTemp	"Temperatura Minima [%.1f °C]"		<temperature_hot> (gTermoOfficina)
+Number tsOfficinaWaitStep	"Step [%.1f °C]"		<temperature_hot> (gTermoOfficina)
+Switch tsOfficinaWaitDebug      "LOG Verbosi"              	<text> (gTermoOfficina)
+Switch tsOfficinaAutoON         "Auto ON on"        	<text> (gTermoOfficina)
+
+
+Number tsOfficinaStartupTemp    "Temp Accensione [%.1f °C]"     <heating>
+Switch tsOfficinaStartupTempON  "Imposta Startup Temp"

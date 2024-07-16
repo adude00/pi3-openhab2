@@ -2,6 +2,22 @@ rule "Calculate Boiler Percentage boh"
   when
     Item tuya05_Power changed
   then
+    //logInfo("Boiler DEBUG:","tuya05_Power: " + tuya05_Power.state)
+
+    // CHARGING
+    if ( tuya05_Power.state >= 300 ) {
+
+      //logInfo("Boiler DEBUG:","Charging, tuya05_Power.state >= 300 : " + tuya05_Power.state + "W")
+
+      // Formula calcolo percentuale
+      Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
+      logInfo("Boiler","Scrivo percentuale: " + ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number + "%")
+    }
+
+    //if (previousState >= 100 && tuya05_Power.state <= 60 ) {
+    //  pushNotification("BOILER: Off", "Il Boiler è carico.")
+    //}
+
     // FULL
     if (previousState >= 440 && tuya05_Power.state < 370 ) {
       //Boiler_Percentage.postUpdate(100)
@@ -20,19 +36,6 @@ rule "Calculate Boiler Percentage boh"
       ])
     }
 
-    // CHARGING
-    if ( tuya05_Power.state >= 300 ) {
-
-      logInfo("Boiler","State: " + tuya05_Power.state + "W")
-
-      // Formula calcolo percentuale
-      Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
-      logInfo("Boiler","Scrivo percentuale: " + ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number + "%")
-    }
-
-    //if (previousState >= 100 && tuya05_Power.state <= 60 ) {
-    //  pushNotification("BOILER: Off", "Il Boiler è carico.")
-    //}
     if (previousState <= 1000 && tuya05_Power.state > 1000 ) {
       pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
     }
