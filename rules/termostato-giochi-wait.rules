@@ -12,7 +12,7 @@ rule "Termostato Giochi AutoON"
     Item cl02_power changed from OFF to ON or
     Item cl02_a_power changed from OFF to ON
   then
-    if ( tsGiochiAutoON == ON && tsGiochi == OFF ) {
+    if ( tsGiochiAutoON.state == ON && tsGiochi.state == OFF ) {
       createTimer(now.plusSeconds(2), [|
         tsGiochi.sendCommand(ON)
         logInfo("tsGiochiWait","Aircon ON. Termostato OFF. tsGiochiAutoON=ON: accendo Termostato.")
@@ -70,31 +70,32 @@ then
   waitRnd = (Math::random * 10.0).intValue + 1
   createTimer(now.plusSeconds(waitRnd),  [ |
 
-  // MAKE SURE WE ARE NOT RUNNING
-  if ( tsGiochiRunning.state == OFF ) {
+  // MAKE SURE WE ARE NOT RUNNING and tsGiochi = ON
+  if ( tsGiochiRunning.state == OFF && tsGiochi.state == ON ) {
     // FIRST THING FIRST - WE ARE RUNNING
     tsGiochiRunning.sendCommand(ON)
     if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: RULE Started")
 
     var Number acTemp
     acTemp = cl02_temp.state as Number
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTemp: " + acTemp)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTemp: " + acTemp)
 
     var Number acTempMax  = tsGiochiWaitMaxTemp.state as DecimalType
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempMax: " + acTempMax)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempMax: " + acTempMax)
 
     var Number acTempMin  = tsGiochiWaitMinTemp.state as DecimalType
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempMin " + acTempMin)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempMin " + acTempMin)
 
     var Number acTempStep = tsGiochiWaitStep.state as Number
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempStep: " + acTempStep)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTempStep: " + acTempStep)
 
     var Number tolGiochi  = hsGiochi.state
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: tolGiochi: " + tolGiochi)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: tolGiochi: " + tolGiochi)
 
     var Number setpoint   = spGiochi.state
-    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: setpoint: " + setpoint)
+    //if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: setpoint: " + setpoint)
 
+    if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG: acTemp: " + acTemp + " - setpoint: " + setpoint + " - acTempMax: " + acTempMax + " - acTempMin " + acTempMin + " - acTempStep: " + acTempStep + " - tolGiochi: " + tolGiochi + " - ")
 
     // Temp to check against
     var Number cur_temp = sf12_Temp.state
@@ -145,6 +146,18 @@ then
                 acTemp = acTemp + acTempStep
                 cl02_temp.sendCommand(acTemp)
                 if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Increasing acTemp to " + acTemp)
+
+		  // tsGiochiPowerCheck START
+		  createTimer(now.plusSeconds(20),  [ |
+		    if (shelly07_Power.state > 40 && tsGiochiPowerCheck.state == ON ) {
+		      if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG tsGiochiPowerCheck - cooling: TOO COLD! Increasing again, compressor still running!")
+		      acTemp = acTemp + acTempStep
+		      cl02_temp.sendCommand(acTemp)
+		      if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Increasing acTemp to " + acTemp)
+		    }
+		  ])
+		  // tsGiochiPowerCheck END
+
               } else {
                 if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
               }
@@ -237,9 +250,21 @@ then
 	        cl02_power.sendCommand(ON)
 	        if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: Aircon was OFF. Turning it ON!")
 	      }
+
+              // tsGiochiPowerCheck START
+              createTimer(now.plusSeconds(20),  [ |
+                if (shelly07_Power.state < 40 && tsGiochiPowerCheck.state == ON ) {
+                  if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG tsGiochiPowerCheck - cooling: TOO HOT! Decreasing temp again, compressor still NOT running!")
+                  acTemp = acTemp - acTempStep
+                  cl02_temp.sendCommand(acTemp)
+                  if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Decreasing acTemp to " + acTemp)
+                }
+              ])
+              // tsGiochiPowerCheck END
+
 	    } else {
-	      // MAX POWER REACHED
-              if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
+	      // MIN TEMP REACHED
+              if (tsGiochiWaitDebug.state == ON ) logInfo("tsGiochiWait","DEBUG - cooling: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached acTempMin: " + acTempMin )
 	    }
 
 	  } // IF COOLING CLOSED

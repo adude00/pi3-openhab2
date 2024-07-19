@@ -687,9 +687,10 @@ sitemap default label="Casa"
             Setpoint  item=tsGiochiWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
             Setpoint  item=tsGiochiWaitStep        minValue=1  maxValue=3  step=1  icon=line
             Switch    item=tsGiochiStartupTempON 
-            Setpoint  item=tsGiochiStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsGiochiStartupTempON==ON]
+            Setpoint  item=tsGiochiStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsGiochiStartupTempON==ON]
             Switch    item=tsGiochiAutoON          label="Auto ON on SetPoint" icon=settings
             Switch    item=tsGiochiOverride        icon=settings
+	    Switch    item=tsGiochiPowerCheck
           }
 
           Frame label="A/C Auto DEBUG"  {
@@ -934,6 +935,47 @@ sitemap default label="Casa"
     } // CHIUSO Text Studio
 
     Text item=sf08_Temp label="Officina" icon=office {
+      Frame label="Termostato" {
+	Switch    item=tsOfficina
+	Text      item=spOfficina {
+
+	  // Thermostat Page
+	  Frame label="Temperature" {
+	    Text item=sf08_Temp 
+	  }
+	  Frame label="Thermostat" {
+            Switch    item=tsOfficina
+	    Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.2
+	  }
+
+          Frame label="A/C Auto Conf" {
+            Setpoint  item=hsOfficina minValue=0     maxValue=3  step=0.1           icon=settings
+            Setpoint  item=tsOfficinaWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
+            Setpoint  item=tsOfficinaWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
+            Setpoint  item=tsOfficinaWaitStep        minValue=1  maxValue=3  step=1  icon=line
+            Switch    item=tsOfficinaStartupTempON 
+            Setpoint  item=tsOfficinaStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsOfficinaStartupTempON==ON]
+            Switch    item=tsOfficinaAutoON          label="Auto ON on SetPoint" icon=settings
+            Switch    item=tsOfficinaOverride        icon=settings
+            Switch    item=tsOfficinaPowerCheck      
+          }
+
+          Frame label="A/C Auto DEBUG"  {
+            Switch    item=tsOfficinaWait
+            Setpoint  item=tsOfficinaWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
+            Switch    item=tsOfficinaWaitDebug
+            Switch    item=tsOfficinaRunning
+            Switch    item=shelly07_Power
+          }
+
+	} //Chiuso text spOfficina
+      } // Chiuso frame Termostato
+
+      Frame label="Comfort" {
+        Text      item=sf08_Temp   label="Officina: Temperatura"
+        Text      item=sf08_Humid  label="Officina: Umidità"
+      }
+
       Frame label="Condizionatore Officina" {
         Switch    item=cl01_power     icon=climate      
 	Setpoint  item=cl01_temp      icon=temperature  minValue=16 maxValue=32 step=1
@@ -958,10 +1000,6 @@ sitemap default label="Casa"
 	    Text      item=cl01_a_temp	icon=temperature
 	  }
 	}
-      }
-      Frame label="Comfort" {
-        Text      item=sf08_Temp   label="Officina: Temperatura"
-        Text      item=sf08_Humid  label="Officina: Umidità"
       }
       Frame label="Outside" {
         Text      item=faikin01_outside icon=garden        label="Terrazzo Davanti [%.1f °C]"

@@ -13,8 +13,8 @@ Number tsOfficinaWaitMaxTemp	"Temperatura Massima [%.1f °C]"		<temperature_hot>
 Number tsOfficinaWaitMinTemp	"Temperatura Minima [%.1f °C]"		<temperature_hot> (gTermoOfficina)
 Number tsOfficinaWaitStep	"Step [%.1f °C]"		<temperature_hot> (gTermoOfficina)
 Switch tsOfficinaWaitDebug      "LOG Verbosi"              	<text> (gTermoOfficina)
-Switch tsOfficinaAutoON         "Auto ON on"        	<text> (gTermoOfficina)
-
+Switch tsOfficinaAutoON         "Auto ON on"        	        <text> (gTermoOfficina)
+Switch tsOfficinaPowerCheck     "Check for Power"               <settings> (gTermoOfficina)
 
 Number tsOfficinaStartupTemp    "Temp Accensione [%.1f °C]"     <heating>
 Switch tsOfficinaStartupTempON  "Imposta Startup Temp"

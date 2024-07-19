@@ -6,15 +6,15 @@ Number hsGiochi  "Isteresi Giochi [%.1f °C]"  <flowpipe>    (gTermoGiochi)
 Switch tsGiochiOverride  "Override OFF Thermostat"
 
 
-Switch tsGiochiWait 		"Ts is Waiting..."		<lock> (gTermoGiochi)
-Switch tsGiochiRunning	"Ts is Running..."		<lock> (gTermoGiochi)
-Number tsGiochiWaitMins	"Minutes to Wait"		<time> (gTermoGiochi)
-Number tsGiochiWaitMaxTemp	"Temperatura Massima [%.1f °C]"		<temperature_hot> (gTermoGiochi)
-Number tsGiochiWaitMinTemp	"Temperatura Minima [%.1f °C]"		<temperature_hot> (gTermoGiochi)
-Number tsGiochiWaitStep	"Step [%.1f °C]"		<temperature_hot> (gTermoGiochi)
-Switch tsGiochiWaitDebug     "LOG Verbosi"              	<text> (gTermoGiochi)
-Switch tsGiochiAutoON        "Auto ON on"        	<text> (gTermoGiochi)
-
+Switch tsGiochiWait 	      "Ts is Waiting..."		<lock>            (gTermoGiochi)
+Switch tsGiochiRunning	      "Ts is Running..."		<lock>            (gTermoGiochi)
+Number tsGiochiWaitMins	      "Minutes to Wait"		        <time>            (gTermoGiochi)
+Number tsGiochiWaitMaxTemp    "Temperatura Massima [%.1f °C]"	<temperature_hot> (gTermoGiochi)
+Number tsGiochiWaitMinTemp    "Temperatura Minima [%.1f °C]"	<temperature_hot> (gTermoGiochi)
+Number tsGiochiWaitStep	      "Step [%.1f °C]"		        <temperature_hot> (gTermoGiochi)
+Switch tsGiochiWaitDebug      "LOG Verbosi"              	<text>            (gTermoGiochi)
+Switch tsGiochiAutoON         "Auto ON on"        	        <text>            (gTermoGiochi)
+Switch tsGiochiPowerCheck     "Check for Power"                 <settings>        (gTermoGiochi)
 
 Number tsGiochiStartupTemp    "Temp Accensione [%.1f °C]"     <heating>
 Switch tsGiochiStartupTempON  "Imposta Startup Temp"
