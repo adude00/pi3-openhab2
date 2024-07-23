@@ -15,6 +15,9 @@ Number tsGiochiWaitStep	      "Step [%.1f °C]"		        <temperature_hot> (gTer
 Switch tsGiochiWaitDebug      "LOG Verbosi"              	<text>            (gTermoGiochi)
 Switch tsGiochiAutoON         "Auto ON on"        	        <text>            (gTermoGiochi)
 Switch tsGiochiPowerCheck     "Check for Power"                 <settings>        (gTermoGiochi)
+Switch tsGiochiPowerLimit     "Power Limit"                     <settings>        (gTermoGiochi)
+Number tsGiochiPowerMax	      "Power Max [%s W]"	        <energy>          (gTermoGiochi)
 
+Number tsGiochiWaitStep	      "Step [%.1f °C]"		        <temperature_hot> (gTermoGiochi)
 Number tsGiochiStartupTemp    "Temp Accensione [%.1f °C]"     <heating>
 Switch tsGiochiStartupTempON  "Imposta Startup Temp"
