@@ -4,11 +4,11 @@ Group t_tuya06          "tuya06: Ex Spina termo"
 Switch tuya06_Switch "Ex Spina termo"  <radiator> (t_sonoff,t_tuya06,gSwitch) {channel="mqtt:topic:tasmota:tuya06:PowerSwitch"}
 
 // POWER
-Number:Power            tuya06_Power      "tuya06 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya06,gWatt)    {channel="mqtt:topic:tasmota:tuya06:Power"}
-Number:Dimensionless    tuya06_AppPower   "tuya06 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya06,gVa)      {channel="mqtt:topic:tasmota:tuya06:ApparentPower"}
-Number:Dimensionless    tuya06_ReaPower   "tuya06 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya06,gVar)     {channel="mqtt:topic:tasmota:tuya06:ReactivePower"}
-Number:Dimensionless    tuya06_Voltage    "tuya06 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya06,gVolt)    {channel="mqtt:topic:tasmota:tuya06:Voltage"}
-Number:Dimensionless    tuya06_Current    "tuya06 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya06,gAmps)    {channel="mqtt:topic:tasmota:tuya06:Current"}
+Number  tuya06_Power      "tuya06 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya06,gWatt)    {channel="mqtt:topic:tasmota:tuya06:Power"}
+Number  tuya06_AppPower   "tuya06 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya06,gVa)      {channel="mqtt:topic:tasmota:tuya06:ApparentPower"}
+Number  tuya06_ReaPower   "tuya06 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya06,gVar)     {channel="mqtt:topic:tasmota:tuya06:ReactivePower"}
+Number  tuya06_Voltage    "tuya06 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya06,gVolt)    {channel="mqtt:topic:tasmota:tuya06:Voltage"}
+Number  tuya06_Current    "tuya06 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya06,gAmps)    {channel="mqtt:topic:tasmota:tuya06:Current"}
 
 // Sensor
 //Number:Temperature   tuya06_Temp          "tuya06 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya06)       {channel="mqtt:topic:tasmota:tuya06:Temperature"}

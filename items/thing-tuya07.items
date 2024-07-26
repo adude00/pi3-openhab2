@@ -4,11 +4,11 @@ Group t_tuya07          "tuya07: Networking"
 Switch tuya07_Switch  "Networking"  <poweroutlet> (t_sonoff,t_tuya07,gSwitch) {channel="mqtt:topic:tasmota:tuya07:PowerSwitch"}
 
 // POWER
-Number:Power            tuya07_Power      "tuya07 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya07,gWatt)    {channel="mqtt:topic:tasmota:tuya07:Power"}
-Number:Dimensionless    tuya07_AppPower   "tuya07 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya07,gVa)      {channel="mqtt:topic:tasmota:tuya07:ApparentPower"}
-Number:Dimensionless    tuya07_ReaPower   "tuya07 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya07,gVar)     {channel="mqtt:topic:tasmota:tuya07:ReactivePower"}
-Number:Dimensionless    tuya07_Voltage    "tuya07 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya07,gVolt)    {channel="mqtt:topic:tasmota:tuya07:Voltage"}
-Number:Dimensionless    tuya07_Current    "tuya07 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya07,gAmps)    {channel="mqtt:topic:tasmota:tuya07:Current"}
+Number  tuya07_Power      "tuya07 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya07,gWatt)    {channel="mqtt:topic:tasmota:tuya07:Power"}
+Number  tuya07_AppPower   "tuya07 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya07,gVa)      {channel="mqtt:topic:tasmota:tuya07:ApparentPower"}
+Number  tuya07_ReaPower   "tuya07 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya07,gVar)     {channel="mqtt:topic:tasmota:tuya07:ReactivePower"}
+Number  tuya07_Voltage    "tuya07 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya07,gVolt)    {channel="mqtt:topic:tasmota:tuya07:Voltage"}
+Number  tuya07_Current    "tuya07 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya07,gAmps)    {channel="mqtt:topic:tasmota:tuya07:Current"}
 
 // Sensor
 //Number:Temperature   tuya07_Temp          "tuya07 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya07)       {channel="mqtt:topic:tasmota:tuya07:Temperature"}

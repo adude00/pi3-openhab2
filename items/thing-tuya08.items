@@ -4,11 +4,11 @@ Group t_tuya08          "tuya08: Lavastoviglie"
 Switch tuya08_Switch  "tuya08 - Lavastoviglie (Disabled)"  <poweroutlet_eu> (t_sonoff,t_tuya08,gSwitch) {channel="mqtt:topic:tasmota:tuya08:PowerSwitch"}
 
 // POWER
-Number:Power            tuya08_Power      "tuya08 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya08,gWatt)    {channel="mqtt:topic:tasmota:tuya08:Power"}
-Number:Dimensionless    tuya08_AppPower   "tuya08 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya08,gVa)      {channel="mqtt:topic:tasmota:tuya08:ApparentPower"}
-Number:Dimensionless    tuya08_ReaPower   "tuya08 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya08,gVar)     {channel="mqtt:topic:tasmota:tuya08:ReactivePower"}
-Number:Dimensionless    tuya08_Voltage    "tuya08 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya08,gVolt)    {channel="mqtt:topic:tasmota:tuya08:Voltage"}
-Number:Dimensionless    tuya08_Current    "tuya08 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya08,gAmps)    {channel="mqtt:topic:tasmota:tuya08:Current"}
+Number  tuya08_Power      "tuya08 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya08,gWatt)    {channel="mqtt:topic:tasmota:tuya08:Power"}
+Number  tuya08_AppPower   "tuya08 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya08,gVa)      {channel="mqtt:topic:tasmota:tuya08:ApparentPower"}
+Number  tuya08_ReaPower   "tuya08 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya08,gVar)     {channel="mqtt:topic:tasmota:tuya08:ReactivePower"}
+Number  tuya08_Voltage    "tuya08 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya08,gVolt)    {channel="mqtt:topic:tasmota:tuya08:Voltage"}
+Number  tuya08_Current    "tuya08 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya08,gAmps)    {channel="mqtt:topic:tasmota:tuya08:Current"}
 
 // Sensor
 //Number:Temperature   tuya08_Temp          "tuya08 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya08)       {channel="mqtt:topic:tasmota:tuya08:Temperature"}

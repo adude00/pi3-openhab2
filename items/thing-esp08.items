@@ -1,6 +1,6 @@
 Group t_esp08         "esp08: P1 Power Total"
 
-Number:Power         esp08_Power         "esp08 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp08,gWatt)     {channel="mqtt:topic:tasmota:esp08:Power"}
+Number esp08_Power         "esp08 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp08,gWatt)     {channel="mqtt:topic:tasmota:esp08:Power"}
 
 Number esp08_AppPower      "esp08: Line Apparent Power [%.3f VA]"     <current>       (t_esp08,t_sonoff,gVag)
         {channel="mqtt:topic:tasmota:esp08:ApparentPower"}

@@ -70,7 +70,7 @@ then
   waitRnd = (Math::random * 10.0).intValue + 1
   createTimer(now.plusSeconds(waitRnd),  [ |
 
-  // MAKE SURE WE ARE NOT ALREADY RUNNING tsOfficina is ON
+  // MAKE SURE WE ARE NOT RUNNING and tsOfficina = ON
   if ( tsOfficinaRunning.state == OFF && tsOfficina.state == ON ) {
     // FIRST THING FIRST - WE ARE RUNNING
     tsOfficinaRunning.sendCommand(ON)
@@ -167,23 +167,45 @@ then
           } // TOO COLD COOLING CLOSED
 
 
-          // TOO COLD HEATING: INCREASE TEMP
+          // TOO COLD HEATING: INCREASE POWER > INCREASE TEMP
 
           if ((cl01_work_mode.state+"") == "1") {
-            if ( acTemp < acTempMax ) {
-            // WE CAN INCREASE TEMP
-              acTemp = acTemp + acTempStep
-              cl01_temp.sendCommand(acTemp)
-              if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Increasing acTemp to " + acTemp)
-              if (cl01_power.state == OFF ) {
-                // TURN ON IF OFF
-                cl01_power.sendCommand(ON)
-                if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: Aircon was OFF. Turning it ON!")
-              }
+
+            // CHECK FOR POWER LIMIT
+            if ( tsOfficinaPowerLimit.state == ON && shelly07_Power.state > tsOfficinaPowerMax.state ) {
+
+              if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: COLD! Power Limit " + tsOfficinaPowerMax.state + "W reached: current power: " + shelly07_Power.state + "W! - Not doing anything.")
+
             } else {
-              // MAX POWER REACHED
-              if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
-            }
+
+              if ( acTemp < acTempMax ) {
+              // WE CAN INCREASE TEMP
+                acTemp = acTemp + acTempStep
+                cl01_temp.sendCommand(acTemp)
+                if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Increasing acTemp to " + acTemp)
+                if (cl01_power.state == OFF ) {
+                  // TURN ON IF OFF
+                  cl01_power.sendCommand(ON)
+                  if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: Aircon was OFF. Turning it ON!")
+                }
+
+                // tsOfficinaPowerCheck START
+                createTimer(now.plusSeconds(20),  [ |
+                  if (shelly07_Power.state < 40 && tsOfficinaPowerCheck.state == ON ) {
+                    if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG tsOfficinaPowerCheck - heating: TOO COLD! Increasing temp again, compressor still NOT running!")
+                    acTemp = acTemp + acTempStep
+                    cl01_temp.sendCommand(acTemp)
+                    if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Increasing acTemp to " + acTemp)
+                  }
+                ])
+                // tsOfficinaPowerCheck END
+
+              } else {
+                // MAX TEMP REACHED
+                if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
+              }
+
+            } // CHECK FOR POWER LIMIT ELSE CLOSED
 
           } // TOO COLD HEATING CLOSED
 
@@ -237,35 +259,45 @@ then
 	  } // IF HEATING CLOSED
 
 
-	  // TOO HOT COOLING: DECREASE TEMP
+	  // TOO HOT COOLING: INCREASE POWER > DECREASE TEMP
 
 	  if ((cl01_work_mode.state+"") == "2") {
-	    if ( acTemp > acTempMin ) {
-	    // WE CAN DECREASE TEMP
-              acTemp = acTemp - acTempStep
-	      cl01_temp.sendCommand(acTemp)
-              if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Decreasing acTemp to " + acTemp)
-	      if (cl01_power.state == OFF ) {
-	        // TURN ON IF OFF
-	        cl01_power.sendCommand(ON)
-	        if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: Aircon was OFF. Turning it ON!")
-	      }
 
-              // tsOfficinaPowerCheck START
-              createTimer(now.plusSeconds(20),  [ |
-                if (shelly07_Power.state < 40 && tsOfficinaPowerCheck.state == ON ) {
-                  if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG tsOfficinaPowerCheck - cooling: TOO HOT! Decreasing temp again, compressor still NOT running!")
-                  acTemp = acTemp - acTempStep
-                  cl01_temp.sendCommand(acTemp)
-                  if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Decreasing acTemp to " + acTemp)
-                }
-              ])
-              // tsOfficinaPowerCheck END
+	    // CHECK FOR POWER LIMIT
+	    if ( tsOfficinaPowerLimit.state == ON && shelly07_Power.state > tsOfficinaPowerMax.state ) {
+
+	      if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: HOT! Power Limit " + tsOfficinaPowerMax.state + "W reached: current power: " + shelly07_Power.state + "W! - Not doing anything.")
 
 	    } else {
-	      // MIN TEMP REACHED
-              if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached acTempMin: " + acTempMin )
-	    }
+
+	      if ( acTemp > acTempMin ) {
+	      // WE CAN DECREASE TEMP
+                acTemp = acTemp - acTempStep
+	        cl01_temp.sendCommand(acTemp)
+                if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Decreasing acTemp to " + acTemp)
+	        if (cl01_power.state == OFF ) {
+	          // TURN ON IF OFF
+	          cl01_power.sendCommand(ON)
+	          if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: Aircon was OFF. Turning it ON!")
+	        }
+  
+                // tsOfficinaPowerCheck START
+                createTimer(now.plusSeconds(20),  [ |
+                  if (shelly07_Power.state < 40 && tsOfficinaPowerCheck.state == ON ) {
+                    if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG tsOfficinaPowerCheck - cooling: TOO HOT! Decreasing temp again, compressor still NOT running!")
+                    acTemp = acTemp - acTempStep
+                    cl01_temp.sendCommand(acTemp)
+                    if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Decreasing acTemp to " + acTemp)
+                  }
+                ])
+                // tsOfficinaPowerCheck END
+  
+	      } else {
+	        // MIN TEMP REACHED
+                if (tsOfficinaWaitDebug.state == ON ) logInfo("tsOfficinaWait","DEBUG - cooling: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly07_Power.state + "W. Not doing anything, reached acTempMin: " + acTempMin )
+	      }
+
+	    } // CHECK FOR POWER LIMIT ELSE CLOSED
 
 	  } // IF COOLING CLOSED
 

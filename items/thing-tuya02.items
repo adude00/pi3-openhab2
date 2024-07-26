@@ -4,11 +4,11 @@ Group t_tuya02          "tuya02: Lavasciuga"
 Switch tuya02_Switch "Lavasciuga" <washingmachine_2> (t_sonoff,t_tuya02,gSwitch,Devices) [ "Switchable" ]  {channel="mqtt:topic:tasmota:tuya02:PowerSwitch"}
 
 // POWER
-Number:Power            tuya02_Power      "tuya02 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya02,gWatt)    {channel="mqtt:topic:tasmota:tuya02:Power"}
-Number:Dimensionless    tuya02_AppPower   "tuya02 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya02,gVa)      {channel="mqtt:topic:tasmota:tuya02:ApparentPower"}
-Number:Dimensionless    tuya02_ReaPower   "tuya02 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya02,gVar)     {channel="mqtt:topic:tasmota:tuya02:ReactivePower"}
-Number:Dimensionless    tuya02_Voltage    "tuya02 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya02,gVolt)    {channel="mqtt:topic:tasmota:tuya02:Voltage"}
-Number:Dimensionless    tuya02_Current    "tuya02 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya02,gAmps)    {channel="mqtt:topic:tasmota:tuya02:Current"}
+Number  tuya02_Power      "tuya02 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya02,gWatt)    {channel="mqtt:topic:tasmota:tuya02:Power"}
+Number  tuya02_AppPower   "tuya02 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya02,gVa)      {channel="mqtt:topic:tasmota:tuya02:ApparentPower"}
+Number  tuya02_ReaPower   "tuya02 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya02,gVar)     {channel="mqtt:topic:tasmota:tuya02:ReactivePower"}
+Number  tuya02_Voltage    "tuya02 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya02,gVolt)    {channel="mqtt:topic:tasmota:tuya02:Voltage"}
+Number  tuya02_Current    "tuya02 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya02,gAmps)    {channel="mqtt:topic:tasmota:tuya02:Current"}
 
 // Sensor
 //Number:Temperature   tuya02_Temp          "tuya02 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya02)       {channel="mqtt:topic:tasmota:tuya02:Temperature"}

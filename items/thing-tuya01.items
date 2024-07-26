@@ -4,11 +4,11 @@ Group t_tuya01          "tuya01: TV"
 Switch                  tuya01_switch     "tuya01 Switch"                  <poweroutlet> (t_sonoff,t_tuya01,gSwitch,Devices)  {channel="mqtt:topic:tasmota:tuya01:PowerSwitch"}
 
 // POWER
-Number:Power            tuya01_Power      "tuya01 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya01,gWatt)    {channel="mqtt:topic:tasmota:tuya01:Power"}
-Number:Dimensionless    tuya01_AppPower   "tuya01 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya01,gVa)      {channel="mqtt:topic:tasmota:tuya01:ApparentPower"}
-Number:Dimensionless    tuya01_ReaPower   "tuya01 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya01,gVar)     {channel="mqtt:topic:tasmota:tuya01:ReactivePower"}
-Number:Dimensionless    tuya01_Voltage    "tuya01 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya01,gVolt)    {channel="mqtt:topic:tasmota:tuya01:Voltage"}
-Number:Dimensionless    tuya01_Current    "tuya01 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya01,gAmps)    {channel="mqtt:topic:tasmota:tuya01:Current"}
+Number 	tuya01_Power      "tuya01 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya01,gWatt)    {channel="mqtt:topic:tasmota:tuya01:Power"}
+Number 	tuya01_AppPower   "tuya01 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya01,gVa)      {channel="mqtt:topic:tasmota:tuya01:ApparentPower"}
+Number 	tuya01_ReaPower   "tuya01 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya01,gVar)     {channel="mqtt:topic:tasmota:tuya01:ReactivePower"}
+Number 	tuya01_Voltage    "tuya01 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya01,gVolt)    {channel="mqtt:topic:tasmota:tuya01:Voltage"}
+Number	tuya01_Current    "tuya01 - Current [%.3f A]"           <energy> (t_sonoff,t_tuya01,gAmps)    {channel="mqtt:topic:tasmota:tuya01:Current"}
 
 // Sensor
 //Number:Temperature   tuya01_Temp          "tuya01 Temp [%.1f °C]"               <temperature>  (gTemp,t_tuya01)       {channel="mqtt:topic:tasmota:tuya01:Temperature"}

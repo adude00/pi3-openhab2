@@ -690,7 +690,11 @@ sitemap default label="Casa"
             Setpoint  item=tsGiochiStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsGiochiStartupTempON==ON]
             Switch    item=tsGiochiAutoON          label="Auto ON on SetPoint" icon=settings
             Switch    item=tsGiochiOverride        icon=settings
+	  }
+	  Frame label="A/C Auto Tuning" {
 	    Switch    item=tsGiochiPowerCheck
+	    Switch    item=tsGiochiPowerLimit
+	    Setpoint  item=tsGiochiPowerMax        minValue=200 maxValue=500 step=25
           }
 
           Frame label="A/C Auto DEBUG"  {
@@ -957,7 +961,11 @@ sitemap default label="Casa"
             Setpoint  item=tsOfficinaStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsOfficinaStartupTempON==ON]
             Switch    item=tsOfficinaAutoON          label="Auto ON on SetPoint" icon=settings
             Switch    item=tsOfficinaOverride        icon=settings
-            Switch    item=tsOfficinaPowerCheck      
+	  }
+	  Frame label="A/C Auto Tuning" {
+	    Switch    item=tsOfficinaPowerCheck
+	    Switch    item=tsOfficinaPowerLimit
+	    Setpoint  item=tsOfficinaPowerMax        minValue=200 maxValue=500 step=25
           }
 
           Frame label="A/C Auto DEBUG"  {
