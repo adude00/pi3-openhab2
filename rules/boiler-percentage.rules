@@ -11,7 +11,7 @@ rule "Calculate Boiler Percentage boh"
 
       // Formula calcolo percentuale
       Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
-      logInfo("Boiler","Scrivo percentuale: " + ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number + "%")
+      //logInfo("Boiler","Scrivo percentuale: " + ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number + "%")
     }
 
     //if (previousState >= 100 && tuya05_Power.state <= 60 ) {

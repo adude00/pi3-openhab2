@@ -7,7 +7,7 @@ then
 
     g_shellies.members.forEach[ i |
         var shelly = i.name
-        logInfo("Shelly", "Requesting hourly status update for " + shelly)
+        //logInfo("Shelly", "Requesting hourly status update for " + shelly)
 
         var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
         actionsBroker.publishMQTT( "shellies/" + shelly + "/rpc", "{\"id\":1, \"src\":\"shellies/" + shelly + "/shellystatus\", \"method\":\"Shelly.GetStatus\"}" )
