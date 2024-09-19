@@ -1,0 +1,16 @@
+rule "faikin02 fan 3"
+when
+        Item faikin02_fan received command 3
+then
+        logInfo("faikin02 FAN","Received command FAN 3.")
+
+        if (faikin02_AutoRestore.state == ON) {
+        	logInfo("faikin02 FAN","faikin02_AutoRestore=ON, Timer start!")
+	        createTimer(now.plusMinutes(1), [|
+		        if (faikin02_AutoRestore.state == ON) {
+		                logInfo("faikin02 FAN","Timer END! Fan back to A")
+		                faikin02_fan.sendCommand("A")
+			}
+	        ])
+	}
+end

@@ -344,7 +344,7 @@ sitemap default label="Casa"
     Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
       Frame label="Termostato" {
         Switch    item=tsSoggiorno
-        Text      item=spSoggiorno {
+        Text      item=Casa_Temperature_AVG {
 
           // Thermostat Page
           Frame label="Temperature" {
@@ -398,6 +398,7 @@ sitemap default label="Casa"
         	Switch    item=faikin02_streamer
         	Switch    item=faikin02_quiet
 		Switch    item=faikin02_AutoQuiet
+		Switch    item=faikin02_AutoRestore
 	  }
 	}
 

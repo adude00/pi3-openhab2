@@ -26,7 +26,8 @@ String faikin02_fan       "Fan"        <fan>        (g_faikin02,g_faikin02_cmd) 
 String faikin02_mode      "Mode"       <heating>    (g_faikin02,g_faikin02_cmd) 	{channel="mqtt:topic:Faikin:faikin02:mode"}
 String faikin02_ts        "TimeStamp"  <time>       (g_faikin02) 			{channel="mqtt:topic:Faikin:faikin02:ts"}
 
-Switch faikin02_AutoQuiet "Auto Quiet on Power ON" <settings>   (g_faikin02)
+Switch faikin02_AutoQuiet   "Auto Quiet on Power ON" <settings>   (g_faikin02)
+Switch faikin02_AutoRestore "Auto restore Auto"      <settings>   (g_faikin02)
 
 // Retrocompatibilità Grafici
 Number:Temperature acSoggiornoOutsideTemp "2P Davanti [%.1f]" (gTemp,Fuori_Temperature_Chart)  { channel="mqtt:topic:Faikin:faikin02:outside" }

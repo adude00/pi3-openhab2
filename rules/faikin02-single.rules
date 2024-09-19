@@ -44,3 +44,25 @@ then
 	}
 end
 
+
+rule "faikin02 fan 3"
+when
+        Item faikin02_fan received command 1 or
+        Item faikin02_fan received command 2 or
+        Item faikin02_fan received command 3 or
+        Item faikin02_fan received command 4 or
+        Item faikin02_fan received command 5
+then
+        logInfo("faikin02 FAN","Received command FAN: " + receivedCommand)
+
+        if (faikin02_AutoRestore.state == ON) {
+        	logInfo("faikin02 FAN","faikin02_AutoRestore=ON, Timer start!")
+	        createTimer(now.plusMinutes(60), [|
+		        if (faikin02_AutoRestore.state == ON) {
+		                logInfo("faikin02 FAN","Timer END! Fan back to A")
+		                faikin02_fan.sendCommand("A")
+			}
+	        ])
+	}
+end
+
