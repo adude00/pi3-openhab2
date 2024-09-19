@@ -1460,6 +1460,22 @@ sitemap default label="Casa"
         Text   item=shelly07_rssi icon=none
         }
       }
+      Text label="Shelly 08 - Networking" {
+        Frame label="Shelly Mini Gen3 PM" {
+        Switch item=shelly08_R1
+        Text   item=shelly08_Power icon=none
+        Text   item=shelly08_voltage icon=none
+        Text   item=shelly08_energy icon=none
+        Text   item=shelly08_temperature icon=none
+        Text   item=shelly08_restartreq icon=none
+        Text   item=shelly08_uptime icon=none
+        Text   item=shelly08_state icon=none
+        Text   item=shelly08_event0 icon=none
+        Text   item=shelly08_source icon=none
+        Text   item=shelly08_ip icon=none
+        Text   item=shelly08_rssi icon=none
+        }
+      }
       Text label="Shelly2PM 01 - Giochi: Luce e Clima" {
 	Frame label="Shelly Plus 1PM" {
         Switch item=shelly2pm01_R0
