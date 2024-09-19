@@ -1,0 +1,31 @@
+Group        g_shellies
+
+Switch shelly08_R1                 "Networking"
+    { channel="mqtt:topic:shellies:shelly08:PowerSwitch" }
+Number tuya07_Power                "Networking Power [%.1f W]" (gWatt,Casa_Consumi_Chart)
+    { channel="mqtt:topic:shellies:shelly08:Power" }
+Number shelly08_Power              "Networking Power [%s W]"
+    { channel="mqtt:topic:shellies:shelly08:Power" }
+Number shelly08_voltage            "shelly08 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shelly08:Voltage" }
+Number shelly08_energy             "shelly08 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly08:Energy" }
+Number shelly08_temperature        "shelly08 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shelly08:Temperature" }
+String shelly08_restartreq         "shelly08 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly08:RestartReq" }
+String shelly08_state              "shelly08 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly08:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly08_event0             "shelly08 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly08:Event0" }
+String shelly08_ip                 "shelly08 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly08:IP" }
+String shelly08_rssi               "shelly08 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly08:RSSI" }
+String shelly08_source             "shelly08 Source"
+    { channel="mqtt:topic:shellies:shelly08:Source" }
+Number shelly08_uptime             "shelly08 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly08:Uptime" }
+
+String shelly08                    "shelly08" (g_shellies) // dummy for rule status loop
+
