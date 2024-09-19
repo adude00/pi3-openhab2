@@ -356,10 +356,10 @@ sitemap default label="Casa"
           }
 
           Frame label="A/C Auto Conf" {
-            Setpoint  item=hsSoggiorno minValue=0     maxValue=3  step=0.1           icon=settings
-            Setpoint  item=tsSoggiornoWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
-            Setpoint  item=tsSoggiornoWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
-            Setpoint  item=tsSoggiornoWaitStep        minValue=1  maxValue=3  step=1  icon=line
+            Setpoint  item=hsSoggiorno                minValue=0   maxValue=3  step=0.1  icon=settings
+            Setpoint  item=tsSoggiornoWaitMaxTemp     minValue=10  maxValue=31 step=1    icon=flowpipe
+            Setpoint  item=tsSoggiornoWaitMinTemp     minValue=10  maxValue=31 step=1    icon=returnpipe
+            Setpoint  item=tsSoggiornoWaitStep        minValue=0.5 maxValue=3  step=0.5  icon=line
             Switch    item=tsSoggiornoStartupTempON 
             Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
             Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
