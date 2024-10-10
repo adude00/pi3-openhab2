@@ -465,7 +465,7 @@ sitemap default label="Casa"
     } // Chiuso Text Soggiorno Clima
 
 
-    Text item=sf07_Temp label="Bagno" icon=bath {
+    Text item=sf07_Temp label="P2 Bagno" icon=bath {
 
       Frame label="Boiler" {
         Text            item=Boiler_Percentage {
@@ -523,14 +523,6 @@ sitemap default label="Casa"
         Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
         Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
-      Frame label="Termostato" {
-        Switch		item=tsBagno
-        Setpoint	item=spBagno 		icon=smiley	minValue=18  	maxValue=30	step=0.5
-        Setpoint	item=hsBagno		icon=settings	minValue=0  	maxValue=3	step=0.1
-        Switch		item=sf07_Light 	icon=radiator
-	Switch		item=mdBagno		label="Modalità"		mappings=[heat='HOT', off='OFF']
-        Switch		item=tsBagnoAutoOFF	label="Auto OFF: 15 min"	icon=settings
-      } // Chiuso Frame Termostato
 
     } // Chiuso Text Bagno Stufa
 
@@ -1015,15 +1007,34 @@ sitemap default label="Casa"
       }
     }
 
-    Text item=sf20_Temp label="Bagno P1" icon=toilet {
+    Text item=sf20_Temp label="P1 Bagno" icon=toilet {
       Frame label="Comfort" {
-        Text      item=sf20_Temp   label="BagnoP1: Temperatura"
-        Text      item=sf20_Humid  label="BagnoP1: Umidità"
+        Text	item=sf20_Temp   label="BagnoP1: Temperatura" {
+          Frame label="Termostato" {
+            Switch	item=tsBagnoP1
+            Setpoint	item=spBagnoP1 		minValue=17  	maxValue=30	step=0.5
+            Setpoint	item=hsBagnoP1		minValue=0  	maxValue=3	step=0.1
+            Switch	item=shelly09_R1 	icon=radiator
+	  }
+	  Frame label="Auto Off" {
+            Switch	item=tsBagnoP1AutoOff	
+	    Setpoint	item=tsBagnoP1AutoOffMins  minValue=0   maxValue=60	step=5   	visibility=[tsBagnoP1AutoOff==ON]
+	  }
+	  Frame label="Override Thermostat OFF" {
+            Switch		item=tsBagnoP1AllowOn	
+          }
+
+	} // Chiuso Text Temperatura
+
+        Text    item=sf20_Humid  label="BagnoP1: Umidità"
+        Switch	item=tsBagnoP1
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna"
         Text      item=DaikinMatrimoniale_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
       }
+
+
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
@@ -1070,10 +1081,10 @@ sitemap default label="Casa"
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
         Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
+        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
       }
       Frame label="Piano 1" {
         Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
-        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
         Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
         Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
         Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
@@ -1474,6 +1485,22 @@ sitemap default label="Casa"
         Text   item=shelly08_source icon=none
         Text   item=shelly08_ip icon=none
         Text   item=shelly08_rssi icon=none
+        }
+      }
+      Text label="Shelly 09 - Stufetta" {
+        Frame label="Shelly Plus 1 PM" {
+        Switch item=shelly09_R1
+        Text   item=shelly09_Power icon=none
+        Text   item=shelly09_voltage icon=none
+        Text   item=shelly09_energy icon=none
+        Text   item=shelly09_temperature icon=none
+        Text   item=shelly09_restartreq icon=none
+        Text   item=shelly09_uptime icon=none
+        Text   item=shelly09_state icon=none
+        Text   item=shelly09_event0 icon=none
+        Text   item=shelly09_source icon=none
+        Text   item=shelly09_ip icon=none
+        Text   item=shelly09_rssi icon=none
         }
       }
       Text label="Shelly2PM 01 - Giochi: Luce e Clima" {

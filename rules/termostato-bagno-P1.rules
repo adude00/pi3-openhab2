@@ -1,0 +1,44 @@
+rule "Termostato Bagno P1"
+  when
+    Item spBagnoP1 changed or
+    Item sf20_Temp changed or
+    Item tsBagnoP1 changed
+  then
+  
+  var Number cur_temp = sf20_Temp.state 
+  var Number setpoint = spBagnoP1.state 
+  var Number hysteresis = hsBagnoP1.state 
+  var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+
+  if (tsBagnoP1.state == ON) {
+    if (shelly09_R1.state == ON) {
+      if ((cur_temp).floatValue > ((setpoint).floatValue)) {
+        sendCommand(shelly09_R1, OFF)
+        logInfo("tsBagnoP1","tsBagnoP1: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+      }
+    }
+    else {
+      if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
+        sendCommand(shelly09_R1, ON)
+        logInfo("tsBagnoP1","tsBagnoP1: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+      }
+    }
+  }
+  else {
+    if (tsBagnoP1AllowOn.state == OFF)  sendCommand(shelly09_R1, OFF)
+  }
+end
+
+rule "Termostato BagnoP1 Auto OFF"
+  when
+    Item tsBagnoP1 changed from OFF to ON
+  then
+    val int timerTime = (tsBagnoP1AutoOffMins.state as Number).intValue
+    if (tsBagnoP1AutoOff.state == ON) {
+      logInfo("tsBagnoP1","tsBagnoP1: AutoOff ON: Starting "+ timerTime +" minutes timer")
+      createTimer(now.plusMinutes(timerTime), [|
+        tsBagnoP1.sendCommand(OFF)
+        logInfo("tsBagnoP1","tsBagnoP1: Auto OFF: turning off thermostat after "+ timerTime +" mins")
+      ])
+    }
+end

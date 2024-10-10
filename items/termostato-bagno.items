@@ -1,12 +1,9 @@
-// Termostato HOMEKIT
-Group gTermoBagno "Bagno" 
+Switch tsBagnoP1                "Scaldabagno" [ "Switchable" ]
 
-Number spBagno    "Setpoint Bagno [%.1f °C]"  		<temperature> 	(gTermoBagno)
-String mdBagno    "Bagno Heating/Cooling Mode" 			(gTermoBagno) 	
+Number spBagnoP1                "Setpoint Bagno [%.1f °C]"  	<temperature> 
+Number hsBagnoP1                "Isteresi Bagno [%.1f °C]"      <settings>
 
-// Termostato WEB, non parte di homekit
-//Switch tsBagno   "Scaldabagno"
-Switch tsBagno 	"Scaldabagno" (gFinto)  [ "Switchable" ]
-Number hsBagno   "Isteresi Bagno [%.1f °C]"  <temperature>
+Switch tsBagnoP1AllowOn	        "Stufetta Allow ON"		<settings>
 
-Switch tsBagnoAutoOFF	"Scaldabagno Auto OFF"
+Switch tsBagnoP1AutoOff	        "Scaldabagno Auto Off"		<settings>
+Number tsBagnoP1AutoOffMins	"Minuti Auto Off [%s]"		<time>             
