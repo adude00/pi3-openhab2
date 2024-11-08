@@ -1,0 +1,32 @@
+Group t_sonoff21      "sonoff21: TestRelais"
+
+// ITEM SPECIFIC
+Switch       sonoff21_R1     "Relais 1 (In)"      <light>     (t_sonoff,t_sonoff21)    {channel="mqtt:topic:tasmota:sonoff21:PowerSwitch1"}
+Switch       sonoff21_R2     "Relais 2 (Board)"   <light>     (t_sonoff,t_sonoff21)    {channel="mqtt:topic:tasmota:sonoff21:PowerSwitch2"}
+Switch       sonoff21_R3     "Relais 3 (Board)"   <light>     (t_sonoff,t_sonoff21)    {channel="mqtt:topic:tasmota:sonoff21:PowerSwitch3"}
+Switch       sonoff21_R4     "Relais 4 (Board)"   <light>     (t_sonoff,t_sonoff21)    {channel="mqtt:topic:tasmota:sonoff21:PowerSwitch4"}
+
+
+// DEFAULT FOR ALL
+// device specific properties
+//Switch               sonoff21_switch        "sonoff21 Switch"                <poweroutlet> (t_sonoff,t_sonoff21,gSwitch)    {channel="mqtt:topic:tasmota:sonoff21:PowerSwitch"}
+//Number:Temperature   sonoff21_Temp          "Temp. Bagno P1 [%.1f °C]"       <temperature> (t_sonoff,t_sonoff21)      {channel="mqtt:topic:tasmota:sonoff21:Temperature"}
+//Number:Dimensionless sonoff21_Humid         "Umid. Bagno P1 [%.1f %%]"       <humidity>    (t_sonoff,t_sonoff21)      {channel="mqtt:topic:tasmota:sonoff21:Humidity"}
+
+//Number:Power       sonoff21_Power         "Power [%.1f W]"                      <energy> (t_sonoff,t_sonoff21,gPower)     {channel="mqtt:topic:tasmota:sonoff21:Power"}
+
+// Tasmota Status
+String               sonoff21_Refresh       "sonoff21 Time [%s]"                   <clock> (t_sonoff,t_sonoff21,gTime)      {channel="mqtt:topic:tasmota:sonoff21:Time"}
+String               sonoff21_Version       "sonoff21 Version [%s]"                        (t_sonoff,t_sonoff21,gVersion)   {channel="mqtt:topic:tasmota:sonoff21:Version"}
+String               sonoff21_Reachable     "sonoff21 Reachable [%s]"             <switch> (t_sonoff,t_sonoff21,gReachable) {channel="mqtt:topic:tasmota:sonoff21:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sonoff21_RSSI          "sonoff21 Signal [%d %%]" <network>            (t_sonoff,t_sonoff21,gRSSI)      {channel="mqtt:topic:tasmota:sonoff21:RSSI"}
+Number:Dimensionless sonoff21_LoadAvg       "sonoff21 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff21,gLoad)      {channel="mqtt:topic:tasmota:sonoff21:LoadAvg"}
+String               sonoff21_Result        "sonoff21 Result [%s]"    <status>             (t_sonoff,t_sonoff21,gResult)    {channel="mqtt:topic:tasmota:sonoff21:Result"}
+String               sonoff21_Uptime        "sonoff21 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff21,gUptime)    {channel="mqtt:topic:tasmota:sonoff21:Uptime"}
+String               sonoff21_RestartReason "sonoff21 Reason [%s]"    <error>              (t_sonoff,t_sonoff21,gReason)    {channel="mqtt:topic:tasmota:sonoff21:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+String sonoff21_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff21) {channel="mqtt:topic:tasmota:sonoff21:WifiDowntime"}
+

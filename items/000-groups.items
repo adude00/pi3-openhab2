@@ -47,6 +47,8 @@ Group gHumdP1
 
 Group gGraph
 
+Group gInflux
+
 // Consumi
 Group  Casa_Consumi_Chart (System, Charts)
 Group  gPower

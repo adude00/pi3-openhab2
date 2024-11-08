@@ -1,0 +1,18 @@
+rule "check sensor uptime state"
+when
+    Time cron "0 0/30 * * * ?" // Every 30 minutes
+then
+    var Number state_cur
+    var Number state_avg
+    gTemp.members.forEach[i|
+
+        state_cur = i.state as Number
+	state_avg = i.averageSince(now.minusMinutes(90)) as Number
+	    
+	if ( state_cur == state_avg ) {
+	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
+	    pushNotification("Sensor " + i.name + " Stuck!", "NOW: " + state_cur.toString + " - AVG: " + state_avg.toString + " - Check it out")
+	}
+    ]
+
+end

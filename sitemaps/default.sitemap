@@ -942,7 +942,7 @@ sitemap default label="Casa"
 	  }
 	  Frame label="Thermostat" {
             Switch    item=tsOfficina
-	    Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.2
+	    Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.1
 	  }
 
           Frame label="A/C Auto Conf" {
@@ -1233,7 +1233,7 @@ sitemap default label="Casa"
 	Text item=sf04_Temp                   label="Divano"  icon=sofa
         Text item=sf04_Humid                  label="Divano"
         Text item=sf06_Temp                   label="Alta"    icon=flowpipe
-  	Text item=Casa_Umidita_Sogg           label="Alta"    
+  	Text item=sf06_Humid                  label="Alta"    
         Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
 	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
       }
@@ -1308,9 +1308,9 @@ sitemap default label="Casa"
 			Group item=t_sonoff05
 			Group item=t_sonoff07
 			Group item=t_sonoff08
-			Group item=t_sonoff11
 			Group item=t_sonoff12
 			Group item=t_sonoff20
+			Group item=t_sonoff21
 			Group item=t_esp08
 			Group item=t_esp09
 			Group item=t_esp10
@@ -1320,7 +1320,6 @@ sitemap default label="Casa"
 			Group item=t_tuya04
 			Group item=t_tuya05
 			Group item=t_tuya06
-			Group item=t_tuya07
 			Group item=t_tuya08
 		}
       }

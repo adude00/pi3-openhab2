@@ -1,7 +1,7 @@
 Group gTermoOfficina
 
 Switch tsOfficina  "Termostato Officina"                        (gTermoOfficina,gRestore) [ "Switchable" ]
-Number spOfficina  "Setpoint Officina [%.1f °C]"  <smiley>      (gTermoOfficina) 
+Number spOfficina  "Setpoint Officina [%.1f °C]"  <smiley>      (gTermoOfficina,gInflux) 
 Number hsOfficina  "Isteresi Officina [%.1f °C]"  <flowpipe>    (gTermoOfficina)
 Switch tsOfficinaOverride  "Override OFF Thermostat"
 

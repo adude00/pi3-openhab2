@@ -1,0 +1,9 @@
+rule "check sensor uptime state"
+when
+    Time cron "0 0 0/1 * * ?" // Every hour
+then
+	if (gTemp.state==UNDEF) {
+		val triggerItem = gTemp.members.filter[ i|i.state==UNDEF ]
+		logInfo("EXTRA","LATEUPDATE: Ein Sensor ist ausgefallen: "+triggerItem)
+	}
+end

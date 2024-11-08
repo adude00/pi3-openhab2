@@ -16,7 +16,7 @@ String Casa_Temperature_Sogg_Down_String       "Sogg Basso [%.1f °C]"  <tempera
 // UMIDITA: /mnt/temp/dht22-umid
 Group  Casa_Umidita_Chart
 Number Casa_Umidita_Chart_Period "Periodo" (System)
-Number Casa_Umidita_Sogg         "Sogg Alta [%.1f %%]"   <humidity>  (gHumd,Casa_Umidita_Chart,gChartLvrmH,gGraph) [ "CurrentHumidity" ] { exec="<[cat /mnt/temp/dht22-umid:60000:]" }
+//Number Casa_Umidita_Sogg         "Sogg Alta [%.1f %%]"   <humidity>  (gHumd,Casa_Umidita_Chart,gChartLvrmH,gGraph) [ "CurrentHumidity" ] { exec="<[cat /mnt/temp/dht22-umid:60000:]" }
 
 
 // CRONTAB NECESSARY
