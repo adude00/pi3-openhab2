@@ -1,0 +1,27 @@
+rule "Termostato Giochi"
+  when
+    Item spGiochi changed or
+    Item sf12_Temp changed or
+    Item tsGiochi changed
+  then
+  
+  var Number cur_temp = sf12_Temp.state 
+  var Number setpoint = spGiochi.state 
+  var Number hysteresis = hsGiochi.state 
+  var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
+
+  if (tsGiochi.state == ON) {
+    if (sonoff21_R2.state == ON) {
+      if ((cur_temp).floatValue > ((setpoint).floatValue)) {
+        sendCommand(sonoff21_R2, OFF)
+        logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+      }
+    }
+    else {
+      if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
+        sendCommand(sonoff21_R2, ON)
+        logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+      }
+    }
+  }
+end

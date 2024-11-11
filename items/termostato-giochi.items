@@ -1,7 +1,7 @@
 Group gTermoGiochi
 
 Switch tsGiochi  "Termostato Giochi"                        (gTermoGiochi,gRestore) [ "Switchable" ]
-Number spGiochi  "Setpoint Giochi [%.1f °C]"  <smiley>      (gTermoGiochi) 
+Number spGiochi  "Setpoint Giochi [%.1f °C]"  <smiley>      (gTermoGiochi,gInflux) 
 Number hsGiochi  "Isteresi Giochi [%.1f °C]"  <flowpipe>    (gTermoGiochi)
 Switch tsGiochiOverride  "Override OFF Thermostat"
 
@@ -11,7 +11,6 @@ Switch tsGiochiRunning	      "Ts is Running..."		<lock>            (gTermoGiochi
 Number tsGiochiWaitMins	      "Minutes to Wait"		        <time>            (gTermoGiochi)
 Number tsGiochiWaitMaxTemp    "Temperatura Massima [%.1f °C]"	<temperature_hot> (gTermoGiochi)
 Number tsGiochiWaitMinTemp    "Temperatura Minima [%.1f °C]"	<temperature_hot> (gTermoGiochi)
-Number tsGiochiWaitStep	      "Step [%.1f °C]"		        <temperature_hot> (gTermoGiochi)
 Switch tsGiochiWaitDebug      "LOG Verbosi"              	<text>            (gTermoGiochi)
 Switch tsGiochiAutoON         "Auto ON on"        	        <text>            (gTermoGiochi)
 Switch tsGiochiPowerCheck     "Check for Power"                 <settings>        (gTermoGiochi)
