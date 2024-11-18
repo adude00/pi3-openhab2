@@ -237,6 +237,26 @@ sitemap default label="Casa"
 	}
 
       }
+      Frame label="Sveglie" {
+	Text label="Sveglia 01 - Clima Giochi" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia01AlarmRepeat
+            Setpoint item=sveglia01Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia01AlarmRepeat==ON]
+            Setpoint item=sveglia01Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia01AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia01Condition1 label="Turn ON on Weekdays"
+	    Switch item=sveglia01Condition2 label="Turn ON on Weekends"
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia01AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia01AlarmTriggered
+	  }
+	}
+      } // CHIUSO FRAME Sveglie
+
       Frame label="Automatismi" { 
 	Text label="White Noise" icon="settings" {
 	  Frame label="Bedroom" {
@@ -944,7 +964,7 @@ sitemap default label="Casa"
 	  Frame label="Thermostat" {
             Switch    item=tsOfficina
 	    Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.1
-            Setpoint  item=hsOfficina minValue=0     maxValue=3  step=0.2           icon=settings
+            Setpoint  item=hsOfficina minValue=0     maxValue=3  step=0.1           icon=settings
             Switch    item=sonoff21_R4
 	  }
 

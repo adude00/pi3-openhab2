@@ -1,0 +1,127 @@
+import org.eclipse.smarthome.core.library.types.DecimalType
+import org.eclipse.smarthome.model.script.actions.Timer
+
+val String LOG = "sveglia01"
+var Timer sveglia01Timer = null
+var Timer sveglia01EndTimer = null
+
+rule "sveglia01AlarmSwitchOn"
+when
+    Item sveglia01AlarmSwitch changed to ON
+then
+    if (sveglia01Minute.state == NULL || sveglia01Hour.state == NULL) 
+    {
+      logInfo(LOG, "sveglia01AlarmMinute or sveglia01AlarmHour not set, alarm not processed")
+    } 
+    else 
+    {
+      var int nowHour = now.getHourOfDay
+      var int wakeUpHour = (sveglia01Hour.state as DecimalType).intValue
+
+      var int hours = 0
+      val int hourDiff = wakeUpHour - nowHour 
+      if (hourDiff >= 0) {
+        hours = hourDiff
+      } else {
+        hours = 24 + wakeUpHour - nowHour
+      }
+      var int minutes = 0
+      val int nowMinute = now.getMinuteOfHour
+      val int wakeUpMinute =  (sveglia01Minute.state as DecimalType).intValue
+      var int minuteDiff = wakeUpMinute - nowMinute
+      if (minuteDiff >= 0) {
+        minutes = minuteDiff
+      } else {
+        minutes = 60 + wakeUpMinute - nowMinute
+        if (hourDiff == 0) {
+          hours = 24
+        }
+        hours--
+      }
+      
+      var int totalMinutes = (hours*60) + minutes 
+      logInfo(LOG, "Alarm: "  + hours + " h " + minutes + " min")
+      logInfo(LOG, "Alarm TP will be set for: " + totalMinutes + " minutes")
+      sveglia01AlarmTriggered.sendCommand(OFF)
+      if (sveglia01Timer !== null) {
+        sveglia01Timer.cancel
+        sveglia01Timer = null
+      }
+      sveglia01Timer = createTimer(now.plusMinutes(totalMinutes), [|
+        logInfo(LOG, "Alarm triggered! ")
+        sveglia01AlarmTriggered.sendCommand(ON)
+        sveglia01Timer = null
+      ])    
+
+}
+end
+
+
+rule "sveglia01AlarmTriggeredOn"
+when
+  Item sveglia01AlarmTriggered changed to ON
+then
+  logInfo(LOG, "Alarm triggered. Starting alarm procedure")
+
+//////////////////////////////////////////////////////
+// QUI FACCIO LE COSE CHE VOGLIO CON QUESTA SVEGLIA //
+
+  //val day = now.getDayOfWeek.getValue()
+  val day = now.getDayOfWeek.intValue()
+
+  if (day == 6 || day == 7)  // WEEKENDS
+  {
+    if (sveglia01Condition2.state == ON) 
+    {
+      logInfo(LOG, "Condition2 == ON, Weekends: accendo")
+      cl02_a_power.sendCommand(ON)
+    }
+  }
+  else // WORKING DAYS
+  {
+    if (sveglia01Condition1.state == ON) 
+    {
+      logInfo(LOG, "Condition1 == ON, Working Days: accendo")
+      cl02_a_power.sendCommand(ON)
+    }
+  }
+
+// ORA BASTA //
+///////////////
+
+  sveglia01EndTimer = createTimer(now.plusSeconds(30), [|
+    sveglia01AlarmSwitch.sendCommand(OFF)
+    sveglia01AlarmTriggered.sendCommand(OFF)
+    sveglia01EndTimer = null
+    logInfo(LOG, "Alarm procedure finished. Resetting triggers.")
+    ])
+end
+
+
+rule "sveglia01AlarmSwitchOff"
+when
+    Item sveglia01AlarmSwitch changed to OFF
+then
+   logInfo(LOG, "Spengo la sveglia")
+   if (sveglia01Timer !== null) {
+       sveglia01Timer.cancel
+       sveglia01Timer = null
+   }
+   sveglia01AlarmTriggered.sendCommand(OFF)
+end
+
+
+rule "Repeat Alarm"
+when
+  // Alle 3 e 7 minuti di tutti i giorni riarmo la sveglia per la mattina
+  Time cron "0 7 3 1/1 * ? *"
+  // Generated with http://www.cronmaker.com
+then
+  logInfo(LOG, "Controllo se riattivare la sveglia")
+
+  if (sveglia01AlarmRepeat.state == ON) {
+    logInfo(LOG, "sveglia01AlarmRepeat = ON, riattivo la sveglia!!")
+    sveglia01AlarmSwitch.sendCommand(ON)
+  }
+
+end
