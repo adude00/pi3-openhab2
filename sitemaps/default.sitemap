@@ -245,8 +245,8 @@ sitemap default label="Casa"
             Setpoint item=sveglia01Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia01AlarmRepeat==ON]
 	  }
 	  Frame label="Configurazione" {
-	    Switch item=sveglia01Condition1 label="Turn ON on Weekdays"
-	    Switch item=sveglia01Condition2 label="Turn ON on Weekends"
+	    Switch item=sveglia01Condition1
+	    Switch item=sveglia01Condition2
 	  }
 	  Frame label="Debug - Timer started" {
 	    Switch item=sveglia01AlarmSwitch
@@ -361,7 +361,7 @@ sitemap default label="Casa"
 
 
   Frame label="Temperature P2" {
-    Text item=Casa_Temperature_AVG label="Soggiorno" icon=sofa {
+    Text item=Casa_Temperature_AVG label="P2 - Soggiorno" icon=sofa {
       Frame label="Termostato" {
         Switch    item=tsSoggiorno
         Text      item=Casa_Temperature_AVG {
@@ -485,7 +485,7 @@ sitemap default label="Casa"
     } // Chiuso Text Soggiorno Clima
 
 
-    Text item=sf07_Temp label="P2 Bagno" icon=bath {
+    Text item=sf07_Temp label="P2 - Bagno" icon=bath {
 
       Frame label="Boiler" {
         Text            item=Boiler_Percentage {
@@ -546,7 +546,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=esp02_Temp label="Cameretta" icon=girl_3 {
+    Text item=esp02_Temp label="P2 - Cameretta" icon=girl_3 {
       Frame label="Condizionatore" {
         Switch item=DaikinCameretta_Power
         Setpoint item=DaikinCameretta_SetPoint icon=heating step=0.5 visibility=[DaikinCameretta_Power==ON]
@@ -617,7 +617,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Cameretta
 
-    Text item=sf05_Temp label="Matrimoniale" icon=bedroom_orange {
+    Text item=sf05_Temp label="P2 - Matrimoniale" icon=bedroom_orange {
       Frame label="Condizionatore" {
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
@@ -680,7 +680,7 @@ sitemap default label="Casa"
   } // Chiuso Text Temperature P2
   Frame label="Temperature P1" {
 
-    Text item=sf12_Temp label="Sala Giochi" icon=party {
+    Text item=sf12_Temp label="P1 - Sala Giochi" icon=party {
       Frame label="Termostato" {
 	Switch    item=tsGiochi
 	Text      item=spGiochi {
@@ -688,6 +688,7 @@ sitemap default label="Casa"
 	  // Thermostat Page
 	  Frame label="Temperature" {
 	    Text item=sf12_Temp 
+	    Text item=sf12_Humid 
 	  }
 	  Frame label="Thermostat" {
             Switch    item=tsGiochi
@@ -695,30 +696,6 @@ sitemap default label="Casa"
             Setpoint  item=hsGiochi minValue=0     maxValue=3  step=0.1           icon=settings
             Switch    item=sonoff21_R2
 	  }
-
-          Frame label="A/C Auto Conf" {
-            Setpoint  item=tsGiochiWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
-            Setpoint  item=tsGiochiWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
-            Setpoint  item=tsGiochiWaitStep        minValue=1  maxValue=3  step=1  icon=line
-            Switch    item=tsGiochiStartupTempON 
-            Setpoint  item=tsGiochiStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsGiochiStartupTempON==ON]
-            Switch    item=tsGiochiAutoON          label="Auto ON on SetPoint" icon=settings
-            Switch    item=tsGiochiOverride        icon=settings
-	  }
-	  Frame label="A/C Auto Tuning" {
-	    Switch    item=tsGiochiPowerCheck
-	    Switch    item=tsGiochiPowerLimit
-	    Setpoint  item=tsGiochiPowerMax        minValue=200 maxValue=500 step=25
-          }
-
-          Frame label="A/C Auto DEBUG"  {
-            Switch    item=tsGiochiWait
-            Setpoint  item=tsGiochiWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
-            Switch    item=tsGiochiWaitDebug
-            Switch    item=tsGiochiRunning
-            Switch    item=shelly07_Power
-          }
-
 	} //Chiuso text spGiochi
       } // Chiuso frame Termostato
 
@@ -727,30 +704,13 @@ sitemap default label="Casa"
         Text      item=sf12_Temp   label="Giochi: Temperatura"
         Text      item=sf12_Humid  label="Giochi: Umidità"
       }
-      Frame label="Condizionatore Sala Giochi" {
-        Switch    item=cl02_power     icon=climate      
-	Setpoint  item=cl02_temp      icon=temperature  minValue=16 maxValue=32 step=1
-	Selection item=cl02_fan_speed icon=fan          mappings=["0"="Auto", "5"="Super Low", "6"="Low", "7"="Medium", "8"="High", "9"="Super High"]
-	Switch    item=cl02_fan_mute  icon=microphone
-        Text      item=shelly07_Power icon=settings     label="Extra Settings" {
-	  Frame label="Mode" {
-	    Switch    item=cl02_work_mode icon=settings     mappings=["0"="Fan", "1"="Heat", "2"="Cool", "3"="Dry", "4"="Auto"]
-	  }
-	  Frame label="Settings" {
-	    Switch    item=cl02_up_down   icon=flow
-	    Switch    item=cl02_beep      icon=soundvolume
-	    Switch    item=cl02_eco       icon=garden
-	    Switch    item=cl02_super     icon=pump
-	  }
-	  Frame label="Power" {
-	    Text      item=shelly07_Power icon=energy
-            Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
-	  }
-	  Frame label="Alexa API" {
-	    Switch    item=cl02_a_power	icon=switch
-	    Text      item=cl02_a_temp	icon=temperature
-	  }
-	}
+      Frame label="Alexa API" {
+        Switch    item=cl02_a_power	icon=switch
+        Text      item=cl02_a_temp	icon=temperature
+      }
+      Frame label="Power" {
+        Text      item=shelly07_Power icon=energy
+        Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature label="Bologna"      icon="vacation"
@@ -797,7 +757,7 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera Giochi
 
 
-    Text item=esp01_Temp label="Camera Ethan" icon=boy_3 {
+    Text item=esp01_Temp label="P1 - Cameretta" icon=boy_3 {
       Frame label="A/C Manual" {
         Switch    item=faikin01_power
 	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
@@ -890,7 +850,7 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera Ethan
 
 
-    Text item=sf08_Temp label="Studio" icon=calendar {
+    Text item=sf08_Temp label="P1 - Studio" icon=calendar {
       Frame label="Condizionatore" {
         Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
 	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
@@ -952,7 +912,7 @@ sitemap default label="Casa"
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Studio
 
-    Text item=sf08_Temp label="Officina" icon=office {
+    Text item=sf08_Temp label="P1 - Officina" icon=office {
       Frame label="Termostato" {
 	Switch    item=tsOfficina
 	Text      item=spOfficina {
@@ -1029,7 +989,7 @@ sitemap default label="Casa"
       }
     }
 
-    Text item=sf20_Temp label="P1 Bagno" icon=toilet {
+    Text item=sf20_Temp label="P1 - Bagno" icon=toilet {
       Frame label="Comfort" {
         Text	item=sf20_Temp   label="BagnoP1: Temperatura" {
           Frame label="Termostato" {
