@@ -1,0 +1,8 @@
+Group gScene01
+
+Switch Scene01   		"Scena: IoVado"   			<alarm>	    (gScene01)  [ "Switchable" ]
+
+Switch Scene01Condition1 	"Spegni Termostato Soggiorno [%s]" 	<settings>  (gScene01)
+Switch Scene01Condition2 	"Spegni Clima Soggiorno [%s]"	 	<settings>  (gScene01)
+Switch Scene01Condition3 	"Spegni Luci Soggiorno [%s]" 		<settings>  (gScene01)
+Switch Scene01Condition4 	"Spegni Server [%s]" 			<settings>  (gScene01)

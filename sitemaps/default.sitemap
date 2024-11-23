@@ -235,6 +235,29 @@ sitemap default label="Casa"
             Switch    item=conf_nanna_ac_kid_chng     
             Setpoint  item=conf_nanna_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=0.5 visibility=[conf_nanna_ac_kid_chng==ON]
 	}
+        Text label="Scena 01 - Io Vado" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene01
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene01Condition1
+            Switch    item=Scene01Condition2
+            Switch    item=Scene01Condition3
+            Switch    item=Scene01Condition4
+	  }
+	} // Chiuso frame Scena 01
+        Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene02
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene02Condition1
+            Switch    item=Scene02Condition2
+            Switch    item=Scene02Condition3
+            Switch    item=Scene02Condition4
+            Switch    item=Scene02Condition5
+	  }
+	} // Chiuso frame Scena 02
 
       }
       Frame label="Sveglie" {
@@ -289,6 +312,23 @@ sitemap default label="Casa"
 	    Switch item=sveglia03AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia03
+	Text label="Sveglia 04 - Arrivano i Bimbi" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia04AlarmRepeat
+            Setpoint item=sveglia04Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia04AlarmRepeat==ON]
+            Setpoint item=sveglia04Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia04AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia04Condition1
+	    Switch item=sveglia04Condition2
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia04AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia04AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia04
       } // CHIUSO FRAME Sveglie
 
       Frame label="Automatismi" { 

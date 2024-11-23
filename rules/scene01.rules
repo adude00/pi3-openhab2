@@ -1,0 +1,32 @@
+val String LOG = "Scene01"
+
+rule "Scene01"
+when
+    Item Scene01 changed to ON
+then
+  pushNotification("Scena Io Vado: Start!", "La scena Scene01 è stata attivata")
+  logInfo(LOG,"Scene Started")
+
+  if (Scene01Condition1.state == ON) {
+    logInfo(LOG,"Scene01Condition1.state == ON")
+    tsSoggiorno.sendCommand(OFF)
+  }
+  if (Scene01Condition2.state == ON) {
+    logInfo(LOG,"Scene01Condition2.state == ON")
+    faikin02_power.sendCommand(OFF)
+  }
+  if (Scene01Condition3.state == ON) {
+    logInfo(LOG,"Scene01Condition3.state == ON")
+    gLuci.sendCommand(OFF)
+  }
+  if (Scene01Condition4.state == ON) {
+    logInfo(LOG,"Scene01Condition4.state == ON")
+    NAS2.sendCommand(OFF)
+  }
+
+  createTimer(now.plusSeconds(5), [|
+    Scene01.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end

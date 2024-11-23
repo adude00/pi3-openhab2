@@ -111,10 +111,10 @@ then
 end
 
 
-rule "Repeat Alarm"
+rule "sveglia03 timer for next alarm"
 when
-  // Alle 3 e 7 minuti di tutti i giorni riarmo la sveglia per la mattina
-  Time cron "0 7 3 1/1 * ? *"
+  // Alle 3 e 03 minuti di tutti i giorni riarmo la sveglia per la mattina
+  Time cron "0 03 3 1/1 * ? *"
   // Generated with http://www.cronmaker.com
 then
   logInfo(LOG, "Controllo se riattivare la sveglia")

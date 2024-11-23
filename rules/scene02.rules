@@ -1,0 +1,36 @@
+val String LOG = "Scene02"
+
+rule "Scene02"
+when
+    Item Scene02 changed to ON
+then
+  pushNotification("Scena Arrivano i Bimbi: Start!", "La scena Scene02 è stata attivata")
+  logInfo(LOG,"Scene Started")
+
+  if (Scene02Condition1.state == ON) {
+    logInfo(LOG,"Scene02Condition1.state == ON")
+    cl01_a_power.sendCommand(OFF)
+  }
+  if (Scene02Condition2.state == ON) {
+    logInfo(LOG,"Scene02Condition2.state == ON")
+    cl02_a_power.sendCommand(ON)
+  }
+  if (Scene02Condition3.state == ON) {
+    logInfo(LOG,"Scene02Condition3.state == ON")
+    faikin01_power.sendCommand(ON)
+  }
+  if (Scene02Condition4.state == ON) {
+    logInfo(LOG,"Scene02Condition4.state == ON")
+    climaStudio_Power.sendCommand(ON)
+  }
+  if (Scene02Condition5.state == ON) {
+    logInfo(LOG,"Scene02Condition5.state == ON")
+    tsSoggiorno.sendCommand(ON)
+  }
+
+  createTimer(now.plusSeconds(5), [|
+    Scene02.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end

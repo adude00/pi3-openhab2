@@ -1,0 +1,9 @@
+Group gScene02
+
+Switch Scene02   		"Scena: Arrivano i Bimbi"		<alarm>	    (gScene02)  [ "Switchable" ]
+
+Switch Scene02Condition1 	"Spegni Clima Officina [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition2 	"Accendi Clima Giochi [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition3 	"Accendi Clima Camera 1 [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition4 	"Accendi Clima Camera 2 [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition5 	"Accendi Termostato Soggiorno [%s]"	<settings>  (gScene02)

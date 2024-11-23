@@ -1,22 +1,22 @@
 import org.eclipse.smarthome.core.library.types.DecimalType
 import org.eclipse.smarthome.model.script.actions.Timer
 
-val String LOG = "sveglia01"
-var Timer sveglia01Timer = null
-var Timer sveglia01EndTimer = null
+val String LOG = "sveglia04"
+var Timer sveglia04Timer = null
+var Timer sveglia04EndTimer = null
 
-rule "sveglia01AlarmSwitchOn"
+rule "sveglia04AlarmSwitchOn"
 when
-    Item sveglia01AlarmSwitch changed to ON
+    Item sveglia04AlarmSwitch changed to ON
 then
-    if (sveglia01Minute.state == NULL || sveglia01Hour.state == NULL) 
+    if (sveglia04Minute.state == NULL || sveglia04Hour.state == NULL) 
     {
-      logInfo(LOG, "sveglia01AlarmMinute or sveglia01AlarmHour not set, alarm not processed")
+      logInfo(LOG, "sveglia04AlarmMinute or sveglia04AlarmHour not set, alarm not processed")
     } 
     else 
     {
       var int nowHour = now.getHourOfDay
-      var int wakeUpHour = (sveglia01Hour.state as DecimalType).intValue
+      var int wakeUpHour = (sveglia04Hour.state as DecimalType).intValue
 
       var int hours = 0
       val int hourDiff = wakeUpHour - nowHour 
@@ -27,7 +27,7 @@ then
       }
       var int minutes = 0
       val int nowMinute = now.getMinuteOfHour
-      val int wakeUpMinute =  (sveglia01Minute.state as DecimalType).intValue
+      val int wakeUpMinute =  (sveglia04Minute.state as DecimalType).intValue
       var int minuteDiff = wakeUpMinute - nowMinute
       if (minuteDiff >= 0) {
         minutes = minuteDiff
@@ -42,24 +42,24 @@ then
       var int totalMinutes = (hours*60) + minutes 
       logInfo(LOG, "Alarm: "  + hours + " h " + minutes + " min")
       logInfo(LOG, "Alarm TP will be set for: " + totalMinutes + " minutes")
-      sveglia01AlarmTriggered.sendCommand(OFF)
-      if (sveglia01Timer !== null) {
-        sveglia01Timer.cancel
-        sveglia01Timer = null
+      sveglia04AlarmTriggered.sendCommand(OFF)
+      if (sveglia04Timer !== null) {
+        sveglia04Timer.cancel
+        sveglia04Timer = null
       }
-      sveglia01Timer = createTimer(now.plusMinutes(totalMinutes), [|
+      sveglia04Timer = createTimer(now.plusMinutes(totalMinutes), [|
         logInfo(LOG, "Alarm triggered! ")
-        sveglia01AlarmTriggered.sendCommand(ON)
-        sveglia01Timer = null
+        sveglia04AlarmTriggered.sendCommand(ON)
+        sveglia04Timer = null
       ])    
 
 }
 end
 
 
-rule "sveglia01AlarmTriggeredOn"
+rule "sveglia04AlarmTriggeredOn"
 when
-  Item sveglia01AlarmTriggered changed to ON
+  Item sveglia04AlarmTriggered changed to ON
 then
   logInfo(LOG, "Alarm triggered. Starting alarm procedure")
 
@@ -71,57 +71,57 @@ then
 
   if (day == 6 || day == 7)  // WEEKENDS
   {
-    if (sveglia01Condition2.state == ON) 
+    if (sveglia04Condition2.state == ON) 
     {
       logInfo(LOG, "Condition2 == ON, Weekends: accendo")
-      cl02_a_power.sendCommand(ON)
+      Scene02.sendCommand(ON)
     }
   }
   else // WORKING DAYS
   {
-    if (sveglia01Condition1.state == ON) 
+    if (sveglia04Condition1.state == ON) 
     {
       logInfo(LOG, "Condition1 == ON, Working Days: accendo")
-      cl02_a_power.sendCommand(ON)
+      Scene02.sendCommand(ON)
     }
   }
 
 // ORA BASTA //
 ///////////////
 
-  sveglia01EndTimer = createTimer(now.plusSeconds(30), [|
-    sveglia01AlarmSwitch.sendCommand(OFF)
-    sveglia01AlarmTriggered.sendCommand(OFF)
-    sveglia01EndTimer = null
+  sveglia04EndTimer = createTimer(now.plusSeconds(30), [|
+    sveglia04AlarmSwitch.sendCommand(OFF)
+    sveglia04AlarmTriggered.sendCommand(OFF)
+    sveglia04EndTimer = null
     logInfo(LOG, "Alarm procedure finished. Resetting triggers.")
     ])
 end
 
 
-rule "sveglia01AlarmSwitchOff"
+rule "sveglia04AlarmSwitchOff"
 when
-    Item sveglia01AlarmSwitch changed to OFF
+    Item sveglia04AlarmSwitch changed to OFF
 then
    logInfo(LOG, "Spengo la sveglia")
-   if (sveglia01Timer !== null) {
-       sveglia01Timer.cancel
-       sveglia01Timer = null
+   if (sveglia04Timer !== null) {
+       sveglia04Timer.cancel
+       sveglia04Timer = null
    }
-   sveglia01AlarmTriggered.sendCommand(OFF)
+   sveglia04AlarmTriggered.sendCommand(OFF)
 end
 
 
-rule "sveglia01 timer for next alarm"
+rule "sveglia04 timer for next alarm"
 when
-  // Alle 3 e 01 minuti di tutti i giorni riarmo la sveglia per la mattina
-  Time cron "0 01 3 1/1 * ? *"
+  // Alle 3 e 04 minuti di tutti i giorni riarmo la sveglia per la mattina
+  Time cron "0 04 3 1/1 * ? *"
   // Generated with http://www.cronmaker.com
 then
   logInfo(LOG, "Controllo se riattivare la sveglia")
 
-  if (sveglia01AlarmRepeat.state == ON) {
-    logInfo(LOG, "sveglia01AlarmRepeat = ON, riattivo la sveglia!!")
-    sveglia01AlarmSwitch.sendCommand(ON)
+  if (sveglia04AlarmRepeat.state == ON) {
+    logInfo(LOG, "sveglia04AlarmRepeat = ON, riattivo la sveglia!!")
+    sveglia04AlarmSwitch.sendCommand(ON)
   }
 
 end
