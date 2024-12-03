@@ -1,0 +1,16 @@
+Thing mqtt:topic:shelly:ble-script:button1 "button1" (mqtt:broker:brokerv2) {
+    Channels:
+            Type string : click "click" [ stateTopic = "shelly/ble-script/button1", trigger=true ]
+} 
+Thing mqtt:topic:shelly:ble-script:button2 "button2" (mqtt:broker:brokerv2) {
+    Channels:
+            Type string : click "click" [ stateTopic = "shelly/ble-script/button2", trigger=true ]
+} 
+Thing mqtt:topic:shelly:ble-script:button3 "button3" (mqtt:broker:brokerv2) {
+    Channels:
+            Type string : click "click" [ stateTopic = "shelly/ble-script/button3", trigger=true ]
+} 
+Thing mqtt:topic:shelly:ble-script:button4 "button4" (mqtt:broker:brokerv2) {
+    Channels:
+            Type string : click "click" [ stateTopic = "shelly/ble-script/button4", trigger=true ]
+} 

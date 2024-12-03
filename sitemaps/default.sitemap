@@ -1708,6 +1708,9 @@ sitemap default label="Casa"
       Switch    item=sw_restart mappings=[0="Restart"]
       Switch    item=pi_restart mappings=[0="Reboot"]
     }
+    Text label="BLE Sensors" {
+      Group item=g_bs01
+    }
 
   } // CHIUSO FRAME DEBUG
 
