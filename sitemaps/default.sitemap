@@ -760,10 +760,14 @@ sitemap default label="Casa"
 	Text      item=spGiochi {
 
 	  // Thermostat Page
-	  Frame label="Temperature" {
+	  Frame label="Temperature vere" {
 	    Text item=sf12_Temp 
 	    Text item=sf12_Humid 
 	  }
+          Frame label="Alexa API" {
+            Switch    item=cl02_a_power	icon=switch
+            Text      item=cl02_a_temp	icon=temperature
+          }
 	  Frame label="Thermostat" {
             Switch    item=tsGiochi
 	    Setpoint  item=spGiochi minValue=17    maxValue=29 step=0.2
