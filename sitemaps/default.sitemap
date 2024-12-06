@@ -259,6 +259,19 @@ sitemap default label="Casa"
 	  }
 	} // Chiuso frame Scena 02
 
+        Text label="Scena 03 - ora di lavorare" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene03
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene03Condition1
+            Switch    item=Scene03Condition2
+            Switch    item=Scene03Condition3
+            Switch    item=Scene03Condition4
+            Switch    item=Scene03Condition5
+	  }
+	} // Chiuso frame Scena 03
+
       }
       Frame label="Sveglie" {
 	Text label="Sveglia 01 - Clima Giochi" icon="clock" {
@@ -329,6 +342,23 @@ sitemap default label="Casa"
 	    Switch item=sveglia04AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia04
+	Text label="Sveglia 05 - Ora di Lavorare" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia05AlarmRepeat
+            Setpoint item=sveglia05Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia05AlarmRepeat==ON]
+            Setpoint item=sveglia05Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia05AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia05Condition1
+	    Switch item=sveglia05Condition2
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia05AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia05AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia05
       } // CHIUSO FRAME Sveglie
 
       Frame label="Automatismi" { 
@@ -835,7 +865,7 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera Giochi
 
 
-    Text item=esp01_Temp label="P1 - Cameretta" icon=boy_3 {
+    Text item=esp01_Temp label="P1 - Camera 1" icon=boy_3 {
       Frame label="A/C Manual" {
         Switch    item=faikin01_power
 	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
@@ -925,10 +955,10 @@ sitemap default label="Casa"
         Switch    item=shelly01_R1          icon=climate      label="Compressor Power"
       }
 
-    } // CHIUSO Text Camera Ethan
+    } // CHIUSO Text Camera 1
 
 
-    Text item=sf08_Temp label="P1 - Studio" icon=calendar {
+    Text item=sf08_Temp label="P1 - Camera 2" icon=girl_3 {
       Frame label="Condizionatore" {
         Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
 	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
@@ -988,84 +1018,50 @@ sitemap default label="Casa"
         Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
-    } // CHIUSO Text Studio
+    } // CHIUSO Text Camera 2
 
     Text item=sf08_Temp label="P1 - Officina" icon=office {
-      Frame label="Termostato" {
-	Switch    item=tsOfficina
-	Text      item=spOfficina {
 
-	  // Thermostat Page
-	  Frame label="Temperature" {
-	    Text item=sf08_Temp 
-	  }
-	  Frame label="Thermostat" {
+      Frame label="Termostato" {
+        Switch    item=tsOfficina
+        Text      item=spOfficina {
+
+          // Thermostat Page
+          Frame label="Temperature vere" {
+            Text item=sf08_Temp
+            Text item=sf08_Humid
+          }
+          Frame label="Alexa API" {
+            Switch    item=cl01_a_power icon=switch
+            Text      item=cl01_a_temp  icon=temperature
+          }
+          Frame label="Thermostat" {
             Switch    item=tsOfficina
-	    Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.1
+            Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.2
             Setpoint  item=hsOfficina minValue=0     maxValue=3  step=0.1           icon=settings
             Switch    item=sonoff21_R4
-	  }
-
-          Frame label="A/C Auto Conf" {
-            Setpoint  item=tsOfficinaWaitMaxTemp     minValue=10 maxValue=31 step=1  icon=flowpipe
-            Setpoint  item=tsOfficinaWaitMinTemp     minValue=10 maxValue=31 step=1  icon=returnpipe
-            Setpoint  item=tsOfficinaWaitStep        minValue=1  maxValue=3  step=1  icon=line
-            Switch    item=tsOfficinaStartupTempON 
-            Setpoint  item=tsOfficinaStartupTemp     minValue=16 maxValue=30 step=1 visibility=[tsOfficinaStartupTempON==ON]
-            Switch    item=tsOfficinaAutoON          label="Auto ON on SetPoint" icon=settings
-            Switch    item=tsOfficinaOverride        icon=settings
-	  }
-	  Frame label="A/C Auto Tuning" {
-	    Switch    item=tsOfficinaPowerCheck
-	    Switch    item=tsOfficinaPowerLimit
-	    Setpoint  item=tsOfficinaPowerMax        minValue=200 maxValue=500 step=25
           }
-
-          Frame label="A/C Auto DEBUG"  {
-            Switch    item=tsOfficinaWait
-            Setpoint  item=tsOfficinaWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
-            Switch    item=tsOfficinaWaitDebug
-            Switch    item=tsOfficinaRunning
-            Switch    item=shelly07_Power
-          }
-
-	} //Chiuso text spOfficina
+        } //Chiuso text spOfficina
       } // Chiuso frame Termostato
 
       Frame label="Comfort" {
         Text      item=sf08_Temp   label="Officina: Temperatura"
         Text      item=sf08_Humid  label="Officina: Umidità"
       }
-
-      Frame label="Condizionatore Officina" {
-        Switch    item=cl01_power     icon=climate      
-	Setpoint  item=cl01_temp      icon=temperature  minValue=16 maxValue=32 step=1
-	Selection item=cl01_fan_speed icon=fan          mappings=["0"="Auto", "5"="Super Low", "6"="Low", "7"="Medium", "8"="High", "9"="Super High"]
-	Switch    item=cl01_fan_mute  icon=microphone
-        Text      item=shelly07_Power icon=settings     label="Extra Settings" {
-	  Frame label="Mode" {
-	    Switch    item=cl01_work_mode icon=settings     mappings=["0"="Fan", "1"="Heat", "2"="Cool", "3"="Dry", "4"="Auto"]
-	  }
-	  Frame label="Settings" {
-	    Switch    item=cl01_up_down   icon=flow
-	    Switch    item=cl01_beep      icon=soundvolume
-	    Switch    item=cl01_eco       icon=garden
-	    Switch    item=cl01_super     icon=pump
-	  }
-	  Frame label="Power" {
-	    Text      item=shelly07_Power icon=energy
-            Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
-	  }
-	  Frame label="Alexa API" {
-	    Switch    item=cl01_a_power	icon=switch
-	    Text      item=cl01_a_temp	icon=temperature
-	  }
-	}
+      Frame label="Alexa API" {
+        Switch    item=cl01_a_power     icon=switch
+        Text      item=cl01_a_temp      icon=temperature
+      }
+      Frame label="Power" {
+        Text      item=shelly07_Power icon=energy
+        Switch    item=shelly07_R1              icon=climate  label="Compressore HiSense"
       }
       Frame label="Outside" {
-        Text      item=faikin01_outside icon=garden        label="Terrazzo Davanti [%.1f °C]"
+        Text      item=Fuori_Temperature   icon=vacation      label="Bologna"
+        Text      item=faikin01_outside    icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
       }
-    }
+
+    } // CHIUSO Text Officina
 
     Text item=sf20_Temp label="P1 - Bagno" icon=toilet {
       Frame label="Comfort" {

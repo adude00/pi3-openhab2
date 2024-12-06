@@ -3,12 +3,3 @@ Group	g_cl01		"Clima Officina"
 Switch	cl01_a_power    "Power Alexa" 		(g_cl01) 	{ channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:powerState" }
 Number	cl01_a_temp     "Split Temp [%s °C]" 	(g_cl01,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:temperature" }
 
-Number  cl01_temp       "Temp [%s °C]"	(g_cl01,gInflux)  
-Number  cl01_work_mode  "Mode"		(g_cl01)
-Number  cl01_fan_speed  "Fan Speed"	(g_cl01)
-Switch	cl01_power	"Power"		(g_cl01)
-Switch  cl01_beep       "Beep"		(g_cl01)
-Switch  cl01_fan_mute   "Silent"	(g_cl01)
-Switch  cl01_super	"Turbo"		(g_cl01)
-Switch  cl01_eco	"Eco"		(g_cl01)
-Switch 	cl01_up_down	"Swing"		(g_cl01)

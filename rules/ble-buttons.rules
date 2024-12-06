@@ -7,10 +7,12 @@ then
 	if (click == "2") {
 	  logInfo("ble","button1: doubleclick - accendo tsBagno")
 	  tsBagnoP1.sendCommand(ON)
+	  sendCommand(shelly09_R1, ON)
 	}
 	if (click == "4") {
 	  logInfo("ble","button1: longclick - spengo tsBagno")
 	  tsBagnoP1.sendCommand(OFF)
+	  sendCommand(shelly09_R1, OFF)
 	}
 end
 

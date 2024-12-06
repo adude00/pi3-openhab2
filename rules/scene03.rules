@@ -1,0 +1,36 @@
+val String LOG = "Scene03"
+
+rule "Scene03"
+when
+    Item Scene03 changed to ON
+then
+  pushNotification("Scena ora di lavorare: Start!", "La scena Scene03 è stata attivata")
+  logInfo(LOG,"Scene Started")
+
+  if (Scene03Condition1.state == ON) {
+    logInfo(LOG,"Scene03Condition1.state == ON")
+    cl02_a_power.sendCommand(OFF)
+  }
+  if (Scene03Condition2.state == ON) {
+    logInfo(LOG,"Scene03Condition2.state == ON")
+    cl01_a_power.sendCommand(ON)
+  }
+  if (Scene03Condition3.state == ON) {
+    logInfo(LOG,"Scene03Condition3.state == ON")
+    faikin01_power.sendCommand(OFF)
+  }
+  if (Scene03Condition4.state == ON) {
+    logInfo(LOG,"Scene03Condition4.state == ON")
+    climaStudio_Power.sendCommand(OFF)
+  }
+  if (Scene03Condition5.state == ON) {
+    logInfo(LOG,"Scene03Condition5.state == ON")
+    tsOfficina.sendCommand(ON)
+  }
+
+  createTimer(now.plusSeconds(5), [|
+    Scene03.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end

@@ -1,0 +1,9 @@
+Group  sveglia05Alarm
+Number sveglia05Hour            "Sveglia 05 hour [%d]"             <clock>     (gRestore,sveglia05Alarm)
+Number sveglia05Minute          "Sveglia 05 minute [%d]"           <clock>     (gRestore,sveglia05Alarm)
+Switch sveglia05AlarmSwitch     "Sveglia 05 timer started [%s]"    <clock>     (gRestore,sveglia05Alarm)
+Switch sveglia05AlarmTriggered  "Sveglia 05 action trigger [%s]"   <fire>      (gRestore,sveglia05Alarm)
+Switch sveglia05AlarmRepeat     "Sveglia 05 repeat tomorrow [%s]"  <smiley>    (gRestore,sveglia05Alarm)
+
+Switch sveglia05Condition1      "Turn ON on Week days [%s]"      <settings>  (gRestore,sveglia05Alarm)
+Switch sveglia05Condition2      "Turn ON on Week-ends [%s]"      <settings>  (gRestore,sveglia05Alarm)
