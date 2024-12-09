@@ -124,7 +124,7 @@ then
 
               if (faikin02_power.state == ON ) {
                 // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER
-                faikin02_power.sendCommand(OFF)
+                if (tsSoggiornoPowerOff.state == ON ) faikin02_power.sendCommand(OFF)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Compressor not doing anything already. Turning aircon OFF!")
               } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, aircon already OFF!!")
@@ -147,26 +147,28 @@ then
           } // TOO COLD COOLING CLOSED
 
 
-          // TOO COLD HEATING: INCREASE TEMP
+          // TOO COLD HEATING: TURN ON or INCREASE TEMP
 
           if ((faikin02_mode.state+"") == "H") {
-            if ( acTemp < acTempMax ) {
-            // WE CAN INCREASE TEMP
-              acTemp = acTemp + acTempStep
-              faikin02_temp.sendCommand(acTemp)
-              if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
-              if (faikin02_power.state == OFF ) {
-                // TURN ON IF OFF
-                faikin02_power.sendCommand(ON)
-                if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: Aircon was OFF. Turning it ON!")
+	    if (faikin02_power.state == OFF ) { 
+	      // AIRCON WAS OFF: TURN IT ON
+	      faikin02_power.sendCommand(ON)
+	      if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: Aircon was OFF. Turning it ON!")
+	    } else {
+
+              // AIRCONF WAS ON, INCREASE TEMP IF POSSIBLE
+              if ( acTemp < acTempMax ) {
+              // WE CAN INCREASE TEMP
+                acTemp = acTemp + acTempStep
+                faikin02_temp.sendCommand(acTemp)
+                if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
+              } else {
+                // MAX POWER REACHED
+                if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
               }
-            } else {
-              // MAX POWER REACHED
-              if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
-            }
+	    } // IF IT WAS ON
 
           } // TOO COLD HEATING CLOSED
-
 
       } // TOO COLD CLOSED
 
@@ -194,7 +196,7 @@ then
 
 	      if (faikin02_power.state == ON ) {
 	        // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER 
-	        faikin02_power.sendCommand(OFF)
+	        if (tsSoggiornoPowerOff.state == ON ) faikin02_power.sendCommand(OFF)
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Compressor not doing anything already. Turning aircon OFF!")
 	      } else {
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, aircon already OFF!!")

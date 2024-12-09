@@ -27,6 +27,10 @@ then
     logInfo(LOG,"Scene03Condition5.state == ON")
     tsOfficina.sendCommand(ON)
   }
+  if (Scene03Condition6.state == ON) {
+    logInfo(LOG,"Scene03Condition6.state == ON")
+    sf08_Light.sendCommand(ON)
+  }
 
   createTimer(now.plusSeconds(5), [|
     Scene03.sendCommand(OFF)

@@ -14,13 +14,13 @@ rule "Termostato Officina"
     if (sonoff21_R4.state == ON) {
       if ((cur_temp).floatValue > ((setpoint).floatValue)) {
         sendCommand(sonoff21_R4, OFF)
-        logInfo("tsOfficina","tsOfficina: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+        if (tsOfficinaLog.state == ON) logInfo("tsOfficina","tsOfficina: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
       }
     }
     else {
       if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
         sendCommand(sonoff21_R4, ON)
-        logInfo("tsOfficina","tsOfficina: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+        if (tsOfficinaLog.state == ON) logInfo("tsOfficina","tsOfficina: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
       }
     }
   }

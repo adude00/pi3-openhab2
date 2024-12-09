@@ -4,10 +4,10 @@ Group t_sonoff08      "sonoff08: Scrivania"
 Switch		sf08_Light "Scrivania" 			<wallswitch> 	(t_sonoff08,sonoff,gScrivania,gBuonanotte)	
 	{channel="mqtt:topic:tasmota:sonoff08:PowerSwitch"}
 
-Number		sf08_Temp   "Temp. Scrivania [%.1f °C]"  <temperature>  (gTemp,t_sonoff08,sonoff,gChartStudioT)
+Number		sf08_Temp   "Temp. Scrivania [%.1f °C]"  <temperature>  (gTemp,t_sonoff08,sonoff)
 	{channel="mqtt:topic:tasmota:sonoff08:Temperature"}
 
-Number		sf08_Humid  "Umid. Scrivania [%.1f %%]"  <humidity>    (gHumd,t_sonoff08,sonoff,gChartStudioH)
+Number		sf08_Humid  "Umid. Scrivania [%.1f %%]"  <humidity>    (gHumd,t_sonoff08,sonoff)
 	{channel="mqtt:topic:tasmota:sonoff08:Humidity"}
 
 // Tasmota Status

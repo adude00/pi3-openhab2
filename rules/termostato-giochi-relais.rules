@@ -14,13 +14,13 @@ rule "Termostato Giochi"
     if (sonoff21_R2.state == ON) {
       if ((cur_temp).floatValue > ((setpoint).floatValue)) {
         sendCommand(sonoff21_R2, OFF)
-        logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+        if (tsGiochiLog.state == ON) logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
       }
     }
     else {
       if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
         sendCommand(sonoff21_R2, ON)
-        logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+        if (tsGiochiLog.state == ON) logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
       }
     }
   }

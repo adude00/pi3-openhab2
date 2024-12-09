@@ -1,7 +1,7 @@
 Group g_climaStudio
 
 Switch climaStudio_Power    "Clima Studio"      (g_climaStudio)    [ "Switchable" ]
-Number climaStudio_Temp     "Temp [%.1f °C]"    (g_climaStudio)
+Number climaStudio_Temp     "Temp [%.1f °C]"    (g_climaStudio,gInflux)
 String climaStudio_Mode     "Mode"              (g_climaStudio)
 String climaStudio_Fan      "Fan Speed"         (g_climaStudio)    
 Switch climaStudio_Swing    "Swing"             (g_climaStudio)

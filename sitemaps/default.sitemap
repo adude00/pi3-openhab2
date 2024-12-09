@@ -269,6 +269,7 @@ sitemap default label="Casa"
             Switch    item=Scene03Condition3
             Switch    item=Scene03Condition4
             Switch    item=Scene03Condition5
+            Switch    item=Scene03Condition6
 	  }
 	} // Chiuso frame Scena 03
 
@@ -488,6 +489,7 @@ sitemap default label="Casa"
             Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
             Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
             Switch    item=tsSoggiornoOverride        icon=settings
+	    Switch    item=tsSoggiornoPowerOff
           }
 
           Frame label="Extra" {
@@ -798,11 +800,12 @@ sitemap default label="Casa"
             Switch    item=cl02_a_power	icon=switch
             Text      item=cl02_a_temp	icon=temperature
           }
-	  Frame label="Thermostat" {
+	  Frame label="Thermostat Conf" {
             Switch    item=tsGiochi
 	    Setpoint  item=spGiochi minValue=17    maxValue=29 step=0.2
             Setpoint  item=hsGiochi minValue=0     maxValue=3  step=0.1           icon=settings
             Switch    item=sonoff21_R2
+            Switch    item=tsGiochiLog
 	  }
 	} //Chiuso text spGiochi
       } // Chiuso frame Termostato
@@ -958,7 +961,45 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera 1
 
 
-    Text item=sf08_Temp label="P1 - Camera 2" icon=girl_3 {
+    Text item=sf22_Temp label="P1 - Camera 2" icon=girl_3 {
+      Frame label="Termostato" {
+	Switch    item=tsCamera2
+	Text      item=tsCamera2sp {
+
+	  Frame label="Temperature reali" {
+	        Text      item=sf22_Temp   label="Studio: Temperatura"
+	        Text      item=sf22_Humid  label="Studio: Umidità"
+	  }
+	  Frame label="Termostato - Basic" {
+	    Switch    item=tsCamera2
+	    Setpoint  item=tsCamera2sp	minValue=16 maxValue=28 step=0.2
+	    Setpoint  item=tsCamera2hs	minValue=0  maxValue=3  step=0.1
+	  }
+	  Frame label="Termostato - Advanced" {
+	    Setpoint  item=tsCamera2WaitMins 		minValue=5   maxValue=20  step=1
+	    Setpoint  item=tsCamera2WaitMaxTemp 	minValue=16  maxValue=30  step=1
+	    Setpoint  item=tsCamera2WaitMinTemp 	minValue=16  maxValue=30  step=1
+	    Setpoint  item=tsCamera2Step 		minValue=1   maxValue=3   step=1
+            Switch    item=tsCamera2AutoON
+	    Switch    item=tsCamera2StartupTempON
+	    Setpoint  item=tsCamera2StartupTemp         minValue=16  maxValue=30  step=1 visibility=[tsCamera2StartupTempON==ON]
+	    Switch    item=tsCamera2PowerOff
+	    Switch    item=tsCamera2Override
+	  }
+	  Frame label="Termostato - DEBUG" {
+	    Switch    item=tsCamera2Wait
+	    Switch    item=tsCamera2Running
+	    Switch    item=tsCamera2WaitDebug
+	    Text      item=tsCamera2PrevTemp
+	  }
+
+	} // CHIUSO TEXT tsCamera2sp 
+      } // CHIUSO FRAME Termostato
+
+      Frame label="Comfort" {
+        Text      item=sf22_Temp   label="Studio: Temperatura"
+        Text      item=sf22_Humid  label="Studio: Umidità"
+      }
       Frame label="Condizionatore" {
         Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
 	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
@@ -971,10 +1012,6 @@ sitemap default label="Casa"
 	Switch    item=climaStudio_Turbo     icon=pump
         Switch    item=shelly06_R1    icon=climate  label="Clima Studio"
         Text      item=shelly06_Power icon=energy
-      }
-      Frame label="Comfort" {
-        Text      item=sf08_Temp   label="Studio: Temperatura"
-        Text      item=sf08_Humid  label="Studio: Umidità"
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna" 
@@ -1040,6 +1077,7 @@ sitemap default label="Casa"
             Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.2
             Setpoint  item=hsOfficina minValue=0     maxValue=3  step=0.1           icon=settings
             Switch    item=sonoff21_R4
+	    Switch    item=tsOfficinaLog
           }
         } //Chiuso text spOfficina
       } // Chiuso frame Termostato
@@ -1367,6 +1405,7 @@ sitemap default label="Casa"
 			Group item=t_sonoff12
 			Group item=t_sonoff20
 			Group item=t_sonoff21
+			Group item=t_sonoff22
 			Group item=t_esp08
 			Group item=t_esp09
 			Group item=t_esp10

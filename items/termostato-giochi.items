@@ -1,5 +1,7 @@
-Group gTermoGiochi
+Group gtsGiochi
 
-Switch tsGiochi  "Termostato Giochi"                        (gTermoGiochi,gRestore) [ "Switchable" ]
-Number spGiochi  "Setpoint Giochi [%.1f °C]"  <smiley>      (gTermoGiochi,gInflux) 
-Number hsGiochi  "Isteresi Giochi [%.1f °C]"  <flowpipe>    (gTermoGiochi)
+Switch tsGiochi    "Termostato Giochi [%s]"                   (gtsGiochi,gRestore) [ "Switchable" ]
+Number spGiochi    "Setpoint Giochi [%.1f °C]"  <smiley>      (gtsGiochi,gInflux) 
+Number hsGiochi    "Isteresi Giochi [%.1f °C]"  <flowpipe>    (gtsGiochi)
+
+Switch tsGiochiLog "tsGiochi Log Debug [%s]"    <settings>

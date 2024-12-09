@@ -1,0 +1,27 @@
+Group t_sonoff22      "sonoff22: P1 Camera 2 TBD"
+
+// ITEM SPECIFIC
+Switch		sf22_Switch "P1 Camera 2 TBD" 		<camera> 	(t_sonoff22,sonoff)
+	{channel="mqtt:topic:tasmota:sonoff22:PowerSwitch"}
+
+Number		sf22_Temp   "P1 Camera 2 [%.1f °C]"  <temperature> 	(gTemp,t_sonoff22,sonoff,gChartStudioT)
+	{channel="mqtt:topic:tasmota:sonoff22:Temperature"}
+
+Number		sf22_Humid  "P1 Camera 2 [%.1f %%]"  <humidity>    	(gHumd,t_sonoff22,sonoff,gChartStudioH)
+	{channel="mqtt:topic:tasmota:sonoff22:Humidity"}
+
+// Tasmota Status
+String               sf22_Refresh       "sonoff22 Time [%s]"      <clock>  (t_sonoff,t_sonoff22,gTime)      {channel="mqtt:topic:tasmota:sonoff22:Time"}
+String               sf22_Version       "sonoff22 Version [%s]"	  <status> (t_sonoff,t_sonoff22,gVersion)   {channel="mqtt:topic:tasmota:sonoff22:Version"}
+String               sf22_Reachable     "sonoff22 Reachable [%s]" <switch> (t_sonoff,t_sonoff22,gReachable) {channel="mqtt:topic:tasmota:sonoff22:Reachable"}
+
+// Diagnostics
+Number:Dimensionless sf22_RSSI          "sonoff22 Signal [%d %%]" <network>            (t_sonoff,t_sonoff22,gRSSI)      {channel="mqtt:topic:tasmota:sonoff22:RSSI"}
+Number:Dimensionless sf22_LoadAvg       "sonoff22 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff22,gLoad)      {channel="mqtt:topic:tasmota:sonoff22:LoadAvg"}
+String               sf22_Result        "sonoff22 Result [%s]"    <status>             (t_sonoff,t_sonoff22,gResult)    {channel="mqtt:topic:tasmota:sonoff22:Result"}
+String               sf22_Uptime        "sonoff22 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff22,gUptime)    {channel="mqtt:topic:tasmota:sonoff22:Uptime"}
+String               sf22_RestartReason "sonoff22 Reason [%s]"    <error>              (t_sonoff,t_sonoff22,gReason)    {channel="mqtt:topic:tasmota:sonoff22:RestartReason"}
+
+// NEW STUFF - UPGRADE FIRST
+// String sf22_WifiDowntime "Wifi Downtime [%s]" (t_sonoff,t_sonoff22) {channel="mqtt:topic:tasmota:sonoff22:WifiDowntime"}
+
