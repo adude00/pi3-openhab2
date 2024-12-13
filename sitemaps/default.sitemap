@@ -254,8 +254,13 @@ sitemap default label="Casa"
             Switch    item=Scene02Condition1
             Switch    item=Scene02Condition2
             Switch    item=Scene02Condition3
+            Switch    item=Scene02Condition3bis visibility=[Scene02Condition3==ON]
+            Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
             Switch    item=Scene02Condition4
             Switch    item=Scene02Condition5
+	  }
+	  Frame label="Triggers" {
+	    Switch    item=Scene02Trigger1
 	  }
 	} // Chiuso frame Scena 02
 
@@ -976,7 +981,7 @@ sitemap default label="Casa"
 	    Setpoint  item=tsCamera2hs	minValue=0  maxValue=3  step=0.1
 	  }
 	  Frame label="Termostato - Advanced" {
-	    Setpoint  item=tsCamera2WaitMins 		minValue=5   maxValue=20  step=1
+	    Setpoint  item=tsCamera2WaitMins 		minValue=1   maxValue=20  step=1
 	    Setpoint  item=tsCamera2WaitMaxTemp 	minValue=16  maxValue=30  step=1
 	    Setpoint  item=tsCamera2WaitMinTemp 	minValue=16  maxValue=30  step=1
 	    Setpoint  item=tsCamera2Step 		minValue=1   maxValue=3   step=1

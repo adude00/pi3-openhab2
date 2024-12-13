@@ -1,9 +1,8 @@
 Group gtsCamera2		"Termostato tsCamera2"
 
-Switch tsCamera2  		"Termostato tsCamera2 [%s]"                    	(gtsCamera2,gRestore)
-Number tsCamera2sp  		"Setpoint tsCamera2 [%.1f °C]"  <smiley>      	(gtsCamera2) 
+Switch tsCamera2  		"Termostato Camera2 [%s]"       <heating>       (gtsCamera2,gRestore) [ "Switchable" ]
+Number tsCamera2sp  		"Setpoint tsCamera2 [%.1f °C]"  <smiley>      	(gtsCamera2,gInflux) 
 Number tsCamera2hs  		"Isteresi tsCamera2 [%.1f °C]"  <flowpipe>    	(gtsCamera2)
-Switch tsCamera2Override  	"Override OFF Thermostat"
 
 
 Number tsCamera2WaitMins	"Minutes to Wait [%s]"		<time> 		(gtsCamera2)
@@ -14,6 +13,7 @@ Switch tsCamera2AutoON 		"Auto ON on SetPoint [%s]"    	<text> 		(gtsCamera2)
 Number tsCamera2StartupTemp 	"Temp Accensione [%.1f °C]"     <heating>
 Switch tsCamera2StartupTempON	"Imposta Startup Temp [%s]"     <settings>
 Switch tsCamera2PowerOff	"Spegni se inutilizzato [%s]"   <energy>	(gtsCamera2)
+Switch tsCamera2Override  	"Override OFF Thermostat [%s]"  <settings>      (gtsCamera2)
 
 // DEBUG ITEMS
 Switch tsCamera2Wait 		"Ts is Waiting... [%s]"		<lock> 		(gtsCamera2)

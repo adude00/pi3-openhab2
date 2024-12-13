@@ -25,7 +25,7 @@ then
   }
   if (Scene03Condition5.state == ON) {
     logInfo(LOG,"Scene03Condition5.state == ON")
-    tsOfficina.sendCommand(ON)
+    tsCamera2.sendCommand(OFF)
   }
   if (Scene03Condition6.state == ON) {
     logInfo(LOG,"Scene03Condition6.state == ON")

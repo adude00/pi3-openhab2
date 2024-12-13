@@ -18,17 +18,25 @@ then
   if (Scene02Condition3.state == ON) {
     logInfo(LOG,"Scene02Condition3.state == ON")
     faikin01_power.sendCommand(ON)
+
+    if (Scene02Condition3bis.state == ON) {
+      createTimer(now.plusSeconds(10), [|
+        logInfo(LOG,"Scene02Condition3bis.state == ON - Setting up temperature: " + Scene02Condition3bisNum.state as Number)
+        faikin01_temp.sendCommand(Scene02Condition3bisNum.state as Number)
+     ])
+    }
+
   }
   if (Scene02Condition4.state == ON) {
     logInfo(LOG,"Scene02Condition4.state == ON")
-    climaStudio_Power.sendCommand(ON)
+    tsCamera2.sendCommand(ON)
   }
   if (Scene02Condition5.state == ON) {
     logInfo(LOG,"Scene02Condition5.state == ON")
     tsSoggiorno.sendCommand(ON)
   }
 
-  createTimer(now.plusSeconds(5), [|
+  createTimer(now.plusSeconds(13), [|
     Scene02.sendCommand(OFF)
     logInfo(LOG,"Scena finita")
   ])

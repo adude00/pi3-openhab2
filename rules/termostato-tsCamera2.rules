@@ -95,7 +95,10 @@ then
     var Number acTempStep 	= tsCamera2Step.state as Number
     var Number tsCamera2hs    	= tsCamera2hs.state
     var Number setpoint   	= tsCamera2sp.state
-    //var Number prevTemp         = tsCamera2PrevTemp.state
+
+    // previous Temperature awareness
+    var Number prevTemp         = tsCamera2PrevTemp.state
+    tsCamera2PrevTemp.sendCommand(cur_temp)
 
     // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
     // https://community.openhab.org/t/solved-int-from-switch-item-number-as-now-plusminutes/60035/17
@@ -157,18 +160,27 @@ then
 	      climaStudio_Power.sendCommand(ON)
 	      if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: Aircon was OFF. Turning it ON!")
 	    } else {
-
               // AIRCONF WAS ON, INCREASE TEMP IF POSSIBLE
-              if ( acTemp < acTempMax ) {
-              // WE CAN INCREASE TEMP
-                acTemp = acTemp + acTempStep
-                climaStudio_Temp.sendCommand(acTemp)
-                if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Increasing acTemp to " + acTemp)
-              } else {
-                // MAX POWER REACHED
-                if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached maximum power: " + acTemp)
-              }
-	    } // IF IT WAS ON
+
+              if ( cur_temp > prevTemp ) {
+		// WARMING UP ALREADY - NOT DOING ANYTHING
+		if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything its warming up already!")
+	      } else {
+		// NOT WARMING UP - INCREASING TEMP
+            
+                if ( acTemp < acTempMax ) {
+                // WE CAN INCREASE TEMP
+                  acTemp = acTemp + acTempStep
+                  climaStudio_Temp.sendCommand(acTemp)
+                  if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Increasing acTemp to " + acTemp)
+                } else {
+                  // MAX POWER REACHED
+                  if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached maximum power: " + acTemp)
+                }
+
+	      } // IF prevTemp CHECK CLOSED
+
+	    } // IF climaStudio_Power CHECK
 
           } // TOO COLD HEATING CLOSED
 
@@ -207,16 +219,24 @@ then
 	    } else {
 	    // COMPRESSOR IS RUNNING
 
-	      if ( acTemp > acTempMin ) {
-		// DECREASE POWER IF WE CAN
-                acTemp = acTemp - acTempStep
-	        climaStudio_Temp.sendCommand(acTemp)
-                if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Decreasing acTemp to " + acTemp)
+	      if (cur_temp < prevTemp ) {
+	        // ALREADY COOLING DOWN - NOT DOING ANYTHING
+	        if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp (" + cur_temp + ") < prevTemp (" + cur_temp + ") - not doing anything its cooling down already!")
 	      } else {
-                if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached minimum power: " + acTemp)
-	      }
+	        // NOT COOLING DOWN - DECREASING TEMP
 
-	    }
+	        if ( acTemp > acTempMin ) {
+	  	  // DECREASE POWER IF WE CAN
+                  acTemp = acTemp - acTempStep
+	          climaStudio_Temp.sendCommand(acTemp)
+                  if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Decreasing acTemp to " + acTemp)
+	        } else {
+                  if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached minimum power: " + acTemp)
+	        }
+
+	      } // IF prevTemp CHECK CLOSED
+
+	    } // IF tsCamera2Watts CHECK CLOSED
 	    
 	  } // IF HEATING CLOSED
 

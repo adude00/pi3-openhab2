@@ -1,9 +1,13 @@
 Group gScene02
 
-Switch Scene02   		"Scena: Arrivano i Bimbi"		<alarm>	    (gScene02)  [ "Switchable" ]
+Switch Scene02   		"Scena: Arrivano i Bimbi"	<alarm>	    (gScene02)  [ "Switchable" ]
 
-Switch Scene02Condition1 	"Spegni Clima Officina [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition2 	"Accendi Clima Giochi [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition3 	"Accendi Clima Camera 1 [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition4 	"Accendi Clima Camera 2 [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition5 	"Accendi Termostato Soggiorno [%s]"	<settings>  (gScene02)
+Switch Scene02Condition1 	"Spegni Clima Officina [%s]" 	<settings>  (gScene02)
+Switch Scene02Condition2 	"Clima Giochi [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition3 	"Clima Camera 1 [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition3bis 	"Modifica Temp Camera 1 [%s]" 	<settings>  (gScene02)
+Number Scene02Condition3bisNum 	"Temp Camera 1 [%.1f °C]" 	<settings>  (gScene02)
+Switch Scene02Condition4 	"Termostato Camera 2 [%s]" 	<settings>  (gScene02)
+Switch Scene02Condition5 	"Termostato Soggiorno P2 [%s]"	<settings>  (gScene02)
+
+Switch Scene02Trigger1		"Trigger: SIAMO SVEGLI"		<settings>  (gScene02)

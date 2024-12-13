@@ -197,6 +197,8 @@ then
   led03_DimW.sendCommand(led03_w)
   led03_Dim.sendCommand(led03_c)
 
+  // Scene02 se abilitato il trigger
+  if (Scene02Trigger1.state == ON) Scene02.sendCommand(ON)
 
   createTimer(now.plusSeconds(30), [|
     AutoRientro.sendCommand(OFF) 
