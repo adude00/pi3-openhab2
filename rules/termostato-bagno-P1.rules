@@ -1,3 +1,5 @@
+var Timer tsBagnoP1Timer = null
+
 rule "Termostato Bagno P1"
   when
     Item spBagnoP1 changed or
@@ -36,9 +38,20 @@ rule "Termostato BagnoP1 Auto OFF"
     val int timerTime = (tsBagnoP1AutoOffMins.state as Number).intValue
     if (tsBagnoP1AutoOff.state == ON) {
       logInfo("tsBagnoP1","tsBagnoP1: AutoOff ON: Starting "+ timerTime +" minutes timer")
-      createTimer(now.plusMinutes(timerTime), [|
+      tsBagnoP1Timer = createTimer(now.plusMinutes(timerTime), [|
         tsBagnoP1.sendCommand(OFF)
         logInfo("tsBagnoP1","tsBagnoP1: Auto OFF: turning off thermostat after "+ timerTime +" mins")
       ])
     }
+end
+
+rule "Termostato BagnoP1 Auto OFF"
+  when
+    Item tsBagnoP1 changed from ON to OFF
+  then
+      if (tsBagnoP1Timer !== null) {
+        tsBagnoP1Timer.cancel
+        tsBagnoP1Timer = null
+	logInfo("tsBagnoP1","OFF: tsBagnoP1Timer not null -> tsBagnoP1Timer.cancel")
+      }
 end

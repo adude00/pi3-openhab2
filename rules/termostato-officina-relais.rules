@@ -5,7 +5,8 @@ rule "Termostato Officina"
     Item tsOfficina changed
   then
   
-  var Number cur_temp = sf08_Temp.state 
+  //var Number cur_temp = sf08_Temp.state 
+  var Number cur_temp = bs03_temperature.state 
   var Number setpoint = spOfficina.state 
   var Number hysteresis = hsOfficina.state 
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue

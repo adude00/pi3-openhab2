@@ -972,8 +972,10 @@ sitemap default label="Casa"
 	Text      item=tsCamera2sp {
 
 	  Frame label="Temperature reali" {
-	        Text      item=sf22_Temp   label="Studio: Temperatura"
-	        Text      item=sf22_Humid  label="Studio: Umidità"
+	        Text      item=sf22_Temp   label="Alto (sf22): Temperatura"
+	        Text      item=sf22_Humid  label="Alto (sf22): Umidità"
+	        Text      item=bs04_temperature   label="Basso (bs04): Temperatura"
+	        Text      item=bs04_humidity      label="Basso (bs04): Umidità"
 	  }
 	  Frame label="Termostato - Basic" {
 	    Switch    item=tsCamera2
@@ -1002,8 +1004,10 @@ sitemap default label="Casa"
       } // CHIUSO FRAME Termostato
 
       Frame label="Comfort" {
-        Text      item=sf22_Temp   label="Studio: Temperatura"
-        Text      item=sf22_Humid  label="Studio: Umidità"
+	        Text      item=sf22_Temp   label="Alto (sf22): Temperatura"
+	        Text      item=sf22_Humid  label="Alto (sf22): Umidità"
+	        Text      item=bs04_temperature   label="Basso (bs04): Temperatura"
+	        Text      item=bs04_humidity      label="Basso (bs04): Umidità"
       }
       Frame label="Condizionatore" {
         Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
@@ -1754,6 +1758,9 @@ sitemap default label="Casa"
     }
     Text label="BLE Sensors" {
       Group item=g_bs01
+      Group item=g_bs02
+      Group item=g_bs03
+      Group item=g_bs04
     }
 
   } // CHIUSO FRAME DEBUG
