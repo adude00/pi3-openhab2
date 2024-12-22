@@ -1,11 +1,10 @@
 rule "Termostato Officina"
   when
     Item spOfficina changed or
-    Item sf08_Temp changed or
+    Item bs03_temperature changed or
     Item tsOfficina changed
   then
   
-  //var Number cur_temp = sf08_Temp.state 
   var Number cur_temp = bs03_temperature.state 
   var Number setpoint = spOfficina.state 
   var Number hysteresis = hsOfficina.state 

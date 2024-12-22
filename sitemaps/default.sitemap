@@ -70,7 +70,6 @@ sitemap default label="Casa"
       Switch item=NAS2
       Switch item=Net_TV
       Switch item=pow04_Switch
-      Switch item=sf08_Light
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
         Switch item=tuya01_switch
@@ -277,6 +276,21 @@ sitemap default label="Casa"
             Switch    item=Scene03Condition6
 	  }
 	} // Chiuso frame Scena 03
+        Text label="Scena 04 - Nanna" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene04
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene04Condition1
+            Switch    item=Scene04Condition2
+            Switch    item=Scene04Condition3
+            Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
+            Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
+            Switch    item=Scene04Condition4
+            Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
+            Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
+	  }
+	} // Chiuso frame Scena 04
 
       }
       Frame label="Sveglie" {
@@ -966,16 +980,20 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera 1
 
 
-    Text item=sf22_Temp label="P1 - Camera 2" icon=girl_3 {
+    Text item=bs04_temperature label="P1 - Camera 2" icon=girl_3 {
       Frame label="Termostato" {
 	Switch    item=tsCamera2
 	Text      item=tsCamera2sp {
 
 	  Frame label="Temperature reali" {
-	        Text      item=sf22_Temp   label="Alto (sf22): Temperatura"
-	        Text      item=sf22_Humid  label="Alto (sf22): Umidità"
-	        Text      item=bs04_temperature   label="Basso (bs04): Temperatura"
-	        Text      item=bs04_humidity      label="Basso (bs04): Umidità"
+	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
+	        Text      item=bs04_temperature   label="Metà (bs04): Temperatura"
+	        Text      item=bs01_temperature   label="Basso (bs04): Temperatura"
+	  }
+	  Frame label="Umidità reali" {
+	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
+	        Text      item=bs04_humidity      label="Metà (bs04): Umidità"
+	        Text      item=bs01_humidity      label="Basso (bs04): Umidità"
 	  }
 	  Frame label="Termostato - Basic" {
 	    Switch    item=tsCamera2
@@ -1003,12 +1021,16 @@ sitemap default label="Casa"
 	} // CHIUSO TEXT tsCamera2sp 
       } // CHIUSO FRAME Termostato
 
-      Frame label="Comfort" {
-	        Text      item=sf22_Temp   label="Alto (sf22): Temperatura"
-	        Text      item=sf22_Humid  label="Alto (sf22): Umidità"
-	        Text      item=bs04_temperature   label="Basso (bs04): Temperatura"
-	        Text      item=bs04_humidity      label="Basso (bs04): Umidità"
-      }
+	  Frame label="Temperature reali" {
+	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
+	        Text      item=bs04_temperature   label="Metà (bs04): Temperatura"
+	        Text      item=bs01_temperature   label="Basso (bs04): Temperatura"
+	  }
+	  Frame label="Umidità reali" {
+	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
+	        Text      item=bs04_humidity      label="Metà (bs04): Umidità"
+	        Text      item=bs01_humidity      label="Basso (bs04): Umidità"
+	  }
       Frame label="Condizionatore" {
         Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
 	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
@@ -1066,7 +1088,7 @@ sitemap default label="Casa"
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Camera 2
 
-    Text item=sf08_Temp label="P1 - Officina" icon=office {
+    Text item=bs03_temperature label="P1 - Officina" icon=office {
 
       Frame label="Termostato" {
         Switch    item=tsOfficina
@@ -1074,8 +1096,8 @@ sitemap default label="Casa"
 
           // Thermostat Page
           Frame label="Temperature vere" {
-            Text item=sf08_Temp
-            Text item=sf08_Humid
+            Text item=bs03_temperature
+            Text item=bs03_humidity
           }
           Frame label="Alexa API" {
             Switch    item=cl01_a_power icon=switch
@@ -1092,8 +1114,8 @@ sitemap default label="Casa"
       } // Chiuso frame Termostato
 
       Frame label="Comfort" {
-        Text      item=sf08_Temp   label="Officina: Temperatura"
-        Text      item=sf08_Humid  label="Officina: Umidità"
+        Text      item=bs03_temperature	label="Officina: Temperatura"
+        Text      item=bs03_humidity	label="Officina: Umidità"
       }
       Frame label="Alexa API" {
         Switch    item=cl01_a_power     icon=switch

@@ -1,0 +1,12 @@
+Group gScene04
+
+Switch Scene04   		"Scena: Nanna"			<alarm>	    (gScene04)  [ "Switchable" ]
+
+Switch Scene04Condition1 	"Spegni Campanello [%s]" 	<settings>  (gScene04)
+Switch Scene04Condition2 	"Accendi Rumore Marrone [%s]" 	<settings>  (gScene04)
+Switch Scene04Condition3 	"Clima Camera 2 [%s]" 		<settings>  (gScene04)
+Switch Scene04Condition3bis 	"Modifica Temp Clima [%s]" 	<settings>  (gScene04)
+Number Scene04Condition3bisNum 	"Temp Clima [%.1f °C]" 		<settings>  (gScene04)
+Switch Scene04Condition4 	"Termostato Camera 2 [%s]" 	<settings>  (gScene04)
+Switch Scene04Condition4bis 	"Modifica Temp [%s]" 		<settings>  (gScene04)
+Number Scene04Condition4bisNum 	"Temp Termostato [%.1f °C]" 	<settings>  (gScene04)

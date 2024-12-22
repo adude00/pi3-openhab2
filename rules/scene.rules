@@ -372,27 +372,3 @@ then
 end
 
 
-rule "Nanna"
-when
-    Item Scene_Nanna changed to ON
-then
-    logInfo("Scene","Scena NANNA: iniziata")
-    Tapp08.sendCommand(DOWN)
-
-    alexa_campanello.sendCommand(OFF)
-
-    if (conf_nanna_ac_kid_acon.state == ON) {
-      logInfo("Scene","Nanna: Accendo clima cameretta")
-      DaikinCameretta_Power.sendCommand(ON)
-    }
-
-    if (WhiteNoiseGirlsAutoON.state == ON) {
-      logInfo("Scene","Nanna: Accendo rumore bianco")
-      WhiteNoiseGirls.sendCommand(ON)
-    }
-
-    createTimer(now.plusSeconds(30), [|
-      gScene.sendCommand(OFF)
-      logInfo("Scene","Scena NANNA: finita")
-    ])
-end

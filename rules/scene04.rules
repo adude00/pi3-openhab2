@@ -1,0 +1,57 @@
+val String LOG = "Scene04"
+
+rule "Scene04"
+when
+    Item Scene04 changed to ON
+then
+  pushNotification("Scena Nanna: Start!", "La scena Scene04 è stata attivata")
+  logInfo(LOG,"Scene Started")
+
+  shellytappDelta_roller.sendCommand(DOWN)
+
+  if (Scene04Condition1.state == ON) {
+    logInfo(LOG,"Scene04Condition1.state == ON")
+    alexa_campanello.sendCommand(OFF)
+  }
+
+  if (Scene04Condition2.state == ON) {
+    logInfo(LOG,"Scene04Condition2.state == ON")
+    WhiteNoiseGirls.sendCommand(ON)
+  }
+
+  if (Scene04Condition3.state == ON) {
+    logInfo(LOG,"Scene04Condition3.state == ON")
+    climaStudio_Power.sendCommand(ON)
+
+    if (Scene04Condition3bis.state == ON) {
+      createTimer(now.plusSeconds(10), [|
+        logInfo(LOG,"Scene04Condition3bis.state == ON - Setting up temperature: " + Scene04Condition3bisNum.state as Number)
+        climaStudio_Temp.sendCommand(Scene04Condition3bisNum.state as Number)
+     ])
+    }
+
+  }
+
+  if (Scene04Condition4.state == ON) {
+    logInfo(LOG,"Scene04Condition4.state == " + Scene04Condition4.state)
+    tsCamera2.sendCommand(ON)
+    if (Scene04Condition4bis.state == ON) {
+      createTimer(now.plusSeconds(10), [|
+        logInfo(LOG,"Scene04Condition4bis.state == ON - Setting up temperature: " + Scene04Condition4bisNum.state as Number)
+        tsCamera2sp.sendCommand(Scene04Condition4bisNum.state as Number)
+     ])
+    }
+
+  }
+  
+  if (Scene04Condition4.state == OFF && tsCamera2.state == ON ) {
+    logInfo(LOG,"Scene04Condition4.state == " + Scene04Condition4.state)
+    tsCamera2.sendCommand(OFF)
+  }
+
+  createTimer(now.plusSeconds(13), [|
+    Scene04.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end
