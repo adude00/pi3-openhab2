@@ -5,8 +5,8 @@ Switch led01_Power "Barra Accesa"      (gRGB,gLuci)  {mqtt=">[broker:cmnd/led01/
 String led01_RGB   "Barra Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/HSBCOLOR1:state:JSONPATH($.Color1)]"}
 Dimmer led01_Dim   "Barra [%.0f %%]"   (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer1)"}
 
-Switch led01_PowerW "Letto Acceso"     (gRGB,gLuci) {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER2)]"}
-Dimmer led01_DimW   "Letto [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer2)"}
+Switch led01_PowerW "Bancone Acceso"     (gRGB,gLuci) {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER2)]"}
+Dimmer led01_DimW   "Bancone [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer2)"}
 
 
 // setoption4 1: DIMMER > DIMMER
@@ -14,16 +14,16 @@ Dimmer led01_DimW   "Letto [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broke
 // Per il POWER, il RESULT non ha DIMMER e COLOR. Causa loggate di errore
 
 // setoption4 0
-//Dimmer led01_Dim   "Letto Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER:command:*:default], <[broker:stat/led01/RESULT:state:JSONPATH($.Dimmer)"}
-//String led01_RGB   "Letto Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/RESULT:state:JSONPATH($.Color)]"}
+//Dimmer led01_Dim   "Bancone Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER:command:*:default], <[broker:stat/led01/RESULT:state:JSONPATH($.Dimmer)"}
+//String led01_RGB   "Bancone Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/RESULT:state:JSONPATH($.Color)]"}
 
 
 // STATUS
-Number led01_RSSI "Letto: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
+Number led01_RSSI "Bancone: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String led01_Reachable "Letto: Status [%s]" <switch> (led01,sonoff,gReachable)
+String led01_Reachable "Bancone: Status [%s]" <switch> (led01,sonoff,gReachable)
     { mqtt="<[broker:tele/led01/LWT:state:MAP(reachable.map)]" }
-String led01_Uptime "Letto: Uptime [%s]" <clock> (led01,sonoff,gUptime)
+String led01_Uptime "Bancone: Uptime [%s]" <clock> (led01,sonoff,gUptime)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

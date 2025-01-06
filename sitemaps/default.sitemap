@@ -227,6 +227,9 @@ sitemap default label="Casa"
 	  Frame label="Configurazione Clima Matrimoniale" {
 	    Switch    item=conf_autooff_ac_bdr
 	  }
+	  Frame label="Configurazione Bagno P1" {
+	    Switch    item=conf_mattina_tsBagnoP1
+	  }
 	}  // SCENA Mattina
 
         Text label="Scena Nanna" icon="settings" {
@@ -257,6 +260,8 @@ sitemap default label="Casa"
             Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
             Switch    item=Scene02Condition4
             Switch    item=Scene02Condition5
+            Switch    item=Scene02Condition6
+            Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
 	  }
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
@@ -887,7 +892,7 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera Giochi
 
 
-    Text item=esp01_Temp label="P1 - Camera 1" icon=boy_3 {
+    Text item=bs06_temperature label="P1 - Camera 1" icon=boy_3 {
       Frame label="A/C Manual" {
         Switch    item=faikin01_power
 	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
@@ -927,8 +932,10 @@ sitemap default label="Casa"
       }
 
       Frame label="Comfort" {
-        Text      item=esp01_Temp   label="ETHAN: Temperatura"
-        Text      item=esp01_Humid  label="ETHAN: Umidità"
+        Text      item=bs06_temperature
+        Text      item=bs06_humidity
+        Text      item=bs02_temperature
+        Text      item=bs02_humidity
       }
       Frame label="Outside" {
         Text      item=Fuori_Temperature   icon=vacation      label="Bologna"
@@ -1365,8 +1372,8 @@ sitemap default label="Casa"
       Frame label="Cameretta" {
         Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
         Text item=esp02_Humid                  label="Cameretta Girls"
-        Text item=esp01_Temp                   label="Cameretta Ethan"  icon=bedroom_blue
-        Text item=esp01_Humid                  label="Cameretta Ethan"
+        Text item=bs06_temperature             label="Cameretta Ethan"  icon=bedroom_blue
+        Text item=bs06_humidity                label="Cameretta Ethan"
       }
       Frame label="Bagno" {
         Text item=sf07_Temp                   label="Temperatura" icon=bath
@@ -1431,12 +1438,11 @@ sitemap default label="Casa"
 			Group item=t_sonoff03
 			Group item=t_sonoff04
 			Group item=t_sonoff05
+			Group item=t_sonoff06
 			Group item=t_sonoff07
-			Group item=t_sonoff08
 			Group item=t_sonoff12
 			Group item=t_sonoff20
 			Group item=t_sonoff21
-			Group item=t_sonoff22
 			Group item=t_esp08
 			Group item=t_esp09
 			Group item=t_esp10
@@ -1783,6 +1789,9 @@ sitemap default label="Casa"
       Group item=g_bs02
       Group item=g_bs03
       Group item=g_bs04
+      Group item=g_bs05
+      Group item=g_bs06
+      Group item=g_bs07
     }
 
   } // CHIUSO FRAME DEBUG

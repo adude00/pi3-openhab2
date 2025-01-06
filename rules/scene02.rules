@@ -35,6 +35,18 @@ then
     logInfo(LOG,"Scene02Condition5.state == ON")
     tsSoggiorno.sendCommand(ON)
   }
+  if (Scene02Condition6.state == ON) {
+      createTimer(now.plusSeconds(10), [|
+        logInfo(LOG,"Scene02Condition6.state == ON - Setting up climaStudio temperature: " + Scene02Condition6num.state as Number)
+        climaStudio_Temp.sendCommand(Scene02Condition6num.state as Number)
+     ])
+      createTimer(now.plusSeconds(20), [|
+        logInfo(LOG,"Scene02Condition6.state == ON - Setting up climaStudio temperature second time: " + Scene02Condition6num.state as Number)
+        climaStudio_Temp.sendCommand(Scene02Condition6num.state as Number)
+     ])
+    logInfo(LOG,"Scene02Condition6.state == ON")
+    tsSoggiorno.sendCommand(ON)
+  }
 
   createTimer(now.plusSeconds(13), [|
     Scene02.sendCommand(OFF)

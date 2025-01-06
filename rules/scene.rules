@@ -190,7 +190,7 @@ then
 
   sf03_Switch.sendCommand(OFF)
   sf12_Switch.sendCommand(OFF)
-  //tsBagno.sendCommand(ON)
+  if (conf_mattina_tsBagnoP1.state == ON) tsBagnoP1.sendCommand(ON)
 
   // Accendo le luci in soggiorno in base alla configurazione
   sf04_Light.sendCommand(ON)

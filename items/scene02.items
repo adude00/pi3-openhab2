@@ -9,5 +9,7 @@ Switch Scene02Condition3bis 	"Modifica Temp Camera 1 [%s]" 	<settings>  (gScene0
 Number Scene02Condition3bisNum 	"Temp Camera 1 [%.1f °C]" 	<settings>  (gScene02)
 Switch Scene02Condition4 	"Termostato Camera 2 [%s]" 	<settings>  (gScene02)
 Switch Scene02Condition5 	"Termostato Soggiorno P2 [%s]"	<settings>  (gScene02)
+Switch Scene02Condition6 	"Modifica Temp Camera 2 [%s]"	<settings>  (gScene02)
+Number Scene02Condition6num 	"Temp Camera 2 [%s]"		<settings>  (gScene02)
 
 Switch Scene02Trigger1		"Trigger: SIAMO SVEGLI"		<settings>  (gScene02)
