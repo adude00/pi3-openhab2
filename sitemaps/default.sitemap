@@ -14,14 +14,10 @@ sitemap default label="Casa"
 				Colorpicker  	item=led03_Color
 				Text 		item=led03_RGB
 			}
-			Frame label="Matrimoniale" { 
-				Switch item=sf05_Light
-				Switch item=sf11_Light
-				Slider item=led01_DimW
-			}
-
-			Frame label="Barra LED Colorati" {
-				//Switch 		item=led01_Power
+			Frame label="Studio Barra" {
+			  	Switch		item=led01_PowerW
+				Slider 		item=led01_DimW
+			  	Switch		item=led01_Power
 				Slider 		item=led01_Dim
 				Colorpicker  	item=led01_Color
 				Text 		item=led01_RGB
