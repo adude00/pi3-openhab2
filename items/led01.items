@@ -1,13 +1,16 @@
 Group led01
 
-Color  led01_Color "Bancone Colore"       (gRGB)
+// FAKE FOR ALEXA
+Switch led01_fake01 "Bancone [%s]"           (gLuci) [ "Switchable" ]
+
+Color  led01_Color "Barra Colore"       (gRGB)
 Switch led01_Power "Barra Colorato Acceso"      (gRGB,gLuci)  {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER1)" }
-String led01_RGB   "Bancone Colorato Colore [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/HSBCOLOR1:state:JSONPATH($.Color1)]"}
-Dimmer led01_Dim   "Bancone Colorato [%.0f %%]"   (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer1)"}
+String led01_RGB   "Barra Colorata Colore [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/HSBCOLOR1:state:JSONPATH($.Color1)]"}
+Dimmer led01_Dim   "Barra Colorata [%.0f %%]"   (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer1)"}
 
 // BIANCO
-Switch led01_PowerW "Bancone Bianco Acceso [%s]"     (gRGB,gLuci) {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER2)]"}
-Dimmer led01_DimW   "Bancone Bianco [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer2)"}
+Switch led01_PowerW "Barra Bianca Acceso [%s]"     (gRGB,gLuci) {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER2)]"}
+Dimmer led01_DimW   "Barra Bianca [%.0f %%]" (gLightsDim)    {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer2)"}
 
 
 // setoption4 1: DIMMER > DIMMER
@@ -15,16 +18,16 @@ Dimmer led01_DimW   "Bancone Bianco [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt
 // Per il POWER, il RESULT non ha DIMMER e COLOR. Causa loggate di errore
 
 // setoption4 0
-//Dimmer led01_Dim   "Bancone Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER:command:*:default], <[broker:stat/led01/RESULT:state:JSONPATH($.Dimmer)"}
-//String led01_RGB   "Bancone Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/RESULT:state:JSONPATH($.Color)]"}
+//Dimmer led01_Dim   "Barra Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER:command:*:default], <[broker:stat/led01/RESULT:state:JSONPATH($.Dimmer)"}
+//String led01_RGB   "Barra Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/RESULT:state:JSONPATH($.Color)]"}
 
 
 // STATUS
-Number led01_RSSI "Bancone: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
+Number led01_RSSI "Barra: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String led01_Reachable "Bancone: Status [%s]" <switch> (led01,sonoff,gReachable)
+String led01_Reachable "Barra: Status [%s]" <switch> (led01,sonoff,gReachable)
     { mqtt="<[broker:tele/led01/LWT:state:MAP(reachable.map)]" }
-String led01_Uptime "Bancone: Uptime [%s]" <clock> (led01,sonoff,gUptime)
+String led01_Uptime "Barra: Uptime [%s]" <clock> (led01,sonoff,gUptime)
     { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Uptime)]" }
 
 // Versions

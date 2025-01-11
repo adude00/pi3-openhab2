@@ -5,7 +5,6 @@ Number spSoggiorno  "Setpoint Soggiorno [%.1f °C]"  <smiley>      (gTermoSogg)
 Number hsSoggiorno  "Isteresi Soggiorno [%.1f °C]"  <flowpipe>    (gTermoSogg)
 Number tsSoggSensor "Riferimento"                   <zoom>        (gTermoSogg)
 Switch tsSoggiornoOverride  "Override OFF Thermostat"
-Switch tsSoggiornoBagnetto  "Bagnetto"              <settings>    (gTermoSogg) [ "Switchable" ]		
 
 Number avgSoggiornoAvg		"Media: 30m [%.1f °C]"  (gTermoSogg,gTemp)
 Number avgSoggiornoDivano	"Divano: 30m [%.1f °C]"	(gTermoSogg,gTemp)

@@ -1,14 +1,14 @@
-rule "climaStudio"
+rule "climaCamera2"
 when 
-	//Member of g_climaStudio received command or
-	Member of g_climaStudio changed
+	//Member of g_climaCamera2 received command or
+	Member of g_climaCamera2 changed
 then
 	var String command
 	// Samsung: SAMSUNG_AC
 
-        command = "{ \"Vendor\":\"SAMSUNG_AC\", \"Power\":\"" + climaStudio_Power.state + "\", \"Mode\":\""+ climaStudio_Mode.state + "\", \"Temp\":\"" + climaStudio_Temp.state +"\", \"FanSpeed\":\""+ climaStudio_Fan.state +"\", \"Quiet\":\"" + climaStudio_Quiet.state + "\", \"Beep\":\"" + climaStudio_Beep.state +"\", \"SwingV\":\"" + climaStudio_Swing.state + "\", \"Light\":\"" + climaStudio_Light.state +"\", \"Turbo\":\"" + climaStudio_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
+        command = "{ \"Vendor\":\"SAMSUNG_AC\", \"Power\":\"" + climaCamera2_Power.state + "\", \"Mode\":\""+ climaCamera2_Mode.state + "\", \"Temp\":\"" + climaCamera2_Temp.state +"\", \"FanSpeed\":\""+ climaCamera2_Fan.state +"\", \"Quiet\":\"" + climaCamera2_Quiet.state + "\", \"Beep\":\"" + climaCamera2_Beep.state +"\", \"SwingV\":\"" + climaCamera2_Swing.state + "\", \"Light\":\"" + climaCamera2_Light.state +"\", \"Turbo\":\"" + climaCamera2_Turbo.state +"\", \"StateMode\":\"SendStore\" }"
 	
-        logInfo("climaStudio",command)        
+        logInfo("climaCamera2",command)        
  
         // action-mqtt bindingsv1
 	// publish("broker", "cmnd/ir01/irhvac0", command)

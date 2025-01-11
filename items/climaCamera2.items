@@ -1,0 +1,11 @@
+Group g_climaCamera2
+
+Switch climaCamera2_Power    "Clima Bimbe"       (g_climaCamera2)    [ "Switchable" ]
+Number climaCamera2_Temp     "Temp [%.1f °C]"    (g_climaCamera2,gInflux)
+String climaCamera2_Mode     "Mode"              (g_climaCamera2)
+String climaCamera2_Fan      "Fan Speed"         (g_climaCamera2)    
+Switch climaCamera2_Swing    "Swing"             (g_climaCamera2)
+Switch climaCamera2_Quiet    "Quiet"             (g_climaCamera2)
+Switch climaCamera2_Light    "Light"             (g_climaCamera2)
+Switch climaCamera2_Turbo    "Turbo"             (g_climaCamera2)
+Switch climaCamera2_Beep     "Beep"              (g_climaCamera2)

@@ -1,0 +1,32 @@
+val String LOG = "led01"
+
+rule "Bancone ON"
+when
+  Item led01_fake01 changed from OFF to ON
+then
+  logInfo(LOG,"Bancone ON, start!")
+
+  led01_DimW.sendCommand(100)
+
+  createTimer(now.plusSeconds(1), [|
+    led01_Dim.sendCommand(100)
+    logInfo(LOG,"Bancone ON, end!")
+  ])
+
+end
+
+
+rule "Bancone OFF"
+when
+  Item led01_fake01 changed from ON to OFF
+then
+  logInfo(LOG,"Bancone OFF, start!")
+
+  led01_DimW.sendCommand(0)
+
+  createTimer(now.plusSeconds(1), [|
+    led01_Dim.sendCommand(0)
+    logInfo(LOG,"Bancone OFF, end!")
+  ])
+
+end

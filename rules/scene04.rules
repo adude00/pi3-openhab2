@@ -21,12 +21,12 @@ then
 
   if (Scene04Condition3.state == ON) {
     logInfo(LOG,"Scene04Condition3.state == ON")
-    climaStudio_Power.sendCommand(ON)
+    climaCamera2_Power.sendCommand(ON)
 
     if (Scene04Condition3bis.state == ON) {
       createTimer(now.plusSeconds(10), [|
         logInfo(LOG,"Scene04Condition3bis.state == ON - Setting up temperature: " + Scene04Condition3bisNum.state as Number)
-        climaStudio_Temp.sendCommand(Scene04Condition3bisNum.state as Number)
+        climaCamera2_Temp.sendCommand(Scene04Condition3bisNum.state as Number)
      ])
     }
 

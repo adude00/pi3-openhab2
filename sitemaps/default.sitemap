@@ -15,6 +15,7 @@ sitemap default label="Casa"
 				Text 		item=led03_RGB
 			}
 			Frame label="Studio Barra" {
+			  	Switch		item=led01_fake01
 			  	Switch		item=led01_PowerW
 				Slider 		item=led01_DimW
 			  	Switch		item=led01_Power
@@ -731,15 +732,6 @@ sitemap default label="Casa"
         Chart  item=gChartCamerettaH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
       } // Chiuso frame grafici
-      Frame label="Termostato" {
-        Switch    item=tsCameretta
-        Setpoint  item=spCameretta minValue=18  maxValue=26 step=0.1 icon=smiley
-        Setpoint  item=hsCameretta minValue=0   maxValue=3  step=0.1 icon=settings
-        Switch    item=tuya06_Switch            icon=radiator
-        Text 	  item=tuya06_Power             label="Termo: [%.0f W]" icon=radiator
-        Switch    item=mdCameretta label="Modalità"      mappings=[heat='HOT', off='OFF']
-        Switch    item=tsCamerettaAutoOFF  label="Auto OFF: 30 min" icon=settings
-      } // Chiuso Frame Termostato
 
     } // Chiuso Text Cameretta
 
@@ -1035,15 +1027,15 @@ sitemap default label="Casa"
 	        Text      item=bs01_humidity      label="Basso (bs04): Umidità"
 	  }
       Frame label="Condizionatore" {
-        Switch    item=climaStudio_Power     icon=climate      label="Clima Studio"
-	Setpoint  item=climaStudio_Temp      icon=temperature  minValue=16 maxValue=30 step=1
-	Selection item=climaStudio_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
-	Switch    item=climaStudio_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]
-	Switch    item=climaStudio_Swing     icon=flow
-	Switch    item=climaStudio_Quiet     icon=microphone
-	Switch    item=climaStudio_Beep      icon=soundvolume_mute
-	Switch    item=climaStudio_Light     icon=light
-	Switch    item=climaStudio_Turbo     icon=pump
+        Switch    item=climaCamera2_Power     icon=climate      label="Clima Studio"
+	Setpoint  item=climaCamera2_Temp      icon=temperature  minValue=16 maxValue=30 step=1
+	Selection item=climaCamera2_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
+	Switch    item=climaCamera2_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]
+	Switch    item=climaCamera2_Swing     icon=flow
+	Switch    item=climaCamera2_Quiet     icon=microphone
+	Switch    item=climaCamera2_Beep      icon=soundvolume_mute
+	Switch    item=climaCamera2_Light     icon=light
+	Switch    item=climaCamera2_Turbo     icon=pump
         Switch    item=shelly06_R1    icon=climate  label="Clima Studio"
         Text      item=shelly06_Power icon=energy
       }
@@ -1445,7 +1437,6 @@ sitemap default label="Casa"
 			Group item=t_tuya01
 			Group item=t_tuya02
 			Group item=t_tuya03
-			Group item=t_tuya04
 			Group item=t_tuya05
 			Group item=t_tuya06
 			Group item=t_tuya08

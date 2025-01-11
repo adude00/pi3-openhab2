@@ -50,10 +50,7 @@ Number pi_restart "Reboot PI3" <settings>
 
 // Alexa
 Switch alexa_campanello         "Campanello"                   <settings>        [ "Switchable" ]
-Switch alexa_forno              "Forno"                        <settings>        [ "Switchable" ]
 Switch alexa_lavatrice          "Lavatrice"                    <settings>        [ "Switchable" ]
-
-Switch alexa_test_giochi_20     "Test 20"                      <settings>
 
 // Tramonto
 Switch sunIsOut			"Giorno"			<settings>		[ "Switchable" ]

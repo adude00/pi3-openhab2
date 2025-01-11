@@ -13,7 +13,7 @@ then
   }
   if (Scene03Condition2.state == ON) {
     logInfo(LOG,"Scene03Condition2.state == ON")
-    cl01_a_power.sendCommand(ON)
+    DaikinMatrimoniale_Power.sendCommand(ON)
   }
   if (Scene03Condition3.state == ON) {
     logInfo(LOG,"Scene03Condition3.state == ON")
@@ -21,7 +21,7 @@ then
   }
   if (Scene03Condition4.state == ON) {
     logInfo(LOG,"Scene03Condition4.state == ON")
-    climaStudio_Power.sendCommand(OFF)
+    climaCamera2_Power.sendCommand(OFF)
   }
   if (Scene03Condition5.state == ON) {
     logInfo(LOG,"Scene03Condition5.state == ON")
