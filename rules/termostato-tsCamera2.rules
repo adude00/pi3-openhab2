@@ -60,14 +60,14 @@ end
 rule "tsCamera2 Wait"
 when
     Item tsCamera2 changed from OFF to ON or
-    Item bs04_temperature changed or
+    Item esp02_Temp changed or
     Item tsCamera2sp changed or
     Item tsCamera2hs changed
 then
   // EDIT HERE
 
   // Sensor to check against
-  var Number cur_temp 	= bs04_temperature.state as Number
+  var Number cur_temp 	= esp02_Temp.state as Number
 
   // AC Temp to use - Use find and replace
   var Number acTemp	= climaCamera2_Temp.state as Number
