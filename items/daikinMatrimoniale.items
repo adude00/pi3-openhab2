@@ -1,9 +1,12 @@
-Switch DaikinMatrimoniale_Power "A/C" { channel="daikin:ac_unit:DaikinAP05103:power" }
-Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" { channel="daikin:ac_unit:DaikinAP05103:settemp" }
-String DaikinMatrimoniale_Mode "Mode [ %s]" { channel="daikin:ac_unit:DaikinAP05103:mode" }
-String DaikinMatrimoniale_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP05103:fanspeed" }
+Switch DaikinMatrimoniale_Power "A/C" { channel="daikin:ac_unit:DaikinAP37843:power" }
+Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:settemp" }
+String DaikinMatrimoniale_Mode "Mode" { channel="daikin:ac_unit:DaikinAP37843:mode" }
+String DaikinMatrimoniale_HomekitMode { channel="daikin:ac_unit:DaikinAP37843:homekitmode" }
+String DaikinMatrimoniale_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP37843:fanspeed" }
 Number DaikinMatrimoniale_Fan_Number "Fan Speed" (gGraph)
-String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP05103:fandir" }
-Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split" { channel="daikin:ac_unit:DaikinAP05103:indoortemp" }
-Number:Temperature DaikinMatrimoniale_OutdoorTemperature "2P Dietro [%.1f °C]" { channel="daikin:ac_unit:DaikinAP05103:outdoortemp" }
+String DaikinMatrimoniale_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP37843:fandir" }
+Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split [%.1f °C]" { channel="daikin:ac_unit:DaikinAP37843:indoortemp" }
+Number:Temperature DaikinMatrimoniale_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp,Fuori_Temperature_Chart) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }
 
+// Per continuità grafici grafici
+Number:Temperature DaikinCameretta_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp,Fuori_Temperature_Chart) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }

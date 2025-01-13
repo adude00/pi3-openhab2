@@ -1,4 +1,4 @@
-rule daikinFanMatrimoniale
+rule daikinFanCameretta
 when
   Item DaikinMatrimoniale_Fan received command
 then

@@ -1,0 +1,9 @@
+Switch DaikinStudio_Power "A/C" { channel="daikin:ac_unit:DaikinAP05103:power" }
+Number:Temperature DaikinStudio_SetPoint "SetPoint" { channel="daikin:ac_unit:DaikinAP05103:settemp" }
+String DaikinStudio_Mode "Mode [ %s]" { channel="daikin:ac_unit:DaikinAP05103:mode" }
+String DaikinStudio_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP05103:fanspeed" }
+Number DaikinStudio_Fan_Number "Fan Speed" (gGraph)
+String DaikinStudio_Fan_Movement "Air Direction" { channel="daikin:ac_unit:DaikinAP05103:fandir" }
+Number:Temperature DaikinStudio_IndoorTemperature "Temp Split" { channel="daikin:ac_unit:DaikinAP05103:indoortemp" }
+Number:Temperature DaikinStudio_OutdoorTemperature "2P Dietro [%.1f °C]" { channel="daikin:ac_unit:DaikinAP05103:outdoortemp" }
+

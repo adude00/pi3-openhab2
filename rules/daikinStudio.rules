@@ -1,11 +1,11 @@
-rule daikinFanCameretta
+rule daikinFanMatrimoniale
 when
-  Item DaikinCameretta_Fan received command
+  Item DaikinStudio_Fan received command
 then
   
     var Number fanSpeed
 
-    if (DaikinCameretta_Fan.state !== null) {
+    if (DaikinStudio_Fan.state !== null) {
       switch(receivedCommand.toString) {
         case "SILENCE": { fanSpeed = 0 }
         case "LEVEL_1": { fanSpeed = 1 }
@@ -16,7 +16,7 @@ then
         case "AUTO": { fanSpeed = 9 }
         }
     }
-    DaikinCameretta_Fan_Number.postUpdate(fanSpeed)
+    DaikinStudio_Fan_Number.postUpdate(fanSpeed)
 
 end
 

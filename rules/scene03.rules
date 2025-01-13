@@ -13,7 +13,7 @@ then
   }
   if (Scene03Condition2.state == ON) {
     logInfo(LOG,"Scene03Condition2.state == ON")
-    DaikinMatrimoniale_Power.sendCommand(ON)
+    DaikinStudio_Power.sendCommand(ON)
   }
   if (Scene03Condition3.state == ON) {
     logInfo(LOG,"Scene03Condition3.state == ON")
