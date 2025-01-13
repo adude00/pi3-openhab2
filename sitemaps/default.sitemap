@@ -673,7 +673,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=esp02_Temp label="P2 - Cameretta" icon=girl_3 {
+    Text item=sf05_Temp label="P2 - Matrimoniale" icon=bedroom {
       Frame label="Condizionatore" {
         Switch item=DaikinCameretta_Power
         Setpoint item=DaikinCameretta_SetPoint icon=heating step=0.5 visibility=[DaikinCameretta_Power==ON]
@@ -690,8 +690,8 @@ sitemap default label="Casa"
         Text item=DaikinCameretta_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=esp02_Temp   label="GIRLS: Temperatura"
-        Text      item=esp02_Humid  label="GIRLS: Umidità"
+        Text      item=sf05_Temp
+        Text      item=sf05_Humid
       }
 
       Frame label="Grafici " {
@@ -735,7 +735,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Cameretta
 
-    Text item=sf05_Temp label="P2 - Matrimoniale" icon=bedroom_orange {
+    Text item=sf08_Temp label="P2 - Studio" icon=niveau {
       Frame label="Condizionatore" {
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
@@ -749,8 +749,8 @@ sitemap default label="Casa"
       }
 
       Frame label="Dati" {
-        Text      item=sf05_Temp   label="Luce Bianca: Temperatura"
-        Text      item=sf05_Humid  label="Luce Bianca: Umidità"
+        Text      item=sf08_Temp   
+        Text      item=sf08_Humid
       }
 
       Frame label="Grafici " {
@@ -975,20 +975,18 @@ sitemap default label="Casa"
     } // CHIUSO Text Camera 1
 
 
-    Text item=bs04_temperature label="P1 - Camera 2" icon=girl_3 {
+    Text item=esp02_Temp label="P1 - Camera 2" icon=girl_3 {
       Frame label="Termostato" {
 	Switch    item=tsCamera2
 	Text      item=tsCamera2sp {
 
 	  Frame label="Temperature reali" {
-	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
-	        Text      item=bs04_temperature   label="Metà (bs04): Temperatura"
-	        Text      item=bs01_temperature   label="Basso (bs04): Temperatura"
+	        Text      item=esp02_Temp         label="Colonna (esp02): Temperatura"
+	        Text      item=bs01_temperature   label="Basso (bs01): Temperatura"
 	  }
 	  Frame label="Umidità reali" {
-	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
-	        Text      item=bs04_humidity      label="Metà (bs04): Umidità"
-	        Text      item=bs01_humidity      label="Basso (bs04): Umidità"
+	        Text      item=esp02_Humid        label="Colonna (esp02): Umidità"
+	        Text      item=bs01_humidity      label="Basso (bs01): Umidità"
 	  }
 	  Frame label="Termostato - Basic" {
 	    Switch    item=tsCamera2
@@ -1018,13 +1016,11 @@ sitemap default label="Casa"
 
 	  Frame label="Temperature reali" {
 	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
-	        Text      item=bs04_temperature   label="Metà (bs04): Temperatura"
-	        Text      item=bs01_temperature   label="Basso (bs04): Temperatura"
+	        Text      item=bs01_temperature   label="Colonna (bs01): Temperatura"
 	  }
 	  Frame label="Umidità reali" {
 	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
-	        Text      item=bs04_humidity      label="Metà (bs04): Umidità"
-	        Text      item=bs01_humidity      label="Basso (bs04): Umidità"
+	        Text      item=bs01_humidity      label="Colonna (bs01): Umidità"
 	  }
       Frame label="Condizionatore" {
         Switch    item=climaCamera2_Power     icon=climate      label="Clima Studio"

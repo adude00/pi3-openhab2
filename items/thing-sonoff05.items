@@ -2,8 +2,8 @@ Group t_sonoff05      "sonoff05: Luce Bianca"
 
 // ITEM SPECIFIC
 Switch                sf05_Light   "Luce Bianca"                 <light>        (gLuci)  [ "Lighting" ]                             {channel="mqtt:topic:tasmota:sonoff05:PowerSwitch"}
-Number:Temperature    sf05_Temp   "Temp. Luce Bianca [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartBdrmT,gGraph)   {channel="mqtt:topic:tasmota:sonoff05:Temperature"}
-Number:Dimensionless  sf05_Humid  "Umid. Luce Bianca [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart,gChartBdrmH,gGraph)       {channel="mqtt:topic:tasmota:sonoff05:Humidity"}
+Number:Temperature    sf05_Temp   "Temp. Luce Bianca [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gGraph,gChartCamerettaT)   {channel="mqtt:topic:tasmota:sonoff05:Temperature"}
+Number:Dimensionless  sf05_Humid  "Umid. Luce Bianca [%.1f %%]"  <humidity>     (gHumd,Casa_Umidita_Chart,gGraph,gChartCamerettaH)       {channel="mqtt:topic:tasmota:sonoff05:Humidity"}
 
 
 // DEFAULT FOR ALL

@@ -4,8 +4,8 @@ Group t_esp02         "esp02: Cameretta Girls"
 //Number:Power         esp02_Power         "esp02 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp02,gWatt)     {channel="mqtt:topic:tasmota:esp02:Power"}
 
 // Sensor
-Number:Temperature   esp02_Temp          "Cameretta Girls Temp [%.1f °C]"  <temperature>  (gTemp,esp02,sonoff,gChartCamerettaT)   {channel="mqtt:topic:tasmota:esp02:Temperature"}
-Number:Dimensionless esp02_Humid         "Cameretta Girls Humid [%.1f %%]" <humidity>     (gHumd,esp02,sonoff,gChartCamerettaH)   {channel="mqtt:topic:tasmota:esp02:Humidity"}
+Number:Temperature   esp02_Temp          "Cameretta Girls Temp [%.1f °C]"  <temperature>  (gTemp,esp02,sonoff,gChartStudioT)   {channel="mqtt:topic:tasmota:esp02:Temperature"}
+Number:Dimensionless esp02_Humid         "Cameretta Girls Humid [%.1f %%]" <humidity>     (gHumd,esp02,sonoff,gChartStudioH)   {channel="mqtt:topic:tasmota:esp02:Humidity"}
 
 // FOR ALL
 

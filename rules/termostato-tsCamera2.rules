@@ -97,7 +97,7 @@ then
     var Number setpoint   	= tsCamera2sp.state
 
     // previous Temperature awareness
-    var Number prevTemp         = tsCamera2PrevTemp.state
+    //var Number prevTemp         = tsCamera2PrevTemp.state
     tsCamera2PrevTemp.sendCommand(cur_temp)
 
     // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
@@ -162,9 +162,11 @@ then
 	    } else {
               // AIRCONF WAS ON, INCREASE TEMP IF POSSIBLE
 
-              if ( cur_temp > prevTemp ) {
+              if (tsCamera2Watts > 40) {
+              //if ( cur_temp > prevTemp ) {
 		// WARMING UP ALREADY - NOT DOING ANYTHING
-		if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything its warming up already!")
+		if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything compressor running already!")
+		//if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything its warming up already!")
 	      } else {
 		// NOT WARMING UP - INCREASING TEMP
             
@@ -178,7 +180,8 @@ then
                   if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached maximum power: " + acTemp)
                 }
 
-	      } // IF prevTemp CHECK CLOSED
+	      } // IF tsCamera2Watts CHECK CLOSED
+	      // } // IF prevTemp CHECK CLOSED
 
 	    } // IF climaCamera2_Power CHECK
 
@@ -219,11 +222,12 @@ then
 	    } else {
 	    // COMPRESSOR IS RUNNING
 
-	      if (cur_temp < prevTemp ) {
-	        // ALREADY COOLING DOWN - NOT DOING ANYTHING
-	        if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp (" + cur_temp + ") < prevTemp (" + cur_temp + ") - not doing anything its cooling down already!")
-	      } else {
-	        // NOT COOLING DOWN - DECREASING TEMP
+//	      if (cur_temp < prevTemp ) {
+//	        // ALREADY COOLING DOWN - NOT DOING ANYTHING
+//	        if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp (" + cur_temp + ") < prevTemp (" + cur_temp + ") - not doing anything its cooling down already!")
+//	      } else {
+
+		// NOT COOLING DOWN - DECREASING TEMP
 
 	        if ( acTemp > acTempMin ) {
 	  	  // DECREASE POWER IF WE CAN
@@ -234,7 +238,7 @@ then
                   if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + tsCamera2Watts + "W. Not doing anything, reached minimum power: " + acTemp)
 	        }
 
-	      } // IF prevTemp CHECK CLOSED
+//	      } // IF prevTemp CHECK CLOSED
 
 	    } // IF tsCamera2Watts CHECK CLOSED
 	    
