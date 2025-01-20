@@ -9,4 +9,4 @@ Number:Temperature DaikinMatrimoniale_IndoorTemperature "Temp Split [%.1f °C]" 
 Number:Temperature DaikinMatrimoniale_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp,Fuori_Temperature_Chart) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }
 
 // Per continuità grafici grafici
-Number:Temperature DaikinCameretta_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp,Fuori_Temperature_Chart) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }
+Number:Temperature DaikinCameretta_OutdoorTemperature "2P Dietro [%.1f °C]" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:outdoortemp" }

@@ -4,7 +4,7 @@ Group t_tuya05          "tuya05: Boiler"
 Switch tuya05_Switch "Boiler"  <cistern> (t_sonoff,t_tuya05,gSwitch) {channel="mqtt:topic:tasmota:tuya05:PowerSwitch"}
 
 // POWER
-Number  tuya05_Power      "tuya05 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya05,gWatt,gChartBathP)    {channel="mqtt:topic:tasmota:tuya05:Power"}
+Number  tuya05_Power      "tuya05 - True Power [%.1f W]"        <energy> (t_sonoff,t_tuya05,gWatt,gChartBagnoP2P)    {channel="mqtt:topic:tasmota:tuya05:Power"}
 Number  tuya05_AppPower   "tuya05 - Apparent Power [%.3f VA]"   <energy> (t_sonoff,t_tuya05,gVa)      {channel="mqtt:topic:tasmota:tuya05:ApparentPower"}
 Number  tuya05_ReaPower   "tuya05 - Reactive Power [%.3f VAR]"  <energy> (t_sonoff,t_tuya05,gVar)     {channel="mqtt:topic:tasmota:tuya05:ReactivePower"}
 Number  tuya05_Voltage    "tuya05 - Voltage [%.1f V]"           <energy> (t_sonoff,t_tuya05,gVolt)    {channel="mqtt:topic:tasmota:tuya05:Voltage"}

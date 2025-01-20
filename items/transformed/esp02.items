@@ -5,9 +5,9 @@ Group esp02
 //            <[broker:stat/esp02/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number esp02_Temp   "Cameretta Girls Temp [%.1f °C]"  <temperature>  (gTemp,esp02,sonoff,gChartCamerettaT)
+Number esp02_Temp   "Cameretta Girls Temp [%.1f °C]"  <temperature>  (gTemp,esp02,sonoff,gChartMatrimonialeT)
   [ "CurrentTemperature" ] { mqtt="<[broker:tele/esp02/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number esp02_Humid  "Cameretta Girls Humid [%.1f %%]" <humidity>     (gHumd,esp02,sonoff,gChartCamerettaH)
+Number esp02_Humid  "Cameretta Girls Humid [%.1f %%]" <humidity>     (gHumd,esp02,sonoff,gChartMatrimonialeH)
     { mqtt="<[broker:tele/esp02/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

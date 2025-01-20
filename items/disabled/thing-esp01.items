@@ -4,8 +4,8 @@ Group t_esp01         "esp01: Cameretta Ethan"
 //Number:Power         esp01_Power         "esp01 Power - P1 Total [%.1f W]"    <energy> (t_sonoff,t_esp01,gWatt)     {channel="mqtt:topic:tasmota:esp01:Power"}
 
 // Sensor
-Number:Temperature   esp01_Temp          "Cameretta Ethan Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff,gChartEthanT)    {channel="mqtt:topic:tasmota:esp01:Temperature"}
-Number:Dimensionless esp01_Humid         "Cameretta Ethan Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff,gChartEthanH)    {channel="mqtt:topic:tasmota:esp01:Humidity"}
+Number:Temperature   esp01_Temp          "Cameretta Ethan Temp [%.1f °C]"  <temperature>  (gTemp,esp01,sonoff,gChartCamera1T)    {channel="mqtt:topic:tasmota:esp01:Temperature"}
+Number:Dimensionless esp01_Humid         "Cameretta Ethan Humid [%.1f %%]" <humidity>     (gHumd,esp01,sonoff,gChartCamera1H)    {channel="mqtt:topic:tasmota:esp01:Humidity"}
 
 // FOR ALL
 

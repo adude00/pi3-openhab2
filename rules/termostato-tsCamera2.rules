@@ -165,7 +165,7 @@ then
               if (tsCamera2Watts > 40) {
               //if ( cur_temp > prevTemp ) {
 		// WARMING UP ALREADY - NOT DOING ANYTHING
-		if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything compressor running already!")
+		if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") < setpoint (" + setpoint + ") - not doing anything compressor running (" + tsCamera2Watts + "W) already!")
 		//if (tsCamera2WaitDebug.state == ON ) logInfo("tsCamera2Wait","DEBUG - heating: COLD! cur_temp (" + cur_temp + ") > prevTemp (" + cur_temp + ") - not doing anything its warming up already!")
 	      } else {
 		// NOT WARMING UP - INCREASING TEMP

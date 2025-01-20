@@ -25,6 +25,12 @@ then
         faikin01_temp.sendCommand(Scene02Condition3bisNum.state as Number)
      ])
     }
+    if (Scene02Condition3c.state == ON) {
+      createTimer(now.plusSeconds(17), [|
+        logInfo(LOG,"Scene02Condition3c.state == ON - Setting up Fan: " + Scene02Condition3cSet.state)
+        faikin01_fan.sendCommand(Scene02Condition3cSet.state)
+     ])
+    }
 
   }
   if (Scene02Condition4.state == ON) {

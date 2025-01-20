@@ -4,10 +4,10 @@ Group t_sonoff07      "sonoff07: Bagno P2 e Stufetta"
 Switch		sf07_Light  "Ex-stufetta Bagno P2" 			<fan_box> 	(t_sonoff07,sonoff)
 	{channel="mqtt:topic:tasmota:sonoff07:PowerSwitch"}
 
-Number		sf07_Temp   "Bagno Temp [%.1f °C]"  	<temperature>  	(gTemp,t_sonoff07,sonoff,Casa_Temperature_Chart,gChartBathT,gGraph)
+Number		sf07_Temp   "Bagno Temp [%.1f °C]"  	<temperature>  	(gTemp,t_sonoff07,sonoff,Casa_Temperature_Chart,gChartBagnoP2T,gGraph)
 	{channel="mqtt:topic:tasmota:sonoff07:Temperature"}
 
-Number 		sf07_Humid  "Bagno Humid [%.1f %%]" 	<humidity>	(gHumd,t_sonoff07,sonoff,Casa_Umidita_Chart,gChartBathH,gGraph)
+Number 		sf07_Humid  "Bagno Humid [%.1f %%]" 	<humidity>	(gHumd,t_sonoff07,sonoff,Casa_Umidita_Chart,gChartBagnoP2H,gGraph)
 	{channel="mqtt:topic:tasmota:sonoff07:Humidity"}
 
 // Tasmota Status

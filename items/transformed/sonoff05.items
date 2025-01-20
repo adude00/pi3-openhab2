@@ -5,9 +5,9 @@ Switch sf05_Light "Specchio" <light> (sonoff05,sonoff,gLuci) [ "Lighting" ]
             <[broker:stat/sonoff05/POWER:state:default]" }
 
 // TEMPERATURA E UMIDITA
-Number sf05_Temp    "Temp. Specchio [%.1f °C]"    <temperature>   (gTemp,sonoff05,sonoff,Casa_Temperature_Chart,gChartBdrmT,gGraph)
+Number sf05_Temp    "Temp. Specchio [%.1f °C]"    <temperature>   (gTemp,sonoff05,sonoff,Casa_Temperature_Chart,gChartStudioT,gGraph)
   [ "CurrentTemperature" ]  { mqtt="<[broker:tele/sonoff05/SENSOR:state:JSONPATH($.AM2301.Temperature)]" }
-Number sf05_Humid   "Umid. Specchio [%.1f %%]"    <humidity>      (gHumd,sonoff05,sonoff,Casa_Umidita_Chart,gChartBdrmH,gGraph)
+Number sf05_Humid   "Umid. Specchio [%.1f %%]"    <humidity>      (gHumd,sonoff05,sonoff,Casa_Umidita_Chart,gChartStudioH,gGraph)
   [ "CurrentHumidity" ]     { mqtt="<[broker:tele/sonoff05/SENSOR:state:JSONPATH($.AM2301.Humidity)]" }
 
 // STATUS

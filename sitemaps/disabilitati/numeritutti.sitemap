@@ -135,28 +135,28 @@ sitemap default label="Casa"
 
       Frame label="Camera Matrimoniale" {
         // TEMPERATURA Matrimoniale
-        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
         // UMIDITA Matrimoniale
-        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
 
       Frame label="Tutto insieme" {

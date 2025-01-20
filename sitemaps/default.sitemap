@@ -253,8 +253,10 @@ sitemap default label="Casa"
             Switch    item=Scene02Condition1
             Switch    item=Scene02Condition2
             Switch    item=Scene02Condition3
-            Switch    item=Scene02Condition3bis visibility=[Scene02Condition3==ON]
+            Switch    item=Scene02Condition3bis     visibility=[Scene02Condition3==ON]
             Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
+            Switch    item=Scene02Condition3c 	    visibility=[Scene02Condition3==ON]
+	    Selection item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"] visibility=[Scene02Condition3c==ON]
             Switch    item=Scene02Condition4
             Switch    item=Scene02Condition5
             Switch    item=Scene02Condition6
@@ -508,6 +510,8 @@ sitemap default label="Casa"
             Setpoint  item=tsSoggiornoWaitStep        minValue=0.5 maxValue=3  step=0.5  icon=line
             Switch    item=tsSoggiornoStartupTempON 
             Setpoint  item=tsSoggiornoStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsSoggiornoStartupTempON==ON]
+            Switch    item=tsSoggiornoStartupFan 
+            Selection item=tsSoggiornoStartupFanS     mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"] visibility=[tsSoggiornoStartupFan==ON] 
             Switch    item=tsSoggiornoAutoON          label="Auto ON on SetPoint" icon=settings
             Switch    item=tsSoggiornoOverride        icon=settings
 	    Switch    item=tsSoggiornoPowerOff
@@ -629,16 +633,16 @@ sitemap default label="Casa"
       Frame label="Consumo Boiler" {
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         // CONSUMO BOILER
-        Chart  item=gChartBathP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBathP period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBathP period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBathP period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBathP period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBathP period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBathP period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBathP period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBathP period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBathP period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBagnoP2P period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2P period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2P period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2P period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2P period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2P period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2P period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2P period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2P period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2P period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       } 
 
       Frame label="Periodo " {
@@ -646,29 +650,29 @@ sitemap default label="Casa"
       }
       Frame label="Temperatura " {
         // TEMPERATURA Bagno
-        Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBathT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBathT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBathT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBathT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBathT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBathT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBathT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBathT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
       Frame label="Umidità " {
 	// UMIDITA Bagno
-        Chart  item=gChartBathH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBathH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBathH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBathH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBathH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBathH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBathH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
       }
 
     } // Chiuso Text Bagno Stufa
@@ -697,17 +701,17 @@ sitemap default label="Casa"
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
-        // TEMPERATURA Cameretta
-        Chart  item=gChartCamerettaT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartCamerettaT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartCamerettaT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartCamerettaT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartCamerettaT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartCamerettaT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartCamerettaT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartCamerettaT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartCamerettaT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartCamerettaT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // TEMPERATURA Matrimoniale
+        Chart  item=gChartMatrimonialeT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartMatrimonialeT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartMatrimonialeT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartMatrimonialeT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartMatrimonialeT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartMatrimonialeT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartMatrimonialeT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartMatrimonialeT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartMatrimonialeT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartMatrimonialeT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
         // Potenza Pompa
         Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
         Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
@@ -720,16 +724,16 @@ sitemap default label="Casa"
         Chart  item=pow01_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
         Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA Cameretta
-        Chart  item=gChartCamerettaH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartCamerettaH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartCamerettaH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartCamerettaH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartCamerettaH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartCamerettaH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartCamerettaH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartCamerettaH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartCamerettaH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartCamerettaH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        //Chart  item=gChartMatrimonialeH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        //Chart  item=gChartMatrimonialeH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        //Chart  item=gChartMatrimonialeH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        //Chart  item=gChartMatrimonialeH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        //Chart  item=gChartMatrimonialeH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        //Chart  item=gChartMatrimonialeH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        //Chart  item=gChartMatrimonialeH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        //Chart  item=gChartMatrimonialeH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        //Chart  item=gChartMatrimonialeH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        //Chart  item=gChartMatrimonialeH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
       } // Chiuso frame grafici
 
@@ -756,17 +760,17 @@ sitemap default label="Casa"
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
-        // TEMPERATURA Matrimoniale
-        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // TEMPERATURA Studio
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // Potenza Pompa
         Chart  item=pow01_Power period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
         Chart  item=pow01_Power period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
@@ -779,17 +783,17 @@ sitemap default label="Casa"
         Chart  item=pow01_Power period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
         Chart  item=pow01_Power period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
-        // UMIDITA Matrimoniale
-        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // UMIDITA Studio
+        //Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        //Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        //Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        //Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        //Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        //Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        //Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        //Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        //Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        //Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // Chiuso frame grafici
 
@@ -865,16 +869,16 @@ sitemap default label="Casa"
         Chart  item=gChartGiochiP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
         Chart  item=gChartGiochiP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA Giochi
-        Chart  item=gChartGiochiH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartGiochiH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartGiochiH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartGiochiH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartGiochiH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartGiochiH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartGiochiH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartGiochiH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartGiochiH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartGiochiH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        //Chart  item=gChartGiochiH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        //Chart  item=gChartGiochiH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        //Chart  item=gChartGiochiH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        //Chart  item=gChartGiochiH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        //Chart  item=gChartGiochiH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        //Chart  item=gChartGiochiH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        //Chart  item=gChartGiochiH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        //Chart  item=gChartGiochiH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        //Chart  item=gChartGiochiH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        //Chart  item=gChartGiochiH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Camera Giochi
@@ -932,39 +936,39 @@ sitemap default label="Casa"
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
-        // TEMPERATURA Ethan
-        Chart  item=gChartEthanT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // TEMPERATURA Camera1
+        Chart  item=gChartCamera1T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartCamera1T period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartCamera1T period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartCamera1T period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartCamera1T period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartCamera1T period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartCamera1T period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartCamera1T period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartCamera1T period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartCamera1T period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // Potenza Pompa
-        Chart  item=gChartEthanP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        Chart  item=gChartCamera1P period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartCamera1P period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartCamera1P period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartCamera1P period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartCamera1P period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartCamera1P period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartCamera1P period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartCamera1P period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartCamera1P period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartCamera1P period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA Ethan
-        Chart  item=gChartEthanH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartEthanH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartEthanH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartEthanH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartEthanH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartEthanH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartEthanH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartEthanH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartEthanH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartEthanH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        //Chart  item=gChartCamera1H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        //Chart  item=gChartCamera1H period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        //Chart  item=gChartCamera1H period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        //Chart  item=gChartCamera1H period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        //Chart  item=gChartCamera1H period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        //Chart  item=gChartCamera1H period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        //Chart  item=gChartCamera1H period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        //Chart  item=gChartCamera1H period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        //Chart  item=gChartCamera1H period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        //Chart  item=gChartCamera1H period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
 
@@ -1042,39 +1046,39 @@ sitemap default label="Casa"
       Frame label="Grafici " {
         Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
 
-        // TEMPERATURA Studio
-        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        // TEMPERATURA Camera2
+        Chart  item=gChartCamera2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartCamera2T period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartCamera2T period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartCamera2T period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartCamera2T period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartCamera2T period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartCamera2T period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartCamera2T period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartCamera2T period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartCamera2T period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // Potenza Pompa
-        Chart  item=gChartStudioP period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartStudioP period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartStudioP period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartStudioP period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartStudioP period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartStudioP period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartStudioP period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartStudioP period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartStudioP period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartStudioP period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        Chart  item=gChartCamera2P period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        Chart  item=gChartCamera2P period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        Chart  item=gChartCamera2P period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        Chart  item=gChartCamera2P period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        Chart  item=gChartCamera2P period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        Chart  item=gChartCamera2P period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        Chart  item=gChartCamera2P period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        Chart  item=gChartCamera2P period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        Chart  item=gChartCamera2P period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        Chart  item=gChartCamera2P period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA Studio
-        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        //Chart  item=gChartCamera2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        //Chart  item=gChartCamera2H period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        //Chart  item=gChartCamera2H period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        //Chart  item=gChartCamera2H period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        //Chart  item=gChartCamera2H period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        //Chart  item=gChartCamera2H period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        //Chart  item=gChartCamera2H period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        //Chart  item=gChartCamera2H period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        //Chart  item=gChartCamera2H period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        //Chart  item=gChartCamera2H period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Camera 2
@@ -1166,16 +1170,16 @@ sitemap default label="Casa"
         Chart  item=gChartBagnoP1T period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
         Chart  item=gChartBagnoP1T period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
         // UMIDITA BagnoP1
-        Chart  item=gChartBagnoP1H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
-        Chart  item=gChartBagnoP1H period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
-        Chart  item=gChartBagnoP1H period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
-        Chart  item=gChartBagnoP1H period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
-        Chart  item=gChartBagnoP1H period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
-        Chart  item=gChartBagnoP1H period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
-        Chart  item=gChartBagnoP1H period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
-        Chart  item=gChartBagnoP1H period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
-        Chart  item=gChartBagnoP1H period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
-        Chart  item=gChartBagnoP1H period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
+        //Chart  item=gChartBagnoP1H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"] legend=true
+        //Chart  item=gChartBagnoP1H period=4h  refresh=300000  visibility=[ChartPeriod==1] legend=true
+        //Chart  item=gChartBagnoP1H period=8h  refresh=300000  visibility=[ChartPeriod==2] legend=true
+        //Chart  item=gChartBagnoP1H period=12h refresh=600000  visibility=[ChartPeriod==3] legend=true
+        //Chart  item=gChartBagnoP1H period=D   refresh=3600000 visibility=[ChartPeriod==4] legend=true
+        //Chart  item=gChartBagnoP1H period=2D  refresh=3600000 visibility=[ChartPeriod==5] legend=true
+        //Chart  item=gChartBagnoP1H period=W   refresh=3600000 visibility=[ChartPeriod==6] legend=true
+        //Chart  item=gChartBagnoP1H period=2W  refresh=3600000 visibility=[ChartPeriod==7] legend=true
+        //Chart  item=gChartBagnoP1H period=M   refresh=3600000 visibility=[ChartPeriod==8] legend=true
+        //Chart  item=gChartBagnoP1H period=Y   refresh=3600000 visibility=[ChartPeriod==9] legend=true
 
       } // CHIUSO Frame Grafici
     } // CHIUSO Text Camera BagnoP1
@@ -1263,55 +1267,55 @@ sitemap default label="Casa"
         }
 
         Frame label="Camera Matrimoniale" {
-        // TEMPERATURA Matrimoniale
-        Chart  item=gChartBdrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // TEMPERATURA Studio
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
-        // UMIDITA Matrimoniale
-        Chart  item=gChartBdrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBdrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBdrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBdrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBdrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBdrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBdrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBdrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBdrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBdrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // UMIDITA Studio
+        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
         }
 
         Frame label="Bagno" {
-        // TEMPERATURA Bagno
-        Chart  item=gChartBathT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBathT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBathT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBathT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBathT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBathT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBathT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBathT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBathT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBathT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        // TEMPERATURA BagnoP2
+        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
 
         // UMIDITA Bagno
-        Chart  item=gChartBathH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBathH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBathH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBathH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBathH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBathH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBathH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBathH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBathH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBathH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
         }
 
         Frame label="Tutto insieme" {
@@ -1370,12 +1374,17 @@ sitemap default label="Casa"
     }
 
   Text item=faikin02_outside label="Fuori [%.1f °C]" icon=garden {
-    Frame label="Temperature" {
-      Text item=DaikinMatrimoniale_OutdoorTemperature       label="Daikin 2P Dietro"         icon="terrace"
-      Text item=faikin02_outside			 label="Daikin 2P Davanti"        icon="terrace"
-      Text item=faikin01_outside			 label="Daikin 1P Davanti"        icon="terrace"
-      Text item=Terrazza_Temp                            label="Sensore 2P Temp"   icon="terrace"
-      Text item=Terrazza_Humid                           label="Sensore 2P Humid"  icon="humidity"
+    Frame label="Davanti" {
+      Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
+      Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
+      Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
+      Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
+    }
+    Frame label="Dietro" {
+      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
+      Text item=bs04_temperature                         label="BS04 Temp"   		icon="terrace"
+      Text item=bs04_humidity                            label="BS04 Humid"		icon="humidity"
+
     }
     Frame label="Graphs" {
       Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]

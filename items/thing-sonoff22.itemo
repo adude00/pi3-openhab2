@@ -4,10 +4,10 @@ Group t_sonoff22      "sonoff22: P1 Camera 2 TBD"
 Switch		sf22_Switch "P1 Camera 2 TBD" 		<camera> 	(t_sonoff22,sonoff)
 	{channel="mqtt:topic:tasmota:sonoff22:PowerSwitch"}
 
-Number		sf22_Temp   "P1 Camera 2 [%.1f °C]"  <temperature> 	(gTemp,t_sonoff22,sonoff,gChartStudioT)
+Number		sf22_Temp   "P1 Camera 2 [%.1f °C]"  <temperature> 	(gTemp,t_sonoff22,sonoff,gChartCamera2T)
 	{channel="mqtt:topic:tasmota:sonoff22:Temperature"}
 
-Number		sf22_Humid  "P1 Camera 2 [%.1f %%]"  <humidity>    	(gHumd,t_sonoff22,sonoff,gChartStudioH)
+Number		sf22_Humid  "P1 Camera 2 [%.1f %%]"  <humidity>    	(gHumd,t_sonoff22,sonoff,gChartCamera2H)
 	{channel="mqtt:topic:tasmota:sonoff22:Humidity"}
 
 // Tasmota Status

@@ -10,28 +10,28 @@ Group gRGB
 Group gLightsDim
 Group gBuonanotte
 
-Group gChartBdrmT
-Group gChartBdrmH
-Group gChartBathT
-Group gChartBathH
-Group gChartBathP
+Group gChartStudioT
+Group gChartStudioH
+Group gChartBagnoP2T
+Group gChartBagnoP2H
+Group gChartBagnoP2P
 Group gChartLvrmT
 Group gChartLvrmH
 
-Group gChartCamerettaH
-Group gChartCamerettaT
+Group gChartMatrimonialeH
+Group gChartMatrimonialeT
 
-Group gChartEthanH
-Group gChartEthanT
-Group gChartEthanP
+Group gChartCamera1H
+Group gChartCamera1T
+Group gChartCamera1P
 
 Group gChartGiochiH
 Group gChartGiochiT
 Group gChartGiochiP
 
-Group gChartStudioH
-Group gChartStudioT
-Group gChartStudioP
+Group gChartCamera2H
+Group gChartCamera2T
+Group gChartCamera2P
 
 Group gChartBagnoP1H
 Group gChartBagnoP1T

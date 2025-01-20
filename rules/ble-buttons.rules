@@ -30,6 +30,13 @@ when
 then
 	var click = receivedEvent.event
   	logInfo("ble","button3: "+click)
+
+	if (click == "1") {
+	  logInfo("ble","button3: click - accendo tsBagno")
+	  tsBagnoP1.sendCommand(ON)
+	  sendCommand(shelly09_R1, ON)
+	}
+	
 end
 
 rule "BLE button4"
@@ -38,4 +45,10 @@ when
 then
 	var click = receivedEvent.event
   	logInfo("ble","button4: "+click)
+
+	if (click == "1") {
+	  logInfo("ble","button4: click - spengo tsBagno")
+	  tsBagnoP1.sendCommand(OFF)
+	  sendCommand(shelly09_R1, OFF)
+	}
 end
