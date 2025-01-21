@@ -22,6 +22,7 @@ Number tsSoggiornoWaitStep	"Step [%.1f °C]"		<temperature_hot> (gTermoSogg)
 Switch tsSoggiornoAutoON        "Auto ON on SetPoint"        	<text> (gTermoSogg)
 Number tsSoggiornoStartupTemp   "Temp Accensione [%.1f °C]"     <heating>
 Switch tsSoggiornoStartupTempON "Imposta Startup Temp [%s]"
+Switch tsSoggiornoSilentOnTemp	"Silent on Temperature [%s]"   <flow>
 Switch tsSoggiornoPowerOff	"Spegni se inutilizzato [%s]"   <energy>	(gTermoSogg)
 
 Switch tsSoggiornoStartupFan    "Imposta Startup FAN [%s]"	<settings>

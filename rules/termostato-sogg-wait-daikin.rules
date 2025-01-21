@@ -224,6 +224,13 @@ then
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
 	      }
 
+              // Re-Silent on Temperature
+	      if ( tsSoggiornoSilentOnTemp.state == ON && faikin02_fan.state != "Q" ) {
+		createTimer(now.plusSeconds(7),  [ |
+		  if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoSilentOnTemp=ON, faikin02_fan=" + faikin02_fan.state + ": enabling Silent mode")
+		  faikin02_fan.sendCommand("Q")
+		  ])
+	      }
 	    }
 	    
 	  } // IF HEATING CLOSED
