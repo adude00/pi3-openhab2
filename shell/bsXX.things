@@ -1,0 +1,8 @@
+Thing mqtt:topic:blegateway:a4c138dd5b08 "bs01" (mqtt:broker:brokerv2) {
+    Channels:
+        Type number : temperature     [ stateTopic="blegateway/a4c138dd5b08/sensor", transformationPattern="JSONPATH:$.temperature" ]
+        Type number : humidity        [ stateTopic="blegateway/a4c138dd5b08/sensor", transformationPattern="JSONPATH:$.humidity" ]
+        Type number : battery         [ stateTopic="blegateway/a4c138dd5b08/sensor", transformationPattern="JSONPATH:$.battery" ]
+        Type string : src             [ stateTopic="blegateway/a4c138dd5b08/sensor", transformationPattern="JSONPATH:$.src" ]
+        Type number : rssi            [ stateTopic="blegateway/a4c138dd5b08/sensor", transformationPattern="JSONPATH:$.rssi" ]
+      }

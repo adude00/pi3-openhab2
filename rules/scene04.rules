@@ -49,6 +49,12 @@ then
     tsCamera2.sendCommand(OFF)
   }
 
+  if (Scene04Condition5.state == ON) {
+    logInfo(LOG,"Scene04Condition5.state == ON")
+    faikin01_fan.sendCommand("Q")
+  }
+
+
   createTimer(now.plusSeconds(13), [|
     Scene04.sendCommand(OFF)
     logInfo(LOG,"Scena finita")

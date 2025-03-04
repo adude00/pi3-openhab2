@@ -113,8 +113,8 @@ end
 
 rule "sveglia05 timer for next alarm"
 when
-  // Alle 3 e 04 minuti di tutti i giorni riarmo la sveglia per la mattina
-  Time cron "0 04 3 1/1 * ? *"
+  // Alle 3 e 05 minuti di tutti i giorni riarmo la sveglia per la mattina
+  Time cron "0 05 3 1/1 * ? *"
   // Generated with http://www.cronmaker.com
 then
   logInfo(LOG, "Controllo se riattivare la sveglia")

@@ -53,6 +53,10 @@ then
     logInfo(LOG,"Scene02Condition6.state == ON")
     tsSoggiorno.sendCommand(ON)
   }
+  if (Scene02Condition7.state == ON) {
+    logInfo(LOG,"Scene02Condition7.state == ON")
+    DaikinStudio_Power.sendCommand(OFF)
+  }
 
   createTimer(now.plusSeconds(13), [|
     Scene02.sendCommand(OFF)

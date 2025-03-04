@@ -293,14 +293,14 @@ then
     logInfo("Scene","Scena A Letto: iniziata")
 
     // Luce camera a 10% subito
-    led01_DimW.sendCommand(10)
+    sf05_Light.sendCommand(ON)
 
     createTimer(now.plusSeconds(1),  [ |
       gTappAll.sendCommand(DOWN)
       logInfo("Scene","Scena A Letto: tapparelle abbassate")
     ])
 
-  alexa_campanello.sendCommand(OFF)
+    alexa_campanello.sendCommand(OFF)
 
     // TERMOSTATO
     if (ts_sog_night_off.state == ON) {
@@ -351,7 +351,6 @@ then
     ])
     createTimer(now.plusSeconds(300), [|
       gLuci.sendCommand(OFF)
-      led01_DimW.sendCommand(OFF)
       logInfo("Scene","Scena A Letto: finita per davvero, spenta barra matrimoniale e tutte le altre luci")
     ])
 end

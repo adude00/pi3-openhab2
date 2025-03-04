@@ -1,0 +1,33 @@
+Group        g_shellies
+
+Switch shelly10_R1                 "shelly10"
+    { channel="mqtt:topic:shellies:shelly10:PowerSwitch" }
+
+Number pow03_Power                 "PdC Lvrm Power [%.1f W]"   <energy>       (gWatt,Casa_Consumi_Chart)
+    { channel="mqtt:topic:shellies:shelly10:Power" }
+Number shelly10_Power              "PdC P2 Soggiorno Power [%s W]" (gWatt,Casa_Consumi_Chart,gChartCamera1P)
+    { channel="mqtt:topic:shellies:shelly10:Power" }
+
+Number shelly10_voltage            "shelly10 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shelly10:Voltage" }
+Number shelly10_energy             "shelly10 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly10:Energy" }
+Number shelly10_temperature        "shelly10 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shelly10:Temperature" }
+String shelly10_restartreq         "shelly10 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly10:RestartReq" }
+String shelly10_state              "shelly10 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly10:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly10_event0             "shelly10 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly10:Event0" }
+String shelly10_ip                 "shelly10 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly10:IP" }
+String shelly10_rssi               "shelly10 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly10:RSSI" }
+String shelly10_source             "shelly10 Source"
+    { channel="mqtt:topic:shellies:shelly10:Source" }
+Number shelly10_uptime             "shelly10 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly10:Uptime" }
+
+String shelly10                    "shelly10" (g_shellies) // dummy for rule status loop
+

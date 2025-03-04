@@ -1,0 +1,12 @@
+Group        g_bs12            "BLE Sensor bs12"
+
+Number bs12_temperature        "bs12 Temp [%s C]"      <temperature>		(g_bs12,gTemp)
+{ channel="mqtt:topic:blegateway:a4c138d65376:temperature" }
+Number bs12_humidity           "bs12 Humid [%s %%]"    <humidity>		(g_bs12,gHumd)
+    { channel="mqtt:topic:blegateway:a4c138d65376:humidity" }
+Number bs12_battery            "bs12 Batt [%s %%]"     <battery>		(g_bs12)
+    { channel="mqtt:topic:blegateway:a4c138d65376:battery" }
+String bs12_src                "bs12 Gateway [%s]"     <status>			(g_bs12)
+    { channel="mqtt:topic:blegateway:a4c138d65376:src" }
+Number bs12_rssi               "bs12 Signal [%s dB]"   <qualityofservice>	(g_bs12)
+    { channel="mqtt:topic:blegateway:a4c138d65376:rssi" }

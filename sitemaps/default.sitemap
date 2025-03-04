@@ -293,6 +293,7 @@ sitemap default label="Casa"
             Switch    item=Scene04Condition4
             Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
             Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
+            Switch    item=Scene04Condition5
 	  }
 	} // Chiuso frame Scena 04
 
@@ -383,6 +384,23 @@ sitemap default label="Casa"
 	    Switch item=sveglia05AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia05
+	Text label="Sveglia 06 - Clima Studio" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia06AlarmRepeat
+            Setpoint item=sveglia06Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia06AlarmRepeat==ON]
+            Setpoint item=sveglia06Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia06AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia06Condition1
+	    Switch item=sveglia06Condition2
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia06AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia06AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia06
       } // CHIUSO FRAME Sveglie
 
       Frame label="Automatismi" { 
@@ -1785,6 +1803,7 @@ sitemap default label="Casa"
       Group item=g_bs05
       Group item=g_bs06
       Group item=g_bs07
+      Group item=g_bs08
     }
 
   } // CHIUSO FRAME DEBUG
