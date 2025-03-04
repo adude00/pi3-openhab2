@@ -117,6 +117,7 @@ then
   var Number led03_c = led03_c_Morning.state
 
   alexa_campanello.sendCommand(ON)
+  sf07_Light.sendCommand(OFF)
   
   // SOGGIORNO - CHANGE TEMP
   if (ac_sog_sveglia_change.state == ON) {
