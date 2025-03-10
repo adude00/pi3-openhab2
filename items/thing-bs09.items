@@ -1,8 +1,8 @@
 Group        g_bs09            "BLE Sensor bs09"
 
-Number bs09_temperature        "bs09 Temp [%s C]"      <temperature>		(g_bs09,gTemp)
+Number bs09_temperature        "bs09 Temp [%s C]"      <temperature>		(g_bs09,gTemp,gChartMatrimonialeT)
 { channel="mqtt:topic:blegateway:a4c13887b3b9:temperature" }
-Number bs09_humidity           "bs09 Humid [%s %%]"    <humidity>		(g_bs09,gHumd)
+Number bs09_humidity           "bs09 Humid [%s %%]"    <humidity>		(g_bs09,gHumd,gChartMatrimonialeH)
     { channel="mqtt:topic:blegateway:a4c13887b3b9:humidity" }
 Number bs09_battery            "bs09 Batt [%s %%]"     <battery>		(g_bs09)
     { channel="mqtt:topic:blegateway:a4c13887b3b9:battery" }

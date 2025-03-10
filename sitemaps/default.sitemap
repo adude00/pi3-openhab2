@@ -261,6 +261,7 @@ sitemap default label="Casa"
             Switch    item=Scene02Condition5
             Switch    item=Scene02Condition6
             Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
+            Switch    item=Scene02Condition7
 	  }
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
@@ -696,7 +697,7 @@ sitemap default label="Casa"
 
     } // Chiuso Text Bagno Stufa
 
-    Text item=sf05_Temp label="P2 - Matrimoniale" icon=bedroom {
+    Text item=bs09_temperature label="P2 - Matrimoniale" icon=bedroom {
       Frame label="Condizionatore" {
         Switch item=DaikinMatrimoniale_Power
         Setpoint item=DaikinMatrimoniale_SetPoint icon=heating step=0.5 visibility=[DaikinMatrimoniale_Power==ON]
@@ -713,8 +714,8 @@ sitemap default label="Casa"
         Text item=DaikinMatrimoniale_OutdoorTemperature icon=temperature
       }
       Frame label="Comfort" {
-        Text      item=sf05_Temp
-        Text      item=sf05_Humid
+        Text      item=bs09_temperature
+        Text      item=bs09_humidity
       }
 
       Frame label="Grafici " {
