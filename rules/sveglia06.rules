@@ -75,9 +75,9 @@ then
     {
       logInfo(LOG, "Condition2 == ON, Weekends: accendo")
       DaikinStudio_Power.sendCommand(ON)
-      createTimer(now.plusSeconds(7),  [ |
-        DaikinStudio_Fan.sendCommand("AUTO")
-	])
+      //createTimer(now.plusSeconds(7),  [ |
+      //  DaikinStudio_Fan.sendCommand("AUTO")
+      //])
     }
   }
   else // WORKING DAYS
