@@ -5,7 +5,7 @@ Switch shelly10_R1                 "shelly10"
 
 Number pow03_Power                 "PdC Lvrm Power [%.1f W]"   <energy>       (gWatt,Casa_Consumi_Chart)
     { channel="mqtt:topic:shellies:shelly10:Power" }
-Number shelly10_Power              "PdC P2 Soggiorno Power [%s W]" (gWatt,Casa_Consumi_Chart,gChartCamera1P)
+Number shelly10_Power              "PdC P2 Soggiorno Power [%s W]" (gWatt,Casa_Consumi_Chart)
     { channel="mqtt:topic:shellies:shelly10:Power" }
 
 Number shelly10_voltage            "shelly10 Voltage [%s V]"

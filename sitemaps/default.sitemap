@@ -72,7 +72,6 @@ sitemap default label="Casa"
         Switch item=tuya01_switch
         Switch item=tuya05_Switch
         Switch item=tuya03_Switch
-        Switch item=pow03_Switch
         Switch item=pow01_Switch
         Switch item=Terrazza
       } // Chiuso Text "Varie Casa"
@@ -245,8 +244,25 @@ sitemap default label="Casa"
             Switch    item=Scene01Condition4
 	  }
 	} // Chiuso frame Scena 01
-        Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
+      Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
 	  Frame label="Scena" {
+	Text label="Sveglia 04 - Arrivano i Bimbi" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia04AlarmRepeat
+            Setpoint item=sveglia04Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia04AlarmRepeat==ON]
+            Setpoint item=sveglia04Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia04AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia04Condition1
+	    Switch item=sveglia04Condition2
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia04AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia04AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia04
             Switch    item=Scene02
 	  }
 	  Frame label="Configurazione" {
@@ -266,10 +282,27 @@ sitemap default label="Casa"
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
 	  }
-	} // Chiuso frame Scena 02
+      } // Chiuso frame Scena 02
 
         Text label="Scena 03 - ora di lavorare" icon="settings" {
 	  Frame label="Scena" {
+	Text label="Sveglia 05 - Ora di Lavorare" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia05AlarmRepeat
+            Setpoint item=sveglia05Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia05AlarmRepeat==ON]
+            Setpoint item=sveglia05Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia05AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia05Condition1
+	    Switch item=sveglia05Condition2
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia05AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia05AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia05
             Switch    item=Scene03
 	  }
 	  Frame label="Configurazione" {
@@ -351,40 +384,6 @@ sitemap default label="Casa"
 	    Switch item=sveglia03AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia03
-	Text label="Sveglia 04 - Arrivano i Bimbi" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia04AlarmRepeat
-            Setpoint item=sveglia04Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia04AlarmRepeat==ON]
-            Setpoint item=sveglia04Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia04AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia04Condition1
-	    Switch item=sveglia04Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia04AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia04AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia04
-	Text label="Sveglia 05 - Ora di Lavorare" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia05AlarmRepeat
-            Setpoint item=sveglia05Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia05AlarmRepeat==ON]
-            Setpoint item=sveglia05Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia05AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia05Condition1
-	    Switch item=sveglia05Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia05AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia05AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia05
 	Text label="Sveglia 06 - Clima Studio" icon="clock" {
 	  Frame label="Orario" {
 	    Switch item=sveglia06AlarmRepeat
@@ -394,6 +393,8 @@ sitemap default label="Casa"
 	  Frame label="Configurazione" {
 	    Switch item=sveglia06Condition1
 	    Switch item=sveglia06Condition2
+	    Switch item=sveglia06Condition3
+            Switch item=sveglia06Condition4 icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"]
 	  }
 	  Frame label="Debug - Timer started" {
 	    Switch item=sveglia06AlarmSwitch
@@ -547,7 +548,6 @@ sitemap default label="Casa"
             Setpoint  item=tsSoggiornoWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
             Switch    item=tsSoggiornoWaitDebug
             Switch    item=tsSoggiornoRunning
-            Switch    item=pow03_Switch
           }
 
         } //Chiuso text spSoggiorno
@@ -1040,11 +1040,11 @@ sitemap default label="Casa"
 
 	  Frame label="Temperature reali" {
 	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
-	        Text      item=bs01_temperature   label="Colonna (bs01): Temperatura"
+	        Text      item=bs01_temperature   label="Basso (bs01): Temperatura"
 	  }
 	  Frame label="Umidità reali" {
 	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
-	        Text      item=bs01_humidity      label="Colonna (bs01): Umidità"
+	        Text      item=bs01_humidity      label="Basso (bs01): Umidità"
 	  }
       Frame label="Condizionatore" {
         Switch    item=climaCamera2_Power     icon=climate      label="Clima Studio"

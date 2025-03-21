@@ -3,7 +3,7 @@ Group        g_shellies
 Switch shelly01_R1                 "shelly01"
     { channel="mqtt:topic:shellies:shelly01:PowerSwitch" }
 
-Number shelly01_Power              "PdC Camera 1 Power [%.1f W]"   <energy>       (gWatt)
+Number shelly01_Power              "PdC Camera 1 Power [%.1f W]"   <energy>       (gWatt,gChartCamera1P)
     { channel="mqtt:topic:shellies:shelly01:Power" }
 
 Number shelly01_voltage            "shelly01 Voltage [%s V]"

@@ -66,7 +66,6 @@ then
 //////////////////////////////////////////////////////
 // QUI FACCIO LE COSE CHE VOGLIO CON QUESTA SVEGLIA //
 
-  //val day = now.getDayOfWeek.getValue()
   val day = now.getDayOfWeek.intValue()
 
   if (day == 6 || day == 7)  // WEEKENDS
@@ -75,9 +74,11 @@ then
     {
       logInfo(LOG, "Condition2 == ON, Weekends: accendo")
       DaikinStudio_Power.sendCommand(ON)
-      //createTimer(now.plusSeconds(7),  [ |
-      //  DaikinStudio_Fan.sendCommand("AUTO")
-      //])
+      createTimer(now.plusSeconds(7),  [ |
+        logInfo(LOG, "Setting Fan: " + sveglia06Condition4.state.toString)
+        DaikinStudio_Fan.sendCommand(sveglia06Condition4.state.toString)
+      ])
+      if (sveglia06Condition3.state == ON ) sf08_Light.sendCommand(ON)
     }
   }
   else // WORKING DAYS
@@ -87,8 +88,10 @@ then
       logInfo(LOG, "Condition1 == ON, Working Days: accendo")
       DaikinStudio_Power.sendCommand(ON)
       createTimer(now.plusSeconds(7),  [ |
-        DaikinStudio_Fan.sendCommand("AUTO")
-	])
+        logInfo(LOG, "Setting Fan: " + sveglia06Condition4.state.toString)
+        DaikinStudio_Fan.sendCommand(sveglia06Condition4.state.toString)
+      ])
+      if (sveglia06Condition3.state == ON ) sf08_Light.sendCommand(ON)
     }
   }
 
