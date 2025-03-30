@@ -403,6 +403,24 @@ sitemap default label="Casa"
 	    Switch item=sveglia06AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia06
+	Text label="Sveglia 07 - Alexa P2 Bedroom" icon="clock" {
+	  Frame label="Orario" {
+	    Switch item=sveglia07AlarmRepeat
+            Setpoint item=sveglia07Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia07AlarmRepeat==ON]
+            Setpoint item=sveglia07Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia07AlarmRepeat==ON]
+	  }
+	  Frame label="Configurazione" {
+	    Switch item=sveglia07Condition1
+	    Switch item=sveglia07Condition2
+	    Switch item=sveglia07Condition3
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia07AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia07AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia07
       } // CHIUSO FRAME Sveglie
 
       Frame label="Automatismi" { 

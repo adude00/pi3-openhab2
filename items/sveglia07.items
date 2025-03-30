@@ -1,0 +1,10 @@
+Group  sveglia07Alarm
+Number sveglia07Hour            "Sveglia 07 hour [%d]"             <clock>     (gRestore,sveglia07Alarm)
+Number sveglia07Minute          "Sveglia 07 minute [%d]"           <clock>     (gRestore,sveglia07Alarm)
+Switch sveglia07AlarmSwitch     "Sveglia 07 timer started [%s]"    <clock>     (gRestore,sveglia07Alarm)
+Switch sveglia07AlarmTriggered  "Sveglia 07 action trigger [%s]"   <fire>      (gRestore,sveglia07Alarm)
+Switch sveglia07AlarmRepeat     "Sveglia 07 repeat tomorrow [%s]"  <smiley>    (gRestore,sveglia07Alarm)
+
+Switch sveglia07Condition1      "Turn ON on Week days [%s]"        <settings>  (gRestore,sveglia07Alarm)
+Switch sveglia07Condition2      "Turn ON on Week-ends [%s]"        <settings>  (gRestore,sveglia07Alarm)
+Switch sveglia07Condition3      "Reset Alexa P2 Bedroom [%s]"      <settings>  (gRestore,sveglia07Alarm)
