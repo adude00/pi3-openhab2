@@ -1,0 +1,13 @@
+Group gScene05
+
+Switch Scene05   		"Scena: Nanna di Ethan"		<alarm>	    (gScene05)  [ "Switchable" ]
+
+Switch Scene05Condition1 	"Spegni Campanello [%s]" 	<settings>  (gScene05)
+Switch Scene05Condition2 	"NON USATO - TBD! [%s]" 	<settings>  (gScene05)
+Switch Scene05Condition3 	"Clima Camera 1 [%s]" 		<settings>  (gScene05)
+Switch Scene05Condition3bis 	"Modifica Temp Clima [%s]" 	<settings>  (gScene05)
+Number Scene05Condition3bisNum 	"Temp Clima [%.1f °C]" 		<settings>  (gScene05)
+Switch Scene05Condition4 	"Termostato Camera 1 [%s]" 	<settings>  (gScene05)
+Switch Scene05Condition4bis 	"Modifica Temp TS [%s]" 	<settings>  (gScene05)
+Number Scene05Condition4bisNum 	"Temp Termostato [%.1f °C]" 	<settings>  (gScene05)
+Switch Scene05Condition5        "Camera 1 Silent [%s]"          <settings>  (gScene05)

@@ -1,18 +1,21 @@
 Group gScene02
 
-Switch Scene02   		"Scena: Arrivano i Bimbi"	<alarm>	    (gScene02)  [ "Switchable" ]
+Switch Scene02   		"Scena: Arrivano i Bimbi"	        <alarm>	    (gScene02)  [ "Switchable" ]
 
-Switch Scene02Condition1 	"Spegni Clima Officina [%s]" 	<settings>  (gScene02)
-Switch Scene02Condition2 	"Clima Giochi [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition3 	"Clima Camera 1 [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition3bis 	"Modifica Temp Camera 1 [%s]" 	<settings>  (gScene02)
-Number Scene02Condition3bisNum 	"Temp Camera 1 [%.1f °C]" 	<settings>  (gScene02)
-Switch Scene02Condition3c 	"Modifica Fan Camera 1 [%s]" 	<settings>  (gScene02)
-String Scene02Condition3cSet 	"Fan Camera 1 [%s]" 		<settings>  (gScene02)
-Switch Scene02Condition4 	"Termostato Camera 2 [%s]" 	<settings>  (gScene02)
-Switch Scene02Condition5 	"Termostato Soggiorno P2 [%s]"	<settings>  (gScene02)
-Switch Scene02Condition6 	"Modifica Temp Camera 2 [%s]"	<settings>  (gScene02)
-Number Scene02Condition6num 	"Temp Camera 2 [%s]"		<settings>  (gScene02)
-Switch Scene02Condition7 	"Spegni Clima Studio [%s]" 	<settings>  (gScene02)
+Switch Scene02Condition1 	  "Spegni Clima Officina [%s]" 	        <settings>  (gScene02)
+Switch Scene02Condition2 	  "Clima Giochi [%s]" 		        <settings>  (gScene02)
+Switch Scene02Condition3ts 	  "Camera 1 TS [%s]" 		        <settings>  (gScene02)
+Switch Scene02Condition3tsbis 	  "Camera 1 TS Modifica Temp[%s]"       <settings>  (gScene02)
+Number Scene02Condition3tsbisNum  "Camera 1 TS Temp [%.1f °C]" 	        <settings>  (gScene02)
+Switch Scene02Condition3 	  "Camera 1 Clima [%s]" 		<settings>  (gScene02)
+Switch Scene02Condition3bis 	  "Camera 1 Clima Modifica Temp [%s]" 	<settings>  (gScene02)
+Number Scene02Condition3bisNum 	  "Camera 1 Clima Temp[%.1f °C]" 	<settings>  (gScene02)
+Switch Scene02Condition3c 	  "Camera 1 Modifica FAN[%s]" 	        <settings>  (gScene02)
+String Scene02Condition3cSet 	  "Camera 1 FAN [%s]" 		        <settings>  (gScene02)
+Switch Scene02Condition4 	  "Camera 2 TS [%s]" 	        	<settings>  (gScene02)
+Switch Scene02Condition5 	  "Soggiorno P2 TS [%s]"		<settings>  (gScene02)
+Switch Scene02Condition6 	  "Camera 2 Modifica Temp [%s]" 	<settings>  (gScene02)
+Number Scene02Condition6num 	  "Camera 2 Temp [%s]"		        <settings>  (gScene02)
+Switch Scene02Condition7 	  "Spegni Clima Studio [%s]" 	        <settings>  (gScene02)
 
-Switch Scene02Trigger1		"Trigger: SIAMO SVEGLI"		<settings>  (gScene02)
+Switch Scene02Trigger1		  "Trigger: SIAMO SVEGLI"		<settings>  (gScene02)

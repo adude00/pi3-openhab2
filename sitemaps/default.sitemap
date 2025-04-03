@@ -268,11 +268,14 @@ sitemap default label="Casa"
 	  Frame label="Configurazione" {
             Switch    item=Scene02Condition1
             Switch    item=Scene02Condition2
-            Switch    item=Scene02Condition3
-            Switch    item=Scene02Condition3bis     visibility=[Scene02Condition3==ON]
+	    Switch    item=Scene02Condition3ts
+            Switch    item=Scene02Condition3tsbis     visibility=[Scene02Condition3ts==ON]
+            Setpoint  item=Scene02Condition3tsbisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene02Condition3tsbis==ON]
+	    Switch    item=Scene02Condition3
+            Switch    item=Scene02Condition3bis     
             Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
-            Switch    item=Scene02Condition3c 	    visibility=[Scene02Condition3==ON]
-	    Selection item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"] visibility=[Scene02Condition3c==ON]
+            Switch    item=Scene02Condition3c 	    
+	    Switch    item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent"] visibility=[Scene02Condition3c==ON]
             Switch    item=Scene02Condition4
             Switch    item=Scene02Condition5
             Switch    item=Scene02Condition6
@@ -309,12 +312,14 @@ sitemap default label="Casa"
             Switch    item=Scene03Condition1
             Switch    item=Scene03Condition2
             Switch    item=Scene03Condition3
+            Switch    item=Scene03Condition3a
             Switch    item=Scene03Condition4
             Switch    item=Scene03Condition5
             Switch    item=Scene03Condition6
 	  }
 	} // Chiuso frame Scena 03
-        Text label="Scena 04 - Nanna" icon="settings" {
+
+        Text label="Scena 04 - Nanna delle Bimbe" icon="settings" {
 	  Frame label="Scena" {
             Switch    item=Scene04
 	  }
@@ -330,6 +335,23 @@ sitemap default label="Casa"
             Switch    item=Scene04Condition5
 	  }
 	} // Chiuso frame Scena 04
+
+        Text label="Scena 05 - Nanna di Ethan" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene05
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene05Condition1
+            Switch    item=Scene05Condition2
+            Switch    item=Scene05Condition3
+            Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
+            Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
+            Switch    item=Scene05Condition4
+            Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
+            Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
+            Switch    item=Scene05Condition5
+	  }
+	} // Chiuso frame Scena 05
 
       }
       Frame label="Sveglie" {
@@ -923,6 +945,50 @@ sitemap default label="Casa"
 
 
     Text item=bs06_temperature label="P1 - Camera 1" icon=boy_3 {
+
+      Frame label="Termostato" {
+        Switch    item=tsCamera1
+        Text      item=bs02_temperature {
+
+          // Thermostat Page
+          Frame label="Temperature" {
+            Text item=bs02_temperature
+            Text item=bs06_temperature
+          }
+          Frame label="Thermostat" {
+            Switch    item=tsCamera1
+            Setpoint  item=tsCamera1sp minValue=17  maxValue=29 step=0.1
+          }
+
+          Frame label="A/C Auto Conf" {
+            Setpoint  item=tsCamera1hs              minValue=0   maxValue=3  step=0.1  icon=settings
+            Setpoint  item=tsCamera1MaxTemp         minValue=16  maxValue=30 step=1    icon=flowpipe
+            Setpoint  item=tsCamera1MinTemp         minValue=16  maxValue=30 step=1    icon=returnpipe
+            Setpoint  item=tsCamera1Step            minValue=0.5 maxValue=3  step=0.5  icon=line
+            Switch    item=tsCamera1StartupTempON
+            Setpoint  item=tsCamera1StartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsCamera1StartupTempON==ON]
+            Switch    item=tsCamera1StartupFan
+            Selection item=tsCamera1StartupFanS     mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"] visibility=[tsCamera1StartupFan==ON]
+            Switch    item=tsCamera1SilentOnTemp
+            Switch    item=tsCamera1AutoON          label="Auto ON on SetPoint" icon=settings
+            Switch    item=tsCamera1Override        icon=settings
+            Switch    item=tsCamera1PowerOff
+          }
+		  
+          Frame label="Extra" {
+            Selection item=tsSoggSensor             mappings=[1='bs02', 2='bs06', 3='Media']
+          }
+
+          Frame label="A/C Auto DEBUG"  {
+            Switch    item=tsCamera1Wait
+            Setpoint  item=tsCamera1WaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
+            Switch    item=tsCamera1WaitDebug
+            Switch    item=tsCamera1Running
+          }
+
+        } //Chiuso text tsCamera1
+      } // Chiuso frame Termostato
+
       Frame label="A/C Manual" {
         Switch    item=faikin01_power
 	Selection item=faikin01_fan 	mappings=["A"="Auto", "Q"="Silent", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]

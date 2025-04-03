@@ -15,24 +15,38 @@ then
     logInfo(LOG,"Scene02Condition2.state == ON")
     cl02_a_power.sendCommand(ON)
   }
+  if (Scene02Condition3ts.state == ON) {
+    logInfo(LOG,"Scene02Condition3ts.state == ON")
+    tsCamera1.sendCommand(ON)
+
+    if (Scene02Condition3tsbis.state == ON) {
+      createTimer(now.plusSeconds(15), [|
+        logInfo(LOG,"Scene02Condition3tsbis.state == ON - Setting up temperature: " + Scene02Condition3tsbisNum.state as Number)
+        tsCamera1sp.sendCommand(Scene02Condition3tsbisNum.state as Number)
+     ])
+    }
+  }
+
+  // CLIMA CAMERA1
   if (Scene02Condition3.state == ON) {
     logInfo(LOG,"Scene02Condition3.state == ON")
     faikin01_power.sendCommand(ON)
-
-    if (Scene02Condition3bis.state == ON) {
-      createTimer(now.plusSeconds(10), [|
-        logInfo(LOG,"Scene02Condition3bis.state == ON - Setting up temperature: " + Scene02Condition3bisNum.state as Number)
-        faikin01_temp.sendCommand(Scene02Condition3bisNum.state as Number)
-     ])
-    }
-    if (Scene02Condition3c.state == ON) {
-      createTimer(now.plusSeconds(17), [|
-        logInfo(LOG,"Scene02Condition3c.state == ON - Setting up Fan: " + Scene02Condition3cSet.state)
-        faikin01_fan.sendCommand(Scene02Condition3cSet.state)
-     ])
-    }
-
   }
+
+  if (Scene02Condition3bis.state == ON) {
+    createTimer(now.plusSeconds(10), [|
+      logInfo(LOG,"Scene02Condition3bis.state == ON - Setting up temperature: " + Scene02Condition3bisNum.state as Number)
+      faikin01_temp.sendCommand(Scene02Condition3bisNum.state as Number)
+   ])
+  }
+
+  if (Scene02Condition3c.state == ON) {
+    createTimer(now.plusSeconds(17), [|
+      logInfo(LOG,"Scene02Condition3c.state == ON - Setting up Fan: " + Scene02Condition3cSet.state)
+      faikin01_fan.sendCommand(Scene02Condition3cSet.state)
+   ])
+  }
+
   if (Scene02Condition4.state == ON) {
     logInfo(LOG,"Scene02Condition4.state == ON")
     tsCamera2.sendCommand(ON)

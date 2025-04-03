@@ -1,0 +1,294 @@
+// SEARCH AND REPLACE
+//
+// POWER: faikin01_power
+// TEMP: faikin01_temp 
+// FAN: faikin01_fan
+// MODE: faikin01_mode
+// TEMP1: bs02_temperature
+// TEMP2: bs06_temperature
+// POWER: shelly01_Power
+
+// TEMPAVG: calculated on the fly
+
+// EDIT
+val String HEAT = "H"
+val String COOL = "C"
+
+rule "Reset Termostato Camera1 items at boot"
+  when
+    System started
+  then
+    tsCamera1Wait.sendCommand(OFF)
+    tsCamera1Running.sendCommand(OFF)
+    logInfo("tsCamera1Wait","System started: Turning off tsCamera1Wait and tsCamera1Running")
+end
+
+rule "Termostato Camera1 AutoON"
+  when
+    Item faikin01_power changed from OFF to ON
+
+  then
+    if ( tsCamera1AutoON == ON && tsCamera1 == OFF ) {
+      createTimer(now.plusSeconds(2), [|
+        tsCamera1.sendCommand(ON)
+        logInfo("tsCamera1Wait","Aircon ON. Termostato OFF. tsCamera1AutoON=ON: accendo Termostato.")
+      ])
+    }
+end
+
+rule "Termostato Camera1 ON - Setting startup Temp"
+  when
+    Item tsCamera1 changed from OFF to ON
+  then
+    tsCamera1Wait.sendCommand(OFF)
+    tsCamera1Running.sendCommand(OFF)
+    logInfo("tsCamera1Wait","Termostato ON - Turning off tsCamera1Wait and tsCamera1Running")
+
+
+    if (faikin01_power.state == OFF ) {
+      faikin01_power.sendCommand(ON)
+      logInfo("tsCamera1Wait","Termostato ON. Aircon OFF. Turning ON Aircon")
+
+      createTimer(now.plusSeconds(2), [|
+
+        if ( tsCamera1StartupTempON.state == ON ) {
+          logInfo("tsCamera1Wait","Termostato ON. tsCamera1StartupTempON=ON. Setting Start Temperature: " + tsCamera1StartupTemp.state)
+          faikin01_temp.sendCommand(tsCamera1StartupTemp.state as Number)
+        }
+
+      ]) //TIMER ON
+
+      // TIMER FAN Start
+      createTimer(now.plusSeconds(27), [|
+
+        if ( tsCamera1StartupFan.state == ON ) {
+          logInfo("tsCamera1Wait","Termostato ON. tsCamera1StartupFan=ON. Setting Start FAN: " + tsCamera1StartupFanS.state.toString)
+	  faikin01_fan.sendCommand(tsCamera1StartupFanS.state.toString)
+	}
+     
+      ]) // TIMER FAN End
+
+    }
+
+end
+
+rule "Termostato Camera1 OFF - Turning OFF if needed"
+  when
+    Item tsCamera1 changed from ON to OFF
+  then
+  if ( tsCamera1Override.state == OFF ) {
+    logInfo("tsCamera1Wait","Termostato OFF. tsCamera1Override=OFF. Turning OFF Aircon")
+    faikin01_power.sendCommand(OFF)
+  }
+end
+
+
+rule "Termostato Camera1 Wait"
+when
+    Item tsCamera1 changed from OFF to ON or
+    Item tsCamera2sp changed or
+    Item tsCamera1hs changed or
+    Time cron "0 * * * * ?"
+
+then
+
+  // STARTING A RANDOM TIMER 0-10 second
+  var Number waitRnd
+  waitRnd = (Math::random * 10.0).intValue + 1
+  createTimer(now.plusSeconds(waitRnd),  [ |
+
+  // MAKE SURE WE ARE NOT RUNNING
+  if ( tsCamera1Running.state == OFF ) {
+    // FIRST THING FIRST - WE ARE RUNNING
+    tsCamera1Running.sendCommand(ON)
+    if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: RULE Started")
+
+    // Setting up variables
+    var Number acTemp       =  faikin01_temp.state as Number
+    var Number acTempMax    =  tsCamera1MaxTemp.state as DecimalType
+    var Number acTempMin    =  tsCamera1MinTemp.state as DecimalType
+    var Number acTempStep   =  tsCamera1Step.state as Number
+    var Number tsCamera1hs  =  tsCamera1hs.state
+    var Number setpoint     =  tsCamera1sp.state
+
+    // Temp to check against
+    var Number cur_temp
+    if (tsSoggSensor.state == 1 ) cur_temp = bs02_temperature.state
+    if (tsSoggSensor.state == 2 ) cur_temp = bs06_temperature.state
+    if (tsSoggSensor.state == 3 ) cur_temp = (bs02_temperature.state as DecimalType + bs06_temperature.state as DecimalType) / 2
+
+    // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
+    // https://community.openhab.org/t/solved-int-from-switch-item-number-as-now-plusminutes/60035/17
+    val int timerTime = (tsCamera1WaitMins.state as Number).intValue
+   
+    if (tsCamera1.state == ON && tsCamera1Wait.state == OFF) { 
+      if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: INFO: cur_temp: (" + cur_temp + "), setpoint: (" + setpoint + "), tsCamera1hs: (" + tsCamera1hs + "), acTemp: " + acTemp)
+
+      if ( ( cur_temp + tsCamera1hs )  < setpoint ) {
+      ///////////////
+      // TOO COLD //
+      /////////////
+        if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO COLD")
+
+        // Creating  Wait Timer
+        tsCamera1Wait.sendCommand(ON)
+        if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TIMER started, tsCamera1Wait ON")
+        createTimer(now.plusMinutes(timerTime), [|
+            tsCamera1Wait.sendCommand(OFF)
+            if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TIMER expired, tsCamera1Wait OFF")
+          ])
+
+
+	  // TOO COLD COOLING: INCREASE TEMP
+
+	  if (faikin01_mode.state == COOL) {
+	    if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO COLD COOLING")
+	    if (shelly01_Power.state < 40) {
+              // COMPRESSOR IS NOT RUNNING
+
+              if (faikin01_power.state == ON ) {
+                // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER
+                if (tsCamera1PowerOff.state == ON ) faikin01_power.sendCommand(OFF)
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Compressor not doing anything already. Turning aircon OFF if allowed!")
+              } else {
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, aircon already OFF!!")
+              }
+
+            } else {
+            // COMPRESSOR IS RUNNING
+
+              if ( acTemp < acTempMax ) {
+                // INCREASE TEMP IF WE CAN
+                acTemp = acTemp + acTempStep
+                faikin01_temp.sendCommand(acTemp)
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Increasing acTemp to " + acTemp)
+              } else {
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
+              }
+
+            }
+
+          } // TOO COLD COOLING CLOSED
+
+
+          // TOO COLD HEATING: TURN ON or INCREASE TEMP
+
+          if (faikin01_mode.state == HEAT) {
+            if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO COLD HEATING")
+	    if (faikin01_power.state == OFF ) { 
+	      // AIRCON WAS OFF: TURN IT ON
+	      faikin01_power.sendCommand(ON)
+	      if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: Aircon was OFF. Turning it ON!")
+	    } else {
+
+              // AIRCONF WAS ON, INCREASE TEMP IF POSSIBLE
+              if ( acTemp < acTempMax ) {
+              // WE CAN INCREASE TEMP
+                acTemp = acTemp + acTempStep
+                faikin01_temp.sendCommand(acTemp)
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Increasing acTemp to " + acTemp)
+              } else {
+                // MAX POWER REACHED
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: STILL TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
+              }
+	    } // IF IT WAS ON
+
+          } // TOO COLD HEATING CLOSED
+
+      } // TOO COLD CLOSED
+
+
+
+      if ( ( cur_temp - tsCamera1hs ) > setpoint ) {
+
+      //////////////
+      // TOO HOT //
+      ////////////
+        if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO HOT")
+
+        // Creating Wait Timer
+        tsCamera1Wait.sendCommand(ON)
+        if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TIMER started, tsCamera1Wait ON")
+        createTimer(now.plusMinutes(timerTime), [|
+            tsCamera1Wait.sendCommand(OFF)
+            if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TIMER expired, tsCamera1Wait OFF")
+          ])
+
+	  
+	  // TOO HOT HEATING: REDUCE TEMP
+
+	  if (faikin01_mode.state == HEAT) {
+            if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO HOT HEATING")
+	    if (shelly01_Power.state < 40) {
+	      // COMPRESSOR IS NOT RUNNING
+
+	      if (faikin01_power.state == ON ) {
+	        // AIRCON IS ON EVEN IF ITS NOT RUNNING - TURN IT OFF ALTOGETHER 
+	        if (tsCamera1PowerOff.state == ON ) faikin01_power.sendCommand(OFF)
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Compressor not doing anything already. Turning aircon OFF if allowed!")
+	      } else {
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, aircon already OFF!!")
+	      }
+
+	    } else {
+	    // COMPRESSOR IS RUNNING
+
+	      if ( acTemp > acTempMin ) {
+		// DECREASE POWER IF WE CAN
+                acTemp = acTemp - acTempStep
+	        faikin01_temp.sendCommand(acTemp)
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Decreasing acTemp to " + acTemp)
+	      } else {
+                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - heating: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
+	      }
+
+              // Re-Silent on Temperature
+	      if ( tsCamera1SilentOnTemp.state == ON && faikin01_fan.state != "Q" ) {
+		createTimer(now.plusSeconds(7),  [ |
+		  if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - tsCamera1SilentOnTemp=ON, faikin01_fan=" + faikin01_fan.state + ": enabling Silent mode")
+		  faikin01_fan.sendCommand("Q")
+		  ])
+	      }
+	    }
+	    
+	  } // IF HEATING CLOSED
+
+
+	  // TOO HOT COOLING: DECREASE TEMP
+
+	  if (faikin01_mode.state == COOL) {
+            if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG: TOO HOT COOLING")
+	    if ( acTemp > acTempMin ) {
+	    // WE CAN DECREASE TEMP
+              acTemp = acTemp - acTempStep
+	      faikin01_temp.sendCommand(acTemp)
+              if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Increasing acTemp to " + acTemp)
+	      if (faikin01_power.state == OFF ) {
+	        // TURN ON IF OFF
+	        faikin01_power.sendCommand(ON)
+	        if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: Aircon was OFF. Turning it ON!")
+	      }
+	    } else {
+	      // MAX POWER REACHED
+              if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - cooling: TOO HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + shelly01_Power.state + "W. Not doing anything, reached maximum power: " + acTemp)
+	    }
+
+	  } // IF COOLING CLOSED
+
+
+        } // TOO HOT CLOSED
+
+    } // END IF termostato ON and type=3
+
+  createTimer(now.plusSeconds(3),  [ |
+    if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG:      Finished")
+    tsCamera1Running.sendCommand(OFF)
+  ])
+
+  } // END WE ARE RUNNING
+
+  ]) // END RANDOM TIMER
+
+end
+
+

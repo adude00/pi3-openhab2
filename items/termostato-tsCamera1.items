@@ -1,0 +1,27 @@
+Group gtsCamera1		"Termostato tsCamera1"
+
+Switch tsCamera1  		"Termostato Camera1 [%s]"       <heating>       (gtsCamera1,gRestore) [ "Switchable" ]
+Number tsCamera1sp  		"Setpoint tsCamera1 [%.1f °C]"  <smiley>      	(gtsCamera1,gInflux) 
+Number tsCamera1hs  		"Isteresi tsCamera1 [%.1f °C]"  <flowpipe>    	(gtsCamera1)
+
+
+Number tsCamera1WaitMins	"Minutes to Wait [%s]"		<time> 		(gtsCamera1)
+Number tsCamera1MaxTemp	        "Temperatura Max [%.1f °C]"	<temperature_hot> (gtsCamera1)
+Number tsCamera1MinTemp	        "Temperatura Min [%.1f °C]"	<temperature_cold> (gtsCamera1)
+Number tsCamera1Step		"Step [%.1f °C]"		<temperature>   (gtsCamera1)
+Switch tsCamera1AutoON 		"Auto ON on SetPoint [%s]"    	<text> 		(gtsCamera1)
+Number tsCamera1StartupTemp 	"Temp Accensione [%.1f °C]"     <heating>
+Switch tsCamera1StartupTempON	"Imposta Startup Temp [%s]"     <settings>
+Switch tsCamera1PowerOff	"Spegni se inutilizzato [%s]"   <energy>	(gtsCamera1)
+Switch tsCamera1Override  	"Override OFF Thermostat [%s]"  <settings>      (gtsCamera1)
+
+Switch tsCamera1SilentOnTemp    "Silent on Temperature [%s]"       <settings>      (gtsCamera1)
+
+Switch tsCamera1StartupFan	"Imposta Startup FAN [%s]"      <settings>      (gtsCamera1)
+String tsCamera1StartupFanS     "Startup FAN"                   <flow>          (gtsCamera1)
+
+// DEBUG ITEMS
+Switch tsCamera1Wait 		"Ts is Waiting... [%s]"		<lock> 		(gtsCamera1)
+Switch tsCamera1Running		"Ts is Running... [%s]"		<lock> 		(gtsCamera1)
+Switch tsCamera1WaitDebug	"LOG Verbosi [%s]"             	<text> 		(gtsCamera1)
+Number tsCamera1PrevTemp	"Previous Temp [%.1f °C]"	<temperature>   (gtsCamera1)

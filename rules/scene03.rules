@@ -19,6 +19,10 @@ then
     logInfo(LOG,"Scene03Condition3.state == ON")
     faikin01_power.sendCommand(OFF)
   }
+  if (Scene03Condition3a.state == ON) {
+    logInfo(LOG,"Scene03Condition3a.state == ON")
+    tsCamera1.sendCommand(OFF)
+  }
   if (Scene03Condition4.state == ON) {
     logInfo(LOG,"Scene03Condition4.state == ON")
     climaCamera2_Power.sendCommand(OFF)
