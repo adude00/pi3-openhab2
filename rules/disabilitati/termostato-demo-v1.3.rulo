@@ -169,15 +169,6 @@ then
 
             }
 
-            // Re-Silent on Temperature
-            if ( tsCamera1SilentOnTemp.state == ON && faikin01_fan.state.toString != SILENT ) {
-              createTimer(now.plusSeconds(7),  [ |
-                if (tsCamera1WaitDebug.state == ON ) logInfo("tsCamera1Wait","DEBUG - tsCamera1SilentOnTemp=ON, faikin01_fan=" + faikin01_fan.state + ": enabling Silent mode")
-                faikin01_fan.sendCommand(SILENT)
-              ])
-            } //END: Re-Silent on Temperature
-
-
           } // TOO COLD COOLING CLOSED
 
 
