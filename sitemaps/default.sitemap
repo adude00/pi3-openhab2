@@ -1131,7 +1131,7 @@ sitemap default label="Casa"
 	        Text      item=bs01_humidity      label="Basso (bs01): Umidità"
 	  }
       Frame label="Condizionatore" {
-        Switch    item=climaCamera2_Power     icon=climate      label="Clima Studio"
+        Switch    item=climaCamera2_Power     icon=climate      
 	Setpoint  item=climaCamera2_Temp      icon=temperature  minValue=16 maxValue=30 step=1
 	Selection item=climaCamera2_Fan       icon=fan          mappings=["Auto"="Auto", "1"="1", "2"="2", "3"="3", "4"="4", "5"="5"]
 	Switch    item=climaCamera2_Mode      icon=settings     mappings=["Cooling"="Cool", "Heating"="Heat"]

@@ -1,6 +1,7 @@
 rule "check sensor uptime state"
 when
-    Time cron "0 0/30 * * * ?" // Every 30 minutes
+    //Time cron "0 0/30 * * * ?" // Every 30 minutes
+    Time cron "0 0 * * * ?" // Every hour
 then
     var Number state_cur
     var Number state_avg
@@ -9,7 +10,7 @@ then
     gTemp.members.forEach[i|
 
         state_cur = i.state as Number
-	state_avg = i.averageSince(now.minusMinutes(300)) as Number
+	state_avg = i.averageSince(now.minusMinutes(600)) as Number
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
@@ -21,7 +22,7 @@ then
     gHumd.members.forEach[i|
 
         state_cur = i.state as Number
-	state_avg = i.averageSince(now.minusMinutes(120)) as Number
+	state_avg = i.averageSince(now.minusMinutes(1440)) as Number
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)

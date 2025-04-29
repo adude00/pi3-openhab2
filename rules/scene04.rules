@@ -54,6 +54,10 @@ then
     faikin01_fan.sendCommand("Q")
   }
 
+  createTimer(now.plusSeconds(10), [|
+    logInfo(LOG,"Disabilito pulsante luce bimbe")
+    executeCommandLine("/etc/openhab2/scripts/switch-off.sh")
+  ])
 
   createTimer(now.plusSeconds(13), [|
     Scene04.sendCommand(OFF)
