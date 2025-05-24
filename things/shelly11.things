@@ -1,0 +1,15 @@
+Thing mqtt:topic:shellies:shelly11 "Shelly 11 - P1 Luce Bagno" (mqtt:broker:brokerv2) {
+    Channels:
+        Type switch : PowerSwitch     [ stateTopic="shellies/shelly11/status/switch:0" , transformationPattern="JSONPATH:$.output", on="true" , off="false" , commandTopic="shellies/shelly11/rpc" , formatBeforePublish="{\"src\":\"openhab\",\"method\":\"Switch.Set\", \"params\":{\"id\":0,\"on\":%s}}" ] 
+        Type number : Power           [ stateTopic="shellies/shelly11/status/switch:0" , transformationPattern="JSONPATH:$.apower" ]
+        Type number : Voltage         [ stateTopic="shellies/shelly11/status/switch:0" , transformationPattern="JSONPATH:$.voltage" ]
+        Type number : Energy          [ stateTopic="shellies/shelly11/status/switch:0", transformationPattern="JSONPATH:$.aenergy.total∩JS:shellyplus_energy_kwh.js" ] // From Shelly in Wh
+        Type number : Temperature     [ stateTopic="shellies/shelly11/status/switch:0", transformationPattern="JSONPATH:$.temperature.tC" ]
+        Type string : RestartReq      [ stateTopic="shellies/shelly11/status/sys",  transformationPattern="REGEX:(.*restart_required.*)∩JSONPATH:$.restart_required"]
+        Type string : Devicestate     [ stateTopic="shellies/shelly11/online" ]
+        Type string : IP              [ stateTopic="shellies/shelly11/shellystatus/rpc", transformationPattern="REGEX:(.*sta_ip.*)∩JSONPATH:$.result.wifi.sta_ip"]
+	Type string : Event0          [ stateTopic="shellies/shelly11/events/rpc", transformationPattern="REGEX:(.*\"event\":.*)∩JSONPATH:$.params.events[*].event" ] 
+        Type string : Source          [ stateTopic="shellies/shelly11/status/switch:0" , transformationPattern="JSONPATH:$.source" ]
+        Type string : RSSI            [ stateTopic="shellies/shelly11/shellystatus/rpc", transformationPattern="REGEX:(.*rssi.*)∩JSONPATH:$.result.wifi.rssi"]
+        Type number : Uptime          [ stateTopic="shellies/shelly11/shellystatus/rpc", transformationPattern="REGEX:(.*uptime.*)∩JSONPATH:$.result.sys.uptime"] // in seconds
+      }

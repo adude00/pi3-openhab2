@@ -1,0 +1,31 @@
+Group        g_shellies
+
+Switch shelly11_R1                 "shelly11"
+    { channel="mqtt:topic:shellies:shelly11:PowerSwitch" }
+
+Number shelly11_Power              "Luce Bagno P1 Power [%s W]" (gWatt,Casa_Consumi_Chart)
+    { channel="mqtt:topic:shellies:shelly11:Power" }
+
+Number shelly11_voltage            "shelly11 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shelly11:Voltage" }
+Number shelly11_energy             "shelly11 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly11:Energy" }
+Number shelly11_temperature        "shelly11 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shelly11:Temperature" }
+String shelly11_restartreq         "shelly11 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly11:RestartReq" }
+String shelly11_state              "shelly11 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly11:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly11_event0             "shelly11 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly11:Event0" }
+String shelly11_ip                 "shelly11 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly11:IP" }
+String shelly11_rssi               "shelly11 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly11:RSSI" }
+String shelly11_source             "shelly11 Source"
+    { channel="mqtt:topic:shellies:shelly11:Source" }
+Number shelly11_uptime             "shelly11 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly11:Uptime" }
+
+String shelly11                    "shelly11" (g_shellies) // dummy for rule status loop
+
