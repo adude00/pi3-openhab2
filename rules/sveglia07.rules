@@ -74,6 +74,7 @@ then
     {
       logInfo(LOG, "Condition2 == ON, Weekends: start!")
       if (sveglia07Condition3.state == ON ) sf07_Light.sendCommand(OFF)
+      if (sveglia07Condition4.state == ON ) DaikinMatrimoniale_Power.sendCommand(ON)
     }
   }
   else // WORKING DAYS
@@ -82,6 +83,7 @@ then
     {
       logInfo(LOG, "Condition1 == ON, Working Days: start!")
       if (sveglia07Condition3.state == ON ) sf07_Light.sendCommand(OFF)
+      if (sveglia07Condition4.state == ON ) DaikinMatrimoniale_Power.sendCommand(ON)
     }
   }
 

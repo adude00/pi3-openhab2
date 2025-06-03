@@ -8,3 +8,4 @@ Switch sveglia07AlarmRepeat     "Sveglia 07 repeat tomorrow [%s]"  <smiley>    (
 Switch sveglia07Condition1      "Turn ON on Week days [%s]"        <settings>  (gRestore,sveglia07Alarm)
 Switch sveglia07Condition2      "Turn ON on Week-ends [%s]"        <settings>  (gRestore,sveglia07Alarm)
 Switch sveglia07Condition3      "Reset Alexa P2 Bedroom [%s]"      <settings>  (gRestore,sveglia07Alarm)
+Switch sveglia07Condition4      "Turn ON Aircon [%s]"              <settings>  (gRestore,sveglia07Alarm)

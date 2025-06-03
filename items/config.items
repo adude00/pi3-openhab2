@@ -1,3 +1,5 @@
+Group gAutomations
+
 // Scena Mattina
 // Luci
 Dimmer led03_w_Morning  	"Soffitto Bianco"      <lightbulb>
@@ -51,8 +53,4 @@ Switch alexa_lavatrice          "Lavatrice"                    <settings>       
 
 // Tramonto
 Switch sunIsOut			"Giorno"			<settings>		[ "Switchable" ]
-
-// ClimaEthan
-Switch climaEthan_AutoOn   "Clima Ethan Auto ON"
-Switch climaEthan_AutoOff  "Clima Ethan Auto OFF"
 

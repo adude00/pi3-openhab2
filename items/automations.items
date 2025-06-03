@@ -1,2 +1,0 @@
-Group gAutomations
-Switch  AutoRientro   "AUTO Sono a casa [%s]"    (gAutomations,gRestore)

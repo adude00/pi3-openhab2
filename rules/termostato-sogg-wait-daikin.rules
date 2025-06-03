@@ -33,7 +33,7 @@ rule "Termostato Soggiorno ON - Setting startup Temp"
       faikin02_power.sendCommand(ON)
       logInfo("tsSoggiornoWait","Termostato ON. Aircon OFF. Turning ON Aircon")
 
-      createTimer(now.plusSeconds(2), [|
+      createTimer(now.plusSeconds(10), [|
 
         if ( tsSoggiornoStartupTempON.state == ON ) {
           logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature: " + tsSoggiornoStartupTemp.state)
@@ -152,6 +152,14 @@ then
                 if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: TOO COLD! cur_temp: (" + cur_temp + ") lower than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Not doing anything, reached minimum power: " + acTemp)
               }
 
+              // Re-Silent on Temperature
+	      if ( tsSoggiornoSilentOnTemp.state == ON && faikin02_fan.state != "Q" ) {
+		createTimer(now.plusSeconds(7),  [ |
+		  if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - tsSoggiornoSilentOnTemp=ON, faikin02_fan=" + faikin02_fan.state + ": enabling Silent mode")
+		  faikin02_fan.sendCommand("Q")
+		  ])
+	      }
+
             }
 
           } // TOO COLD COOLING CLOSED
@@ -233,7 +241,7 @@ then
 	      }
 	    }
 	    
-	  } // IF HEATING CLOSED
+	  } // TOO HOT HEATING: CLOSED
 
 
 	  // TOO HOT COOLING: DECREASE TEMP

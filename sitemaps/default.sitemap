@@ -420,7 +420,7 @@ sitemap default label="Casa"
 	    Switch item=sveglia06AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia06
-	Text label="Sveglia 07 - Alexa P2 Bedroom" icon="clock" {
+	Text label="Sveglia 07 - P2 Bedroom Prep" icon="clock" {
 	  Frame label="Orario" {
 	    Switch item=sveglia07AlarmRepeat
             Setpoint item=sveglia07Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia07AlarmRepeat==ON]
@@ -430,6 +430,7 @@ sitemap default label="Casa"
 	    Switch item=sveglia07Condition1
 	    Switch item=sveglia07Condition2
 	    Switch item=sveglia07Condition3
+	    Switch item=sveglia07Condition4
 	  }
 	  Frame label="Debug - Timer started" {
 	    Switch item=sveglia07AlarmSwitch
@@ -452,7 +453,7 @@ sitemap default label="Casa"
 	  }
 	}
 
-      Text label="Sveglia" icon="time" {
+      Text label="Sveglia Casa" icon="time" {
         Frame label="Sveglia" {
           Switch item=WakeUpAlarmRepeat label="Sveglia"
           Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
@@ -478,15 +479,11 @@ sitemap default label="Casa"
       }  // Chiuso Text Sveglia
 
         Group item=gAutomations   label="Automazioni"
-        Group item=gPresence      label="Presence"
-	Text label="Alexa" icon=settings {
+	Text label="Alexa Debug" icon=settings {
 
 	  Frame label="Campanello" {
 	    Switch        item=alexa_campanello
 	    Switch        item=esp09_Switch 
-	  }
-	  Frame label="Forno" {
-	    Switch        item=alexa_forno 
 	  }
 	  Frame label="Lavatrice" {
 	    Switch        item=alexa_lavatrice
@@ -531,11 +528,6 @@ sitemap default label="Casa"
 	  
 	} // TEXT CLIMA SOGGIORNO
 
-	Text label="Clima Ethan" icon="settings" {
-          Switch      item=climaEthan_AutoOn
-          Switch      item=climaEthan_AutoOff
-	}
-
       } // CHIUSO FRAME Automatismi
     } // CHIUSO TEXT Configurazione schermata principale
 
@@ -552,6 +544,9 @@ sitemap default label="Casa"
           // Thermostat Page
           Frame label="Temperature" {
             Text item=Casa_Temperature_AVG 
+            Text item=sf04_Temp
+	    Text item=avgSoggiornoAvg
+	    Text item=bs11_temperature
           }
           Frame label="Thermostat" {
             Switch    item=tsSoggiorno
