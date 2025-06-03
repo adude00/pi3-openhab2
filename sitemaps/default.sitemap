@@ -228,11 +228,6 @@ sitemap default label="Casa"
 	  }
 	}  // SCENA Mattina
 
-        Text label="Scena Nanna" icon="settings" {
-            Switch    item=conf_nanna_ac_kid_acon     
-            Switch    item=conf_nanna_ac_kid_chng     
-            Setpoint  item=conf_nanna_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=0.5 visibility=[conf_nanna_ac_kid_chng==ON]
-	}
         Text label="Scena 01 - Io Vado" icon="settings" {
 	  Frame label="Scena" {
             Switch    item=Scene01
