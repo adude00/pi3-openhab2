@@ -478,7 +478,7 @@ sitemap default label="Casa"
         }
       }  // Chiuso Text Sveglia
 
-        Group item=gAutomations   label="Automazioni"
+        Group item=gAutomations   label="Automazioni Varie"
 	Text label="Alexa Debug" icon=settings {
 
 	  Frame label="Campanello" {
