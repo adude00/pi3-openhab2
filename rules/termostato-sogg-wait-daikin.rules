@@ -43,7 +43,7 @@ rule "Termostato Soggiorno ON - Setting startup Temp"
       ]) //TIMER ON
 
       // TIMER FAN Start
-      createTimer(now.plusSeconds(27), [|
+      createTimer(now.plusSeconds(37), [|
 
         if ( tsSoggiornoStartupFan.state == ON ) {
           logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupFan=ON. Setting Start FAN: " + tsSoggiornoStartupFanS.state.toString)

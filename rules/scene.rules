@@ -76,7 +76,6 @@ then
   shelly2pm01_R1.sendCommand(ON)
 
   createTimer(now.plusSeconds(30), [|
-    AutoRientro.sendCommand(OFF) 
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena A CASA: finita")
     ])
@@ -207,8 +206,6 @@ then
   if (Scene02Trigger1.state == ON) Scene02.sendCommand(ON)
 
   createTimer(now.plusSeconds(30), [|
-    AutoRientro.sendCommand(OFF) 
-    //faikin02_temp.sendCommand(23.0)
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena MATTINA: finita")
     ])
@@ -232,9 +229,6 @@ then
     sf03_Switch.sendCommand(ON)
     sf12_Switch.sendCommand(ON)
     logInfo("Scene","Scena USCIAMO: Telecamere accese")
-    ])
-  createTimer(now.plusSeconds(300), [|
-    AutoRientro.sendCommand(ON)
     ])
 
     // TERMOSTATO
