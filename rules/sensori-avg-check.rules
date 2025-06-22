@@ -1,7 +1,8 @@
 rule "check sensor uptime state"
 when
     //Time cron "0 0/30 * * * ?" // Every 30 minutes
-    Time cron "0 0 * * * ?" // Every hour
+    //Time cron "0 0 * * * ?" // Every hour
+    Time cron "0 0 10 * * ?" // Every Day
 then
     var Number state_cur
     var Number state_avg

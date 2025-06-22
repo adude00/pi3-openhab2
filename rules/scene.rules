@@ -184,10 +184,26 @@ then
     WhiteNoiseGirls.sendCommand(OFF)
   }
 
-  // CAMERA ETHAN - AC AUTO OFF - TODO DAKIN
-  if (climaEthan_AutoOff.state == ON) {
-    logInfo("Scene","MATTINA: AutoOFF Ethan: Spengo il Clima")
+  // CAMERA 1 - AC AUTO OFF - DAKIN
+  if (Camera1_Clima_AutoOff.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF Camera 1: Spengo il Clima")
     faikin01_power.sendCommand(OFF)
+  }
+  // CAMERA 1 - TS AUTO OFF - DAKIN
+  if (Camera1_TS_AutoOff.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF Camera 1: Spengo il TS")
+    tsCamera1.sendCommand(OFF)
+  }
+
+  // CAMERA 2 - AC AUTO OFF - Samsung
+  if (Camera2_Clima_AutoOff.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF Camera 2: Spengo il Clima")
+    climaCamera2_Power.sendCommand(OFF)
+  }
+  // CAMERA 2 - TS AUTO OFF - Samsung
+  if (Camera2_TS_AutoOff.state == ON) {
+    logInfo("Scene","MATTINA: AutoOFF Camera 2: Spengo il TS")
+    tsCamera1.sendCommand(OFF)
   }
 
   gTappP2.sendCommand(UP)

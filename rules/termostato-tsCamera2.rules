@@ -1,11 +1,4 @@
-rule "Reset tsCamera2 items at boot"
-  when
-    System started
-  then
-    tsCamera2Wait.sendCommand(OFF)
-    tsCamera2Running.sendCommand(OFF)
-    logInfo("tsCamera2Wait","System started: Turning off tsCamera2Wait and tsCamera2Running")
-end
+// STARTUP rule in startup.rules
 
 rule "tsCamera2 AutoON"
   when

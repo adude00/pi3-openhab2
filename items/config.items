@@ -54,4 +54,7 @@ Switch alexa_lavatrice          "Lavatrice"                    <settings>       
 Switch sunIsOut			"Giorno"			<settings>		[ "Switchable" ]
 
 // Clima Ethan
-Switch climaEthan_AutoOff       "Clima Ethan Auto OFF"         <settings> (gAutomations)
+Switch Camera2_Clima_AutoOff    "Camera 2 Clima Auto OFF"      <settings> (gAutomations)
+Switch Camera2_TS_AutoOff       "Camera 2 TS Auto OFF"         <settings> (gAutomations)
+Switch Camera1_Clima_AutoOff    "Camera 1 Clima Auto OFF"      <settings> (gAutomations)
+Switch Camera1_TS_AutoOff       "Camera 1 TS Auto OFF"         <settings> (gAutomations)

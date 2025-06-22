@@ -1,0 +1,18 @@
+rule "One startup rule to rule them all"
+  when
+    System started
+  then
+
+    tsSoggiornoWait.sendCommand(OFF)
+    tsSoggiornoRunning.sendCommand(OFF)
+    logInfo("tsSoggiornoWait","System started: Turning off tsSoggiornoWait and tsSoggiornoRunning")
+
+    tsCamera1Wait.sendCommand(OFF)
+    tsCamera1Running.sendCommand(OFF)
+    logInfo("tsCamera1Wait","System started: Turning off tsCamera1Wait and tsCamera1Running")
+
+    tsCamera2Wait.sendCommand(OFF)
+    tsCamera2Running.sendCommand(OFF)
+    logInfo("tsCamera2Wait","System started: Turning off tsCamera2Wait and tsCamera2Running")
+
+end

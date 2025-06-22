@@ -1,11 +1,4 @@
-rule "Reset Termostato Soggiorno items at boot"
-  when
-    System started
-  then
-    tsSoggiornoWait.sendCommand(OFF)
-    tsSoggiornoRunning.sendCommand(OFF)
-    logInfo("tsSoggiornoWait","System started: Turning off tsSoggiornoWait and tsSoggiornoRunning")
-end
+// STARTUP rule in startup.rules
 
 rule "Termostato Soggiorno AutoON"
   when

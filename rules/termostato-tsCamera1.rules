@@ -15,14 +15,7 @@ val String HEAT = "H"
 val String COOL = "C"
 val String SILENT = "Q"
 
-rule "Reset Termostato Camera1 items at boot"
-  when
-    System started
-  then
-    tsCamera1Wait.sendCommand(OFF)
-    tsCamera1Running.sendCommand(OFF)
-    logInfo("tsCamera1Wait","System started: Turning off tsCamera1Wait and tsCamera1Running")
-end
+// STARTUP rule in startup.rules
 
 rule "Termostato Camera1 AutoON"
   when

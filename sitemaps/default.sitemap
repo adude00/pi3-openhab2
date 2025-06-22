@@ -187,12 +187,6 @@ sitemap default label="Casa"
     Text label="IP Cameras" icon="camera" {
       Frame label="2P" {
         Switch item=sf03_Switch
-			// Camera 1
-			Selection item=Camera1_View mappings=[0='1: Soggiorno', 1='2: Divano', 2='3: Scrivania', 3='4: Finestra', 4='5: Ingresso', 5='6: AC', 6='7: Cane', 7='8: Soffitto']
-			Switch item=Camera1_Record 
-			// Camera 2
-			Selection item=Camera2_View mappings=[0='1: Ingresso', 1='2: Pavimento Ingresso', 2='3: Cucina', 3='4: Pavimento Tinello', 4='5: Tavolo', 5='6: Divano', 6='7: AC', 7='8: Soffitto']
-        Switch item=Camera2_Record
       }
       Frame label="1P" {
 	Switch item=sf12_Switch
