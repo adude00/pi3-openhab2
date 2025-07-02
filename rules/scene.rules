@@ -302,7 +302,7 @@ then
     ])
 end
 
-rule "Vado a Letto: BUONANOTTE"
+rule "Vado a Letto: BUONANOTTE - Buonanotte"
 when
     Item Scene_aLetto changed to ON
 then
@@ -352,6 +352,21 @@ then
     logInfo("Scene","Scena A Letto: AutoON White Noise: Accendo il rumore bianco")
     WhiteNoiseBDRM.sendCommand(ON)
   }
+
+
+      if (Buonanotte_CM_Power.state == ON ) {
+        DaikinMatrimoniale_Power.sendCommand(ON)
+        createTimer(now.plusSeconds(5),  [ |
+          logInfo("Scene", "Buonanotte: Setting Temp: " + Buonanotte_CM_Temp.state)
+          DaikinMatrimoniale_SetPoint.sendCommand(Buonanotte_CM_Temp.state)
+        ])
+        createTimer(now.plusSeconds(10),  [ |
+          logInfo("Scene", "Buonanotte: Setting Fan: " + Buonanotte_CM_Fan.state.toString)
+          DaikinMatrimoniale_Fan.sendCommand(Buonanotte_CM_Fan.state.toString)
+        ])
+      }
+
+
 
     createTimer(now.plusSeconds(5),  [ |
       gBuonanotte.sendCommand(OFF)

@@ -74,7 +74,18 @@ then
     {
       logInfo(LOG, "Condition2 == ON, Weekends: start!")
       if (sveglia07Condition3.state == ON ) sf07_Light.sendCommand(OFF)
-      if (sveglia07Condition4.state == ON ) DaikinMatrimoniale_Power.sendCommand(ON)
+
+      if (sveglia07Condition4.state == ON ) {
+        DaikinMatrimoniale_Power.sendCommand(ON)
+        createTimer(now.plusSeconds(5),  [ |
+          logInfo(LOG, "Setting Temp: " + sveglia07Condition4temp.state)
+          DaikinMatrimoniale_SetPoint.sendCommand(sveglia07Condition4temp.state)
+        ])
+        createTimer(now.plusSeconds(10),  [ |
+          logInfo(LOG, "Setting Fan: " + sveglia07Condition4fan.state.toString)
+          DaikinMatrimoniale_Fan.sendCommand(sveglia07Condition4fan.state.toString)
+        ])
+      }
     }
   }
   else // WORKING DAYS
@@ -83,7 +94,18 @@ then
     {
       logInfo(LOG, "Condition1 == ON, Working Days: start!")
       if (sveglia07Condition3.state == ON ) sf07_Light.sendCommand(OFF)
-      if (sveglia07Condition4.state == ON ) DaikinMatrimoniale_Power.sendCommand(ON)
+
+      if (sveglia07Condition4.state == ON ) {
+        DaikinMatrimoniale_Power.sendCommand(ON)
+        createTimer(now.plusSeconds(5),  [ |
+          logInfo(LOG, "Setting Temp: " + sveglia07Condition4temp.state)
+          DaikinMatrimoniale_SetPoint.sendCommand(sveglia07Condition4temp.state)
+        ])
+        createTimer(now.plusSeconds(10),  [ |
+          logInfo(LOG, "Setting Fan: " + sveglia07Condition4fan.state.toString)
+          DaikinMatrimoniale_Fan.sendCommand(sveglia07Condition4fan.state.toString)
+        ])
+      }
     }
   }
 
@@ -114,8 +136,8 @@ end
 
 rule "sveglia07 timer for next alarm"
 when
-  // Alle 3 e 07 minuti di tutti i giorni riarmo la sveglia per la mattina
-  Time cron "0 07 3 1/1 * ? *"
+  // Alle 19 e 07 minuti di tutti i giorni riarmo la sveglia per la sera
+  Time cron "0 07 19 1/1 * ? *"
   // Generated with http://www.cronmaker.com
 then
   logInfo(LOG, "Controllo se riattivare la sveglia")

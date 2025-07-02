@@ -1,0 +1,12 @@
+Group  sveglia08Alarm
+Number sveglia08Hour            "Sveglia 08 hour [%d]"             <clock>     (gRestore,sveglia08Alarm)
+Number sveglia08Minute          "Sveglia 08 minute [%d]"           <clock>     (gRestore,sveglia08Alarm)
+Switch sveglia08AlarmSwitch     "Sveglia 08 timer started [%s]"    <clock>     (gRestore,sveglia08Alarm)
+Switch sveglia08AlarmTriggered  "Sveglia 08 action trigger [%s]"   <fire>      (gRestore,sveglia08Alarm)
+Switch sveglia08AlarmRepeat     "Sveglia 08 repeat tomorrow [%s]"  <smiley>    (gRestore,sveglia08Alarm)
+
+Switch sveglia08Condition1      "Turn ON on Week days [%s]"        <settings>  (gRestore,sveglia08Alarm)
+Switch sveglia08Condition2      "Turn ON on Week-ends [%s]"        <settings>  (gRestore,sveglia08Alarm)
+Switch sveglia08Condition4      "Turn ON Aircon [%s]"              <settings>  (gRestore,sveglia08Alarm)
+Number sveglia08Condition4temp  "Aircon Temp [%s]"                 <settings>  (gRestore,sveglia08Alarm)
+String sveglia08Condition4fan   "Fan Speed [%s]"                   <settings>  (gRestore,sveglia08Alarm)

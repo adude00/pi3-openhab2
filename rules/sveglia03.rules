@@ -74,7 +74,8 @@ then
     if (sveglia03Condition2.state == ON) 
     {
       logInfo(LOG, "Condition2 == ON, Weekends: accendo")
-      tsSoggiorno.sendCommand(ON)
+      if (sveglia03Condition3.state == ON ) tsSoggiorno.sendCommand(ON)
+      if (sveglia03Condition4.state == ON ) faikin02_power.sendCommand(ON)
     }
   }
   else // WORKING DAYS
@@ -82,7 +83,8 @@ then
     if (sveglia03Condition1.state == ON) 
     {
       logInfo(LOG, "Condition1 == ON, Working Days: accendo")
-      tsSoggiorno.sendCommand(ON)
+      if (sveglia03Condition3.state == ON ) tsSoggiorno.sendCommand(ON)
+      if (sveglia03Condition4.state == ON ) faikin02_power.sendCommand(ON)
     }
   }
 

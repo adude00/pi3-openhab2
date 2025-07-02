@@ -9,3 +9,5 @@ Switch sveglia07Condition1      "Turn ON on Week days [%s]"        <settings>  (
 Switch sveglia07Condition2      "Turn ON on Week-ends [%s]"        <settings>  (gRestore,sveglia07Alarm)
 Switch sveglia07Condition3      "Reset Alexa P2 Bedroom [%s]"      <settings>  (gRestore,sveglia07Alarm)
 Switch sveglia07Condition4      "Turn ON Aircon [%s]"              <settings>  (gRestore,sveglia07Alarm)
+Number sveglia07Condition4temp  "Aircon Temp [%s]"                 <settings>  (gRestore,sveglia07Alarm)
+String sveglia07Condition4fan   "Fan Speed [%s]"                   <settings>  (gRestore,sveglia07Alarm)

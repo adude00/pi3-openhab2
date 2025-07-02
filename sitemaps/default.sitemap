@@ -379,14 +379,16 @@ sitemap default label="Casa"
 	  }
 	} // CHIUSO Text Sveglia02
 	Text label="Sveglia 03 - Clima Soggiorno" icon="clock" {
-	  Frame label="Orario" {
+	  Frame label="Schedulazione" {
 	    Switch item=sveglia03AlarmRepeat
             Setpoint item=sveglia03Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia03AlarmRepeat==ON]
             Setpoint item=sveglia03Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia03AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
 	    Switch item=sveglia03Condition1
 	    Switch item=sveglia03Condition2
+	  }
+	  Frame label="Azioni" {
+	    Switch item=sveglia03Condition3
+	    Switch item=sveglia03Condition4
 	  }
 	  Frame label="Debug - Timer started" {
 	    Switch item=sveglia03AlarmSwitch
@@ -425,6 +427,8 @@ sitemap default label="Casa"
 	    Switch item=sveglia07Condition2
 	    Switch item=sveglia07Condition3
 	    Switch item=sveglia07Condition4
+            Setpoint item=sveglia07Condition4temp icon=temperature minValue=16 maxValue=30 step=0.5 visibility=[sveglia07Condition4==ON]
+            Switch   item=sveglia07Condition4fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[sveglia07Condition4==ON]
 	  }
 	  Frame label="Debug - Timer started" {
 	    Switch item=sveglia07AlarmSwitch
@@ -433,9 +437,36 @@ sitemap default label="Casa"
 	    Switch item=sveglia07AlarmTriggered
 	  }
 	} // CHIUSO Text Sveglia07
+	Text label="Sveglia 08 - P2 Bedroom Notturna" icon="clock" {
+	  Frame label="Schedulazione" {
+	    Switch item=sveglia08AlarmRepeat
+            Setpoint item=sveglia08Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia08AlarmRepeat==ON]
+            Setpoint item=sveglia08Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia08AlarmRepeat==ON]
+	    Switch item=sveglia08Condition1
+	    Switch item=sveglia08Condition2
+	  }
+	  Frame label="Azioni" {
+	    Switch item=sveglia08Condition4
+            Setpoint item=sveglia08Condition4temp icon=temperature minValue=16 maxValue=30 step=0.5 visibility=[sveglia08Condition4==ON]
+            Switch   item=sveglia08Condition4fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[sveglia08Condition4==ON]
+	  }
+	  Frame label="Debug - Timer started" {
+	    Switch item=sveglia08AlarmSwitch
+	  }
+	  Frame label="Debug - Manual Trigger" {
+	    Switch item=sveglia08AlarmTriggered
+	  }
+	} // CHIUSO Text Sveglia08
       } // CHIUSO FRAME Sveglie
 
       Frame label="Automatismi" { 
+	Text label="Clima Matrimoniale" icon=settings {
+	  Frame label="Scena Buonanotte" {
+	    Switch   item=Buonanotte_CM_Power
+            Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
+            Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
+	  }
+	}
 	Text label="White Noise" icon="settings" {
 	  Frame label="Bedroom" {
 	    Switch item=WhiteNoiseBDRMautoON

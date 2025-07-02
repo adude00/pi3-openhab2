@@ -7,3 +7,5 @@ Switch sveglia03AlarmRepeat     "Sveglia 03 repeat tomorrow [%s]"  <smiley>    (
 
 Switch sveglia03Condition1      "Turn ON on Week days [%s]"      <settings>  (gRestore,sveglia03Alarm)
 Switch sveglia03Condition2      "Turn ON on Week-ends [%s]"      <settings>  (gRestore,sveglia03Alarm)
+Switch sveglia03Condition3      "Turn ON Termostat [%s]"         <settings>  (gRestore,sveglia03Alarm)
+Switch sveglia03Condition4      "Turn ON Aircon [%s]"            <settings>  (gRestore,sveglia03Alarm)
