@@ -17,5 +17,6 @@ Switch Scene02Condition5 	  "Soggiorno P2 TS [%s]"		<settings>  (gScene02)
 Switch Scene02Condition6 	  "Camera 2 Modifica Temp [%s]" 	<settings>  (gScene02)
 Number Scene02Condition6num 	  "Camera 2 Temp [%s]"		        <settings>  (gScene02)
 Switch Scene02Condition7 	  "Spegni Clima Studio [%s]" 	        <settings>  (gScene02)
+Switch Scene02Condition8 	  "Accendi Clima Soggiorno [%s]"        <settings>  (gScene02)
 
 Switch Scene02Trigger1		  "Trigger: SIAMO SVEGLI"		<settings>  (gScene02)

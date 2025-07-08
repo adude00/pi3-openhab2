@@ -72,6 +72,11 @@ then
     DaikinStudio_Power.sendCommand(OFF)
   }
 
+  if (Scene02Condition8.state == ON) {
+    logInfo(LOG,"Scene02Condition8.state == ON")
+    faikin02_power.sendCommand(ON)
+  }
+
   createTimer(now.plusSeconds(13), [|
     Scene02.sendCommand(OFF)
     logInfo(LOG,"Scena finita")

@@ -270,6 +270,7 @@ sitemap default label="Casa"
             Switch    item=Scene02Condition6
             Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
             Switch    item=Scene02Condition7
+            Switch    item=Scene02Condition8
 	  }
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
