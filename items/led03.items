@@ -1,13 +1,5 @@
 Group led03
 
-Color  led03_Color "Discoteca Color"       (gRGB)
-Switch led03_Power "Discoteca Accesa" (gRGB,gLuci,gLuciSogg)  {mqtt=">[broker:cmnd/led03/DIMMER1:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER1)" }
-String led03_RGB   "Discoteca Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led03/HSBCOLOR1:state:JSONPATH($.Color1)]"}
-Dimmer led03_Dim   "Discoteca [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led03/DIMMER1:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.Dimmer1)"}
-
-Switch led03_PowerW "Soffitto Acceso" (gRGB,gLuci,gLuciSogg) {mqtt=">[broker:cmnd/led03/DIMMER2:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.POWER2)]"}
-Dimmer led03_DimW   "Soffitto [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[broker:cmnd/led03/DIMMER2:command:*:default], <[broker:stat/led03/DIMMER:state:JSONPATH($.Dimmer2)"}
-
 
 // setoption4 1: DIMMER > DIMMER
 // setoption4 0: DIMMER > RESULT
@@ -17,24 +9,23 @@ Dimmer led03_DimW   "Soffitto [%.0f %%]" (gLightsDim) [ "Lighting" ] {mqtt=">[br
 //Dimmer led03_Dim   "Soffitto Power [%.0f %%]" (gLightsDim) {mqtt=">[broker:cmnd/led03/DIMMER:command:*:default], <[broker:stat/led03/RESULT:state:JSONPATH($.Dimmer)"}
 //String led03_RGB   "Soffitto Color [%s]"  (gRGB)      {mqtt="<[broker:stat/led03/RESULT:state:JSONPATH($.Color)]"}
 
+// RGB Section
+Color   led03_Color   "Discoteca Color"            (gRGB)                                     {channel="mqtt:topic:led03:colorControl"}
+Switch  led03_Power   "Discoteca Accesa"           (gRGB, gLuci, gLuciSogg)                   {channel="mqtt:topic:led03:powerColor"}
+String  led03_RGB     "Discoteca Color [%s]"       (gRGB)                                     {channel="mqtt:topic:led03:colorRGB"}
+Dimmer  led03_Dim     "Discoteca [%.0f %%]"        (gLightsDim) [ "Lighting" ]                {channel="mqtt:topic:led03:dimColor"}
 
-// STATUS
-Number led03_RSSI "Soffitto: RSSI [%d %%]" <qualityofservice> (led03,sonoff,gRSSI)
-    { mqtt="<[broker:tele/led03/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String led03_Reachable "Soffitto: Status [%s]" <switch> (led03,sonoff,gReachable)
-    { mqtt="<[broker:tele/led03/LWT:state:MAP(reachable.map)]" }
-String led03_Uptime "Soffitto: Uptime [%s]" <clock> (led03,sonoff,gUptime)
-    { mqtt="<[broker:tele/led03/STATE:state:JSONPATH($.Uptime)]" }
+// White Section
+Switch  led03_PowerW  "Soffitto Acceso"            (gRGB, gLuci, gLuciSogg)                   {channel="mqtt:topic:led03:powerWhite"}
+Dimmer  led03_DimW    "Soffitto [%.0f %%]"         (gLightsDim) [ "Lighting" ]                {channel="mqtt:topic:led03:dimWhite"}
 
-// Versions
-DateTime  led03_Date     "LED 03: Refresh [ %1$tH:%1$tM]"   <clock>      (led03,sonoff,gVersion,gTime)
-    { mqtt="<[broker:tele/led03/STATE:state:JSONPATH($.Time)]" }
+// Telemetry / Status
+Number   led03_RSSI      "Soffitto: RSSI [%d %%]"      <qualityofservice> (led03, sonoff, gRSSI)     {channel="mqtt:topic:led03:rssi"}
+String   led03_Reachable "Soffitto: Status [%s]"       <switch>           (led03, sonoff, gReachable) {channel="mqtt:topic:led03:reachable"}
+String   led03_Uptime    "Soffitto: Uptime [%s]"       <clock>            (led03, sonoff, gUptime)     {channel="mqtt:topic:led03:uptime"}
 
-String    led03_Core     "LED 03: Core [%s]"                <text>       (led03,sonoff,gVersion,gCore)
-    { mqtt="<[broker:stat/led03/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
+DateTime led03_Date      "LED 03: Refresh [%1$tH:%1$tM]" <clock>          (led03, sonoff, gVersion, gTime) {channel="mqtt:topic:led03:time"}
+String   led03_Core      "LED 03: Core [%s]"            <text>            (led03, sonoff, gVersion, gCore) {channel="mqtt:topic:led03:core"}
+String   led03_SDK       "LED 03: SDK [%s]"             <text>            (led03, sonoff, gVersion, gSDK)  {channel="mqtt:topic:led03:sdk"}
+String   led03_Version   "LED 03: Version [%s]"         <text>            (led03, sonoff, gVersion, gFirmware) {channel="mqtt:topic:led03:version"}
 
-String    led03_SDK      "LED 03: SDK [%s]"                 <text>       (led03,sonoff,gVersion,gSDK)
-    { mqtt="<[broker:stat/led03/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
-
-String    led03_Version  "LED 03: Version [%s]"             <text>       (led03,sonoff,gVersion,gFirmware)
-    { mqtt="<[broker:stat/led03/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }

@@ -3,15 +3,13 @@ Group led01
 // FAKE FOR ALEXA
 Switch led01_fake01 "Bancone [%s]"           (gLuci) [ "Switchable" ]
 
-Color  led01_Color "Barra Colore"       (gRGB)
-Switch led01_Power "Barra Colorato Acceso"      (gRGB,gLuci)  {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER1)" }
-String led01_RGB   "Barra Colorata Colore [%s]"  (gRGB)      {mqtt="<[broker:stat/led01/HSBCOLOR1:state:JSONPATH($.Color1)]"}
-Dimmer led01_Dim   "Barra Colorata [%.0f %%]"   (gLightsDim) {mqtt=">[broker:cmnd/led01/DIMMER1:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer1)"}
+Switch led01_Power     "Barra Colorato Acceso"      (gRGB, gLuci)      {channel="mqtt:topic:led01:powerColor"}
+String led01_RGB       "Barra Colorata Colore [%s]" (gRGB)             {channel="mqtt:topic:led01:colorRGB"}
+Dimmer led01_Dim       "Barra Colorata [%.0f %%]"   (gLightsDim)       {channel="mqtt:topic:led01:dimColor"}
+Color  led01_Color     "Barra Colore" (gRGB)                           {channel="mqtt:topic:led01:colorControl"}
 
-// BIANCO
-Switch led01_PowerW "Barra Bianca Acceso [%s]"     (gRGB,gLuci) {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.POWER2)]"}
-Dimmer led01_DimW   "Barra Bianca [%.0f %%]" (gLightsDim)    {mqtt=">[broker:cmnd/led01/DIMMER2:command:*:default], <[broker:stat/led01/DIMMER:state:JSONPATH($.Dimmer2)"}
-
+Switch led01_PowerW    "Barra Bianca Acceso [%s]"   (gRGB, gLuci)      {channel="mqtt:topic:led01:powerWhite"}
+Dimmer led01_DimW      "Barra Bianca [%.0f %%]"     (gLightsDim)       {channel="mqtt:topic:led01:dimWhite"}
 
 // setoption4 1: DIMMER > DIMMER
 // setoption4 0: DIMMER > RESULT
@@ -23,22 +21,12 @@ Dimmer led01_DimW   "Barra Bianca [%.0f %%]" (gLightsDim)    {mqtt=">[broker:cmn
 
 
 // STATUS
-Number led01_RSSI "Barra: RSSI [%d %%]" <qualityofservice> (led01,sonoff,gRSSI)
-    { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String led01_Reachable "Barra: Status [%s]" <switch> (led01,sonoff,gReachable)
-    { mqtt="<[broker:tele/led01/LWT:state:MAP(reachable.map)]" }
-String led01_Uptime "Barra: Uptime [%s]" <clock> (led01,sonoff,gUptime)
-    { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Uptime)]" }
+Number   led01_RSSI      "Barra: RSSI [%d %%]"       <qualityofservice> (led01, sonoff, gRSSI)        {channel="mqtt:topic:led01:rssi"}
+String   led01_Reachable "Barra: Status [%s]"        <switch>           (led01, sonoff, gReachable)   {channel="mqtt:topic:led01:reachable"}
+String   led01_Uptime    "Barra: Uptime [%s]"        <clock>            (led01, sonoff, gUptime)      {channel="mqtt:topic:led01:uptime"}
 
-// Versions
-DateTime  led01_Date     "LED 01: Refresh [ %1$tH:%1$tM]"   <clock>      (led01,sonoff,gVersion,gTime)
-    { mqtt="<[broker:tele/led01/STATE:state:JSONPATH($.Time)]" }
+DateTime led01_Date      "LED 01: Refresh [%1$tH:%1$tM]" <clock>        (led01, sonoff, gVersion, gTime) {channel="mqtt:topic:led01:time"}
+String   led01_Core      "LED 01: Core [%s]"         <text>             (led01, sonoff, gVersion, gCore) {channel="mqtt:topic:led01:core"}
+String   led01_SDK       "LED 01: SDK [%s]"          <text>             (led01, sonoff, gVersion, gSDK)  {channel="mqtt:topic:led01:sdk"}
+String   led01_Version   "LED 01: Version [%s]"      <text>             (led01, sonoff, gVersion, gFirmware) {channel="mqtt:topic:led01:version"}
 
-String    led01_Core     "LED 01: Core [%s]"                <text>       (led01,sonoff,gVersion,gCore)
-    { mqtt="<[broker:stat/led01/STATUS2:state:JSONPATH($.StatusFWR.Core)]" }
-
-String    led01_SDK      "LED 01: SDK [%s]"                 <text>       (led01,sonoff,gVersion,gSDK)
-    { mqtt="<[broker:stat/led01/STATUS2:state:JSONPATH($.StatusFWR.SDK)]" }
-
-String    led01_Version  "LED 01: Version [%s]"             <text>       (led01,sonoff,gVersion,gFirmware)
-    { mqtt="<[broker:stat/led01/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
