@@ -60,8 +60,8 @@ then
   sf03_Switch.sendCommand(OFF)
   sf12_Switch.sendCommand(OFF)
   alexa_campanello.sendCommand(ON)
-  executeCommandLine("/etc/openhab2/scripts/switch-on.sh")
-  executeCommandLine("/etc/openhab2/scripts/timer-off.sh")
+  executeCommandLine("/openhab/conf/scripts/switch-on.sh")
+  executeCommandLine("/openhab/conf/scripts/timer-off.sh")
 
 
   // Accendo le luci in soggiorno in base alla configurazione
@@ -119,8 +119,8 @@ then
   var Number led03_c = led03_c_Morning.state
 
   alexa_campanello.sendCommand(ON)
-  executeCommandLine("/etc/openhab2/scripts/switch-on.sh")
-  executeCommandLine("/etc/openhab2/scripts/timer-off.sh")
+  executeCommandLine("/openhab/conf/scripts/switch-on.sh")
+  executeCommandLine("/openhab/conf/scripts/timer-off.sh")
   sf07_Light.sendCommand(OFF)
   
   // SOGGIORNO - CHANGE TEMP
@@ -317,8 +317,8 @@ then
     ])
 
     alexa_campanello.sendCommand(OFF)
-    executeCommandLine("/etc/openhab2/scripts/switch-off.sh")
-    executeCommandLine("/etc/openhab2/scripts/timer-on.sh")
+    executeCommandLine("/openhab/conf/scripts/switch-off.sh")
+    executeCommandLine("/openhab/conf/scripts/timer-on.sh")
 
     // TERMOSTATO
     if (ts_sog_night_off.state == ON) {

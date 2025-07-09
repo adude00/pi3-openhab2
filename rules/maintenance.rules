@@ -9,7 +9,7 @@ rule "Cloud Connector restart"
 
     logInfo("Maintenance","OpenHAB Cloud Connector restart requested, proceeding...")
 
-    command = "sudo /etc/openhab2/shell/restart-cloud.sh";
+    command = "/openhab/runtime/bin/client -p habopen bundle:restart org.openhab.io.openhabcloud";
     executeCommandLine(command);
 
 end
@@ -25,12 +25,12 @@ rule "OpenHAB restart"
 
     logInfo("Maintenance","OpenHAB restart requested, proceeding...")
 
-    command = "sudo /etc/openhab2/shell/restart.sh";
+    command = "ssh root@127.0.0.1 service docker-compose@openhab2 restart";
     executeCommandLine(command);
 
 end
 
-rule "PI3 restart"
+rule "PI restart"
   when
 
     Item pi_restart received command
@@ -39,9 +39,9 @@ rule "PI3 restart"
 
     var String command;
 
-    logInfo("Maintenance","PI3 reboot requested, proceeding...")
+    logInfo("Maintenance","PI reboot requested, proceeding...")
 
-    command = "sudo /etc/openhab2/shell/reboot.sh";
+    command = "ssh root@127.0.0.1 reboot";
     executeCommandLine(command);
 
 end

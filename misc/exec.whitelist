@@ -2,3 +2,4 @@
 # Every command needs to be listed on a separate line below.
 
 /bin/cat /run/shm/temp-soggnew
+ssh root@pi3 /bin/cat /run/shm/temp-soggnew
