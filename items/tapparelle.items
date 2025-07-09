@@ -16,93 +16,79 @@ Group gTappReach
 Group gTappUptime
 
 
+// User-facing items
 Rollershutter Tapp01 "1: Sogg Piccola [(%d)]"     <rollershutter>     (gTappAll,gTappWake,gTappLvrm,gTappP2)
-    { mqtt=">[broker:cmnd/tapp01/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp01/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp01/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp02 "2: Sogg Grande [(%d)]"      <rollershutter>     (gTappAll,gTappWake,gTappLvrm,gTappP2)
-    { mqtt=">[broker:cmnd/tapp02/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp02/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp02/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp03 "3: Cucina Destra [(%d)]"    <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappKtcn,gTappP2) 
-    { mqtt=">[broker:cmnd/tapp03/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp03/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp03/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp04 "4: Cucina Sinistra [(%d)]"  <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappKtcn,gTappP2) 
-    { mqtt=">[broker:cmnd/tapp04/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp04/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp04/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp05 "5: Matr Terrazzo [(%d)]"    <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappBdrm,gTappP2) 
-    { mqtt=">[broker:cmnd/tapp05/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp05/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp05/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp06 "6: Matr Grande [(%d)]"      <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappBdrm,gTappP2)
-    { mqtt=">[broker:cmnd/tapp06/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp06/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp06/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp07 "7: Bagno [(%d)]"            <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappP2)
-    { mqtt=">[broker:cmnd/tapp07/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp07/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp07/POWER3:command:DOWN:MAP(tapparella.map)]" }
 Rollershutter Tapp08 "8: Cameretta [(%d)]"        <rollershutter>     (gTappAll,gTappWake,gTappDog,gTappP2)
-    { mqtt=">[broker:cmnd/tapp08/POWER2:command:UP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp08/POWER:command:STOP:MAP(tapparella.map)],
-            >[broker:cmnd/tapp08/POWER3:command:DOWN:MAP(tapparella.map)]" }
+
+// Internal backend control channels
+Switch Tapp01_Up   { channel="mqtt:topic:tapp01:up" }
+Switch Tapp01_Stop { channel="mqtt:topic:tapp01:stop" }
+Switch Tapp01_Down { channel="mqtt:topic:tapp01:down" }
+
+Switch Tapp02_Up   { channel="mqtt:topic:tapp02:up" }
+Switch Tapp02_Stop { channel="mqtt:topic:tapp02:stop" }
+Switch Tapp02_Down { channel="mqtt:topic:tapp02:down" }
+
+Switch Tapp03_Up   { channel="mqtt:topic:tapp03:up" }
+Switch Tapp03_Stop { channel="mqtt:topic:tapp03:stop" }
+Switch Tapp03_Down { channel="mqtt:topic:tapp03:down" }
+
+Switch Tapp04_Up   { channel="mqtt:topic:tapp04:up" }
+Switch Tapp04_Stop { channel="mqtt:topic:tapp04:stop" }
+Switch Tapp04_Down { channel="mqtt:topic:tapp04:down" }
+
+Switch Tapp05_Up   { channel="mqtt:topic:tapp05:up" }
+Switch Tapp05_Stop { channel="mqtt:topic:tapp05:stop" }
+Switch Tapp05_Down { channel="mqtt:topic:tapp05:down" }
+
+Switch Tapp06_Up   { channel="mqtt:topic:tapp06:up" }
+Switch Tapp06_Stop { channel="mqtt:topic:tapp06:stop" }
+Switch Tapp06_Down { channel="mqtt:topic:tapp06:down" }
+
+Switch Tapp07_Up   { channel="mqtt:topic:tapp07:up" }
+Switch Tapp07_Stop { channel="mqtt:topic:tapp07:stop" }
+Switch Tapp07_Down { channel="mqtt:topic:tapp07:down" }
+
+Switch Tapp08_Up   { channel="mqtt:topic:tapp08:up" }
+Switch Tapp08_Stop { channel="mqtt:topic:tapp08:stop" }
+Switch Tapp08_Down { channel="mqtt:topic:tapp08:down" }
 
 
-Number Tapp01_RSSI "Tapp01 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp01/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp01_Reachable "Tapp01 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp01/LWT:state:MAP(reachable.map)]" }
-String Tapp01_Uptime "Tapp01 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp01/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp01_RSSI      "Tapp01 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp01_status:rssi" }
+String Tapp01_Reachable "Tapp01 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp01_status:reachable" }
+String Tapp01_Uptime    "Tapp01 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp01_status:uptime" }
 
-Number Tapp02_RSSI "Tapp02 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp02/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp02_Reachable "Tapp02 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp02/LWT:state:MAP(reachable.map)]" }
-String Tapp02_Uptime "Tapp02 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp02/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp02_RSSI      "Tapp02 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp02_status:rssi" }
+String Tapp02_Reachable "Tapp02 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp02_status:reachable" }
+String Tapp02_Uptime    "Tapp02 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp02_status:uptime" }
 
-Number Tapp03_RSSI "Tapp03 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp03/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp03_Reachable "Tapp03 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp03/LWT:state:MAP(reachable.map)]" }
-String Tapp03_Uptime "Tapp03 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp03/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp03_RSSI      "Tapp03 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp03_status:rssi" }
+String Tapp03_Reachable "Tapp03 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp03_status:reachable" }
+String Tapp03_Uptime    "Tapp03 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp03_status:uptime" }
 
-Number Tapp04_RSSI "Tapp04 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp04/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp04_Reachable "Tapp04 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp04/LWT:state:MAP(reachable.map)]" }
-String Tapp04_Uptime "Tapp04 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp04/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp04_RSSI      "Tapp04 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp04_status:rssi" }
+String Tapp04_Reachable "Tapp04 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp04_status:reachable" }
+String Tapp04_Uptime    "Tapp04 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp04_status:uptime" }
 
-Number Tapp05_RSSI "Tapp05 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp05/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp05_Reachable "Tapp05 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp05/LWT:state:MAP(reachable.map)]" }
-String Tapp05_Uptime "Tapp05 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp05/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp05_RSSI      "Tapp05 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp05_status:rssi" }
+String Tapp05_Reachable "Tapp05 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp05_status:reachable" }
+String Tapp05_Uptime    "Tapp05 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp05_status:uptime" }
 
-Number Tapp06_RSSI "Tapp06 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp06/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp06_Reachable "Tapp06 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp06/LWT:state:MAP(reachable.map)]" }
-String Tapp06_Uptime "Tapp06 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp06/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp06_RSSI      "Tapp06 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp06_status:rssi" }
+String Tapp06_Reachable "Tapp06 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp06_status:reachable" }
+String Tapp06_Uptime    "Tapp06 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp06_status:uptime" }
 
-Number Tapp07_RSSI "Tapp07 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp07/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp07_Reachable "Tapp07 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp07/LWT:state:MAP(reachable.map)]" }
-String Tapp07_Uptime "Tapp07 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp07/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp07_RSSI      "Tapp07 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp07_status:rssi" }
+String Tapp07_Reachable "Tapp07 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp07_status:reachable" }
+String Tapp07_Uptime    "Tapp07 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp07_status:uptime" }
 
-Number Tapp08_RSSI "Tapp08 - Signal [%d %%]" <qualityofservice> (gTappDebug,gTappRSSI)
-    { mqtt="<[broker:tele/tapp08/STATE:state:JSONPATH($.Wifi.RSSI)]" }
-String Tapp08_Reachable "Tapp08 - Status: [%s]" <switch> (gTappDebug,gTappReach)
-    { mqtt="<[broker:tele/tapp08/LWT:state:MAP(reachable.map)]" }
-String Tapp08_Uptime "Tapp08 - uptime: [%s]" <clock> (gTappDebug,gTappUptime,gUptime)
-    { mqtt="<[broker:tele/tapp08/STATE:state:JSONPATH($.Uptime)]" }
+Number Tapp08_RSSI      "Tapp08 - Signal [%d %%]"   <qualityofservice> (gTappDebug, gTappRSSI)    { channel="mqtt:topic:tapp08_status:rssi" }
+String Tapp08_Reachable "Tapp08 - Status [%s]"     <switch>           (gTappDebug, gTappReach)   { channel="mqtt:topic:tapp08_status:reachable" }
+String Tapp08_Uptime    "Tapp08 - Uptime [%s]"     <clock>            (gTappDebug, gTappUptime, gUptime) { channel="mqtt:topic:tapp08_status:uptime" }
 

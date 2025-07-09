@@ -1,8 +1,8 @@
 V daikinSoggiorno.items
 V esp01.items
 V esp02.items
-led01.items
-led03.items
+V led01.items
+V led03.items
 pow01.items
 pow02.items
 pow03.items
@@ -11,7 +11,7 @@ pow05.items
 V- sonoff01.items
 V- sonoff09.items
 V- sonoff11.items
-tapparelle.items
+V- tapparelle.items
 V- tuya01.items
 V- tuya02.items
 V- tuya03.items

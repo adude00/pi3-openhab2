@@ -1,0 +1,88 @@
+rule "Handle Tapp01 Commands"
+when
+    Item Tapp01 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp01_Up.sendCommand(ON)
+        case STOP : Tapp01_Stop.sendCommand(OFF)
+        case DOWN : Tapp01_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp02 Commands"
+when
+    Item Tapp02 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp02_Up.sendCommand(ON)
+        case STOP : Tapp02_Stop.sendCommand(OFF)
+        case DOWN : Tapp02_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp03 Commands"
+when
+    Item Tapp03 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp03_Up.sendCommand(ON)
+        case STOP : Tapp03_Stop.sendCommand(OFF)
+        case DOWN : Tapp03_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp04 Commands"
+when
+    Item Tapp04 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp04_Up.sendCommand(ON)
+        case STOP : Tapp04_Stop.sendCommand(OFF)
+        case DOWN : Tapp04_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp05 Commands"
+when
+    Item Tapp05 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp05_Up.sendCommand(ON)
+        case STOP : Tapp05_Stop.sendCommand(OFF)
+        case DOWN : Tapp05_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp06 Commands"
+when
+    Item Tapp06 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp06_Up.sendCommand(ON)
+        case STOP : Tapp06_Stop.sendCommand(OFF)
+        case DOWN : Tapp06_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp07 Commands"
+when
+    Item Tapp07 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp07_Up.sendCommand(ON)
+        case STOP : Tapp07_Stop.sendCommand(OFF)
+        case DOWN : Tapp07_Down.sendCommand(ON)
+    }
+end
+
+rule "Handle Tapp08 Commands"
+when
+    Item Tapp08 received command
+then
+    switch(receivedCommand) {
+        case UP   : Tapp08_Up.sendCommand(ON)
+        case STOP : Tapp08_Stop.sendCommand(OFF)
+        case DOWN : Tapp08_Down.sendCommand(ON)
+    }
+end
+
