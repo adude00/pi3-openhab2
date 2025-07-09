@@ -21,10 +21,14 @@ Number Casa_Umidita_Chart_Period "Periodo" (System)
 // FUORI: TEMP /tmp/openweathermap/main-temp
 Group  Fuori_Temperature_Chart (System, Charts)
 Number Fuori_Temperature_Chart_Period "Periodo" (System)
-Number:Temperature   Fuori_Temperature "Bologna [%.1f %unit%]" <temperature> (gTemp) { exec="<[cat /tmp/openweathermap/main-temp:60000:]" }
+
+Number  Fuori_Temperature         "Bologna [%.1f °C]"   <temperature>  (gTemp)
+String  Fuori_Temperature_String  "Bo Temp String"      <temperature>  {channel="exec:command:botemp:output"}
+
 
 // FUORI: UMIDITA /tmp/openweathermap/main-humidity
 Group  Fuori_Umidita_Chart
 Number Fuori_Umidita_Chart_Period "Periodo" (System)
-Number:Dimensionless   Fuori_Umidita "Bologna [%.1f %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph) { exec="<[cat /tmp/openweathermap/main-humidity:60000:]" }
+Number  Fuori_Umidita         "Bologna [%.1f %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph)
+String  Fuori_Umidita_String  "Bo Humid String"   <humidity> {channel="exec:command:boumid:output"}
 

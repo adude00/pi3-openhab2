@@ -1,0 +1,64 @@
+Thing mqtt:topic:led01 "LED Strip" (mqtt:broker:brokerv2) {
+  Channels:
+    Type switch : powerColor "Color Power" [
+      commandTopic="cmnd/led01/DIMMER1",
+      stateTopic="stat/led01/DIMMER",
+      transformationPattern="JSONPATH:$.POWER1"
+    ]
+    Type string : colorRGB "RGB Color" [
+      stateTopic="stat/led01/HSBCOLOR1",
+      transformationPattern="JSONPATH:$.Color1"
+    ]
+    Type dimmer : dimColor "RGB Dimmer" [
+      commandTopic="cmnd/led01/DIMMER1",
+      stateTopic="stat/led01/DIMMER",
+      transformationPattern="JSONPATH:$.Dimmer1"
+    ]
+    Type switch : powerWhite "White Power" [
+      commandTopic="cmnd/led01/DIMMER2",
+      stateTopic="stat/led01/DIMMER",
+      transformationPattern="JSONPATH:$.POWER2"
+    ]
+    Type dimmer : dimWhite "White Dimmer" [
+      commandTopic="cmnd/led01/DIMMER2",
+      stateTopic="stat/led01/DIMMER",
+      transformationPattern="JSONPATH:$.Dimmer2"
+    ]
+    Type color : colorControl "Color Control" [
+      commandTopic="cmnd/led01/HSBCOLOR",
+      stateTopic="stat/led01/HSBCOLOR",
+      transformationPattern="JSONPATH:$.HSBColor"
+    ]
+
+    // Telemetry
+    Type number : rssi        "WiFi RSSI" [
+      stateTopic="tele/led01/STATE",
+      transformationPattern="JSONPATH:$.Wifi.RSSI"
+    ]
+    Type string : reachable   "Reachability" [
+      stateTopic="tele/led01/LWT",
+      transformationPattern="MAP:reachable.map"
+    ]
+    Type string : uptime      "Uptime" [
+      stateTopic="tele/led01/STATE",
+      transformationPattern="JSONPATH:$.Uptime"
+    ]
+
+    // Version / Status Info
+    Type datetime : time      "Last Update Time" [
+      stateTopic="tele/led01/STATE",
+      transformationPattern="JSONPATH:$.Time"
+    ]
+    Type string : core        "ESP Core Version" [
+      stateTopic="stat/led01/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.Core"
+    ]
+    Type string : sdk         "SDK Version" [
+      stateTopic="stat/led01/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.SDK"
+    ]
+    Type string : version     "Firmware Version" [
+      stateTopic="stat/led01/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.Version"
+    ]
+}

@@ -1,2 +1,0 @@
-Thing exec:command:soggdown [command="ssh root@pi3 /bin/cat /run/shm/temp-soggnew", interval=60, timeout=3, autorun=true]
-

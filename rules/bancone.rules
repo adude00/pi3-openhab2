@@ -7,11 +7,8 @@ then
   logInfo(LOG,"Bancone ON, start!")
 
   led01_DimW.sendCommand(100)
-
-  createTimer(now.plusSeconds(1), [|
-    led01_Dim.sendCommand(100)
-    logInfo(LOG,"Bancone ON, end!")
-  ])
+  led01_Dim.sendCommand(100)
+  logInfo(LOG,"Bancone ON, end!")
 
 end
 
@@ -23,10 +20,7 @@ then
   logInfo(LOG,"Bancone OFF, start!")
 
   led01_DimW.sendCommand(0)
-
-  createTimer(now.plusSeconds(1), [|
-    led01_Dim.sendCommand(0)
-    logInfo(LOG,"Bancone OFF, end!")
-  ])
+  led01_Dim.sendCommand(0)
+  logInfo(LOG,"Bancone OFF, end!")
 
 end

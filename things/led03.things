@@ -1,0 +1,67 @@
+Thing mqtt:topic:led03 "LED 03 Discoteca" (mqtt:broker:brokerv2) {
+  Channels:
+
+    // RGB Section
+    Type switch : powerColor "Discoteca Power" [
+      commandTopic="cmnd/led03/DIMMER1",
+      stateTopic="stat/led03/DIMMER",
+      transformationPattern="JSONPATH:$.POWER1"
+    ]
+    Type string : colorRGB "Discoteca RGB" [
+      stateTopic="stat/led03/HSBCOLOR1",
+      transformationPattern="JSONPATH:$.Color1"
+    ]
+    Type dimmer : dimColor "Discoteca Dimmer" [
+      commandTopic="cmnd/led03/DIMMER1",
+      stateTopic="stat/led03/DIMMER",
+      transformationPattern="JSONPATH:$.Dimmer1"
+    ]
+    Type color : colorControl "Discoteca HSB Color Control" [
+      commandTopic="cmnd/led03/HSBCOLOR1",
+      stateTopic="stat/led03/HSBCOLOR1",
+      transformationPattern="JSONPATH:$.HSBColor"
+    ]
+
+    // White Section
+    Type switch : powerWhite "Soffitto Power" [
+      commandTopic="cmnd/led03/DIMMER2",
+      stateTopic="stat/led03/DIMMER",
+      transformationPattern="JSONPATH:$.POWER2"
+    ]
+    Type dimmer : dimWhite "Soffitto Dimmer" [
+      commandTopic="cmnd/led03/DIMMER2",
+      stateTopic="stat/led03/DIMMER",
+      transformationPattern="JSONPATH:$.Dimmer2"
+    ]
+
+    // Telemetry / Status
+    Type number : rssi "WiFi RSSI" [
+      stateTopic="tele/led03/STATE",
+      transformationPattern="JSONPATH:$.Wifi.RSSI"
+    ]
+    Type string : reachable "Online Status" [
+      stateTopic="tele/led03/LWT",
+      transformationPattern="MAP:reachable.map"
+    ]
+    Type string : uptime "Uptime" [
+      stateTopic="tele/led03/STATE",
+      transformationPattern="JSONPATH:$.Uptime"
+    ]
+    Type datetime : time "Last Update Time" [
+      stateTopic="tele/led03/STATE",
+      transformationPattern="JSONPATH:$.Time"
+    ]
+    Type string : core "Core Version" [
+      stateTopic="stat/led03/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.Core"
+    ]
+    Type string : sdk "SDK Version" [
+      stateTopic="stat/led03/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.SDK"
+    ]
+    Type string : version "Firmware Version" [
+      stateTopic="stat/led03/STATUS2",
+      transformationPattern="JSONPATH:$.StatusFWR.Version"
+    ]
+}
+

@@ -1,5 +1,6 @@
 # For security reasons all commands that are used by the exec binding or transformation need to be whitelisted.
 # Every command needs to be listed on a separate line below.
 
-/bin/cat /run/shm/temp-soggnew
 ssh root@pi3 /bin/cat /run/shm/temp-soggnew
+ssh root@pi3 /bin/cat /tmp/openweathermap/main-temp
+ssh root@pi3 /bin/cat /tmp/openweathermap/main-humidity

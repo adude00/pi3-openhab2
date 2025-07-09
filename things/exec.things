@@ -1,0 +1,3 @@
+Thing exec:command:soggdown [command="ssh root@pi3 /bin/cat /run/shm/temp-soggnew", interval=60, timeout=3, autorun=true]
+Thing exec:command:botemp   [command="ssh root@pi3 /bin/cat /tmp/openweathermap/main-temp", interval=60, timeout=3, autorun=true]
+Thing exec:command:boumid   [command="ssh root@pi3 /bin/cat /tmp/openweathermap/main-humidity", interval=60, timeout=3, autorun=true]
