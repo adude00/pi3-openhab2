@@ -1,0 +1,51 @@
+Group pow04
+
+// SWITCH
+Switch pow04_Switch "Videogioco" <wallswitch> (pow04, gTuya, sonoff) [ "Switchable" ]
+    { channel="mqtt:topic:pow04:relay" }
+
+// POWER
+Number pow04_Power      "Pow 04: Line True Power [%.1f W]"         <voltage>       (pow04, gTuya, gWatt)
+    { channel="mqtt:topic:pow04:power" }
+
+Number pow04_AppPower   "Pow 04: Apparent Power [%.3f VA]"         <current>       (pow04, gTuya, gVa)
+    { channel="mqtt:topic:pow04:apparent" }
+
+Number pow04_ReaPower   "Pow 04: Reactive Power [%.3f VAR]"        <current>       (pow04, gTuya, gVar)
+    { channel="mqtt:topic:pow04:reactive" }
+
+Number pow04_Voltage    "Pow 04: Voltage [%.1f V]"                 <voltage>       (pow04, gTuya, gVolt)
+    { channel="mqtt:topic:pow04:voltage" }
+
+Number pow04_Current    "Pow 04: Current [%.3f A]"                 <current>       (pow04, gTuya, gAmps)
+    { channel="mqtt:topic:pow04:current" }
+
+Number pow04_Today      "Pow 04: Energy Today [%.5f kWh]"          <total_energy>  (pow04, gTuya, gEnergyToday)
+    { channel="mqtt:topic:pow04:today" }
+
+Number pow04_Yesterday  "Pow 04: Energy Yesterday [%.5f kWh]"      <total_energy>  (pow04, gTuya, gEnergyYesterday)
+    { channel="mqtt:topic:pow04:yesterday" }
+
+// STATUS
+Number pow04_Light_RSSI     "Pow 04: RSSI [%d %%]"        <qualityofservice> (pow04, gTuya, sonoff, gRSSI)
+    { channel="mqtt:topic:pow04:rssi" }
+
+String pow04_Light_Reachable "Pow 04: Status [%s]"        <switch>           (pow04, gTuya, sonoff, gReachable)
+    { channel="mqtt:topic:pow04:reachable" }
+
+String pow04_Uptime          "Pow 04: Uptime [%s]"        <clock>            (pow04, gTuya, sonoff, gUptime)
+    { channel="mqtt:topic:pow04:uptime" }
+
+// VERSIONS
+DateTime pow04_Date     "Pow 04: Refresh [ %1$tH:%1$tM]"  <clock>            (pow04, gTuya, sonoff, gVersion, gTime)
+    { channel="mqtt:topic:pow04:datetime" }
+
+String   pow04_Core     "Pow 04: Core [%s]"               <text>             (pow04, gTuya, sonoff, gVersion, gCore)
+    { channel="mqtt:topic:pow04:core" }
+
+String   pow04_SDK      "Pow 04: SDK [%s]"                <text>             (pow04, gTuya, sonoff, gVersion, gSDK)
+    { channel="mqtt:topic:pow04:sdk" }
+
+String   pow04_Version  "Pow 04: Version [%s]"            <text>             (pow04, gTuya, sonoff, gVersion, gFirmware)
+    { channel="mqtt:topic:pow04:version" }
+

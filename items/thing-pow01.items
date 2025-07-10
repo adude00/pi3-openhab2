@@ -1,0 +1,51 @@
+Group pow01
+
+// SWITCH
+Switch pow01_Switch "Pow 01: Clima Camera" <flow> (pow01, gTuya, sonoff)
+    { channel="mqtt:topic:pow01:relay" }
+
+// POWER
+Number pow01_Power      "PdC Bdrm Power [%.1f W]"               <voltage>       (pow01, gTuya, gWatt, Casa_Consumi_Chart)
+    { channel="mqtt:topic:pow01:power" }
+
+Number pow01_AppPower   "Pow 01: Line Apparent Power [%.3f VA]" <current>       (pow01, gTuya, gVa)
+    { channel="mqtt:topic:pow01:apparent" }
+
+Number pow01_ReaPower   "Pow 01: Line Reactive Power [%.3f VAR]"<current>       (pow01, gTuya, gVar)
+    { channel="mqtt:topic:pow01:reactive" }
+
+Number pow01_Voltage    "Pow 01: Line voltage [%.1f V]"         <voltage>       (pow01, gTuya, gVolt)
+    { channel="mqtt:topic:pow01:voltage" }
+
+Number pow01_Current    "Pow 01: Line current [%.3f A]"         <current>       (pow01, gTuya, gAmps)
+    { channel="mqtt:topic:pow01:current" }
+
+Number pow01_Today      "Pow 01: Total energy today [%.5f kWh]" <total_energy>  (pow01, gTuya, gEnergyToday)
+    { channel="mqtt:topic:pow01:today" }
+
+Number pow01_Yesterday  "Pow 01: Total energy yesterday [%.5f kWh]" <total_energy> (pow01, gTuya, gEnergyYesterday)
+    { channel="mqtt:topic:pow01:yesterday" }
+
+// STATUS
+Number pow01_Light_RSSI     "Pow 01: RSSI [%d %%]"        <qualityofservice> (pow01, gTuya, sonoff, gRSSI)
+    { channel="mqtt:topic:pow01:rssi" }
+
+String pow01_Light_Reachable "Pow 01: Status [%s]"        <switch>           (pow01, gTuya, sonoff, gReachable)
+    { channel="mqtt:topic:pow01:reachable" }
+
+String pow01_Uptime          "Pow 01: Uptime [%s]"        <clock>            (pow01, gTuya, sonoff, gUptime)
+    { channel="mqtt:topic:pow01:uptime" }
+
+// VERSIONS
+DateTime pow01_Date     "Pow 01: Refresh [ %1$tH:%1$tM]"  <clock>            (pow01, gTuya, sonoff, gVersion, gTime)
+    { channel="mqtt:topic:pow01:datetime" }
+
+String   pow01_Core     "Pow 01: Core [%s]"               <text>             (pow01, gTuya, sonoff, gVersion, gCore)
+    { channel="mqtt:topic:pow01:core" }
+
+String   pow01_SDK      "Pow 01: SDK [%s]"                <text>             (pow01, gTuya, sonoff, gVersion, gSDK)
+    { channel="mqtt:topic:pow01:sdk" }
+
+String   pow01_Version  "Pow 01: Version [%s]"            <text>             (pow01, gTuya, sonoff, gVersion, gFirmware)
+    { channel="mqtt:topic:pow01:version" }
+

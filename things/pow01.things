@@ -1,0 +1,26 @@
+Thing mqtt:topic:pow01 "Pow 01" (mqtt:broker:brokerv2) {
+  Channels:
+    // SWITCH
+    Type switch : relay       [ commandTopic="cmnd/pow01/POWER", stateTopic="stat/pow01/POWER" ]
+
+    // POWER MONITORING
+    Type number : power       [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Power" ]
+    Type number : apparent    [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.ApparentPower" ]
+    Type number : reactive    [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.ReactivePower" ]
+    Type number : voltage     [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Voltage" ]
+    Type number : current     [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Current" ]
+    Type number : today       [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Today" ]
+    Type number : yesterday   [ stateTopic="tele/pow01/SENSOR", transformationPattern="JSONPATH:$.ENERGY.Yesterday" ]
+
+    // STATUS
+    Type number : rssi        [ stateTopic="tele/pow01/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+    Type string : reachable   [ stateTopic="tele/pow01/LWT", transformationPattern="MAP:reachable.map" ]
+    Type string : uptime      [ stateTopic="tele/pow01/STATE", transformationPattern="JSONPATH:$.Uptime" ]
+    Type datetime : datetime  [ stateTopic="tele/pow01/STATE", transformationPattern="JSONPATH:$.Time" ]
+
+    // VERSIONS
+    Type string : core        [ stateTopic="stat/pow01/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Core" ]
+    Type string : sdk         [ stateTopic="stat/pow01/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.SDK" ]
+    Type string : version     [ stateTopic="stat/pow01/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]
+}
+

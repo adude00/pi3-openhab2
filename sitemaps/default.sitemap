@@ -65,7 +65,6 @@ sitemap default label="Casa"
       }
       Frame label="Cose" {
       Switch item=NAS2
-      Switch item=Net_TV
       Switch item=pow04_Switch
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
@@ -1595,12 +1594,9 @@ sitemap default label="Casa"
       }
 
       Frame label="Specifici per tipo" {
-	Text label="Tuya"   {
+	Text label="Pow XX"   {
 	  Group item=pow01		label="Debug POW 01"
-	  Group item=pow02 		label="Debug POW 02"
-	  Group item=pow03 		label="Debug POW 03"
 	  Group item=pow04 		label="Debug POW 04"
-	  Group item=pow05 		label="Debug POW 05"
 	}
 	
 	Text label="Tapparelle"   icon=rollershutter {
