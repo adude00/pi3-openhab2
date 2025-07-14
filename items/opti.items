@@ -1,3 +1,4 @@
+Switch Opti "Server" <player> (Devices, gCinema) [ "Switchable" ]
+
 Switch 		Plex     	"Plex"      			<player> (Devices)  { channel="network:servicedevice:plex:online" }
 DateTime        Plex_Last	"Plex last seen [%1$tH:%1$tM]"	<player> (Devices)  { channel="network:servicedevice:plex:lastseen" }
-Number		Plex_Restart    "Restart Plex"

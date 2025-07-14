@@ -13,11 +13,18 @@ String marantz_lr_command                              {channel="denonmarantz:av
 
 
 // SCRIPT Stuff
-Switch denon_DynamicVolume "Volume Dinamico" <soundvolume> (Devices,gRestore) [ "Switchable" ] { exec=">[ON:/etc/openhab2/shell/denon-dynVol.sh on ] >[OFF:/etc/openhab2/shell/denon-dynVol.sh off ]" }
+Switch denon_DynamicVolume "Volume Dinamico" <soundvolume> (Devices, gRestore) [ "Switchable" ]
+    { channel="exec:command:denon_DynamicVolume_on:run", command="ON",
+      channel="exec:command:denon_DynamicVolume_off:run", command="OFF" }
 
-Switch denon_Restorer "Ristoratore" <line> (Devices,gRestore) [ "Switchable" ] { exec=">[ON:/etc/openhab2/shell/denon-restorer.sh on ] >[OFF:/etc/openhab2/shell/denon-restorer.sh off ]" }
+Switch denon_Restorer "Ristoratore" <line> (Devices, gRestore) [ "Switchable" ]
+    { channel="exec:command:denon_Restorer_on:run", command="ON",
+      channel="exec:command:denon_Restorer_off:run", command="OFF" }
 
-Switch denon_DynamicEq "Equalizzatore Dinamico" <recorder> (Devices,gRestore) [ "Switchable" ] { exec=">[ON:/etc/openhab2/shell/denon-dynEq.sh on ] >[OFF:/etc/openhab2/shell/denon-dynEq.sh off ]" }
+Switch denon_DynamicEq "Equalizzatore Dinamico" <recorder> (Devices, gRestore) [ "Switchable" ]
+    { channel="exec:command:denon_DynamicEq_on:run", command="ON",
+      channel="exec:command:denon_DynamicEq_off:run", command="OFF" }
 
-Switch denon_BassLimit "Limitatore Bassi" <party> (Devices,gRestore) [ "Switchable" ] { exec=">[ON:/etc/openhab2/shell/denon-subLFC.sh on ] >[OFF:/etc/openhab2/shell/denon-subLFC.sh off ]" }
-
+Switch denon_BassLimit "Limitatore Bassi" <party> (Devices, gRestore) [ "Switchable" ]
+    { channel="exec:command:denon_BassLimit_on:run", command="ON",
+      channel="exec:command:denon_BassLimit_off:run", command="OFF" }

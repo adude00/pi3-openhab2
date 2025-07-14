@@ -49,6 +49,8 @@ Group gGraph
 
 Group gInflux
 
+Group Devices
+
 // Consumi
 Group  Casa_Consumi_Chart (System, Charts)
 Group  gPower

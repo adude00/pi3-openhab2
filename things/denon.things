@@ -1,2 +1,14 @@
 Thing denonmarantz:avr:0006783d81f8 "Living Room" @ "Denon" [host="172.27.72.145"]
 Thing denonmarantz:avr:0005cdd01d42 "Bedroom" @ "Denon" [host="172.27.72.175"]
+
+Thing exec:command:denon_DynamicVolume_on  [ command="/openhab/conf/scripts/denon-dynVol.sh on", autorun=true ]
+Thing exec:command:denon_DynamicVolume_off [ command="/openhab/conf/scripts/denon-dynVol.sh off", autorun=true ]
+
+Thing exec:command:denon_Restorer_on       [ command="/openhab/conf/scripts/denon-restorer.sh on", autorun=true ]
+Thing exec:command:denon_Restorer_off      [ command="/openhab/conf/scripts/denon-restorer.sh off", autorun=true ]
+
+Thing exec:command:denon_DynamicEq_on      [ command="/openhab/conf/scripts/denon-dynEq.sh on", autorun=true ]
+Thing exec:command:denon_DynamicEq_off     [ command="/openhab/conf/scripts/denon-dynEq.sh off", autorun=true ]
+
+Thing exec:command:denon_BassLimit_on      [ command="/openhab/conf/scripts/denon-subLFC.sh on", autorun=true ]
+Thing exec:command:denon_BassLimit_off     [ command="/openhab/conf/scripts/denon-subLFC.sh off", autorun=true ]

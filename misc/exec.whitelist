@@ -4,3 +4,13 @@
 ssh root@pi3 /bin/cat /run/shm/temp-soggnew
 ssh root@pi3 /bin/cat /tmp/openweathermap/main-temp
 ssh root@pi3 /bin/cat /tmp/openweathermap/main-humidity
+/openhab/conf/scripts/denon-dynVol.sh on
+/openhab/conf/scripts/denon-dynVol.sh off
+/openhab/conf/scripts/denon-restorer.sh on
+/openhab/conf/scripts/denon-restorer.sh off
+/openhab/conf/scripts/denon-dynEq.sh on
+/openhab/conf/scripts/denon-dynEq.sh off
+/openhab/conf/scripts/denon-subLFC.sh on
+/openhab/conf/scripts/denon-subLFC.sh off
+/usr/bin/wakeonlan -i 172.27.72.255 90:b1:1c:91:25:7e
+ssh root@opti.bluetears.org /sbin/shutdown -h now

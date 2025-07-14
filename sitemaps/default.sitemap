@@ -59,12 +59,11 @@ sitemap default label="Casa"
     }
     Text label="Devices" icon=cinema {
       Frame label="Plex" {
-      Switch item=Plex
-      Text   item=Plex_Last
-      Switch item=Plex_Restart mappings=[0="Restart"]
+        Switch item=Opti
+        Text   item=Plex_Last
+        Switch item=Plex
       }
       Frame label="Cose" {
-      Switch item=NAS2
       Switch item=pow04_Switch
       Text label="Varie Casa" icon=house {
         Switch item=tuya02_Switch
