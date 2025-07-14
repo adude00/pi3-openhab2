@@ -44,7 +44,7 @@ Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 
 Number cl_restart "Restart Cloud Connector" <settings>
 Number sw_restart "Restart OpenHAB" <settings>
-Number pi_restart "Reboot PI3" <settings>
+Number pi_restart "Reboot Pi5" <settings>
 
 // Alexa
 Switch alexa_campanello         "Campanello"                   <settings>        [ "Switchable" ]

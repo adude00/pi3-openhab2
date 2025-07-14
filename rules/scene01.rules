@@ -21,7 +21,7 @@ then
   }
   if (Scene01Condition4.state == ON) {
     logInfo(LOG,"Scene01Condition4.state == ON")
-    NAS2.sendCommand(OFF)
+    Opti.sendCommand(OFF)
   }
 
   createTimer(now.plusSeconds(5), [|
