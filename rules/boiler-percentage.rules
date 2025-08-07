@@ -1,3 +1,5 @@
+val prowl = getActions("prowl", "prowl:broker:mybroker")
+
 rule "Calculate Boiler Percentage boh"
   when
     Item tuya05_Power changed
@@ -13,10 +15,6 @@ rule "Calculate Boiler Percentage boh"
       Boiler_Percentage.postUpdate( ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number )
       //logInfo("Boiler","Scrivo percentuale: " + ( tuya05_Power.state as Number - (Boiler_Max.state as Number - Boiler_Delta.state as Number ) ) * 100 / Boiler_Delta.state as Number + "%")
     }
-
-    //if (previousState >= 100 && tuya05_Power.state <= 60 ) {
-    //  pushNotification("BOILER: Off", "Il Boiler è carico.")
-    //}
 
     // FULL
     if (previousState >= 440 && tuya05_Power.state < 370 ) {
@@ -37,7 +35,7 @@ rule "Calculate Boiler Percentage boh"
     }
 
     if (previousState <= 1000 && tuya05_Power.state > 1000 ) {
-      pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
+      prowl.pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
     }
 
 end

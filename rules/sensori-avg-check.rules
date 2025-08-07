@@ -1,3 +1,5 @@
+val prowl = getActions("prowl", "prowl:broker:mybroker")
+
 rule "check sensor uptime state"
 when
     //Time cron "0 0/30 * * * ?" // Every 30 minutes
@@ -15,7 +17,7 @@ then
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
-	    pushNotification("Sensor " + i.name + " Stuck for 300mins!", "NOW: " + state_cur.toString + " - AVG: " + state_avg.toString + " - Check it out")
+	    prowl.pushNotification("Sensor " + i.name + " Stuck for 300mins!", "NOW: " + state_cur.toString + " - AVG: " + state_avg.toString + " - Check it out")
 	}
     ]
 
@@ -27,7 +29,7 @@ then
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
-	    pushNotification("Sensor " + i.name + " Stuck for 60mins!", "NOW: " + state_cur.toString + " - AVG: " + state_avg.toString + " - Check it out")
+	    prowl.pushNotification("Sensor " + i.name + " Stuck for 60mins!", "NOW: " + state_cur.toString + " - AVG: " + state_avg.toString + " - Check it out")
 	}
     ]
 

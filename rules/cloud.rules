@@ -1,9 +1,10 @@
-//      pushNotification("BOILER: ERROR", "Il Boiler sta andando a resistenza.")
+val prowl = getActions("prowl", "prowl:broker:mybroker")
+
 rule "LogReader - Disconnected"
     when
         Channel "logreader:reader:disconnected:newErrorEvent" triggered
     then
-        pushNotification("CLOUD: ERROR", "Il Cloud si è disconnesso. Provo a riavviarlo!")
+        prowl.pushNotification("CLOUD: ERROR", "Il Cloud si è disconnesso. Provo a riavviarlo!")
 	cl_restart.sendCommand(1)
     end
 
@@ -11,6 +12,6 @@ rule "LogReader - Connected"
     when
         Channel "logreader:reader:connected:newErrorEvent" triggered
     then
-        pushNotification("CLOUD: OK!", "Il Cloud si è connesso.")
+        prowl.pushNotification("CLOUD: OK!", "Il Cloud si è connesso.")
     end
 

@@ -2,13 +2,13 @@ rule "White Noise Bedroom ON"
 when 
 	Item WhiteNoiseBDRM received command ON
 then
-	executeCommandLine("ssh root@zero1 ./whitenoise.sh")
+	executeCommandLine(Duration.ofSeconds(10), "/usr/bin/ssh", "root@zero1", "./whitenoise.sh")
 end
 
 rule "White Noise Bedroom OFF"
 when 
 	Item WhiteNoiseBDRM received command OFF
 then
-	executeCommandLine("ssh root@zero1 reboot")
+	executeCommandLine(Duration.ofSeconds(10), "/usr/bin/ssh", "root@zero1", "reboot")
 end
 

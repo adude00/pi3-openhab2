@@ -5,10 +5,7 @@ rule "Opti ON"
 
   then
 
-    var String command;
-
-    command = "/usr/bin/wakeonlan -i 172.27.72.255 90:b1:1c:91:25:7e";
-    executeCommandLine(command);
+    executeCommandLine(Duration.ofSeconds(10), "/usr/bin/wakeonlan", "-i", "172.27.72.255", "90:b1:1c:91:25:7e")
 
 end
 
@@ -19,9 +16,6 @@ rule "Opti OFF"
 
   then
 
-    var String command;
-
-    command = "ssh root@opti.bluetears.org /sbin/shutdown -h now";
-    executeCommandLine(command);
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@opti.bluetears.org", "/sbin/shutdown", "-h", "now")
 
 end

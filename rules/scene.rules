@@ -1,8 +1,11 @@
+val prowl = getActions("prowl", "prowl:broker:mybroker")
+
+
 rule "Lavoro"
 when
     Item Scene_Lavoro changed to ON
 then
-  pushNotification("Scena: LAVORO", "La scena LAVORO è stata attivata")
+  prowl.pushNotification("Scena: LAVORO", "La scena LAVORO è stata attivata")
   logInfo("Scene","Scena LAVORO: iniziata")
 
   gTappDog.sendCommand(DOWN)
@@ -13,7 +16,6 @@ then
     gScene.sendCommand(OFF)
     logInfo("Scene","Scena LAVORO: finita")
     ])
-
 
   // TERMOSTATO
   if (ts_sog_lavoro_off.state == ON) {
@@ -48,7 +50,7 @@ rule "A Casa"
 when
     Item Scene_aCasa changed to ON
 then
-  pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
+  prowl.pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
   logInfo("Scene","Scena A CASA: iniziata")
 
 
@@ -60,8 +62,8 @@ then
   sf03_Switch.sendCommand(OFF)
   sf12_Switch.sendCommand(OFF)
   alexa_campanello.sendCommand(ON)
-  executeCommandLine("/openhab/conf/scripts/switch-on.sh")
-  executeCommandLine("/openhab/conf/scripts/timer-off.sh")
+  executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-on.sh")
+  executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/timer-off.sh")
 
 
   // Accendo le luci in soggiorno in base alla configurazione
@@ -112,15 +114,16 @@ rule "Mattina: SIAMO SVEGLI"
 when
     Item Scene_Mattina changed to ON
 then
-  pushNotification("Scena: MATTINA", "La scena MATTINA è stata attivata")
+  prowl.pushNotification("Scena: MATTINA", "La scena MATTINA è stata attivata")
   logInfo("Scene","Scena MATTINA: iniziata")
 
   var Number led03_w = led03_w_Morning.state
   var Number led03_c = led03_c_Morning.state
 
   alexa_campanello.sendCommand(ON)
-  executeCommandLine("/openhab/conf/scripts/switch-on.sh")
-  executeCommandLine("/openhab/conf/scripts/timer-off.sh")
+  executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-on.sh")
+  executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/timer-off.sh")
+
   sf07_Light.sendCommand(OFF)
   
   // SOGGIORNO - CHANGE TEMP
@@ -231,7 +234,7 @@ rule "Usciamo"
 when
     Item Scene_Usciamo changed to ON
 then
-  pushNotification("Scena: USCIAMO", "La scena USCIAMO è stata attivata")
+  prowl.pushNotification("Scena: USCIAMO", "La scena USCIAMO è stata attivata")
   logInfo("Scene","Scena USCIAMO: iniziata")
 
   gTappAll.sendCommand(DOWN)
@@ -317,8 +320,9 @@ then
     ])
 
     alexa_campanello.sendCommand(OFF)
-    executeCommandLine("/openhab/conf/scripts/switch-off.sh")
-    executeCommandLine("/openhab/conf/scripts/timer-on.sh")
+    executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-off.sh")
+    executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/timer-on.sh")
+
 
     // TERMOSTATO
     if (ts_sog_night_off.state == ON) {

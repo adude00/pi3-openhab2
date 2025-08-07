@@ -1,6 +1,8 @@
+val prowl = getActions("prowl", "prowl:broker:mybroker")
+
 rule "Lavatrice spina offline"
   when
-    Item tuya02_Light_Reachable changed from ON to OFF
+    Item tuya02_Reachable changed from Online to Offline
   then
     alexa_lavatrice.sendCommand(OFF)
     tuya02_Power.postUpdate(0)
@@ -22,8 +24,7 @@ rule "Lavatrice tramite consumi"
   then
     if ( alexa_lavatrice.state == ON ) {
       if ( tuya02_Power.averageSince(now.minusMinutes(2)) < 2 ) {
-
-        pushNotification("LAVATRICE: Finita", "La lavasciuga ha finito il lavaggio")
+        prowl.pushNotification("LAVATRICE: Finita", "La lavasciuga ha finito il lavaggio")
 
 	var String message;
 	message= "La lavatrice ha finito il lavaggio. Ripeto. La lavatrice ha finito il lavaggio. Vai a sistemare i vestiti!"

@@ -243,7 +243,7 @@ then
 	    // WE CAN DECREASE TEMP
               acTemp = acTemp - acTempStep
 	      faikin02_temp.sendCommand(acTemp)
-              if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Increasing acTemp to " + acTemp)
+              if (tsSoggiornoWaitDebug.state == ON ) logInfo("tsSoggiornoWait","DEBUG - cooling: HOT! cur_temp: (" + cur_temp + ") higher than setpoint (" + setpoint + "). Pump power: " + pow03_Power.state + "W. Decreasing acTemp to " + acTemp)
 	      if (faikin02_power.state == OFF ) {
 	        // TURN ON IF OFF
 	        faikin02_power.sendCommand(ON)

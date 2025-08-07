@@ -1,47 +1,25 @@
 rule "Cloud Connector restart"
   when
-
     Item cl_restart received command
-
   then
-
-    var String command;
-
     logInfo("Maintenance","OpenHAB Cloud Connector restart requested, proceeding...")
-
-    command = "/openhab/runtime/bin/client -p habopen bundle:restart org.openhab.io.openhabcloud";
-    executeCommandLine(command);
-
+    executeCommandLine(Duration.ofSeconds(10), "/openhab/runtime/bin/client", "-p", "habopen", "bundle:restart", "org.openhab.io.openhabcloud")
 end
 
 rule "OpenHAB restart"
   when
-
     Item sw_restart received command
-
   then
-
-    var String command;
-
     logInfo("Maintenance","OpenHAB restart requested, proceeding...")
-
-    command = "ssh root@127.0.0.1 service docker-compose@openhab2 restart";
-    executeCommandLine(command);
-
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "touch /tmp/restart-oh-requested")
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "service", "docker-compose@openhab3", "restart")
 end
 
 rule "PI restart"
   when
-
     Item pi_restart received command
-
   then
-
-    var String command;
-
     logInfo("Maintenance","PI reboot requested, proceeding...")
-
-    command = "ssh root@127.0.0.1 reboot";
-    executeCommandLine(command);
-
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "touch /tmp/restart-pi5-requested")
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "reboot")
 end

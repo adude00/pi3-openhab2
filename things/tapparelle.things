@@ -1,57 +1,57 @@
 Thing mqtt:topic:tapp01 "Tapparella 1 - Sogg Piccola" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp01/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp01/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp01/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp01/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp01/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp01/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp02 "Tapparella 2 - Sogg Grande" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp02/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp02/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp02/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp02/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp02/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp02/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp03 "Tapparella 3 - Cucina Destra" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp03/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp03/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp03/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp03/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp03/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp03/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp04 "Tapparella 4 - Cucina Sinistra" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp04/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp04/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp04/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp04/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp04/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp04/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp05 "Tapparella 5 - Matr Terrazzo" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp05/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp05/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp05/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp05/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp05/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp05/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp06 "Tapparella 6 - Matr Grande" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp06/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp06/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp06/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp06/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp06/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp06/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp07 "Tapparella 7 - Bagno" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp07/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp07/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp07/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp07/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp07/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp07/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 Thing mqtt:topic:tapp08 "Tapparella 8 - Cameretta" (mqtt:broker:brokerv2) {
   Channels:
-    Type switch : up    [ commandTopic="cmnd/tapp08/POWER2", transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : stop  [ commandTopic="cmnd/tapp08/POWER",  transformationPatternOut="MAP:tapparella.map" ]
-    Type switch : down  [ commandTopic="cmnd/tapp08/POWER3", transformationPatternOut="MAP:tapparella.map" ]
+    Type switch : up    [ commandTopic="cmnd/tapp08/POWER2", commandTransformation="MAP:tapparella.map" ]
+    Type switch : stop  [ commandTopic="cmnd/tapp08/POWER",  commandTransformation="MAP:tapparella.map" ]
+    Type switch : down  [ commandTopic="cmnd/tapp08/POWER3", commandTransformation="MAP:tapparella.map" ]
 }
 
 

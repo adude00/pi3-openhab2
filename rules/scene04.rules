@@ -1,10 +1,11 @@
+val prowl = getActions("prowl", "prowl:broker:mybroker")
 val String LOG = "Scene04"
 
 rule "Scene04"
 when
     Item Scene04 changed to ON
 then
-  pushNotification("Scena Nanna: Start!", "La scena Scene04 è stata attivata")
+  prowl.pushNotification("Scena Nanna: Start!", "La scena Scene04 è stata attivata")
   logInfo(LOG,"Scene Started")
 
   shellytappDelta_roller.sendCommand(DOWN)
@@ -56,7 +57,7 @@ then
 
   createTimer(now.plusSeconds(10), [|
     logInfo(LOG,"Disabilito pulsante luce bimbe")
-    executeCommandLine("/openhab/conf/scripts/switch-off.sh")
+    executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-off.sh")
   ])
 
   createTimer(now.plusSeconds(13), [|
