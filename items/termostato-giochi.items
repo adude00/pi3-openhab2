@@ -5,3 +5,5 @@ Number spGiochi    "Setpoint Giochi [%.1f °C]"  <smiley>      (gtsGiochi,gInflu
 Number hsGiochi    "Isteresi Giochi [%.1f °C]"  <flowpipe>    (gtsGiochi)
 
 Switch tsGiochiLog "tsGiochi Log Debug [%s]"    <settings>
+
+Switch tsGiochiFlip "Flip TS Giochi [%s]" <settings> (gtsGiochi)

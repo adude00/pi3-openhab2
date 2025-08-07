@@ -3,12 +3,11 @@
 rule "Termostato Soggiorno AutoON"
   when
     Item faikin02_power changed from OFF to ON
-
   then
-    if ( tsSoggiornoAutoON == ON && tsSoggiorno == OFF ) {
+    if ( tsSoggiornoAutoON.state == ON && tsSoggiorno.state == OFF ) {
       createTimer(now.plusSeconds(2), [|
         tsSoggiorno.sendCommand(ON)
-        logInfo("tsSoggiornoWait","Aircon ON. Termostato OFF. tsSoggiornoAutoON=ON: accendo Termostato.")
+        logInfo("tsSoggiornoWait","AutoON: tsSoggiornoAutoON=ON, tsSoggiorno=OFF: accendo Termostato.")
       ])
     }
 end

@@ -13,6 +13,7 @@ Number Scene02Condition3bisNum 	  "Camera 1 Clima Temp[%.1f °C]" 	<settings>  (
 Switch Scene02Condition3c 	  "Camera 1 Modifica FAN[%s]" 	        <settings>  (gScene02)
 String Scene02Condition3cSet 	  "Camera 1 FAN [%s]" 		        <settings>  (gScene02)
 Switch Scene02Condition4 	  "Camera 2 TS [%s]" 	        	<settings>  (gScene02)
+Switch Scene02Condition4bis 	  "Camera 2 Clima [%s]" 	       	<settings>  (gScene02)
 Switch Scene02Condition5 	  "Soggiorno P2 TS [%s]"		<settings>  (gScene02)
 Switch Scene02Condition6 	  "Camera 2 Modifica Temp [%s]" 	<settings>  (gScene02)
 Number Scene02Condition6num 	  "Camera 2 Temp [%s]"		        <settings>  (gScene02)

@@ -11,15 +11,14 @@ rule "Termostato Giochi"
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue
 
   if (tsGiochi.state == ON) {
-    if (sonoff21_R2.state == ON) {
       if ((cur_temp).floatValue > ((setpoint).floatValue)) {
-        sendCommand(sonoff21_R2, OFF)
+	if (tsGiochiFlip.state == OFF && sonoff21_R2.state == ON) sendCommand(sonoff21_R2, OFF)
+	if (tsGiochiFlip.state == ON && sonoff21_R2.state == OFF) sendCommand(sonoff21_R2, ON)
         if (tsGiochiLog.state == ON) logInfo("tsGiochi","tsGiochi: SPENGO - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
-      }
-    }
-    else {
+      } else {
       if ((cur_temp).floatValue < ((setpoint).floatValue - (hysteresis).floatValue)) {
-        sendCommand(sonoff21_R2, ON)
+	if (tsGiochiFlip.state == OFF && sonoff21_R2.state == OFF) sendCommand(sonoff21_R2, ON)
+	if (tsGiochiFlip.state == ON  && sonoff21_R2.state == ON)  sendCommand(sonoff21_R2, OFF)
         if (tsGiochiLog.state == ON) logInfo("tsGiochi","tsGiochi: ACCENDO - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
       }
     }

@@ -51,6 +51,10 @@ then
     logInfo(LOG,"Scene02Condition4.state == ON")
     tsCamera2.sendCommand(ON)
   }
+  if (Scene02Condition4bis.state == ON) {
+    logInfo(LOG,"Scene02Condition4bis.state == ON")
+    climaCamera2_Power.sendCommand(ON)
+  }
   if (Scene02Condition5.state == ON) {
     logInfo(LOG,"Scene02Condition5.state == ON")
     tsSoggiorno.sendCommand(ON)
