@@ -4,42 +4,42 @@ Group gAutomations
 // Luci
 Dimmer led03_w_Morning  	"Soffitto Bianco"      <lightbulb>
 Dimmer led03_c_Morning  	"Soffitto Colorato"    <lightbulb>
-Switch sf04_Light_Morning	"Accendi Divano"       <lightbulb>
-Switch sogg_soff_Morning	"Accendi Soffitto"     <lightbulb>
+Switch sf04_Light_Morning	"Accendi Divano [%s]"       <lightbulb>
+Switch sogg_soff_Morning	"Accendi Soffitto [%s]"     <lightbulb>
 
 // CONF Scene_Mattina - Siamo Svegli
-Switch conf_autooff_ac_kid_chng	"Modifica Temperatura"		<settings>
+Switch conf_autooff_ac_kid_chng	"Modifica Temperatura [%s]"		<settings>
 Number conf_mattina_ac_kid_temp "Temperatura da impostare"      <temperatura>
-Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta"	<flow>
+Switch conf_autooff_ac_kid	"Auto Spegni AC Cameretta [%s]"	<flow>
 Number conf_autooff_ac_kid_mins "Dopo quanti minuti"    	<settings>
 
 Switch conf_mattina_tsBagnoP1   "Accendi tsBagno P1 [%s]"	<settings>
-Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale"	<flow>
+Switch conf_autooff_ac_bdr	"Auto Spegni AC Matrimoniale [%s]"	<flow>
 
 // CONF SOGGIORNO - Scene varie
-Switch ts_sog_sveglia_on 	"Sveglia TS Auto-On"           <heating>
-Switch ac_sog_sveglia_on 	"Sveglia Clima Auto-On"        <heating>
-Switch ac_sog_sveglia_change 	"Sveglia Auto Change Temp"     <heating>
+Switch ts_sog_sveglia_on 	"Sveglia TS Auto-On [%s]"      <heating>
+Switch ac_sog_sveglia_on 	"Sveglia Clima Auto-On [%s]"   <heating>
+Switch ac_sog_sveglia_change 	"Sveglia Auto Change Temp[%s]" <heating>
 Number ac_sog_sveglia_temp 	"Sveglia Temp [%.1f °C]"       <heating>
 
-Switch ts_sog_acasa_on 		"A Casa TS Auto-On"            <heating>
-Switch ac_sog_acasa_on  	"A Casa Clima Auto-On"         <heating>
-Switch ac_sog_acasa_change 	"A Casa Auto Change Temp"      <heating>
+Switch ts_sog_acasa_on 		"A Casa TS Auto-On [%s]"       <heating>
+Switch ac_sog_acasa_on  	"A Casa Clima Auto-On [%s]"    <heating>
+Switch ac_sog_acasa_change 	"A Casa Auto Change Temp [%s]" <heating>
 Number ac_sog_acasa_temp 	"A Casa Temp [%.1f °C]"        <heating>
 
-Switch ts_sog_lavoro_off 	"Lavoro TS Auto-Off"           <heating>
-Switch ac_sog_lavoro_off 	"Lavoro Clima Auto-Off"        <heating>
-Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp"      <heating>
+Switch ts_sog_lavoro_off 	"Lavoro TS Auto-Off [%s]"      <heating>
+Switch ac_sog_lavoro_off 	"Lavoro Clima Auto-Off [%s]"   <heating>
+Switch ac_sog_lavoro_change 	"Lavoro Auto Change Temp [%s]" <heating>
 Number ac_sog_lavoro_temp 	"Lavoro Temp [%.1f °C]"        <heating>
 
-Switch ts_sog_usciamo_off 	"Usciamo TS Auto-Off"          <heating>
-Switch ac_sog_usciamo_off 	"Usciamo Clima Auto-Off"       <heating>
-Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp"     <heating>
+Switch ts_sog_usciamo_off 	"Usciamo TS Auto-Off [%s]"     <heating>
+Switch ac_sog_usciamo_off 	"Usciamo Clima Auto-Off [%s]"  <heating>
+Switch ac_sog_usciamo_change 	"Usciamo Auto Change Temp [%s]" <heating>
 Number ac_sog_usciamo_temp 	"Usciamo Temp [%.1f °C]"       <heating>
 
-Switch ts_sog_night_off 	"Night TS Auto-Off"            <heating>
-Switch ac_sog_night_off 	"Night Clima Auto-Off"         <heating>
-Switch ac_sog_night_change 	"Night Auto Change Temp"       <heating>
+Switch ts_sog_night_off 	"Night TS Auto-Off [%s]"       <heating>
+Switch ac_sog_night_off 	"Night Clima Auto-Off [%s]"    <heating>
+Switch ac_sog_night_change 	"Night Auto Change Temp [%s]"  <heating>
 Number ac_sog_night_temp 	"Night Temp [%.1f °C]"         <heating>
 
 Number cl_restart "Restart Cloud Connector" <settings>
@@ -47,17 +47,17 @@ Number sw_restart "Restart OpenHAB" <settings>
 Number pi_restart "Reboot Pi5" <settings>
 
 // Alexa
-Switch alexa_campanello         "Campanello"                   <settings>        [ "Switchable" ]
-Switch alexa_lavatrice          "Lavatrice"                    <settings>        [ "Switchable" ]
+Switch alexa_campanello         "Campanello [%s]"                   <settings>        [ "Switchable" ]
+Switch alexa_lavatrice          "Lavatrice [%s]"                    <settings>        [ "Switchable" ]
 
 // Tramonto
-Switch sunIsOut			"Giorno"			<settings>		[ "Switchable" ]
+Switch sunIsOut			"Giorno [%s]"			    <settings>		[ "Switchable" ]
 
 // Clima Ethan
-Switch Camera2_Clima_AutoOff    "Camera 2 Clima Auto OFF"      <settings> (gAutomations)
-Switch Camera2_TS_AutoOff       "Camera 2 TS Auto OFF"         <settings> (gAutomations)
-Switch Camera1_Clima_AutoOff    "Camera 1 Clima Auto OFF"      <settings> (gAutomations)
-Switch Camera1_TS_AutoOff       "Camera 1 TS Auto OFF"         <settings> (gAutomations)
+Switch Camera2_Clima_AutoOff    "Camera 2 Clima Auto OFF [%s]"      <settings> (gAutomations)
+Switch Camera2_TS_AutoOff       "Camera 2 TS Auto OFF [%s]"         <settings> (gAutomations)
+Switch Camera1_Clima_AutoOff    "Camera 1 Clima Auto OFF [%s]"      <settings> (gAutomations)
+Switch Camera1_TS_AutoOff       "Camera 1 TS Auto OFF [%s]"         <settings> (gAutomations)
 
 
 Switch Buonanotte_CM_Power "Turn ON Aircon [%s]"              <settings>  (gRestore,ClimaMatrimonialeAlarm)

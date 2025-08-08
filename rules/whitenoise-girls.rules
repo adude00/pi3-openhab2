@@ -2,13 +2,13 @@ rule "White Noise Girls ON"
 when 
 	Item WhiteNoiseGirls received command ON
 then
-        executeCommandLine(Duration.ofSeconds(10), "/usr/bin/ssh", "root@zero", "./whitenoise.sh")
+        executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@zero", "./whitenoise.sh")
 end
 
 rule "White Noise Girls OFF"
 when 
 	Item WhiteNoiseGirls received command OFF
 then
-	executeCommandLine(Duration.ofSeconds(10), "/usr/bin/ssh", "root@zero", "reboot")
+	executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@zero", "reboot")
 end
 
