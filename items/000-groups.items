@@ -87,3 +87,6 @@ Group gVolt
 Group gAmps
 Group gEnergyToday
 Group gEnergyYesterday
+
+// Shellies
+Group g_shellies

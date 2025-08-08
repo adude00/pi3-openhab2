@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Switch shelly2pm01_R0                 "2pm01 Output (0) Giochi: Luce Fuori"
     { channel="mqtt:topic:shellies:shelly2pm01:PowerSwitch0" }

@@ -12,7 +12,7 @@ rule "OpenHAB restart"
   then
     logInfo("Maintenance","OpenHAB restart requested, proceeding...")
     executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "touch /tmp/restart-oh-requested")
-    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "service", "docker-compose@openhab3", "restart")
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "service", "docker-compose@openhab5", "restart")
 end
 
 rule "PI restart"

@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Switch shelly07_R1                 "PdC Hisense"
     { channel="mqtt:topic:shellies:shelly07:PowerSwitch" }

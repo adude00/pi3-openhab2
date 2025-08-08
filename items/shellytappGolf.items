@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Rollershutter shellytappGolf_roller      "shellytappGolf Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappGolf:run" }

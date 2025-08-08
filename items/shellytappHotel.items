@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Rollershutter shellytappHotel_roller      "shellytappHotel Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappHotel:run" }

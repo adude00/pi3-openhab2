@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Switch shelly02_R1                 "shelly02"
     { channel="mqtt:topic:shellies:shelly02:PowerSwitch" }

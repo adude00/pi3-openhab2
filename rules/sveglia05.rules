@@ -67,7 +67,7 @@ then
 // QUI FACCIO LE COSE CHE VOGLIO CON QUESTA SVEGLIA //
 
   //val day = now.getDayOfWeek.getValue()
-  val day = now.getDayOfWeek.intValue()
+  val day = now.getDayOfWeek.getValue()
 
   if (day == 6 || day == 7)  // WEEKENDS
   {

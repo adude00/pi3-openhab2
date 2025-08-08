@@ -1,4 +1,4 @@
-Group        g_shellies
+
 
 Rollershutter shellytappFoxtrot_roller      "shellytappFoxtrot Roller" (gTappAll,gTappP1)
 //    { channel="exec:command:shellytappFoxtrot:run" }
