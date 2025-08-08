@@ -198,7 +198,7 @@ sitemap default label="Casa"
 
 
     Text label="Home Automation" icon="settings" {
-      Frame label="Scene" {
+      Frame label="Scene Standard" {
 	Text label="Scena Mattina" icon="settings" {
 	  Frame label="Configurazione Luci Soggiorno" {
 	    Switch    item=sf04_Light_Morning
@@ -219,7 +219,8 @@ sitemap default label="Casa"
 	    Switch    item=conf_mattina_tsBagnoP1
 	  }
 	}  // SCENA Mattina
-
+      }
+      Frame label="Scene Moderne" {
         Text label="Scena 01 - Io Vado" icon="settings" {
 	  Frame label="Scena" {
             Switch    item=Scene01
@@ -233,23 +234,6 @@ sitemap default label="Casa"
 	} // Chiuso frame Scena 01
       Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
 	  Frame label="Scena" {
-	Text label="Sveglia 04 - Arrivano i Bimbi" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia04AlarmRepeat
-            Setpoint item=sveglia04Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia04AlarmRepeat==ON]
-            Setpoint item=sveglia04Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia04AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia04Condition1
-	    Switch item=sveglia04Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia04AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia04AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia04
             Switch    item=Scene02
 	  }
 	  Frame label="Configurazione" {
@@ -278,28 +262,13 @@ sitemap default label="Casa"
 
         Text label="Scena 03 - ora di lavorare" icon="settings" {
 	  Frame label="Scena" {
-	Text label="Sveglia 05 - Ora di Lavorare" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia05AlarmRepeat
-            Setpoint item=sveglia05Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia05AlarmRepeat==ON]
-            Setpoint item=sveglia05Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia05AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia05Condition1
-	    Switch item=sveglia05Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia05AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia05AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia05
             Switch    item=Scene03
 	  }
 	  Frame label="Configurazione" {
             Switch    item=Scene03Condition1
             Switch    item=Scene03Condition2
+            Setpoint  item=Scene03Condition2temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene03Condition2==ON]
+            Switch    item=Scene03Condition2fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene03Condition2==ON]
             Switch    item=Scene03Condition3
             Switch    item=Scene03Condition3a
             Switch    item=Scene03Condition4
@@ -341,123 +310,40 @@ sitemap default label="Casa"
             Switch    item=Scene05Condition5
 	  }
 	} // Chiuso frame Scena 05
+        Text label="Scene 06 - Studio Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene06
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene06Condition1
+            Setpoint  item=Scene06Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition2
+	  }
+	} // Chiuso frame Scena 06
+        Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene07
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene07Condition1
+            Setpoint  item=Scene07Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition2
+	  }
+	} // Chiuso frame Scena 07
+        Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene08
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene08Condition1
+            Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
+            Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
+	  }
+	} // Chiuso frame Scena 08
 
-      }
-      Frame label="Sveglie" {
-	Text label="Sveglia 01 - Clima Giochi" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia01AlarmRepeat
-            Setpoint item=sveglia01Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia01AlarmRepeat==ON]
-            Setpoint item=sveglia01Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia01AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia01Condition1
-	    Switch item=sveglia01Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia01AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia01AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia01
-	Text label="Sveglia 02 - Scaldabagno" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia02AlarmRepeat
-            Setpoint item=sveglia02Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia02AlarmRepeat==ON]
-            Setpoint item=sveglia02Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia02AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia02Condition1
-	    Switch item=sveglia02Condition2
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia02AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia02AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia02
-	Text label="Sveglia 03 - Clima Soggiorno" icon="clock" {
-	  Frame label="Schedulazione" {
-	    Switch item=sveglia03AlarmRepeat
-            Setpoint item=sveglia03Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia03AlarmRepeat==ON]
-            Setpoint item=sveglia03Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia03AlarmRepeat==ON]
-	    Switch item=sveglia03Condition1
-	    Switch item=sveglia03Condition2
-	  }
-	  Frame label="Azioni" {
-	    Switch item=sveglia03Condition3
-	    Switch item=sveglia03Condition4
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia03AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia03AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia03
-	Text label="Sveglia 06 - Clima Studio" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia06AlarmRepeat
-            Setpoint item=sveglia06Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia06AlarmRepeat==ON]
-            Setpoint item=sveglia06Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia06AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia06Condition1
-	    Switch item=sveglia06Condition2
-	    Switch item=sveglia06Condition3
-            Switch item=sveglia06Condition4 icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"]
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia06AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia06AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia06
-	Text label="Sveglia 07 - P2 Bedroom Prep" icon="clock" {
-	  Frame label="Orario" {
-	    Switch item=sveglia07AlarmRepeat
-            Setpoint item=sveglia07Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia07AlarmRepeat==ON]
-            Setpoint item=sveglia07Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia07AlarmRepeat==ON]
-	  }
-	  Frame label="Configurazione" {
-	    Switch item=sveglia07Condition1
-	    Switch item=sveglia07Condition2
-	    Switch item=sveglia07Condition3
-	    Switch item=sveglia07Condition4
-            Setpoint item=sveglia07Condition4temp icon=temperature minValue=16 maxValue=30 step=0.5 visibility=[sveglia07Condition4==ON]
-            Switch   item=sveglia07Condition4fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[sveglia07Condition4==ON]
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia07AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia07AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia07
-	Text label="Sveglia 08 - P2 Bedroom Notturna" icon="clock" {
-	  Frame label="Schedulazione" {
-	    Switch item=sveglia08AlarmRepeat
-            Setpoint item=sveglia08Hour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[sveglia08AlarmRepeat==ON]
-            Setpoint item=sveglia08Minute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[sveglia08AlarmRepeat==ON]
-	    Switch item=sveglia08Condition1
-	    Switch item=sveglia08Condition2
-	  }
-	  Frame label="Azioni" {
-	    Switch item=sveglia08Condition4
-            Setpoint item=sveglia08Condition4temp icon=temperature minValue=16 maxValue=30 step=0.5 visibility=[sveglia08Condition4==ON]
-            Switch   item=sveglia08Condition4fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[sveglia08Condition4==ON]
-	  }
-	  Frame label="Debug - Timer started" {
-	    Switch item=sveglia08AlarmSwitch
-	  }
-	  Frame label="Debug - Manual Trigger" {
-	    Switch item=sveglia08AlarmTriggered
-	  }
-	} // CHIUSO Text Sveglia08
-      } // CHIUSO FRAME Sveglie
+      } // Chiuso frame Scene
 
       Frame label="Automatismi" { 
 	Text label="Clima Matrimoniale" icon=settings {

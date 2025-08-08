@@ -1,0 +1,29 @@
+val String LOG = "Scene08"
+
+rule "Scene08"
+when
+    Item Scene08 changed to ON
+then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
+  prowl.pushNotification("Scene08 - Start!", "Scene08: P2 Bedroom Notturna")
+  logInfo(LOG,"Scene Started")
+
+  if (Scene08Condition1.state == ON) {
+    logInfo(LOG,"Scene08Condition1.state == ON")
+    DaikinMatrimoniale_Power.sendCommand(ON)
+    createTimer(now.plusSeconds(5),  [ |
+      logInfo(LOG, "Setting Temp: " + Scene08Condition1temp.state as Number)
+      DaikinMatrimoniale_SetPoint.sendCommand(Scene08Condition1temp.state as Number)
+    ])
+    createTimer(now.plusSeconds(9),  [ |
+      logInfo(LOG, "Setting Fan: " + Scene08Condition1fan.state.toString)
+      DaikinMatrimoniale_Fan.sendCommand(Scene08Condition1fan.state.toString)
+    ])
+  }
+
+  createTimer(now.plusSeconds(15), [|
+    Scene08.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end

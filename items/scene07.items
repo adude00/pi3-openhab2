@@ -1,0 +1,8 @@
+Group gScene07
+
+Switch Scene07   		"Scene07: P2 Bedroom Prep"  	<alarm>	    (gScene07)  [ "Switchable" ]
+
+Switch Scene07Condition1        "Turn ON Aircon [%s]"           <settings>  (gRestore,gScene07)
+Number Scene07Condition1temp    "Aircon Temp [%s]"              <settings>  (gRestore,gScene07)
+String Scene07Condition1fan     "Fan Speed [%s]"                <settings>  (gRestore,gScene07)
+Switch Scene07Condition2	"Reset Alexa [%s]"		<settings>  (gRestore,gScene07)

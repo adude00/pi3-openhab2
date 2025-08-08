@@ -15,6 +15,15 @@ then
   if (Scene03Condition2.state == ON) {
     logInfo(LOG,"Scene03Condition2.state == ON")
     DaikinStudio_Power.sendCommand(ON)
+    createTimer(now.plusSeconds(5),  [ |
+      logInfo(LOG, "Setting Temp: " + Scene03Condition2temp.state as Number)
+      DaikinStudio_SetPoint.sendCommand(Scene03Condition2temp.state as Number)
+    ])
+    createTimer(now.plusSeconds(9),  [ |
+      logInfo(LOG, "Setting Fan: " + Scene03Condition2fan.state.toString)
+      DaikinStudio_Fan.sendCommand(Scene03Condition2fan.state.toString)
+    ])
+
   }
   if (Scene03Condition3.state == ON) {
     logInfo(LOG,"Scene03Condition3.state == ON")

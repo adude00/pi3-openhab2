@@ -1,0 +1,8 @@
+Group gScene06
+
+Switch Scene06   		"Scene06: Studio Prep"  	<alarm>	    (gScene06)  [ "Switchable" ]
+
+Switch Scene06Condition1        "Turn ON Aircon [%s]"           <settings>  (gRestore,gScene06)
+Number Scene06Condition1temp    "Aircon Temp [%s]"              <settings>  (gRestore,gScene06)
+String Scene06Condition1fan     "Fan Speed [%s]"                <settings>  (gRestore,gScene06)
+Switch Scene06Condition2	"Turn On Scrivania [%s]"	<settings>  (gRestore,gScene06)

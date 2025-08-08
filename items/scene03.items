@@ -2,10 +2,12 @@ Group gScene03
 
 Switch Scene03   		"Scena: ora di lavorare"	        <alarm>	    (gScene03)  [ "Switchable" ]
 
-Switch Scene03Condition1 	"Spegni Clima Giochi [%s]" 		<settings>  (gScene03)
-Switch Scene03Condition2 	"Accendi Clima Studio [%s]" 		<settings>  (gScene03)
-Switch Scene03Condition3 	"Spegni Camera Clima 1 [%s]" 		<settings>  (gScene03)
-Switch Scene03Condition3a 	"Spegni Camera TS 1 [%s]" 		<settings>  (gScene03)
-Switch Scene03Condition4 	"Spegni Camera Clima 2 [%s]" 		<settings>  (gScene03)
-Switch Scene03Condition5 	"Spegni Camera TS 2 [%s]"		<settings>  (gScene03)
-Switch Scene03Condition6 	"Accendi Scrivania [%s]"		<settings>  (gScene03)
+Switch Scene03Condition1 	"Spegni Clima Giochi [%s]" 		<settings>  (gRestore,gScene03)
+Switch Scene03Condition2 	"Accendi Clima Studio [%s]" 		<settings>  (gRestore,gScene03)
+Number Scene03Condition2temp    "Aircon Temp [%s]" 			<settings>  (gRestore,gScene06)
+String Scene03Condition2fan     "Fan Speed [%s]" 			<settings>  (gRestore,gScene06)
+Switch Scene03Condition3 	"Spegni Camera Clima 1 [%s]" 		<settings>  (gRestore,gScene03)
+Switch Scene03Condition3a 	"Spegni Camera TS 1 [%s]" 		<settings>  (gRestore,gScene03)
+Switch Scene03Condition4 	"Spegni Camera Clima 2 [%s]" 		<settings>  (gRestore,gScene03)
+Switch Scene03Condition5 	"Spegni Camera TS 2 [%s]"		<settings>  (gRestore,gScene03)
+Switch Scene03Condition6 	"Accendi Scrivania [%s]"		<settings>  (gRestore,gScene03)
