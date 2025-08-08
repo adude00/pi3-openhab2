@@ -13,8 +13,6 @@ var int mTimeStep
 val int DEFAULT_DIM_STEP = 2
 val int DEFAULT_TIME_STEP = 1
 
-val prowl = getActions("prowl", "prowl:broker:mybroker")
-
 rule "WakeUpAlarmSwitchOn"
 when
     Item WakeUpAlarmSwitch changed to ON
@@ -195,6 +193,7 @@ then
     if ( tDiffD > -1.5 && tDiffD <= -1.0 )  mTimer   = 45
 
     logInfo("LOG","Ci sono: " + cur_temp + "C, tDiff: " + tDiffD + "C - Accendo A/C tra " + mTimer + " minuti") 
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
     prowl.pushNotification("SVEGLIA AC", "Ci sono: " + cur_temp + "C, tDiff: " + tDiffD + "C - Accendo A/C tra " + mTimer + " minuti")
 
     if (tDelay !== null) {

@@ -1,10 +1,10 @@
-val prowl = getActions("prowl", "prowl:broker:mybroker")
 val String LOG = "Scene03"
 
 rule "Scene03"
 when
     Item Scene03 changed to ON
 then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena ora di lavorare: Start!", "La scena Scene03 è stata attivata")
   logInfo(LOG,"Scene Started")
 

@@ -1,9 +1,8 @@
-val prowl = getActions("prowl", "prowl:broker:mybroker")
-
 rule "Campanello"
   when
     Item esp09_Switch changed from OFF to ON
   then
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
     prowl.pushNotification("CAMPANELLO!!", "Qualcuno ha suonato!")
     logInfo("CAMPANELLO", "Qualcuno ha suonato")
 

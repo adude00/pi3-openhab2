@@ -1,10 +1,8 @@
-val prowl = getActions("prowl", "prowl:broker:mybroker")
-
-
 rule "Lavoro"
 when
     Item Scene_Lavoro changed to ON
 then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena: LAVORO", "La scena LAVORO è stata attivata")
   logInfo("Scene","Scena LAVORO: iniziata")
 
@@ -50,6 +48,7 @@ rule "A Casa"
 when
     Item Scene_aCasa changed to ON
 then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena: A CASA", "La scena A CASA è stata attivata")
   logInfo("Scene","Scena A CASA: iniziata")
 
@@ -114,6 +113,7 @@ rule "Mattina: SIAMO SVEGLI"
 when
     Item Scene_Mattina changed to ON
 then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena: MATTINA", "La scena MATTINA è stata attivata")
   logInfo("Scene","Scena MATTINA: iniziata")
 
@@ -234,6 +234,7 @@ rule "Usciamo"
 when
     Item Scene_Usciamo changed to ON
 then
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena: USCIAMO", "La scena USCIAMO è stata attivata")
   logInfo("Scene","Scena USCIAMO: iniziata")
 

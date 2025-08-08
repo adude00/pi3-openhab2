@@ -1,5 +1,3 @@
-val prowl = getActions("prowl", "prowl:broker:mybroker")
-
 rule "Notify that plex is ON"
 when
     Item Plex changed to ON
@@ -8,6 +6,7 @@ then
     if ( tuya07_Power.state > 90 ) {
       Echo_Soggiorno_TTS.sendCommand('Il server è acceso. Ora puoi guardare PLEX!')
       logInfo("PLEX", "Plex Acceso. Mandato TTS ad Echo Soggiorno")
+      val prowl = getActions("prowl", "prowl:broker:mybroker")
       prowl.pushNotification("Plex: ON", "Plex è acceso!")
     }
 end
