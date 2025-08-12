@@ -254,6 +254,7 @@ sitemap default label="Casa"
             Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
             Switch    item=Scene02Condition7
             Switch    item=Scene02Condition8
+            Switch    item=Scene02Condition9
 	  }
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
@@ -456,8 +457,8 @@ sitemap default label="Casa"
           Frame label="Temperature" {
             Text item=Casa_Temperature_AVG 
             Text item=sf04_Temp
-	    Text item=avgSoggiornoAvg
 	    Text item=bs11_temperature
+	    Text item=avgSoggiornoAvg icon=temperature
           }
           Frame label="Thermostat" {
             Switch    item=tsSoggiorno
@@ -481,7 +482,7 @@ sitemap default label="Casa"
 
           Frame label="Extra" {
             Selection item=tsSoggiornoType          label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
-            Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano']
+            Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano Sonoff', 4='Divano BT bs11']
           }
 
           Frame label="A/C Auto DEBUG"  {
@@ -540,7 +541,8 @@ sitemap default label="Casa"
         Text      item=avgSoggiornoAvg              label="Media 30min"                icon=flow
         Text      item=Casa_Temperature_AVG         label="Istantanea"                 icon=house
         Text      item=sf06_Temp                    label="Alta"                       icon=flowpipe
-        Text      item=sf04_Temp                    label="Divano"                     icon=sofa
+        Text      item=sf04_Temp                    label="Divano Sonoff"              icon=sofa
+        Text      item=bs11_temperature             label="Divano BT"                  icon=sofa
 	Text      item=Casa_Temperature_Sogg_Down   label="Bassa"                      icon=returnpipe
       }
 
@@ -769,34 +771,49 @@ sitemap default label="Casa"
 	Text      item=spGiochi {
 
 	  // Thermostat Page
-	  Frame label="Temperature vere" {
-	    Text item=sf12_Temp 
-	    Text item=sf12_Humid 
-	  }
-          Frame label="Clima" {
-            Switch    item=cl02_a_power	icon=switch
-            Text      item=cl02_a_temp	icon=temperature
-            Text      item=shelly07_Power icon=energy
-          }
 	  Frame label="Thermostat Conf" {
             Switch    item=tsGiochi
 	    Setpoint  item=spGiochi minValue=17    maxValue=29 step=0.2
             Setpoint  item=hsGiochi minValue=0     maxValue=3  step=0.1           icon=settings
-            Switch    item=sonoff21_R2
             Switch    item=tsGiochiFlip
+            Selection item=tsGiochiSensor          mappings=[1='AM2302 (sf12)', 2='BT Mi Temp (bs07)']
             Switch    item=tsGiochiLog
+            Switch    item=sonoff21_R2
 	  }
+	      Frame label="Comfort" {
+		Text      item=sf12_Temp          label="Giochi AM2301: Temperatura"
+		Text      item=bs07_temperature   label="Giochi BS07: Temperatura"
+		Text      item=sf12_Humid         label="Giochi AM2301: Umidità"
+		Text      item=bs07_humidity      label="Giochi BS07: Umidità"
+	      }
+	      Frame label="A/C Alexa API Control" {
+		Switch    item=cl02_alexa_powerState	   icon=switch
+		Text      item=cl02_alexa_temperature	   icon=temperature label="Rilevata"
+		Text      item=cl02_alexa_targetSetpoint   icon=temperature label="Impostata"
+		Setpoint  item=cl02_sp	                   icon=temperature minValue=16 maxValue=32 step=1
+		Selection item=cl02_alexa_thermostatMode   icon=settings
+	      }
+	      Frame label="Power" {
+		Text      item=shelly07_Power icon=energy
+		Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
+	      }
+
 	} //Chiuso text spGiochi
       } // Chiuso frame Termostato
 
 
       Frame label="Comfort" {
-        Text      item=sf12_Temp   label="Giochi: Temperatura"
-        Text      item=sf12_Humid  label="Giochi: Umidità"
+        Text      item=sf12_Temp          label="Giochi AM2301: Temperatura"
+        Text      item=bs07_temperature   label="Giochi BS07: Temperatura"
+        Text      item=sf12_Humid         label="Giochi AM2301: Umidità"
+        Text      item=bs07_humidity      label="Giochi BS07: Umidità"
       }
-      Frame label="Alexa API" {
-        Switch    item=cl02_a_power	icon=switch
-        Text      item=cl02_a_temp	icon=temperature
+      Frame label="A/C Alexa API Control" {
+        Switch    item=cl02_alexa_powerState	   icon=switch
+        Text      item=cl02_alexa_temperature	   icon=temperature label="Rilevata"
+	Text      item=cl02_alexa_targetSetpoint   icon=temperature label="Impostata"
+        Setpoint  item=cl02_sp	                   icon=temperature minValue=16 maxValue=32 step=1
+        Selection item=cl02_alexa_thermostatMode   icon=settings
       }
       Frame label="Power" {
         Text      item=shelly07_Power icon=energy
@@ -1101,10 +1118,13 @@ sitemap default label="Casa"
             Text item=bs03_temperature
             Text item=bs03_humidity
           }
-          Frame label="Alexa API" {
-            Switch    item=cl01_a_power icon=switch
-            Text      item=cl01_a_temp  icon=temperature
-          }
+	      Frame label="A/C Alexa API Control" {
+		Switch    item=cl01_alexa_powerState	   icon=switch
+		Text      item=cl01_alexa_temperature	   icon=temperature label="Rilevata"
+		Text      item=cl01_alexa_targetSetpoint   icon=temperature label="Impostata"
+		Setpoint  item=cl01_sp	                   icon=temperature minValue=16 maxValue=32 step=1
+		Selection item=cl01_alexa_thermostatMode   icon=settings
+	      }
           Frame label="Thermostat" {
             Switch    item=tsOfficina
             Setpoint  item=spOfficina minValue=17    maxValue=29 step=0.2
@@ -1119,9 +1139,12 @@ sitemap default label="Casa"
         Text      item=bs03_temperature	label="Officina: Temperatura"
         Text      item=bs03_humidity	label="Officina: Umidità"
       }
-      Frame label="Alexa API" {
-        Switch    item=cl01_a_power     icon=switch
-        Text      item=cl01_a_temp      icon=temperature
+      Frame label="A/C Alexa API Control" {
+	Switch    item=cl01_alexa_powerState	   icon=switch
+	Text      item=cl01_alexa_temperature	   icon=temperature label="Rilevata"
+	Text      item=cl01_alexa_targetSetpoint   icon=temperature label="Impostata"
+	Setpoint  item=cl01_sp	                   icon=temperature minValue=16 maxValue=32 step=1
+	Selection item=cl01_alexa_thermostatMode   icon=settings
       }
       Frame label="Power" {
         Text      item=shelly07_Power icon=energy

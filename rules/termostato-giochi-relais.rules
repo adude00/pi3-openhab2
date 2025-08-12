@@ -6,6 +6,7 @@ rule "Termostato Giochi"
   then
   
   var Number cur_temp = sf12_Temp.state 
+  if (tsGiochiSensor.state == 2 ) cur_temp = bs07_temperature.state
   var Number setpoint = spGiochi.state 
   var Number hysteresis = hsGiochi.state 
   var Number hsetpoint = setpoint.floatValue - hysteresis.floatValue

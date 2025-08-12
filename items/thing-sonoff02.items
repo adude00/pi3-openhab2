@@ -4,8 +4,8 @@ Group t_sonoff02      "sonoff02: Terrazza"
 Number Terrazza_Cart_Period     "Periodo" (System)
 
 Switch                Terrazza        "Irrigazione:"        <rain>                                                 {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
-Number:Temperature    Terrazza_Temp   "Terrazza [%.1f °C]"  <temperature>  (gTemp,Fuori_Temperature_Chart,gGraph)  {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
-Number:Dimensionless  Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHumd,Fuori_Umidita_Chart,gGraph)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
+Number:Temperature    Terrazza_Temp   "Terrazza [%.1f]"  <temperature>  (gTemp,Fuori_Temperature_Chart,gGraph)  {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
+Number                Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHumd,Fuori_Umidita_Chart,gGraph)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
 
 
 // DEFAULT FOR ALL
@@ -23,7 +23,6 @@ String               sonoff02_Reachable     "sonoff02 Reachable [%s]"           
 
 // Diagnostics
 Number:Dimensionless sonoff02_RSSI          "sonoff02 Signal [%d %%]" <network>            (t_sonoff,t_sonoff02,gRSSI)      {channel="mqtt:topic:tasmota:sonoff02:RSSI"}
-Number:Dimensionless sonoff02_LoadAvg       "sonoff02 Load [%d %%]"   <qualityofservice>   (t_sonoff,t_sonoff02,gLoad)      {channel="mqtt:topic:tasmota:sonoff02:LoadAvg"}
 String               sonoff02_Result        "sonoff02 Result [%s]"    <status>             (t_sonoff,t_sonoff02,gResult)    {channel="mqtt:topic:tasmota:sonoff02:Result"}
 String               sonoff02_Uptime        "sonoff02 Uptime [%s]"    <clock>              (t_sonoff,t_sonoff02,gUptime)    {channel="mqtt:topic:tasmota:sonoff02:Uptime"}
 String               sonoff02_RestartReason "sonoff02 Reason [%s]"    <error>              (t_sonoff,t_sonoff02,gReason)    {channel="mqtt:topic:tasmota:sonoff02:RestartReason"}

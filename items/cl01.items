@@ -1,5 +1,9 @@
-Group	g_cl01		"Clima Officina"
+Group   g_cl01          "Clima Officina"
 
-Switch	cl01_a_power    "Power Alexa" 		(g_cl01) 	{ channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:powerState" }
-Number	cl01_a_temp     "Split Temp [%s °C]" 	(g_cl01,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:temperature" }
+Number:Temperature cl01_sp  "Telecomando [%s]"        (g_cl01,gInflux)
+
+Switch             cl01_alexa_powerState      "powerState [%s]"       (g_cl01) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:powerState" }
+Number:Temperature cl01_alexa_temperature     "temperature [%s]"      (g_cl01) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:temperature" }
+Number:Temperature cl01_alexa_targetSetpoint  "targetSetpoint [%s]"   (g_cl01) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:targetSetpoint" }
+String             cl01_alexa_thermostatMode  "thermostatMode[%s]"    (g_cl01) { channel="amazonechocontrol:smartHomeDevice:98a41df9:d4d6e5d5-6ccc-46ab-a485-6e1be9f960ae:thermostatMode" }
 

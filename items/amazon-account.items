@@ -1,1 +1,5 @@
-String AmazonControl_SendMessage            "SendMessage"          {channel="amazonechocontrol:account:8dcf59ae:sendMessage"}
+Switch TestLaunch01 "Launch A Test Command"
+
+
+// Messaggio - ring giallo - hai un messaggio da giorgio
+String Amazon_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:98a41df9:sendMessage"}

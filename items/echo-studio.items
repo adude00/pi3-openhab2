@@ -1,5 +1,7 @@
 // Account
-String Echo_Studio_SendMessage            "SendMessage"                           {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:sendMessage"}
+String Echo_Studio_startCommand            "startCommand"                           {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:startCommand"}
+String Echo_Studio_startRoutine            "startRoutine"                           {channel="amazonechocontrol:echo:98a41df9:G090XG1214320N34:startRoutine"}
+String Echo_Studio_sendMessage             "sendMessage"                            {channel="amazonechocontrol:account:98a41df9:sendMessage"}
 
 Group Alexa_Studio <player>
 

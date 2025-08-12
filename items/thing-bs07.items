@@ -1,6 +1,6 @@
 Group        g_bs07            "BLE Sensor bs07"
 
-Number bs07_temperature        "bs07 Temp [%s C]"      <temperature>		(g_bs07,gTemp)
+Number bs07_temperature        "bs07 Temp [%s C]"      <temperature>		(g_bs07,gTemp,gChartGiochiT)
 { channel="mqtt:topic:blegateway:a4c13877b808:temperature" }
 Number bs07_humidity           "bs07 Humid [%s %%]"    <humidity>		(g_bs07,gHumd)
     { channel="mqtt:topic:blegateway:a4c13877b808:humidity" }

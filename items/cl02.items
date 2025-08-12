@@ -1,4 +1,8 @@
 Group	g_cl02		"Clima Giochi"
 
-Switch     		cl02_a_power        "Power"                     (g_cl02)        { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:powerState" }
-Number                  cl02_a_temp         "Split Temp [%s °C]"        (g_cl02,gInflux)  { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:temperature" }
+Number:Temperature cl02_sp  "Telecomando [%s]"        (g_cl02,gInflux)
+
+Switch             cl02_alexa_powerState      "powerState [%s]"       (g_cl02) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:powerState" }
+Number:Temperature cl02_alexa_temperature     "temperature [%s]"      (g_cl02,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:temperature" }
+Number:Temperature cl02_alexa_targetSetpoint  "targetSetpoint [%s]"   (g_cl02,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:targetSetpoint" }
+String            cl02_alexa_thermostatMode   "thermostatMode [%s]"   (g_cl02) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:thermostatMode" }

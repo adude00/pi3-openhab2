@@ -14,7 +14,7 @@ then
   }
   if (Scene02Condition2.state == ON) {
     logInfo(LOG,"Scene02Condition2.state == ON")
-    cl02_a_power.sendCommand(ON)
+    cl02_alexa_powerState.sendCommand(ON)
   }
   if (Scene02Condition3ts.state == ON) {
     logInfo(LOG,"Scene02Condition3ts.state == ON")
@@ -82,7 +82,12 @@ then
     faikin02_power.sendCommand(ON)
   }
 
-  createTimer(now.plusSeconds(13), [|
+  if (Scene02Condition9.state == ON) {
+    logInfo(LOG,"Scene02Condition9.state == ON")
+    sf08_Light.sendCommand(OFF)
+  }
+
+  createTimer(now.plusSeconds(30), [|
     Scene02.sendCommand(OFF)
     logInfo(LOG,"Scena finita")
   ])

@@ -1,0 +1,7 @@
+rule "cl02_sp"
+when
+    Item cl02_sp received command
+then
+    logInfo("cl02_sp", "Setting temp: " + cl02_sp.state as Number)
+    cl02_alexa_targetSetpoint.sendCommand(cl02_sp.state as Number)
+end
