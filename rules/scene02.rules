@@ -10,7 +10,7 @@ then
 
   if (Scene02Condition1.state == ON) {
     logInfo(LOG,"Scene02Condition1.state == ON")
-    cl01_a_power.sendCommand(OFF)
+    cl01_alexa_powerState.sendCommand(OFF)
   }
   if (Scene02Condition2.state == ON) {
     logInfo(LOG,"Scene02Condition2.state == ON")
