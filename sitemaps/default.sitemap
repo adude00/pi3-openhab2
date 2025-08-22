@@ -92,7 +92,7 @@ sitemap default label="Casa"
         Default   item=marantz_lr_album     visibility=[marantz_lr_power==ON]
         Default   item=marantz_lr_track     visibility=[marantz_lr_power==ON]
 	} // CHIUSO GROUP "Living Room"
-      Group item=marantz_br_power label="Bedroom" icon="receiver" {
+      Group item=marantz_br_power label="Studio" icon="receiver" {
         Default   item=marantz_br_power     label="Stereo"
         Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
         Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
