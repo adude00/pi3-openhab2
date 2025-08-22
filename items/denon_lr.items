@@ -1,15 +1,15 @@
 // Things stuff
-Switch marantz_lr_power    "Receiver" <switch>         {channel="denonmarantz:avr:0006783d81f8:mainZone#power"}
-Dimmer marantz_lr_volume   "Volume"   <soundvolume>    {channel="denonmarantz:avr:0006783d81f8:mainZone#volume"}
-Number marantz_lr_volumeDB "Volume [%.1f dB]"          {channel="denonmarantz:avr:0006783d81f8:mainZone#volumeDB"}
-Switch marantz_lr_mute     "Mute"     <mute>           {channel="denonmarantz:avr:0006783d81f8:mainZone#mute"}
-Switch marantz_lr_z2power  "Zone 2"                    {channel="denonmarantz:avr:0006783d81f8:zone2#power"}
-String marantz_lr_input    "Input [%s]"                {channel="denonmarantz:avr:0006783d81f8:mainZone#input" }
-String marantz_lr_surround "Surround: [%s]"            {channel="denonmarantz:avr:0006783d81f8:general#surroundProgram"}
-String marantz_lr_artist   "Artist: [%s]"              {channel="denonmarantz:avr:0006783d81f8:general#artist"}
-String marantz_lr_album    "Album: [%s]"               {channel="denonmarantz:avr:0006783d81f8:general#album"}
-String marantz_lr_track    "Track: [%s]"               {channel="denonmarantz:avr:0006783d81f8:general#track"}
-String marantz_lr_command                              {channel="denonmarantz:avr:0006783d81f8:general#command"}
+Switch marantz_lr_power    "Receiver" <switch>         {channel="denonmarantz:avr:0006783d81fa:mainZone#power"}
+Dimmer marantz_lr_volume   "Volume"   <soundvolume>    {channel="denonmarantz:avr:0006783d81fa:mainZone#volume"}
+Number marantz_lr_volumeDB "Volume [%.1f dB]"          {channel="denonmarantz:avr:0006783d81fa:mainZone#volumeDB"}
+Switch marantz_lr_mute     "Mute"     <mute>           {channel="denonmarantz:avr:0006783d81fa:mainZone#mute"}
+Switch marantz_lr_z2power  "Zone 2"                    {channel="denonmarantz:avr:0006783d81fa:zone2#power"}
+String marantz_lr_input    "Input [%s]"                {channel="denonmarantz:avr:0006783d81fa:mainZone#input" }
+String marantz_lr_surround "Surround: [%s]"            {channel="denonmarantz:avr:0006783d81fa:general#surroundProgram"}
+String marantz_lr_artist   "Artist: [%s]"              {channel="denonmarantz:avr:0006783d81fa:general#artist"}
+String marantz_lr_album    "Album: [%s]"               {channel="denonmarantz:avr:0006783d81fa:general#album"}
+String marantz_lr_track    "Track: [%s]"               {channel="denonmarantz:avr:0006783d81fa:general#track"}
+String marantz_lr_command                              {channel="denonmarantz:avr:0006783d81fa:general#command"}
 
 
 // SCRIPT Stuff

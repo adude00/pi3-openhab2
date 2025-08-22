@@ -1,5 +1,3 @@
-Group Casa_Consumi_Chart_Total
-
 Group t_esp10         "esp10 (sf09): Total House Power"
 
 Switch  esp10_Switch        "esp10: switch" (t_esp10,t_sonoff,sonoff) {channel="mqtt:topic:tasmota:esp10:PowerSwitch"}

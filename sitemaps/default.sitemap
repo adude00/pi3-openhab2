@@ -79,9 +79,9 @@ sitemap default label="Casa"
         Default   item=marantz_lr_power     label="Stereo"
         Selection item=marantz_lr_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_lr_power==ON]
         Default   item=marantz_lr_mute      visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=2  visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=1  visibility=[marantz_lr_power==ON]
         Slider    item=marantz_lr_volume    label="Volume [%.1f]" visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volume    label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volumeDB  label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
         Default   item=marantz_lr_volumeDB  visibility=[marantz_lr_power==ON]
         Default   item=marantz_lr_surround  visibility=[marantz_lr_power==ON]
         Switch 	  item=denon_DynamicVolume  visibility=[marantz_lr_power==ON]
