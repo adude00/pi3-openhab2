@@ -96,10 +96,8 @@ sitemap default label="Casa"
         Default   item=marantz_br_power     label="Stereo"
         Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
         Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
-        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=40 step=0.5  visibility=[marantz_br_power==ON]
-        Slider    item=marantz_br_volume    label="Volume [%.1f]" visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_volumeDB  visibility=[marantz_br_power==ON]
         Default   item=marantz_br_surround  visibility=[marantz_br_power==ON]
+        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_br_power==ON]
         Default   item=marantz_br_artist    visibility=[marantz_br_power==ON]
         Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
         Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
