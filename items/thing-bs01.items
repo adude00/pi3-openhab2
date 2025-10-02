@@ -1,4 +1,4 @@
-Group        g_bs01            "BLE Sensor bs01"
+Group        g_bs01            "BLE Sensor bs01 ex-07"
 
 Number bs01_temperature        "bs01 SottoIlLetto Temp [%s C]"      <temperature>		(g_bs01,gTemp,gChartCamera2T)
 { channel="mqtt:topic:blegateway:a4c13877b808:temperature" }

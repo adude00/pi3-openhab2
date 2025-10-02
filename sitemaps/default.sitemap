@@ -1174,7 +1174,9 @@ sitemap default label="Casa"
 
 	} // Chiuso Text Temperatura
 
-        Text    item=sf20_Humid  label="BagnoP1: Umidità"
+        Text    item=sf20_Humid       label="BagnoP1: Umidità"
+        Text    item=bs12_temperature label="Bagno P1 BT: T"
+        Text    item=bs12_humidity    label="Bagno P1 BT: H"
         Switch	item=tsBagnoP1
       }
       Frame label="Outside" {
