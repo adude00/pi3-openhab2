@@ -1,4 +1,4 @@
-Thing mqtt:topic:blegateway:a4c13877b808 "bs07" (mqtt:broker:brokerv2) {
+Thing mqtt:topic:blegateway:a4c138dd5b08 "bs07" (mqtt:broker:brokerv2) {
     Channels:
         Type number : temperature     [ stateTopic="blegateway/a4c13877b808/sensor", transformationPattern="JSONPATH:$.temperature" ]
         Type number : humidity        [ stateTopic="blegateway/a4c13877b808/sensor", transformationPattern="JSONPATH:$.humidity" ]
