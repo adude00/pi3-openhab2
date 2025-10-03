@@ -32,7 +32,15 @@ rule "Termostato Soggiorno ON - Setting startup Temp"
           faikin02_temp.sendCommand(tsSoggiornoStartupTemp.state as Number)
         }
 
-      ]) //TIMER ON
+      ]) //TIMER ON TRY 1
+      createTimer(now.plusSeconds(15), [|
+
+        if ( tsSoggiornoStartupTempON.state == ON ) {
+          logInfo("tsSoggiornoWait","Termostato ON. tsSoggiornoStartupTempON=ON. Setting Start Temperature: " + tsSoggiornoStartupTemp.state)
+          faikin02_temp.sendCommand(tsSoggiornoStartupTemp.state as Number)
+        }
+
+      ]) //TIMER ON TRY 2
 
       // TIMER FAN Start
       createTimer(now.plusSeconds(37), [|
