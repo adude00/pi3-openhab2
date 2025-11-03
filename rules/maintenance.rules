@@ -23,3 +23,13 @@ rule "PI restart"
     executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "touch /tmp/restart-pi5-requested")
     executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "reboot")
 end
+
+rule "Service Restart"
+  when
+    Item service_restart received command
+  then
+    logInfo("Maintenance","Requested restart of service " + service_name.state + ", proceeding...")
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "echo ", service_name.state.toString, "> /tmp/service-restart")
+    executeCommandLine(Duration.ofSeconds(120), "ssh", "root@127.0.0.1", "systemctl", "restart", service_name.state.toString)
+end
+

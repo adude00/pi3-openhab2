@@ -1828,6 +1828,8 @@ sitemap default label="Casa"
       Switch    item=cl_restart mappings=[0="Restart Cloud"]
       Switch    item=sw_restart mappings=[0="Restart"]
       Switch    item=pi_restart mappings=[0="Reboot"]
+      Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
+      Switch    item=service_restart mappings=[0="Restart"]
     }
     Text label="BLE Sensors" {
       Group item=g_bs01
