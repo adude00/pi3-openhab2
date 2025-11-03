@@ -16,6 +16,11 @@ then
     alexa_campanello.sendCommand(OFF)
   }
 
+  if (Scene05Condition2.state == ON) {
+    logInfo(LOG,"Scene05Condition2.state == ON")
+    faikin01_power.sendCommand(OFF)
+  }
+
   if (Scene05Condition3.state == ON) {
     logInfo(LOG,"Scene05Condition3.state == ON")
     faikin01_power.sendCommand(ON)
