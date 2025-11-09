@@ -25,3 +25,57 @@ rule "Termostato Giochi"
     }
   }
 end
+
+rule "Termostato Giochi Delta Check"
+  when
+    Time cron "0 0/5 * * * ?"
+  then
+  
+  var Number cur_temp = sf12_Temp.state 
+  if (tsGiochiSensor.state == 2 ) cur_temp = bs07_temperature.state
+  var Number setpoint   = spGiochi.state 
+  var Number hysteresis = hsGiochi.state 
+  var Number hsetpoint  = setpoint.floatValue - hysteresis.floatValue
+  var Number deltamax   = dmGiochi.state
+  var Number curpower   = shelly07_Power.state
+
+  if ( cl02_alexa_powerState.state == ON && tsGiochi.state == ON && tsGiochiFix.state == ON ) {
+
+    if ( (cur_temp).floatValue > ( (setpoint).floatValue + (deltamax).floatValue ) ) {
+      if ( curpower.floatValue > 100 && tsGiochiFlip.state == OFF && sonoff21_R2.state == ON  ) sendCommand(tsGiochiFixTrig, OFF)
+      if ( curpower.floatValue < 100 && tsGiochiFlip.state == ON  && sonoff21_R2.state == OFF ) sendCommand(tsGiochiFixTrig, ON)
+      if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","tsGiochi: CYCLE - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+    }
+
+    if ( (cur_temp).floatValue < ( (setpoint).floatValue - (hysteresis).floatValue - (deltamax).floatValue) ) {
+      if ( curpower.floatValue > 100 && tsGiochiFlip.state == OFF && sonoff21_R2.state == OFF) sendCommand(tsGiochiFixTrig, ON)
+      if ( curpower.floatValue < 100 && tsGiochiFlip.state == ON  && sonoff21_R2.state == ON ) sendCommand(tsGiochiFixTrig, OFF)
+      if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","tsGiochi: CYCLE - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+    }
+
+  }
+
+end
+
+rule "Termostato Giochi Delta"
+  when
+    Item tsGiochiFixTrig received command
+  then
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+
+    if ( receivedCommand == ON ) { 
+      sendCommand(sonoff21_R2, OFF)
+      Thread::sleep(2000)
+      sendCommand(sonoff21_R2, ON)
+      prowl.pushNotification("tsGiochi sonoff21_R2 stuck OFF!", "Cycling ON and OFF again, check it out!")
+    }
+
+    if ( receivedCommand == OFF ) { 
+      sendCommand(sonoff21_R2, ON)
+      Thread::sleep(2000)
+      sendCommand(sonoff21_R2, OFF)
+      prowl.pushNotification("tsGiochi sonoff21_R2 stuck ON!", "Cycling OFF and ON again, check it out!")
+    }
+
+end

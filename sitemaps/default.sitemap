@@ -795,6 +795,12 @@ sitemap default label="Casa"
 		Text      item=shelly07_Power icon=energy
 		Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
 	      }
+	      Frame label="Delta Fix" {
+                Switch    item=tsGiochiFix
+                Setpoint  item=dmGiochi                 minValue=0     maxValue=3  step=0.1
+                Switch    item=tsGiochiDeltaLog
+                Switch    item=tsGiochiFixTrig
+              }
 
 	} //Chiuso text spGiochi
       } // Chiuso frame Termostato
