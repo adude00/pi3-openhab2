@@ -900,7 +900,7 @@ sitemap default label="Casa"
           }
 		  
           Frame label="Extra" {
-            Selection item=tsSoggSensor             mappings=[1='bs02', 2='bs06', 3='Media']
+            Selection item=tsSoggSensor             mappings=[1='bs02 - Armadio', 2='bs06 - Letto', 3='Media']
           }
 
           Frame label="A/C Auto DEBUG"  {
