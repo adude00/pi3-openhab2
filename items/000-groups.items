@@ -90,3 +90,6 @@ Group gEnergyYesterday
 
 // Shellies
 Group g_shellies
+
+// Batteries
+Group g_Batteries

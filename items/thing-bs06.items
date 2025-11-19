@@ -1,12 +1,12 @@
 Group        g_bs06            "BLE Sensor bs06"
 
-Number bs06_temperature        "Temp Letto [%s C]"      <temperature>		(g_bs06,gTemp,gChartCamera1T)
+Number bs06_temperature        "Temp Letto [%s C]"      			<temperature>		(g_bs06,gTemp,gChartCamera1T)
 { channel="mqtt:topic:blegateway:a4c138ceb7c0:temperature" }
-Number bs06_humidity           "Humid Letto [%s %%]"    <humidity>		(g_bs06,gHumd,gChartCamera1H)
+Number bs06_humidity           "Humid Letto [%s %%]"    			<humidity>		(g_bs06,gHumd,gChartCamera1H)
     { channel="mqtt:topic:blegateway:a4c138ceb7c0:humidity" }
-Number bs06_battery            "bs06 Batt [%s %%]"     <battery>		(g_bs06)
+Number bs06_battery            "bs06 Batt: P1 Camera 1 - Comodino [%s %%]"	<battery>		(g_bs06,g_Batteries)
     { channel="mqtt:topic:blegateway:a4c138ceb7c0:battery" }
-String bs06_src                "bs06 Gateway [%s]"     <status>			(g_bs06)
+String bs06_src                "bs06 Gateway [%s]"				<status>		(g_bs06)
     { channel="mqtt:topic:blegateway:a4c138ceb7c0:src" }
-Number bs06_rssi               "bs06 Signal [%s dB]"   <qualityofservice>	(g_bs06)
+Number bs06_rssi               "bs06 Signal [%s dB]"				<qualityofservice>	(g_bs06)
     { channel="mqtt:topic:blegateway:a4c138ceb7c0:rssi" }

@@ -3,9 +3,9 @@ Group t_sonoff02      "sonoff02: Terrazza"
 // ITEM SPECIFIC
 Number Terrazza_Cart_Period     "Periodo" (System)
 
-Switch                Terrazza        "Irrigazione:"        <rain>                                                 {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
-Number:Temperature    Terrazza_Temp   "Terrazza [%.1f]"  <temperature>  (gTemp,Fuori_Temperature_Chart,gGraph)  {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
-Number                Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHumd,Fuori_Umidita_Chart,gGraph)      {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
+Switch                Terrazza        "Irrigazione:"        <rain>                          {channel="mqtt:topic:tasmota:sonoff02:PowerSwitch"}
+Number:Temperature    Terrazza_Temp   "Terrazza [%.1f]"     <temperature>  (gTemp,gGraph)   {channel="mqtt:topic:tasmota:sonoff02:Temperature"}
+Number                Terrazza_Humid  "Terrazza [%.1f %%]"  <humidity>     (gHumd,gGraph)   {channel="mqtt:topic:tasmota:sonoff02:Humidity"}
 
 
 // DEFAULT FOR ALL

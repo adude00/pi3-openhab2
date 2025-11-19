@@ -1838,6 +1838,7 @@ sitemap default label="Casa"
       Switch    item=service_restart mappings=[0="Restart"]
     }
     Text label="BLE Sensors" {
+      Group item=g_Batteries
       Group item=g_bs01
       Group item=g_bs02
       Group item=g_bs03
@@ -1846,6 +1847,10 @@ sitemap default label="Casa"
       Group item=g_bs06
       Group item=g_bs07
       Group item=g_bs08
+      Group item=g_bs09
+      Group item=g_bs10
+      Group item=g_bs11
+      Group item=g_bs12
     }
 
   } // CHIUSO FRAME DEBUG

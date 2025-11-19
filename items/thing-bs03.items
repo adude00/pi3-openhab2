@@ -4,9 +4,9 @@ Number bs03_temperature        "bs03 Officina Temp [%s C]"      <temperature>		(
 { channel="mqtt:topic:blegateway:a4c138df3f0a:temperature" }
 Number bs03_humidity           "bs03 Officina Humid [%s %%]"    <humidity>		(g_bs03,gHumd)
     { channel="mqtt:topic:blegateway:a4c138df3f0a:humidity" }
-Number bs03_battery            "bs03 Batt [%s %%]"     <battery>		(g_bs03)
+Number bs03_battery            "bs03 Batt: P1 Officina [%s %%]"	<battery>		(g_bs03,g_Batteries)
     { channel="mqtt:topic:blegateway:a4c138df3f0a:battery" }
-String bs03_src                "bs03 Gateway [%s]"     <status>			(g_bs03)
+String bs03_src                "bs03 Gateway [%s]"     		<status>		(g_bs03)
     { channel="mqtt:topic:blegateway:a4c138df3f0a:src" }
-Number bs03_rssi               "bs03 Signal [%s dB]"   <qualityofservice>	(g_bs03)
+Number bs03_rssi               "bs03 Signal [%s dB]"		<qualityofservice>	(g_bs03)
     { channel="mqtt:topic:blegateway:a4c138df3f0a:rssi" }
