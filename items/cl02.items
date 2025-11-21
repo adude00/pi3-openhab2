@@ -6,3 +6,10 @@ Switch             cl02_alexa_powerState      "powerState [%s]"       (g_cl02) {
 Number:Temperature cl02_alexa_temperature     "temperature [%s]"      (g_cl02,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:temperature" }
 Number:Temperature cl02_alexa_targetSetpoint  "targetSetpoint [%s]"   (g_cl02,gInflux) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:targetSetpoint" }
 String            cl02_alexa_thermostatMode   "thermostatMode [%s]"   (g_cl02) { channel="amazonechocontrol:smartHomeDevice:98a41df9:c4b98684-5a1e-4cd2-98ed-fb804d04e550:thermostatMode" }
+
+// META Items
+
+Switch	cl02_metapower 		"Meta-Power [%s]"       	(g_cl02) 
+Switch  cl02_metapower_running	"Meta-Power Running [%s]"       (g_cl02)
+DateTime cl02_metapower_lastChange "Last change" <time>
+

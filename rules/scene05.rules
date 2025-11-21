@@ -56,6 +56,11 @@ then
     faikin01_fan.sendCommand("Q")
   }
 
+  if (Scene05Condition6.state == ON) {
+    logInfo(LOG,"Scene05Condition6.state == ON")
+    cl02_metapower.sendCommand(OFF)
+  }
+
 
   createTimer(now.plusSeconds(13), [|
     Scene05.sendCommand(OFF)

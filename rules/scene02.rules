@@ -14,7 +14,7 @@ then
   }
   if (Scene02Condition2.state == ON) {
     logInfo(LOG,"Scene02Condition2.state == ON")
-    cl02_alexa_powerState.sendCommand(ON)
+    cl02_metapower.sendCommand(ON)
   }
   if (Scene02Condition3ts.state == ON) {
     logInfo(LOG,"Scene02Condition3ts.state == ON")

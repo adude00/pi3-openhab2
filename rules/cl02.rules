@@ -5,3 +5,83 @@ then
     logInfo("cl02_sp", "Setting temp: " + cl02_sp.state as Number)
     cl02_alexa_targetSetpoint.sendCommand(cl02_sp.state as Number)
 end
+
+
+rule "Track cl02_metapower changes"
+when
+    Item cl02_metapower changed
+then
+    cl02_metapower_lastChange.postUpdate(new DateTimeType())
+end
+
+
+rule "CL02-MetaPower startup sequence"
+when
+    Item cl02_metapower received command ON
+then
+
+    // Turn Power ON
+    shelly07_R1.sendCommand(ON)
+    logInfo("cl02_meta_ON", "Power ON!")
+
+    // Setup Relais so the compresso will eventually turn ON, accordingly to the flip
+
+    if (tsGiochiFlip.state == ON) { // SUMMER - We need it OFF
+      Thread::sleep(30000)
+      sonoff21_R2.sendCommand(OFF)
+      logInfo("cl02_meta_ON", "SUMMER - turning OFF Relais")
+    }
+
+    if (tsGiochiFlip.state == OFF) { // WINTER - We need it ON
+      Thread::sleep(30000)
+      sonoff21_R2.sendCommand(ON)
+      logInfo("cl02_meta_ON", "WINTER - turning ON Relais")
+    }
+
+    // Turn ON thermostat
+    tsGiochi.sendCommand(ON)
+
+end
+
+
+rule "CL02-MetaPower shutdown sequence"
+when
+    Item cl02_metapower received command OFF
+then
+    // Prevent concurrent runs
+    if (cl02_metapower_running.state == ON) {
+        logInfo("CL02-MetaPower", "Rule already running, skipping.")
+        return
+    }
+
+    logInfo("CL02-MetaPower", "Shutdown process started.")
+    cl02_metapower_running.sendCommand(ON)
+
+    // Turn OFF thermostat
+    tsGiochi.sendCommand(OFF)
+
+    // Turn OFF Relais so the compresso will eventually turn off, accordingly to the flip
+    if (tsGiochiFlip.state == ON) sonoff21_R2.sendCommand(ON) 
+    if (tsGiochiFlip.state == OFF) sonoff21_R2.sendCommand(OFF) 
+
+    // Monitor power until below threshold
+    while ((shelly07_Power.state as Number) > 12) {
+        Thread::sleep(5000) // check every 5 seconds
+    }
+
+    logInfo("CL02-MetaPower", "Power below threshold, waiting 60s before shutdown.")
+    Thread::sleep(60000)
+
+    // Turn off switch
+    shelly07_R1.sendCommand(OFF)
+    logInfo("CL02-MetaPower", "Switch OFF sent to shelly07_R1.")
+
+    // Sending notification
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("CL02-MetaPower", "CL02 Real Shutdown")
+
+    // Reset running flag
+    cl02_metapower_running.sendCommand(OFF)
+
+end
+

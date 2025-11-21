@@ -28,7 +28,7 @@ end
 
 rule "Termostato Giochi Delta Check"
   when
-    Time cron "0 0/5 * * * ?"
+    Time cron "0 0/1 * * * ?"
   then
   
   var Number cur_temp = sf12_Temp.state 
@@ -37,45 +37,76 @@ rule "Termostato Giochi Delta Check"
   var Number hysteresis = hsGiochi.state 
   var Number hsetpoint  = setpoint.floatValue - hysteresis.floatValue
   var Number deltamax   = dmGiochi.state
-  var Number curpower   = shelly07_Power.state
 
-  if ( cl02_alexa_powerState.state == ON && tsGiochi.state == ON && tsGiochiFix.state == ON ) {
+  if ( cl02_metapower.state == ON && tsGiochi.state == ON && tsGiochiFix.state == ON ) {
 
-    if ( (cur_temp).floatValue > ( (setpoint).floatValue + (deltamax).floatValue ) ) {
-      if ( curpower.floatValue > 100 && tsGiochiFlip.state == OFF && sonoff21_R2.state == ON  ) sendCommand(tsGiochiFixTrig, OFF)
-      if ( curpower.floatValue < 100 && tsGiochiFlip.state == ON  && sonoff21_R2.state == OFF ) sendCommand(tsGiochiFixTrig, ON)
-      if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","tsGiochi: CYCLE - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
-    }
+    if ( tsGiochiFlip.state == OFF ) { // HEATING Begins
 
-    if ( (cur_temp).floatValue < ( (setpoint).floatValue - (hysteresis).floatValue - (deltamax).floatValue) ) {
-      if ( curpower.floatValue > 100 && tsGiochiFlip.state == OFF && sonoff21_R2.state == OFF) sendCommand(tsGiochiFixTrig, ON)
-      if ( curpower.floatValue < 100 && tsGiochiFlip.state == ON  && sonoff21_R2.state == ON ) sendCommand(tsGiochiFixTrig, OFF)
-      if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","tsGiochi: CYCLE - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
-    }
+      if ( (cur_temp).floatValue > ( (setpoint).floatValue + (deltamax).floatValue ) && ( (shelly07_Power.state as Number) > 100 ) ) {
+        sendCommand(tsGiochiFixTrigOFF, ON)
+        if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","Heat: CYCLE relais to OFF - " + (cur_temp).floatValue + "C > " + (setpoint).floatValue + "C")
+      }
+
+      if ( (cur_temp).floatValue < ( (setpoint).floatValue - (hysteresis).floatValue - (deltamax).floatValue) && ( (shelly07_Power.state as Number) < 100 ) ) {
+        sendCommand(tsGiochiFixTrigON, ON)
+        if (tsGiochiDeltaLog.state == ON) logInfo("tsGiochiDelta","Heat: CYCLE relais to ON - " + (cur_temp).floatValue + "C < " + (hsetpoint).floatValue + "C")
+      }
+
+    } // HEATING Ends
 
   }
 
 end
 
-rule "Termostato Giochi Delta"
+rule "Termostato Giochi Delta Fix ON"
   when
-    Item tsGiochiFixTrig received command
+    Item tsGiochiFixTrigON received command ON
   then
 
+    // EXIT if less than 5 minutes from start
+    val last = cl02_metapower_lastChange.state as DateTimeType
+    //if (now.minusMinutes(5).isBefore(last.getZonedDateTime)) {
+    if (now.minusMinutes(5).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
+        logInfo("tsGiochi sonoff21_R2 stuck", "Exiting: cl02_metapower changed less than 5 minutes ago: " + cl02_metapower_lastChange.state)
+        sendCommand(tsGiochiFixTrigON, OFF)
+        return
+    }
+
+    sendCommand(sonoff21_R2, OFF)
+    Thread::sleep(2000)
+    sendCommand(sonoff21_R2, ON)
+
+    logInfo("tsGiochiDeltaFixON","CYCLE relais to ON!")
     val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("tsGiochi sonoff21_R2 stuck OFF!", "Cycling OFF and ON again, check it out!")
 
-    if ( receivedCommand == ON ) { 
-      sendCommand(sonoff21_R2, OFF)
-      Thread::sleep(2000)
-      sendCommand(sonoff21_R2, ON)
-      prowl.pushNotification("tsGiochi sonoff21_R2 stuck OFF!", "Cycling ON and OFF again, check it out!")
+    sendCommand(tsGiochiFixTrigON, OFF)      
+
+end
+
+
+rule "Termostato Giochi Delta Fix OFF"
+  when
+    Item tsGiochiFixTrigOFF received command ON
+  then
+
+    // EXIT if less than 5 minutes from start
+    val last = cl02_metapower_lastChange.state as DateTimeType
+    //if (now.minusMinutes(5).isBefore( last.getZonedDateTime )) {
+    if (now.minusMinutes(5).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
+        logInfo("tsGiochi sonoff21_R2 stuck", "Exiting: cl02_metapower changed less than 5 minutes ago: " + cl02_metapower_lastChange.state)
+        sendCommand(tsGiochiFixTrigOFF, OFF)
+        return
     }
 
-    if ( receivedCommand == OFF ) { 
-      sendCommand(sonoff21_R2, ON)
-      Thread::sleep(2000)
-      sendCommand(sonoff21_R2, OFF)
-      prowl.pushNotification("tsGiochi sonoff21_R2 stuck ON!", "Cycling OFF and ON again, check it out!")
-    }
+    sendCommand(sonoff21_R2, ON)
+    Thread::sleep(2000)
+    sendCommand(sonoff21_R2, OFF)
+
+    logInfo("tsGiochiDeltaFixOFF","CYCLE relais to OFF!")
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("tsGiochi sonoff21_R2 stuck ON!", "Cycling ON and OFF again, check it out!")
+
+    sendCommand(tsGiochiFixTrigOFF, OFF)      
 
 end

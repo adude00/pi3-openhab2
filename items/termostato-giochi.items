@@ -11,7 +11,8 @@ Switch tsGiochiFlip "Flip TS Giochi [%s]" <settings> (gtsGiochi)
 Number tsGiochiSensor "Riferimento"             <zoom>        (gtsGiochi)
 
 
-Number dmGiochi          "Max Delta Giochi [%.1f °C]"  <settings>     (gtsGiochi)
-Switch tsGiochiFix       "Fix tsGiochi [%s]"           <settings>
-Switch tsGiochiFixTrig   "tsGiochiFix trigger item"    <settings>
-Switch tsGiochiDeltaLog  "tsGiochi Delta Log [%s]"     <settings>     (gtsGiochi)
+Number dmGiochi          	"Max Delta Giochi [%.1f °C]"	<settings>     (gtsGiochi)
+Switch tsGiochiFix       	"Fix tsGiochi [%s]"		<settings>
+Switch tsGiochiFixTrigON 	"tsGiochiFix ON trigger"	<settings>
+Switch tsGiochiFixTrigOFF 	"tsGiochiFix OFF trigger"	<settings>
+Switch tsGiochiDeltaLog  	"tsGiochi Delta Log [%s]"	<settings>     (gtsGiochi)

@@ -307,6 +307,7 @@ sitemap default label="Casa"
             Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
             Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
             Switch    item=Scene05Condition5
+            Switch    item=Scene05Condition6
 	  }
 	} // Chiuso frame Scena 05
         Text label="Scene 06 - Studio Prep" icon="settings" {
@@ -791,6 +792,11 @@ sitemap default label="Casa"
 		Setpoint  item=cl02_sp	                   icon=temperature minValue=16 maxValue=32 step=1
 		Selection item=cl02_alexa_thermostatMode   icon=settings
 	      }
+	      Frame label="Meta-Power" {
+                Switch    item=cl02_metapower
+                Text      item=cl02_metapower_lastChange
+                Switch    item=cl02_metapower_running
+              }
 	      Frame label="Power" {
 		Text      item=shelly07_Power icon=energy
 		Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
@@ -799,7 +805,8 @@ sitemap default label="Casa"
                 Switch    item=tsGiochiFix
                 Setpoint  item=dmGiochi                 minValue=0     maxValue=3  step=0.1
                 Switch    item=tsGiochiDeltaLog
-                Switch    item=tsGiochiFixTrig
+                Switch    item=tsGiochiFixTrigON
+                Switch    item=tsGiochiFixTrigOFF
               }
 
 	} //Chiuso text spGiochi
