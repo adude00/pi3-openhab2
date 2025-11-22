@@ -63,10 +63,9 @@ rule "Termostato Giochi Delta Fix ON"
     Item tsGiochiFixTrigON received command ON
   then
 
-    // EXIT if less than 5 minutes from start
+    // EXIT if less than 3 minutes from start
     val last = cl02_metapower_lastChange.state as DateTimeType
-    //if (now.minusMinutes(5).isBefore(last.getZonedDateTime)) {
-    if (now.minusMinutes(5).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
+    if (now.minusMinutes(3).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
         logInfo("tsGiochi sonoff21_R2 stuck", "Exiting: cl02_metapower changed less than 5 minutes ago: " + cl02_metapower_lastChange.state)
         sendCommand(tsGiochiFixTrigON, OFF)
         return
@@ -90,10 +89,9 @@ rule "Termostato Giochi Delta Fix OFF"
     Item tsGiochiFixTrigOFF received command ON
   then
 
-    // EXIT if less than 5 minutes from start
+    // EXIT if less than 3 minutes from start
     val last = cl02_metapower_lastChange.state as DateTimeType
-    //if (now.minusMinutes(5).isBefore( last.getZonedDateTime )) {
-    if (now.minusMinutes(5).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
+    if (now.minusMinutes(3).isBefore( last.getZonedDateTime(ZoneId.systemDefault()) )) {
         logInfo("tsGiochi sonoff21_R2 stuck", "Exiting: cl02_metapower changed less than 5 minutes ago: " + cl02_metapower_lastChange.state)
         sendCommand(tsGiochiFixTrigOFF, OFF)
         return
