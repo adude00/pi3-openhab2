@@ -177,17 +177,26 @@ sitemap default label="Casa"
 
 
 	} // CHIUSO FRAME Alexa
+    Frame label="IP Cameras" {
+    Text label="IP Cameras" icon="camera" {
+	      Frame label="2P" {
+		Switch item=sf03_Switch
+	      }
+	      Frame label="1P" {
+		Switch item=sf12_Switch
+	      }
+      }
+    }
 
     } // CHIUSO TEXT "Devices"
 
-    Text label="IP Cameras" icon="camera" {
-      Frame label="2P" {
-        Switch item=sf03_Switch
+    Text label="Timers" {
+      Text label="Timer 01" {
+        Switch    item=timer01_timer01_item        
       }
-      Frame label="1P" {
-	Switch item=sf12_Switch
-      }
-    }
+
+    } // CHIUSO TEXT Timers
+
   } // Chiuso Frame Things
 
 

@@ -1,0 +1,7 @@
+Group    g_timer01
+Switch	 timer01_item 		"Item State [%s]" 		(g_timer01) 
+Switch   timer01_desired_state	"Desired State [%s]"     	(g_timer01)
+Switch   timer01_running	"Timer Running [%s]"		(g_timer01)
+Number   timer01_minutes        "Timer 01 Mimnutes [%s]"	(g_timer01)
+DateTime timer01_lastChange 	"Item Last change" <time>	(g_timer01)
+
