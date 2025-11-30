@@ -1,0 +1,49 @@
+var Timer timer01_runtime = null
+
+rule "timer01 OFF"
+when
+    Item timer01_state changed from ON to OFF
+then
+    logInfo("timer01", "Canceling timer...")
+
+    if (timer01_runtime !== null) {
+        timer01_runtime.cancel
+        timer01_runtime = null
+        logInfo("timer01", "Timer canceled")
+    }
+end
+
+
+rule "timer01 ON"
+when
+    Item timer01_state changed from OFF to ON
+then
+
+    val int durationMins = (timer01_minutes.state as Number).intValue
+    logInfo("timer01", "Starting timer for {} minutes", durationMins)
+
+    timer01_runtime = createTimer(now.plusMinutes(durationMins)) [ |
+        val finalState = timer01_desired_state.state as OnOffType
+        logInfo("TIMER01", "Timer expired — setting {} to {}", timer01_item.name, finalState)
+
+        timer01_item.sendCommand(finalState)
+        timer01_state.sendCommand(OFF) // reset the timer state
+
+        //timer01_runtime = null // already the rule above
+    ]
+end
+
+rule "Track timer01_state changes"
+when
+    Item timer01_state changed from OFF to ON
+then
+    timer01_state_lastChange.postUpdate(new DateTimeType())
+end
+
+rule "Track timer01_item changes"
+when
+    Item timer01_item changed
+then
+    timer01_item_lastChange.postUpdate(new DateTimeType())
+end
+

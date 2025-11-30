@@ -191,11 +191,16 @@ sitemap default label="Casa"
     } // CHIUSO TEXT "Devices"
 
     Text label="Timers" {
-      Text label="Timer 01" {
-        Switch    item=timer01_timer01_item        
+      Text label="Timer 01" { 
+        Switch    item=timer01_state
+        Text      item=timer01_state_lastChange
+        Switch    item=timer01_item
+        Text      item=timer01_item_lastChange
+        Switch    item=timer01_desired_state
+        Slider    item=timer01_minutes
       }
+    } // CHIUSO Text Timers
 
-    } // CHIUSO TEXT Timers
 
   } // Chiuso Frame Things
 
@@ -587,66 +592,6 @@ sitemap default label="Casa"
     } // Chiuso Text Soggiorno Clima
 
 
-    Text item=sf07_Temp label="P2 - Bagno" icon=bath {
-
-      Frame label="Boiler" {
-        Text            item=Boiler_Percentage {
-		Text		item=Boiler_Percentage
-		Text		item=Boiler_Max
-		Setpoint	item=Boiler_Delta     minValue=100     maxValue=300     step=10
-		Text item=tuya05_Power          label="Boiler: [%.0f W]"
-	}
-      }
-      Frame label="Comfort" {
-        Text		item=sf07_Temp		label="Temperatura"
-        Text		item=sf07_Humid		label="Umidità"
-      }
-      Frame label="Consumo Boiler" {
-        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
-        // CONSUMO BOILER
-        Chart  item=gChartBagnoP2P period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2P period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2P period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2P period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2P period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2P period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2P period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2P period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2P period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2P period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      } 
-
-      Frame label="Periodo " {
-        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-      }
-      Frame label="Temperatura " {
-        // TEMPERATURA Bagno
-        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
-      Frame label="Umidità " {
-	// UMIDITA Bagno
-        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      }
-
-    } // Chiuso Text Bagno Stufa
 
     Text item=bs09_temperature label="P2 - Matrimoniale" icon=bedroom {
       Frame label="Condizionatore" {
@@ -769,6 +714,67 @@ sitemap default label="Casa"
       } // Chiuso frame grafici
 
     } // Chiuso Text Matrimoniale
+
+    Text item=sf07_Temp label="P2 - Bagno" icon=bath {
+
+      Frame label="Boiler" {
+        Text            item=Boiler_Percentage {
+		Text		item=Boiler_Percentage
+		Text		item=Boiler_Max
+		Setpoint	item=Boiler_Delta     minValue=100     maxValue=300     step=10
+		Text item=tuya05_Power          label="Boiler: [%.0f W]"
+	}
+      }
+      Frame label="Comfort" {
+        Text		item=sf07_Temp		label="Temperatura"
+        Text		item=sf07_Humid		label="Umidità"
+      }
+      Frame label="Consumo Boiler" {
+        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
+        // CONSUMO BOILER
+        Chart  item=gChartBagnoP2P period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2P period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2P period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2P period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2P period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2P period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2P period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2P period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2P period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2P period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      } 
+
+      Frame label="Periodo " {
+        Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+      }
+      Frame label="Temperatura " {
+        // TEMPERATURA Bagno
+        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+      Frame label="Umidità " {
+	// UMIDITA Bagno
+        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      }
+
+    } // Chiuso Text Bagno Stufa
 
   } // Chiuso Text Temperature P2
   Frame label="Temperature P1" {
