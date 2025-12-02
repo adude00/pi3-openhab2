@@ -3,10 +3,14 @@ rule "check sensor uptime state"
 when
     //Time cron "0 0/30 * * * ?" // Every 30 minutes
     //Time cron "0 0 * * * ?" // Every hour
-    Time cron "0 0 10 * * ?" // Every Day
+    Time cron "0 0 10-16 * * ?" // Al minuto 0 dalle 10 alle 16
+    //Time cron "0 0 12 * * ?" // Every Day at 10
+    //Time cron "0 0 12 * * ?" // Every Day at 10
 then
     var Number state_cur
     var Number state_avg
+
+    logInfo("sensors-check", "running stuck check")
 
     val prowl = getActions("prowl", "prowl:broker:mybroker")
 
@@ -14,6 +18,9 @@ then
 
         state_cur = i.state as Number
 	state_avg = i.averageSince(now.minusMinutes(600)) as Number
+
+        // DEBUG
+        //logInfo("sensors-check", "Item {} Check: - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)
@@ -25,7 +32,7 @@ then
     gHumd.members.forEach[i|
 
         state_cur = i.state as Number
-	state_avg = i.averageSince(now.minusMinutes(1440)) as Number
+	state_avg = i.averageSince(now.minusMinutes(600)) as Number
 	    
 	if ( state_cur == state_avg ) {
 	    logInfo("sensors-check", "Item {} STUCK!! - NOW: {} - AVG {}",i.name, state_cur.toString, state_avg.toString)

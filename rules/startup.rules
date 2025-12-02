@@ -1,6 +1,7 @@
 rule "One startup rule to rule them all"
   when
-    System started
+    //System started
+    System reached start level 100
   then
 
     tsSoggiornoWait.sendCommand(OFF)
