@@ -24,13 +24,12 @@ then
 
     timer01_runtime = createTimer(now.plusMinutes(durationMins)) [ |
         val finalState = timer01_desired_state.state as OnOffType
-        logInfo("TIMER01", "Timer expired — setting {} to {}", timer01_item.name, finalState)
+        logInfo("timer01", "Timer expired — setting {} to {}", shelly12_R1.name, finalState)
 
-        timer01_item.sendCommand(finalState)
+        shelly12_R1.sendCommand(finalState)
         timer01_state.sendCommand(OFF) // reset the timer state
-
-        //timer01_runtime = null // already the rule above
     ]
+
 end
 
 rule "Track timer01_state changes"
@@ -40,9 +39,9 @@ then
     timer01_state_lastChange.postUpdate(new DateTimeType())
 end
 
-rule "Track timer01_item changes"
+rule "Track shelly12_R1 changes"
 when
-    Item timer01_item changed
+    Item shelly12_R1 changed
 then
     timer01_item_lastChange.postUpdate(new DateTimeType())
 end

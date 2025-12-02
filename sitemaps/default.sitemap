@@ -194,10 +194,12 @@ sitemap default label="Casa"
       Text label="Timer 01" { 
         Switch    item=timer01_state
         Text      item=timer01_state_lastChange
-        Switch    item=timer01_item
+        Switch    item=shelly12_R1
         Text      item=timer01_item_lastChange
         Switch    item=timer01_desired_state
         Slider    item=timer01_minutes
+        Text      item=shelly12_Power
+        Text      item=shelly12_temperature
       }
     } // CHIUSO Text Timers
 
@@ -1706,6 +1708,22 @@ sitemap default label="Casa"
         Text   item=shelly09_ip icon=none
         Text   item=shelly09_rssi icon=none
         }
+      }
+      Text label="Shelly 12 - P2 Friggitrice" {
+	Frame label="Shelly Plus 1PM" {
+        Switch item=shelly12_R1
+        Text   item=shelly12_Power icon=none
+        Text   item=shelly12_voltage icon=none
+        Text   item=shelly12_energy icon=none
+        Text   item=shelly12_temperature icon=none
+        Text   item=shelly12_restartreq icon=none
+        Text   item=shelly12_uptime icon=none
+        Text   item=shelly12_state icon=none
+        Text   item=shelly12_event0 icon=none
+        Text   item=shelly12_source icon=none
+        Text   item=shelly12_ip icon=none
+        Text   item=shelly12_rssi icon=none
+	}
       }
       Text label="Shelly2PM 01 - Giochi: Luce e Clima" {
 	Frame label="Shelly Plus 1PM" {

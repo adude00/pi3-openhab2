@@ -8,4 +8,3 @@ DateTime timer01_item_lastChange	"Item Last change" <time>	(g_timer01)
 
 Number  timer01_minutes			"Timer Duration [%d min]"	(g_timer01)
 Switch  timer01_desired_state		"Timer 01 Desired State [%s]"	(g_timer01)
-

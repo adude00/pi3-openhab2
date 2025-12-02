@@ -1,0 +1,31 @@
+
+
+Switch shelly12_R1                 "Friggitrice"
+    { channel="mqtt:topic:shellies:shelly12:PowerSwitch" }
+
+Number shelly12_Power              "Friggitrice P2 Power [%s W]" (gWatt,Casa_Consumi_Chart)
+    { channel="mqtt:topic:shellies:shelly12:Power" }
+
+Number shelly12_voltage            "shelly12 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shelly12:Voltage" }
+Number shelly12_energy             "shelly12 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shelly12:Energy" }
+Number shelly12_temperature        "shelly12 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shelly12:Temperature" }
+String shelly12_restartreq         "shelly12 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shelly12:RestartReq" }
+String shelly12_state              "shelly12 Status [%s]"
+    { channel="mqtt:topic:shellies:shelly12:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shelly12_event0             "shelly12 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shelly12:Event0" }
+String shelly12_ip                 "shelly12 IP [%s]"
+    { channel="mqtt:topic:shellies:shelly12:IP" }
+String shelly12_rssi               "shelly12 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shelly12:RSSI" }
+String shelly12_source             "shelly12 Source"
+    { channel="mqtt:topic:shellies:shelly12:Source" }
+Number shelly12_uptime             "shelly12 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shelly12:Uptime" }
+
+String shelly12                    "shelly12" (g_shellies) // dummy for rule status loop
+
