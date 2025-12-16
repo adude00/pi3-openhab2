@@ -1291,6 +1291,9 @@ sitemap default label="Casa"
             Switch    item=Scene01Condition3
             Switch    item=Scene01Condition4
 	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene01Active
+	  }
 	} // Chiuso frame Scena 01
       Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
 	  Frame label="Scena" {
@@ -1318,6 +1321,9 @@ sitemap default label="Casa"
 	  }
 	  Frame label="Triggers" {
 	    Switch    item=Scene02Trigger1
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene02Active
 	  }
       } // Chiuso frame Scena 02
 
@@ -1386,6 +1392,9 @@ sitemap default label="Casa"
             Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
             Switch    item=Scene06Condition2
 	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene06Active
+	  }
 	} // Chiuso frame Scena 06
         Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
 	  Frame label="Scena" {
@@ -1397,6 +1406,9 @@ sitemap default label="Casa"
             Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
             Switch    item=Scene07Condition2
 	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene07Active
+	  }
 	} // Chiuso frame Scena 07
         Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
 	  Frame label="Scena" {
@@ -1406,6 +1418,9 @@ sitemap default label="Casa"
             Switch    item=Scene08Condition1
             Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
             Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene08Active
 	  }
 	} // Chiuso frame Scena 08
 

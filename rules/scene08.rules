@@ -4,6 +4,8 @@ rule "Scene08"
 when
     Item Scene08 changed to ON
 then
+  if (Scene08Active.state == OFF) return  // DO NOT CONTINUE IF OFF
+
   val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scene08 - Start!", "Scene08: P2 Bedroom Notturna")
   logInfo(LOG,"Scene Started")

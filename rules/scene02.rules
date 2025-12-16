@@ -4,6 +4,8 @@ rule "Scene02"
 when
     Item Scene02 changed to ON
 then
+  if (Scene02Active.state == OFF) return  // DO NOT CONTINUE IF OFF
+
   val prowl = getActions("prowl", "prowl:broker:mybroker")
   prowl.pushNotification("Scena Arrivano i Bimbi: Start!", "La scena Scene02 è stata attivata")
   logInfo(LOG,"Scene Started")

@@ -2,6 +2,8 @@ Group gScene08
 
 Switch Scene08   		"Scene08: P2 Bedroom Notturna"	<alarm>	    (gScene08)  [ "Switchable" ]
 
+Switch Scene08Active            "Scena Attiva [%s]"             <settings>  (gRestore,gScene08)
+
 Switch Scene08Condition1        "Turn ON Aircon [%s]"           <settings>  (gRestore,gScene08)
 Number Scene08Condition1temp    "Aircon Temp [%s]"              <settings>  (gRestore,gScene08)
 String Scene08Condition1fan     "Fan Speed [%s]"                <settings>  (gRestore,gScene08)
