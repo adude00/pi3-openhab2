@@ -1,0 +1,16 @@
+Group        g_bs13            "BLE Sensor bs13"
+
+// Retrocompatibilità grafici vecchi
+Number Casa_Temperature_Sogg_Down        "Sogg Basso [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT) 
+    { channel="mqtt:topic:blegateway:a4c138b0e203:temperature" }
+
+Number bs13_temperature        "bs13 Temp [%s C]"		<temperature>		(g_bs13,gTemp)
+    { channel="mqtt:topic:blegateway:a4c138b0e203:temperature" }
+Number bs13_humidity           "bs13 Humid [%s %%]"		<humidity>		(g_bs13,gHumd)
+    { channel="mqtt:topic:blegateway:a4c138b0e203:humidity" }
+Number bs13_battery            "bs13 Batt: P2 Soggiorno - Down [%s %%]"	<battery>		(g_bs13,g_Batteries)
+    { channel="mqtt:topic:blegateway:a4c138b0e203:battery" }
+String bs13_src                "bs13 Gateway [%s]"		<status>		(g_bs13)
+    { channel="mqtt:topic:blegateway:a4c138b0e203:src" }
+Number bs13_rssi               "bs13 Signal [%s dB]"		<qualityofservice>	(g_bs13)
+    { channel="mqtt:topic:blegateway:a4c138b0e203:rssi" }

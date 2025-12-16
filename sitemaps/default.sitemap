@@ -1,5 +1,240 @@
 sitemap default label="Casa"
 {
+
+
+  Frame label="Sensori" {
+
+  Text item=bs04_temperature label="Fuori [%.2f °C]" icon=garden {
+    Frame label="Davanti" {
+      Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
+      Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
+      Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
+      Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
+    }
+    Frame label="Dietro" {
+      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
+      Text item=bs04_temperature                         label="BS04 Temp"   		icon="terrace"
+      Text item=bs04_humidity                            label="BS04 Humid"		icon="humidity"
+
+    }
+    Frame label="Graphs" {
+      Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+      // TEMPERATURA
+      Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Temperature_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Temperature_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Temperature_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Temperature_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Temperature_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Temperature_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Temperature_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Temperature_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      // UMIDITA
+      Chart  item=Fuori_Umidita_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Umidita_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Umidita_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Umidita_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Umidita_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Umidita_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Umidita_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      }
+    }
+
+
+    Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
+      Frame label="Piano 2" {
+        Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
+        Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
+        Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
+        Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
+        Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
+        Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu
+        Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
+        Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
+        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
+        Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
+        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
+        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
+      }
+      Frame label="Piano 1" {
+        Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
+        Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
+        Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
+        Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
+      }
+      Frame label="Grafici" {
+        Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
+        Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
+        Chart  item=Casa_Consumi_Chart period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2]
+        Chart  item=Casa_Consumi_Chart period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3]
+        Chart  item=Casa_Consumi_Chart period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4]
+        Chart  item=Casa_Consumi_Chart period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5]
+        Chart  item=Casa_Consumi_Chart period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6]
+        Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
+        Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
+        Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
+        Chart  item=Casa_Consumi_Chart_Total period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9] legend=true
+      }
+    }
+
+	  Text item=avgSoggiornoAvg label="Casa [%.1f °C]" icon="house" {
+      Frame label="Grafici" {
+        Text label="Grafici" icon=line {
+  	    Frame label="Periodo" {
+          Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        }
+        Frame label="Soggiorno" {
+        // TEMPERATURA Soggiorno
+        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      
+        // UMIDITA Soggiorno
+        Chart  item=gChartLvrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Camera Matrimoniale" {
+        // TEMPERATURA Studio
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Studio
+        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Bagno" {
+        // TEMPERATURA BagnoP2
+        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Bagno
+        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Tutto insieme" {
+        // TEMPERATURA TUTTO
+        Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Temperature_Chart period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Temperature_Chart period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Temperature_Chart period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=Casa_Temperature_Chart period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=Casa_Temperature_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Temperature_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Temperature_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Temperature_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+  			// UMIDITA TUTTO
+        Chart  item=Casa_Umidita_Chart period=h   refresh=30000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Umidita_Chart period=4h  refresh=30000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Umidita_Chart period=8h  refresh=30000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Umidita_Chart period=12h refresh=60000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Umidita_Chart period=D   refresh=60000  visibility=[ChartPeriod==4]
+        Chart  item=Casa_Umidita_Chart period=2D  refresh=60000  visibility=[ChartPeriod==5]
+        Chart  item=Casa_Umidita_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+        } // Chiuso frame grafici
+      } // Chiuso text grafici 
+
+      Frame label="Soggiorno Media 30min" {
+        Text item=avgSoggiornoAvg             icon=house
+        Text item=avgSoggiornoDivano          icon=sofa
+      }
+      Frame label="Soggiorno Tutte" {
+	Text item=sf04_Temp                   label="Divano"  icon=sofa
+        Text item=sf04_Humid                  label="Divano"
+        Text item=sf06_Temp                   label="Alta"    icon=flowpipe
+  	Text item=sf06_Humid                  label="Alta"    
+        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
+	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
+      }
+      Frame label="Cameretta" {
+        Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
+        Text item=esp02_Humid                  label="Cameretta Girls"
+        Text item=bs06_temperature             label="Cameretta Ethan"  icon=bedroom_blue
+        Text item=bs06_humidity                label="Cameretta Ethan"
+      }
+      Frame label="Bagno" {
+        Text item=sf07_Temp                   label="Temperatura" icon=bath
+        Text item=sf07_Humid                  label="Umidità"
+      }
+      Frame label="Camera Da Letto" {
+        Text item=sf05_Temp                   label="Specchio"  icon=bedroom_orange
+        Text item=sf05_Humid                  label="Specchio"
+      }
+    }
+
+  } // CLOSE FRAME SENSORI
+
+
+
+
 	Frame label="Things" {
 		Text label="Luci" icon="light" {
 			Frame label="P1 Luci" {
@@ -206,259 +441,6 @@ sitemap default label="Casa"
 
   } // Chiuso Frame Things
 
-
-  Frame label="Configurazioni" {
-
-
-
-    Text label="Home Automation" icon="settings" {
-      Frame label="Scene Standard" {
-	Text label="Scena Mattina" icon="settings" {
-	  Frame label="Configurazione Luci Soggiorno" {
-	    Switch    item=sf04_Light_Morning
-	    Switch    item=sogg_soff_Morning
-	    Slider    item=led03_w_Morning visibility=[sogg_soff_Morning==ON]
-	    Slider    item=led03_c_Morning visibility=[sogg_soff_Morning==ON]
-	  }
-	  Frame label="Configurazione Clima Cameretta" {
-            Switch    item=conf_autooff_ac_kid_chng     
-            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
-	    Switch    item=conf_autooff_ac_kid
-            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=1 visibility=[conf_autooff_ac_kid==ON]
-	  }
-	  Frame label="Configurazione Clima Matrimoniale" {
-	    Switch    item=conf_autooff_ac_bdr
-	  }
-	  Frame label="Configurazione Bagno P1" {
-	    Switch    item=conf_mattina_tsBagnoP1
-	  }
-	}  // SCENA Mattina
-      }
-      Frame label="Scene Moderne" {
-        Text label="Scena 01 - Io Vado" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene01
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene01Condition1
-            Switch    item=Scene01Condition2
-            Switch    item=Scene01Condition3
-            Switch    item=Scene01Condition4
-	  }
-	} // Chiuso frame Scena 01
-      Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene02
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene02Condition1
-            Switch    item=Scene02Condition2
-	    Switch    item=Scene02Condition3ts
-            Switch    item=Scene02Condition3tsbis     visibility=[Scene02Condition3ts==ON]
-            Setpoint  item=Scene02Condition3tsbisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene02Condition3tsbis==ON]
-	    Switch    item=Scene02Condition3
-            Switch    item=Scene02Condition3bis     
-            Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
-            Switch    item=Scene02Condition3c 	    
-	    Switch    item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent"] visibility=[Scene02Condition3c==ON]
-            Switch    item=Scene02Condition4
-            Switch    item=Scene02Condition4bis
-            Switch    item=Scene02Condition5
-            Switch    item=Scene02Condition6
-            Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
-            Switch    item=Scene02Condition7
-            Switch    item=Scene02Condition8
-            Switch    item=Scene02Condition9
-	  }
-	  Frame label="Triggers" {
-	    Switch    item=Scene02Trigger1
-	  }
-      } // Chiuso frame Scena 02
-
-        Text label="Scena 03 - ora di lavorare" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene03
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene03Condition1
-            Switch    item=Scene03Condition2
-            Setpoint  item=Scene03Condition2temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene03Condition2==ON]
-            Switch    item=Scene03Condition2fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene03Condition2==ON]
-            Switch    item=Scene03Condition3
-            Switch    item=Scene03Condition3a
-            Switch    item=Scene03Condition4
-            Switch    item=Scene03Condition5
-            Switch    item=Scene03Condition6
-	  }
-	} // Chiuso frame Scena 03
-
-        Text label="Scena 04 - Nanna delle Bimbe" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene04
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene04Condition1
-            Switch    item=Scene04Condition2
-            Switch    item=Scene04Condition3
-            Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
-            Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
-            Switch    item=Scene04Condition4
-            Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
-            Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
-            Switch    item=Scene04Condition5
-	  }
-	} // Chiuso frame Scena 04
-
-        Text label="Scena 05 - Nanna di Ethan" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene05
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene05Condition1
-            Switch    item=Scene05Condition2
-            Switch    item=Scene05Condition3
-            Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
-            Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
-            Switch    item=Scene05Condition4
-            Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
-            Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
-            Switch    item=Scene05Condition5
-            Switch    item=Scene05Condition6
-	  }
-	} // Chiuso frame Scena 05
-        Text label="Scene 06 - Studio Prep" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene06
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene06Condition1
-            Setpoint  item=Scene06Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene06Condition1==ON]
-            Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
-            Switch    item=Scene06Condition2
-	  }
-	} // Chiuso frame Scena 06
-        Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene07
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene07Condition1
-            Setpoint  item=Scene07Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene07Condition1==ON]
-            Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
-            Switch    item=Scene07Condition2
-	  }
-	} // Chiuso frame Scena 07
-        Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene08
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene08Condition1
-            Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
-            Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
-	  }
-	} // Chiuso frame Scena 08
-
-      } // Chiuso frame Scene
-
-      Frame label="Automatismi" { 
-	Text label="Clima Matrimoniale" icon=settings {
-	  Frame label="Scena Buonanotte" {
-	    Switch   item=Buonanotte_CM_Power
-            Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
-            Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
-	  }
-	}
-	Text label="White Noise" icon="settings" {
-	  Frame label="Bedroom" {
-	    Switch item=WhiteNoiseBDRMautoON
-	    Switch item=WhiteNoiseBDRMautoOFF
-	  }
-	  Frame label="Cameretta" {
-	    Switch item=WhiteNoiseGirlsAutoON
-	    Switch item=WhiteNoiseGirlsAutoOFF
-	  }
-	}
-
-      Text label="Sveglia Casa" icon="time" {
-        Frame label="Sveglia" {
-          Switch item=WakeUpAlarmRepeat label="Sveglia"
-          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
-          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[WakeUpAlarmRepeat==ON]
-          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
-                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
-                              20="20", 21="21", 22="22", 23="23"] visibility=[WakeUpAlarmRepeat==ON]
-          Selection item=WakeUpMinute label="Minuti" mappings=[
-                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
-                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"] visibility=[WakeUpAlarmRepeat==ON]
-          Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
-
-          Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
-          Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
-          Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
-          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
-        }
-
-        Frame label="Debug" {
-          Text label="La sveglia si allarma alle 3.07am"
-          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
-        }
-      }  // Chiuso Text Sveglia
-
-        Group item=gAutomations   label="Automazioni Varie"
-	Text label="Alexa Debug" icon=settings {
-
-	  Frame label="Campanello" {
-	    Switch        item=alexa_campanello
-	    Switch        item=esp09_Switch 
-	  }
-	  Frame label="Lavatrice" {
-	    Switch        item=alexa_lavatrice
-	  }
-	  Frame label="Tramonto" {
-	    Switch        item=sunIsOut
-	  }
-
-	}
-
-	Text label="Clima Soggiorno" icon="settings" {
-          Frame label="Override Sveglia" {
-	    Switch      item=ts_sog_sveglia_on    icon="settings"
-	    Switch      item=ac_sog_sveglia_on    icon="settings"
-	    Switch      item=ac_sog_sveglia_change  icon="settings"
-	    Setpoint    item=ac_sog_sveglia_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_sveglia_change==ON]
-	  }
-          Frame label="Override A Casa" {
-	    Switch      item=ts_sog_acasa_on      icon="settings"
-	    Switch      item=ac_sog_acasa_on      icon="settings"
-	    Switch      item=ac_sog_acasa_change    icon="settings"
-	    Setpoint    item=ac_sog_acasa_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_acasa_change==ON]
-	  }
-	  Frame label="Override Lavoro" {
-	    Switch      item=ts_sog_lavoro_off    icon="settings"
-	    Switch      item=ac_sog_lavoro_off    icon="settings"
-	    Switch      item=ac_sog_lavoro_change   icon="settings"
-	    Setpoint    item=ac_sog_lavoro_temp     minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_lavoro_change==ON]
-	  }
-	  Frame label="Override Usciamo" {
-	    Switch      item=ts_sog_usciamo_off   icon="settings"
-	    Switch      item=ac_sog_usciamo_off   icon="settings"
-	    Switch      item=ac_sog_usciamo_change  icon="settings"
-	    Setpoint    item=ac_sog_usciamo_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_usciamo_change==ON]
-	  }
-	  Frame label="Override Notte" {
-	    Switch      item=ts_sog_night_off     icon="settings"
-	    Switch      item=ac_sog_night_off     icon="settings"
-	    Switch      item=ac_sog_night_change    icon="settings"
-	    Setpoint    item=ac_sog_night_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_night_change==ON]
-	  }
-	  
-	} // TEXT CLIMA SOGGIORNO
-
-      } // CHIUSO FRAME Automatismi
-    } // CHIUSO TEXT Configurazione schermata principale
-
-  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 
@@ -848,7 +830,7 @@ sitemap default label="Casa"
         Switch    item=shelly07_R1		icon=climate  label="Compressore HiSense"
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature label="Bologna"      icon="vacation"
+        Text      item=bs04_temperature
         Text      item=DaikinStudio_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
       }
       Frame label="Grafici " {
@@ -982,7 +964,7 @@ sitemap default label="Casa"
         Text      item=bs02_humidity
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature   icon=vacation      label="Bologna"
+        Text      item=bs04_temperature
         Text      item=faikin01_outside    icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
       }
       Frame label="Grafici " {
@@ -1092,7 +1074,7 @@ sitemap default label="Casa"
         Text      item=shelly06_Power icon=energy
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna" 
+        Text      item=bs04_temperature 
         Text      item=DaikinStudio_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
       }
       Frame label="Grafici " {
@@ -1179,7 +1161,7 @@ sitemap default label="Casa"
         Switch    item=shelly07_R1              icon=climate  label="Compressore HiSense"
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature   icon=vacation      label="Bologna"
+        Text      item=bs04_temperature
         Text      item=faikin01_outside    icon=garden        label="Terrazzo Davanti 1P [%.1f °C]"
       }
 
@@ -1210,7 +1192,7 @@ sitemap default label="Casa"
         Switch	item=tsBagnoP1
       }
       Frame label="Outside" {
-        Text      item=Fuori_Temperature                      icon="vacation"    label="Bologna"
+        Text      item=bs04_temperature
         Text      item=DaikinStudio_OutdoorTemperature  icon=garden        label="Terrazzo Dietro [%.1f °C]"
       }
 
@@ -1273,233 +1255,260 @@ sitemap default label="Casa"
 
   } // Chiuso frame Thermostats
 
-  Frame label="Sensori" {
-    Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
-      Frame label="Piano 2" {
-        Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
-        Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
-        Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
-        Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
-        Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
-        Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu
-        Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
-        Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
-        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
-        Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
-        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
-        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
-      }
-      Frame label="Piano 1" {
-        Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
-        Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
-        Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
-        Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
-      }
-      Frame label="Grafici" {
-        Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-        Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
-        Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
-        Chart  item=Casa_Consumi_Chart period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2]
-        Chart  item=Casa_Consumi_Chart period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3]
-        Chart  item=Casa_Consumi_Chart period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4]
-        Chart  item=Casa_Consumi_Chart period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5]
-        Chart  item=Casa_Consumi_Chart period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6]
-        Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
-        Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
-        Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
-        Chart  item=Casa_Consumi_Chart_Total period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9] legend=true
-      }
-    }
 
-	  Text item=avgSoggiornoAvg label="Casa [%.1f °C]" icon="house" {
-      Frame label="Grafici" {
-        Text label="Grafici" icon=line {
-  	    Frame label="Periodo" {
-          Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+  Frame label="Configurazioni" {
+    Text label="Home Automation" icon="settings" {
+      Frame label="Scene Standard" {
+	Text label="Scena Mattina" icon="settings" {
+	  Frame label="Configurazione Luci Soggiorno" {
+	    Switch    item=sf04_Light_Morning
+	    Switch    item=sogg_soff_Morning
+	    Slider    item=led03_w_Morning visibility=[sogg_soff_Morning==ON]
+	    Slider    item=led03_c_Morning visibility=[sogg_soff_Morning==ON]
+	  }
+	  Frame label="Configurazione Clima Cameretta" {
+            Switch    item=conf_autooff_ac_kid_chng     
+            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
+	    Switch    item=conf_autooff_ac_kid
+            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=1 visibility=[conf_autooff_ac_kid==ON]
+	  }
+	  Frame label="Configurazione Clima Matrimoniale" {
+	    Switch    item=conf_autooff_ac_bdr
+	  }
+	  Frame label="Configurazione Bagno P1" {
+	    Switch    item=conf_mattina_tsBagnoP1
+	  }
+	}  // SCENA Mattina
+      }
+      Frame label="Scene Moderne" {
+        Text label="Scena 01 - Io Vado" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene01
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene01Condition1
+            Switch    item=Scene01Condition2
+            Switch    item=Scene01Condition3
+            Switch    item=Scene01Condition4
+	  }
+	} // Chiuso frame Scena 01
+      Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene02
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene02Condition1
+            Switch    item=Scene02Condition2
+	    Switch    item=Scene02Condition3ts
+            Switch    item=Scene02Condition3tsbis     visibility=[Scene02Condition3ts==ON]
+            Setpoint  item=Scene02Condition3tsbisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene02Condition3tsbis==ON]
+	    Switch    item=Scene02Condition3
+            Switch    item=Scene02Condition3bis     
+            Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
+            Switch    item=Scene02Condition3c 	    
+	    Switch    item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent"] visibility=[Scene02Condition3c==ON]
+            Switch    item=Scene02Condition4
+            Switch    item=Scene02Condition4bis
+            Switch    item=Scene02Condition5
+            Switch    item=Scene02Condition6
+            Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
+            Switch    item=Scene02Condition7
+            Switch    item=Scene02Condition8
+            Switch    item=Scene02Condition9
+	  }
+	  Frame label="Triggers" {
+	    Switch    item=Scene02Trigger1
+	  }
+      } // Chiuso frame Scena 02
+
+        Text label="Scena 03 - ora di lavorare" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene03
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene03Condition1
+            Switch    item=Scene03Condition2
+            Setpoint  item=Scene03Condition2temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene03Condition2==ON]
+            Switch    item=Scene03Condition2fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene03Condition2==ON]
+            Switch    item=Scene03Condition3
+            Switch    item=Scene03Condition3a
+            Switch    item=Scene03Condition4
+            Switch    item=Scene03Condition5
+            Switch    item=Scene03Condition6
+	  }
+	  Frame label="Scena Attiva" {
+            Switch    item=Scene03Active
+	  }
+
+	} // Chiuso frame Scena 03
+
+        Text label="Scena 04 - Nanna delle Bimbe" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene04
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene04Condition1
+            Switch    item=Scene04Condition2
+            Switch    item=Scene04Condition3
+            Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
+            Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
+            Switch    item=Scene04Condition4
+            Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
+            Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
+            Switch    item=Scene04Condition5
+	  }
+	} // Chiuso frame Scena 04
+
+        Text label="Scena 05 - Nanna di Ethan" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene05
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene05Condition1
+            Switch    item=Scene05Condition2
+            Switch    item=Scene05Condition3
+            Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
+            Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
+            Switch    item=Scene05Condition4
+            Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
+            Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
+            Switch    item=Scene05Condition5
+            Switch    item=Scene05Condition6
+	  }
+	} // Chiuso frame Scena 05
+        Text label="Scene 06 - Studio Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene06
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene06Condition1
+            Setpoint  item=Scene06Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition2
+	  }
+	} // Chiuso frame Scena 06
+        Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene07
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene07Condition1
+            Setpoint  item=Scene07Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition2
+	  }
+	} // Chiuso frame Scena 07
+        Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene08
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene08Condition1
+            Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
+            Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
+	  }
+	} // Chiuso frame Scena 08
+
+      } // Chiuso frame Scene
+
+      Frame label="Automatismi" { 
+	Text label="Clima Matrimoniale" icon=settings {
+	  Frame label="Scena Buonanotte" {
+	    Switch   item=Buonanotte_CM_Power
+            Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
+            Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
+	  }
+	}
+	Text label="White Noise" icon="settings" {
+	  Frame label="Bedroom" {
+	    Switch item=WhiteNoiseBDRMautoON
+	    Switch item=WhiteNoiseBDRMautoOFF
+	  }
+	  Frame label="Cameretta" {
+	    Switch item=WhiteNoiseGirlsAutoON
+	    Switch item=WhiteNoiseGirlsAutoOFF
+	  }
+	}
+
+      Text label="Sveglia Casa" icon="time" {
+        Frame label="Sveglia" {
+          Switch item=WakeUpAlarmRepeat label="Sveglia"
+          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
+          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[WakeUpAlarmRepeat==ON]
+          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
+                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
+                              20="20", 21="21", 22="22", 23="23"] visibility=[WakeUpAlarmRepeat==ON]
+          Selection item=WakeUpMinute label="Minuti" mappings=[
+                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
+                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"] visibility=[WakeUpAlarmRepeat==ON]
+          Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
+
+          Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
+          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
         }
-        Frame label="Soggiorno" {
-        // TEMPERATURA Soggiorno
-        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      
-        // UMIDITA Soggiorno
-        Chart  item=gChartLvrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartLvrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartLvrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartLvrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartLvrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartLvrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartLvrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        Frame label="Debug" {
+          Text label="La sveglia si allarma alle 3.07am"
+          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
         }
+      }  // Chiuso Text Sveglia
 
-        Frame label="Camera Matrimoniale" {
-        // TEMPERATURA Studio
-        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        Group item=gAutomations   label="Automazioni Varie"
+	Text label="Alexa Debug" icon=settings {
 
-        // UMIDITA Studio
-        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
+	  Frame label="Campanello" {
+	    Switch        item=alexa_campanello
+	    Switch        item=esp09_Switch 
+	  }
+	  Frame label="Lavatrice" {
+	    Switch        item=alexa_lavatrice
+	  }
+	  Frame label="Tramonto" {
+	    Switch        item=sunIsOut
+	  }
 
-        Frame label="Bagno" {
-        // TEMPERATURA BagnoP2
-        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+	}
 
-        // UMIDITA Bagno
-        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
+	Text label="Clima Soggiorno" icon="settings" {
+          Frame label="Override Sveglia" {
+	    Switch      item=ts_sog_sveglia_on    icon="settings"
+	    Switch      item=ac_sog_sveglia_on    icon="settings"
+	    Switch      item=ac_sog_sveglia_change  icon="settings"
+	    Setpoint    item=ac_sog_sveglia_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_sveglia_change==ON]
+	  }
+          Frame label="Override A Casa" {
+	    Switch      item=ts_sog_acasa_on      icon="settings"
+	    Switch      item=ac_sog_acasa_on      icon="settings"
+	    Switch      item=ac_sog_acasa_change    icon="settings"
+	    Setpoint    item=ac_sog_acasa_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_acasa_change==ON]
+	  }
+	  Frame label="Override Lavoro" {
+	    Switch      item=ts_sog_lavoro_off    icon="settings"
+	    Switch      item=ac_sog_lavoro_off    icon="settings"
+	    Switch      item=ac_sog_lavoro_change   icon="settings"
+	    Setpoint    item=ac_sog_lavoro_temp     minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_lavoro_change==ON]
+	  }
+	  Frame label="Override Usciamo" {
+	    Switch      item=ts_sog_usciamo_off   icon="settings"
+	    Switch      item=ac_sog_usciamo_off   icon="settings"
+	    Switch      item=ac_sog_usciamo_change  icon="settings"
+	    Setpoint    item=ac_sog_usciamo_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_usciamo_change==ON]
+	  }
+	  Frame label="Override Notte" {
+	    Switch      item=ts_sog_night_off     icon="settings"
+	    Switch      item=ac_sog_night_off     icon="settings"
+	    Switch      item=ac_sog_night_change    icon="settings"
+	    Setpoint    item=ac_sog_night_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_night_change==ON]
+	  }
+	  
+	} // TEXT CLIMA SOGGIORNO
 
-        Frame label="Tutto insieme" {
-        // TEMPERATURA TUTTO
-        Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=Casa_Temperature_Chart period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=Casa_Temperature_Chart period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=Casa_Temperature_Chart period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=Casa_Temperature_Chart period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=Casa_Temperature_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=Casa_Temperature_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=Casa_Temperature_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=Casa_Temperature_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-  			// UMIDITA TUTTO
-        Chart  item=Casa_Umidita_Chart period=h   refresh=30000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=Casa_Umidita_Chart period=4h  refresh=30000  visibility=[ChartPeriod==1]
-        Chart  item=Casa_Umidita_Chart period=8h  refresh=30000  visibility=[ChartPeriod==2]
-        Chart  item=Casa_Umidita_Chart period=12h refresh=60000  visibility=[ChartPeriod==3]
-        Chart  item=Casa_Umidita_Chart period=D   refresh=60000  visibility=[ChartPeriod==4]
-        Chart  item=Casa_Umidita_Chart period=2D  refresh=60000  visibility=[ChartPeriod==5]
-        Chart  item=Casa_Umidita_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
-        } // Chiuso frame grafici
-      } // Chiuso text grafici 
+      } // CHIUSO FRAME Automatismi
+    } // CHIUSO TEXT Configurazione schermata principale
 
-      Frame label="Soggiorno Media 30min" {
-        Text item=avgSoggiornoAvg             icon=house
-        Text item=avgSoggiornoDivano          icon=sofa
-      }
-      Frame label="Soggiorno Tutte" {
-	Text item=sf04_Temp                   label="Divano"  icon=sofa
-        Text item=sf04_Humid                  label="Divano"
-        Text item=sf06_Temp                   label="Alta"    icon=flowpipe
-  	Text item=sf06_Humid                  label="Alta"    
-        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
-	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
-      }
-      Frame label="Cameretta" {
-        Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
-        Text item=esp02_Humid                  label="Cameretta Girls"
-        Text item=bs06_temperature             label="Cameretta Ethan"  icon=bedroom_blue
-        Text item=bs06_humidity                label="Cameretta Ethan"
-      }
-      Frame label="Bagno" {
-        Text item=sf07_Temp                   label="Temperatura" icon=bath
-        Text item=sf07_Humid                  label="Umidità"
-      }
-      Frame label="Camera Da Letto" {
-        Text item=sf05_Temp                   label="Specchio"  icon=bedroom_orange
-        Text item=sf05_Humid                  label="Specchio"
-      }
-    }
-
-  Text item=faikin02_outside label="Fuori [%.1f °C]" icon=garden {
-    Frame label="Davanti" {
-      Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
-      Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
-      Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
-      Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
-    }
-    Frame label="Dietro" {
-      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
-      Text item=bs04_temperature                         label="BS04 Temp"   		icon="terrace"
-      Text item=bs04_humidity                            label="BS04 Humid"		icon="humidity"
-
-    }
-    Frame label="Graphs" {
-      Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-      // TEMPERATURA
-      Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
-      Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
-      Chart  item=Fuori_Temperature_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
-      Chart  item=Fuori_Temperature_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
-      Chart  item=Fuori_Temperature_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
-      Chart  item=Fuori_Temperature_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
-      Chart  item=Fuori_Temperature_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
-      Chart  item=Fuori_Temperature_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
-      Chart  item=Fuori_Temperature_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
-      Chart  item=Fuori_Temperature_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
-      // UMIDITA
-      Chart  item=Fuori_Umidita_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
-      Chart  item=Fuori_Umidita_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
-      Chart  item=Fuori_Umidita_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
-      Chart  item=Fuori_Umidita_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
-      Chart  item=Fuori_Umidita_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
-      Chart  item=Fuori_Umidita_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
-      Chart  item=Fuori_Umidita_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
-      Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
-      Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
-      Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
-      }
-    }
-  } // CLOSE FRAME TEMPS
-
+  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 
@@ -1891,9 +1900,12 @@ sitemap default label="Casa"
       Group item=g_bs10
       Group item=g_bs11
       Group item=g_bs12
+      Group item=g_bs13
     }
 
   } // CHIUSO FRAME DEBUG
+
+
 
 
 }// CLOSE SITEMAP

@@ -2,6 +2,8 @@ Group gScene03
 
 Switch Scene03   		"Scena: ora di lavorare"	        <alarm>	    (gScene03)  [ "Switchable" ]
 
+Switch Scene03Active		"Scena: Attiva [%s]"			<settings>  (gRestore,gScene03)
+
 Switch Scene03Condition1 	"Spegni Clima Giochi [%s]" 		<settings>  (gRestore,gScene03)
 Switch Scene03Condition2 	"Accendi Clima Studio [%s]" 		<settings>  (gRestore,gScene03)
 Number Scene03Condition2temp    "Aircon Temp [%s]" 			<settings>  (gRestore,gScene06)

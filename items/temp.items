@@ -4,11 +4,12 @@ Number ChartPeriod "Periodo" (System)
 
 
 Number Casa_Temperature_AVG 		 "Sogg Media [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT,gSoggThermostat,gGraph)
-Number Casa_Temperature_Sogg_Down 	 "Sogg Basso [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
 
+
+// Migrato su BS13
+//Number Casa_Temperature_Sogg_Down 	 "Sogg Basso [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
 // Thing exec cat /run/shm/temp-soggnew from crontab sensori.sh
-String Casa_Temperature_Sogg_Down_String "Sogg Basso [%.1f °C]"  <temperature>  {channel="exec:command:soggdown:output"}
-
+//String Casa_Temperature_Sogg_Down_String "Sogg Basso [%.1f °C]"  <temperature>  {channel="exec:command:soggdown:output"}
 
 Group  Casa_Umidita_Chart
 Number Casa_Umidita_Chart_Period "Periodo" (System)
@@ -22,13 +23,14 @@ Number Casa_Umidita_Chart_Period "Periodo" (System)
 Group  Fuori_Temperature_Chart (System, Charts)
 Number Fuori_Temperature_Chart_Period "Periodo" (System)
 
-Number  Fuori_Temperature         "Bologna [%.1f °C]"   <temperature>  (gTemp)
-String  Fuori_Temperature_String  "Bo Temp String"      <temperature>  {channel="exec:command:botemp:output"}
+// DEPRECATO - Uso i miei sensori 
+//Number  Fuori_Temperature         "Bologna [%.1f °C]"   <temperature>  (gTemp)
+//String  Fuori_Temperature_String  "Bo Temp String"      <temperature>  {channel="exec:command:botemp:output"}
+//Number  Fuori_Umidita         "Bologna [%.1f %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph)
+//String  Fuori_Umidita_String  "Bo Humid String"   <humidity> {channel="exec:command:boumid:output"}
 
 
 // FUORI: UMIDITA /tmp/openweathermap/main-humidity
 Group  Fuori_Umidita_Chart
 Number Fuori_Umidita_Chart_Period "Periodo" (System)
-Number  Fuori_Umidita         "Bologna [%.1f %%]" <humidity> (gHumd,Fuori_Umidita_Chart,gGraph)
-String  Fuori_Umidita_String  "Bo Humid String"   <humidity> {channel="exec:command:boumid:output"}
 
