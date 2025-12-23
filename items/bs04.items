@@ -1,8 +1,8 @@
 Group        g_bs04            "BLE Sensor bs04"
 
-Number bs04_temperature        "bs04 P2 Nord Outside [%s C]"		<temperature>		(g_bs04,gTemp,Fuori_Temperature_Chart)
+Number bs04_temperature        "bs04 P1 Nord Outside [%s C]"		<temperature>		(g_bs04,gTemp,Fuori_Temperature_Chart)
 { channel="mqtt:topic:blegateway:a4c1386a4816:temperature" }
-Number bs04_humidity           "bs04 P2 Nord Outside [%s %%]"   	<humidity>		(g_bs04,gHumd,Fuori_Umidita_Chart)
+Number bs04_humidity           "bs04 P1 Nord Outside [%s %%]"   	<humidity>		(g_bs04,gHumd,Fuori_Umidita_Chart)
     { channel="mqtt:topic:blegateway:a4c1386a4816:humidity" }
 Number bs04_battery            "bs04 Batt: P2 Nord Outside [%s %%]"	<battery>		(g_bs04,g_Batteries)
     { channel="mqtt:topic:blegateway:a4c1386a4816:battery" }
