@@ -1,0 +1,1 @@
+String PublicIP "WAN IP: " { channel="exec:command:checkip:output" }

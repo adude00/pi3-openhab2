@@ -1,0 +1,1 @@
+Thing exec:command:checkip "WAN IP Checker" [ command="curl -s https://checkip.amazonaws.com", interval=900, timeout=10, autorun=true ]

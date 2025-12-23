@@ -1,0 +1,10 @@
+rule "Monitor WAN IP Change"
+when
+    Item PublicIP changed
+then
+    logInfo("IPMonitor", "Public IP changed to " + PublicIP.state.toString())
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("IP Cambiato", "IP: " + PublicIP.state.toString())
+
+end
