@@ -5,20 +5,23 @@ sitemap default label="Casa"
   Frame label="Sensori" {
 
   Text item=bs04_temperature label="Fuori [%.2f °C]" icon=garden {
+    Frame label="Nord" {
+      Text item=bs04_temperature                       icon="terrace"
+      Text item=bs04_humidity                          icon="humidity"
+    }
     Frame label="Davanti" {
       Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
       Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
       Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
       Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
     }
-    Frame label="Dietro" {
+    Frame label="Clima Dietro" {
       Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
-      Text item=bs04_temperature                       icon="terrace"
-      Text item=bs04_humidity                          icon="humidity"
-
     }
-    Frame label="Graphs" {
+    Frame label="Periodo" {
       Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+    }
+    Frame label="Terrazzo Nord" {
       // TEMPERATURA Parcheggio P1
       Chart  item=bs04_temperature period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
       Chart  item=bs04_temperature period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
@@ -41,6 +44,8 @@ sitemap default label="Casa"
       Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
       Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
       Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+    }
+    Frame label="Motori Clima" {
       // TEMPERATURA
       Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
       Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
@@ -1435,6 +1440,23 @@ sitemap default label="Casa"
             Switch    item=Scene08Active
 	  }
 	} // Chiuso frame Scena 08
+        Text label="Scene 09 - Vado a letto" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene09
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene09Condition1
+            Switch    item=Scene09Condition1state visibility=[Scene09Condition1==ON]
+            Setpoint  item=Scene09Condition1temp  visibility=[Scene09Condition1==ON] icon=temperature minValue=16 maxValue=30 step=0.5
+            Switch    item=Scene09Condition1fan   visibility=[Scene09Condition1==ON] icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"]
+            Switch    item=Scene09Condition2
+            Switch    item=Scene09Condition3
+            Switch    item=Scene09Condition4
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene09Active
+	  }
+	} // Chiuso frame Scena 09
 
       } // Chiuso frame Scene
 

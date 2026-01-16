@@ -1,0 +1,47 @@
+val String LOG = "Scene09"
+
+rule "Scene09"
+when
+    Item Scene09 changed to ON
+then
+  if (Scene09Active.state == OFF) return  // DO NOT CONTINUE IF OFF
+
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
+  prowl.pushNotification("Scene09 - Start!", "Scene09: P2 Bedroom Notturna")
+  logInfo(LOG,"Scene Started")
+
+  if (Scene09Condition1.state == ON) {
+    logInfo(LOG,"Scene09Condition1.state == ON")
+    DaikinMatrimoniale_Power.sendCommand(Scene09Condition1state.state.toString)
+    createTimer(now.plusSeconds(5),  [ |
+      logInfo(LOG, "Setting Temp: " + Scene09Condition1temp.state as Number)
+      DaikinMatrimoniale_SetPoint.sendCommand(Scene09Condition1temp.state as Number)
+    ])
+    createTimer(now.plusSeconds(9),  [ |
+      logInfo(LOG, "Setting Fan: " + Scene09Condition1fan.state.toString)
+      DaikinMatrimoniale_Fan.sendCommand(Scene09Condition1fan.state.toString)
+    ])
+  }
+
+  if (Scene09Condition2.state == ON) {
+    logInfo(LOG,"Scene09Condition2.state == ON")
+    gTappAll.sendCommand(DOWN)
+  }
+
+  if (Scene09Condition3.state == ON) {
+    logInfo(LOG,"Scene09Condition3.state == ON")
+    WhiteNoiseBDRM.sendCommand(ON)
+  }
+
+  if (Scene09Condition4.state == ON) {
+    logInfo(LOG,"Scene09Condition4.state == ON")
+    sf05_Light.sendCommand(OFF)
+  }
+
+
+  createTimer(now.plusSeconds(15), [|
+    Scene09.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+
+end

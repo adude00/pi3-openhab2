@@ -1,4 +1,4 @@
-Switch WhiteNoiseBDRM		"White Noise Bedroom"		<soundvolume>
+Switch WhiteNoiseBDRM		"White Noise Bedroom"		<soundvolume> [ "Switchable" ] 
 Switch WhiteNoiseBDRMautoON	"White Noise Bedroom Auto On"	<soundvolume>
 Switch WhiteNoiseBDRMautoOFF	"White Noise Bedroom Auto Off"	<soundvolume>
 Switch WhiteNoiseGirls		"White Noise Girls"		<soundvolume>

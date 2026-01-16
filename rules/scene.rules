@@ -312,8 +312,8 @@ when
 then
     logInfo("Scene","Scena A Letto: iniziata")
 
-    // Luce camera a 10% subito
-    sf05_Light.sendCommand(ON)
+    // Deprecato tanto è già accesa
+    //sf05_Light.sendCommand(ON)
 
     createTimer(now.plusSeconds(1),  [ |
       gTappAll.sendCommand(DOWN)

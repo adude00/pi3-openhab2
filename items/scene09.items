@@ -1,0 +1,13 @@
+Group gScene09
+
+Switch Scene09   		"Scena vado a letto"	        <alarm>	    (gScene09)  [ "Switchable" ]  {alexa="Switch"}
+
+Switch Scene09Active            "Scena Attiva [%s]"             <settings>  (gRestore,gScene09)
+
+Switch Scene09Condition1        "Modifica Clima [%s]"           <settings>  (gRestore,gScene09)
+Switch Scene09Condition1state   "Clima Status [%s]"             <settings>  (gRestore,gScene09)
+Number Scene09Condition1temp    "Clima Temp [%s]"               <settings>  (gRestore,gScene09)
+String Scene09Condition1fan     "Fan Speed [%s]"                <settings>  (gRestore,gScene09)
+Switch Scene09Condition2        "Chiudi Tapparelle [%s]"        <settings>  (gRestore,gScene09)
+Switch Scene09Condition3        "Accendi Rumore Marrone [%s]"   <settings>  (gRestore,gScene09)
+Switch Scene09Condition4        "Spegni la luce [%s]"           <settings>  (gRestore,gScene09)
