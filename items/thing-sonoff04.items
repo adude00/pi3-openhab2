@@ -4,11 +4,11 @@ Group t_sonoff04      "sonoff04: Divano"
 Switch		sf04_Light  "Divano"			<light>		(t_sonoff04,sonoff,gLuci,gLuciSogg) [ "Lighting" ]
 	{channel="mqtt:topic:tasmota:sonoff04:PowerSwitch"}
 
-Number		sf04_Temp   "Sogg Divano [%.1f °C]"	<temperature>	(gTemp,t_sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
-	{channel="mqtt:topic:tasmota:sonoff04:Temperature"}
+//Number		sf04_Temp   "Sogg Divano [%.1f °C]"	<temperature>	(gTemp,t_sonoff04,sonoff,Casa_Temperature_Chart,gChartLvrmT,gGraph)  
+//	{channel="mqtt:topic:tasmota:sonoff04:Temperature"}
 
-Number		sf04_Humid  "Sogg Divano [%.1f %%]"	<humidity>	(gHumd,t_sonoff04,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
-	{channel="mqtt:topic:tasmota:sonoff04:Humidity"}
+//Number		sf04_Humid  "Sogg Divano [%.1f %%]"	<humidity>	(gHumd,t_sonoff04,sonoff,Casa_Umidita_Chart,gChartLvrmH,gGraph)
+//	{channel="mqtt:topic:tasmota:sonoff04:Humidity"}
 
 // Tasmota Status
 String               sf04_Refresh       "sonoff04 Time [%s]"      <clock>  (t_sonoff,t_sonoff04,gTime)      {channel="mqtt:topic:tasmota:sonoff04:Time"}
