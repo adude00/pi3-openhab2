@@ -5,7 +5,6 @@ rule mediaSogg
 when
   Item Casa_Temperature_Sogg_Down changed or
   Item sf06_Temp changed or
-  Item sf04_Temp changed
 then
   var avgTemp = (sf06_Temp.state as DecimalType + bs13_temperature.state as DecimalType + bs11_temperature.state as DecimalType) / 3
   Casa_Temperature_AVG.postUpdate(avgTemp)

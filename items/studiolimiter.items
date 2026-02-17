@@ -1,0 +1,3 @@
+Switch Limiter01     "Limiter 01 [%s]"               <settings>
+Number Limiter01Temp "Limiter 01 [%.1f °C]"          <settings>
+Number Limiter01Ref  "Limiter 01 Reference"          <settings>

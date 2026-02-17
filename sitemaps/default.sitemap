@@ -496,7 +496,7 @@ sitemap default label="Casa"
 
           Frame label="Extra" {
             Selection item=tsSoggiornoType          label="Tipo"           mappings=[1='Old: Istantaneo', 2='Step: 0,30', 3='Step: Wait Mins']
-            Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 2='Divano Sonoff', 4='Divano BT bs11']
+            Selection item=tsSoggSensor             mappings=[3='Media 30m', 1='Istantanea', 4='Divano BT bs11']
           }
 
           Frame label="A/C Auto DEBUG"  {
@@ -666,6 +666,12 @@ sitemap default label="Casa"
         Text item=pow01_Power label="Potenza Motore: [%.0f W]" icon=pump
         Text item=DaikinStudio_IndoorTemperature icon=temperature
         Text item=DaikinStudio_OutdoorTemperature icon=temperature
+      }
+
+      Frame label="Limiter" {
+        Switch    item=Limiter01
+        Selection item=Limiter01Ref  mappings=[1='Angolo (BS08)', 2='Scrivania (sf08)']
+        Setpoint  item=Limiter01Temp step=0.2 minValue=20 maxValue=22 visibility=[Limiter01==ON]
       }
 
       Frame label="Dati" {

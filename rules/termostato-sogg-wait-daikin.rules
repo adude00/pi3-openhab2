@@ -71,7 +71,6 @@ rule "Termostato Soggiorno Wait"
 when
     Item tsSoggiorno changed from OFF to ON or
     Item Casa_Temperature_AVG changed or
-    Item sf04_Temp changed or
     Item avgSoggiornoAvg changed or
     Item spSoggiorno changed or
     Item hsSoggiorno changed
@@ -101,7 +100,6 @@ then
     // Temp to check against
     var Number cur_temp = Casa_Temperature_AVG.state
     // Check if we want to use sofa sensor and not house average and override in case
-    if (tsSoggSensor.state == 2 ) cur_temp = sf04_Temp.state
     if (tsSoggSensor.state == 3 ) cur_temp = avgSoggiornoAvg.state
     if (tsSoggSensor.state == 4 ) cur_temp = bs11_temperature.state
 

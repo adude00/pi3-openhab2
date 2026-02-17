@@ -1,0 +1,16 @@
+rule "Limiter01"
+when
+    Time cron "0 * * * * ?"
+then
+    if ( Limiter01.state == OFF || DaikinStudio_Power.state == OFF) return  // QUIT if not ON
+
+    var Number cur_temp
+    if (Limiter01Ref.state == 1 ) cur_temp = bs08_temperature.state
+    if (Limiter01Ref.state == 2 ) cur_temp = sf08_Temp.state
+    
+    if ( cur_temp > Limiter01Temp.state && DaikinStudio_Fan.state != "SILENCE" ) {
+      logInfo("Limiter01","Temperatura raggiunta, imposto silent")
+      DaikinStudio_Fan.sendCommand("SILENCE")
+    }
+
+end
