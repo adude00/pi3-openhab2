@@ -1,0 +1,4 @@
+Group  gSensorsStuckNotified
+Number SensorsTimeoutMinutes "Timeout Minutes"             <settings> 
+Switch SensorsStuckLog       "Sensor Stuck DEBUG Log"      <settings>
+Switch SensorsStuckCheck     "Sensor Stuck Check"          <settings>

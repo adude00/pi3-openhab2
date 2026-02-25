@@ -2,7 +2,8 @@
 // Preso da https://community.openhab.org/t/design-pattern-group-based-persistence/15098
 //
 Strategies {
-        default = everyUpdate
+        //default = everyUpdate 
+        //la 5.1 depreca il default https://github.com/openhab/openhab-core/pull/4682
 }
 
 Items {

@@ -1,0 +1,129 @@
+var Timer startupGraceTimer = null
+var Boolean startupFinished = false
+
+
+rule "Sensors stuck - startup grace"
+when
+    System started
+then
+    startupFinished = false
+
+    startupGraceTimer?.cancel
+    startupGraceTimer = createTimer(now.plusMinutes(10), [ |
+        startupFinished = true
+        logInfo("SENSORS", "Startup grace period finished")
+    ])
+
+    logInfo("SENSORS", "Startup grace period started (10 min)")
+end
+
+
+rule "Sensors stuck periodic check (lastChange)"
+when
+    Time cron "0 */30 * * * ?"
+then
+    // Exit if SensorsStuckCheck is not ON
+    if (SensorsStuckCheck.state != ON) {
+      if (SensorsStuckLog.state == ON) logInfo("SENSORS", "Skipping check - Disabled in interface")
+      return;
+    }
+
+
+    if (!startupFinished) {
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS", "Skipping check - still in startup grace period")
+        }
+        return;
+    }
+
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    if (prowl === null) {
+        logError("SENSORS", "Prowl actions not available!")
+        return;
+    }
+
+    val timeoutMinutes =
+        if (SensorsTimeoutMinutes.state instanceof Number)
+            (SensorsTimeoutMinutes.state as Number).intValue
+        else
+            15
+
+    val nowZdt = now()
+    val allSensors = gTemp.members + gHumd.members
+
+    var stuckList = newArrayList
+
+    allSensors.forEach[ sensor |
+
+        val lastChange = sensor.lastChange
+        if (lastChange === null) return;
+
+        val minutesSince =
+            java.time.Duration.between(
+                lastChange.toInstant(),
+                nowZdt.toInstant()
+            ).toMinutes()
+
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS",
+                "Checking {} - {} minutes since last CHANGE",
+                sensor.name,
+                minutesSince
+            )
+        }
+
+        if (minutesSince > timeoutMinutes) {
+
+            if (!gSensorsStuckNotified.members.contains(sensor)) {
+
+                gSensorsStuckNotified.addMember(sensor)
+
+                stuckList.add(
+                    sensor.name + " (" + minutesSince + " min)"
+                )
+
+                if (SensorsStuckLog.state == ON) {
+                    logWarn("SENSORS",
+                        "Sensor {} marked as STUCK",
+                        sensor.name
+                    )
+                }
+            }
+        }
+    ]
+
+    if (!stuckList.isEmpty) {
+
+        val message = "Stuck sensors (no change for > " +
+                      timeoutMinutes + " min):\n" +
+                      stuckList.join("\n")
+
+        prowl.pushNotification(
+            stuckList.size + " Sensor(s) Stuck",
+            message
+        )
+
+        logWarn("SENSORS", message)
+    }
+
+end
+
+
+rule "Reset stuck sensor when it changes"
+when
+    Member of gTemp changed or
+    Member of gHumd changed
+then
+    if (gSensorsStuckNotified.members.contains(triggeringItem)) {
+
+        gSensorsStuckNotified.removeMember(triggeringItem)
+
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS",
+                "Sensor {} changed again - removed from stuck list",
+                triggeringItem.name
+            )
+        }
+    }
+end

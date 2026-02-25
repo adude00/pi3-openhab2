@@ -1940,6 +1940,9 @@ sitemap default label="Casa"
       Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
       Switch    item=service_restart mappings=[0="Restart"]
       Text      item=PublicIP
+      Switch    item=SensorsStuckCheck
+      Setpoint  item=SensorsTimeoutMinutes minValue=30 maxValue=600 step=30
+      Switch    item=SensorsStuckLog
     }
     Text label="BLE Sensors" {
       Group item=g_Batteries

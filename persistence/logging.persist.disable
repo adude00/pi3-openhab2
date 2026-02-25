@@ -1,7 +1,9 @@
 // persistence strategies have a name and a definition and are referred to in the "Items" section
 Strategies {
 	// if no strategy is specified for an item entry below, the default list will be used
-	default = everyChange
+	//default = everyChange
+        //la 5.1 depreca il default https://github.com/openhab/openhab-core/pull/4682
+
 }
 
 /* 

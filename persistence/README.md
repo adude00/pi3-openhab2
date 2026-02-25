@@ -1,4 +1,42 @@
-# PERSISTANCE
+# Persistance 2026
+
+Sono rimaste solo due persistance:
+
+* mapdb
+* influxdb
+
+## MapDB
+
+MapDB si salva solo ed esclusivamente l'ultimo stato di un item, e nient'altro: non si salva gli stati precedenti, non si salva QUANDO è stato aggiornato, etc.
+
+Però è fondamentale che TUTTI GLI ITEMS scrivano su mapdb il loro stato ad ogni aggiornamento affinchè MapDB possa ripristinare lo stato precendente al boot.
+
+Senza MapDB al boot ogni singolo ITEM è NULL: immagina avere OpenHAB con tutte le tue belle configurazioni settate negli anni tutte a NULL!!!
+
+## InfluxDB
+
+InfluxDB lo conosciamo, c'è poco da dire. Nonostante quanto scritto sopra, per avere stati come `.lastUpdate` e la `media degli ultimi X minuti` degli items, **influxdb è la persistance di default**.
+
+Questa cosa si configura da interfaccia, non da shell.
+
+## Altre persistance
+
+Con l'aggiornamento alla 5 **non sono necessarie altre persistance**.
+
+Non ce ne sono di installate: si installano [e configurano](https://i.vgy.me/sQA0IQ.png) da interfaccia.
+
+```bash
+root@pi5:~/openhab_conf/persistence# ll |grep -v disable
+total 32
+-rw-r--r-- 1 openhab openhab 1870 Oct 30 11:02 README.md
+-rw-r--r-- 1 openhab openhab  359 Dec 12 10:52 influxdb.persist
+-rw-r--r-- 1 openhab openhab  429 Feb 23 11:18 mapdb.persist
+-rw-r--r-- 1 openhab openhab  256 Oct 30 11:02 readme.txt
+root@pi5:~/openhab_conf/persistence# 
+```
+
+
+# DOCUMENTAZIONE VECCHIE OBSOLETE
 
 OpenHAB manages persistance in a weird and convoluted way.
 

@@ -1,5 +1,5 @@
 Switch DaikinMatrimoniale_Power "A/C" { channel="daikin:ac_unit:DaikinAP37843:power" }
-Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" (gTemp) { channel="daikin:ac_unit:DaikinAP37843:settemp" }
+Number:Temperature DaikinMatrimoniale_SetPoint "SetPoint" (gInflux) { channel="daikin:ac_unit:DaikinAP37843:settemp" }
 String DaikinMatrimoniale_Mode "Mode" { channel="daikin:ac_unit:DaikinAP37843:mode" }
 String DaikinMatrimoniale_HomekitMode { channel="daikin:ac_unit:DaikinAP37843:homekitmode" }
 String DaikinMatrimoniale_Fan "Fan Speed" { channel="daikin:ac_unit:DaikinAP37843:fanspeed" }

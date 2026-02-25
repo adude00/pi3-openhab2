@@ -1,0 +1,117 @@
+var Timer startupGraceTimer = null
+var Boolean startupFinished = false
+
+rule "Sensors stuck - startup grace"
+when
+    System started
+then
+    startupFinished = false
+
+    startupGraceTimer?.cancel
+    startupGraceTimer = createTimer(now.plusMinutes(10), [ |
+        startupFinished = true
+        logInfo("SENSORS", "Startup grace period finished")
+    ])
+
+    logInfo("SENSORS", "Startup grace period started (10 min)")
+end
+
+rule "Sensors stuck periodic check"
+when
+    Time cron "0 */5 * * * ?"
+then
+
+    if (!startupFinished) {
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS", "Skipping check - still in startup grace period")
+        }
+        return;
+    }
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    if (prowl === null) {
+        logError("SENSORS", "Prowl actions not available!")
+        return;
+    }
+
+    val timeoutMinutes =
+        if (SensorsTimeoutMinutes.state instanceof Number)
+            (SensorsTimeoutMinutes.state as Number).intValue
+        else
+            15
+
+    val nowZdt = now()
+    val allSensors = gTemp.members + gHumd.members
+
+    var stuckList = newArrayList
+
+    allSensors.forEach[ sensor |
+
+        val lastUpd = sensor.lastUpdate
+        if (lastUpd === null) return;
+
+        val minutesSince =
+            java.time.Duration.between(
+                lastUpd.toInstant(),
+                nowZdt.toInstant()
+            ).toMinutes()
+
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS",
+                "Checking {} - {} minutes since update",
+                sensor.name,
+                minutesSince
+            )
+        }
+
+        if (minutesSince > timeoutMinutes) {
+
+            if (!gSensorsStuckNotified.members.contains(sensor)) {
+
+                gSensorsStuckNotified.addMember(sensor)
+
+                stuckList.add(
+                    sensor.name + " (" + minutesSince + " min)"
+                )
+
+                if (SensorsStuckLog.state == ON) {
+                    logWarn("SENSORS",
+                        "Sensor {} marked as STUCK",
+                        sensor.name
+                    )
+                }
+            }
+        }
+    ]
+
+    if (!stuckList.isEmpty) {
+
+        val message = "Stuck sensors:\n" + stuckList.join("\n")
+
+        prowl.pushNotification(
+            stuckList.size + " Sensor(s) Stuck",
+            message
+        )
+
+        logWarn("SENSORS", message)
+    }
+
+end
+
+rule "Reset stuck sensor when it updates"
+when
+    Member of gTemp received update or
+    Member of gHumd received update
+then
+    if (gSensorsStuckNotified.members.contains(triggeringItem)) {
+
+        gSensorsStuckNotified.removeMember(triggeringItem)
+
+        if (SensorsStuckLog.state == ON) {
+            logInfo("SENSORS",
+                "Sensor {} updated - removed from stuck list",
+                triggeringItem.name
+            )
+        }
+    }
+end
