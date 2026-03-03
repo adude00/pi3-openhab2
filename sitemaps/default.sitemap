@@ -656,6 +656,49 @@ sitemap default label="Casa"
     } // Chiuso Text Cameretta
 
     Text item=sf08_Temp label="P2 - Studio" icon=niveau {
+      Frame label="Termostato Studio" {
+        Switch    item=tsStudio
+        Text      item=bs08_temperature label="Desk Temperature [%.1f °C]" {
+
+          // Thermostat Page
+          Frame label="Temperature" {
+            Text item=sf08_Temp label="Desk Temperature [%.1f °C]"
+            Text item=bs08_temperature label="Corner Temperature [%.1f °C]"
+          }
+          Frame label="Thermostat" {
+            Switch    item=tsStudio
+            Setpoint  item=tsStudiosp minValue=17  maxValue=29 step=0.1
+          }
+
+          Frame label="A/C Auto Conf" {
+            Setpoint  item=tsStudiohs              minValue=0   maxValue=3  step=0.1  icon=settings
+            Setpoint  item=tsStudioMaxTemp         minValue=16  maxValue=30 step=1    icon=flowpipe
+            Setpoint  item=tsStudioMinTemp         minValue=16  maxValue=30 step=1    icon=returnpipe
+            Setpoint  item=tsStudioStep            minValue=0.5 maxValue=3  step=0.5  icon=line
+            Switch    item=tsStudioStartupTempON
+            Setpoint  item=tsStudioStartupTemp     minValue=16 maxValue=30 step=0.5 visibility=[tsStudioStartupTempON==ON]
+            Switch    item=tsStudioStartupFan
+            Selection item=tsStudioStartupFanS     mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[tsStudioStartupFan==ON]
+            Switch    item=tsStudioSilentOnTemp
+            Switch    item=tsStudioAutoON          label="Auto ON on SetPoint" icon=settings
+            Switch    item=tsStudioOverride        icon=settings
+            Switch    item=tsStudioPowerOff
+          }
+		  
+          Frame label="Extra" {
+            Selection item=tsStudioSensor          mappings=[1='sf08 - Desk', 2='bs08 - Corner', 3='Media']
+          }
+
+          Frame label="A/C Auto DEBUG"  {
+            Switch    item=tsStudioWait
+            Setpoint  item=tsStudioWaitMins        label="Minutes to Wait: [%.0f]" minValue=0  maxValue=60 step=1
+            Switch    item=tsStudioWaitDebug
+            Switch    item=tsStudioRunning
+          }
+
+        } //Chiuso text tsStudio
+      } // Chiuso frame Termostato Studio
+ 
       Frame label="Condizionatore" {
         Switch item=DaikinStudio_Power
         Setpoint item=DaikinStudio_SetPoint icon=heating step=0.5 visibility=[DaikinStudio_Power==ON]

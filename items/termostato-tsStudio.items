@@ -1,0 +1,47 @@
+// ============================================================
+// Thermostat Studio - Items Configuration
+// ============================================================
+
+// --- Core Thermostat Controls ---
+Switch   tsStudio                 "Thermostat"                   <temperature>
+Number   tsStudiosp               "Setpoint [%.1f °C]"           <temperature>
+Number   tsStudiohs               "Hysteresis [%.1f °C]"         <temperature>
+
+// --- Temperature Limits ---
+Number   tsStudioMinTemp          "Min AC Temp [%.0f °C]"        <temperature>
+Number   tsStudioMaxTemp          "Max AC Temp [%.0f °C]"        <temperature>
+Number   tsStudioStep             "Temp Step [%.1f °C]"          <temperature>
+
+// --- Timing Controls ---
+Number   tsStudioWaitMins         "Wait Minutes [%d min]"        <clock>
+
+// --- State Flags ---
+Switch   tsStudioWait             "Wait Timer Active"            <clock>
+Switch   tsStudioRunning          "Rule Running"                 <settings>
+
+// --- Feature Switches ---
+Switch   tsStudioAutoON           "Auto-ON when AC starts"       <settings>
+Switch   tsStudioOverride         "Override OFF (keep AC on)"    <settings>
+Switch   tsStudioPowerOff         "Allow Power Off"              <settings>
+Switch   tsStudioSilentOnTemp     "Silent on Temp"               <settings>
+Switch   tsStudioWaitDebug        "Debug Logging"                <settings>
+
+// --- Startup Configuration ---
+Switch   tsStudioStartupTempON    "Use Startup Temp"             <settings>
+Number   tsStudioStartupTemp      "Startup Temp [%.0f °C]"       <temperature>
+Switch   tsStudioStartupFan       "Use Startup Fan"              <settings>
+String   tsStudioStartupFanS      "Startup Fan Mode"             <fan>
+
+// --- Sensor Selection ---
+// 1 = sf08 (desk), 2 = bs08 (corner), 3 = average of both
+Number   tsStudioSensor           "Sensor Selection" <settings>
+
+// --- Existing Device Items (reference only - already defined elsewhere) ---
+// Switch   DaikinStudio_Power
+// Number   DaikinStudio_SetPoint
+// String   DaikinStudio_Mode      // "COLD" or "HEAT"
+// String   DaikinStudio_Fan       // "AUTO" or "SILENCE"
+// Number   sf08_Temp              // Desk temperature sensor
+// Number   bs08_temperature       // Corner temperature sensor
+// Number   pow01_power            // Compressor power in Watts
+

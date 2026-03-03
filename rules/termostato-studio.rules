@@ -1,0 +1,325 @@
+// ============================================================
+//  Thermostat - Studio
+//  Controls a Daikin A/C (DaikinStudio) to maintain a room setpoint.
+//
+//  Items used:
+//    DaikinStudio_Power       - A/C power switch (ON/OFF)
+//    DaikinStudio_SetPoint    - A/C target temperature
+//    DaikinStudio_Fan         - A/C fan speed ("AUTO", "SILENCE")
+//    DaikinStudio_Mode        - A/C mode: "HEAT" or "COLD"
+//    pow01_Power              - Compressor power draw in Watts
+//    sf08_Temp                - Desk temperature sensor
+//    bs08_temperature         - Corner temperature sensor
+//    tsStudioSensor           - Sensor selection: 1=sf08, 2=bs08, 3=average
+//    tsStudio                 - Thermostat master ON/OFF
+//    tsStudiosp               - Setpoint (target temperature)
+//    tsStudiohs               - Hysteresis band
+//    tsStudioMinTemp          - Minimum allowed A/C temperature
+//    tsStudioMaxTemp          - Maximum allowed A/C temperature
+//    tsStudioStep             - Temperature adjustment step size
+//    tsStudioWaitMins         - Minutes to wait between adjustments
+//    tsStudioWait             - Wait-timer flag (ON = cooling down between steps)
+//    tsStudioRunning          - Concurrency guard (ON = rule is executing)
+//    tsStudioPowerOff         - Allow rule to power off A/C entirely (ON/OFF)
+//    tsStudioSilentOnTemp     - Switch fan to silent when reducing output (ON/OFF)
+//    tsStudioAutoON           - Auto-start thermostat when A/C is turned on manually
+//    tsStudioWaitDebug        - Enable verbose debug logging
+// ============================================================
+
+val String MODE_HEAT   = "HEAT"
+val String MODE_COOL   = "COLD"
+val String FAN_SILENCE = "SILENCE"
+
+// Watts below which we consider the compressor not running
+val Number COMPRESSOR_IDLE_W = 40
+
+
+// ============================================================
+//  AUTO-ON
+//  If the A/C is switched on manually and AutoON is enabled,
+//  start the thermostat automatically.
+// ============================================================
+rule "Termostato Studio AutoON"
+when
+    Item DaikinStudio_Power changed from OFF to ON
+then
+    if (tsStudioAutoON.state == ON && tsStudio.state == OFF) {
+        createTimer(now.plusSeconds(2), [|
+            tsStudio.sendCommand(ON)
+            logInfo("tsStudio", "A/C turned on manually and AutoON=ON: starting thermostat.")
+        ])
+    }
+end
+
+
+// ============================================================
+//  THERMOSTAT ON
+//  When the thermostat is enabled: reset state flags, turn on
+//  the A/C if needed, and optionally apply startup temperature
+//  and fan speed.
+// ============================================================
+rule "Termostato Studio ON"
+when
+    Item tsStudio changed from OFF to ON
+then
+    // Reset control flags so the main loop starts fresh
+    tsStudioWait.sendCommand(OFF)
+    tsStudioRunning.sendCommand(OFF)
+    logInfo("tsStudio", "Thermostat ON: resetting Wait and Running flags.")
+
+    if (DaikinStudio_Power.state == OFF) {
+        DaikinStudio_Power.sendCommand(ON)
+        logInfo("tsStudio", "Thermostat ON: A/C was OFF, turning it ON.")
+
+        // Apply startup temperature after A/C has initialised
+        createTimer(now.plusSeconds(2), [|
+            if (tsStudioStartupTempON.state == ON) {
+                DaikinStudio_SetPoint.sendCommand(tsStudioStartupTemp.state as Number)
+                logInfo("tsStudio", "Thermostat ON: applied startup temperature: " + tsStudioStartupTemp.state)
+            }
+        ])
+
+        // Apply startup fan speed (longer delay to let the unit settle)
+        createTimer(now.plusSeconds(27), [|
+            if (tsStudioStartupFan.state == ON) {
+                DaikinStudio_Fan.sendCommand(tsStudioStartupFanS.state.toString)
+                logInfo("tsStudio", "Thermostat ON: applied startup fan speed: " + tsStudioStartupFanS.state)
+            }
+        ])
+    }
+end
+
+
+// ============================================================
+//  THERMOSTAT OFF
+//  Turn the A/C off unless an override is active.
+// ============================================================
+rule "Termostato Studio OFF"
+when
+    Item tsStudio changed from ON to OFF
+then
+    if (tsStudioOverride.state == OFF) {
+        DaikinStudio_Power.sendCommand(OFF)
+        logInfo("tsStudio", "Thermostat OFF: turning A/C off.")
+    } else {
+        logInfo("tsStudio", "Thermostat OFF: override is ON, leaving A/C running.")
+    }
+end
+
+
+// ============================================================
+//  MAIN LOOP
+//  Runs every minute and after relevant item changes.
+//  Reads the current room temperature and nudges the A/C
+//  target temperature up or down by one step to close the gap
+//  to the setpoint, respecting the hysteresis band.
+//
+//  Thermal states:
+//    TOO COLD  →  (curTemp + hysteresis) < setpoint
+//    IN RANGE  →  no action needed
+//    TOO HOT   →  (curTemp - hysteresis) > setpoint
+//
+//  For each thermal state the action depends on mode:
+//    HEAT + too cold  →  raise A/C temp (or turn A/C on)
+//    HEAT + too hot   →  lower A/C temp (or turn A/C off)
+//    COLD + too cold  →  raise A/C temp to reduce cooling (or turn off)
+//    COLD + too hot   →  lower A/C temp to increase cooling (or turn on)
+// ============================================================
+rule "Termostato Studio Main Loop"
+when
+    Item tsStudio    changed from OFF to ON or
+    Item tsStudiosp  changed or
+    Item tsStudiohs  changed or
+    Time cron "0 * * * * ?"
+then
+
+    // --- Concurrency guard -------------------------------------------
+    // A random small delay reduces the chance of two simultaneous
+    // triggers both seeing Running=OFF and both proceeding.
+    var Number jitterSec = (Math::random * 9).intValue + 1
+    createTimer(now.plusSeconds(jitterSec), [|
+
+        if (tsStudioRunning.state == ON) {
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: already running, skipping this trigger.")
+            return;
+        }
+        tsStudioRunning.sendCommand(ON)
+
+        // --- Early exits ------------------------------------------------
+        if (tsStudio.state != ON) {
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: thermostat is OFF, nothing to do.")
+            tsStudioRunning.sendCommand(OFF)
+            return;
+        }
+        if (tsStudioWait.state == ON) {
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: wait timer active, skipping this cycle.")
+            tsStudioRunning.sendCommand(OFF)
+            return;
+        }
+
+        // --- Read current configuration ---------------------------------
+        var Number acTemp    = DaikinStudio_SetPoint.state as Number
+        val Number acTempMax = tsStudioMaxTemp.state as DecimalType
+        val Number acTempMin = tsStudioMinTemp.state as DecimalType
+        val Number acStep    = tsStudioStep.state as Number
+        val Number hysteresis = tsStudiohs.state as Number
+        val Number setpoint  = tsStudiosp.state as Number
+        val int    waitMins  = (tsStudioWaitMins.state as Number).intValue
+        val String mode      = DaikinStudio_Mode.state.toString
+        val Boolean acIsOn   = (DaikinStudio_Power.state == ON)
+        val Boolean compressorIsRunning = (pow01_Power.state as Number) >= COMPRESSOR_IDLE_W
+
+        // --- Read room temperature (sensor selection) -------------------
+        var Number curTemp
+        if (tsStudioSensor.state == 1)
+            curTemp = sf08_Temp.state as Number
+        if (tsStudioSensor.state == 2)
+            curTemp = bs08_temperature.state as Number
+        if (tsStudioSensor.state == 3)
+            curTemp = ((sf08_Temp.state as DecimalType) + (bs08_temperature.state as DecimalType)) / 2
+
+        // --- Determine thermal state ------------------------------------
+        val Boolean tooCold = (curTemp + hysteresis) < setpoint
+        val Boolean tooHot  = (curTemp - hysteresis) > setpoint
+
+        if (tsStudioWaitDebug.state == ON)
+            logInfo("tsStudio", "DEBUG: curTemp=" + curTemp + " setpoint=" + setpoint +
+                " hs=" + hysteresis + " acTemp=" + acTemp + " mode=" + mode +
+                " acOn=" + acIsOn + " compressor=" + compressorIsRunning +
+                " → tooCold=" + tooCold + " tooHot=" + tooHot)
+
+        // --- No action needed -------------------------------------------
+        if (!tooCold && !tooHot) {
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: temperature in range, no action needed.")
+            tsStudioRunning.sendCommand(OFF)
+            return;
+        }
+
+        // --- Start the inter-step wait timer ----------------------------
+        // Prevents adjustments happening faster than tsStudioWaitMins.
+        tsStudioWait.sendCommand(ON)
+        createTimer(now.plusMinutes(waitMins), [|
+            tsStudioWait.sendCommand(OFF)
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: wait timer expired.")
+        ])
+
+        // --- Helpers ----------------------------------------------------
+
+        // Raise the A/C target temperature by one step (upper-bounded by acTempMax).
+        // Used both to increase heating output and to reduce cooling output.
+        val raiseAcTemp = [ |
+            if (acTemp < acTempMax) {
+                acTemp = acTemp + acStep
+                DaikinStudio_SetPoint.sendCommand(acTemp)
+                logInfo("tsStudio", "A/C temp raised to " + acTemp + "° (step=" + acStep + ")")
+            } else {
+                if (tsStudioWaitDebug.state == ON)
+                    logInfo("tsStudio", "DEBUG: A/C temp already at maximum (" + acTempMax + "°), cannot raise further.")
+            }
+        ]
+
+        // Lower the A/C target temperature by one step (lower-bounded by acTempMin).
+        // Used both to increase cooling output and to reduce heating output.
+        val lowerAcTemp = [ |
+            if (acTemp > acTempMin) {
+                acTemp = acTemp - acStep
+                DaikinStudio_SetPoint.sendCommand(acTemp)
+                logInfo("tsStudio", "A/C temp lowered to " + acTemp + "° (step=" + acStep + ")")
+            } else {
+                if (tsStudioWaitDebug.state == ON)
+                    logInfo("tsStudio", "DEBUG: A/C temp already at minimum (" + acTempMin + "°), cannot lower further.")
+            }
+        ]
+
+        // Switch the fan to silent mode, with a short delay to let the
+        // unit settle after a temperature change.
+        val enableSilentIfAllowed = [ |
+            if (tsStudioSilentOnTemp.state == ON && DaikinStudio_Fan.state.toString != FAN_SILENCE) {
+                createTimer(now.plusSeconds(7), [|
+                    DaikinStudio_Fan.sendCommand(FAN_SILENCE)
+                    logInfo("tsStudio", "Fan switched to silent mode.")
+                ])
+            }
+        ]
+
+        // Turn the A/C off when the compressor is already idle —
+        // only if tsStudioPowerOff permits it.
+        val turnOffIfAllowed = [ |
+            if (acIsOn) {
+                if (tsStudioPowerOff.state == ON) {
+                    DaikinStudio_Power.sendCommand(OFF)
+                    logInfo("tsStudio", "Compressor idle and output already minimal: A/C turned OFF.")
+                } else {
+                    if (tsStudioWaitDebug.state == ON)
+                        logInfo("tsStudio", "DEBUG: Compressor idle but PowerOff is disabled, leaving A/C on.")
+                }
+            } else {
+                if (tsStudioWaitDebug.state == ON)
+                    logInfo("tsStudio", "DEBUG: Compressor idle and A/C already OFF, nothing to do.")
+            }
+        ]
+
+        // --- Act on thermal state × mode --------------------------------
+
+        if (tooCold && mode == MODE_HEAT) {
+            // Need more heat: turn on or raise temperature
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: TOO COLD in HEAT mode — increasing output.")
+            if (!acIsOn) {
+                DaikinStudio_Power.sendCommand(ON)
+                logInfo("tsStudio", "A/C was OFF, turning it ON.")
+            } else {
+                raiseAcTemp.apply()
+            }
+        }
+
+        if (tooCold && mode == MODE_COOL) {
+            // Over-cooling: reduce cooling output or turn off
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: TOO COLD in COOL mode — reducing output.")
+            if (!compressorIsRunning) {
+                turnOffIfAllowed.apply()
+            } else {
+                raiseAcTemp.apply()  // higher A/C temp = less cooling
+            }
+            enableSilentIfAllowed.apply()
+        }
+
+        if (tooHot && mode == MODE_COOL) {
+            // Need more cooling: turn on or lower temperature
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: TOO HOT in COOL mode — increasing output.")
+            if (!acIsOn) {
+                DaikinStudio_Power.sendCommand(ON)
+                logInfo("tsStudio", "A/C was OFF, turning it ON.")
+            }
+            lowerAcTemp.apply()  // lower A/C temp = more cooling
+        }
+
+        if (tooHot && mode == MODE_HEAT) {
+            // Over-heating: reduce heating output or turn off
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: TOO HOT in HEAT mode — reducing output.")
+            if (!compressorIsRunning) {
+                turnOffIfAllowed.apply()
+            } else {
+                lowerAcTemp.apply()  // lower A/C temp = less heating
+            }
+            enableSilentIfAllowed.apply()
+        }
+
+        // Release concurrency guard
+        createTimer(now.plusSeconds(3), [|
+            tsStudioRunning.sendCommand(OFF)
+            if (tsStudioWaitDebug.state == ON)
+                logInfo("tsStudio", "DEBUG: finished, lock released.")
+        ])
+
+    ]) // end jitter timer
+
+end
