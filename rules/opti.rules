@@ -16,6 +16,6 @@ rule "Opti OFF"
 
   then
 
-    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@opti.bluetears.org", "/sbin/shutdown", "-h", "now")
+    executeCommandLine(Duration.ofSeconds(10), "ssh", "root@oooopti.bluetears.org", "/sbin/shutdown", "-h", "now")
 
 end

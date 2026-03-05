@@ -28,6 +28,12 @@ then
     sf08_Light.sendCommand(ON)
   }
 
+  if (Scene06Condition3.state == ON) {
+    logInfo(LOG,"Scene06Condition3.state == ON")
+    tsStudio.sendCommand(ON)
+  }
+
+
   createTimer(now.plusSeconds(15), [|
     Scene06.sendCommand(OFF)
     logInfo(LOG,"Scena finita")

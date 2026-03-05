@@ -8,3 +8,4 @@ Switch Scene06Condition1        "Turn ON Aircon [%s]"           <settings>  (gRe
 Number Scene06Condition1temp    "Aircon Temp [%s]"              <settings>  (gRestore,gScene06)
 String Scene06Condition1fan     "Fan Speed [%s]"                <settings>  (gRestore,gScene06)
 Switch Scene06Condition2	"Turn On Scrivania [%s]"	<settings>  (gRestore,gScene06)
+Switch Scene06Condition3	"Turn On Thermostat [%s]"	<settings>  (gRestore,gScene06)
