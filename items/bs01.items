@@ -1,8 +1,8 @@
 Group        g_bs01            "bs01 - P1 C2 - Top Bed"
 
-Number bs01_temperature        "bs01 SottoIlLetto Temp [%s C]"      		<temperature>		(g_bs01,gTemp,gChartCamera2T)
+Number bs01_temperature        "bs01 Letto Alto [%s C]"      		<temperature>		(g_bs01,gTemp,gChartCamera2T)
 { channel="mqtt:topic:blegateway:a4c13877b808:temperature" }
-Number bs01_humidity           "bs01 SottoIlLetto Humid [%s %%]"    		<humidity>		(g_bs01,gHumd,gChartCamera2H)
+Number bs01_humidity           "bs01 Letto Alto Humid [%s %%]"    		<humidity>		(g_bs01,gHumd,gChartCamera2H)
     { channel="mqtt:topic:blegateway:a4c13877b808:humidity" }
 Number bs01_battery            "bs01 Batt: P1 Camera 2 - Sottoilletto [%s %%]"	<battery>		(g_bs01,g_Batteries)
     { channel="mqtt:topic:blegateway:a4c13877b808:battery" }
