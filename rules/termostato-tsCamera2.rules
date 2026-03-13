@@ -70,8 +70,6 @@ then
 
   // EDIT FINISHED
 
-  if (tsCamera2PrevTemp.state == UNDEF || tsCamera2PrevTemp.state == NULL) tsCamera2PrevTemp.sendCommand(cur_temp)
-
   // STARTING A RANDOM TIMER 0-10 second
   var Number waitRnd
   waitRnd = (Math::random * 10.0).intValue + 1
@@ -88,10 +86,6 @@ then
     var Number acTempStep 	= tsCamera2Step.state as Number
     var Number tsCamera2hs    	= tsCamera2hs.state
     var Number setpoint   	= tsCamera2sp.state
-
-    // previous Temperature awareness
-    //var Number prevTemp         = tsCamera2PrevTemp.state
-    tsCamera2PrevTemp.sendCommand(cur_temp)
 
     // val int timerTime = (Bewaesserungsdauer.state as Number).intValue
     // https://community.openhab.org/t/solved-int-from-switch-item-number-as-now-plusminutes/60035/17

@@ -1,4 +1,4 @@
-Group        g_bs11            "BLE Sensor bs11"
+Group        g_bs11            "bs11 - P2 Divano"
 
 Number bs11_temperature        "bs11 Temp [%s C]"		<temperature>		(g_bs11,gTemp,gChartLvrmT)
 { channel="mqtt:topic:blegateway:a4c1386656be:temperature" }

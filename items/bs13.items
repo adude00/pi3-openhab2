@@ -1,4 +1,4 @@
-Group        g_bs13            "BLE Sensor bs13"
+Group        g_bs13            "bs13 - P2 Soggiorno Basso"
 
 // Retrocompatibilità grafici vecchi
 Number Casa_Temperature_Sogg_Down        "Sogg Basso [%.1f °C]"  <temperature>  (gTemp,Casa_Temperature_Chart,gChartLvrmT) 

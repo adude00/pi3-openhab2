@@ -1,4 +1,4 @@
-Group        g_bs12            "BLE Sensor bs12"
+Group        g_bs12            "bs12 - P1 Bagno"
 
 Number bs12_temperature        "bs12 Temp [%s C]"		<temperature>		(g_bs12,gTemp,gChartBagnoP1T)
 { channel="mqtt:topic:blegateway:a4c138d65376:temperature" }

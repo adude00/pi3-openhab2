@@ -1,4 +1,4 @@
-Group        g_bs02            "BLE Sensor bs02"
+Group        g_bs02            "bs02 - P1 C1 - Armadio"
 
 Number bs02_temperature        "Temp Armadio [%s C]"      			<temperature>		(g_bs02,gTemp,gChartCamera1T)
 { channel="mqtt:topic:blegateway:a4c1389844df:temperature" }

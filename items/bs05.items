@@ -1,4 +1,4 @@
-Group        g_bs05            "BLE Sensor bs05"
+Group        g_bs05            "bs05 - P2 Frigorifero"
 
 Number bs05_temperature        "bs05 Temp [%s C]"      			<temperature>		(g_bs05,gTemp)
 { channel="mqtt:topic:blegateway:a4c138fcab7e:temperature" }

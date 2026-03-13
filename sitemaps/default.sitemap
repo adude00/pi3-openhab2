@@ -1084,12 +1084,14 @@ sitemap default label="Casa"
 	Text      item=tsCamera2sp {
 
 	  Frame label="Temperature reali" {
-	        Text      item=esp02_Temp         label="Colonna (esp02): Temperatura"
-	        Text      item=bs01_temperature   label="Basso (bs01): Temperatura"
+	        Text      item=bs01_temperature   label="Alto (bs01): Temperatura"
+	        Text      item=esp02_Temp         label="Cassettiera (esp02): Temperatura"
+	        Text      item=bs14_temperature   label="Basso (bs14): Temperatura"
 	  }
 	  Frame label="Umidità reali" {
-	        Text      item=esp02_Humid        label="Colonna (esp02): Umidità"
-	        Text      item=bs01_humidity      label="Basso (bs01): Umidità"
+	        Text      item=bs01_humidity      label="Alto (bs01): Umidità"
+	        Text      item=esp02_Humid        label="Cassettiera (esp02): Umidità"
+	        Text      item=bs14_humidity      label="Basso (bs14): Umidità"
 	  }
 	  Frame label="Termostato - Basic" {
 	    Switch    item=tsCamera2
@@ -1116,14 +1118,15 @@ sitemap default label="Casa"
 
 	} // CHIUSO TEXT tsCamera2sp 
       } // CHIUSO FRAME Termostato
-
 	  Frame label="Temperature reali" {
-	        Text      item=esp02_Temp         label="Alto (esp02): Temperatura"
-	        Text      item=bs01_temperature   label="Basso (bs01): Temperatura"
+	        Text      item=bs01_temperature   label="Alto (bs01): Temperatura"
+	        Text      item=esp02_Temp         label="Cassettiera (esp02): Temperatura"
+	        Text      item=bs14_temperature   label="Basso (bs14): Temperatura"
 	  }
 	  Frame label="Umidità reali" {
-	        Text      item=esp02_Humid        label="Alto (esp02): Umidità"
-	        Text      item=bs01_humidity      label="Basso (bs01): Umidità"
+	        Text      item=bs01_humidity      label="Alto (bs01): Umidità"
+	        Text      item=esp02_Humid        label="Cassettiera (esp02): Umidità"
+	        Text      item=bs14_humidity      label="Basso (bs14): Umidità"
 	  }
       Frame label="Condizionatore" {
         Switch    item=climaCamera2_Power     icon=climate      
@@ -2003,6 +2006,7 @@ sitemap default label="Casa"
       Group item=g_bs11
       Group item=g_bs12
       Group item=g_bs13
+      Group item=g_bs14
     }
 
   } // CHIUSO FRAME DEBUG

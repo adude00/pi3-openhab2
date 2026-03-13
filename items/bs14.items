@@ -1,0 +1,12 @@
+Group        g_bs14            "bs14 - P1 C2 - Bottom Bed"
+
+Number bs14_temperature        "bs14 Temp [%s C]"		<temperature>		(g_bs14,gTemp)
+    { channel="mqtt:topic:blegateway:a4c138340459:temperature" }
+Number bs14_humidity           "bs14 Humid [%s %%]"		<humidity>		(g_bs14,gHumd)
+    { channel="mqtt:topic:blegateway:a4c138340459:humidity" }
+Number bs14_battery            "bs14 Batt: P1 Camera 2 Down [%s %%]"	<battery>	(g_bs14,g_Batteries)
+    { channel="mqtt:topic:blegateway:a4c138340459:battery" }
+String bs14_src                "bs14 Gateway [%s]"		<status>		(g_bs14)
+    { channel="mqtt:topic:blegateway:a4c138340459:src" }
+Number bs14_rssi               "bs14 Signal [%s dB]"		<qualityofservice>	(g_bs14)
+    { channel="mqtt:topic:blegateway:a4c138340459:rssi" }
