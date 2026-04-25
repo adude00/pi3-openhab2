@@ -124,7 +124,8 @@ then
   executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-on.sh")
   executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/timer-off.sh")
 
-  sf07_Light.sendCommand(OFF)
+  // Reset Alexa BDRM
+  // sf07_Light.sendCommand(OFF)
   
   // SOGGIORNO - CHANGE TEMP
   if (ac_sog_sveglia_change.state == ON) {
@@ -212,8 +213,12 @@ then
   gTappP2.sendCommand(UP)
   if (sunIsOut.state == ON) gTappP1.sendCommand(UP)
 
+  // Telecamere 2P
   sf03_Switch.sendCommand(OFF)
+
+  // Telecamere 1P
   sf12_Switch.sendCommand(OFF)
+
   if (conf_mattina_tsBagnoP1.state == ON) tsBagnoP1.sendCommand(ON)
 
   // Accendo le luci in soggiorno in base alla configurazione
