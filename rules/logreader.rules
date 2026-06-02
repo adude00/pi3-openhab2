@@ -1,25 +1,42 @@
 import java.time.ZonedDateTime
 
 var ZonedDateTime lastNotified = null
+var int errorCount = 0
 
 rule "MQTT Connect Failed → Prowl Notification"
 when
     Channel 'logreader:reader:mqttlog:newCustomEvent' triggered
 then
+    errorCount = errorCount + 1
+    val matchedLine = receivedEvent.toString
+
+    logInfo("MQTTAlert", "Triggered #" + errorCount + " - " + matchedLine)
+
     val now = ZonedDateTime.now()
 
-    // Only notify once per hour at most
     if (lastNotified === null || now.isAfter(lastNotified.plusHours(1))) {
         lastNotified = now
 
+        val message  = "Errors since last reset: " + errorCount + "\n" +
+                       "Last line: " + matchedLine + "\n" +
+                       "Time: " + now.toString
+
         val prowl = getActions("prowl", "prowl:broker:mybroker")
-        prowl.pushNotification(
-            "MQTT Connection Failed",
-            "Detected: Connect failed to mqtt.bluetears.org:1883\nLast event: " + mqttLastError.state.toString,
-            1  // priority: -2 (low) to 2 (emergency)
-        )
-        logInfo("MQTTAlert", "Prowl notification sent for MQTT connection failure")
+        prowl.pushNotification("MQTT Connection Failed", message, 1)
+
+        logInfo("MQTTAlert", "Prowl notification sent")
     } else {
-        logInfo("MQTTAlert", "Pattern matched but within throttle window, skipping notification")
+        logInfo("MQTTAlert", "Throttled (" + errorCount + " errors so far)")
     }
+end
+
+
+rule "Reset MQTT error counter"
+when
+    Item MqttErrorReset received command ON
+then
+    logInfo("MQTTAlert", "Counter reset from " + errorCount + " to 0")
+    errorCount = 0
+    lastNotified = null
+    MqttErrorReset.postUpdate(OFF)
 end

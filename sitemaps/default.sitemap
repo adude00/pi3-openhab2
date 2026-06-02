@@ -1990,6 +1990,9 @@ sitemap default label="Casa"
       Switch    item=SensorsStuckCheck
       Setpoint  item=SensorsTimeoutMinutes minValue=30 maxValue=600 step=30
       Switch    item=SensorsStuckLog
+      Switch    item=MqttErrorReset
+      Text      item=mqttLastError
+      Text      item=mqttConnectErrors
     }
     Text label="BLE Sensors" {
       Group item=g_Batteries

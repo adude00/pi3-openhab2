@@ -1,2 +1,4 @@
-Number   mqttConnectErrors    "MQTT Connect Errors [%d]"  { channel="logreader:reader:mqttlog:customEvents" }
-String   mqttLastError        "Last MQTT Error [%s]"      { channel="logreader:reader:mqttlog:lastCustomEvent" }
+// logreader.items
+Number  mqttConnectErrors  "MQTT Connect Errors [%d]"  { channel="logreader:reader:mqttlog:customEvents" }
+String  mqttLastError      "Last MQTT Error [%s]"      { channel="logreader:reader:mqttlog:lastCustomEvent" }
+Switch  MqttErrorReset     "Reset MQTT Counter"
