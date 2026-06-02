@@ -2,8 +2,12 @@ Group g_faikin02
 Group g_faikin02_cmd
 
 // SWITCH
-Switch faikin02_power    "Power"         <switch> 		(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:power"}
-Switch faikin02_econo    "Econo"         <price>       		(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:econo"}
+//Switch faikin02_power    "Power"         <switch> 		(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:power"}
+//Switch faikin02_econo    "Econo"         <price>       	(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:econo"}
+// SWITCH
+Switch faikin02_power    "Power []"      <switch>               (g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:power"}
+Switch faikin02_econo    "Econo []"      <price>                (g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:econo"}
+
 Switch faikin02_powerful "Powerful"      <pump>       		(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:powerful"}
 Switch faikin02_streamer "Streamer"      <smiley>        	(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:streamer"}
 Switch faikin02_quiet    "Quiet Outdoor" <soundvolume_mute>	(g_faikin02,g_faikin02_cmd) {channel="mqtt:topic:Faikin:faikin02:quiet"}

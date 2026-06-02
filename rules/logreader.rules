@@ -1,0 +1,25 @@
+import java.time.ZonedDateTime
+
+var ZonedDateTime lastNotified = null
+
+rule "MQTT Connect Failed → Prowl Notification"
+when
+    Channel 'logreader:reader:mqttlog:newCustomEvent' triggered
+then
+    val now = ZonedDateTime.now()
+
+    // Only notify once per hour at most
+    if (lastNotified === null || now.isAfter(lastNotified.plusHours(1))) {
+        lastNotified = now
+
+        val prowl = getActions("prowl", "prowl:broker:mybroker")
+        prowl.pushNotification(
+            "MQTT Connection Failed",
+            "Detected: Connect failed to mqtt.bluetears.org:1883\nLast event: " + mqttLastError.state.toString,
+            1  // priority: -2 (low) to 2 (emergency)
+        )
+        logInfo("MQTTAlert", "Prowl notification sent for MQTT connection failure")
+    } else {
+        logInfo("MQTTAlert", "Pattern matched but within throttle window, skipping notification")
+    }
+end

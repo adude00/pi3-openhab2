@@ -24,7 +24,8 @@ Thing mqtt:topic:Faikin:faikin02 "faikin02_Thing" (mqtt:broker:brokerv2) {
         Type switch   : econo		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.econo",    on="true", off="false"]
         Type switch   : powerful	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.powerful", on="true", off="false"]
         Type switch   : swingh		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.swingh",   on="true", off="false"]
-        Type switch   : streamer	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.streamer", on="true", off="false"]
+        //Type switch   : streamer	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.streamer", on="true", off="false"]
+        Type switch   : streamer	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.streamer", on="true", off="false", commandTopic="state/faikin02/status"]
         Type switch   : quiet	        [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.quiet",    on="true", off="false"]
 
 } 

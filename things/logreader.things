@@ -1,0 +1,6 @@
+// logreader.things
+logreader:reader:mqttlog [
+    filePath="/openhab/log/aggregated.log",
+    refreshRate=60000,
+    customPatterns="Connect failed to mqtt\\.bluetears\\.org:1883"
+]
