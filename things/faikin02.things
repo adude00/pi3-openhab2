@@ -2,8 +2,7 @@
 Thing mqtt:topic:Faikin:faikin02 "faikin02_Thing" (mqtt:broker:brokerv2) {
     Channels:
 
-        // State - si aggiorna SOLO ad ogni cambio di stato - livestatus=ON
-        Type number   : temp		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.temp"]
+        // Read Only State - si aggiorna SOLO ad ogni cambio di stato - livestatus=ON
         Type number   : home            [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.home"]
         Type number   : fanrpm          [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.fanrpm"]
         Type number   : comp            [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.comp"]
@@ -12,20 +11,21 @@ Thing mqtt:topic:Faikin:faikin02 "faikin02_Thing" (mqtt:broker:brokerv2) {
         Type number   : anglev          [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.anglev"]
         Type number   : demand          [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.demand"]
         Type number   : Wh              [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.Wh"]
-        Type string   : fan		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.fan"]
-        Type string   : mode		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.mode"]
+        
+	// Command and state
+        Type number   : temp		[stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.temp"]
+        Type string   : fan		[stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.fan"]
+        Type string   : mode		[stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.mode"]
 
         // Faikin - si aggiorna SOLO ogni minuto
         Type string   : ts		[stateTopic="Faikin/faikin02",  transformationPattern="JSONPATH:$.ts"]
 
 	// Switch (like a string)
-        Type switch   : power           [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.power",    on="true", off="false"]
-        Type switch   : swingv		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.swingv",   on="true", off="false"]
-        Type switch   : econo		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.econo",    on="true", off="false"]
-        Type switch   : powerful	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.powerful", on="true", off="false"]
-        Type switch   : swingh		[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.swingh",   on="true", off="false"]
-        //Type switch   : streamer	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.streamer", on="true", off="false"]
-        Type switch   : streamer	[stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.streamer", on="true", off="false", commandTopic="state/faikin02/status"]
-        Type switch   : quiet	        [stateTopic="state/faikin02/status",  transformationPattern="JSONPATH:$.quiet",    on="true", off="false"]
-
+        Type switch   : power           [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.power",    on="true", off="false"]
+        Type switch   : swingv          [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.swingv",   on="true", off="false"]
+        Type switch   : econo           [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.econo",    on="true", off="false"]
+        Type switch   : powerful        [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.powerful", on="true", off="false"]
+        Type switch   : swingh          [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.swingh",   on="true", off="false"]
+        Type switch   : streamer        [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.streamer", on="true", off="false"]
+        Type switch   : quiet           [stateTopic="state/faikin02/status", commandTopic="state/faikin02/status", transformationPattern="JSONPATH:$.quiet",    on="true", off="false"]
 } 
