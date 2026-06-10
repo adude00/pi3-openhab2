@@ -828,7 +828,7 @@ sitemap default label="Casa"
   } // Chiuso Text Temperature P2
   Frame label="Temperature P1" {
 
-    Text item=sf12_Temp label="P1 - Sala Giochi" icon=party {
+    Text item=bs07_temperature label="P1 - Sala Giochi" icon=party {
       Frame label="Termostato" {
 	Switch    item=tsGiochi
 	Text      item=spGiochi {
