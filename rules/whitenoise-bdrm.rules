@@ -3,7 +3,7 @@ when
 	Item WhiteNoiseBDRM received command ON
 then
 	//executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@zero-bdrm", "service whitenoise start")
-	executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@pi-bdrm", "service whitenoise start")
+	executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@pi-bdrm.bluetears.org", "service whitenoise start")
 end
 
 rule "White Noise Bedroom OFF"
@@ -11,6 +11,6 @@ when
 	Item WhiteNoiseBDRM received command OFF
 then
 	//executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@zero-bdrm", "service whitenoise stop")
-	executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@pi-bdrm", "service whitenoise stop")
+	executeCommandLine(Duration.ofSeconds(30), "/usr/bin/ssh", "root@pi-bdrm.bluetears.org", "service whitenoise stop")
 end
 
