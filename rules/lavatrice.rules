@@ -41,8 +41,13 @@ rule "Lavatrice tramite consumi"
 
   if ( alexa_lavatrice.state == OFF ) {
     if ( tuya02_Power.averageSince(now.minusMinutes(2)) > 10 ) {
-      logInfo("LAVATRICE", "AutoON: Consumo medio negli ultimi 2 minuti maggiore di 10W: accendo notifica Alexa!")
-      alexa_lavatrice.sendCommand(ON)
+      logInfo("LAVATRICE", "AutoON: Consumo medio negli ultimi 2 minuti maggiore di 10W: accendo notifica Alexa, ma solo tra 5 minutii!")
+      
+      createTimer(now.plusMinutes(5), [|
+        alexa_lavatrice.sendCommand(ON)
+        logInfo("LAVATRICE", "AutoON: 5 minuti sono passati, accendo notifica Alexa!")
+      ])
+
     }
   }
 
