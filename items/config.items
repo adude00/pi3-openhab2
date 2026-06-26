@@ -51,6 +51,7 @@ String service_name     "Service"         <settings>
 // Alexa
 Switch alexa_campanello         "Campanello [%s]"                   <settings>        [ "Switchable" ]
 Switch alexa_lavatrice          "Lavatrice [%s]"                    <settings>        [ "Switchable" ]
+Switch alexa_lavatrice_wait     "Lavatrice wait [%s]"               <settings>
 
 // Tramonto
 Switch sunIsOut			"Giorno [%s]"			    <settings>		[ "Switchable" ]

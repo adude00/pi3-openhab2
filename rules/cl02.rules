@@ -26,10 +26,10 @@ then
 
     // Setup Relais so the compresso will eventually turn ON, accordingly to the flip
 
-    if (tsGiochiFlip.state == ON) { // SUMMER - We need it OFF
+    if (tsGiochiFlip.state == ON) { // SUMMER - We need it ON - Summer26 OK
       Thread::sleep(30000)
-      sonoff21_R2.sendCommand(OFF)
-      logInfo("cl02_meta_ON", "SUMMER - turning OFF Relais")
+      sonoff21_R2.sendCommand(ON)
+      logInfo("cl02_meta_ON", "SUMMER - turning ON Relais")
     }
 
     if (tsGiochiFlip.state == OFF) { // WINTER - We need it ON
@@ -61,11 +61,11 @@ then
     tsGiochi.sendCommand(OFF)
 
     // Turn OFF Relais so the compresso will eventually turn off, accordingly to the flip
-    if (tsGiochiFlip.state == ON) sonoff21_R2.sendCommand(ON) 
+    if (tsGiochiFlip.state == ON) sonoff21_R2.sendCommand(OFF) // Summer 2026 OK
     if (tsGiochiFlip.state == OFF) sonoff21_R2.sendCommand(OFF) 
 
     // Monitor power until below threshold
-    while ((shelly07_Power.state as Number) > 12) {
+    while ((shelly07_Power.state as Number) > 18) {  // Summer 26 OK - ex 12 winter
         Thread::sleep(5000) // check every 5 seconds
     }
 

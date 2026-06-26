@@ -17,6 +17,7 @@ then
   if (Scene02Condition2.state == ON) {
     logInfo(LOG,"Scene02Condition2.state == ON")
     cl02_metapower.sendCommand(ON)
+    //cl01_alexa_powerState.sendCommand(ON)
   }
   if (Scene02Condition3ts.state == ON) {
     logInfo(LOG,"Scene02Condition3ts.state == ON")
@@ -72,7 +73,6 @@ then
         climaCamera2_Temp.sendCommand(Scene02Condition6num.state as Number)
      ])
     logInfo(LOG,"Scene02Condition6.state == ON")
-    tsSoggiorno.sendCommand(ON)
   }
   if (Scene02Condition7.state == ON) {
     logInfo(LOG,"Scene02Condition7.state == ON")

@@ -2,6 +2,7 @@ rule "Lavatrice spina offline"
   when
     Item tuya02_Reachable changed from Online to Offline
   then
+    alexa_lavatrice_wait.sendCommand(OFF)
     alexa_lavatrice.sendCommand(OFF)
     tuya02_Power.postUpdate(0)
     logInfo("LAVATRICE", "Spina offline, disattivo la notifica su alexa e imposto consumo a 0W")
@@ -22,6 +23,7 @@ rule "Lavatrice tramite consumi"
   then
     if ( alexa_lavatrice.state == ON ) {
       if ( tuya02_Power.averageSince(now.minusMinutes(2)) < 2 ) {
+      //if ( tuya02_Power.averageSince(now.minusMinutes(4)) < 4 ) {
         val prowl = getActions("prowl", "prowl:broker:mybroker")
         prowl.pushNotification("LAVATRICE: Finita", "La lavasciuga ha finito il lavaggio")
 
@@ -39,12 +41,15 @@ rule "Lavatrice tramite consumi"
       }
     }
 
-  if ( alexa_lavatrice.state == OFF ) {
-    if ( tuya02_Power.averageSince(now.minusMinutes(2)) > 10 ) {
-      logInfo("LAVATRICE", "AutoON: Consumo medio negli ultimi 2 minuti maggiore di 10W: accendo notifica Alexa, ma solo tra 5 minutii!")
+  if ( alexa_lavatrice.state == OFF && alexa_lavatrice_wait.state !== ON ) {
+    //if ( tuya02_Power.averageSince(now.minusMinutes(2)) > 10 ) {
+    if ( tuya02_Power.averageSince(now.minusMinutes(4)) > 10 ) {
       
+      logInfo("LAVATRICE", "AutoON: Consumo medio negli ultimi 4 minuti maggiore di 10W: tra 5 minuti accendo notifica su alexa!")
+      alexa_lavatrice_wait.sendCommand(ON)
       createTimer(now.plusMinutes(5), [|
         alexa_lavatrice.sendCommand(ON)
+        alexa_lavatrice_wait.sendCommand(OFF)
         logInfo("LAVATRICE", "AutoON: 5 minuti sono passati, accendo notifica Alexa!")
       ])
 
