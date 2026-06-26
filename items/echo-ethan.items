@@ -1,0 +1,25 @@
+// Account
+String Echo_Ethan_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:98a41df9:sendMessage"}
+
+Group Alexa_Ethan <player>
+
+// Player control
+Player Echo_Ethan_Player                 "Player"                                (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:player"}
+Dimmer Echo_Ethan_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:volume"}
+Switch Echo_Ethan_Shuffle                "Shuffle"                               (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:shuffle"}
+
+// Player Information
+String Echo_Ethan_Title                  "Title"                                 (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:title"}
+String Echo_Ethan_ProviderDisplayName    "Provider"                              (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:providerDisplayName"}
+
+// Commands
+String Echo_Ethan_Announcement           "Announcement"                          (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:announcement"}
+String Echo_Ethan_TTS                    "Text to Speech"                        (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:textToSpeech"}
+Dimmer Echo_Ethan_TTS_Volume             "Text to Speech Volume"                 (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:textToSpeechVolume"}
+String Echo_Ethan_Remind                 "Remind"                                (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:remind"}
+String Echo_Ethan_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:playAlarmSound"}
+Dimmer Echo_Ethan_NotificationVolume     "Notification volume"                   (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:notificationVolume"}
+Switch Echo_Ethan_AscendingAlarm         "Ascending alarm"                       (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:ascendingAlarm"}
+
+// Feedbacks
+String Echo_Ethan_LastVoiceCommand       "Last voice command"                    (Alexa_Ethan) {channel="amazonechocontrol:echo:98a41df9:G0G2HP0331120L9C:lastVoiceCommand"}

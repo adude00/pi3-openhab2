@@ -60,6 +60,16 @@ then
     executeCommandLine(Duration.ofSeconds(10), "/openhab/conf/scripts/switch-off.sh")
   ])
 
+
+  if (Scene04Condition6.state == ON) {
+    logInfo(LOG,"Scene04Condition6.state == ON")
+    createTimer(now.plusSeconds(7), [|
+        Echo_Cameretta_Volume.sendCommand(Scene04Condition6Num.state as Number)
+        logInfo(LOG,"Impostato volume di alexa a ", Scene04Condition6Num.state)
+        ])
+  }
+
+
   createTimer(now.plusSeconds(13), [|
     Scene04.sendCommand(OFF)
     logInfo(LOG,"Scena finita")

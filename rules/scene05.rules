@@ -62,6 +62,14 @@ then
   }
 
 
+  if (Scene05Condition7.state == ON) {
+    logInfo(LOG,"Scene05Condition7.state == ON")
+    createTimer(now.plusSeconds(7), [|
+        Echo_Ethan_Volume.sendCommand(Scene04Condition6Num.state as Number)
+        logInfo(LOG,"Impostato volume di alexa a ", Scene04Condition6Num.state)
+        ])
+  }
+
   createTimer(now.plusSeconds(13), [|
     Scene05.sendCommand(OFF)
     logInfo(LOG,"Scena finita")

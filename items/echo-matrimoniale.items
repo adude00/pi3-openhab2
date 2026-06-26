@@ -1,0 +1,25 @@
+// Account
+String Echo_Matrimoniale_SendMessage            "SendMessage"                           {channel="amazonechocontrol:account:98a41df9:sendMessage"}
+
+Group Alexa_Matrimoniale <player>
+
+// Player control
+Player Echo_Matrimoniale_Player                 "Player"                                (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:player"}
+Dimmer Echo_Matrimoniale_Volume                 "Volume [%.0f %%]" <soundvolume>        (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:volume"}
+Switch Echo_Matrimoniale_Shuffle                "Shuffle"                               (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:shuffle"}
+
+// Player Information
+String Echo_Matrimoniale_Title                  "Title"                                 (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:title"}
+String Echo_Matrimoniale_ProviderDisplayName    "Provider"                              (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:providerDisplayName"}
+
+// Commands
+String Echo_Matrimoniale_Announcement           "Announcement"                          (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:announcement"}
+String Echo_Matrimoniale_TTS                    "Text to Speech"                        (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:textToSpeech"}
+Dimmer Echo_Matrimoniale_TTS_Volume             "Text to Speech Volume"                 (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:textToSpeechVolume"}
+String Echo_Matrimoniale_Remind                 "Remind"                                (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:remind"}
+String Echo_Matrimoniale_PlayAlarmSound         "Play Alarm Sound"                      (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:playAlarmSound"}
+Dimmer Echo_Matrimoniale_NotificationVolume     "Notification volume"                   (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:notificationVolume"}
+Switch Echo_Matrimoniale_AscendingAlarm         "Ascending alarm"                       (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:ascendingAlarm"}
+
+// Feedbacks
+String Echo_Matrimoniale_LastVoiceCommand       "Last voice command"                    (Alexa_Matrimoniale) {channel="amazonechocontrol:echo:98a41df9:G0911W06927102VE:lastVoiceCommand"}
