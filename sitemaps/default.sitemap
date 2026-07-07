@@ -2,470 +2,7 @@ sitemap default label="Casa"
 {
 
 
-  Frame label="Sensori" {
 
-  Text item=bs04_temperature label="Fuori [%.2f °C]" icon=garden {
-    Frame label="Nord" {
-      Text item=bs04_temperature                       icon="terrace"
-      Text item=bs04_humidity                          icon="humidity"
-    }
-    Frame label="Davanti" {
-      Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
-      Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
-      Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
-      Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
-    }
-    Frame label="Clima Dietro" {
-      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
-    }
-    Frame label="Periodo" {
-      Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-    }
-    Frame label="Terrazzo Nord" {
-      // TEMPERATURA Parcheggio P1
-      Chart  item=bs04_temperature period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
-      Chart  item=bs04_temperature period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
-      Chart  item=bs04_temperature period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
-      Chart  item=bs04_temperature period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
-      Chart  item=bs04_temperature period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
-      Chart  item=bs04_temperature period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
-      Chart  item=bs04_temperature period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
-      Chart  item=bs04_temperature period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
-      Chart  item=bs04_temperature period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
-      Chart  item=bs04_temperature period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
-      // UMIDITA Parcheggio P1
-      Chart  item=Fuori_Umidita_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
-      Chart  item=Fuori_Umidita_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
-      Chart  item=Fuori_Umidita_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
-      Chart  item=Fuori_Umidita_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
-      Chart  item=Fuori_Umidita_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
-      Chart  item=Fuori_Umidita_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
-      Chart  item=Fuori_Umidita_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
-      Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
-      Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
-      Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
-    }
-    Frame label="Motori Clima" {
-      // TEMPERATURA
-      Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
-      Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
-      Chart  item=Fuori_Temperature_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
-      Chart  item=Fuori_Temperature_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
-      Chart  item=Fuori_Temperature_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
-      Chart  item=Fuori_Temperature_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
-      Chart  item=Fuori_Temperature_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
-      Chart  item=Fuori_Temperature_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
-      Chart  item=Fuori_Temperature_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
-      Chart  item=Fuori_Temperature_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
-      }  // CHIUSO Frane Graphs
-
-    }  // CHIUSO Text item=bs04_temperature MAIN PAGE
-
-
-    Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
-      Frame label="Piano 2" {
-        Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
-        Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
-        Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
-        Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
-        Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
-        Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu
-        Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
-        Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
-        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
-        Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
-        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
-        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
-      }
-      Frame label="Piano 1" {
-        Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
-        Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
-        Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
-        Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
-      }
-      Frame label="Grafici" {
-        Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-        Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
-        Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
-        Chart  item=Casa_Consumi_Chart period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2]
-        Chart  item=Casa_Consumi_Chart period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3]
-        Chart  item=Casa_Consumi_Chart period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4]
-        Chart  item=Casa_Consumi_Chart period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5]
-        Chart  item=Casa_Consumi_Chart period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6]
-        Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
-        Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
-        Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
-        Chart  item=Casa_Consumi_Chart_Total period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8] legend=true
-        Chart  item=Casa_Consumi_Chart_Total period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9] legend=true
-      }
-    }
-
-	  Text item=avgSoggiornoAvg label="Casa [%.1f °C]" icon="house" {
-      Frame label="Grafici" {
-        Text label="Grafici" icon=line {
-  	    Frame label="Periodo" {
-          Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
-        }
-        Frame label="Soggiorno" {
-        // TEMPERATURA Soggiorno
-        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-      
-        // UMIDITA Soggiorno
-        Chart  item=gChartLvrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartLvrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartLvrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartLvrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartLvrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartLvrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartLvrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
-
-        Frame label="Camera Matrimoniale" {
-        // TEMPERATURA Studio
-        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-
-        // UMIDITA Studio
-        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
-
-        Frame label="Bagno" {
-        // TEMPERATURA BagnoP2
-        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-
-        // UMIDITA Bagno
-        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
-
-        Frame label="Tutto insieme" {
-        // TEMPERATURA TUTTO
-        Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
-        Chart  item=Casa_Temperature_Chart period=8h  refresh=300000  visibility=[ChartPeriod==2]
-        Chart  item=Casa_Temperature_Chart period=12h refresh=600000  visibility=[ChartPeriod==3]
-        Chart  item=Casa_Temperature_Chart period=D   refresh=3600000 visibility=[ChartPeriod==4]
-        Chart  item=Casa_Temperature_Chart period=2D  refresh=3600000 visibility=[ChartPeriod==5]
-        Chart  item=Casa_Temperature_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=Casa_Temperature_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=Casa_Temperature_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=Casa_Temperature_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-  			// UMIDITA TUTTO
-        Chart  item=Casa_Umidita_Chart period=h   refresh=30000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
-        Chart  item=Casa_Umidita_Chart period=4h  refresh=30000  visibility=[ChartPeriod==1]
-        Chart  item=Casa_Umidita_Chart period=8h  refresh=30000  visibility=[ChartPeriod==2]
-        Chart  item=Casa_Umidita_Chart period=12h refresh=60000  visibility=[ChartPeriod==3]
-        Chart  item=Casa_Umidita_Chart period=D   refresh=60000  visibility=[ChartPeriod==4]
-        Chart  item=Casa_Umidita_Chart period=2D  refresh=60000  visibility=[ChartPeriod==5]
-        Chart  item=Casa_Umidita_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
-        Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
-        Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
-        Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
-        }
-        } // Chiuso frame grafici
-      } // Chiuso text grafici 
-
-      Frame label="Soggiorno Media 30min" {
-        Text item=avgSoggiornoAvg             icon=house
-      }
-      Frame label="Soggiorno Tutte" {
-        Text item=sf06_Temp                   label="Alta"    icon=flowpipe
-  	Text item=sf06_Humid                  label="Alta"    
-        Text item=bs11_temperature            label="Divano"    icon=sofa
-  	Text item=bs11_humidity               label="Divano"    
-        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
-	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
-      }
-      Frame label="Cameretta" {
-        Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
-        Text item=esp02_Humid                  label="Cameretta Girls"
-        Text item=bs06_temperature             label="Cameretta Ethan"  icon=bedroom_blue
-        Text item=bs06_humidity                label="Cameretta Ethan"
-      }
-      Frame label="Bagno" {
-        Text item=sf07_Temp                   label="Temperatura" icon=bath
-        Text item=sf07_Humid                  label="Umidità"
-      }
-      Frame label="Camera Da Letto" {
-        Text item=sf05_Temp                   label="Specchio"  icon=bedroom_orange
-        Text item=sf05_Humid                  label="Specchio"
-      }
-    }
-
-  } // CLOSE FRAME SENSORI
-
-
-
-
-	Frame label="Things" {
-		Text label="Luci" icon="light" {
-			Frame label="P1 Luci" {
-			        Switch item=shelly03_R1    label="Scala"    icon=lightbulb
-			        Switch item=shelly04_R1    label="Luce Giochi"   icon=lightbulb
-			        Switch item=shelly05_R1    label="Faretti Giochi"   icon=lightbulb
-			}
-			Frame label="Soggiorno Luci" {
-				Switch item=sf04_Light
-				Slider item=led03_DimW
-				Slider 		item=led03_Dim
-				Colorpicker  	item=led03_Color
-				Text 		item=led03_RGB
-			}
-			Frame label="Studio Barra" {
-			  	Switch		item=led01_fake01
-			  	Switch		item=led01_PowerW
-				Slider 		item=led01_DimW
-			  	Switch		item=led01_Power
-				Slider 		item=led01_Dim
-				Colorpicker  	item=led01_Color
-				Text 		item=led01_RGB
-				//Switch 		item=led01_PowerW
-			}
-		}
-
-
-    Text label="Tapparelle" icon=rollershutter {
-      Frame label="Tutta Casa" {
-        Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappP2   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      }
-      Frame label="Piano 2" {
-        Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Default item=Tapp01
-        Default item=Tapp02
-        Default item=Tapp03
-        Default item=Tapp04
-        Default item=Tapp05
-        Default item=Tapp06
-        Default item=Tapp07
-        Default item=Tapp08
-      }
-      Frame label="Piano 1" {
-        Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
-        Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
-        Switch item=shellytappCharlie_roller  label="Charlie - Bagno"
-        Switch item=shellytappDelta_roller    label="Delta - Cameretta"
-        Switch item=shellytappEcho_roller     label="Echo - Matrimoniale Grande"
-        Switch item=shellytappFoxtrot_roller  label="Foxtrot - Matrimoniale Piccola"
-        Switch item=shellytappGolf_roller     label="Golf - Cucina destra"
-        Switch item=shellytappHotel_roller    label="Hotel - Cucina sinistra"
-      }
-    }
-    Text label="Devices" icon=cinema {
-      Frame label="Plex" {
-        Switch item=Opti
-        Text   item=Plex_Last
-        Switch item=Plex
-      }
-      Frame label="Cose" {
-      Switch item=pow04_Switch
-      Text label="Varie Casa" icon=house {
-        Switch item=tuya02_Switch
-        Switch item=tuya01_switch
-        Switch item=tuya05_Switch
-        Switch item=tuya03_Switch
-        Switch item=pow01_Switch
-        Switch item=Terrazza
-      } // Chiuso Text "Varie Casa"
-      } // Chiuso FRAME "Cose"
-      Frame label="Audio" {
-      Group item=marantz_lr_power label="Living Room" icon="receiver" {
-        Default   item=marantz_lr_power     label="Stereo"
-        Selection item=marantz_lr_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_mute      visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=1  visibility=[marantz_lr_power==ON]
-        Slider    item=marantz_lr_volume    label="Volume [%.1f]" visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volumeDB  label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_volumeDB  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_surround  visibility=[marantz_lr_power==ON]
-        Switch 	  item=denon_DynamicVolume  visibility=[marantz_lr_power==ON]
-        Switch    item=denon_Restorer       visibility=[marantz_lr_power==ON]
-        Switch    item=denon_DynamicEq      visibility=[marantz_lr_power==ON]
-        Switch    item=denon_BassLimit      visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_artist    visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_album     visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_track     visibility=[marantz_lr_power==ON]
-	} // CHIUSO GROUP "Living Room"
-      Group item=marantz_br_power label="Studio" icon="receiver" {
-        Default   item=marantz_br_power     label="Stereo"
-        Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_surround  visibility=[marantz_br_power==ON]
-        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_artist    visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
-      } // CHIUSO GROUP "Bedroom"
-      Switch  item=WhiteNoiseBDRM
-      Switch  item=WhiteNoiseGirls
-
-
-        } // CHIUSO FRAME Audio
-
-
-	Frame label="Alexa" {
-
-        Text label="Echo Soggiorno" {
-            Default   item=Echo_Soggiorno_Player
-            Slider    item=Echo_Soggiorno_Volume
-            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Soggiorno_TTS_Volume
-            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Soggiorno_Shuffle
-            Text      item=Echo_Soggiorno_Title
-
-            Text    item=Echo_Soggiorno_LastVoiceCommand
-            Slider  item=Echo_Soggiorno_NotificationVolume
-        }
-
-        Text label="Echo Matrimoniale" {
-            Default   item=Echo_Matrimoniale_Player
-            Slider    item=Echo_Matrimoniale_Volume
-            Setpoint  item=Echo_Matrimoniale_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Matrimoniale_TTS_Volume
-            Setpoint  item=Echo_Matrimoniale_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Matrimoniale_Shuffle
-            Text      item=Echo_Matrimoniale_Title
-            Text    item=Echo_Matrimoniale_LastVoiceCommand
-            Slider  item=Echo_Matrimoniale_NotificationVolume
-        }
-        Text label="Echo Ethan" {
-            Default   item=Echo_Ethan_Player
-            Slider    item=Echo_Ethan_Volume
-            Setpoint  item=Echo_Ethan_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Ethan_TTS_Volume
-            Setpoint  item=Echo_Ethan_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Ethan_Shuffle
-            Text      item=Echo_Ethan_Title
-            Text    item=Echo_Ethan_LastVoiceCommand
-            Slider  item=Echo_Ethan_NotificationVolume
-        }
-        Text label="Echo Cameretta" {
-            Default   item=Echo_Cameretta_Player
-            Slider    item=Echo_Cameretta_Volume
-            Setpoint  item=Echo_Cameretta_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Cameretta_TTS_Volume
-            Setpoint  item=Echo_Cameretta_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Cameretta_Shuffle
-            Text      item=Echo_Cameretta_Title
-
-            Text    item=Echo_Cameretta_LastVoiceCommand
-            Slider  item=Echo_Cameretta_NotificationVolume
-        }
-
-        Text label="Echo Studio" {
-            Default   item=Echo_Studio_Player
-            Slider    item=Echo_Studio_Volume
-            Setpoint  item=Echo_Studio_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Studio_TTS_Volume
-            Setpoint  item=Echo_Studio_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Studio_Shuffle
-            Text      item=Echo_Studio_Title
-
-            Text    item=Echo_Studio_LastVoiceCommand
-            Slider  item=Echo_Studio_NotificationVolume
-        }
-
-        Text label="Echo Giochi" {
-            Default   item=Echo_Giochi_Player
-            Slider    item=Echo_Giochi_Volume
-            Setpoint  item=Echo_Giochi_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Giochi_TTS_Volume
-            Setpoint  item=Echo_Giochi_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Giochi_Shuffle
-            Text      item=Echo_Giochi_Title
-
-            Text    item=Echo_Giochi_LastVoiceCommand
-            Slider  item=Echo_Giochi_NotificationVolume
-        }
-
-
-	} // CHIUSO FRAME Alexa
-    Frame label="IP Cameras" {
-    Text label="IP Cameras" icon="camera" {
-	      Frame label="2P" {
-		Switch item=sf03_Switch
-	      }
-	      Frame label="1P" {
-		Switch item=sf12_Switch
-	      }
-      }
-    }
-
-    } // CHIUSO TEXT "Devices"
-
-    Text label="Timers" {
-      Text label="Timer 01" { 
-        Switch    item=timer01_state
-        Text      item=timer01_state_lastChange
-        Switch    item=shelly12_R1
-        Text      item=timer01_item_lastChange
-        Switch    item=timer01_desired_state
-        Slider    item=timer01_minutes
-        Text      item=shelly12_Power
-        Text      item=shelly12_temperature
-      }
-    } // CHIUSO Text Timers
-
-
-  } // Chiuso Frame Things
 
 
 
@@ -1334,6 +871,477 @@ sitemap default label="Casa"
   } // Chiuso frame Thermostats
 
 
+  Frame label="Sensori" {
+
+  Text item=bs04_temperature label="Fuori [%.2f °C]" icon=garden {
+    Frame label="Nord" {
+      Text item=bs04_temperature                       icon="terrace"
+      Text item=bs04_humidity                          icon="humidity"
+    }
+    Frame label="Davanti" {
+      Text item=faikin01_outside			 label="Daikin 1P Davanti"	icon="terrace"
+      Text item=faikin02_outside			 label="Daikin 2P Davanti"	icon="terrace"
+      Text item=Terrazza_Temp                            label="Sensore 2P Temp"	icon="terrace"
+      Text item=Terrazza_Humid                           label="Sensore 2P Humid"	icon="humidity"
+    }
+    Frame label="Clima Dietro" {
+      Text item=DaikinMatrimoniale_OutdoorTemperature    label="Daikin 2P Dietro"	icon="terrace"
+    }
+    Frame label="Periodo" {
+      Selection item=Fuori_Temperature_Chart_Period icon="line" mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+    }
+    Frame label="Terrazzo Nord" {
+      // TEMPERATURA Parcheggio P1
+      Chart  item=bs04_temperature period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=bs04_temperature period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=bs04_temperature period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=bs04_temperature period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=bs04_temperature period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=bs04_temperature period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=bs04_temperature period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=bs04_temperature period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=bs04_temperature period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=bs04_temperature period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      // UMIDITA Parcheggio P1
+      Chart  item=Fuori_Umidita_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Umidita_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Umidita_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Umidita_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Umidita_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Umidita_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Umidita_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Umidita_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Umidita_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Umidita_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+    }
+    Frame label="Motori Clima" {
+      // TEMPERATURA
+      Chart  item=Fuori_Temperature_Chart period=h   refresh=30000  visibility=[Fuori_Temperature_Chart_Period==0, Fuori_Temperature_Chart_Period=="Uninitialized"]
+      Chart  item=Fuori_Temperature_Chart period=4h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==1]
+      Chart  item=Fuori_Temperature_Chart period=8h  refresh=30000  visibility=[Fuori_Temperature_Chart_Period==2]
+      Chart  item=Fuori_Temperature_Chart period=12h refresh=60000  visibility=[Fuori_Temperature_Chart_Period==3]
+      Chart  item=Fuori_Temperature_Chart period=D   refresh=60000  visibility=[Fuori_Temperature_Chart_Period==4]
+      Chart  item=Fuori_Temperature_Chart period=2D  refresh=60000  visibility=[Fuori_Temperature_Chart_Period==5]
+      Chart  item=Fuori_Temperature_Chart period=W   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==6]
+      Chart  item=Fuori_Temperature_Chart period=2W  refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==7]
+      Chart  item=Fuori_Temperature_Chart period=M   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==8]
+      Chart  item=Fuori_Temperature_Chart period=Y   refresh=3600000 visibility=[Fuori_Temperature_Chart_Period==9]
+      }  // CHIUSO Frane Graphs
+
+    }  // CHIUSO Text item=bs04_temperature MAIN PAGE
+
+
+  Text item=avgSoggiornoAvg label="Casa [%.1f °C]" icon="house" {
+      Frame label="Grafici" {
+        Text label="Grafici" icon=line {
+  	    Frame label="Periodo" {
+          Selection item=ChartPeriod icon=line mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        }
+        Frame label="Soggiorno" {
+        // TEMPERATURA Soggiorno
+        Chart  item=gChartLvrmT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+      
+        // UMIDITA Soggiorno
+        Chart  item=gChartLvrmH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartLvrmH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartLvrmH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartLvrmH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartLvrmH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartLvrmH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartLvrmH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartLvrmH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartLvrmH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartLvrmH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Camera Matrimoniale" {
+        // TEMPERATURA Studio
+        Chart  item=gChartStudioT period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioT period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioT period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioT period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioT period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioT period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioT period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioT period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioT period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioT period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Studio
+        Chart  item=gChartStudioH period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartStudioH period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartStudioH period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartStudioH period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartStudioH period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartStudioH period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartStudioH period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartStudioH period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartStudioH period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartStudioH period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Bagno" {
+        // TEMPERATURA BagnoP2
+        Chart  item=gChartBagnoP2T period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2T period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2T period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2T period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2T period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2T period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2T period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2T period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2T period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2T period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+
+        // UMIDITA Bagno
+        Chart  item=gChartBagnoP2H period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=gChartBagnoP2H period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=gChartBagnoP2H period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=gChartBagnoP2H period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=gChartBagnoP2H period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=gChartBagnoP2H period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=gChartBagnoP2H period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=gChartBagnoP2H period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=gChartBagnoP2H period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=gChartBagnoP2H period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+
+        Frame label="Tutto insieme" {
+        // TEMPERATURA TUTTO
+        Chart  item=Casa_Temperature_Chart period=h   refresh=300000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Temperature_Chart period=4h  refresh=300000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Temperature_Chart period=8h  refresh=300000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Temperature_Chart period=12h refresh=600000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Temperature_Chart period=D   refresh=3600000 visibility=[ChartPeriod==4]
+        Chart  item=Casa_Temperature_Chart period=2D  refresh=3600000 visibility=[ChartPeriod==5]
+        Chart  item=Casa_Temperature_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Temperature_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Temperature_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Temperature_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+  			// UMIDITA TUTTO
+        Chart  item=Casa_Umidita_Chart period=h   refresh=30000  visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]
+        Chart  item=Casa_Umidita_Chart period=4h  refresh=30000  visibility=[ChartPeriod==1]
+        Chart  item=Casa_Umidita_Chart period=8h  refresh=30000  visibility=[ChartPeriod==2]
+        Chart  item=Casa_Umidita_Chart period=12h refresh=60000  visibility=[ChartPeriod==3]
+        Chart  item=Casa_Umidita_Chart period=D   refresh=60000  visibility=[ChartPeriod==4]
+        Chart  item=Casa_Umidita_Chart period=2D  refresh=60000  visibility=[ChartPeriod==5]
+        Chart  item=Casa_Umidita_Chart period=W   refresh=3600000 visibility=[ChartPeriod==6]
+        Chart  item=Casa_Umidita_Chart period=2W  refresh=3600000 visibility=[ChartPeriod==7]
+        Chart  item=Casa_Umidita_Chart period=M   refresh=3600000 visibility=[ChartPeriod==8]
+        Chart  item=Casa_Umidita_Chart period=Y   refresh=3600000 visibility=[ChartPeriod==9]
+        }
+        } // Chiuso frame grafici
+      } // Chiuso text grafici 
+
+      Frame label="Soggiorno Media 30min" {
+        Text item=avgSoggiornoAvg             icon=house
+      }
+      Frame label="Soggiorno Tutte" {
+        Text item=sf06_Temp                   label="Alta"    icon=flowpipe
+  	Text item=sf06_Humid                  label="Alta"    
+        Text item=bs11_temperature            label="Divano"    icon=sofa
+  	Text item=bs11_humidity               label="Divano"    
+        Text item=Casa_Temperature_AVG        label="MEDIA Calcolata" icon=zoom
+	Text item=Casa_Temperature_Sogg_Down  label="Bassa"   icon=returnpipe
+      }
+      Frame label="Cameretta" {
+        Text item=esp02_Temp                   label="Cameretta Girls"  icon=bedroom_blue
+        Text item=esp02_Humid                  label="Cameretta Girls"
+        Text item=bs06_temperature             label="Cameretta Ethan"  icon=bedroom_blue
+        Text item=bs06_humidity                label="Cameretta Ethan"
+      }
+      Frame label="Bagno" {
+        Text item=sf07_Temp                   label="Temperatura" icon=bath
+        Text item=sf07_Humid                  label="Umidità"
+      }
+      Frame label="Camera Da Letto" {
+        Text item=sf05_Temp                   label="Specchio"  icon=bedroom_orange
+        Text item=sf05_Humid                  label="Specchio"
+      }
+    }
+
+    Text item=sonoff09_Power_Fix label="Consumo [%.0f W]" icon=energy {
+      Frame label="Piano 2" {
+        Text item=sonoff09_Power_Fix	label="Casa PZEM: [%.0f W]" icon=poweroutlet
+        Text item=pow03_Power           label="Clima Soggiorno: [%.0f W]" icon=sofa
+        Text item=pow01_Power           label="Clima Daikin: [%.0f W]" icon=bedroom
+        Text item=sonoff01_Power_Fix	label="Induzione: [%.0f W]" icon=kitchen
+        Text item=tuya02_Power		label="Lavasciuga: [%.0f W]" icon=washingmachine
+        Text item=tuya08_Power		label="Lavastoviglie: [%.0f W]" icon=poweroutlet_eu
+        Text item=tuya01_Power		label="TV: [%.0f W]" icon=screen
+        Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
+        Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
+        Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
+        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
+        Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
+      }
+      Frame label="Piano 1" {
+        Text item=esp08_Power		label="P1 Totale [%.0f W]" icon=groundfloor
+        Text item=shelly01_Power	label="PdC Ethan [%.0f W]" icon=climate
+        Text item=shelly06_Power	label="PdC Studio [%.0f W]" icon=climate
+        Text item=shelly07_Power	label="PdC HiSense [%.0f W]" icon=climate
+      }
+      Frame label="Grafici" {
+        Selection item=Casa_Consumi_Chart_Period mappings=[0="1h", 1="4h", 2="8h", 3="12h", 4="1D", 5="2D", 6="1W", 7="2W", 8="1M", 9="1Y" ]
+        Chart  item=Casa_Consumi_Chart period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"]
+        Chart  item=Casa_Consumi_Chart period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1]
+        Chart  item=Casa_Consumi_Chart period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2]
+        Chart  item=Casa_Consumi_Chart period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3]
+        Chart  item=Casa_Consumi_Chart period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4]
+        Chart  item=Casa_Consumi_Chart period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5]
+        Chart  item=Casa_Consumi_Chart period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6]
+        Chart  item=Casa_Consumi_Chart period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7]
+        Chart  item=Casa_Consumi_Chart period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8]
+        Chart  item=Casa_Consumi_Chart period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9]
+        Chart  item=Casa_Consumi_Chart_Total period=h   refresh=30000  visibility=[Casa_Consumi_Chart_Period==0, Casa_Consumi_Chart_Period=="Uninitialized"] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=4h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==1] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=8h  refresh=30000  visibility=[Casa_Consumi_Chart_Period==2] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=12h refresh=60000  visibility=[Casa_Consumi_Chart_Period==3] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=D   refresh=60000  visibility=[Casa_Consumi_Chart_Period==4] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2D  refresh=60000  visibility=[Casa_Consumi_Chart_Period==5] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=W   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==6] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=2W  refresh=3600000 visibility=[Casa_Consumi_Chart_Period==7] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=M   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==8] legend=true
+        Chart  item=Casa_Consumi_Chart_Total period=Y   refresh=3600000 visibility=[Casa_Consumi_Chart_Period==9] legend=true
+      }
+    }
+
+
+
+
+  } // CLOSE FRAME SENSORI
+
+
+	Frame label="Things" {
+		Text label="Luci" icon="light" {
+			Frame label="P1 Luci" {
+			        Switch item=shelly03_R1    label="Scala"    icon=lightbulb
+			        Switch item=shelly04_R1    label="Luce Giochi"   icon=lightbulb
+			        Switch item=shelly05_R1    label="Faretti Giochi"   icon=lightbulb
+			}
+			Frame label="Soggiorno Luci" {
+				Switch item=sf04_Light
+				Slider item=led03_DimW
+				Slider 		item=led03_Dim
+				Colorpicker  	item=led03_Color
+				Text 		item=led03_RGB
+			}
+			Frame label="Studio Barra" {
+			  	Switch		item=led01_fake01
+			  	Switch		item=led01_PowerW
+				Slider 		item=led01_DimW
+			  	Switch		item=led01_Power
+				Slider 		item=led01_Dim
+				Colorpicker  	item=led01_Color
+				Text 		item=led01_RGB
+				//Switch 		item=led01_PowerW
+			}
+		}
+
+
+    Text label="Tapparelle" icon=rollershutter {
+      Frame label="Tutta Casa" {
+        Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP2   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      }
+      Frame label="Piano 2" {
+        Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Default item=Tapp01
+        Default item=Tapp02
+        Default item=Tapp03
+        Default item=Tapp04
+        Default item=Tapp05
+        Default item=Tapp06
+        Default item=Tapp07
+        Default item=Tapp08
+      }
+      Frame label="Piano 1" {
+        Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
+        Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
+        Switch item=shellytappCharlie_roller  label="Charlie - Bagno"
+        Switch item=shellytappDelta_roller    label="Delta - Cameretta"
+        Switch item=shellytappEcho_roller     label="Echo - Matrimoniale Grande"
+        Switch item=shellytappFoxtrot_roller  label="Foxtrot - Matrimoniale Piccola"
+        Switch item=shellytappGolf_roller     label="Golf - Cucina destra"
+        Switch item=shellytappHotel_roller    label="Hotel - Cucina sinistra"
+      }
+    }
+    Text label="Devices" icon=cinema {
+
+      Frame label="IP Cameras" {
+        Text label="IP Cameras" icon="camera" {
+          Frame label="2P" {
+            Switch item=sf03_Switch
+	  }
+	  Frame label="1P" {
+            Switch item=sf12_Switch
+	  }
+        }
+      } // CHIUSO FRAME IP Cameras
+
+      Frame label="Plex" {
+        Switch item=Opti
+        Text   item=Plex_Last
+        Switch item=Plex
+      }
+      Frame label="Cose" {
+      Switch item=pow04_Switch
+      Text label="Varie Casa" icon=house {
+        Switch item=tuya02_Switch
+        Switch item=tuya01_switch
+        Switch item=tuya05_Switch
+        Switch item=tuya03_Switch
+        Switch item=pow01_Switch
+        Switch item=Terrazza
+      } // Chiuso Text "Varie Casa"
+      } // Chiuso FRAME "Cose"
+      Frame label="Audio" {
+      Group item=marantz_lr_power label="Living Room" icon="receiver" {
+        Default   item=marantz_lr_power     label="Stereo"
+        Selection item=marantz_lr_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_mute      visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=1  visibility=[marantz_lr_power==ON]
+        Slider    item=marantz_lr_volume    label="Volume [%.1f]" visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volumeDB  label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_volumeDB  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_surround  visibility=[marantz_lr_power==ON]
+        Switch 	  item=denon_DynamicVolume  visibility=[marantz_lr_power==ON]
+        Switch    item=denon_Restorer       visibility=[marantz_lr_power==ON]
+        Switch    item=denon_DynamicEq      visibility=[marantz_lr_power==ON]
+        Switch    item=denon_BassLimit      visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_artist    visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_album     visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_track     visibility=[marantz_lr_power==ON]
+	} // CHIUSO GROUP "Living Room"
+      Group item=marantz_br_power label="Studio" icon="receiver" {
+        Default   item=marantz_br_power     label="Stereo"
+        Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_surround  visibility=[marantz_br_power==ON]
+        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_artist    visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
+      } // CHIUSO GROUP "Bedroom"
+      Switch  item=WhiteNoiseBDRM
+      Switch  item=WhiteNoiseGirls
+
+
+        } // CHIUSO FRAME Audio
+
+
+	Frame label="Alexa" {
+
+        Text label="Echo Soggiorno" {
+            Default   item=Echo_Soggiorno_Player
+            Slider    item=Echo_Soggiorno_Volume
+            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Soggiorno_TTS_Volume
+            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Soggiorno_Shuffle
+            Text      item=Echo_Soggiorno_Title
+
+            Text    item=Echo_Soggiorno_LastVoiceCommand
+            Slider  item=Echo_Soggiorno_NotificationVolume
+        }
+
+        Text label="Echo Matrimoniale" {
+            Default   item=Echo_Matrimoniale_Player
+            Slider    item=Echo_Matrimoniale_Volume
+            Setpoint  item=Echo_Matrimoniale_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Matrimoniale_TTS_Volume
+            Setpoint  item=Echo_Matrimoniale_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Matrimoniale_Shuffle
+            Text      item=Echo_Matrimoniale_Title
+            Text    item=Echo_Matrimoniale_LastVoiceCommand
+            Slider  item=Echo_Matrimoniale_NotificationVolume
+        }
+        Text label="Echo Ethan" {
+            Default   item=Echo_Ethan_Player
+            Slider    item=Echo_Ethan_Volume
+            Setpoint  item=Echo_Ethan_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Ethan_TTS_Volume
+            Setpoint  item=Echo_Ethan_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Ethan_Shuffle
+            Text      item=Echo_Ethan_Title
+            Text    item=Echo_Ethan_LastVoiceCommand
+            Slider  item=Echo_Ethan_NotificationVolume
+        }
+        Text label="Echo Cameretta" {
+            Default   item=Echo_Cameretta_Player
+            Slider    item=Echo_Cameretta_Volume
+            Setpoint  item=Echo_Cameretta_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Cameretta_TTS_Volume
+            Setpoint  item=Echo_Cameretta_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Cameretta_Shuffle
+            Text      item=Echo_Cameretta_Title
+
+            Text    item=Echo_Cameretta_LastVoiceCommand
+            Slider  item=Echo_Cameretta_NotificationVolume
+        }
+
+        Text label="Echo Studio" {
+            Default   item=Echo_Studio_Player
+            Slider    item=Echo_Studio_Volume
+            Setpoint  item=Echo_Studio_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Studio_TTS_Volume
+            Setpoint  item=Echo_Studio_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Studio_Shuffle
+            Text      item=Echo_Studio_Title
+
+            Text    item=Echo_Studio_LastVoiceCommand
+            Slider  item=Echo_Studio_NotificationVolume
+        }
+
+        Text label="Echo Giochi" {
+            Default   item=Echo_Giochi_Player
+            Slider    item=Echo_Giochi_Volume
+            Setpoint  item=Echo_Giochi_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Giochi_TTS_Volume
+            Setpoint  item=Echo_Giochi_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Giochi_Shuffle
+            Text      item=Echo_Giochi_Title
+
+            Text    item=Echo_Giochi_LastVoiceCommand
+            Slider  item=Echo_Giochi_NotificationVolume
+        }
+
+
+	} // CHIUSO FRAME Alexa
+
+    } // CHIUSO TEXT "Devices"
+
+    Text label="Timers" {
+      Text label="Timer 01" { 
+        Switch    item=timer01_state
+        Text      item=timer01_state_lastChange
+        Switch    item=shelly12_R1
+        Text      item=timer01_item_lastChange
+        Switch    item=timer01_desired_state
+        Slider    item=timer01_minutes
+        Text      item=shelly12_Power
+        Text      item=shelly12_temperature
+      }
+    } // CHIUSO Text Timers
+
+
+  } // Chiuso Frame Things
+
+
+
+
   Frame label="Configurazioni" {
     Text label="Home Automation" icon="settings" {
       Frame label="Scene Standard" {
@@ -1630,6 +1638,30 @@ sitemap default label="Casa"
 
 
   Frame label="Debug" {
+
+    Text label="OpenHAB" {
+      Frame label="IP" {
+        Text      item=PublicIP
+      }
+      Frame label="Services" {
+        Switch    item=cl_restart mappings=[0="Restart Cloud"]
+        Switch    item=sw_restart mappings=[0="Restart"]
+        Switch    item=pi_restart mappings=[0="Reboot"]
+        Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
+        Switch    item=service_restart mappings=[0="Restart"]
+      }
+      Frame label="Sensors Stuck Check" {
+        Switch    item=SensorsStuckCheck
+        Setpoint  item=SensorsTimeoutMinutes minValue=60 maxValue=1440 step=60
+        Switch    item=SensorsStuckLog
+      }
+      Frame label="MQTT Errors" {
+        Switch    item=MqttErrorReset
+        Text      item=mqttLastError
+        Text      item=mqttConnectErrors
+      }
+    }
+
     Text label="Tasmota Devices" {
       Frame label="Tutti" {
 	Group item=gReachable     label="Debug Reachable"
@@ -1995,20 +2027,6 @@ sitemap default label="Casa"
 
     }
     Group item=gScene         label="SCENE"
-    Text label="OpenHAB" {
-      Switch    item=cl_restart mappings=[0="Restart Cloud"]
-      Switch    item=sw_restart mappings=[0="Restart"]
-      Switch    item=pi_restart mappings=[0="Reboot"]
-      Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
-      Switch    item=service_restart mappings=[0="Restart"]
-      Text      item=PublicIP
-      Switch    item=SensorsStuckCheck
-      Setpoint  item=SensorsTimeoutMinutes minValue=30 maxValue=600 step=30
-      Switch    item=SensorsStuckLog
-      Switch    item=MqttErrorReset
-      Text      item=mqttLastError
-      Text      item=mqttConnectErrors
-    }
     Text label="BLE Sensors" {
       Group item=g_Batteries
       Group item=g_bs01
