@@ -13,7 +13,7 @@ rule "Campanello"
       Echo_Soggiorno_TTS.sendCommand(message)
       Echo_Studio_TTS.sendCommand(message)
       Echo_Giochi_TTS.sendCommand(message)
-      Echo_Camera_TTS.sendCommand(message)
+      Echo_Matrimoniale_TTS.sendCommand(message)
       logInfo("CAMPANELLO", "Allertato Alexa")
     }
 end
