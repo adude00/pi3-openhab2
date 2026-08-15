@@ -67,3 +67,5 @@ Switch Buonanotte_CM_Power "Turn ON Aircon [%s]"              <settings>  (gRest
 Number Buonanotte_CM_Temp  "Aircon Temp [%s]"                 <settings>  (gRestore,ClimaMatrimonialeAlarm)
 String Buonanotte_CM_Fan   "Fan Speed [%s]"                   <settings>  (gRestore,ClimaMatrimonialeAlarm)
 
+Number Buonanotte_Alexa_Bdrm_Volume        "Volume Alexa"        <settings>  (gRestore)
+Switch Buonanotte_Alexa_Bdrm_Change_Volume "Change Alexa Volume" <settings>  (gRestore)

@@ -1536,12 +1536,16 @@ sitemap default label="Casa"
       } // Chiuso frame Scene
 
       Frame label="Automatismi" { 
-	Text label="Clima Matrimoniale" icon=settings {
-	  Frame label="Scena Buonanotte" {
+	Text label="Scena buonanotte" icon=settings {
+	  Frame label="Clima Matrimoniale" {
 	    Switch   item=Buonanotte_CM_Power
             Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
             Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
 	  }
+          Frame label="White Noise Bedroom" {
+            Switch   item=Buonanotte_Alexa_Bdrm_Change_Volume
+            Setpoint item=Buonanotte_Alexa_Bdrm_Volume icon=soundvolume minValue=1 maxValue=30 step=1
+          }
 	}
 	Text label="White Noise" icon="settings" {
 	  Frame label="Bedroom" {

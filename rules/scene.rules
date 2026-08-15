@@ -363,6 +363,14 @@ then
     WhiteNoiseBDRM.sendCommand(ON)
   }
 
+  if (Buonanotte_Alexa_Bdrm_Change_Volume.state == ON) {
+    logInfo("Scene","Buonanotte_Alexa_Bdrm_Change_Volume.state == ON")
+    createTimer(now.plusSeconds(7), [|
+        Echo_Matrimoniale_Volume.sendCommand(Buonanotte_Alexa_Bdrm_Volume.state as Number)
+        logInfo("Scene","Impostato volume di alexa a ", Buonanotte_Alexa_Bdrm_Volume.state)
+        ])
+  }
+
 
       if (Buonanotte_CM_Power.state == ON ) {
         DaikinMatrimoniale_Power.sendCommand(ON)
