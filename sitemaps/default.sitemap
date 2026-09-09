@@ -376,7 +376,8 @@ sitemap default label="Casa"
   Frame label="Temperature P1" {
 
     Text item=bs07_temperature label="P1 - Sala Giochi" icon=party {
-      Frame label="Termostato" {
+      Frame label="MAIN" {
+        Switch    item=cl02_metapower
 	Switch    item=tsGiochi
 	Text      item=spGiochi {
 
@@ -385,7 +386,7 @@ sitemap default label="Casa"
             Switch    item=tsGiochi
 	    Setpoint  item=spGiochi minValue=17    maxValue=29 step=0.2
             Setpoint  item=hsGiochi minValue=0     maxValue=3  step=0.1           icon=settings
-            Switch    item=tsGiochiFlip
+            Switch    item=tsGiochiFlip            mappings=[ON='Estate', OFF='Inverno']
             Selection item=tsGiochiSensor          mappings=[1='AM2302 (sf12)', 2='BT Mi Temp (bs07)']
             Switch    item=tsGiochiLog
             Switch    item=sonoff21_R2
