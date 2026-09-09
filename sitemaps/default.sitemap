@@ -1590,8 +1590,9 @@ sitemap default label="Casa"
 	    Switch        item=alexa_campanello
 	    Switch        item=esp09_Switch 
 	  }
-	  Frame label="Lavatrice" {
+	  Frame label="Lavatrice Notification" {
 	    Switch        item=alexa_lavatrice
+	    Switch        item=alexa_lavatrice_running
 	  }
 	  Frame label="Tramonto" {
 	    Switch        item=sunIsOut

@@ -50,7 +50,8 @@ String service_name     "Service"         <settings>
 
 // Alexa
 Switch alexa_campanello         "Campanello [%s]"                   <settings>        [ "Switchable" ]
-Switch alexa_lavatrice          "Lavatrice [%s]"                    <settings>        [ "Switchable" ]
+Switch alexa_lavatrice          "Lavatrice Notification [%s]"       <soundvolume>
+Switch alexa_lavatrice_running  "Lavatrice detected running [%s]"   <washingmachine>
 Switch alexa_lavatrice_wait     "Lavatrice wait [%s]"               <settings>
 
 // Tramonto
