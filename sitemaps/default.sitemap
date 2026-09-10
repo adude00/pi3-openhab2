@@ -378,6 +378,8 @@ sitemap default label="Casa"
     Text item=bs07_temperature label="P1 - Sala Giochi" icon=party {
       Frame label="MAIN" {
         Switch    item=cl02_metapower
+	}
+      Frame label="Thermostat" {
 	Switch    item=tsGiochi
 	Text      item=spGiochi {
 
