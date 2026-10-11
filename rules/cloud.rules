@@ -1,18 +1,49 @@
+// One restart per disconnection "episode": the logreader fires one event
+// per matching log line, so a single disconnect can produce many events in a
+// row. We latch the first one and ignore the rest until the cloud comes back.
+
+var Boolean cloudRestartDone = false
+var Timer cloudRetryTimer = null
 
 rule "LogReader - Disconnected"
     when
         Channel "logreader:reader:disconnected:newErrorEvent" triggered
     then
+        if (cloudRestartDone) {
+            logInfo("CLOUD", "Disconnection already handled - skipping duplicate event")
+            return;
+        }
+
+        cloudRestartDone = true
+
         val prowl = getActions("prowl", "prowl:broker:mybroker")
         prowl.pushNotification("CLOUD: ERROR", "Il Cloud si è disconnesso. Provo a riavviarlo!")
-	cl_restart.sendCommand(1)
+        cl_restart.sendCommand(1)
+
+        // Safety net: if the restart does not fix it, re-arm after 15 min so we
+        // try again, instead of being stuck with the latch forever.
+        cloudRetryTimer?.cancel
+        cloudRetryTimer = createTimer(now.plusMinutes(15), [ |
+            cloudRestartDone = false
+            cloudRetryTimer = null
+            logWarn("CLOUD", "Cloud still disconnected after restart - re-arming restart")
+        ])
     end
 
 rule "LogReader - Connected"
     when
         Channel "logreader:reader:connected:newErrorEvent" triggered
     then
+        // Nothing was broken (or we already reported it): just re-arm the latch
+        // and stay quiet, so we don't spam an "OK!" for every log line.
+        if (!cloudRestartDone) {
+            return;
+        }
+
+        cloudRestartDone = false
+        cloudRetryTimer?.cancel
+        cloudRetryTimer = null
+
         val prowl = getActions("prowl", "prowl:broker:mybroker")
         prowl.pushNotification("CLOUD: OK!", "Il Cloud si è connesso.")
     end
-
