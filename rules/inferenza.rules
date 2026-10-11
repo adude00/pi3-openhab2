@@ -114,3 +114,28 @@ then
         Inferenza.postUpdate(OFF)
     }
 end
+
+
+// --- Strata interface (port 8080 on the Inferenza PC) ---
+
+rule "Strata interface is UP"
+when
+    Item StrataOnline changed from OFF to ON
+then
+    logInfo("STRATA", "Strata interface is up and running")
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("STRATA", "Strata interface is UP and running (172.27.73.6:8080)")
+end
+
+
+rule "Strata interface is DOWN"
+when
+    Item StrataOnline changed from ON to OFF
+then
+    logWarn("STRATA", "Strata interface went down")
+
+    // Uncomment if you also want the notification for the down transition
+    //val prowl = getActions("prowl", "prowl:broker:mybroker")
+    //prowl.pushNotification("STRATA", "Strata interface is DOWN (172.27.73.6:8080)")
+end

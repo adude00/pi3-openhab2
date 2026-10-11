@@ -1,0 +1,4 @@
+// inferenza.things
+// TCP reachability check for the Strata interface on the Inferenza PC
+// (same pattern as things/plex.things)
+Thing network:servicedevice:strata "Strata Interface" [ hostname="172.27.73.6", port=8080, refreshInterval=15000 ]

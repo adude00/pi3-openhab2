@@ -1202,6 +1202,8 @@ sitemap default label="Casa"
       Frame label="Inferenza" {
         Switch item=Inferenza
         Switch item=Inferenza_running
+        Switch item=StrataOnline
+        Text   item=Strata_Last
       }
       Frame label="Cose" {
       Switch item=pow04_Switch

@@ -4,3 +4,7 @@
 
 Switch Inferenza         "Inferenza"                     <player> (Devices) [ "Switchable" ] {alexa="Switch"}
 Switch Inferenza_running "Inferenza Shutdown Running [%s]"        (Devices)
+
+// Strata interface (port 8080 on the Inferenza PC)
+Switch   StrataOnline "Strata Interface [%s]" <player> (Devices) { channel="network:servicedevice:strata:online" }
+DateTime Strata_Last  "Strata last seen [%1$tH:%1$tM]" <player> (Devices) { channel="network:servicedevice:strata:lastseen" }
