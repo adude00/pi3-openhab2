@@ -1084,7 +1084,7 @@ sitemap default label="Casa"
         Text item=tuya03_Power		label="Amplificatore: [%.0f W]" icon=receiver
         Text item=tuya05_Power		label="Boiler: [%.0f W]" icon=cistern
         Text item=tuya07_Power		label="Networking: [%.0f W]" icon=network
-        Text item=pow04_Power		label="Gaming PC: [%.0f W]" icon=poweroutlet_eu
+        Text item=pow04_Power		label="Inferenza: [%.0f W]" icon=poweroutlet_eu
         Text item=shelly02_Power	label="Frigo [%.0f W]" icon=pantry
       }
       Frame label="Piano 1" {
@@ -1199,9 +1199,9 @@ sitemap default label="Casa"
         Text   item=Plex_Last
         Switch item=Plex
       }
-      Frame label="Gaming PC" {
-        Switch item=GamingPC
-        Switch item=GamingPC_running
+      Frame label="Inferenza" {
+        Switch item=Inferenza
+        Switch item=Inferenza_running
       }
       Frame label="Cose" {
       Switch item=pow04_Switch

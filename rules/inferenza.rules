@@ -1,0 +1,116 @@
+// Inferenza (Gaming PC on the pow04 Sonoff strip)
+// ON  -> power the strip
+// OFF -> tell Windows to shut down, then poll the strip until it drops below
+//         10 W and only then cut the power.
+//
+// The OFF sequence is NOT blocking: Alexa gets an immediate response and the
+// waiting part is done by the polling rule below (a blocking rule would make
+// Alexa complain that the command "took too long").
+
+var int inferenzaWaited = 0
+
+rule "Inferenza - Power ON"
+when
+    Item Inferenza received command ON
+then
+    // If a shutdown was in progress, the user changed his mind: stop it
+    if (Inferenza_running.state == ON) {
+        logWarn("INFERENZA", "Power ON requested during shutdown - aborting shutdown")
+        Inferenza_running.postUpdate(OFF)
+    }
+
+    if (pow04_Switch.state == ON) {
+        logInfo("INFERENZA", "Strip already ON, only resyncing state")
+        Inferenza.postUpdate(ON)
+        return;
+    }
+
+    logInfo("INFERENZA", "Powering ON the strip")
+    pow04_Switch.sendCommand(ON)
+    Inferenza.postUpdate(ON)
+end
+
+
+rule "Inferenza - Shutdown request"
+when
+    Item Inferenza received command OFF
+then
+    if (Inferenza_running.state == ON) {
+        logInfo("INFERENZA", "Shutdown already running, skipping.")
+        return
+    }
+
+    if (pow04_Switch.state == OFF) {
+        logInfo("INFERENZA", "Strip already OFF, only resyncing state")
+        Inferenza.postUpdate(OFF)
+        return;
+    }
+
+    logInfo("INFERENZA", "Shutdown process started.")
+    Inferenza_running.postUpdate(ON)
+    inferenzaWaited = 0
+
+    // Ask Windows to shut down (5 s grace). Returns immediately.
+    executeCommandLine(Duration.ofSeconds(30), "ssh", "sshuser@172.27.73.6", "shutdown /s /t 5")
+    logInfo("INFERENZA", "Shutdown requested on the PC - polling power now")
+end
+
+
+rule "Inferenza - Shutdown poll"
+when
+    Time cron "*/10 * * * * ?"
+then
+    if (Inferenza_running.state != ON) {
+        return;
+    }
+
+    inferenzaWaited = inferenzaWaited + 10
+
+    val w = pow04_Power.state
+    val threshold = 10
+    val maxWaitSec = 300
+
+    if (w instanceof Number && (w as Number) < threshold) {
+        // PC stopped pulling power: give it a margin, then cut the strip
+        if (inferenzaWaited >= 20) {
+            logInfo("INFERENZA", "Power below {} W after {} s - cutting the strip OFF", threshold, inferenzaWaited)
+            pow04_Switch.sendCommand(OFF)
+            Inferenza.postUpdate(OFF)
+            Inferenza_running.postUpdate(OFF)
+
+            val prowl = getActions("prowl", "prowl:broker:mybroker")
+            prowl.pushNotification("INFERENZA", "Inferenza shutdown complete, strip OFF")
+        }
+        return;
+    }
+
+    if (inferenzaWaited >= maxWaitSec) {
+        // Still on: do NOT cut power (that would be a hard off), just report
+        logWarn("INFERENZA", "Strip still above {} W after {} s - aborting, strip left ON", threshold, maxWaitSec)
+        val prowlTimeout = getActions("prowl", "prowl:broker:mybroker")
+        prowlTimeout.pushNotification("INFERENZA", "Shutdown timeout: Inferenza still above 10 W, power NOT cut")
+        Inferenza_running.postUpdate(OFF)
+        return;
+    }
+
+    logInfo("INFERENZA", "Waiting for Inferenza to power down: {} s waited, {} W on strip", inferenzaWaited, w)
+end
+
+
+rule "Inferenza - Resync with strip"
+when
+    Item pow04_Switch changed from ON to OFF or
+    Item pow04_Switch changed from OFF to ON
+then
+    // Keep the virtual switch honest if someone toggles the strip directly,
+    // but never fight an ongoing shutdown sequence.
+    if (Inferenza_running.state == ON) {
+        return;
+    }
+
+    if (pow04_Switch.state == ON) {
+        Inferenza.postUpdate(ON)
+    } else {
+        Inferenza.postUpdate(OFF)
+    }
+end

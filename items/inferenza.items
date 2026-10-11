@@ -1,0 +1,6 @@
+// inferenza.items
+// Virtual switch for the Gaming PC (Sonoff strip pow04).
+// Named "Inferenza" so Alexa (IT voice) can say "Inferenza, on/off".
+
+Switch Inferenza         "Inferenza"                     <player> (Devices) [ "Switchable" ] {alexa="Switch"}
+Switch Inferenza_running "Inferenza Shutdown Running [%s]"        (Devices)

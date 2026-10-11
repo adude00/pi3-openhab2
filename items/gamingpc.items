@@ -1,5 +1,0 @@
-// gamingpc.items
-// Virtual switch: driving pow04 (the Sonoff strip the Gaming PC plugs into).
-
-Switch GamingPC         "Gaming PC [%s]"                 <player>  (Devices) [ "Switchable" ]
-Switch GamingPC_running "Gaming PC Shutdown Running [%s]"         (Devices)
