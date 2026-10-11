@@ -1,0 +1,102 @@
+// Gaming PC: ON  -> just power the Sonoff strip (pow04_Switch)
+//              OFF -> ask Windows to shut down, wait until the strip reports
+//                      < 10 W, then cut the power (so the PSU stops pulling)
+
+rule "Gaming PC - Power ON"
+when
+    Item GamingPC received command ON
+then
+    if (pow04_Switch.state == ON) {
+        logInfo("GAMINGPC", "pow04_Switch already ON, only resyncing state")
+        GamingPC.postUpdate(ON)
+        return;
+    }
+
+    logInfo("GAMINGPC", "Powering ON the strip (pow04_Switch)")
+    pow04_Switch.sendCommand(ON)
+    GamingPC.postUpdate(ON)
+end
+
+
+rule "Gaming PC - Shutdown sequence"
+when
+    Item GamingPC received command OFF
+then
+    // Prevent concurrent runs
+    if (GamingPC_running.state == ON) {
+        logInfo("GAMINGPC", "Shutdown already running, skipping.")
+        return
+    }
+
+    if (pow04_Switch.state == OFF) {
+        logInfo("GAMINGPC", "pow04_Switch already OFF, only resyncing state")
+        GamingPC.postUpdate(OFF)
+        return;
+    }
+
+    logInfo("GAMINGPC", "Shutdown process started.")
+    GamingPC_running.postUpdate(ON)
+
+    // Ask Windows to shut down (5 s grace, so the PC starts closing)
+    executeCommandLine(Duration.ofSeconds(30), "ssh", "sshuser@172.27.73.6", "shutdown /s /t 5")
+    logInfo("GAMINGPC", "Shutdown requested on the PC")
+
+    // Wait until the strip drops below 10 W (PC stopped pulling power)
+    val threshold = 10
+    val maxWaitSec = 300
+    var Boolean poweredOff = false
+    var int waited = 0
+
+    while (waited < maxWaitSec && !poweredOff) {
+        Thread::sleep(5000)
+        waited = waited + 5
+
+        val w = pow04_Power.state
+        if (w instanceof Number && (w as Number) < threshold) {
+            poweredOff = true
+        }
+
+        logInfo("GAMINGPC", "Waiting for PC to power down: {} s waited, {} W on strip", waited, w)
+    }
+
+    if (!poweredOff) {
+        // The PC is still on: do NOT cut the power (that would be a hard off)
+        logWarn("GAMINGPC", "Strip still above {} W after {} s - aborting, switch left ON", threshold, maxWaitSec)
+        val prowlTimeout = getActions("prowl", "prowl:broker:mybroker")
+        prowlTimeout.pushNotification("GAMINGPC", "Shutdown timeout: PC still above 10 W, power NOT cut")
+        GamingPC_running.postUpdate(OFF)
+        return;
+    }
+
+    // Small extra margin so the PSU has really stopped
+    Thread::sleep(10000)
+
+    logInfo("GAMINGPC", "Power below threshold, cutting the strip OFF")
+    pow04_Switch.sendCommand(OFF)
+    GamingPC.postUpdate(OFF)
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("GAMINGPC", "Gaming PC shutdown complete, strip OFF")
+
+    // Reset running flag
+    GamingPC_running.postUpdate(OFF)
+end
+
+
+rule "Gaming PC - Resync with strip"
+when
+    Item pow04_Switch changed from ON to OFF or
+    Item pow04_Switch changed from OFF to ON
+then
+    // Keep the virtual switch honest if someone toggles the strip directly,
+    // but never fight an ongoing shutdown sequence.
+    if (GamingPC_running.state == ON) {
+        return;
+    }
+
+    if (pow04_Switch.state == ON) {
+        GamingPC.postUpdate(ON)
+    } else {
+        GamingPC.postUpdate(OFF)
+    }
+end

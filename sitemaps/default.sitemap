@@ -1199,6 +1199,10 @@ sitemap default label="Casa"
         Text   item=Plex_Last
         Switch item=Plex
       }
+      Frame label="Gaming PC" {
+        Switch item=GamingPC
+        Switch item=GamingPC_running
+      }
       Frame label="Cose" {
       Switch item=pow04_Switch
       Text label="Varie Casa" icon=house {
