@@ -315,3 +315,35 @@ Restano da chiarire i seguenti punti:
 ```text
 2025-07-10 15:08:33.312 [thome.event.ExtensionEvent] - Extension 'binding-exec1' has been uninstalled.
 ```
+
+---
+
+## Local Prowl configuration / Configurazione locale di Prowl
+
+### English
+
+Install the Prowl binding through the OpenHAB UI and create an API key in
+your Prowl account at https://www.prowlapp.com/.
+
+Create `things/prowl.things` in this repository with the following content,
+replacing `YOUR_PROWL_API_KEY` with your own key:
+
+```text
+Thing prowl:broker:mybroker "Prowl Broker" [ apiKey="YOUR_PROWL_API_KEY" ]
+```
+
+Keep the UID `prowl:broker:mybroker`: existing rules use it to send notifications.
+The file is ignored by Git because it contains a secret. Keep a secure backup
+outside the repository and recreate it when deploying a fresh checkout.
+
+### Italiano
+
+Installare il binding Prowl tramite l'interfaccia di OpenHAB e creare una chiave
+API nel proprio account Prowl su https://www.prowlapp.com/.
+
+Creare `things/prowl.things` in questo repository usando il contenuto riportato
+sopra e sostituire `YOUR_PROWL_API_KEY` con la propria chiave.
+
+Mantenere l'UID `prowl:broker:mybroker`: le regole esistenti lo usano per inviare
+notifiche. Il file è ignorato da Git perché contiene un segreto. Conservarne una
+copia sicura fuori dal repository e ricrearlo quando si installa un nuovo clone.
