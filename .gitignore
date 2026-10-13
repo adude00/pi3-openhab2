@@ -1,3 +1,4 @@
 *.swp
 prowl.cfg
+prowl.things
 influxdb.cfg
