@@ -127,6 +127,25 @@ Performed on 20260223. The following steps were necessary:
 * Restart to fix some MQTT devices (P1 roller shutters and Camera 2 IR air conditioning).
 * Power the living room thermostat off and on again to fix the timer, setting it to 5 minutes instead of 10.
 
+## Manual configuration notes
+
+### Local Prowl configuration
+
+Install the Prowl binding through the OpenHAB UI and create an API key in
+your Prowl account at https://www.prowlapp.com/.
+
+Create `things/prowl.things` in this repository with the following content,
+replacing `YOUR_PROWL_API_KEY` with your own key:
+
+```text
+Thing prowl:broker:mybroker "Prowl Broker" [ apiKey="YOUR_PROWL_API_KEY" ]
+```
+
+Keep the UID `prowl:broker:mybroker`: existing rules use it to send notifications.
+The file is ignored by Git because it contains a secret. Keep a secure backup
+outside the repository and recreate it when deploying a fresh checkout.
+
+
 ## Alpine notes
 
 ### Alpine SSH
@@ -158,7 +177,7 @@ The following still need to be figured out:
 
 ---
 
-# Italiano
+# Italiano - Non più aggiornato, usare solo come referenza
 
 ## Informazioni sul repository
 
@@ -316,34 +335,3 @@ Restano da chiarire i seguenti punti:
 2025-07-10 15:08:33.312 [thome.event.ExtensionEvent] - Extension 'binding-exec1' has been uninstalled.
 ```
 
----
-
-## Local Prowl configuration / Configurazione locale di Prowl
-
-### English
-
-Install the Prowl binding through the OpenHAB UI and create an API key in
-your Prowl account at https://www.prowlapp.com/.
-
-Create `things/prowl.things` in this repository with the following content,
-replacing `YOUR_PROWL_API_KEY` with your own key:
-
-```text
-Thing prowl:broker:mybroker "Prowl Broker" [ apiKey="YOUR_PROWL_API_KEY" ]
-```
-
-Keep the UID `prowl:broker:mybroker`: existing rules use it to send notifications.
-The file is ignored by Git because it contains a secret. Keep a secure backup
-outside the repository and recreate it when deploying a fresh checkout.
-
-### Italiano
-
-Installare il binding Prowl tramite l'interfaccia di OpenHAB e creare una chiave
-API nel proprio account Prowl su https://www.prowlapp.com/.
-
-Creare `things/prowl.things` in questo repository usando il contenuto riportato
-sopra e sostituire `YOUR_PROWL_API_KEY` con la propria chiave.
-
-Mantenere l'UID `prowl:broker:mybroker`: le regole esistenti lo usano per inviare
-notifiche. Il file è ignorato da Git perché contiene un segreto. Conservarne una
-copia sicura fuori dal repository e ricrearlo quando si installa un nuovo clone.
