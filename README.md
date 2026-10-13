@@ -1,66 +1,135 @@
-# Install howto - 2019 10 15
+# Repo info
 
-## Preparing the system 
-In order to install openhab2 on raspberry *after crash* do the following:
+Questo repo è la dir openhab_conf di un installazione con docker di OpenHAB 5 (https://hub.docker.com/r/openhab/openhab/).
 
-```
-apt update
-apt upgrade
-apt install vim openjdk-8-jdk jq telnet bc lrzsz mosquitto mc git htop
-```
+/opt/docker/openhab5# tree -L 1
+├── Events.log -> openhab_userdata/logs/events.log
+├── Openhab.log -> openhab_userdata/logs/openhab.log
+├── README.md -> openhab_conf/README.md <- QUESTO FILE
+├── docker-compose.yml -> openhab_conf/docker-compose.yml <- in questa dir e linkato in ../
+├── logs -> openhab_userdata/logs/
+├── openhab-init.d
+├── openhab-ssh
+├── openhab_addons
+├── openhab_conf
+└── openhab_userdata
 
-## Installing openhab from repositories
-Let's now install `openhab2`
-```
-wget -qO - 'https://bintray.com/user/downloadSubjectPublicKey?username=openhab' | sudo apt-key add -
-sudo apt-get install apt-transport-https
-echo 'deb https://dl.bintray.com/openhab/apt-repo2 stable main' | sudo tee /etc/apt/sources.list.d/openhab2.list
-sudo apt-get update && sudo apt-get install openhab2 openhab2-addons openhab2-addons-legacy
-```
+Questo repo contiene i files di configurazione di OpenHAB, più il README.md ed il docker-compose.yml
 
-## Restoring conf
-You can now restore your conf from backup. You got to restore the following dirs:
+E' sia un configuration-management che una sorta di backup.
 
-- `/etc/openhab2`
-- `/var/lib/openhab2`
+Attualmente abbiamo installato la release 5, versione 5.1.4.
 
-## Starting openhab
-You should now be able to start openhab2. FIRST BOOT WILL BE *SLOW* (5 mintues)!!!
+# Install info
 
-## If things still do not work
-You can manually check that the following folders are restored:
+## docker-compose.yml
+
+L'immagine è hardcodata perchè gli aggiornamenti li voglio verificare prima.
+
+Per ora si usa la default debian
 
 ```
-* /etc/openhab2                                  # Conf dir. It's on github. That's easy.
-* /var/lib/openhab2/.ssh/                        # So it will be able to turn on and off the NAS
-* /var/lib/openhab2/config/org/openhab/          # During the next boot it will install what's needed and remove what's not
-* /var/lib/openhab2/persistence/                 # Graphs will work now
-* /var/lib/openhab2/jsondb/homekit.json          # Homekit configuration, then you won't have to add it back to iOS devices
-* /var/lib/openhab2/influxdb.cfg                 # InfluxDB conf. It's linked from /etc/openhab2 because it contains passwords
+    image: "openhab/openhab:5.0.3"
 ```
 
-### Old guide
-The old guide is in RECOVERY.md file. All its information should be here but you can check it out.
+## Directory Mappings: 
 
-# Installing mosquitto
-It's super easy:
+Standard Directory Mappings:
+
+* /var/lib/openhab2 > `openhab_userdata`
+* /etc/openhab2 > `openhab_conf`
+
+Sauce: https://community.openhab.org/t/openhab-cli-in-a-docker-container/137222/4
+
+## Customizzazioni
+
+Le customizzazioni presenti sono:
+
+* client openssh
+* pacchetto wakeonlan
+* pacchetto jq
+
+Per realizzarle, nel file `docker-compose.yml` ci sono due volumi aggiuntivi:
+```yml
+      - "./openhab-init.d:/etc/cont-init.d"
+      - "./openhab-ssh:/openhab/.ssh"
 ```
-apt install mosquitto
+
+### Dir ./openhab-init.d
+Tutti i contenuti di `./openhab-init.d` vengono eseguiti al boot del container
+
+Attualmente c'è un solo file, `50-software`.
+
+### File ./openhab-init.d/50-software
+
+Il conteuto è il seguente 
+```bash
+#!/bin/bash
+
+if ssh -V &>/dev/null
+then
+  echo OLD IMAGE - Software is installed
+else
+  echo NEW IMAGE - Need to install openssh-client wakeonlan jq
+  apt update || true
+  apt -y install openssh-client wakeonlan jq || true
+fi
 ```
 
-Then restore `/etc/mosquitto` from backups.
+### Dir ./openhab-ssh
+Questa è la dir `.ssh` dell'utente con cui gira openhab dentro il container.
 
-# Cron and scripts
-First restore the crontab of the users (they're in the backup):
-* `root`
-* `openhab` 
-
-Then add */mnt/temp* to */etc/fstab*
+I files sono:
 ```
-# temperature
-pi:/opt/temp	/mnt/temp	nfs	_netdev	0	0
+ 1823 Oct 30 11:02 id_rsa
+  393 Oct 30 11:02 id_rsa.pub
+ 2220 Oct 30 11:02 known_hosts
 ```
 
-Then restore:
-* `/opt/script/`
-* `/opt/backup/`
+
+
+# DEBUG
+
+## Start in debug
+
+docker run -it openhab/openhab:VERSION ./start_debug.sh
+
+## openhab-cli
+docker exec -it openhab5 /openhab/runtime/bin/client
+
+## Shell
+docker exec -it openhab5 /bin/bash
+
+
+# Upgrades
+
+## 5.0.3 > 5.1.3
+
+Fatta il 20260223, è stato necessario:
+
+* Togliere la default strategy da tutti i file di conf delle persistance [perchè deprecata](https://www.openhab.org/blog/2025-12-22-openhab-5-1-release.html#default-persistence-deprecated)
+* Un riavvio per riparare alcuni mqtt (tapparelle P1 e clima Camera 2 IR)
+* Spegnere e riaccendere il termostato del soggiorno ha sistemato il timer a 5 min anzichè 10
+
+
+# Appunti alpine
+
+## Alpine SSH
+
+In caso di migrazione ad Alpine, considerare questo comando per installare ssh
+
+`apk add --update --no-cache openssh`
+
+Va ancora capito:
+* come eseguire comandi al boot del container
+* come è mappata la dir .ssh
+* se i pacchetti utilizzano gli stessi path
+* se alla fine poi funziona veramente tutto
+
+# History migrazione v2
+
+## 20250710-1426: rimosso mqtt v1
+2025-07-10 14:23:41.323 [thome.event.ExtensionEvent] - Extension 'binding-mqtt1' has been uninstalled.
+
+## 20250710-1508: rimosso exec v1
+2025-07-10 15:08:33.312 [thome.event.ExtensionEvent] - Extension 'binding-exec1' has been uninstalled.
