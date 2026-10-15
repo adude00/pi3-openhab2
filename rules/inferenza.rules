@@ -8,6 +8,15 @@
 // Alexa complain that the command "took too long").
 
 var int inferenzaWaited = 0
+var Timer inferenzaIdleTimer = null
+var int inferenzaIdleMin = 0
+var int inferenzaIdleLog = 0
+var int inferenzaArmedMins = 0
+
+// Below this the PC is considered "idle" (gaming rigs idle around 40-70 W)
+val int IDLE_POWER_W = 80
+// Fallback when Inferenza_IdleMins is not set yet
+val int DEFAULT_IDLE_MINS = 30
 
 rule "Inferenza - Power ON"
 when
@@ -94,6 +103,91 @@ then
     }
 
     logInfo("INFERENZA", "Waiting for Inferenza to power down: {} s waited, {} W on strip", inferenzaWaited, w)
+end
+
+
+rule "Inferenza - Idle auto OFF"
+when
+    Item pow04_Power changed
+then
+    // Only meaningful while the PC is powered on and no shutdown is running.
+    if (Inferenza.state != ON || Inferenza_running.state == ON) {
+        inferenzaIdleTimer?.cancel
+        inferenzaIdleTimer = null
+        inferenzaIdleMin = 0
+        inferenzaIdleLog = 0
+        inferenzaArmedMins = 0
+        return
+    }
+
+    // Disabled from the interface: drop any armed countdown
+    // (unset counts as enabled, only an explicit OFF turns the feature off)
+    if (Inferenza_AutoOff.state == OFF) {
+        inferenzaIdleTimer?.cancel
+        inferenzaIdleTimer = null
+        inferenzaIdleMin = 0
+        inferenzaIdleLog = 0
+        inferenzaArmedMins = 0
+        return
+    }
+
+    val int idleMins =
+        if (Inferenza_IdleMins.state instanceof Number)
+            (Inferenza_IdleMins.state as Number).intValue
+        else
+            DEFAULT_IDLE_MINS
+
+    if (idleMins <= 0) {
+        inferenzaIdleTimer?.cancel
+        inferenzaIdleTimer = null
+        inferenzaIdleMin = 0
+        inferenzaIdleLog = 0
+        inferenzaArmedMins = 0
+        return
+    }
+
+    val w = pow04_Power.state
+    if (!(w instanceof Number)) {
+        return
+    }
+
+    if ((w as Number) >= IDLE_POWER_W) {
+        // Not idle anymore: restart the countdown
+        inferenzaIdleTimer?.cancel
+        inferenzaIdleTimer = null
+        inferenzaIdleMin = 0
+        inferenzaIdleLog = 0
+        inferenzaArmedMins = 0
+        return
+    }
+
+    // Idle: (re)arm when there is no countdown yet, or when the configured
+    // timeout changed while one was already running
+    if (inferenzaIdleTimer === null || inferenzaArmedMins != idleMins) {
+        inferenzaIdleTimer?.cancel
+        inferenzaIdleMin = 0
+        inferenzaIdleLog = 0
+        inferenzaArmedMins = idleMins
+        logInfo("INFERENZA", "Idle detected ({} W < {} W) - auto OFF in {} min", w, IDLE_POWER_W, idleMins)
+        inferenzaIdleTimer = createTimer(now.plusMinutes(idleMins), [|
+            logInfo("INFERENZA", "Idle for {} min - shutting Inferenza down", inferenzaArmedMins)
+            Inferenza.sendCommand(OFF)
+            inferenzaIdleTimer = null
+            inferenzaIdleMin = 0
+            inferenzaIdleLog = 0
+        ])
+        return
+    }
+
+    // Countdown still running: pow04_Power refreshes about once a minute, so
+    // count the refreshes as minutes and report progress every 5 of them
+    inferenzaIdleMin = inferenzaIdleMin + 1
+    inferenzaIdleLog = inferenzaIdleLog + 1
+
+    if (inferenzaIdleLog >= 5) {
+        inferenzaIdleLog = 0
+        logInfo("INFERENZA", "Idle for ~{} min of {} - OFF in ~{} min", inferenzaIdleMin, idleMins, idleMins - inferenzaIdleMin)
+    }
 end
 
 

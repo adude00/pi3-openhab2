@@ -1204,6 +1204,8 @@ sitemap default label="Casa"
         Switch item=Inferenza_running
         Switch item=StrataOnline
         Text   item=Strata_Last
+        Switch   item=Inferenza_AutoOff                    label="Auto OFF when idle"
+        Setpoint item=Inferenza_IdleMins  label="Idle Minutes: [%.0f]" minValue=0 maxValue=180 step=15
       }
       Frame label="Cose" {
       Switch item=pow04_Switch

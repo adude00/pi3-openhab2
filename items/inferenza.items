@@ -5,6 +5,14 @@
 Switch Inferenza         "Inferenza"                     <player> (Devices) [ "Switchable" ] {alexa="Switch"}
 Switch Inferenza_running "Inferenza Shutdown Running [%s]"        (Devices)
 
+// Master switch for the idle auto-off, togglable from the sitemap.
+// Uninitialized counts as ON; only an explicit OFF disables the feature.
+Switch Inferenza_AutoOff "Inferenza Auto OFF [%s]" <settings> (Devices)
+
+// How many minutes Inferenza must sit idle (below IDLE_POWER_W) before it is
+// shut down automatically. Set to 0 to disable the auto-off.
+Number Inferenza_IdleMins "Inferenza Idle Minutes [%s]" <settings> (Devices)
+
 // Strata interface (port 8080 on the Inferenza PC)
 Switch   StrataOnline "Strata Interface [%s]" <player> (Devices) { channel="network:servicedevice:strata:online" }
 DateTime Strata_Last  "Strata last seen [%1$tH:%1$tM]" <player> (Devices) { channel="network:servicedevice:strata:lastseen" }

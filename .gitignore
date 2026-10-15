@@ -2,3 +2,5 @@
 prowl.cfg
 prowl.things
 influxdb.cfg
+Events.log
+Openhab.log
