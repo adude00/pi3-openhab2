@@ -1,5 +1,230 @@
 sitemap default label="Casa"
 {
+	Frame label="Things" {
+    Text label="Devices" icon=cinema {
+
+      Frame label="IP Cameras" {
+        Text label="IP Cameras" icon="camera" {
+          Frame label="2P" {
+            Switch item=sf03_Switch
+	  }
+	  Frame label="1P" {
+            Switch item=sf12_Switch
+	  }
+        }
+      } // CHIUSO FRAME IP Cameras
+
+      Frame label="Plex" {
+        Switch item=Opti
+        Text   item=Plex_Last
+        Switch item=Plex
+      }
+      Frame label="Inferenza" {
+        Switch item=Inferenza
+        Switch item=Inferenza_running
+        Switch item=StrataOnline
+        Text   item=Strata_Last
+        Switch   item=Inferenza_AutoOff                    label="Auto OFF when idle"
+        Setpoint item=Inferenza_IdleMins  label="Idle Minutes: [%.0f]" minValue=0 maxValue=180 step=15
+      }
+      Frame label="Cose" {
+      Switch item=pow04_Switch
+      Text label="Varie Casa" icon=house {
+        Switch item=tuya02_Switch
+        Switch item=tuya01_switch
+        Switch item=tuya05_Switch
+        Switch item=tuya03_Switch
+        Switch item=pow01_Switch
+        Switch item=Terrazza
+      } // Chiuso Text "Varie Casa"
+      } // Chiuso FRAME "Cose"
+      Frame label="Audio" {
+      Group item=marantz_lr_power label="Living Room" icon="receiver" {
+        Default   item=marantz_lr_power     label="Stereo"
+        Selection item=marantz_lr_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_mute      visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=1  visibility=[marantz_lr_power==ON]
+        Slider    item=marantz_lr_volume    label="Volume [%.1f]" visibility=[marantz_lr_power==ON]
+        Setpoint  item=marantz_lr_volumeDB  label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_volumeDB  visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_surround  visibility=[marantz_lr_power==ON]
+        Switch 	  item=denon_DynamicVolume  visibility=[marantz_lr_power==ON]
+        Switch    item=denon_Restorer       visibility=[marantz_lr_power==ON]
+        Switch    item=denon_DynamicEq      visibility=[marantz_lr_power==ON]
+        Switch    item=denon_BassLimit      visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_artist    visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_album     visibility=[marantz_lr_power==ON]
+        Default   item=marantz_lr_track     visibility=[marantz_lr_power==ON]
+	} // CHIUSO GROUP "Living Room"
+      Group item=marantz_br_power label="Studio" icon="receiver" {
+        Default   item=marantz_br_power     label="Stereo"
+        Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_surround  visibility=[marantz_br_power==ON]
+        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_artist    visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
+        Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
+      } // CHIUSO GROUP "Bedroom"
+      Switch  item=WhiteNoiseBDRM
+      Switch  item=WhiteNoiseGirls
+
+
+        } // CHIUSO FRAME Audio
+
+
+	Frame label="Alexa" {
+
+        Text label="Echo Soggiorno" {
+            Default   item=Echo_Soggiorno_Player
+            Slider    item=Echo_Soggiorno_Volume
+            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Soggiorno_TTS_Volume
+            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Soggiorno_Shuffle
+            Text      item=Echo_Soggiorno_Title
+
+            Text    item=Echo_Soggiorno_LastVoiceCommand
+            Slider  item=Echo_Soggiorno_NotificationVolume
+        }
+
+        Text label="Echo Matrimoniale" {
+            Default   item=Echo_Matrimoniale_Player
+            Slider    item=Echo_Matrimoniale_Volume
+            Setpoint  item=Echo_Matrimoniale_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Matrimoniale_TTS_Volume
+            Setpoint  item=Echo_Matrimoniale_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Matrimoniale_Shuffle
+            Text      item=Echo_Matrimoniale_Title
+            Text    item=Echo_Matrimoniale_LastVoiceCommand
+            Slider  item=Echo_Matrimoniale_NotificationVolume
+        }
+        Text label="Echo Ethan" {
+            Default   item=Echo_Ethan_Player
+            Slider    item=Echo_Ethan_Volume
+            Setpoint  item=Echo_Ethan_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Ethan_TTS_Volume
+            Setpoint  item=Echo_Ethan_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Ethan_Shuffle
+            Text      item=Echo_Ethan_Title
+            Text    item=Echo_Ethan_LastVoiceCommand
+            Slider  item=Echo_Ethan_NotificationVolume
+        }
+        Text label="Echo Cameretta" {
+            Default   item=Echo_Cameretta_Player
+            Slider    item=Echo_Cameretta_Volume
+            Setpoint  item=Echo_Cameretta_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Cameretta_TTS_Volume
+            Setpoint  item=Echo_Cameretta_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Cameretta_Shuffle
+            Text      item=Echo_Cameretta_Title
+
+            Text    item=Echo_Cameretta_LastVoiceCommand
+            Slider  item=Echo_Cameretta_NotificationVolume
+        }
+
+        Text label="Echo Studio" {
+            Default   item=Echo_Studio_Player
+            Slider    item=Echo_Studio_Volume
+            Setpoint  item=Echo_Studio_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Studio_TTS_Volume
+            Setpoint  item=Echo_Studio_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Studio_Shuffle
+            Text      item=Echo_Studio_Title
+
+            Text    item=Echo_Studio_LastVoiceCommand
+            Slider  item=Echo_Studio_NotificationVolume
+        }
+
+        Text label="Echo Giochi" {
+            Default   item=Echo_Giochi_Player
+            Slider    item=Echo_Giochi_Volume
+            Setpoint  item=Echo_Giochi_Volume   minValue=0  maxValue=100 step=5
+            Slider    item=Echo_Giochi_TTS_Volume
+            Setpoint  item=Echo_Giochi_TTS_Volume   minValue=0  maxValue=100 step=5
+            Switch    item=Echo_Giochi_Shuffle
+            Text      item=Echo_Giochi_Title
+
+            Text    item=Echo_Giochi_LastVoiceCommand
+            Slider  item=Echo_Giochi_NotificationVolume
+        }
+
+
+	} // CHIUSO FRAME Alexa
+
+    } // CHIUSO TEXT "Devices"
+
+    Text label="Tapparelle" icon=rollershutter {
+      Frame label="Tutta Casa" {
+        Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP2   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+      }
+      Frame label="Piano 2" {
+        Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
+        Default item=Tapp01
+        Default item=Tapp02
+        Default item=Tapp03
+        Default item=Tapp04
+        Default item=Tapp05
+        Default item=Tapp06
+        Default item=Tapp07
+        Default item=Tapp08
+      }
+      Frame label="Piano 1" {
+        Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
+        Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
+        Switch item=shellytappCharlie_roller  label="Charlie - Bagno"
+        Switch item=shellytappDelta_roller    label="Delta - Cameretta"
+        Switch item=shellytappEcho_roller     label="Echo - Matrimoniale Grande"
+        Switch item=shellytappFoxtrot_roller  label="Foxtrot - Matrimoniale Piccola"
+        Switch item=shellytappGolf_roller     label="Golf - Cucina destra"
+        Switch item=shellytappHotel_roller    label="Hotel - Cucina sinistra"
+      }
+    }
+
+		Text label="Luci" icon="light" {
+			Frame label="P1 Luci" {
+			        Switch item=shelly03_R1    label="Scala"    icon=lightbulb
+			        Switch item=shelly04_R1    label="Luce Giochi"   icon=lightbulb
+			        Switch item=shelly05_R1    label="Faretti Giochi"   icon=lightbulb
+			}
+			Frame label="Soggiorno Luci" {
+				Switch item=sf04_Light
+				Slider item=led03_DimW
+				Slider 		item=led03_Dim
+				Colorpicker  	item=led03_Color
+				Text 		item=led03_RGB
+			}
+			Frame label="Studio Barra" {
+			  	Switch		item=led01_fake01
+			  	Switch		item=led01_PowerW
+				Slider 		item=led01_DimW
+			  	Switch		item=led01_Power
+				Slider 		item=led01_Dim
+				Colorpicker  	item=led01_Color
+				Text 		item=led01_RGB
+				//Switch 		item=led01_PowerW
+			}
+		}
+
+    Text label="Timers" {
+      Text label="Timer 01" { 
+        Switch    item=timer01_state
+        Text      item=timer01_state_lastChange
+        Switch    item=shelly12_R1
+        Text      item=timer01_item_lastChange
+        Switch    item=timer01_desired_state
+        Slider    item=timer01_minutes
+        Text      item=shelly12_Power
+        Text      item=shelly12_temperature
+      }
+    } // CHIUSO Text Timers
+
+
+  } // Chiuso Frame Things
 
 
 
@@ -1124,231 +1349,6 @@ sitemap default label="Casa"
   } // CLOSE FRAME SENSORI
 
 
-	Frame label="Things" {
-		Text label="Luci" icon="light" {
-			Frame label="P1 Luci" {
-			        Switch item=shelly03_R1    label="Scala"    icon=lightbulb
-			        Switch item=shelly04_R1    label="Luce Giochi"   icon=lightbulb
-			        Switch item=shelly05_R1    label="Faretti Giochi"   icon=lightbulb
-			}
-			Frame label="Soggiorno Luci" {
-				Switch item=sf04_Light
-				Slider item=led03_DimW
-				Slider 		item=led03_Dim
-				Colorpicker  	item=led03_Color
-				Text 		item=led03_RGB
-			}
-			Frame label="Studio Barra" {
-			  	Switch		item=led01_fake01
-			  	Switch		item=led01_PowerW
-				Slider 		item=led01_DimW
-			  	Switch		item=led01_Power
-				Slider 		item=led01_Dim
-				Colorpicker  	item=led01_Color
-				Text 		item=led01_RGB
-				//Switch 		item=led01_PowerW
-			}
-		}
-
-
-    Text label="Tapparelle" icon=rollershutter {
-      Frame label="Tutta Casa" {
-        Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappP2   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappP1 icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-      }
-      Frame label="Piano 2" {
-        Switch item=gTappBdrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappKtcn icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Switch item=gTappLvrm icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]
-        Default item=Tapp01
-        Default item=Tapp02
-        Default item=Tapp03
-        Default item=Tapp04
-        Default item=Tapp05
-        Default item=Tapp06
-        Default item=Tapp07
-        Default item=Tapp08
-      }
-      Frame label="Piano 1" {
-        Switch item=shellytappAlpha_roller    label="Alpha - Giochi Piccola"
-        Switch item=shellytappBravo_roller    label="Bravo - Giochi Grande"
-        Switch item=shellytappCharlie_roller  label="Charlie - Bagno"
-        Switch item=shellytappDelta_roller    label="Delta - Cameretta"
-        Switch item=shellytappEcho_roller     label="Echo - Matrimoniale Grande"
-        Switch item=shellytappFoxtrot_roller  label="Foxtrot - Matrimoniale Piccola"
-        Switch item=shellytappGolf_roller     label="Golf - Cucina destra"
-        Switch item=shellytappHotel_roller    label="Hotel - Cucina sinistra"
-      }
-    }
-    Text label="Devices" icon=cinema {
-
-      Frame label="IP Cameras" {
-        Text label="IP Cameras" icon="camera" {
-          Frame label="2P" {
-            Switch item=sf03_Switch
-	  }
-	  Frame label="1P" {
-            Switch item=sf12_Switch
-	  }
-        }
-      } // CHIUSO FRAME IP Cameras
-
-      Frame label="Plex" {
-        Switch item=Opti
-        Text   item=Plex_Last
-        Switch item=Plex
-      }
-      Frame label="Inferenza" {
-        Switch item=Inferenza
-        Switch item=Inferenza_running
-        Switch item=StrataOnline
-        Text   item=Strata_Last
-        Switch   item=Inferenza_AutoOff                    label="Auto OFF when idle"
-        Setpoint item=Inferenza_IdleMins  label="Idle Minutes: [%.0f]" minValue=0 maxValue=180 step=15
-      }
-      Frame label="Cose" {
-      Switch item=pow04_Switch
-      Text label="Varie Casa" icon=house {
-        Switch item=tuya02_Switch
-        Switch item=tuya01_switch
-        Switch item=tuya05_Switch
-        Switch item=tuya03_Switch
-        Switch item=pow01_Switch
-        Switch item=Terrazza
-      } // Chiuso Text "Varie Casa"
-      } // Chiuso FRAME "Cose"
-      Frame label="Audio" {
-      Group item=marantz_lr_power label="Living Room" icon="receiver" {
-        Default   item=marantz_lr_power     label="Stereo"
-        Selection item=marantz_lr_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_mute      visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volume    label="Volume Step 2 [%.1f]" minValue=0 maxValue=60 step=1  visibility=[marantz_lr_power==ON]
-        Slider    item=marantz_lr_volume    label="Volume [%.1f]" visibility=[marantz_lr_power==ON]
-        Setpoint  item=marantz_lr_volumeDB  label="Volume Step 5 [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_volumeDB  visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_surround  visibility=[marantz_lr_power==ON]
-        Switch 	  item=denon_DynamicVolume  visibility=[marantz_lr_power==ON]
-        Switch    item=denon_Restorer       visibility=[marantz_lr_power==ON]
-        Switch    item=denon_DynamicEq      visibility=[marantz_lr_power==ON]
-        Switch    item=denon_BassLimit      visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_artist    visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_album     visibility=[marantz_lr_power==ON]
-        Default   item=marantz_lr_track     visibility=[marantz_lr_power==ON]
-	} // CHIUSO GROUP "Living Room"
-      Group item=marantz_br_power label="Studio" icon="receiver" {
-        Default   item=marantz_br_power     label="Stereo"
-        Selection item=marantz_br_input     mappings=[TV=TV,MPLAY=Shield,NET=HEOS]  visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_mute      visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_surround  visibility=[marantz_br_power==ON]
-        Setpoint  item=marantz_br_volume    label="Volume [%.1f]" minValue=0 maxValue=60 step=5  visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_artist    visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_album     visibility=[marantz_br_power==ON]
-        Default   item=marantz_br_track     visibility=[marantz_br_power==ON]
-      } // CHIUSO GROUP "Bedroom"
-      Switch  item=WhiteNoiseBDRM
-      Switch  item=WhiteNoiseGirls
-
-
-        } // CHIUSO FRAME Audio
-
-
-	Frame label="Alexa" {
-
-        Text label="Echo Soggiorno" {
-            Default   item=Echo_Soggiorno_Player
-            Slider    item=Echo_Soggiorno_Volume
-            Setpoint  item=Echo_Soggiorno_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Soggiorno_TTS_Volume
-            Setpoint  item=Echo_Soggiorno_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Soggiorno_Shuffle
-            Text      item=Echo_Soggiorno_Title
-
-            Text    item=Echo_Soggiorno_LastVoiceCommand
-            Slider  item=Echo_Soggiorno_NotificationVolume
-        }
-
-        Text label="Echo Matrimoniale" {
-            Default   item=Echo_Matrimoniale_Player
-            Slider    item=Echo_Matrimoniale_Volume
-            Setpoint  item=Echo_Matrimoniale_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Matrimoniale_TTS_Volume
-            Setpoint  item=Echo_Matrimoniale_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Matrimoniale_Shuffle
-            Text      item=Echo_Matrimoniale_Title
-            Text    item=Echo_Matrimoniale_LastVoiceCommand
-            Slider  item=Echo_Matrimoniale_NotificationVolume
-        }
-        Text label="Echo Ethan" {
-            Default   item=Echo_Ethan_Player
-            Slider    item=Echo_Ethan_Volume
-            Setpoint  item=Echo_Ethan_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Ethan_TTS_Volume
-            Setpoint  item=Echo_Ethan_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Ethan_Shuffle
-            Text      item=Echo_Ethan_Title
-            Text    item=Echo_Ethan_LastVoiceCommand
-            Slider  item=Echo_Ethan_NotificationVolume
-        }
-        Text label="Echo Cameretta" {
-            Default   item=Echo_Cameretta_Player
-            Slider    item=Echo_Cameretta_Volume
-            Setpoint  item=Echo_Cameretta_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Cameretta_TTS_Volume
-            Setpoint  item=Echo_Cameretta_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Cameretta_Shuffle
-            Text      item=Echo_Cameretta_Title
-
-            Text    item=Echo_Cameretta_LastVoiceCommand
-            Slider  item=Echo_Cameretta_NotificationVolume
-        }
-
-        Text label="Echo Studio" {
-            Default   item=Echo_Studio_Player
-            Slider    item=Echo_Studio_Volume
-            Setpoint  item=Echo_Studio_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Studio_TTS_Volume
-            Setpoint  item=Echo_Studio_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Studio_Shuffle
-            Text      item=Echo_Studio_Title
-
-            Text    item=Echo_Studio_LastVoiceCommand
-            Slider  item=Echo_Studio_NotificationVolume
-        }
-
-        Text label="Echo Giochi" {
-            Default   item=Echo_Giochi_Player
-            Slider    item=Echo_Giochi_Volume
-            Setpoint  item=Echo_Giochi_Volume   minValue=0  maxValue=100 step=5
-            Slider    item=Echo_Giochi_TTS_Volume
-            Setpoint  item=Echo_Giochi_TTS_Volume   minValue=0  maxValue=100 step=5
-            Switch    item=Echo_Giochi_Shuffle
-            Text      item=Echo_Giochi_Title
-
-            Text    item=Echo_Giochi_LastVoiceCommand
-            Slider  item=Echo_Giochi_NotificationVolume
-        }
-
-
-	} // CHIUSO FRAME Alexa
-
-    } // CHIUSO TEXT "Devices"
-
-    Text label="Timers" {
-      Text label="Timer 01" { 
-        Switch    item=timer01_state
-        Text      item=timer01_state_lastChange
-        Switch    item=shelly12_R1
-        Text      item=timer01_item_lastChange
-        Switch    item=timer01_desired_state
-        Slider    item=timer01_minutes
-        Text      item=shelly12_Power
-        Text      item=shelly12_temperature
-      }
-    } // CHIUSO Text Timers
-
-
-  } // Chiuso Frame Things
 
 
 
