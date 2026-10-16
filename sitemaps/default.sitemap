@@ -4,6 +4,7 @@ sitemap default label="Casa"
     Text label="Devices" icon=cinema {
 
       Frame label="IP Cameras" {
+        Switch item=telecamere_all label="Telecamere"
         Text label="IP Cameras" icon="camera" {
           Frame label="2P" {
             Switch item=sf03_Switch
@@ -225,6 +226,302 @@ sitemap default label="Casa"
 
 
   } // Chiuso Frame Things
+  Frame label="Configurazioni" {
+    Text label="Home Automation" icon="settings" {
+      Frame label="Scene Standard" {
+	Text label="Scena Mattina" icon="settings" {
+	  Frame label="Configurazione Luci Soggiorno" {
+	    Switch    item=sf04_Light_Morning
+	    Switch    item=sogg_soff_Morning
+	    Slider    item=led03_w_Morning visibility=[sogg_soff_Morning==ON]
+	    Slider    item=led03_c_Morning visibility=[sogg_soff_Morning==ON]
+	  }
+	  Frame label="Configurazione Clima Cameretta" {
+            Switch    item=conf_autooff_ac_kid_chng     
+            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
+	    Switch    item=conf_autooff_ac_kid
+            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=1 visibility=[conf_autooff_ac_kid==ON]
+	  }
+	  Frame label="Configurazione Clima Matrimoniale" {
+	    Switch    item=conf_autooff_ac_bdr
+	  }
+	  Frame label="Configurazione Bagno P1" {
+	    Switch    item=conf_mattina_tsBagnoP1
+	  }
+	}  // SCENA Mattina
+      }
+      Frame label="Scene Moderne" {
+        Text label="Scena 01 - Io Vado" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene01
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene01Condition1
+            Switch    item=Scene01Condition2
+            Switch    item=Scene01Condition3
+            Switch    item=Scene01Condition4
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene01Active
+	  }
+	} // Chiuso frame Scena 01
+      Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene02
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene02Condition1
+            Switch    item=Scene02Condition2
+	    Switch    item=Scene02Condition3ts
+            Switch    item=Scene02Condition3tsbis     visibility=[Scene02Condition3ts==ON]
+            Setpoint  item=Scene02Condition3tsbisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene02Condition3tsbis==ON]
+	    Switch    item=Scene02Condition3
+            Switch    item=Scene02Condition3bis     
+            Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
+            Switch    item=Scene02Condition3c 	    
+	    Switch    item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent"] visibility=[Scene02Condition3c==ON]
+            Switch    item=Scene02Condition4
+            Switch    item=Scene02Condition4bis
+            Switch    item=Scene02Condition5
+            Switch    item=Scene02Condition6
+            Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
+            Switch    item=Scene02Condition7
+            Switch    item=Scene02Condition8
+            Switch    item=Scene02Condition9
+	  }
+	  Frame label="Triggers" {
+	    Switch    item=Scene02Trigger1
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene02Active
+	  }
+      } // Chiuso frame Scena 02
+
+        Text label="Scena 03 - ora di lavorare" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene03
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene03Condition1
+            Switch    item=Scene03Condition2
+            Setpoint  item=Scene03Condition2temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene03Condition2==ON]
+            Switch    item=Scene03Condition2fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene03Condition2==ON]
+            Switch    item=Scene03Condition3
+            Switch    item=Scene03Condition3a
+            Switch    item=Scene03Condition4
+            Switch    item=Scene03Condition5
+            Switch    item=Scene03Condition6
+	  }
+	  Frame label="Scena Attiva" {
+            Switch    item=Scene03Active
+	  }
+
+	} // Chiuso frame Scena 03
+
+        Text label="Scena 04 - Nanna delle Bimbe" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene04
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene04Condition1
+            Switch    item=Scene04Condition2
+            Switch    item=Scene04Condition3
+            Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
+            Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
+            Switch    item=Scene04Condition4
+            Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
+            Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
+            Switch    item=Scene04Condition5
+            Switch    item=Scene04Condition6
+            Setpoint  item=Scene04Condition6Num    minValue=0 maxValue=40 step=1      visibility=[Scene04Condition6==ON]
+
+	  }
+	} // Chiuso frame Scena 04
+
+        Text label="Scena 05 - Nanna di Ethan" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene05
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene05Condition1
+            Switch    item=Scene05Condition2
+            Switch    item=Scene05Condition3
+            Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
+            Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
+            Switch    item=Scene05Condition4
+            Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
+            Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
+            Switch    item=Scene05Condition5
+            Switch    item=Scene05Condition6
+            Switch    item=Scene05Condition7
+            Setpoint  item=Scene05Condition7Num    minValue=0 maxValue=40 step=1      visibility=[Scene04Condition6==ON]
+	  }
+	} // Chiuso frame Scena 05
+        Text label="Scene 06 - Studio Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene06
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene06Condition1
+            Setpoint  item=Scene06Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
+            Switch    item=Scene06Condition2
+            Switch    item=Scene06Condition3
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene06Active
+	  }
+	} // Chiuso frame Scena 06
+        Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene07
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene07Condition1
+            Setpoint  item=Scene07Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
+            Switch    item=Scene07Condition2
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene07Active
+	  }
+	} // Chiuso frame Scena 07
+        Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene08
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene08Condition1
+            Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
+            Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene08Active
+	  }
+	} // Chiuso frame Scena 08
+        Text label="Scene 09 - Vado a letto" icon="settings" {
+	  Frame label="Scena" {
+            Switch    item=Scene09
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene09Condition1
+            Switch    item=Scene09Condition1state visibility=[Scene09Condition1==ON]
+            Setpoint  item=Scene09Condition1temp  visibility=[Scene09Condition1==ON] icon=temperature minValue=16 maxValue=30 step=0.5
+            Switch    item=Scene09Condition1fan   visibility=[Scene09Condition1==ON] icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"]
+            Switch    item=Scene09Condition2
+            Switch    item=Scene09Condition3
+            Switch    item=Scene09Condition4
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene09Active
+	  }
+	} // Chiuso frame Scena 09
+
+      } // Chiuso frame Scene
+
+      Frame label="Automatismi" { 
+	Text label="Scena buonanotte" icon=settings {
+	  Frame label="Clima Matrimoniale" {
+	    Switch   item=Buonanotte_CM_Power
+            Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
+            Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
+	  }
+          Frame label="White Noise Bedroom" {
+            Switch   item=Buonanotte_Alexa_Bdrm_Change_Volume
+            Setpoint item=Buonanotte_Alexa_Bdrm_Volume icon=soundvolume minValue=1 maxValue=30 step=1
+          }
+	}
+	Text label="White Noise" icon="settings" {
+	  Frame label="Bedroom" {
+	    Switch item=WhiteNoiseBDRMautoON
+	    Switch item=WhiteNoiseBDRMautoOFF
+	  }
+	  Frame label="Cameretta" {
+	    Switch item=WhiteNoiseGirlsAutoON
+	    Switch item=WhiteNoiseGirlsAutoOFF
+	  }
+	}
+
+      Text label="Sveglia Casa" icon="time" {
+        Frame label="Sveglia" {
+          Switch item=WakeUpAlarmRepeat label="Sveglia"
+          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
+          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[WakeUpAlarmRepeat==ON]
+          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
+                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
+                              20="20", 21="21", 22="22", 23="23"] visibility=[WakeUpAlarmRepeat==ON]
+          Selection item=WakeUpMinute label="Minuti" mappings=[
+                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
+                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"] visibility=[WakeUpAlarmRepeat==ON]
+          Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
+
+          Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
+          Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
+          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
+        }
+
+        Frame label="Debug" {
+          Text label="La sveglia si allarma alle 3.07am"
+          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
+        }
+      }  // Chiuso Text Sveglia
+
+        Group item=gAutomations   label="Automazioni Varie"
+	Text label="Alexa Debug" icon=settings {
+
+	  Frame label="Campanello" {
+	    Switch        item=alexa_campanello
+	    Switch        item=esp09_Switch 
+	  }
+	  Frame label="Lavatrice Notification" {
+	    Switch        item=alexa_lavatrice
+	    Switch        item=alexa_lavatrice_running
+	  }
+	  Frame label="Tramonto" {
+	    Switch        item=sunIsOut
+	  }
+
+	}
+
+	Text label="Clima Soggiorno" icon="settings" {
+          Frame label="Override Sveglia" {
+	    Switch      item=ts_sog_sveglia_on    icon="settings"
+	    Switch      item=ac_sog_sveglia_on    icon="settings"
+	    Switch      item=ac_sog_sveglia_change  icon="settings"
+	    Setpoint    item=ac_sog_sveglia_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_sveglia_change==ON]
+	  }
+          Frame label="Override A Casa" {
+	    Switch      item=ts_sog_acasa_on      icon="settings"
+	    Switch      item=ac_sog_acasa_on      icon="settings"
+	    Switch      item=ac_sog_acasa_change    icon="settings"
+	    Setpoint    item=ac_sog_acasa_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_acasa_change==ON]
+	  }
+	  Frame label="Override Lavoro" {
+	    Switch      item=ts_sog_lavoro_off    icon="settings"
+	    Switch      item=ac_sog_lavoro_off    icon="settings"
+	    Switch      item=ac_sog_lavoro_change   icon="settings"
+	    Setpoint    item=ac_sog_lavoro_temp     minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_lavoro_change==ON]
+	  }
+	  Frame label="Override Usciamo" {
+	    Switch      item=ts_sog_usciamo_off   icon="settings"
+	    Switch      item=ac_sog_usciamo_off   icon="settings"
+	    Switch      item=ac_sog_usciamo_change  icon="settings"
+	    Setpoint    item=ac_sog_usciamo_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_usciamo_change==ON]
+	  }
+	  Frame label="Override Notte" {
+	    Switch      item=ts_sog_night_off     icon="settings"
+	    Switch      item=ac_sog_night_off     icon="settings"
+	    Switch      item=ac_sog_night_change    icon="settings"
+	    Setpoint    item=ac_sog_night_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_night_change==ON]
+	  }
+	  
+	} // TEXT CLIMA SOGGIORNO
+
+      } // CHIUSO FRAME Automatismi
+    } // CHIUSO TEXT Configurazione schermata principale
+
+  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 
@@ -1353,302 +1650,6 @@ sitemap default label="Casa"
 
 
 
-  Frame label="Configurazioni" {
-    Text label="Home Automation" icon="settings" {
-      Frame label="Scene Standard" {
-	Text label="Scena Mattina" icon="settings" {
-	  Frame label="Configurazione Luci Soggiorno" {
-	    Switch    item=sf04_Light_Morning
-	    Switch    item=sogg_soff_Morning
-	    Slider    item=led03_w_Morning visibility=[sogg_soff_Morning==ON]
-	    Slider    item=led03_c_Morning visibility=[sogg_soff_Morning==ON]
-	  }
-	  Frame label="Configurazione Clima Cameretta" {
-            Switch    item=conf_autooff_ac_kid_chng     
-            Setpoint  item=conf_mattina_ac_kid_temp 	icon="temperature" label="Temperatura da impostare: [%.0f]" minValue=16 maxValue=30 step=1 visibility=[conf_autooff_ac_kid_chng==ON]
-	    Switch    item=conf_autooff_ac_kid
-            Setpoint  item=conf_autooff_ac_kid_mins      label="Dopo quanti minuti: [%.0f]" minValue=0  maxValue=60 step=1 visibility=[conf_autooff_ac_kid==ON]
-	  }
-	  Frame label="Configurazione Clima Matrimoniale" {
-	    Switch    item=conf_autooff_ac_bdr
-	  }
-	  Frame label="Configurazione Bagno P1" {
-	    Switch    item=conf_mattina_tsBagnoP1
-	  }
-	}  // SCENA Mattina
-      }
-      Frame label="Scene Moderne" {
-        Text label="Scena 01 - Io Vado" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene01
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene01Condition1
-            Switch    item=Scene01Condition2
-            Switch    item=Scene01Condition3
-            Switch    item=Scene01Condition4
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene01Active
-	  }
-	} // Chiuso frame Scena 01
-      Text label="Scena 02 - Arrivano i Bimbi" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene02
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene02Condition1
-            Switch    item=Scene02Condition2
-	    Switch    item=Scene02Condition3ts
-            Switch    item=Scene02Condition3tsbis     visibility=[Scene02Condition3ts==ON]
-            Setpoint  item=Scene02Condition3tsbisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene02Condition3tsbis==ON]
-	    Switch    item=Scene02Condition3
-            Switch    item=Scene02Condition3bis     
-            Setpoint  item=Scene02Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene02Condition3bis==ON]
-            Switch    item=Scene02Condition3c 	    
-	    Switch    item=Scene02Condition3cSet    mappings=["A"="Auto", "Q"="Silent"] visibility=[Scene02Condition3c==ON]
-            Switch    item=Scene02Condition4
-            Switch    item=Scene02Condition4bis
-            Switch    item=Scene02Condition5
-            Switch    item=Scene02Condition6
-            Setpoint  item=Scene02Condition6num	   minValue=16 maxValue=30 step=1 visibility=[Scene02Condition6==ON]
-            Switch    item=Scene02Condition7
-            Switch    item=Scene02Condition8
-            Switch    item=Scene02Condition9
-	  }
-	  Frame label="Triggers" {
-	    Switch    item=Scene02Trigger1
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene02Active
-	  }
-      } // Chiuso frame Scena 02
-
-        Text label="Scena 03 - ora di lavorare" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene03
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene03Condition1
-            Switch    item=Scene03Condition2
-            Setpoint  item=Scene03Condition2temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene03Condition2==ON]
-            Switch    item=Scene03Condition2fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene03Condition2==ON]
-            Switch    item=Scene03Condition3
-            Switch    item=Scene03Condition3a
-            Switch    item=Scene03Condition4
-            Switch    item=Scene03Condition5
-            Switch    item=Scene03Condition6
-	  }
-	  Frame label="Scena Attiva" {
-            Switch    item=Scene03Active
-	  }
-
-	} // Chiuso frame Scena 03
-
-        Text label="Scena 04 - Nanna delle Bimbe" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene04
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene04Condition1
-            Switch    item=Scene04Condition2
-            Switch    item=Scene04Condition3
-            Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
-            Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
-            Switch    item=Scene04Condition4
-            Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
-            Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
-            Switch    item=Scene04Condition5
-            Switch    item=Scene04Condition6
-            Setpoint  item=Scene04Condition6Num    minValue=0 maxValue=40 step=1      visibility=[Scene04Condition6==ON]
-
-	  }
-	} // Chiuso frame Scena 04
-
-        Text label="Scena 05 - Nanna di Ethan" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene05
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene05Condition1
-            Switch    item=Scene05Condition2
-            Switch    item=Scene05Condition3
-            Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
-            Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
-            Switch    item=Scene05Condition4
-            Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
-            Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
-            Switch    item=Scene05Condition5
-            Switch    item=Scene05Condition6
-            Switch    item=Scene05Condition7
-            Setpoint  item=Scene05Condition7Num    minValue=0 maxValue=40 step=1      visibility=[Scene04Condition6==ON]
-	  }
-	} // Chiuso frame Scena 05
-        Text label="Scene 06 - Studio Prep" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene06
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene06Condition1
-            Setpoint  item=Scene06Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene06Condition1==ON]
-            Switch    item=Scene06Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene06Condition1==ON]
-            Switch    item=Scene06Condition2
-            Switch    item=Scene06Condition3
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene06Active
-	  }
-	} // Chiuso frame Scena 06
-        Text label="Scene 07 - P2 Bedroom Prep" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene07
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene07Condition1
-            Setpoint  item=Scene07Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene07Condition1==ON]
-            Switch    item=Scene07Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene07Condition1==ON]
-            Switch    item=Scene07Condition2
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene07Active
-	  }
-	} // Chiuso frame Scena 07
-        Text label="Scene 08 - P2 Bedroom Notturna" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene08
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene08Condition1
-            Setpoint  item=Scene08Condition1temp icon=temperature minValue=16 maxValue=30 step=0.5       visibility=[Scene08Condition1==ON]
-            Switch    item=Scene08Condition1fan  icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Scene08Condition1==ON]
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene08Active
-	  }
-	} // Chiuso frame Scena 08
-        Text label="Scene 09 - Vado a letto" icon="settings" {
-	  Frame label="Scena" {
-            Switch    item=Scene09
-	  }
-	  Frame label="Configurazione" {
-            Switch    item=Scene09Condition1
-            Switch    item=Scene09Condition1state visibility=[Scene09Condition1==ON]
-            Setpoint  item=Scene09Condition1temp  visibility=[Scene09Condition1==ON] icon=temperature minValue=16 maxValue=30 step=0.5
-            Switch    item=Scene09Condition1fan   visibility=[Scene09Condition1==ON] icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"]
-            Switch    item=Scene09Condition2
-            Switch    item=Scene09Condition3
-            Switch    item=Scene09Condition4
-	  }
-	  Frame label="Attiva" {
-            Switch    item=Scene09Active
-	  }
-	} // Chiuso frame Scena 09
-
-      } // Chiuso frame Scene
-
-      Frame label="Automatismi" { 
-	Text label="Scena buonanotte" icon=settings {
-	  Frame label="Clima Matrimoniale" {
-	    Switch   item=Buonanotte_CM_Power
-            Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]
-            Switch   item=Buonanotte_CM_Fan icon=flow mappings=["AUTO"="Auto", "SILENCE"="Silence"] visibility=[Buonanotte_CM_Power==ON]
-	  }
-          Frame label="White Noise Bedroom" {
-            Switch   item=Buonanotte_Alexa_Bdrm_Change_Volume
-            Setpoint item=Buonanotte_Alexa_Bdrm_Volume icon=soundvolume minValue=1 maxValue=30 step=1
-          }
-	}
-	Text label="White Noise" icon="settings" {
-	  Frame label="Bedroom" {
-	    Switch item=WhiteNoiseBDRMautoON
-	    Switch item=WhiteNoiseBDRMautoOFF
-	  }
-	  Frame label="Cameretta" {
-	    Switch item=WhiteNoiseGirlsAutoON
-	    Switch item=WhiteNoiseGirlsAutoOFF
-	  }
-	}
-
-      Text label="Sveglia Casa" icon="time" {
-        Frame label="Sveglia" {
-          Switch item=WakeUpAlarmRepeat label="Sveglia"
-          Setpoint item=WakeUpHour    label="Ora"     minValue=0 maxValue=23 step=1  visibility=[WakeUpAlarmRepeat==ON]
-          Setpoint item=WakeUpMinute  label="Minute"  minValue=0 maxValue=59 step=1  visibility=[WakeUpAlarmRepeat==ON]
-          Selection item=WakeUpHour   label="Ora" mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5", 6="6", 7="7", 8="8", 9="9", 
-                              10="10", 11="11", 12="12", 13="13", 14="14", 15="15", 16="16", 17="17", 18="18", 19="19", 20="20", 
-                              20="20", 21="21", 22="22", 23="23"] visibility=[WakeUpAlarmRepeat==ON]
-          Selection item=WakeUpMinute label="Minuti" mappings=[
-                                0="0",    5="5",  10="10",  15="15",  20="20",  25="25",
-                              30="30",  35="35",  40="40",  45="45",  50="50",  55="55"] visibility=[WakeUpAlarmRepeat==ON]
-          Switch item=WakeUpScene       label="Scena Mattina"   visibility=[WakeUpAlarmRepeat==ON]
-
-          Switch item=WakeUpTapp        label="Auto Tapparelle" visibility=[WakeUpScene==OFF]
-          Switch item=WakeUpLights      visibility=[WakeUpScene==OFF]
-          Switch item=WakeUpTs          label="Auto Termostato" visibility=[WakeUpScene==OFF] 
-          Switch item=WakeUpAC          label="Auto AC PRE SVEGLIA"
-        }
-
-        Frame label="Debug" {
-          Text label="La sveglia si allarma alle 3.07am"
-          Switch item=WakeUpAlarmSwitch label="Sveglia allarmata"
-        }
-      }  // Chiuso Text Sveglia
-
-        Group item=gAutomations   label="Automazioni Varie"
-	Text label="Alexa Debug" icon=settings {
-
-	  Frame label="Campanello" {
-	    Switch        item=alexa_campanello
-	    Switch        item=esp09_Switch 
-	  }
-	  Frame label="Lavatrice Notification" {
-	    Switch        item=alexa_lavatrice
-	    Switch        item=alexa_lavatrice_running
-	  }
-	  Frame label="Tramonto" {
-	    Switch        item=sunIsOut
-	  }
-
-	}
-
-	Text label="Clima Soggiorno" icon="settings" {
-          Frame label="Override Sveglia" {
-	    Switch      item=ts_sog_sveglia_on    icon="settings"
-	    Switch      item=ac_sog_sveglia_on    icon="settings"
-	    Switch      item=ac_sog_sveglia_change  icon="settings"
-	    Setpoint    item=ac_sog_sveglia_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_sveglia_change==ON]
-	  }
-          Frame label="Override A Casa" {
-	    Switch      item=ts_sog_acasa_on      icon="settings"
-	    Switch      item=ac_sog_acasa_on      icon="settings"
-	    Switch      item=ac_sog_acasa_change    icon="settings"
-	    Setpoint    item=ac_sog_acasa_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_acasa_change==ON]
-	  }
-	  Frame label="Override Lavoro" {
-	    Switch      item=ts_sog_lavoro_off    icon="settings"
-	    Switch      item=ac_sog_lavoro_off    icon="settings"
-	    Switch      item=ac_sog_lavoro_change   icon="settings"
-	    Setpoint    item=ac_sog_lavoro_temp     minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_lavoro_change==ON]
-	  }
-	  Frame label="Override Usciamo" {
-	    Switch      item=ts_sog_usciamo_off   icon="settings"
-	    Switch      item=ac_sog_usciamo_off   icon="settings"
-	    Switch      item=ac_sog_usciamo_change  icon="settings"
-	    Setpoint    item=ac_sog_usciamo_temp    minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_usciamo_change==ON]
-	  }
-	  Frame label="Override Notte" {
-	    Switch      item=ts_sog_night_off     icon="settings"
-	    Switch      item=ac_sog_night_off     icon="settings"
-	    Switch      item=ac_sog_night_change    icon="settings"
-	    Setpoint    item=ac_sog_night_temp      minValue=10 maxValue=31 step=0.5  visibility=[ac_sog_night_change==ON]
-	  }
-	  
-	} // TEXT CLIMA SOGGIORNO
-
-      } // CHIUSO FRAME Automatismi
-    } // CHIUSO TEXT Configurazione schermata principale
-
-  } // CHIUSO FRAME CONFIGURAZIONI SCHERMATA PRINCIPALE
 
 
 

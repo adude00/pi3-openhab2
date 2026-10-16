@@ -1,0 +1,14 @@
+rule "Telecamere master: control 1P and 2P together"
+when
+    Item telecamere_all changed
+then
+  if (telecamere_all.state == ON) {
+    sf12_Switch.sendCommand(ON)
+    sf03_Switch.sendCommand(ON)
+    logInfo("Telecamere","Master ON: both cameras enabled")
+  } else {
+    sf12_Switch.sendCommand(OFF)
+    sf03_Switch.sendCommand(OFF)
+    logInfo("Telecamere","Master OFF: both cameras disabled")
+  }
+end

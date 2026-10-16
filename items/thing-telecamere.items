@@ -1,0 +1,3 @@
+// Master switch controlling BOTH cameras (1P + 2P) at once
+// Virtual item: no channel, state is set by UI/Alexa, propagated by rules/telecamere.rules
+Switch telecamere_all "Videosorveglianza" <camera> {alexa="Switch"}

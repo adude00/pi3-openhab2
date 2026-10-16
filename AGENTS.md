@@ -31,6 +31,11 @@ Note that it takes a while to process new and edited files: wait some (30?) seco
 Events.log will have current and past status of items.
 
 
+# Alexa Integration
+
+In order to have a switch controlled by alexa just add `{alexa="Switch"}` to the item configuration
+
+
 # Repository rules
 
 Do NOT commit unless told so.
