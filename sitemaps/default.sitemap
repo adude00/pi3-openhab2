@@ -27,6 +27,7 @@ sitemap default label="Casa"
         Text   item=Strata_Last
         Switch   item=Inferenza_AutoOff                    label="Auto OFF when idle"
         Setpoint item=Inferenza_IdleMins  label="Idle Minutes: [%.0f]" minValue=0 maxValue=180 step=15
+        Setpoint item=Inferenza_IdlePowerW label="Idle Threshold: [%.0f] W" minValue=0 maxValue=300 step=10
       }
       Frame label="Cose" {
       Switch item=pow04_Switch

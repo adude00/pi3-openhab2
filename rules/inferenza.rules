@@ -12,11 +12,13 @@ var Timer inferenzaIdleTimer = null
 var int inferenzaIdleMin = 0
 var int inferenzaIdleLog = 0
 var int inferenzaArmedMins = 0
+var int inferenzaArmedPowerW = 0
 
-// Below this the PC is considered "idle" (gaming rigs idle around 40-70 W)
-val int IDLE_POWER_W = 80
 // Fallback when Inferenza_IdleMins is not set yet
 val int DEFAULT_IDLE_MINS = 30
+// Fallback idle threshold, used when the sitemap Setpoint Inferenza_IdlePowerW
+// has not been set yet (gaming rigs idle around 40-70 W)
+val int DEFAULT_IDLE_POWER_W = 80
 
 rule "Inferenza - Power ON"
 when
@@ -117,6 +119,7 @@ then
         inferenzaIdleMin = 0
         inferenzaIdleLog = 0
         inferenzaArmedMins = 0
+        inferenzaArmedPowerW = 0
         return
     }
 
@@ -128,6 +131,7 @@ then
         inferenzaIdleMin = 0
         inferenzaIdleLog = 0
         inferenzaArmedMins = 0
+        inferenzaArmedPowerW = 0
         return
     }
 
@@ -143,32 +147,44 @@ then
         inferenzaIdleMin = 0
         inferenzaIdleLog = 0
         inferenzaArmedMins = 0
+        inferenzaArmedPowerW = 0
         return
     }
+
+    // Idle power threshold, user-tunable from the sitemap (Setpoint on
+    // Inferenza_IdlePowerW); unset or 0 means "never idle enough", i.e. disabled
+    val int idlePowerW =
+        if (Inferenza_IdlePowerW.state instanceof Number)
+            (Inferenza_IdlePowerW.state as Number).intValue
+        else
+            DEFAULT_IDLE_POWER_W
 
     val w = pow04_Power.state
     if (!(w instanceof Number)) {
         return
     }
 
-    if ((w as Number) >= IDLE_POWER_W) {
+    if ((w as Number) >= idlePowerW) {
         // Not idle anymore: restart the countdown
         inferenzaIdleTimer?.cancel
         inferenzaIdleTimer = null
         inferenzaIdleMin = 0
         inferenzaIdleLog = 0
         inferenzaArmedMins = 0
+        inferenzaArmedPowerW = 0
         return
     }
 
     // Idle: (re)arm when there is no countdown yet, or when the configured
-    // timeout changed while one was already running
-    if (inferenzaIdleTimer === null || inferenzaArmedMins != idleMins) {
+    // timeout or power threshold changed while one was already running
+    if (inferenzaIdleTimer === null || inferenzaArmedMins != idleMins
+        || inferenzaArmedPowerW != idlePowerW) {
         inferenzaIdleTimer?.cancel
         inferenzaIdleMin = 0
         inferenzaIdleLog = 0
         inferenzaArmedMins = idleMins
-        logInfo("INFERENZA", "Idle detected ({} W < {} W) - auto OFF in {} min", w, IDLE_POWER_W, idleMins)
+        inferenzaArmedPowerW = idlePowerW
+        logInfo("INFERENZA", "Idle detected ({} W < {} W) - auto OFF in {} min", w, idlePowerW, idleMins)
         inferenzaIdleTimer = createTimer(now.plusMinutes(idleMins), [|
             logInfo("INFERENZA", "Idle for {} min - shutting Inferenza down", inferenzaArmedMins)
             Inferenza.sendCommand(OFF)
