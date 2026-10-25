@@ -422,6 +422,9 @@ sitemap default label="Casa"
 
       Frame label="Automatismi" { 
 	Text label="Scena buonanotte" icon=settings {
+          Frame label="Telecamere" {
+            Switch item=Buonanotte_Telecamere_AutoOn
+          }
 	  Frame label="Clima Matrimoniale" {
 	    Switch   item=Buonanotte_CM_Power
             Setpoint item=Buonanotte_CM_Temp icon=temperature minValue=16 maxValue=30 step=0.5      visibility=[Buonanotte_CM_Power==ON]

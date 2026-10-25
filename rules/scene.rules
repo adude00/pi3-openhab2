@@ -317,6 +317,13 @@ when
 then
     logInfo("Scene","Scena A Letto: iniziata")
 
+    // Telecamere 1P e 2P: accensione solo se abilitata dall'utente
+    if (Buonanotte_Telecamere_AutoOn.state == ON) {
+      sf12_Switch.sendCommand(ON)
+      sf03_Switch.sendCommand(ON)
+      logInfo("Scene","Scena A Letto: Telecamere accese")
+    }
+
     // Deprecato tanto è già accesa
     //sf05_Light.sendCommand(ON)
 

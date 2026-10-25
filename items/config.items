@@ -64,6 +64,9 @@ Switch Camera1_Clima_AutoOff    "Camera 1 Clima Auto OFF [%s]"      <settings> (
 Switch Camera1_TS_AutoOff       "Camera 1 TS Auto OFF [%s]"         <settings> (gAutomations)
 
 
+// Scena Buonanotte: accensione opzionale di entrambe le telecamere
+Switch Buonanotte_Telecamere_AutoOn "Accendi automaticamente" <camera> (gRestore)
+
 Switch Buonanotte_CM_Power "Turn ON Aircon [%s]"              <settings>  (gRestore,ClimaMatrimonialeAlarm)
 Number Buonanotte_CM_Temp  "Aircon Temp [%s]"                 <settings>  (gRestore,ClimaMatrimonialeAlarm)
 String Buonanotte_CM_Fan   "Fan Speed [%s]"                   <settings>  (gRestore,ClimaMatrimonialeAlarm)
