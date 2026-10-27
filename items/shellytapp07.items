@@ -1,0 +1,29 @@
+
+
+Rollershutter shellytapp07_roller      "7: Bagno" (gTappAll,gTappP2)
+//    { channel="exec:command:shellytapp07:run" }
+Number shellytapp07_Power              "shellytapp07 Power [%s W]" (gWatt)
+    { channel="mqtt:topic:shellies:shellytapp07:Power" }
+Number shellytapp07_voltage            "shellytapp07 Voltage [%s V]"
+    { channel="mqtt:topic:shellies:shellytapp07:Voltage" }
+Number shellytapp07_energy             "shellytapp07 Energy [%s kWh]"
+    { channel="mqtt:topic:shellies:shellytapp07:Energy" }
+Number shellytapp07_temperature        "shellytapp07 Temp [%s C]"
+    { channel="mqtt:topic:shellies:shellytapp07:Temperature" }
+String shellytapp07_restartreq         "shellytapp07 Restart Required [%s]"
+    { channel="mqtt:topic:shellies:shellytapp07:RestartReq" }
+String shellytapp07_state              "shellytapp07 Status [%s]"
+    { channel="mqtt:topic:shellies:shellytapp07:Devicestate" [profile="transform:MAP", function="shellyplus.map"] }
+String shellytapp07_event0             "shellytapp07 Last Event" // btn_down, btn_up, single_push, long_push, double_push, scheduled_restart
+    { channel="mqtt:topic:shellies:shellytapp07:Event0" }
+String shellytapp07_ip                 "shellytapp07 IP [%s]"
+    { channel="mqtt:topic:shellies:shellytapp07:IP" }
+String shellytapp07_rssi               "shellytapp07 RSSI [%s]"
+    { channel="mqtt:topic:shellies:shellytapp07:RSSI" }
+String shellytapp07_source             "shellytapp07 Source"
+    { channel="mqtt:topic:shellies:shellytapp07:Source" }
+Number shellytapp07_uptime             "shellytapp07 Uptime [%s s]"
+    { channel="mqtt:topic:shellies:shellytapp07:Uptime" }
+
+String shellytapp07                    "shellytapp07" (g_shellies) // dummy for rule status loop
+

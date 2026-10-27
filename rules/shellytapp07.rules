@@ -1,0 +1,23 @@
+rule "shellytapp07 UP"
+when 
+	Item shellytapp07_roller received command UP
+then
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytapp07/command/cover:0", "open" )
+end
+
+rule "shellytapp07 DOWN"
+when 
+	Item shellytapp07_roller received command DOWN
+then
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytapp07/command/cover:0", "close" )
+end
+
+rule "shellytapp07 STOP"
+when 
+	Item shellytapp07_roller received command STOP
+then
+        var actionsBroker = getActions("mqtt","mqtt:broker:brokerv2")
+	actionsBroker.publishMQTT( "shellies/shellytapp07/command/cover:0", "stop" )
+end

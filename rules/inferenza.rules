@@ -1,13 +1,15 @@
 // Inferenza (Gaming PC on the pow04 Sonoff strip)
 // ON  -> power the strip
 // OFF -> tell Windows to shut down, then poll the strip until it drops below
-//         10 W and only then cut the power.
+//         10 W on repeated fresh readings spanning at least 20 s, then cut power.
 //
 // The OFF sequence is NOT blocking: Alexa gets an immediate response and the
 // waiting part is done by the polling rule below (a blocking rule would make
 // Alexa complain that the command "took too long").
 
 var int inferenzaWaited = 0
+var long inferenzaLowSince = 0
+var long inferenzaLastPowerUpdate = 0
 var Timer inferenzaIdleTimer = null
 var int inferenzaIdleMin = 0
 var int inferenzaIdleLog = 0
@@ -24,6 +26,8 @@ rule "Inferenza - Power ON"
 when
     Item Inferenza received command ON
 then
+    inferenzaLowSince = 0
+    inferenzaLastPowerUpdate = 0
     // If a shutdown was in progress, the user changed his mind: stop it
     if (Inferenza_running.state == ON) {
         logWarn("INFERENZA", "Power ON requested during shutdown - aborting shutdown")
@@ -60,6 +64,9 @@ then
     logInfo("INFERENZA", "Shutdown process started.")
     Inferenza_running.postUpdate(ON)
     inferenzaWaited = 0
+    // Never reuse a low reading from before this shutdown request.
+    inferenzaLowSince = 0
+    inferenzaLastPowerUpdate = 0
 
     // Ask Windows to shut down (5 s grace). Returns immediately.
     executeCommandLine(Duration.ofSeconds(30), "ssh", "sshuser@172.27.73.6", "shutdown /s /t 5")
@@ -81,30 +88,85 @@ then
     val threshold = 10
     val maxWaitSec = 300
 
-    if (w instanceof Number && (w as Number) < threshold) {
-        // PC stopped pulling power: give it a margin, then cut the strip
-        if (inferenzaWaited >= 20) {
-            logInfo("INFERENZA", "Power below {} W after {} s - cutting the strip OFF", threshold, inferenzaWaited)
-            pow04_Switch.sendCommand(OFF)
-            Inferenza.postUpdate(OFF)
-            Inferenza_running.postUpdate(OFF)
-
-            val prowl = getActions("prowl", "prowl:broker:mybroker")
-            prowl.pushNotification("INFERENZA", "Inferenza shutdown complete, strip OFF")
-        }
-        return;
+    // Only the fresh-telemetry rule below may cut power. Polling a cached
+    // low state repeatedly is NOT evidence that the PC has remained off.
+    if (inferenzaLastPowerUpdate == 0 ||
+        now.toInstant.toEpochMilli - inferenzaLastPowerUpdate > 90000) {
+        inferenzaLowSince = 0
     }
 
     if (inferenzaWaited >= maxWaitSec) {
-        // Still on: do NOT cut power (that would be a hard off), just report
-        logWarn("INFERENZA", "Strip still above {} W after {} s - aborting, strip left ON", threshold, maxWaitSec)
+        // Unconfirmed or still on: do NOT cut power, just report
+        logWarn("INFERENZA", "No confirmed fresh power below {} W after {} s - aborting, strip left ON", threshold, maxWaitSec)
         val prowlTimeout = getActions("prowl", "prowl:broker:mybroker")
-        prowlTimeout.pushNotification("INFERENZA", "Shutdown timeout: Inferenza still above 10 W, power NOT cut")
+        prowlTimeout.pushNotification("INFERENZA", "Shutdown timeout: low power not confirmed, power NOT cut")
         Inferenza_running.postUpdate(OFF)
         return;
     }
 
     logInfo("INFERENZA", "Waiting for Inferenza to power down: {} s waited, {} W on strip", inferenzaWaited, w)
+end
+
+
+// Use received update, not changed: repeated identical low readings count,
+// but a cached/restored state alone can never authorize cutting power.
+rule "Inferenza - Confirm PC is OFF"
+when
+    Item pow04_Power received update
+then
+    if (Inferenza_running.state != ON) {
+        inferenzaLowSince = 0
+        inferenzaLastPowerUpdate = 0
+        return;
+    }
+
+    val long sampleTime = now.toInstant.toEpochMilli
+    val w = newState
+    if (inferenzaLastPowerUpdate == 0 ||
+        sampleTime - inferenzaLastPowerUpdate > 90000) {
+        inferenzaLowSince = 0
+    }
+    inferenzaLastPowerUpdate = sampleTime
+
+    // Unknown, negative, or >= 10 W readings fail closed and restart confirmation.
+    if (!(w instanceof Number)) {
+        inferenzaLowSince = 0
+        return;
+    }
+    if (!((w as Number).doubleValue >= 0 && (w as Number).doubleValue < 10)) {
+        inferenzaLowSince = 0
+        return;
+    }
+
+    if (inferenzaLowSince == 0) {
+        inferenzaLowSince = sampleTime
+        logInfo("INFERENZA", "Fresh power {} W below 10 W - waiting for another low reading", w)
+        return;
+    }
+    if (sampleTime - inferenzaLowSince < 20000) {
+        return;
+    }
+
+    // Recheck immediately before issuing the only strip-OFF command.
+    if (Inferenza_running.state != ON || pow04_Switch.state != ON ||
+        !(pow04_Power.state instanceof Number)) {
+        return;
+    }
+    val currentPower = (pow04_Power.state as Number).doubleValue
+    if (!(currentPower >= 0 && currentPower < 10)) {
+        inferenzaLowSince = 0
+        return;
+    }
+    logInfo("INFERENZA", "Fresh readings below 10 W for {} s (now {} W) - cutting the strip OFF",
+        (sampleTime - inferenzaLowSince) / 1000, w)
+    pow04_Switch.sendCommand(OFF)
+    Inferenza.postUpdate(OFF)
+    Inferenza_running.postUpdate(OFF)
+    inferenzaLowSince = 0
+    inferenzaLastPowerUpdate = 0
+
+    val prowl = getActions("prowl", "prowl:broker:mybroker")
+    prowl.pushNotification("INFERENZA", "Inferenza shutdown complete, strip OFF")
 end
 
 

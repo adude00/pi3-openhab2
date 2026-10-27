@@ -172,7 +172,7 @@ sitemap default label="Casa"
         Default item=Tapp04
         Default item=Tapp05
         Default item=Tapp06
-        Default item=Tapp07
+        Default item=shellytapp07_roller
         Default item=Tapp08
       }
       Frame label="Piano 1" {
@@ -2044,6 +2044,22 @@ sitemap default label="Casa"
           Text   item=shellytappHotel_source icon=none
           Text   item=shellytappHotel_ip icon=none
           Text   item=shellytappHotel_rssi icon=none}
+      }
+      Text label="Tapparella 07 - P2 Bagno" {
+        Frame label="shellytapp07" {
+          Switch item=shellytapp07_roller
+          Text   item=shellytapp07_Power icon=none
+          Text   item=shellytapp07_voltage icon=none
+          Text   item=shellytapp07_energy icon=none
+          Text   item=shellytapp07_temperature icon=none
+          Text   item=shellytapp07_restartreq icon=none
+          Text   item=shellytapp07_uptime icon=none
+          Text   item=shellytapp07_state icon=none
+          Text   item=shellytapp07_event0 icon=none
+          Text   item=shellytapp07_source icon=none
+          Text   item=shellytapp07_ip icon=none
+          Text   item=shellytapp07_rssi icon=none
+	}
       }
 
     }

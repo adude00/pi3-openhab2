@@ -57,7 +57,17 @@ then
     allSensors.forEach[ sensor |
 
         val lastChange = sensor.lastChange
-        if (lastChange === null) return;
+        if (lastChange === null) {
+            if (!gSensorsStuckNotified.members.contains(sensor)) {
+                gSensorsStuckNotified.addMember(sensor)
+                stuckList.add(sensor.name + " (no last-change history; possibly offline)")
+                logWarn("SENSORS",
+                    "Sensor {} has no last-change history - marked as potentially STUCK",
+                    sensor.name
+                )
+            }
+            return;
+        }
 
         val minutesSince =
             java.time.Duration.between(
@@ -95,7 +105,7 @@ then
 
     if (!stuckList.isEmpty) {
 
-        val message = "Stuck sensors (no change for > " +
+        val message = "Potentially stuck sensors (no last-change history or no change for > " +
                       timeoutMinutes + " min):\n" +
                       stuckList.join("\n")
 
