@@ -43,5 +43,15 @@ rule "One startup rule to rule them all"
     tsCamera2Running.sendCommand(OFF)
     logInfo("tsCamera2Wait","System started: Turning off tsCamera2Wait and tsCamera2Running")
 
+    // Gli item "Stato ... ON/OFF" delle scene (group gSceneHvacPower) hanno default ON (ACCENDI),
+    // cosi' il comportamento resta identico a prima dell'introduzione di quegli item.
+    // NB: questa rule gira anche ad ogni reload dei .rules: impostiamo il default solo dove lo stato non e' gia' deciso.
+    for (i : gSceneHvacPower.members) {
+      if (i.state !== ON && i.state !== OFF) {
+        i.postUpdate(ON)
+        logInfo("STARTUP", i.name + ": nessuno stato, imposto ON (ACCENDI)")
+      }
+    }
+
 end
 

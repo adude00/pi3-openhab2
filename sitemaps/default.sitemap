@@ -22,6 +22,7 @@ sitemap default label="Casa"
       }
       Frame label="Inferenza" {
         Switch item=Inferenza
+        Text   item=pow04_Power                            label="Consumo: [%.0f W]" icon=energy
         Switch item=Inferenza_running
         Switch item=StrataOnline
         Text   item=Strata_Last
@@ -327,9 +328,11 @@ sitemap default label="Casa"
             Switch    item=Scene04Condition1
             Switch    item=Scene04Condition2
             Switch    item=Scene04Condition3
+            Switch    item=Scene04Condition3Power mappings=[ON="ACCENDI", OFF="SPEGNI"] visibility=[Scene04Condition3==ON]
             Switch    item=Scene04Condition3bis visibility=[Scene04Condition3==ON]
             Setpoint  item=Scene04Condition3bisNum  minValue=16 maxValue=30 step=1.0  visibility=[Scene04Condition3bis==ON]
             Switch    item=Scene04Condition4
+            Switch    item=Scene04Condition4Power mappings=[ON="ACCENDI", OFF="SPEGNI"] visibility=[Scene04Condition4==ON]
             Switch    item=Scene04Condition4bis visibility=[Scene04Condition4==ON]
             Setpoint  item=Scene04Condition4bisNum  minValue=16 maxValue=30 step=0.2  visibility=[Scene04Condition4bis==ON]
             Switch    item=Scene04Condition5
@@ -345,17 +348,18 @@ sitemap default label="Casa"
 	  }
 	  Frame label="Configurazione" {
             Switch    item=Scene05Condition1
-            Switch    item=Scene05Condition2
             Switch    item=Scene05Condition3
+            Switch    item=Scene05Condition3Power mappings=[ON="ACCENDI", OFF="SPEGNI"] visibility=[Scene05Condition3==ON]
             Switch    item=Scene05Condition3bis visibility=[Scene05Condition3==ON]
             Setpoint  item=Scene05Condition3bisNum  minValue=16 maxValue=30 step=0.5  visibility=[Scene05Condition3bis==ON]
             Switch    item=Scene05Condition4
+            Switch    item=Scene05Condition4Power mappings=[ON="ACCENDI", OFF="SPEGNI"] visibility=[Scene05Condition4==ON]
             Switch    item=Scene05Condition4bis visibility=[Scene05Condition4==ON]
             Setpoint  item=Scene05Condition4bisNum  minValue=16 maxValue=30 step=0.1  visibility=[Scene05Condition4bis==ON]
             Switch    item=Scene05Condition5
             Switch    item=Scene05Condition6
             Switch    item=Scene05Condition7
-            Setpoint  item=Scene05Condition7Num    minValue=0 maxValue=40 step=1      visibility=[Scene04Condition6==ON]
+            Setpoint  item=Scene05Condition7Num    minValue=0 maxValue=40 step=1      visibility=[Scene05Condition7==ON]
 	  }
 	} // Chiuso frame Scena 05
         Text label="Scene 06 - Studio Prep" icon="settings" {

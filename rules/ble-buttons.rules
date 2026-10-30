@@ -2,7 +2,7 @@ rule "BLE button1"
 when
     Channel 'mqtt:topic:shelly:ble-script:button1:click' triggered
 then
-	var click = receivedEvent.event
+	var click = receivedEvent.toString.trim
   	logInfo("ble","button1: "+ click)
 	if (click == "2") {
 	  logInfo("ble","button1: doubleclick - accendo tsBagno")
@@ -20,7 +20,7 @@ rule "BLE button2"
 when
     Channel 'mqtt:topic:shelly:ble-script:button2:click' triggered
 then
-	var click = receivedEvent.event
+	var click = receivedEvent.toString.trim
   	logInfo("ble","button2: "+click)
 end
 
@@ -28,7 +28,7 @@ rule "BLE button3"
 when
     Channel 'mqtt:topic:shelly:ble-script:button3:click' triggered
 then
-	var click = receivedEvent.event
+	var click = receivedEvent.toString.trim
   	logInfo("ble","button3: "+click)
 
 	if (click == "1") {
@@ -43,7 +43,7 @@ rule "BLE button4"
 when
     Channel 'mqtt:topic:shelly:ble-script:button4:click' triggered
 then
-	var click = receivedEvent.event
+	var click = receivedEvent.toString.trim
   	logInfo("ble","button4: "+click)
 
 	if (click == "1") {

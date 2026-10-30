@@ -1,5 +1,9 @@
 // Function Items
 Group gScene
+
+// Item "Stato ... ON/OFF" delle scene (SceneXXConditionXPower): messi qui dentro per imporre
+// il default (ON = ACCENDI) alla startup in un colpo solo, vedi rules/startup.rules
+Group gSceneHvacPower
 Switch Scene_Lavoro   "Scena: Lavoro"   (gScene)  [ "Switchable" ]
 Switch Scene_aCasa    "Scena: A Casa"   (gScene)  [ "Switchable" ]
 Switch Scene_Mattina  "Scena: Mattina"  (gScene)  [ "Switchable" ]

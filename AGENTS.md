@@ -23,7 +23,7 @@ Rename it properly only when done.
 
 After your edits, check Openhab.log for errors in loading the configuration item. 
 
-Note that it takes a while to process new and edited files: wait some (30?) seconds before declaring victory.
+Note that it takes a few seconds to process new and edited files: wait 5-10 seconds before declaring victory.
 
 
 # Items status information
