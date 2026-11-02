@@ -271,8 +271,10 @@ end
 
 rule "Inferenza - Resync with strip"
 when
-    Item pow04_Switch changed from ON to OFF or
-    Item pow04_Switch changed from OFF to ON
+    // "received update" (not "changed") so a NULL -> ON update also resyncs:
+    // someone may power the strip directly ("Videogioco") before the MQTT
+    // relay state was ever received.
+    Item pow04_Switch received update
 then
     // Keep the virtual switch honest if someone toggles the strip directly,
     // but never fight an ongoing shutdown sequence.
@@ -281,9 +283,15 @@ then
     }
 
     if (pow04_Switch.state == ON) {
-        Inferenza.postUpdate(ON)
-    } else {
-        Inferenza.postUpdate(OFF)
+        if (Inferenza.state != ON) {
+            logInfo("INFERENZA", "Strip turned ON directly (Videogioco) - setting Inferenza ON (arms idle auto OFF)")
+            Inferenza.postUpdate(ON)
+        }
+    } else if (pow04_Switch.state == OFF) {
+        if (Inferenza.state != OFF) {
+            logInfo("INFERENZA", "Strip turned OFF directly (Videogioco) - setting Inferenza OFF")
+            Inferenza.postUpdate(OFF)
+        }
     }
 end
 
@@ -295,6 +303,15 @@ when
     Item StrataOnline changed from OFF to ON
 then
     logInfo("STRATA", "Strata interface is up and running")
+
+    // The PC came up on its own (boot, Wake-on-LAN) while the strip was powered
+    // directly from "Videogioco" instead of through Inferenza: the virtual switch
+    // is still OFF, so "Idle auto OFF" never arms (it requires Inferenza == ON)
+    // and the strip would stay powered forever. Mirror the strip here.
+    if (Inferenza_running.state != ON && pow04_Switch.state == ON && Inferenza.state != ON) {
+        logInfo("INFERENZA", "Strata is up and the strip is ON but Inferenza is OFF - setting Inferenza ON (arms idle auto OFF)")
+        Inferenza.postUpdate(ON)
+    }
 
     val prowl = getActions("prowl", "prowl:broker:mybroker")
     prowl.pushNotification("STRATA", "Strata interface is UP and running (172.27.73.6:8080)")

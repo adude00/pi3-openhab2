@@ -39,3 +39,8 @@ In order to have a switch controlled by alexa just add `{alexa="Switch"}` to the
 # Repository rules
 
 Do NOT commit unless told so.
+
+
+# OpenHAB specific data
+
+You have access to the internet. If you're unsure on how openhab works, just go learn it
