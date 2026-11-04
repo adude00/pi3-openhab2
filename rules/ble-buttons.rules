@@ -1,32 +1,31 @@
 // See things/ble-buttons.things for what these buttons are.
 //
-// The Shelly BLE gateway publishes one message per click on
-// shelly/ble-script/button<N>, payload = click code ("1" = single click).
+// MAPPING (only these two actions exist, everything else is log-only):
 //
-// Two facts learned from Events.log / Openhab.log (2026-07-28):
+//   button1, single click (code 1) -> tsBagnoP1 ON
+//   button3, single click (code 1) -> tsBagnoP1 OFF
 //
-//  1. Every payload that ever arrives is "1". The gateway does not publish
-//     "2"/"4", so the old double-click / long-press branches were dead code:
-//     pressing those buttons did nothing at all.
+// Click codes published by the Shelly BLE gateway script:
+//   1 = single, 2 = double, 3 = triple, 4 = long press
 //
-//  2. ONE physical press generates 2-3 trigger events spread over up to ~7
-//     seconds (the BLE advertisement is picked up more than once):
-//        button3 12:50:31.735  12:50:32.690  12:50:38.413
-//        button3 12:52:06.349  12:52:08.435  12:52:12.846
-//        button4 12:51:42.959  12:51:46.281
-//        button1 12:51:17.920  12:51:18.932
-//     These rules send absolute ON/OFF commands, so the late duplicate of an
-//     ON press re-energises the thermostat a few seconds after an OFF press
-//     -> "it goes off for a second, then back on".
-//     Every button therefore gets a lock timer: the first event of a press is
-//     acted on, the rest of the burst is ignored.
+// Facts learned from Openhab.log / Events.log:
+//
+//  * ONE physical press produces several MQTT events (the gateway re-publishes
+//    the BLE advertisement), so these rules must be idempotent:
+//        single clicks  : repeats 0.3 - 7 s apart
+//                         button3 12:50:31.735  12:50:32.690  12:50:38.413
+//        multi clicks   : repeats ~100 ms apart AND the code escalates during
+//                         the same press (button4: 2,2,3,3,3 within 400 ms), so
+//                         a press can emit more than one code.
+//  * Locks below are per button and only taken by mapped codes: an unmapped
+//    code never consumes the lock of a real press.
 //
 // Keep actions here, not in the Shelly script (its JS sandbox has no Math.random).
+// When you want to map a new code, reuse the "if lock === null" pattern and
+// remember that one press can emit two consecutive codes.
 
 var Timer bleBtn1Lock = null
-var Timer bleBtn2Lock = null
 var Timer bleBtn3Lock = null
-var Timer bleBtn4Lock = null
 
 rule "BLE button1"
 when Channel 'mqtt:topic:shelly:ble-script:button1:click' triggered
@@ -36,12 +35,14 @@ then
 	if (click == "1") {
 		if (bleBtn1Lock === null) {
 			bleBtn1Lock = createTimer(now.plusSeconds(10), [| bleBtn1Lock = null ])
-			logInfo("BLE button", "button1: -> tsBagnoP1 ON")
+			logInfo("BLE button", "button1: single click -> tsBagnoP1 ON")
 			tsBagnoP1.sendCommand(ON)
 			shelly09_R1.sendCommand(ON)
 		} else {
 			logWarn("BLE button", "button1: duplicate event ignored (debounce)")
 		}
+	} else {
+		logInfo("BLE button", "button1: click code " + click + " not mapped")
 	}
 end
 
@@ -50,7 +51,7 @@ when Channel 'mqtt:topic:shelly:ble-script:button2:click' triggered
 then
 	var click = receivedEvent.toString.trim
 	logInfo("BLE button", "button2: click=" + click)
-	// not mapped yet: log only, so the payload of every press is known
+	logInfo("BLE button", "button2: click code " + click + " not mapped")
 end
 
 rule "BLE button3"
@@ -61,12 +62,14 @@ then
 	if (click == "1") {
 		if (bleBtn3Lock === null) {
 			bleBtn3Lock = createTimer(now.plusSeconds(10), [| bleBtn3Lock = null ])
-			logInfo("BLE button", "button3: -> tsBagnoP1 OFF")
+			logInfo("BLE button", "button3: single click -> tsBagnoP1 OFF")
 			tsBagnoP1.sendCommand(OFF)
 			shelly09_R1.sendCommand(OFF)
 		} else {
 			logWarn("BLE button", "button3: duplicate event ignored (debounce)")
 		}
+	} else {
+		logInfo("BLE button", "button3: click code " + click + " not mapped")
 	}
 end
 
@@ -75,14 +78,5 @@ when Channel 'mqtt:topic:shelly:ble-script:button4:click' triggered
 then
 	var click = receivedEvent.toString.trim
 	logInfo("BLE button", "button4: click=" + click)
-	if (click == "1") {
-		if (bleBtn4Lock === null) {
-			bleBtn4Lock = createTimer(now.plusSeconds(10), [| bleBtn4Lock = null ])
-			logInfo("BLE button", "button4: -> tsBagnoP1 OFF")
-			tsBagnoP1.sendCommand(OFF)
-			shelly09_R1.sendCommand(OFF)
-		} else {
-			logWarn("BLE button", "button4: duplicate event ignored (debounce)")
-		}
-	}
+	logInfo("BLE button", "button4: click code " + click + " not mapped")
 end
