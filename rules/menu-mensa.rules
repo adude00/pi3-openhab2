@@ -1,0 +1,63 @@
+// ---------------------------------------------------------------------------
+// Menu della mensa: "Alexa, accendi menu di oggi" / "Alexa, accendi menu di domani"
+//
+// Menu_Oggi / Menu_Domani (items/menu-mensa.items) sono switch esposti ad Alexa:
+// quando si accendono lanciamo lo script e leggiamo il risultato col
+// text-to-speech su Echo Soggiorno ed Echo Giochi.
+// ---------------------------------------------------------------------------
+
+val String LOG       = "MENU-MENSA"
+val String SCRIPT    = "/openhab/conf/scripts/menu_del_giorno.py"
+val int    TIMEOUT_S = 60
+
+// se arriva una seconda richiesta mentre lo script sta gia' girando, la ignoriamo
+var java.util.concurrent.atomic.AtomicBoolean menuBusy = new java.util.concurrent.atomic.AtomicBoolean(false)
+
+rule "Menu mensa: leggi ad alta voce"
+when
+    Item Menu_Oggi received command ON or
+    Item Menu_Domani received command ON
+then
+    val boolean perDomani = triggeringItemName == "Menu_Domani"
+    val quando = if (perDomani) "domani" else "oggi"
+
+    if (!menuBusy.compareAndSet(false, true)) {
+        logInfo(LOG, "Lettura gia' in corso: ignoro la richiesta ({}).", quando)
+        triggeringItem.postUpdate(OFF)
+        return
+    }
+
+    // lo script stampa gia' una frase pensata per essere parlata (--format speech);
+    // in caso di menu assente dice lui stesso che non c'e'.
+    var String out = null
+    try {
+        if (perDomani) {
+            out = executeCommandLine(Duration.ofSeconds(TIMEOUT_S), SCRIPT, "--quiet", "--format", "speech", "--tomorrow")
+        } else {
+            out = executeCommandLine(Duration.ofSeconds(TIMEOUT_S), SCRIPT, "--quiet", "--format", "speech")
+        }
+    } catch (Exception e) {
+        logError(LOG, "Esecuzione di '{}' fallita: {}", SCRIPT, e.toString)
+    }
+
+    var String testo = if (out === null) "" else out.trim
+    if (testo.isEmpty)
+        testo = "Scusa, non riesco a leggere il menu della mensa. Riprova tra un momento."
+
+    logInfo(LOG, "Menu {}: {}", quando, testo)
+    Menu_Testo.postUpdate(testo)
+    Menu_UltimaLettura.postUpdate(new DateTimeType())
+
+    // i due switch sono solo dei pulsanti: si rispegnono subito
+    Menu_Oggi.postUpdate(OFF)
+    Menu_Domani.postUpdate(OFF)
+
+    menuBusy.set(false)
+
+    // piccolo ritardo: Alexa sta ancora dicendo "ok, accendo...", e il TTS arrivato
+    // subito viene mangiato dalla conferma
+    createTimer(now.plusSeconds(3), [ |
+        Echo_Soggiorno_TTS.sendCommand(Menu_Testo.state.toString)
+        Echo_Giochi_TTS.sendCommand(Menu_Testo.state.toString)
+    ])
+end

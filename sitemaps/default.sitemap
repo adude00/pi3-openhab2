@@ -157,6 +157,21 @@ sitemap default label="Casa"
 
     } // CHIUSO TEXT "Devices"
 
+    Text item=Menu_UltimaLettura label="Mensa [letto %1$td/%1$tm %1$tH:%1$tM]" icon=kitchen {
+      Frame label="Pronuncia Alexa" {
+        Text label="Alexa, accendi menu di oggi"
+        Text label="Alexa, accendi menu di domani"
+      }
+      Frame label="Leggi ora" {
+        Switch item=Menu_Oggi   label="Menu di oggi"   icon=kitchen mappings=[ON="Leggi"]
+        Switch item=Menu_Domani label="Menu di domani" icon=kitchen mappings=[ON="Leggi"]
+      }
+      Frame label="Ultimo menu letto" {
+        Text item=Menu_Testo
+        Text item=Menu_UltimaLettura
+      }
+    } // CHIUSO TEXT Mensa
+
     Text label="Tapparelle" icon=rollershutter {
       Frame label="Tutta Casa" {
         Switch item=gTappAll   icon=rollershutter mappings=[UP="Open", STOP="Stop", DOWN="Close"]

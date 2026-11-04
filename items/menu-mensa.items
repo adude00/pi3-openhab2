@@ -1,0 +1,20 @@
+// ---------------------------------------------------------------------------
+// Menu della mensa (scripts/menu_del_giorno.py), letto a voce dai bambini:
+//
+//   "Alexa, accendi menu di oggi"    -> legge il menu di oggi
+//   "Alexa, accendi menu di domani"  -> legge il menu di domani  (--tomorrow)
+//
+// Il nome del dispositivo su Alexa e' l'etichetta dell'item ("Menu di oggi"),
+// quindi e' quella che i bambini devono pronunciare.
+// La logica (script + text to speech sugli Echo) sta in rules/menu-mensa.rules
+// ---------------------------------------------------------------------------
+
+Group gMenuMensa
+
+// "pulsanti" virtuali: si accendono da Alexa e si rispegnono da soli nella rule
+Switch Menu_Oggi   "Menu di oggi"   (gMenuMensa, Devices) [ "Switchable" ] {alexa="Switch"}
+Switch Menu_Domani "Menu di domani" (gMenuMensa, Devices) [ "Switchable" ] {alexa="Switch"}
+
+// testo dell'ultima lettura: comodo per verificare nella UI che funzioni
+String   Menu_Testo        "Menu [%s]"                      (gMenuMensa)
+DateTime Menu_UltimaLettura "Ultima lettura [%1$td/%1$tm %1$tH:%1$tM]" <time> (gMenuMensa)
