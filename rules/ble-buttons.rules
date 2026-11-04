@@ -1,54 +1,88 @@
+// See things/ble-buttons.things for what these buttons are.
+//
+// The Shelly BLE gateway publishes one message per click on
+// shelly/ble-script/button<N>, payload = click code ("1" = single click).
+//
+// Two facts learned from Events.log / Openhab.log (2026-07-28):
+//
+//  1. Every payload that ever arrives is "1". The gateway does not publish
+//     "2"/"4", so the old double-click / long-press branches were dead code:
+//     pressing those buttons did nothing at all.
+//
+//  2. ONE physical press generates 2-3 trigger events spread over up to ~7
+//     seconds (the BLE advertisement is picked up more than once):
+//        button3 12:50:31.735  12:50:32.690  12:50:38.413
+//        button3 12:52:06.349  12:52:08.435  12:52:12.846
+//        button4 12:51:42.959  12:51:46.281
+//        button1 12:51:17.920  12:51:18.932
+//     These rules send absolute ON/OFF commands, so the late duplicate of an
+//     ON press re-energises the thermostat a few seconds after an OFF press
+//     -> "it goes off for a second, then back on".
+//     Every button therefore gets a lock timer: the first event of a press is
+//     acted on, the rest of the burst is ignored.
+//
+// Keep actions here, not in the Shelly script (its JS sandbox has no Math.random).
+
+var Timer bleBtn1Lock = null
+var Timer bleBtn2Lock = null
+var Timer bleBtn3Lock = null
+var Timer bleBtn4Lock = null
+
 rule "BLE button1"
-when
-    Channel 'mqtt:topic:shelly:ble-script:button1:click' triggered
+when Channel 'mqtt:topic:shelly:ble-script:button1:click' triggered
 then
 	var click = receivedEvent.toString.trim
-  	logInfo("ble","button1: "+ click)
-	if (click == "2") {
-	  logInfo("ble","button1: doubleclick - accendo tsBagno")
-	  tsBagnoP1.sendCommand(ON)
-	  sendCommand(shelly09_R1, ON)
-	}
-	if (click == "4") {
-	  logInfo("ble","button1: longclick - spengo tsBagno")
-	  tsBagnoP1.sendCommand(OFF)
-	  sendCommand(shelly09_R1, OFF)
+	logInfo("BLE button", "button1: click=" + click)
+	if (click == "1") {
+		if (bleBtn1Lock === null) {
+			bleBtn1Lock = createTimer(now.plusSeconds(10), [| bleBtn1Lock = null ])
+			logInfo("BLE button", "button1: -> tsBagnoP1 ON")
+			tsBagnoP1.sendCommand(ON)
+			shelly09_R1.sendCommand(ON)
+		} else {
+			logWarn("BLE button", "button1: duplicate event ignored (debounce)")
+		}
 	}
 end
 
 rule "BLE button2"
-when
-    Channel 'mqtt:topic:shelly:ble-script:button2:click' triggered
+when Channel 'mqtt:topic:shelly:ble-script:button2:click' triggered
 then
 	var click = receivedEvent.toString.trim
-  	logInfo("ble","button2: "+click)
+	logInfo("BLE button", "button2: click=" + click)
+	// not mapped yet: log only, so the payload of every press is known
 end
 
 rule "BLE button3"
-when
-    Channel 'mqtt:topic:shelly:ble-script:button3:click' triggered
+when Channel 'mqtt:topic:shelly:ble-script:button3:click' triggered
 then
 	var click = receivedEvent.toString.trim
-  	logInfo("ble","button3: "+click)
-
+	logInfo("BLE button", "button3: click=" + click)
 	if (click == "1") {
-	  logInfo("ble","button3: click - accendo tsBagno")
-	  tsBagnoP1.sendCommand(ON)
-	  sendCommand(shelly09_R1, ON)
+		if (bleBtn3Lock === null) {
+			bleBtn3Lock = createTimer(now.plusSeconds(10), [| bleBtn3Lock = null ])
+			logInfo("BLE button", "button3: -> tsBagnoP1 OFF")
+			tsBagnoP1.sendCommand(OFF)
+			shelly09_R1.sendCommand(OFF)
+		} else {
+			logWarn("BLE button", "button3: duplicate event ignored (debounce)")
+		}
 	}
-	
 end
 
 rule "BLE button4"
-when
-    Channel 'mqtt:topic:shelly:ble-script:button4:click' triggered
+when Channel 'mqtt:topic:shelly:ble-script:button4:click' triggered
 then
 	var click = receivedEvent.toString.trim
-  	logInfo("ble","button4: "+click)
-
+	logInfo("BLE button", "button4: click=" + click)
 	if (click == "1") {
-	  logInfo("ble","button4: click - spengo tsBagno")
-	  tsBagnoP1.sendCommand(OFF)
-	  sendCommand(shelly09_R1, OFF)
+		if (bleBtn4Lock === null) {
+			bleBtn4Lock = createTimer(now.plusSeconds(10), [| bleBtn4Lock = null ])
+			logInfo("BLE button", "button4: -> tsBagnoP1 OFF")
+			tsBagnoP1.sendCommand(OFF)
+			shelly09_R1.sendCommand(OFF)
+		} else {
+			logWarn("BLE button", "button4: duplicate event ignored (debounce)")
+		}
 	}
 end

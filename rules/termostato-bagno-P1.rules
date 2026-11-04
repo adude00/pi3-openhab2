@@ -31,11 +31,17 @@ rule "Termostato Bagno P1"
   }
 end
 
-rule "Termostato BagnoP1 Auto OFF"
+rule "Termostato BagnoP1 Start Auto OFF"
   when
     Item tsBagnoP1 changed from OFF to ON
   then
     val int timerTime = (tsBagnoP1AutoOffMins.state as Number).intValue
+    // one BLE press can fire this rule 2-3 times: never leak the previous timer,
+    // an orphaned timer turns the boiler off later and cannot be cancelled
+    if (tsBagnoP1Timer !== null) {
+      tsBagnoP1Timer.cancel
+      tsBagnoP1Timer = null
+    }
     if (tsBagnoP1AutoOff.state == ON) {
       logInfo("tsBagnoP1","tsBagnoP1: AutoOff ON: Starting "+ timerTime +" minutes timer")
       tsBagnoP1Timer = createTimer(now.plusMinutes(timerTime), [|
@@ -45,7 +51,7 @@ rule "Termostato BagnoP1 Auto OFF"
     }
 end
 
-rule "Termostato BagnoP1 Auto OFF"
+rule "Termostato BagnoP1 Cancel Auto OFF"
   when
     Item tsBagnoP1 changed from ON to OFF
   then
