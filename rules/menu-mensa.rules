@@ -1,63 +1,158 @@
-// ---------------------------------------------------------------------------
-// Menu della mensa: "Alexa, accendi menu di oggi" / "Alexa, accendi menu di domani"
-//
-// Menu_Oggi / Menu_Domani (items/menu-mensa.items) sono switch esposti ad Alexa:
-// quando si accendono lanciamo lo script e leggiamo il risultato col
-// text-to-speech su Echo Soggiorno ed Echo Giochi.
-// ---------------------------------------------------------------------------
+/*
+ * Menu del giorno della mensa scolastica, letto ad alta voce dall'Echo giusto.
+ *
+ * Alexa (skill openHAB, item esposti in cucina):
+ *   "Alexa, accendi menu di oggi"   -> Menu_Oggi   ON
+ *   "Alexa, accendi menu di domani" -> Menu_Domani ON
+ *
+ * Il comando fa girare scripts/menu_del_giorno.py --quiet --format speech e il
+ * testo viene dettato SOLO sull'Echo da cui la frase e' stata pronunciata.
+ *
+ * Come funziona:
+ *   - il comando ON dallo skill arriva ~1-2s dopo la frase pronunciata
+ *   - Echo_<Stanza>_LastVoiceCommand arriva dopo "activityRequestDelay" del
+ *     thing "Amazon Account" (default 10s!): impostalo a 3 (Settings -> Things
+ *     -> Amazon Account -> Avanzate) cosi' la stanza si conosce quasi subito
+ *   - se la stanza e' gia' nota si parla dopo TTS_DELAY_S, altrimenti si aspetta
+ *     la voce per VOICE_WAIT_S e in mancanza si usano gli speaker di default
+ *     (Soggiorno + Giochi), utile anche quando il comando arriva dalla sitemap
+ *
+ * Stanze: Soggiorno, Giochi, Cameretta, Ethan, Studio, Matrimoniale
+ * (ogni Echo ha gia' l'item Echo_<Stanza>_TTS e _LastVoiceCommand)
+ */
 
-val String LOG       = "MENU-MENSA"
-val String SCRIPT    = "/openhab/conf/scripts/menu_del_giorno.py"
-val int    TIMEOUT_S = 60
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicReference
 
-// se arriva una seconda richiesta mentre lo script sta gia' girando, la ignoriamo
-var java.util.concurrent.atomic.AtomicBoolean menuBusy = new java.util.concurrent.atomic.AtomicBoolean(false)
+var String menuVoiceRoom = ""                             // stanza dell'ultima frase "menu"
+var AtomicBoolean menuBusy   = new AtomicBoolean(false)
+var AtomicBoolean menuSpoken = new AtomicBoolean(false)
+var AtomicReference<Timer> menuTimer = new AtomicReference<Timer>(null)
 
-rule "Menu mensa: leggi ad alta voce"
-when
-    Item Menu_Oggi received command ON or
-    Item Menu_Domani received command ON
+val Integer TIMEOUT_S     = 60    // timeout dello script
+val Integer VOICE_WAIT_S  = 6     // attesa della LastVoiceCommand se la stanza non e' nota
+val Integer TTS_DELAY_S   = 3     // pausa prima di parlare se la stanza e' gia' nota
+
+rule "Alexa: which room asked for the menu"
+    when
+        Item Echo_Soggiorno_LastVoiceCommand received update or
+        Item Echo_Giochi_LastVoiceCommand received update or
+        Item Echo_Matrimoniale_LastVoiceCommand received update or
+        Item Echo_Cameretta_LastVoiceCommand received update or
+        Item Echo_Ethan_LastVoiceCommand received update or
+        Item Echo_Studio_LastVoiceCommand received update
 then
-    val boolean perDomani = triggeringItemName == "Menu_Domani"
-    val quando = if (perDomani) "domani" else "oggi"
+    // "Echo_Soggiorno_LastVoiceCommand" -> "Soggiorno"
+    val room   = triggeringItemName.replaceFirst("Echo_(.+)_LastVoiceCommand$", "$1")
+    val spoken = newState?.toString ?: ""
 
-    if (!menuBusy.compareAndSet(false, true)) {
-        logInfo(LOG, "Lettura gia' in corso: ignoro la richiesta ({}).", quando)
-        triggeringItem.postUpdate(OFF)
+    if (!spoken.toLowerCase.contains("menu")) {
+        logDebug("MENU-MENSA", "Voce su '{}': '{}'", room, spoken)
         return
     }
 
-    // lo script stampa gia' una frase pensata per essere parlata (--format speech);
-    // in caso di menu assente dice lui stesso che non c'e'.
-    var String out = null
-    try {
-        if (perDomani) {
-            out = executeCommandLine(Duration.ofSeconds(TIMEOUT_S), SCRIPT, "--quiet", "--format", "speech", "--tomorrow")
-        } else {
-            out = executeCommandLine(Duration.ofSeconds(TIMEOUT_S), SCRIPT, "--quiet", "--format", "speech")
-        }
-    } catch (Exception e) {
-        logError(LOG, "Esecuzione di '{}' fallita: {}", SCRIPT, e.toString)
+    menuVoiceRoom = room
+    logInfo("MENU-MENSA", "Frase 'menu' pronunciata su '{}': '{}'", room, spoken)
+end
+
+rule "Menu mensa: leggi ad alta voce"
+    when
+        Item Menu_Oggi   received command ON
+        or Item Menu_Domani received command ON
+then
+    if (!menuBusy.compareAndSet(false, true)) {
+        logWarn("MENU-MENSA", "Lettura gia' in corso, ignoro la richiesta ripetuta")
+        return
     }
 
-    var String testo = if (out === null) "" else out.trim
-    if (testo.isEmpty)
-        testo = "Scusa, non riesco a leggere il menu della mensa. Riprova tra un momento."
+    val today = triggeringItemName == "Menu_Oggi"
+    val label = if (today) "oggi" else "domani"
+    logInfo("MENU-MENSA", "Richiesto menu '{}'", label)
 
-    logInfo(LOG, "Menu {}: {}", quando, testo)
-    Menu_Testo.postUpdate(testo)
-    Menu_UltimaLettura.postUpdate(new DateTimeType())
+    var String cmd
+    if (today) {
+        cmd = executeCommandLine(
+            Duration.ofSeconds(TIMEOUT_S),
+            "/openhab/conf/scripts/menu_del_giorno.py",
+            "--quiet", "--format", "speech"
+        )
+    } else {
+        cmd = executeCommandLine(
+            Duration.ofSeconds(TIMEOUT_S),
+            "/openhab/conf/scripts/menu_del_giorno.py",
+            "--quiet", "--format", "speech", "--tomorrow"
+        )
+    }
 
-    // i due switch sono solo dei pulsanti: si rispegnono subito
-    Menu_Oggi.postUpdate(OFF)
-    Menu_Domani.postUpdate(OFF)
+    var String menuText = ""
+    if (cmd !== null) {
+        menuText = cmd.toString.trim.replaceFirst("\n+$", "")
+    }
+    if (menuText.length == 0) {
+        menuText = "Scusa, non riesco a leggere il menu della mensa. Riprova tra un momento."
+    }
+
+    val ok = menuText.startsWith("Ecco il menu")
+    logInfo("MENU-MENSA", "Menu '{}': {}", label, menuText)
+
+    postUpdate(Menu_Testo, menuText)
+    postUpdate(Menu_UltimaLettura, new DateTimeType())
+
+    // i due switch sono solo un pulsante virtuale: li rimetto a OFF
+    postUpdate(Menu_Oggi,   OFF)
+    postUpdate(Menu_Domani, OFF)
+
+    val previous = menuTimer.getAndSet(null)
+    if (previous !== null) {
+        previous.cancel
+    }
+    menuSpoken.set(false)
+
+    if (!ok) {
+        // in caso di errore conviene comunque avvisare in ogni stanza
+        Echo_Soggiorno_TTS.sendCommand(menuText)
+        Echo_Giochi_TTS.sendCommand(menuText)
+        menuBusy.set(false)
+        return
+    }
+
+    val text  = menuText
+    val known = menuVoiceRoom != ""
+    val delay = if (known) TTS_DELAY_S else VOICE_WAIT_S
+    logInfo("MENU-MENSA", "Stanza {}: parlero' tra {}s", if (known) "nota" else "sconosciuta", delay)
+
+    menuTimer.set(createTimer(now.plusSeconds(delay)) [
+        if (menuSpoken.compareAndSet(false, true)) {
+            val room = menuVoiceRoom
+            menuVoiceRoom = ""
+
+            if (room == "") {
+                logInfo("MENU-MENSA", "Echo di provenienza sconosciuto: leggo su Soggiorno e Giochi")
+                Echo_Soggiorno_TTS.sendCommand(text)
+                Echo_Giochi_TTS.sendCommand(text)
+            } else if (room == "Soggiorno") {
+                Echo_Soggiorno_TTS.sendCommand(text)
+            } else if (room == "Giochi") {
+                Echo_Giochi_TTS.sendCommand(text)
+            } else if (room == "Cameretta") {
+                Echo_Cameretta_TTS.sendCommand(text)
+            } else if (room == "Ethan") {
+                Echo_Ethan_TTS.sendCommand(text)
+            } else if (room == "Studio") {
+                Echo_Studio_TTS.sendCommand(text)
+            } else if (room == "Matrimoniale") {
+                Echo_Matrimoniale_TTS.sendCommand(text)
+            } else {
+                logWarn("MENU-MENSA", "Stanza '{}' sconosciuta: leggo su Soggiorno e Giochi", room)
+                Echo_Soggiorno_TTS.sendCommand(text)
+                Echo_Giochi_TTS.sendCommand(text)
+            }
+
+            if (room != "") {
+                logInfo("MENU-MENSA", "Menu letto su '{}'", room)
+            }
+        }
+    ])
 
     menuBusy.set(false)
-
-    // piccolo ritardo: Alexa sta ancora dicendo "ok, accendo...", e il TTS arrivato
-    // subito viene mangiato dalla conferma
-    createTimer(now.plusSeconds(3), [ |
-        Echo_Soggiorno_TTS.sendCommand(Menu_Testo.state.toString)
-        Echo_Giochi_TTS.sendCommand(Menu_Testo.state.toString)
-    ])
 end

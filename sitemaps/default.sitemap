@@ -161,8 +161,9 @@ sitemap default label="Casa"
       Frame label="Pronuncia Alexa" {
         Text label="Alexa, accendi menu di oggi"
         Text label="Alexa, accendi menu di domani"
+        Text label="Parla solo l'Echo a cui lo chiedi"
       }
-      Frame label="Leggi ora" {
+      Frame label="Leggi ora (Soggiorno + Giochi)" {
         Switch item=Menu_Oggi   label="Menu di oggi"   icon=kitchen mappings=[ON="Leggi"]
         Switch item=Menu_Domani label="Menu di domani" icon=kitchen mappings=[ON="Leggi"]
       }
