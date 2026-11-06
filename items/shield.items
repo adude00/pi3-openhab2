@@ -1,0 +1,66 @@
+// =====================================================================
+// NVIDIA SHIELD TV Pro — openHAB AndroidTV binding (thing: androidtv:shieldtv:4affcf0d35)
+// Place at: $OPENHAB_CONF/items/shield.items   (hot-reloads in seconds)
+// Replace/remove any older shield.items you made before to avoid duplicate items.
+// =====================================================================
+Group  Shield          "SHIELD"
+// ----- Power -----------------------------------------------------------
+// ON wakes the box from standby (~15-20 s before other commands land).
+// OFF puts it to sleep. State lags reality by seconds — don't chain tightly.
+Switch Shield_Power   "Power [%.0s]"        (Shield) { channel="androidtv:shieldtv:4affcf0d35:power" }
+// ----- Apps -------------------------------------------------------------
+// SEND a package name to launch it; READS the currently focused app back.
+//   org.smarttube.beta                      SmartTube (YouTube)
+//   com.plexapp.android                     Plex
+//   com.apple.atve.androidtv.appletv        Apple TV
+//   com.amazon.amazonvideo.livingroom       Prime Video
+//   com.netflix.ninja                       Netflix
+//   org.xbmc.kodi                           Kodi
+//   org.jellyfin.androidtv                  Jellyfin
+//   com.stremio.one                         Stremio
+//   com.valvesoftware.steamlink             Steam Link
+String Shield_App     "Current app [MAP(appname.map):%s]" (Shield) { channel="androidtv:shieldtv:4affcf0d35:app" }
+// Human-readable name of the current app (read-only in practice, great for rules/display)
+String Shield_AppName "Now running [%s]"    (Shield) { channel="androidtv:shieldtv:4affcf0d35:appname" }
+// Deep link / URL of the current content, when the app publishes one (read-only)
+String Shield_AppUrl  "Content URL [%s]"    (Shield) { channel="androidtv:shieldtv:4affcf0d35:appurl" }
+// ----- Playback ----------------------------------------------------------
+// PLAY / PAUSE / NEXT / PREVIOUS / REWIND / FASTFORWARD
+// Sends media-session commands into the running app; state mirrors playback.
+Player Shield_Player  "Player"              (Shield) { channel="androidtv:shieldtv:4affcf0d35:player" }
+// ----- Audio -------------------------------------------------------------
+Dimmer Shield_Volume  "Volume [%d%%]"       (Shield) { channel="androidtv:shieldtv:4affcf0d35:volume" }  // read-only: mirrors the box volume
+Switch Shield_Mute    "Mute"                (Shield) { channel="androidtv:shieldtv:4affcf0d35:mute" }
+// ----- Remote keys --------------------------------------------------------
+// keypress: fixed vocabulary, everything MUST be prefixed with KEY_. Names handled by
+//   BOTH protocol stacks (safe): KEY_UP KEY_DOWN KEY_LEFT KEY_RIGHT KEY_ENTER KEY_HOME
+//     KEY_BACK KEY_MENU KEY_PLAYPAUSE KEY_REWIND KEY_FORWARD KEY_POWER KEY_VOLUP
+//     KEY_VOLDOWN KEY_MUTE
+//   GoogleTV stack only:  KEY_PLAY KEY_PAUSE KEY_STOP KEY_NEXT KEY_PREVIOUS
+//   SHIELD stack only:   KEY_POWERON KEY_GOOGLE KEY_SUBMIT
+//   Any single ASCII char works as KEY_<char> (e.g. KEY_a); append _PRESS / _RELEASE
+//   to hold a key down. Anything unknown is silently dropped — for everything else
+//   use the keycode item below.
+String Shield_Key       "Key [%s]"          (Shield) { channel="androidtv:shieldtv:4affcf0d35:keypress" }
+// keycode: raw Android keycodes — universal. Some useful ones:
+//   3   HOME              4   BACK
+//   26  POWER (sleep/wake toggle)
+//   3   HOME               4   BACK              26  POWER (sleep/wake toggle)
+//   19  DPAD_UP  20 DPAD_DOWN  21 DPAD_LEFT  22 DPAD_RIGHT  23 DPAD_CENTER
+//   85  MEDIA_PLAY_PAUSE   126 MEDIA_PLAY   127 MEDIA_PAUSE   86 MEDIA_STOP
+//   87  MEDIA_NEXT          88 MEDIA_PREVIOUS  89 REWIND      90 FAST_FORWARD
+//   82  MENU   84 SEARCH   62 SPACE  67 DELETE  199 app button (Netflix button;
+//       remapped locally to Plex/SmartTube)   219 ASSIST
+String Shield_Keycode   "Keycode [%s]"      (Shield) { channel="androidtv:shieldtv:4affcf0d35:keycode" }
+// keyboard: free text typing into the focused field (search boxes etc.)
+String Shield_Keyboard  "Type [%.0s]"       (Shield) { channel="androidtv:shieldtv:4affcf0d35:keyboard" }
+// ----- Pairing (keep this item — you'll need it if the pairing ever breaks)
+// Re-pair: send REQUEST, read the 6-digit PIN on the TV, send it as text. One cycle only
+// while gtvEnabled=false. Example:  openhab:send Shield_Pin REQUEST
+String Shield_Pin       "PIN pairing [%.0s]"        { channel="androidtv:shieldtv:4affcf0d35:pincode" }
+// ----- Debug / connection control (undocumented channel, advanced) ---------
+// Send: GOOGLETV_HALT (stop the GoogleTV stack -> kills the ':6467' timeout spam),
+//       GOOGLETV_START / SHIELDTV_HALT / SHIELDTV_START to restart a stack,
+//       "RAW<hex>" / "MSG<hex>" to inject raw protocol messages.
+String Shield_Debug     "Connection [%.0s]"         { channel="androidtv:shieldtv:4affcf0d35:debug" }
+

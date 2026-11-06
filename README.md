@@ -129,6 +129,22 @@ Performed on 20260223. The following steps were necessary:
 
 ## Manual configuration notes
 
+### SHIELD TV Bindings
+In order to be able to control the shield you must:
+* install Shield TV Bindings
+* open the cli and PAIR with the tv TWICE (the frist code is a number, the second is alphanumeric)
+  * from openhab-cli (AGAIN, TWICE)
+    * openhab:send Shield_Pin REQUEST
+    * openhab:send Shield_Pin PIN-FROM-TV
+    * RINSE AND REPEAT
+
+Now you'll see the thing ONLINE in OH interface.
+    
+You can test it from openhab-cli:
+* openhab:send Shield_Keycode 26 -> power button
+* openhab:send Shield_App org.smarttube.beta
+* openhab:send Shield_App com.plexapp.android
+
 ### Local Prowl configuration
 
 Install the Prowl binding through the OpenHAB UI and create an API key in

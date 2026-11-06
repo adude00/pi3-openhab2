@@ -3,6 +3,134 @@ sitemap default label="Casa"
 	Frame label="Things" {
     Text label="Devices" icon=cinema {
 
+      // ---- NVIDIA SHIELD ---------------------------------------------------------
+      // thing: androidtv:shieldtv:4affcf0d35  (items: items/shield.items)
+      // One protocol stack behind each function:
+      //   SHIELD app protocol (8987)            -> keypress, keyboard, app(launch), pincode + app state
+      //   GoogleTV protocol   (6466/6467)       -> power, player, volume, mute, keycode + power/volume state
+      // gtvEnabled=false routes everything through the SHIELD protocol: the Power/Player/Keys rows below
+      // then do nothing (use the KEY_* buttons) and power/volume state stops being reported.
+      // Remote buttons are stateless Buttongrid buttons on purpose: the binding leaves the last sent key
+      // as item state, which would otherwise show/highlight itself on every row using that item.
+      // The last key pressed is displayed once, in the "Raw keys" frame.
+      Frame label="NVIDIA SHIELD" icon=cinema {
+        // the whole panel lives on this sub-page; label="SHIELD []" would hide the running-app state
+        Text item=Shield_AppName label="SHIELD" icon=cinema {
+
+          Frame label="Power" {
+            // OFF = standby. ON wakes the box: give it 15-20 s before sending anything else.
+            // Needs the GoogleTV stack; the KEY_POWER fallback lives in Advanced -> Maintenance.
+            Switch    item=Shield_Power   label="Power"
+          }
+
+          Frame label="Now playing" {
+            Text      item=Shield_AppName icon=screen
+            // sends the package name to the box
+            Selection item=Shield_App     label="Launch app" icon=cinema mappings=["org.smarttube.beta"="SmartTube", "com.plexapp.android"="Plex", "com.apple.atve.androidtv.appletv"="Apple TV", "com.amazon.amazonvideo.livingroom"="Prime Video", "com.netflix.ninja"="Netflix", "org.xbmc.kodi"="Kodi", "org.jellyfin.androidtv"="Jellyfin", "com.stremio.one"="Stremio", "com.valvesoftware.steamlink"="Steam Link", "com.android.tv.settings"="Settings"]
+          }
+
+          Frame label="Remote" {
+            // KEY_* names handled by BOTH protocol stacks (safe set)
+            Buttongrid label="Media" {
+              Button item=Shield_Key row=1 column=1 stateless click=KEY_PLAYPAUSE label="⏯"
+              Button item=Shield_Key row=1 column=2 stateless click=KEY_REWIND     label="⏪"
+              Button item=Shield_Key row=1 column=3 stateless click=KEY_FORWARD    label="⏩"
+            }
+            Buttongrid label="Volume" {
+              Button item=Shield_Key row=1 column=1 stateless click=KEY_VOLUP   label="🔊"
+              Button item=Shield_Key row=1 column=2 stateless click=KEY_VOLDOWN label="🔈"
+              Button item=Shield_Key row=1 column=3 stateless click=KEY_MUTE    label="🔇"
+            }
+            Buttongrid label="D-pad" {
+              Button item=Shield_Key row=1 column=1 stateless click=KEY_UP    label="▲"
+              Button item=Shield_Key row=1 column=2 stateless click=KEY_DOWN  label="▼"
+              Button item=Shield_Key row=1 column=3 stateless click=KEY_LEFT  label="◀"
+              Button item=Shield_Key row=1 column=4 stateless click=KEY_RIGHT label="▶"
+            }
+            Buttongrid label="System" {
+              Button item=Shield_Key row=1 column=1 stateless click=KEY_ENTER label="OK"
+              Button item=Shield_Key row=1 column=2 stateless click=KEY_BACK  label="BACK"
+              Button item=Shield_Key row=1 column=3 stateless click=KEY_HOME  label="HOME"
+              Button item=Shield_Key row=1 column=4 stateless click=KEY_MENU  label="MENU"
+            }
+            // Player items only accept PLAY/PAUSE/REWIND/FASTFORWARD/NEXT/PREVIOUS (no STOP).
+            // These go through the GoogleTV stack, unlike the KEY_* buttons above.
+            Buttongrid label="Player" {
+              Button item=Shield_Player row=1 column=1 stateless click=PREVIOUS    label="⏮"
+              Button item=Shield_Player row=1 column=2 stateless click=REWIND      label="⏪"
+              Button item=Shield_Player row=1 column=3 stateless click=PLAY        label="▶"
+              Button item=Shield_Player row=1 column=4 stateless click=PAUSE       label="⏸"
+              Button item=Shield_Player row=1 column=5 stateless click=FASTFORWARD label="⏩"
+              Button item=Shield_Player row=1 column=6 stateless click=NEXT        label="⏭"
+            }
+            // free text into whatever field has focus (search boxes), auto-submitted
+            Input     item=Shield_Keyboard label="Type on the TV" inputHint="text"
+          }
+
+          Frame label="Raw keys" {
+            // the one place where the last pressed key is shown
+            Text      item=Shield_Key      label="Last key"
+            Text      item=Shield_Keycode  label="Last keycode"
+            // raw Android keycodes, for anything the named KEY_* buttons don't cover
+            Buttongrid label="Keys" {
+              Button item=Shield_Keycode row=1 column=1 stateless click=85  label="⏯"
+              Button item=Shield_Keycode row=1 column=2 stateless click=126 label="▶"
+              Button item=Shield_Keycode row=1 column=3 stateless click=127 label="⏸"
+              Button item=Shield_Keycode row=1 column=4 stateless click=86  label="⏹"
+              Button item=Shield_Keycode row=1 column=5 stateless click=87  label="⏭"
+              Button item=Shield_Keycode row=1 column=6 stateless click=88  label="⏮"
+              Button item=Shield_Keycode row=2 column=1 stateless click=89  label="⏪"
+              Button item=Shield_Keycode row=2 column=2 stateless click=90  label="⏩"
+              Button item=Shield_Keycode row=2 column=3 stateless click=84  label="🔍"
+              Button item=Shield_Keycode row=2 column=4 stateless click=82  label="☰"
+              Button item=Shield_Keycode row=2 column=5 stateless click=4   label="↩"
+              Button item=Shield_Keycode row=2 column=6 stateless click=26  label="⏻"
+              Button item=Shield_Keycode row=3 column=1 stateless click=199 label="🔘"
+              Button item=Shield_Keycode row=3 column=2 stateless click=219 label="🎙"
+            }
+            Input     item=Shield_Keycode  label="Send keycode" inputHint="number"
+          }
+
+          Frame label="Setup" {
+            // everything you should not press by accident
+            Text label="Advanced (power keys, PIN, protocol stacks, internals)" icon=settings {
+            Frame label="Maintenance" {
+              // KEY_POWER / KEY_POWERON travel on the SHIELD protocol, so they still work when the
+              // GoogleTV stack (and therefore the Power switch on the main page) is dead.
+              Buttongrid label="Standby / wake" icon=screen {
+                Button item=Shield_Key row=1 column=1 stateless click=KEY_POWER   label="TOGGLE STANDBY"
+                Button item=Shield_Key row=1 column=2 stateless click=KEY_POWERON label="WAKE UP"
+              }
+              // 1. press the button, 2. read the 6-digit PIN on the TV, 3. type it in the row below.
+              // The PIN exchange runs once per protocol stack, so do it twice.
+              Buttongrid label="PIN pairing" {
+                Button item=Shield_Pin row=1 column=1 stateless click=REQUEST label="🔑 request PIN on the TV"
+              }
+              Input     item=Shield_Pin      label="Enter PIN" inputHint="number"
+              // restart/stop the stacks without touching the thing. "GoogleTV stop" also kills the
+              // "Error opening SSL connection ... :6467" log spam, but then the Power/Player/Raw keys
+              // rows above go dead and no power/volume state is reported.
+              Buttongrid label="Protocol stacks" icon=settings {
+                Button item=Shield_Debug row=1 column=1 stateless click=GOOGLETV_HALT  label="GoogleTV ⏹"
+                Button item=Shield_Debug row=1 column=2 stateless click=GOOGLETV_START label="GoogleTV ▶"
+                Button item=Shield_Debug row=1 column=3 stateless click=SHIELDTV_HALT  label="SHIELD ⏹"
+                Button item=Shield_Debug row=1 column=4 stateless click=SHIELDTV_START label="SHIELD ▶"
+              }
+            }
+
+            Frame label="Debug" {
+              // raw internals: usually only interesting when something misbehaves
+              Text      item=Shield_App     label="Package" icon=settings
+              Text      item=Shield_AppUrl  label="Stream URL"
+              Text      item=Shield_Volume  icon=soundvolume
+              Switch    item=Shield_Mute    label="Mute"
+            } // CHIUSO FRAME Debug
+            } // CHIUSO TEXT "Advanced"
+          } // CHIUSO FRAME Setup
+
+        } // CHIUSO TEXT "SHIELD"
+      } // CHIUSO FRAME "NVIDIA SHIELD"
+
       Frame label="IP Cameras" {
         Switch item=telecamere_all label="Telecamere"
         Text label="IP Cameras" icon="camera" {

@@ -1,0 +1,32 @@
+# Friendly names for the Android packages reported by the AndroidTV binding
+# (androidtv:shieldtv:4affcf0d35 -> items/shield.items: Shield_App, sitemaps/default.sitemap)
+# Keep in sync with the "Launch app" Selection in the sitemap.
+
+# --- launchers / system ---
+com.google.android.apps.tv.launcherx=SHIELD Launcher
+com.nvidia.com.television=SHIELD Launcher
+com.google.android.tungsten.setupwraith=Setup
+com.android.tv.settings=Settings
+com.google.android.settings.internals=Settings
+com.google.android.packageinstaller=Install
+com.google.android.tv.remote.service=Remote Service
+
+# --- apps ---
+org.smarttube.beta=SmartTube
+org.smarttube=SmartTube
+com.google.android.youtube.tv=YouTube
+com.google.android.apps.youtube.music=YouTube Music
+com.plexapp.android=Plex
+com.plexapp.amber=Plex
+com.apple.atve.androidtv.appletv=Apple TV
+com.amazon.amazonvideo.livingroom=Prime Video
+com.netflix.ninja=Netflix
+com.disney.disneyplus=Disney+
+com.nbcsports.appwrapper=NBC Sports
+com.spotify.music=Spotify
+org.xbmc.kodi=Kodi
+org.jellyfin.androidtv=Jellyfin
+com.stremio.one=Stremio
+com.valvesoftware.steamlink=Steam Link
+com.google.android.deskclock=Clock
+com.google.android.videos=Google Play Movies
