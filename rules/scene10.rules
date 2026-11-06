@@ -1,0 +1,102 @@
+val String LOG = "Scene10"
+
+// Scene10 - Cinema
+// Default per gli item mai configurati (Uninitialized). Dopo il primo avvio la
+// persistenza (mapdb: everyChange, restoreOnStartup) ripristina i valori scelti
+// dall'utente, quindi questi default vengono applicati solo la prima volta.
+rule "Scene10 - Default"
+when
+    System reached start level 100
+then
+  if (Scene10Active.state !== ON && Scene10Active.state !== OFF) {
+    Scene10Active.postUpdate(ON)
+    logInfo(LOG,"Default: Scene10Active = ON")
+  }
+  if (Scene10Condition1.state !== ON && Scene10Condition1.state !== OFF) {
+    Scene10Condition1.postUpdate(ON)
+    logInfo(LOG,"Default: Condition1 (spegni divano) = ON")
+  }
+  if (Scene10Condition2.state !== ON && Scene10Condition2.state !== OFF) {
+    Scene10Condition2.postUpdate(ON)
+    logInfo(LOG,"Default: Condition2 (abbassa soffitto) = ON")
+  }
+  if (Scene10Condition2dim.state.toString == "Uninitialized" || Scene10Condition2dim.state.toString == "NULL") {
+    Scene10Condition2dim.postUpdate(40)
+    logInfo(LOG,"Default: percentuale soffitto = 40")
+  }
+  if (Scene10Condition3.state !== ON && Scene10Condition3.state !== OFF) {
+    Scene10Condition3.postUpdate(ON)
+    logInfo(LOG,"Default: Condition3 (scena privacy) = ON")
+  }
+  if (Scene10Condition4.state !== ON && Scene10Condition4.state !== OFF) {
+    Scene10Condition4.postUpdate(ON)
+    logInfo(LOG,"Default: Condition4 (accendi SHIELD) = ON")
+  }
+  if (Scene10Condition4app.state.toString == "Uninitialized" || Scene10Condition4app.state.toString == "NULL") {
+    Scene10Condition4app.postUpdate("org.smarttube.beta")
+    logInfo(LOG,"Default: app SHIELD = SmartTube")
+  }
+end
+
+rule "Scene10"
+when
+    Item Scene10 changed to ON
+then
+  if (Scene10Active.state == OFF) return  // DO NOT CONTINUE IF OFF
+
+  val prowl = getActions("prowl", "prowl:broker:mybroker")
+  prowl.pushNotification("Scene10 - Start!", "Scene10: Cinema")
+  logInfo(LOG,"Scene Started")
+
+  // 1 - Spegni la luce del divano
+  if (Scene10Condition1.state == ON) {
+    logInfo(LOG,"Scene10Condition1.state == ON: spengo il divano")
+    sf04_Light.sendCommand(OFF)
+  }
+
+  // 2 - Abbassa la luce del soffitto alla percentuale richiesta.
+  //     UN SOLO comando dimmer: Tasmota accende da solo il canale quando riceve
+  //     un comando luce (https://tasmota.github.io/docs/Lights/), e lo accende
+  //     direttamente alla percentuale richiesta.
+  //     NB: NON inviare prima Power ON su led03_PowerW -> cmnd/led03/DIMMER2 ON
+  //     riaccende il canale bianco al minimo (1%): la luce sembra spenta e poi
+  //     si riaccende, con un flash visibile.
+  if (Scene10Condition2.state == ON) {
+    if (Scene10Condition2dim.state.toString == "Uninitialized" || Scene10Condition2dim.state.toString == "NULL") {
+      logInfo(LOG,"Percentuale soffitto non configurata: uso 40%")
+      Scene10Condition2dim.postUpdate(40)
+    }
+    logInfo(LOG,"Scene10Condition2.state == ON: soffitto a " + Scene10Condition2dim.state + "%")
+    led03_DimW.sendCommand(Scene10Condition2dim.state as Number)
+  }
+
+  // 3 - Attiva la scena Privacy (tapparelle del soggiorno)
+  if (Scene10Condition3.state == ON) {
+    logInfo(LOG,"Scene10Condition3.state == ON: attivo la scena Privacy")
+    createTimer(now.plusSeconds(3), [ |
+      Scene_Privacy.sendCommand(ON)
+    ])
+  }
+
+  // 4 - Accendi lo SHIELD e avvia l'app scelta.
+  //     Dalla standby servono 15-20s prima che i comandi vengano accettati,
+  //     quindi l'app viene inviata solo dopo l'accensione.
+  if (Scene10Condition4.state == ON) {
+    logInfo(LOG,"Scene10Condition4.state == ON: accendo lo SHIELD")
+    Shield_Power.sendCommand(ON)
+    val app = Scene10Condition4app.state.toString
+    if (app != "NONE" && app != "Uninitialized" && app != "NULL" && app.length > 0) {
+      createTimer(now.plusSeconds(25), [ |
+        logInfo(LOG,"Avvio app SHIELD: " + app)
+        Shield_App.sendCommand(app)
+      ])
+    } else {
+      logInfo(LOG,"Nessuna app da avviare sullo SHIELD")
+    }
+  }
+
+  createTimer(now.plusSeconds(30), [ |
+    Scene10.sendCommand(OFF)
+    logInfo(LOG,"Scena finita")
+  ])
+end

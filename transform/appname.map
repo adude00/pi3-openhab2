@@ -3,6 +3,9 @@
 # Keep in sync with the "Launch app" Selection in the sitemap.
 
 # --- launchers / system ---
+# NB: NONE is not a package. It is the 'no app, power the SHIELD on only'
+# option used by Scene10Condition4app (items/scene10.items - Scene 10 Cinema).
+NONE=Nessuna (accendi soltanto)
 com.google.android.apps.tv.launcherx=SHIELD Launcher
 com.nvidia.com.television=SHIELD Launcher
 com.google.android.tungsten.setupwraith=Setup
@@ -12,8 +15,9 @@ com.google.android.packageinstaller=Install
 com.google.android.tv.remote.service=Remote Service
 
 # --- apps ---
+com.gathin.tvhome=Home
 org.smarttube.beta=SmartTube
-org.smarttube=SmartTube
+#org.smarttube=SmartTube
 com.google.android.youtube.tv=YouTube
 com.google.android.apps.youtube.music=YouTube Music
 com.plexapp.android=Plex

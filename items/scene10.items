@@ -1,0 +1,25 @@
+// =====================================================================
+// Scene 10 - Cinema
+// Versione openHAB della routine "Cinema" di Alexa:
+//   1. spegne la luce del Divano (sf04_Light)
+//   2. abbassa la luce del Soffitto (led03_DimW) alla percentuale scelta
+//   3. attiva la Scena Privacy (Scene_Privacy)
+//   4. accende lo SHIELD (Shield_Power) e avvia l'app scelta (Shield_App)
+// Ogni passo ha il proprio item Condition: ON = esegui, OFF = salta.
+// Configurazione: sitemaps/default.sitemap -> "Scene Moderne" -> "Scene 10 - Cinema"
+// =====================================================================
+Group gScene10
+
+Switch Scene10            "Scena Cinema"                <cinema>    (gScene10)  [ "Switchable" ]
+
+Switch Scene10Active      "Scena Attiva [%s]"           <settings>  (gRestore,gScene10)
+
+Switch Scene10Condition1          "Spegni Luce Divano [%s]"                 <settings>  (gRestore,gScene10)
+
+Switch Scene10Condition2          "Abbassa Luce Soffitto [%s]"              <settings>  (gRestore,gScene10)
+Number Scene10Condition2dim       "Percentuale Luce Soffitto [%.0f %%]"     <settings>  (gRestore,gScene10)
+
+Switch Scene10Condition3          "Attiva Scena Privacy [%s]"               <settings>  (gRestore,gScene10)
+
+Switch Scene10Condition4          "Accendi SHIELD [%s]"                     <settings>  (gRestore,gScene10)
+String Scene10Condition4app       "App SHIELD [MAP(appname.map):%s]"                <settings>  (gRestore,gScene10)

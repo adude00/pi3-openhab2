@@ -565,6 +565,22 @@ sitemap default label="Casa"
             Switch    item=Scene09Active
 	  }
 	} // Chiuso frame Scena 09
+        Text label="Scene 10 - Cinema" icon="cinema" {
+	  Frame label="Scena" {
+            Switch    item=Scene10
+	  }
+	  Frame label="Configurazione" {
+            Switch    item=Scene10Condition1
+            Switch    item=Scene10Condition2
+            Setpoint  item=Scene10Condition2dim icon=lightbulb minValue=5 maxValue=100 step=5      visibility=[Scene10Condition2==ON]
+            Switch    item=Scene10Condition3
+            Switch    item=Scene10Condition4
+            Selection item=Scene10Condition4app label="App da avviare" icon=cinema mappings=["org.smarttube.beta"="SmartTube", "com.plexapp.android"="Plex", "com.apple.atve.androidtv.appletv"="Apple TV", "com.amazon.amazonvideo.livingroom"="Prime Video", "com.netflix.ninja"="Netflix", "com.disney.disneyplus"="Disney+", "NONE"="Nessuna (accendi soltanto)"] visibility=[Scene10Condition4==ON]
+	  }
+	  Frame label="Attiva" {
+            Switch    item=Scene10Active
+	  }
+	} // Chiuso frame Scena 10
 
       } // Chiuso frame Scene
 
