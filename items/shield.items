@@ -63,4 +63,10 @@ String Shield_Pin       "PIN pairing [%.0s]"        { channel="androidtv:shieldt
 //       GOOGLETV_START / SHIELDTV_HALT / SHIELDTV_START to restart a stack,
 //       "RAW<hex>" / "MSG<hex>" to inject raw protocol messages.
 String Shield_Debug     "Connection [%.0s]"         { channel="androidtv:shieldtv:4affcf0d35:debug" }
+// ----- Maintenance (sitemap button only, no channel) -----------------------------
+// "cleanup" button: deletes the stale shieldtv keystore and restarts the androidtv bundle
+// (rule lives in rules/maintenance.rules). Workaround for
+// https://github.com/openhab/openhab-addons/issues/20340 - a truncated/empty keystore
+// makes the SHIELD stack fail with "Error initializing keystore".
+String Shield_Cleanup   "Keystore cleanup [%.0s]"
 

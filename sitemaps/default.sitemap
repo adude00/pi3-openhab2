@@ -101,6 +101,13 @@ sitemap default label="Casa"
                 Button item=Shield_Key row=1 column=1 stateless click=KEY_POWER   label="TOGGLE STANDBY"
                 Button item=Shield_Key row=1 column=2 stateless click=KEY_POWERON label="WAKE UP"
               }
+              // Workaround for https://github.com/openhab/openhab-addons/issues/20340: the binding can
+              // leave a truncated/empty shieldtv keystore behind, and the SHIELD stack then dies with
+              // "Error initializing keystore". Delete the file + restart the binding so a fresh one is
+              // created, then redo the PIN pairing below (twice, once per protocol stack).
+              Buttongrid label="Keystore" icon=settings {
+                Button item=Shield_Cleanup row=1 column=1 stateless click=CLEANUP label="🧹 cleanup"
+              }
               // 1. press the button, 2. read the 6-digit PIN on the TV, 3. type it in the row below.
               // The PIN exchange runs once per protocol stack, so do it twice.
               Buttongrid label="PIN pairing" {

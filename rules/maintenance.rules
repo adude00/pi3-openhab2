@@ -24,6 +24,22 @@ rule "PI restart"
     executeCommandLine(Duration.ofSeconds(10), "ssh", "root@127.0.0.1", "reboot")
 end
 
+rule "SHIELD keystore cleanup"
+  when
+    Item Shield_Cleanup received command
+  then
+    // Workaround for https://github.com/openhab/openhab-addons/issues/20340: the androidtv binding
+    // can persist a truncated/empty keystore, after which the SHIELD protocol never comes up again
+    // ("Error initializing keystore", SSL errors on 555/9215). Delete the file and restart the
+    // binding so a fresh keystore is created; the PIN pairing then has to be redone (once per stack).
+    logInfo("Maintenance", "SHIELD keystore cleanup requested, proceeding...")
+    val keystore = "/openhab/userdata/androidtv/shieldtv.4affcf0d35.keystore"
+    val rmout = executeCommandLine(Duration.ofSeconds(10), "/bin/rm", "-f", keystore)
+    logInfo("Maintenance", "Removed " + keystore + " (rm output: '" + rmout + "')")
+    executeCommandLine(Duration.ofSeconds(60), "/openhab/runtime/bin/client", "-p", "habopen", "bundle:restart", "org.openhab.binding.androidtv")
+    logInfo("Maintenance", "androidtv bundle restarted - redo the PIN pairing if the SHIELD stack stays offline")
+end
+
 rule "Service Restart"
   when
     Item service_restart received command
