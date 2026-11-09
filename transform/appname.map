@@ -17,7 +17,6 @@ com.google.android.tv.remote.service=Remote Service
 # --- apps ---
 com.gathin.tvhome=Home
 org.smarttube.beta=SmartTube
-#org.smarttube=SmartTube
 com.google.android.youtube.tv=YouTube
 com.google.android.apps.youtube.music=YouTube Music
 com.plexapp.android=Plex
