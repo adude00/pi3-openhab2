@@ -1836,11 +1836,54 @@ sitemap default label="Casa"
         Text      item=PublicIP
       }
       Frame label="Services" {
-        Switch    item=cl_restart mappings=[0="Restart Cloud"]
-        Switch    item=sw_restart mappings=[0="Restart"]
-        Switch    item=pi_restart mappings=[0="Reboot"]
-        Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
-        Switch    item=service_restart mappings=[0="Restart"]
+        // Nothing on this page can be fired by a slip of the thumb: every action is a row that
+        // opens its own sub-page, and the button only lives there - together with a line saying
+        // what the action actually costs.
+        //
+        // The buttons themselves are stateless Buttongrid buttons on purpose: these items have
+        // no channel, so openHAB's AutoUpdatePolicy writes the command into the item state and a
+        // Switch with mappings=[0="..."] leaves "0" behind. The iOS app then finds a mapping
+        // whose command equals the current state, renders that button as already selected
+        // (grayed out) and sends "OFF" - not a Number, so nothing reaches the rules at all.
+        // Stateless buttons never display or compare item state, so they always fire.
+        // Commands are value-agnostic: the rules only trigger on "received command".
+        Text label="Restart the Cloud Connector" icon=settings {
+          Frame label="openHAB Cloud Connector" {
+            Text label="Only myopenhab.org drops, openHAB keeps running"
+            Buttongrid label="Cloud Connector" icon=settings {
+              Button item=cl_restart row=1 column=1 stateless click=1 label="🔄 restart now"
+            }
+          }
+        }
+        Text label="Restart OpenHAB" icon=settings {
+          Frame label="openhab5 container" {
+            Text label="Rules, items, bindings and UIs stop for about a minute"
+            Buttongrid label="OpenHAB" icon=settings {
+              Button item=sw_restart row=1 column=1 stateless click=1 label="🔄 restart now"
+            }
+          }
+        }
+        Text label="Restart one of the docker services" icon=settings {
+          Frame label="Pick the service first" {
+            // the "Restart Service" rule reads service_name at command time, so the picker and
+            // the button have to live on the same page
+            Selection item=service_name mappings=["docker-compose@grafana.service"="Grafana", "docker-compose@immich-app.service"="immich", "docker-compose@influxdb.service"="influx", "docker-compose@mosquitto.service"="mosquitto", "docker-compose@netdata.service"="Netdata", "docker-compose@nginx.service"="Nginx", "docker-compose@openhab5.service"="OpenHAB", "docker-compose@projectsend.service"="Project Send", "docker-compose@wg-easy.service"="WG Easy"]
+            Text label="systemctl restart of the service selected above"
+            Buttongrid label="Selected service" icon=settings {
+              Button item=service_restart row=1 column=1 stateless click=1 label="🔄 restart now"
+            }
+          }
+        }
+        // The worst one of them: the whole box (openHAB, MQTT, Influx, Grafana, ...) goes down for
+        // a couple of minutes, so it is labelled ⚠️ and stays at the bottom of the frame.
+        Text label="⚠️ Reboot the whole Pi5" icon=settings {
+          Frame label="Raspberry Pi" {
+            Text label="Everything on the box stops for ~2 minutes"
+            Buttongrid label="Pi5" icon=settings {
+              Button item=pi_restart row=1 column=1 stateless click=1 label="🔌 reboot now"
+            }
+          }
+        }
       }
       Frame label="Sensors Stuck Check" {
         Switch    item=SensorsStuckCheck
