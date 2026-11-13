@@ -8,6 +8,10 @@ Group  Shield          "SHIELD"
 // ON wakes the box from standby (~15-20 s before other commands land).
 // OFF puts it to sleep. State lags reality by seconds — don't chain tightly.
 Switch Shield_Power   "Power [%.0s]"        (Shield) { channel="androidtv:shieldtv:4affcf0d35:power" }
+
+// Duplicate switch in order to get a friendly name in Alexa
+Switch Shield_Power_TV "TV"                 (Shield) { channel="androidtv:shieldtv:4affcf0d35:power", alexa="Switch" }
+
 // ----- Apps -------------------------------------------------------------
 // SEND a package name to launch it; READS the currently focused app back.
 //   org.smarttube.beta                      SmartTube (YouTube)
